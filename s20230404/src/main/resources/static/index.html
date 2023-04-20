@@ -3,6 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+    /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
+	document.getElementById('searchId').addEventListener('keyup', function(event) {
+   		 if (event.code === 'Enter')
+    	{
+        	event.preventDefault();
+        	document.querySelector('form').submit();
+    	}
+	});
+	
+	/* 카테고리 선택에서 Enter키 입력 시 검색 수행 */
+	document.getElementById('category').addEventListener('keyup', function(event) {
+  		 if (event.code === 'Enter')
+     	{
+         	event.preventDefault();
+         	document.querySelector('form').submit();
+     	}
+ 	});
+</script>
 </head>
 	<link href="css/main.css" rel="stylesheet" type="text/css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,10 +91,19 @@
 	  <div id="img_benner">
 		<img src="img/메인배경.png" alt="배너">
 	  </div>
-	  <!-- 검색창 -->
-	  <div id="serch">
-		<input type="text" placeholder="종합 검색">
-	  </div>
+	  <!-- 검색창 --> 
+	  <form action="search">
+	  	<select id="category" name="category">
+	  		<option value="category_total">전체</option>
+	  		<option value="category_travel">여행지</option>
+	  		<option value="category_house">숙소</option>
+	  		<option value="category_res">맛집</option>
+	  		<option value="category_comm">커뮤니티</option>  
+	  	</select> 
+	  	<div id="serch">
+			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
+	  	</div>
+	  </form>
 	  <hr>
 	  <!-- 인기맛집 -->
 	  <div id="session1">

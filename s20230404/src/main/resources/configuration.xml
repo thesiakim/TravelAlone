@@ -7,7 +7,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="Notice" type="com.travelAlone.s20230404.model.mh.Notice"/>
-		<!-- <typeAlias alias="Search" type="com.travelAlone.s20230404.model.si.Search"/> -->
+		<typeAlias alias="Search" type="com.travelAlone.s20230404.model.si.Search"/>
 		<typeAlias alias="Inquire" type="com.travelAlone.s20230404.model.mh.Inquire"/>
 		<typeAlias alias="House" type="com.travelAlone.s20230404.model.House"/>
 		<typeAlias alias="Travel" type="com.travelAlone.s20230404.model.Travel"/>
