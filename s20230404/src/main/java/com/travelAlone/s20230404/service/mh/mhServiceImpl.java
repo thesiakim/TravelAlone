@@ -22,7 +22,7 @@ public class mhServiceImpl implements mhService {
 		System.out.println("mhServiceImpl Start totalNotice..." );
 		int totNoticeCnt = mh.totalNotice();
 		System.out.println("mhServiceImpl totalNotice totalNoticeCnt->" + totNoticeCnt);
-
+		//master 브랜치 테스트
 		return totNoticeCnt;
 	}
 
