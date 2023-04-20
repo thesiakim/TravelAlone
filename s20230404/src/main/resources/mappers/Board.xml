@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.BoardMapper">
+	
+	<select id="boardTotal" resultType="int">
+		SELECT	count(*) 
+		FROM	board 
+		WHERE	b_re_level = 0
+	</select>
+	
+	<select id="jhBoardListAll" parameterType="Board" resultType="Board">
+<![CDATA[	SELECT	 * 
+		  	FROM	(SELECT	 rownum rn , a.* 
+				     FROM	 (SELECT   b.*, m.m_nickname 
+				 		 	  FROM	   board b, member m 
+				 		 	  WHERE	   b_re_level = 0 
+				 		 	  AND      b.member_id = m.member_id 
+				 		 	  ORDER BY b.board_id desc ) a ) 
+			WHERE	rn >= #{start} 
+			AND		rn <= #{end}  ]]>
+	</select>
+	
+	<select id="jhcontentBoard" parameterType="Board" resultType="Board">
+		SELECT	 b.*, m.m_nickname  
+		FROM	 board b, member m  
+		WHERE	 b.member_id = m.member_id 
+		AND		 b.b_ref = #{board_id}
+		ORDER BY b_re_step
+	</select>
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO board 
+		VALUES (board_id_seq.nextval, #{member_id}, #{b_title}, #{b_content}, 0, 0,
+				#{b_common_board}, board_id_seq.nextval, 0, 0, SYSDATE, SYSDATE)
+	</insert>
+	
+	<insert id="insertReply" parameterType="Board">
+	    INSERT INTO board 
+	    VALUES (board_id_seq.nextval, #{member_id}, null, #{b_content}, 0, 0,
+	            #{b_common_board}, #{board_id}, 
+	            NVL((SELECT MAX(b_re_step) + 1 FROM board WHERE b_ref = #{board_id}), 0), 
+	            1, SYSDATE, SYSDATE)
+	</insert>
+	
+	<update id="jhboardLike"   parameterType="int">
+		UPDATE 	board 
+		SET 	b_like_cnt = b_like_cnt + 1
+		WHERE  	board_id=#{board_id}
+	</update>
+	
+	<update id="jhboardView" parameterType="Board">
+		UPDATE 	board 
+		SET 	b_view_cnt = b_view_cnt + 1
+		WHERE  	board_id=#{board_id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.InquireMapper" >
+			
+		<!-- 	문의사항갯수세기 -->
+		
+		<select id="mhInqTotal" resultType="int">	
+		select Count(*) FROM G_WRITING
+		</select> 
+		
+				<!-- 문의게시판 목록가져오기 -->
+		<select id="mhInquireList" parameterType="Inquire" resultType="Inquire" >
+    		<![CDATA[
+				SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select  G_WRITING_ID
+											,MEMBER_ID											
+											,G_TITLE
+											,G_CONTENT
+											,CREATE_DATE
+											,MODIFIED_DATE
+											,G_PASSWD
+											,G_VIEW_CNT
+											,G_REPLY_YN
+											,G_REPLY_CONTENT
+											
+									  from  G_WRITING order by G_WRITING_ID desc) a
+			)   
+		 		WHERE  rn >= #{start} 
+		 		and    rn <= #{end} 
+		 	 ]]>	
+			
+		</select>
+		
+
+	<!-- 공지사항 게시글가져오기 -->
+		<select id="mhInquireSelOne"  resultType="Inquire">		
+		  SELECT G_WRITING_ID , G_TITLE,  MEMBER_ID, G_CONTENT ,G_REPLY_YN,G_REPLY_CONTENT,G_REPLY_YN,G_REPLY_CONTENT
+		  FROM  G_WRITING  WHERE G_WRITING_ID = #{G_WRITING_ID}   
+		</select>
+		
+
+
+
+	<!-- 문의사항 게시글작성하기 -->
+		<insert id="insertInquire" parameterType="Inquire">
+			 insert into G_WRITING 
+			 ( G_WRITING_ID , 			MEMBER_ID	, G_COMMON_CSBOARD	 , G_TITLE	, G_CONTENT	
+			 , G_PASSWD	, G_VIEW_CNT , G_REPLY_YN , G_REPLY_CONTENT		,CREATE_DATE , MODIFIED_DATE)
+			 values
+			  (G_WRITING_ID_SEQ.nextval, #{member_id}, #{g_common_csboard} , #{g_title}, #{g_content}, 
+			 #{g_passwd},	 0,				 0			,'' ,	sysdate, sysdate ) 				
+		</insert>
+
+		<!-- 문의사항 게시글수정하기 -->
+		<update id="mhInquireUpdate" parameterType="Inquire">
+		 UPDATE  G_WRITING 
+		 SET 
+		  G_TITLE   	   = #{g_title},
+		  G_COMMON_CSBOARD = #{g_common_csboard},
+		  G_PASSWD		   = #{g_passwd},
+		  G_CONTENT		   = #{g_content} 
+		 WHERE  G_WRITING_ID = #{g_writing_id}
+		
+		</update>
+
+			<!--  문의사항 글삭제하기 -->
+		<delete id="deleteInquire" parameterType="int">
+			delete from G_WRITING where G_WRITING_ID = #{g_writing_id}
+		</delete>
+
+		<!-- 검색어결과갯수 -->
+		<select id="condInquireCnt" parameterType="Inquire" resultType="int">
+			select Count(*) FROM G_WRITING
+			where
+			<choose>
+				<when test="search == 's_title'">
+				  g_title  like '%' || #{keyword} || '%' 
+				</when>
+				<otherwise>
+					g_title like '%'
+				</otherwise>
+			</choose> 
+		</select>
+
+		<!-- 검색결과 -->
+		  <select id="mhinquireSearchList" parameterType="Inquire"  resultType="Inquire" >
+		SELECT *
+		FROM
+		(
+		        SELECT rownum rn , a.*
+		        FROM
+		                   (select * from G_WRITING 
+							<choose>
+					 			<when test="search == 's_title'">
+					                 WHERE g_title  like '%' || #{keyword} || '%'    
+					  			</when>
+					 			<when test="search == 's_content'">
+					                 WHERE g_content  like '%' || #{keyword} || '%'    
+					  			</when>
+					  			
+					            <otherwise>
+					                  WHERE g_title   like '%'   
+					            </otherwise>
+					        </choose>		                   
+		                    order by g_writing_id) a
+		 )   
+ 		WHERE  rn BETWEEN #{start} and #{end} 
+    </select>
+    
+    
+    	<!-- 여행지문의갯수 -->
+		<select id="condTraInquireCnt" parameterType="Inquire" resultType="int">
+			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = 'inq100'
+		</select>
+    
+				<!-- 여행지문의 목록가져오기 -->
+		<select id="mhTraInquireList" parameterType="Inquire" resultType="Inquire" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from G_WRITING 
+								     where G_COMMON_CSBOARD = 'inq100'         
+				                    order by g_writing_id) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+		
+			<!-- 숙소문의갯수 -->
+		<select id="condHouInquireCnt" parameterType="Inquire" resultType="int">
+			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = 'inq200'
+		</select>
+		
+						<!-- 숙소문의 목록가져오기 -->
+		<select id="mhHouInquireList" parameterType="Inquire" resultType="Inquire" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from G_WRITING 
+								     where G_COMMON_CSBOARD = 'inq200'         
+				                    order by g_writing_id) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+
+	<!-- 맛집문의갯수 -->
+		<select id="condResInquireCnt" parameterType="Inquire" resultType="int">
+			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = 'inq300'
+		</select>
+
+						<!-- 맛집문의 목록가져오기 -->
+		<select id="mhResInquireList" parameterType="Inquire" resultType="Inquire" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from G_WRITING 
+								     where G_COMMON_CSBOARD = 'inq300'         
+				                    order by g_writing_id) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+		
+	<!-- 기타문의갯수 -->
+		<select id="condEtcInquireCnt" parameterType="Inquire" resultType="int">
+			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = 'inq400'
+		</select>
+
+		<!-- 기타문의 목록가져오기 -->
+		<select id="mhEtcInquireList" parameterType="Inquire" resultType="Inquire" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from G_WRITING 
+								     where G_COMMON_CSBOARD = 'inq400'         
+				                    order by g_writing_id) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+
+
+
+
+		<!-- 문의사항 게시글답변하기 -->
+		<update id= "mhInquireReply" parameterType="Inquire" >
+		 UPDATE  G_WRITING 
+		 SET 
+		  G_REPLY_YN   	   =  '1',	
+		  G_REPLY_CONTENT  = #{g_reply_content} 
+					    
+		 WHERE  G_WRITING_ID = #{g_writing_id}
+		
+		</update>
+
+
+
+
+
+</mapper>
+<!-- G_WRITING_ID
+MEMBER_ID
+G_COMMON_CSBOARD
+G_TITLE
+G_CONTENT
+G_PASSWD
+G_VIEW_CNT
+G_REPLY_YN
+G_REPLY_CONTENT
+CREATE_DATE
+MODIFIED_DATE -->

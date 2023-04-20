@@ -1,0 +1,174 @@
+@charset "UTF-8";
+
+	/* 몸통 */
+	body {
+		 font-size: 20px;		color: #205E61;
+		 font-weight: bolder;
+		 font-family: 'Roboto', sans-serif; 
+		 margin: 0; 			padding: 0;
+		 text-align: center;
+	}
+	
+	/* 기본 p 글자 */
+	p {
+		font-size: 13px; 		weight: 100%;
+		float:left;				height: 1px;
+	}	
+	
+	ul li{ list-style: none; }
+	
+	a{ text-decoration:none; }
+	
+	/* 링크 글자 색깔 */
+	a:link { text-decoration: none;	color: #5F9EA0; }
+	
+	/* 방문한 링크 색깔 */
+	a:visited { color: #5F9EA0; }
+	
+	/* 구분선 */
+	hr {
+		height: 7px; 		border-radius: 4px;
+		width: 600px; 		border: 0px;
+		background-color: #5F9EA0; 
+	}
+	
+	/* 헤더 */
+	.header { width: 100%; }
+	
+	/* 로고   */
+	.logo { float:left; }
+	
+	.logo img{
+		display: block; 	width: 135px;
+		height: 135px; 		padding: 15px 0 0 15px;
+		object-fit: cover;
+	}
+	
+	/* 메뉴 폼 */
+	.headerForm { padding: 130px 0 0 0; }
+	
+	.headerBenner > ul > li { position:relative; }
+	
+	.headerBenner > ul > li > ul {
+		width: 292px; 		border-box: 300px;
+		display:none; 		position: absolute;
+		font-size: 25px; 	font-weight: bolder;
+	}
+
+	.headerBenner > ul > li:hover > ul { display: block; }
+	
+	.headerBenner > ul > li > ul > li:hover {
+		background: white;
+		transition: ease 1s;
+		border-radius: 13px;
+		opacity: 0.85;
+	}
+	
+	/* 화면크기가 1250이상일때만 메뉴 보여줌 */
+	@media screen and (min-width: 1600px) {
+		.headerBenner > ul > li {
+			font-size: 27px; 	font-weight: bolder;
+		    width: 370px; 		display: inline-block;
+		}
+	}
+
+	/* 화면크기가 1250이하이면 배너 숨김 */
+	@media screen and (max-width: 1600px) {
+		.headerBenner > ul > li { display: none; }
+	}
+
+	a:hover { 
+		color: #205E61;
+		transition: ease 0.5s;
+	}
+	
+	/* 로그인,회원가입 */
+	.headerLogin {
+		font-size: 14px;
+		float: right;
+		padding: 23px;
+		marge-right: 30px;
+		font-weight: bolder;
+	    display: inline-block;
+	}
+	
+	.clearfix::after{
+		content: "";
+		display: block;
+		clear: both;
+	}
+	
+	/* 본문 */
+	#content { display: inline; text-align: center; }
+	
+	/* 이미지 베너 */
+	#img_benner{
+		display: inline; 	margin: 15px;
+		text-align: center;
+	}
+	
+	#img_benner > img {
+	    margin: auto; 		width: 100%;
+	    display: block;
+	}
+	
+	/* 푸터 */
+	.footerForm {
+		display: inline; 	
+		font-size: 14px;
+		float: right;
+		font-weight: bolder;
+	    display: inline-block;
+		padding: 23px;
+		marge-right: 30px;
+	}
+	
+	.clearfix::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+	
+	.footerInfo {
+		display: inline; 	
+		font-size: 14px;
+		float: left;
+		padding: 0 10px;
+		font-weight: bolder;
+		margin: 30px 0;		
+	    display: inline-block;
+	}
+	
+	/* 검색 창 */
+	#serch > input {
+	    width: 600px;		height: 40px;
+	    padding: 20px; 		font-size: 15px; 
+	    border-radius:25px;	margin: 16px;
+		color: #205E61;  	font-weight: bolder;
+	    box-sizing: border-box;
+	    background-color: #F8F8F8;
+		font-family: 'Roboto', sans-serif; 
+		border: 3px solid  #205E61;
+	}
+	
+	#serch > input::placeholder{ color: #5F9EA0; }
+	
+	#serch > input:focus{ outline: 0px solid #205E61; }
+	 
+	 /* 메인 페이지 이미지 */
+  	.swiper-container {
+        height:300px;
+        border:1px solid silver;
+        border-radius:1px;
+        box-shadow:0 0 10px #ccc inset;
+	}
+	.swiper-slide {
+	   text-align:center;
+	   display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
+	   align-items:center; /* 위아래 기준 중앙정렬 */
+	   justify-content:center; /* 좌우 기준 중앙정렬 */
+	}
+	.swiper-slide img {
+		box-shadow: 0 0 5px #555;
+		max-width: 100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+	}

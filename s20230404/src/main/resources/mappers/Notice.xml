@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.NoticeMapper">
+		
+		<!-- 공지사항갯수세기 (DB연동테스트)-->
+		<select id="mhNoticeTotal" resultType="int">	
+		select Count(*) FROM G_NOTICE
+		</select>
+								
+				
+		<!-- 공지사항 목록가져오기 -->
+		<select id="mhNoticeList" parameterType="Notice" resultType="Notice" >
+    		<![CDATA[
+				SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select  G_NOTICE_ID
+											,MEMBER_ID
+											,G_COMMON_CSBOARD
+											,G_NOTICE_TITLE
+											,G_NOTICE_CONTENT
+											,CREATE_DATE
+											,MODIFIED_DATE
+									  from  G_NOTICE 
+									  
+									  
+									   WHERE G_COMMON_CSBOARD = 'not100'
+									   
+									  order by G_NOTICE_ID desc) a
+			)   
+		 		WHERE  rn >= #{start} 
+		 		and    rn <= #{end} 
+		 	 ]]>	
+			
+		</select>
+		
+		
+		<!-- 공지사항 게시글가져오기 -->
+		<select id="mhNoticeSelOne"  resultType="Notice">		
+		  SELECT G_NOTICE_ID , G_NOTICE_TITLE,  MEMBER_ID, g_notice_content FROM  G_NOTICE  WHERE G_NOTICE_ID = #{G_NOTICE_ID}   
+		</select>
+		
+		<!-- 공지사항 게시글작성하기 -->
+		<insert id="insertNotice" parameterType="Notice">
+			 insert into G_NOTICE 
+			 (G_NOTICE_ID,			 MEMBER_ID, G_COMMON_CSBOARD, G_NOTICE_TITLE, G_NOTICE_CONTENT, CREATE_DATE, MODIFIED_DATE)
+			 values 
+			 (G_NOTICE_ID_SEQ.nextval, '2',  #{g_common_csboard} , 	#{g_notice_title}, #{g_notice_content}, sysdate, sysdate ) 				
+		</insert>
+		
+		
+		<!-- 공지사항 게시글수정하기 -->
+		<update id="mhNoticeUpdate" parameterType="Notice">
+		 UPDATE G_NOTICE 
+		 SET 
+		  G_NOTICE_TITLE   = #{g_notice_title},
+		  MEMBER_ID 	   = #{member_id}, 
+		  G_COMMON_CSBOARD = #{g_common_csboard},
+		  G_NOTICE_CONTENT = #{g_notice_content} 
+					    
+		 WHERE  G_NOTICE_ID = #{g_notice_id}
+		
+		</update>
+		
+		
+		<!--  공지사항 글삭제하기 -->
+		<delete id="deleteNotice" parameterType="int">
+			delete from G_NOTICE where G_NOTICE_ID = #{g_notice_id}
+		</delete>
+		
+		<!-- 검색어결과갯수 -->
+		<select id="condNoticeCnt" parameterType="Notice" resultType="int">
+			select Count(*) FROM G_NOTICE
+			where
+			<choose>
+				<when test="search == 's_title'">
+				  g_notice_title  like '%' || #{keyword} || '%' 
+				</when>
+				<otherwise>
+					g_notice_title like '%'
+				</otherwise>
+			</choose> 
+		</select>
+		
+		<!-- 검색결과 -->
+		  <select id="mhNoticeSearchList" parameterType="Notice"  resultType="Notice" >
+		SELECT *
+		FROM
+		(
+		        SELECT rownum rn , a.*
+		        FROM
+		                   (select * from G_NOTICE 
+							<choose>
+					 			<when test="search == 's_title'">
+					                 WHERE g_notice_title  like '%' || #{keyword} || '%'    
+					  			</when>
+					 			<when test="search == 's_content'">
+					                 WHERE g_notice_content  like '%' || #{keyword} || '%'    
+					  			</when>
+					  			
+					            <otherwise>
+					                  WHERE g_notice_title   like '%'   
+					            </otherwise>
+					        </choose>		                   
+		                    order by g_notice_id) a
+		 )   
+ 		WHERE  rn BETWEEN #{start} and #{end} 
+    </select>
+		
+			<!-- 자주묻는질문 목록가져오기 -->
+		<select id="mhFaqList" parameterType="Notice" resultType="Notice" >
+    		<![CDATA[
+				SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select  G_NOTICE_ID
+											,MEMBER_ID
+											,G_COMMON_CSBOARD
+											,G_NOTICE_TITLE
+											,G_NOTICE_CONTENT
+											,CREATE_DATE
+											,MODIFIED_DATE
+									  from  G_NOTICE 
+									  
+									  
+									   WHERE G_COMMON_CSBOARD = 'not200'
+									   
+									  order by G_NOTICE_ID desc) a
+			)   
+		 		WHERE  rn >= #{start} 
+		 		and    rn <= #{end} 
+		 	 ]]>	
+			
+		</select>		
+		
+</mapper>
+
+

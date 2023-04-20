@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/layout">
+<th:block layout:fragment="content">
+
+<meta charset="UTF-8">
+	<link href="/css/write.css" rel="stylesheet" type="text/css">
+	<!-- 이미지배너 -->
+	<div id="img_benner">
+		<img src="img/메인배경.png" alt="배너">
+	</div>
+	
+	<h1>자유 게시판</h1>
+	<div id="comunity">
+		<ul>
+			<li><a href="listBoard">자유게시판</a></li>
+			<li><a href="listBoard">정보게시판</a></li>
+			<li><a href="listBoard">질문게시판</a></li>
+			<li><a href="listBoard">홍보게시판</a></li>
+			<li><a href="listBoard">모집게시판</a></li>
+		</ul>
+	</div>
+	
+	<hr>
+	
+	<div class="writeForm">
+		<form name="form1" action="writeBoard" method="post" onsubmit="return chkWrite()">
+			<table>
+				<input type="hidden" name="b_common_board" value="bor100">
+				<input type="hidden" name="member_id" value="2">
+				
+				<tr>
+					<td colspan="2">
+						<input type="text" id="title" name="b_title" required="required" placeholder="제목">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea id="content" name="b_content" rows="10" required="required">내용을 작성해 주세요</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 100px;">
+						<label for="title">첨부파일</label>
+					</td>
+					<td>
+						<input type="reset" value="파일 선택">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="title">첨부파일</label>
+					</td>
+					<td>
+						<input type="reset" value="파일 선택">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" id="writeFormSubmit">
+						<input type="submit" value="작성">
+						<input type="reset" value="취소">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<hr>
+	
+</body>
+</html>

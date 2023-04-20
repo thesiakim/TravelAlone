@@ -1,0 +1,100 @@
+@charset "UTF-8";
+	
+	#comunity > ul{ text-align:center;		padding: 0; }
+	
+	#comunity > ul > li{ display:inline-block; 	margin:0 15px; 
+		padding: 0;}
+	table {
+		text-align:center;		padding: 0;
+		display:inline-block; 	margin:0 15px; 
+		border-collapse : collapse;
+	}
+	
+	td { 
+		text-align: left;		font-size: 18px;
+		padding:7px; 		color: rgb(64, 64, 64); 
+	}
+	
+	
+	#list {
+		font-size: 15px;	
+	}
+	
+	h6{
+		color:red;
+	}
+	
+	#replyForm {
+		
+	}
+	
+	#serch > input {
+	    
+	    padding: 20px; 		
+	    border-radius:25px;	margin: 16px;
+		color: #205E61;  	font-weight: bolder;
+	    box-sizing: border-box;
+	    background-color: #F8F8F8;
+		font-family: 'Roboto', sans-serif; 
+		border: 3px solid  #205E61;
+	}
+	
+	#replyForm > input:focus{ outline: 0px solid #205E61; }
+	
+	#replyForm > input::placeholder{ color: #5F9EA0; }
+	
+	#replyForm > input[type="text"] {
+		width: 800px; 			height: 100px;
+	    padding: 0 5px; 		font-size: 15px; 
+	    margin:0 3px 16px; 		box-sizing: border-box;
+	    border-radius: 10px; 	background-color: #F8F8F8;
+	    border: 3px solid  #205E61;
+	}
+	
+	#replyForm > input[type="submit"] {
+		width: 80px;			height: 40px;	
+	    font-size: 17px;  		font-weight:bolder;
+	    padding: 0 5px; 		box-sizing: border-box;
+	    margin:0 3px 16px; 		border-radius: 10px;
+	    border:  #205E61; 		color: white;
+	    background-color: #205E61;
+	}
+	
+	#replyForm > input:hover { 
+		color: #205E61;
+		background-color:  white;
+		transition: ease 0.5s;
+	}
+	
+	.titleForm input[type="submit"] {
+		width: 50px;			border-radius: 7px;
+	    height: 25px;			box-sizing: border-box;
+	    font-size: 15px;  		font-weight:bolder;
+	    color:white;
+	    border:  #205E61; 		background-color: #205E61;
+	}
+	
+	.titleForm input[type="submit"]:hover {
+		color: #205E61;
+		background-color:  white;
+		transition: ease 0.5s;
+	}
+	#reply input[type="submit"] {
+		width: 50px;			border-radius: 7px;
+	    height: 25px;			box-sizing: border-box;
+	    font-size: 15px;  		font-weight:bolder;
+	    color:white;
+	    border:  #205E61; 		background-color: #205E61;
+	}
+	
+	#reply input[type="submit"]:hover {
+		color: #205E61;
+		background-color:  white;
+		transition: ease 0.5s;
+	}
+	
+	#reply > table  td { 
+		border-bottom: 2px solid rgb(64, 64, 64);
+	 }
+	
+	
