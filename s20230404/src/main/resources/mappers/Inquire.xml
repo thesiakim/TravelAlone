@@ -114,86 +114,7 @@
     </select>
     
     
-    	<!-- 여행지문의갯수 -->
-		<select id="condTraInquireCnt" parameterType="Inquire" resultType="int">
-			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = 'inq100'
-		</select>
-    
-				<!-- 여행지문의 목록가져오기 -->
-		<select id="mhTraInquireList" parameterType="Inquire" resultType="Inquire" >
-		 		SELECT *
-				FROM
-				(
-				        SELECT rownum rn , a.*
-				        FROM
-				                   (select * from G_WRITING 
-								     where G_COMMON_CSBOARD = 'inq100'         
-				                    order by g_writing_id) a
-				 )   
-		 		WHERE  rn BETWEEN #{start} and #{end} 
-			
-		</select>
-		
-			<!-- 숙소문의갯수 -->
-		<select id="condHouInquireCnt" parameterType="Inquire" resultType="int">
-			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = 'inq200'
-		</select>
-		
-						<!-- 숙소문의 목록가져오기 -->
-		<select id="mhHouInquireList" parameterType="Inquire" resultType="Inquire" >
-		 		SELECT *
-				FROM
-				(
-				        SELECT rownum rn , a.*
-				        FROM
-				                   (select * from G_WRITING 
-								     where G_COMMON_CSBOARD = 'inq200'         
-				                    order by g_writing_id) a
-				 )   
-		 		WHERE  rn BETWEEN #{start} and #{end} 
-			
-		</select>
-
-	<!-- 맛집문의갯수 -->
-		<select id="condResInquireCnt" parameterType="Inquire" resultType="int">
-			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = 'inq300'
-		</select>
-
-						<!-- 맛집문의 목록가져오기 -->
-		<select id="mhResInquireList" parameterType="Inquire" resultType="Inquire" >
-		 		SELECT *
-				FROM
-				(
-				        SELECT rownum rn , a.*
-				        FROM
-				                   (select * from G_WRITING 
-								     where G_COMMON_CSBOARD = 'inq300'         
-				                    order by g_writing_id) a
-				 )   
-		 		WHERE  rn BETWEEN #{start} and #{end} 
-			
-		</select>
-		
-	<!-- 기타문의갯수 -->
-		<select id="condEtcInquireCnt" parameterType="Inquire" resultType="int">
-			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = 'inq400'
-		</select>
-
-		<!-- 기타문의 목록가져오기 -->
-		<select id="mhEtcInquireList" parameterType="Inquire" resultType="Inquire" >
-		 		SELECT *
-				FROM
-				(
-				        SELECT rownum rn , a.*
-				        FROM
-				                   (select * from G_WRITING 
-								     where G_COMMON_CSBOARD = 'inq400'         
-				                    order by g_writing_id) a
-				 )   
-		 		WHERE  rn BETWEEN #{start} and #{end} 
-			
-		</select>
-
+    	
 
 
 
@@ -207,6 +128,29 @@
 		 WHERE  G_WRITING_ID = #{g_writing_id}
 		
 		</update>
+
+
+
+	<!-- 조회된 데이터 갯수 세기 -->  
+		<select id="condOptionInquireCnt" resultType="int">
+			select Count(*) FROM G_WRITING where G_COMMON_CSBOARD = #{code}
+		</select>
+				
+		<select id="mhOptionInquireList" parameterType="Inquire" resultType="Inquire" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from G_WRITING 
+								     where G_COMMON_CSBOARD = #{code}        
+				                    order by g_writing_id desc) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+
+
 
 
 
