@@ -32,6 +32,7 @@ public class mhServiceImpl implements mhService {
 		List<Notice> noticeList = mh.selectNoticeList(notice);
 		log.debug("mhServiceImpl End listNotice...");
 		
+		
 		return noticeList;
 	}
 
