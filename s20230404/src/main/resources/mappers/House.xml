@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.HouseMapper">
+
+<!-- 숙소정보글 갯수세기 -->
+<select id="mhHouseTotal" resultType="int">
+	select Count(*) FROM HOUSE
+</select>
+
+<!-- 숙소 목록가져오기 -->
+		<select id="mhHouseList" parameterType="House" resultType="House" >
+    		<![CDATA[
+				SELECT *
+				FROM
+				(	SELECT rownum rn , a.*
+				        FROM
+				                   (select  HOUSE_ID
+											,H_NAME
+											,H_CONTENT
+											,H_ADDRESS
+											,H_CHECKINOUT
+											,H_CALL
+											,H_ROOM
+											,H_EAT
+											,H_PARKING
+											,H_COMMON_HOUSE
+											,H_COMMON_LOC
+											,CREATE_DATE
+											,MODIFIED_DATE										
+									  from  HOUSE 									  									  									  									   
+									  order by HOUSE_ID desc) a
+			)   
+		 		WHERE  rn >= #{start} 
+		 		and    rn <= #{end} 
+		 	 ]]>	
+			
+		</select>
+		
+<!-- 숙소 정보글가져오기 -->
+		<select id="mhHouseSelOne"  resultType="House">		
+		  SELECT	HOUSE_ID ,H_NAME, H_CONTENT,H_ADDRESS,H_CHECKINOUT,H_CALL,H_ROOM,H_EAT
+					,H_PARKING ,H_COMMON_HOUSE ,H_COMMON_LOC ,CREATE_DATE,MODIFIED_DATE		 
+		 FROM  HOUSE  WHERE HOUSE_ID = #{HOUSE_ID}   
+		</select>
+
+
+
+<!-- 숙소 정보글작성하기 -->
+		<insert id="insertHouse" parameterType="House">
+			 insert into HOUSE 
+			 (HOUSE_ID,			 H_NAME, 	H_CONTENT,		 H_ADDRESS, H_CHECKINOUT, H_CALL,
+			  H_ROOM,		 H_EAT,	 H_PARKING,		H_COMMON_HOUSE,		H_COMMON_LOC, CREATE_DATE,	MODIFIED_DATE )
+			 values 
+			 (HOUSE_ID_SEQ.nextval, #{h_name} , #{h_content}, #{h_address}, #{h_checkinout} , #{h_call} ,
+			  #{h_room},    #{h_eat}, #{h_parking},  #{h_common_house}, #{h_common_loc},  sysdate, sysdate ) 				
+		</insert>
+
+<!-- 숙소 정보글수정하기 -->
+		<update id="mhHouseUpdate" parameterType="House">
+		 UPDATE HOUSE 
+		 SET 
+		  H_COMMON_HOUSE    = #{h_common_house},
+		  H_COMMON_LOC 	    = #{h_common_loc}, 
+		  H_NAME 			= #{h_name},
+		  H_CONTENT			= #{h_content} ,
+		  H_ADDRESS			= #{h_address} ,
+		  H_ROOM			= #{h_room} ,
+		  H_CHECKINOUT		= #{h_checkinout} ,
+		  H_CALL			= #{h_call} ,
+		  H_EAT				= #{h_eat} ,
+		  H_PARKING			= #{h_parking} 
+					    
+		 WHERE  HOUSE_ID 	= #{house_id}
+		
+		</update>
+
+		<!--  숙소 정보글삭제하기 -->
+		<delete id="deleteHouse" parameterType="int">
+			delete from HOUSE where HOUSE_ID = #{house_id}
+		</delete>
+
+
+</mapper>
+
+
+<!-- 
+//HOUSE_ID			NUMBER
+//H_NAME			VARCHAR2(50 BYTE)
+//H_CONTENT			VARCHAR2(4000 BYTE)
+//H_ADDRESS			VARCHAR2(4000 BYTE)
+//H_CHECKINOUT		VARCHAR2(4000 BYTE)
+//H_CALL			VARCHAR2(4000 BYTE)
+//H_ROOM			VARCHAR2(4000 BYTE)
+//H_EAT				VARCHAR2(4000 BYTE)
+//H_PARKING			VARCHAR2(4000 BYTE)
+//H_COMMON_HOUSE	VARCHAR2(20 BYTE)
+//H_COMMON_LOC		VARCHAR2(20 BYTE)
+//CREATE_DATE		DATE
+//MODIFIED_DATE		DATE -->

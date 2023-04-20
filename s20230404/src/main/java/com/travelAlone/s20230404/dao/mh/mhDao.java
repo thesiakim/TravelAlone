@@ -2,6 +2,7 @@ package com.travelAlone.s20230404.dao.mh;
 
 import java.util.List;
 
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
 
@@ -31,17 +32,13 @@ public interface mhDao {
 	List<Inquire> 		inquireSearchList(Inquire inquire);
 	int 				condInquireCnt(Inquire inquire);
 	
-	int 				condTraInqCnt(Inquire inquire);
-	List<Inquire> 		inquireTraFilterList(Inquire inquire);
+	//필터링
+	List<CommonCode> getCommonCode();
+	List<Inquire> mhOptionInquireList(Inquire inquire);
+	int condOptionInqCnt(String code); 
+			
 	
-	int 				condHouInqCnt(Inquire inquire);
-	List<Inquire> 		inquireHouFilterList(Inquire inquire);
-	int 				condResInqCnt(Inquire inquire);
-	List<Inquire> 		inquireResFilterList(Inquire inquire);
-	int 				condEtcInqCnt(Inquire inquire);
-	List<Inquire> 		inquireEtcFilterList(Inquire inquire);
-	
-	
+	//답변
 	int replyCount(Inquire inquire);
 			
 	

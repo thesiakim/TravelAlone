@@ -99,46 +99,29 @@
 		
 			<c:set var="num" value="${page.total-page.start+1 }"></c:set>
 		
-				<!-- 문의 분류하기 -->
+		<!-- 문의 분류하기   20230419 -->
 			<div >  
 				<table style="margin:auto;">
 					<tr>
 						<td>
-							<form action="inquireEtcFilter">
-								<button type="submit">기타문의</button>
-							</form>
-						</td>
-						<td>
-						
-							 
-						  <form action="inquireTraFilter">
-						  <button type="submit">여행지추가문의</button>
-						   </form>
-						
-						</td>
-						<td>
-						
-						  	
-						   <form action="inquireHouFilter">
-						  <button type="submit">숙소추가문의</button>
-						   </form>
-						
-						</td>
-						<td>
-						
-						  <form action="inquireResFilter">
-						  <button type="submit">맛집추가문의</button>
-						   </form>			
-						
-						
-						</td>
+								
+							<!-- 문의글 종류 -->
+						<c:forEach items="${boardList}" var="list">
+							<td>
+									<!-- 컨트롤러로 보내는거 -->
+								<a href="inquireCodeFilter?code=${list.code}">${list.value}</a>
+									
+							</td>
+						</c:forEach>
 					</tr>
 				</table>							
 			
 					   <c:set var="num" value="${page.total-page.start+1 }"></c:set>
-			</div>			
-			
-				
+			</div>				
+		
+		
+		
+		
 		
 		<!-- 찐본문 -->
 	<div style = "text-align:center;">
