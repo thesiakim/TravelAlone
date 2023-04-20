@@ -16,5 +16,4 @@ public class MemberFindIdRequestDto {
         this.name = name;
         this.phone = phone;
     }
-
 }

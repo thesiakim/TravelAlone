@@ -18,5 +18,4 @@ public class MemberFindPasswordRequestDto {
         this.name = name;
         this.phone = phone;
     }
-
 }

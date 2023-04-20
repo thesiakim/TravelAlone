@@ -71,5 +71,4 @@ public class MemberFormDto {
                 .phone(this.phone).build();
     }
 
-
 }

@@ -32,6 +32,7 @@ public class kmController {
     private final CheckNicknameValidator checkNicknameValidator;
     private final PasswordEncoder passwordEncoder;
 
+
     /**
      * 2023-04-17 조경민
      * 설명 : 커스텀 유효성 검증을 위해 추가

@@ -20,4 +20,5 @@ public class MemberFindAndChangePasswordRequestDto {
         this.phone = phone;
         this.password = password;
     }
+
 }
