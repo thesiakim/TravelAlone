@@ -35,8 +35,8 @@ public class jhController {
 		System.out.println("jhController totalBoard -> " + totalBoard);
 		
 		Paging	page = new Paging(totalBoard, currentPage);
-		board.setStart(page.getStart());
-		board.setEnd(page.getEnd());
+		board.setStartRow(page.getStart());
+		board.setEndRow(page.getEnd());
 		
 		List<Board> listBoard = js.listBoard(board);
 		System.out.println("jhController list listBoard.size() -> " + listBoard.size());
