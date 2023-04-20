@@ -24,10 +24,6 @@
 		color:red;
 	}
 	
-	#replyForm {
-		
-	}
-	
 	#serch > input {
 	    
 	    padding: 20px; 		
@@ -39,10 +35,11 @@
 		border: 3px solid  #205E61;
 	}
 	
+	// 맨 밑 댓글창
 	#replyForm > input:focus{ outline: 0px solid #205E61; }
 	
 	#replyForm > input::placeholder{ color: #5F9EA0; }
-	
+
 	#replyForm > input[type="text"] {
 		width: 800px; 			height: 100px;
 	    padding: 0 5px; 		font-size: 15px; 
@@ -66,6 +63,8 @@
 		transition: ease 0.5s;
 	}
 	
+	
+	
 	.titleForm input[type="submit"] {
 		width: 50px;			border-radius: 7px;
 	    height: 25px;			box-sizing: border-box;
@@ -79,6 +78,7 @@
 		background-color:  white;
 		transition: ease 0.5s;
 	}
+	
 	#reply input[type="submit"] {
 		width: 50px;			border-radius: 7px;
 	    height: 25px;			box-sizing: border-box;
@@ -93,8 +93,26 @@
 		transition: ease 0.5s;
 	}
 	
-	#reply > table  td { 
+	#reply input[type="text"] {
+		width: 770px; 			height: 90px;
+	    padding: 0 5px; 		font-size: 15px; 
+	    margin:0 3px 16px; 		box-sizing: border-box;
+	    border-radius: 10px; 	background-color: #F8F8F8;
+	    border: 3px solid  #205E61;
+	}
+	
+	#reply input:focus{ outline: 0px solid #205E61; }
+	
+	#reply input::placeholder{ color: #5F9EA0; }
+	
+	#reply table  td { 
 		border-bottom: 2px solid rgb(64, 64, 64);
 	 }
-	
-	
+	 
+	 input[type="button"] {
+	 	width: 50px;			border-radius: 7px;
+	    height: 25px;			box-sizing: border-box;
+	    font-size: 15px;  		font-weight:bolder;
+	    color:white;
+	    border:  #205E61; 		background-color: #205E61;
+	 }
