@@ -21,9 +21,9 @@ public class siController {
 	private final siService siService;
 	private final Logger logger = LoggerFactory.getLogger(siController.class);
 	
+	//검색창에 검색한 경우
 	@GetMapping(value = "search")
 	public String search(@RequestParam("searchName") String keyword, @RequestParam("category") String category, Model model) {
-		
 		
 		logger.info("siController search start");
 		
@@ -33,6 +33,7 @@ public class siController {
 		//카테고리가 전체인 경우
 		if(category.equals("category_total")) {
 			resultList = siService.search(keyword, category);
+			//검색 키워드가 하나라도 존재한다면 Search 테이블에 insert or update
 			if(resultList.getTravelList().size() != 0 || resultList.getHouseList().size() != 0 || resultList.getRestaurantlList().size() != 0 || resultList.getBoardList().size() != 0) {
 				siService.upsertSearch(keyword);
 			} else {

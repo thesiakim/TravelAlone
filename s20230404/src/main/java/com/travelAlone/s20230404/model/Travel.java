@@ -23,6 +23,7 @@ public class Travel {
     private String t_common_loc;
     private LocalDateTime  create_date;
     private LocalDateTime  modified_date;
+    private int t_count;
 	
 
 }

@@ -16,6 +16,7 @@ public class IndexController {
      * 2023-04-17 조경민
      * 설명 : 메인페이지 이동
      * */
+	
     @GetMapping("/")
     public String main(@LoginUser MemberJpa memberJpa, Model model){
 
@@ -26,4 +27,5 @@ public class IndexController {
 
         return "th/main";
     }
+    
 }

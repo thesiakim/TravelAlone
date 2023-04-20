@@ -25,6 +25,7 @@ public class Res {
 	   private String          r_common_loc;
 	   private LocalDateTime   create_date;
 	   private LocalDateTime   modified_date;
+	   private int r_count;
 	   
 	   // 페이지조회용
 	   private String search;      private String keyword;

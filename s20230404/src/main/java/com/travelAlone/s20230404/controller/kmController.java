@@ -1,23 +1,25 @@
 package com.travelAlone.s20230404.controller;
 
-import com.travelAlone.s20230404.config.km.LoginUser;
-import com.travelAlone.s20230404.domain.km.MemberJpa;
-import com.travelAlone.s20230404.vaildator.km.CheckEmailValidator;
-import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
-import com.travelAlone.s20230404.model.dto.km.MemberFormDto;
-import com.travelAlone.s20230404.service.km.MemberService;
+import java.util.Map;
 
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
-import java.util.Map;
+import com.travelAlone.s20230404.model.dto.km.MemberFormDto;
+import com.travelAlone.s20230404.service.km.MemberService;
+import com.travelAlone.s20230404.vaildator.km.CheckEmailValidator;
+import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,13 +44,25 @@ public class kmController {
     }
 
 
-   
-     
 
-   
-     
-   
-
+    /**
+     * 2023-04-17 조경민
+     * 설명 : 메인페이지 이동
+     * */
+    
+    /*
+      @GetMapping("/")
+      public String main(@LoginUser MemberJpa memberJpa, Model model){
+          System.out.println(" mian ");
+          
+          if (memberJpa != null){
+              model.addAttribute("memberId", memberJpa.getId());
+              System.out.println("user.getNickName() = " + memberJpa.getNickname());
+          }
+          
+          return "th/main";
+      }
+*/
 
     /**
      * 2023-04-17 조경민

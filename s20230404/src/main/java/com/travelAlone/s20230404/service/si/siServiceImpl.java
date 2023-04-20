@@ -18,7 +18,7 @@ public class siServiceImpl implements siService {
 	private final Logger logger = LoggerFactory.getLogger(siService.class);
 	private final siDao siDao;
 	
-	//유저가 선택한 카테고리에 따라 DB 데이터에  검색 키워드가 존재하는지 조회
+	//검색 시 선택한 카테고리에 따라 DB 데이터에  검색 키워드가 존재하는지 조회
 	@Override
 	public ResultList search(String keyword, String category) {
 		
@@ -32,7 +32,6 @@ public class siServiceImpl implements siService {
 			  resultList.setRestaurantlList(siDao.resSearch(keyword));
 			  resultList.setBoardList(siDao.boardSearch(keyword));
 		  
-			  
 		  //카테고리가 여행지인 경우	  
 		  } else if(category.equals("category_travel")) {
 			  resultList.setTravelList(siDao.travelSearch(keyword));
@@ -56,7 +55,7 @@ public class siServiceImpl implements siService {
 	}
 	
 	
-	//유저의 검색 키워드가 Search 테이블에 있는지 조회한 뒤 있으면 update, 없으면 insert
+	//검색 키워드가 Search 테이블에 있는지 조회한 뒤 있으면 update, 없으면 insert
 	@Override
 	public void upsertSearch(String keyword) {
 		logger.info("siServiceImpl upsertSearch start");
