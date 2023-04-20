@@ -39,7 +39,7 @@ public class mhServiceImpl implements mhService {
 	@Override
 	public Notice detailNotice(int g_notice_id) {
 		System.out.println("mhServiceImpl detail ...");
-		Notice notice = null;
+		Notice notice = null; 
 		notice = mh.detailNotice(g_notice_id);
 		return notice;						
 	}
