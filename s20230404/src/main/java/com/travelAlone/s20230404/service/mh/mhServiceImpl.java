@@ -41,7 +41,6 @@ public class mhServiceImpl implements mhService {
 		System.out.println("mhServiceImpl detail ...");
 		Notice notice = null;
 		notice = mh.detailNotice(g_notice_id);
-		//test
 		return notice;						
 	}
 
