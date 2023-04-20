@@ -20,12 +20,14 @@ public class jhController {
 
 	private final jhService 		js;
 	
+	
 	//테스트용
 	@GetMapping("mainPage")
 	public String test() {
 		System.out.println("jhController start...");
 		return "th/main";
 	}
+	
 	
 	//커뮤니티 리스트 보는 컨트롤러
 	@GetMapping("listBoard")
@@ -101,20 +103,5 @@ public class jhController {
 		return "th/jhWrite";
 	}
 
-	// 게시글 작성
-	@PostMapping("writeBoard")
-	public String writeBoard(Board board, Model model) {
-		System.out.println("jhController writeBoard Start...");
-		String result = "";
-		int insertResult = js.insertBoard(board);
-		System.out.println("jhController writeBoard insertResult-> " + insertResult);
-		
-		if(insertResult > 0) result = "redirect:listBoard";
-		else {
-			model.addAttribute("msg","입력 실패 확인해 보세요");
-			result = "redirect:listBoard";
-		}
-		return result;
-	}
 	
 }

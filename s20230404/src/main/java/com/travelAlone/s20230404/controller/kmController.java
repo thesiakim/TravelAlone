@@ -46,6 +46,8 @@ public class kmController {
      * 2023-04-17 조경민
      * 설명 : 메인페이지 이동
      * */
+    
+    /*
       @GetMapping("/")
       public String main(@LoginUser MemberJpa memberJpa, Model model){
           System.out.println(" mian ");
@@ -57,7 +59,7 @@ public class kmController {
           
           return "th/main";
       }
-
+*/
 
     /**
      * 2023-04-17 조경민

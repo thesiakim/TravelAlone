@@ -4,6 +4,7 @@
 
 <mapper namespace="com.travelAlone.s20230404.SearchMapper">
 	
+	<!-- Search 테이블에 키워드가 존재하는 경우 update, 존재하지 않는다면 insert -->
 	<insert id="siUpsert" parameterType="java.lang.String">
   		MERGE INTO search
   		USING dual
@@ -15,42 +16,56 @@
     	VALUES (search_id_seq.nextval, #{keyword, jdbcType=VARCHAR}, 1, sysdate, sysdate)
 	</insert>
 	
-	<!-- <update id="siUpdateTravel" parameterType="java.lang.String">
+	
+	<!-- Travel 테이블의 t_name에 키워드가 존재하는 경우 t_count++ -->
+	<update id="siTravelUpdate" parameterType="java.lang.String">
 		update Travel
 		set t_count = t_count + 1
 		where t_name LIKE '%' || #{keyword} || '%'
 	</update>
 	
-	<update id="siUpdateHouse" parameterType="java.lang.String">
+	
+	<!-- House 테이블의 h_name에 키워드가 존재하는 경우 h_count++ -->
+	<update id="siHouseUpdate" parameterType="java.lang.String">
 		update House
 		set h_count = h_count + 1
 		where h_name LIKE '%' || #{keyword} || '%'
 	</update>
 	
-	<update id="siUpdateRes" parameterType="java.lang.String">
+	
+	<!-- Restaurant 테이블의 r_name에 키워드가 존재하는 경우 r_count++ -->
+	<update id="siResUpdate" parameterType="java.lang.String">
 		update Restaurant
 		set r_count = r_count + 1
 		where r_name LIKE '%' || #{keyword} || '%'
-	</update> -->
+	</update>
 	
+	
+	<!-- Travel 테이블에 키워드가 존재하는지 조회 -->
 	<select id="siTravelSearch" parameterType="java.lang.String" resultType="Travel">
 		SELECT *
   		FROM Travel
   		WHERE t_name LIKE '%' || #{keyword} || '%' OR t_content LIKE '%' || #{keyword} || '%' OR t_address LIKE '%' || #{keyword} || '%'
 	</select>
 	
+	
+	<!-- House 테이블에 키워드가 존재하는지 조회 -->
 	<select id="siHouseSearch" parameterType="java.lang.String" resultType="House">
   		SELECT *
   		FROM house
   		WHERE h_name LIKE '%' || #{keyword} || '%' OR h_content LIKE '%' || #{keyword} || '%' OR h_address LIKE '%' || #{keyword} || '%'
 	</select>
 	
+	
+	<!-- Restaurant 테이블에 키워드가 존재하는지 조회 -->
 	<select id="siResSearch" parameterType="java.lang.String" resultType="Res">
   		SELECT *
   		FROM Restaurant
   		WHERE r_name LIKE '%' || #{keyword} || '%' OR r_content LIKE '%' || #{keyword} || '%' OR r_address LIKE '%' || #{keyword} || '%'
 	</select>
 	
+	
+	<!-- Board 테이블에 키워드가 존재하는지 조회 -->
 	<select id="siBoardSearch" parameterType="java.lang.String" resultType="Board">
   		SELECT *
   		FROM Board

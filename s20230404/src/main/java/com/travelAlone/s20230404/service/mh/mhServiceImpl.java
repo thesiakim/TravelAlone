@@ -16,11 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class mhServiceImpl implements mhService {
 	private final mhDao		mh;
-		//11:19분작업 ㅇㅎㅇㅎㅎㅇㅎㅇㅎㅇㅎㅇㅎㅎㅇㅎㅇㅎ
-	    //11:37 시아작업
-		//11:42 gdgdgddgd
-	//12:07
-	//12:10 sia
+
 	@Override
 	public int totalNotice() {
 		System.out.println("mhServiceImpl Start totalNotice..." );

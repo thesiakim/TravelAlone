@@ -23,14 +23,20 @@ public class siDaoImpl implements siDao {
 	private final Logger logger = LoggerFactory.getLogger(siDao.class);
 	private final SqlSession session;
 	
+	//Travel 테이블에 검색 키워드가 있는지 조회
 	@Override
 	public List<Travel> travelSearch(String keyword) {
 		logger.info("siDaoImpl travelSearch start");
 		List<Travel> travelList = null;
 		
 		try {
-			travelList = session.selectList("siTravelSearch", keyword);		
-//			if(travelList.)
+			//Travel 테이블에 검색 키워드가 있는지 조회한 뒤 결과를 List<Travel>로 반환
+			travelList = session.selectList("siTravelSearch", keyword);
+			
+			//Travel 테이블에 검색 키워드가 존재한다면 해당 키워드에 대해  t_count ++
+			if(!travelList.isEmpty()) {
+				session.update("siTravelUpdate", keyword);
+			}
 			
 		} catch(Exception e) {
 			logger.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
@@ -39,15 +45,18 @@ public class siDaoImpl implements siDao {
 	}
 	
 	
-	
+	//House 테이블에 검색 키워드가 있는지 조회
 	@Override
 	public List<House> houseSearch(String keyword) {
 		logger.info("siDaoImpl houseSearch start");
 		List<House> houseList = null;
 		
 		try {
-			houseList = session.selectList("siHouseSearch", keyword);	
+			houseList = session.selectList("siHouseSearch", keyword);
 			
+			if(!houseList.isEmpty()) {
+				session.update("siHouseUpdate", keyword);
+			}
 			
 		} catch(Exception e) {
 			logger.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
@@ -57,14 +66,18 @@ public class siDaoImpl implements siDao {
 	
 
 
-
+	//Restaurant 테이블에 검색 키워드가 있는지 조회
 	@Override
 	public List<Res> resSearch(String keyword) {
 		logger.info("siDaoImpl resSearch start");
 		List<Res> resList = null;
 		
 		try {
-			resList = session.selectList("siResSearch", keyword);			
+			resList = session.selectList("siResSearch", keyword);	
+			
+			if(!resList.isEmpty()) {
+				session.update("siResUpdate", keyword);
+			}
 			
 		} catch(Exception e) {
 			logger.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
@@ -73,7 +86,7 @@ public class siDaoImpl implements siDao {
 	}
 
 
-	
+	//Board 테이블에 검색 키워드가 있는지 조회
 	@Override
 	public List<Board> boardSearch(String keyword) {
 		logger.info("siDaoImpl boardSearch start");
@@ -85,17 +98,17 @@ public class siDaoImpl implements siDao {
 		} catch(Exception e) {
 			logger.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
 		}
+		
 		return boardList;
 	}
 	
 	
-	
+	//Search 테이블에 검색 키워드가 있다면 update, 없으면 insert
 	@Override
 	public void upsertSearch(String keyword) {
 		logger.info("siDaoImpl upsertSearch start");
 		
 		try {
-			//검색어가 없으면 insert, 있으면 update count++
 			session.insert("siUpsert", keyword);
 			
 		} catch(Exception e) {
