@@ -19,7 +19,7 @@ public class Notice {
 	private LocalDateTime 		modified_date;
 	
 	
-	// 조회용
+	// 조회용  ㅎㅇㅎㅇㅎㅇㅎㅇ
 	private String search;   	private String keyword;
 	private String pageNum;  
 	//            1                           10
