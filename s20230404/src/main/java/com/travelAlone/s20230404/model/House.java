@@ -24,7 +24,7 @@ public class House {
 	private String h_common_loc;
     private LocalDateTime  create_date;
     private LocalDateTime  modified_date;
-    private int h_count;
+    private int h_count; 
     
     // 페이지조회용
     private String search;      private String keyword;
