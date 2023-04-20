@@ -2,6 +2,7 @@ package com.travelAlone.s20230404.service.mh;
 
 import java.util.List;
 
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
 
@@ -16,6 +17,10 @@ public interface mhService {
 	List<Notice> 			listSearchNotice(Notice notice);
 	int 					conditionNoticeCount(Notice notice);
 	
+	//자주묻는질문
+	List<Notice> 			listFaq(Notice notice);
+	
+	
 	//문의하기
 	int 					totalInquire();
 	List<Inquire> 			listInquire(Inquire inquire);
@@ -26,25 +31,21 @@ public interface mhService {
 	List<Inquire> 			listSearchInquire(Inquire inquire);
 	int 					conditionInquireCount(Inquire inquire);
 	
-	//여행
-	int 					conditionTravelCount(Inquire inquire);
-	List<Inquire> 			listFilterTraInquire(Inquire inquire);
-	//숙소
-	int 					conditionHouseCount(Inquire inquire);
-	List<Inquire> 			listFilterHouInquire(Inquire inquire);
-	//맛집
-	int 					conditionResCount(Inquire inquire);
-	List<Inquire>			listFilterResInquire(Inquire inquire);
-	//기타
-	int 					conditionEtcCount(Inquire inquire);
-	List<Inquire> 			listFilterEtcInquire(Inquire inquire);
+	
 	
 	//답변하기
 	int replyInquire(Inquire inquire);
 	
 	
-	//자주묻는질문
-	List<Notice> 			listFaq(Notice notice);
+	
+	
+	
+	//공통코드 호출 
+	List<CommonCode> 		getCommonCode();
+	//옵션별 count 갯수
+	int conditionOptionCount(String code);		
+	//옵션별 게시글 갯수
+	List<Inquire> 			listFilterOptionInquire(Inquire inquire);
 	
 
 	

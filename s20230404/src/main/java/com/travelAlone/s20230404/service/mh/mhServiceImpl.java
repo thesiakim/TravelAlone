@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.mh.mhDao;
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
 
@@ -173,73 +174,29 @@ public class mhServiceImpl implements mhService {
 	}
 
 	
-	//여행지문의 갯수
+	@Override
+	public List<CommonCode> getCommonCode() {
+		List<CommonCode> result = mh.getCommonCode();
+		return  result;
+	}
+	
+	
+	//옵션별 갯수
 	@Override   
-	public int conditionTravelCount(Inquire inquire) {
-		log.info("mhServiceImpl  conditionTravelCount Start" );
-		int conditionTraInquireCnt = mh.condTraInqCnt(inquire);
-		log.info("mhServiceImpl  conditionTravelCount conditionInquireCnt" + conditionTraInquireCnt);		
-		return conditionTraInquireCnt;
+	public int conditionOptionCount(String code) {
+		log.info("mhServiceImpl  conditionOptionCount Start" );
+		int conditionInquireCnt = mh.condOptionInqCnt(code);
+		log.info("mhServiceImpl  conditionOptionCount conditionInquireCnt" + conditionInquireCnt);		
+		return conditionInquireCnt;
 	}
-	//여행지문의 리스트
+	//옵션별 리스트
 	@Override
-	public List<Inquire> listFilterTraInquire(Inquire inquire) {
-		List<Inquire> inquireTraFilterList = null;
-		log.info("mhServiceImpl listFilterInquire Start...");
-		inquireTraFilterList = mh.inquireTraFilterList(inquire);
-		log.info("mhServiceImpl listFilterInquire inquireTraFilterList.size()"+ inquireTraFilterList.size());
-		return inquireTraFilterList;
-	}
-	//숙소문의 갯수
-	@Override
-	public int conditionHouseCount(Inquire inquire) {
-		log.info("mhServiceImpl  conditionHouseCount Start" );
-		int conditionHouInquireCnt = mh.condHouInqCnt(inquire);
-		log.info("mhServiceImpl  conditionHouseCount conditionHouInquireCnt" + conditionHouInquireCnt);		
-		return conditionHouInquireCnt;
-	}
-	//숙소문의 리스트
-	@Override
-	public List<Inquire> listFilterHouInquire(Inquire inquire) {
-		List<Inquire> inquireHouFilterList = null;
-		log.info("mhServiceImpl listFilterInquire Start...");
-		inquireHouFilterList = mh.inquireHouFilterList(inquire);
-		log.info("mhServiceImpl listFilterInquire inquireFilterList.size()"+ inquireHouFilterList.size());
-		return inquireHouFilterList;
-	}
-
-	@Override
-	public int conditionResCount(Inquire inquire) {
-		log.info("mhServiceImpl  conditionResCount Start" );
-		int conditionResInquireCnt = mh.condResInqCnt(inquire);
-		log.info("mhServiceImpl  conditionResCount conditionHouInquireCnt" + conditionResInquireCnt);		
-		return conditionResInquireCnt;
-	}
-
-	@Override
-	public List<Inquire> listFilterResInquire(Inquire inquire) {
-		List<Inquire> inquireResFilterList = null;
-		log.info("mhServiceImpl listFilterInquire Start...");
-		inquireResFilterList = mh.inquireResFilterList(inquire);
-		log.info("mhServiceImpl listFilterInquire inquireResFilterList.size()"+ inquireResFilterList.size());
-		return inquireResFilterList;
-	}
-
-	@Override
-	public int conditionEtcCount(Inquire inquire) {
-		log.info("mhServiceImpl  conditionEtcCount Start" );
-		int conditionEtcInquireCnt = mh.condEtcInqCnt(inquire);
-		log.info("mhServiceImpl  conditionResCount conditionHouInquireCnt" + conditionEtcInquireCnt);		
-		return conditionEtcInquireCnt;
-	}
-
-	@Override
-	public List<Inquire> listFilterEtcInquire(Inquire inquire) {
-		List<Inquire> inquireEtcFilterList = null;
-		log.info("mhServiceImpl inquireEtcFilterList Start...");
-		inquireEtcFilterList = mh.inquireEtcFilterList(inquire);
-		log.info("mhServiceImpl listFilterInquire inquireEtcFilterList.size()"+ inquireEtcFilterList.size());
-		return inquireEtcFilterList;
+	public List<Inquire> listFilterOptionInquire(Inquire inquire) {
+		List<Inquire> inquireOptionFilterList = null;
+		log.info("mhServiceImpl listFilterOptionInquire Start...");
+		inquireOptionFilterList = mh.mhOptionInquireList(inquire);
+		log.info("mhServiceImpl listFilterOptionInquire inquireTraFilterList.size()"+ inquireOptionFilterList.size());
+		return inquireOptionFilterList;
 	}
 
 			

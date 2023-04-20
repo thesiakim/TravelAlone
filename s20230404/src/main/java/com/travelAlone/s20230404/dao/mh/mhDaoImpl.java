@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
 
@@ -68,7 +69,7 @@ public class mhDaoImpl implements mhDao {
 		
 		return notice;
 	}
-
+//글작성
 	@Override
 	public int insertNotice(Notice notice) {
 		int result = 0;
@@ -267,106 +268,44 @@ public class mhDaoImpl implements mhDao {
 		return conditionInquireCount;
 	}
 
-	@Override
-	public int condTraInqCnt(Inquire inquire) {
-		int conditionTraInquireCount = 0;		
-		log.info("mhDaoImpl Start total...");
-		try {
-			conditionTraInquireCount = session.selectOne("condTraInquireCnt",inquire);
-			log.info("mhDaoImpl conditionTraInquireCount->"+conditionTraInquireCount);		
-		} catch (Exception e) {
-			log.info("mhDaoImpl Exception"+ e.getMessage());
-		}			
-		return conditionTraInquireCount;
-	}
-
-	@Override
-	public List<Inquire> inquireTraFilterList(Inquire inquire) {
-		List<Inquire> inquireFilterList = null;
-		log.info("mhDaoImpl inquireFilterList start..");
-		try {
-			inquireFilterList = session.selectList("mhTraInquireList",inquire);
-		} catch (Exception e) {
-			log.info("mhDaoImpl mhTraInqFilterList Exception " + e.getMessage());
+	//공통코드 호출부  여행지문의 숙소문의 맛집문의 같은거
+		@Override
+		public List<CommonCode> getCommonCode() {
+			log.info("getCommonCode 호출부 .......");
+			List<CommonCode> result = session.selectList("mhCommonCode");
+			log.info("getCommonCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
+			
+			return  result;
 		}
-		return inquireFilterList;
-	}
 
-	@Override
-	public int condHouInqCnt(Inquire inquire) {
-		int conditionHouInquireCount = 0;		
-		log.info("mhDaoImpl Start total...");
-		try {
-			conditionHouInquireCount = session.selectOne("condHouInquireCnt",inquire);
-			log.info("mhDaoImpl conditionHouInquireCount->"+conditionHouInquireCount);		
-		} catch (Exception e) {
-			log.info("mhDaoImpl Exception"+ e.getMessage());
-		}			
-		return conditionHouInquireCount;
-	}
-
-	@Override
-	public List<Inquire> inquireHouFilterList(Inquire inquire) {
-		List<Inquire> inquireFilterList = null;
-		log.info("mhDaoImpl inquireFilterList start..");
-		try {
-			inquireFilterList = session.selectList("mhHouInquireList",inquire);
-		} catch (Exception e) {
-			log.info("mhDaoImpl mhTraInqFilterList Exception " + e.getMessage());
+		@Override
+		public List<Inquire> mhOptionInquireList(Inquire inquire) {
+			List<Inquire> inquireFilterList = null;
+			log.info("mhDaoImpl inquireFilterList start..");
+			try {
+				inquireFilterList = session.selectList("mhOptionInquireList",inquire);
+			} catch (Exception e) {
+				log.info("mhDaoImpl mhTraInqFilterList Exception " + e.getMessage());
+			}
+			return inquireFilterList;
 		}
-		return inquireFilterList;
-	}
 
-	@Override
-	public int condResInqCnt(Inquire inquire) {
-		int conditionResInquireCount = 0;		
-		log.info("mhDaoImpl Start total...");
-		try {
-			conditionResInquireCount = session.selectOne("condResInquireCnt",inquire);
-			log.info("mhDaoImpl conditionResInquireCount->"+conditionResInquireCount);		
-		} catch (Exception e) {
-			log.info("mhDaoImpl Exception"+ e.getMessage());
-		}			
-		return conditionResInquireCount;
-	}
-
-	@Override
-	public List<Inquire> inquireResFilterList(Inquire inquire) {
-		List<Inquire> inquireFilterList = null;
-		log.info("mhDaoImpl inquireFilterList start..");
-		try {
-			inquireFilterList = session.selectList("mhResInquireList",inquire);
-		} catch (Exception e) {
-			log.info("mhDaoImpl mhTraInqFilterList Exception " + e.getMessage());
+		@Override
+		public int condOptionInqCnt(String code) {
+			int count = 0;		
+			log.info("mhDaoImpl Start total...");
+			try {
+				count = session.selectOne("condOptionInquireCnt",code);
+				log.info("mhDaoImpl condOptionInquireCnt->"+count);		
+			} catch (Exception e) {
+				log.info("mhDaoImpl Exception"+ e.getMessage());
+			}			
+			return count;
 		}
-		return inquireFilterList;
-	}
 
-	@Override
-	public int condEtcInqCnt(Inquire inquire) {
-		int conditionEtcInquireCount = 0;		
-		log.info("mhDaoImpl Start total...");
-		try {
-			conditionEtcInquireCount = session.selectOne("condEtcInquireCnt",inquire);
-			log.info("mhDaoImpl conditionEtcInquireCount->"+conditionEtcInquireCount);		
-		} catch (Exception e) {
-			log.info("mhDaoImpl Exception"+ e.getMessage());
-		}			
-		return conditionEtcInquireCount;
-	}
-
-	@Override
-	public List<Inquire> inquireEtcFilterList(Inquire inquire) {
-		List<Inquire> inquireFilterList = null;
-		log.info("mhDaoImpl inquireFilterList start..");
-		try {
-			inquireFilterList = session.selectList("mhEtcInquireList",inquire);
-		} catch (Exception e) {
-			log.info("mhDaoImpl mhTraInqFilterList Exception " + e.getMessage());
-		}
-		return inquireFilterList;
-	}
-
+	
+	
+	
 
 	//답변하기
 	@Override

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.CommonMapper">
+		
+		<select id="mhCommonCode" parameterType="Common" resultType="Common" >
+			select 
+				bcd||mcd as code,  
+				word as value
+			from 
+				common
+			where 
+				bcd = 'inq'
+		</select>		
+		
+</mapper>
+
+
+<!-- || 연산자는 문자열을 이어붙이는 연산자입니다. 즉, bcd와 mcd의 값이 '001', '002'일 경우 code 열의 값은 '001002'가 됩니다. -->
+<!-- 대분류랑 중분류 합치고    코드이름을 가져오는 코드 -->

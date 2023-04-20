@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
 import com.travelAlone.s20230404.service.Paging;
@@ -84,11 +86,9 @@ public class mhController {
 	//공지사항 글작성
 	@PostMapping(value = "noticeWriteForm")
 	public String noticeWrite(Notice notice, Model model) {
-		System.out.println("mhController  noticeWrite Start..." );
-		
+		log.info("mhController  noticeWrite Start...");
 		int insertResult = mh.insertNotice(notice);
-		System.out.println("mhController noticeWrite insertResult->"+insertResult );
-		
+		log.info("mhController noticeWrite insertResult->"+insertResult );
 		if (insertResult > 0) {
 			return "redirect:notice";}
 		else {
@@ -102,11 +102,9 @@ public class mhController {
 	//공지사항 글수정 페이지이동
 	@GetMapping(value = "noticeUpdateForm")
 	public String noticeUpdateForm(int g_notice_id, Model model) {
-		System.out.println("mhController Start updateForm..." );
+		log.info("mhController Start updateForm...");
 		Notice notice = mh.detailNotice(g_notice_id);
-		
-		System.out.println("mhController updateFormEmp notice->"+notice);
-		
+		log.info("mhController updateFormNotice house->" + notice);		
 		
 		model.addAttribute("notice", notice);	
 		return "mh/noticeUpdateForm";
@@ -198,6 +196,12 @@ public class mhController {
 			Paging page = new Paging(totalInquire, currentPage);
 			inquire.setStart(page.getStart());
 			inquire.setEnd(page.getEnd());
+			
+			
+			//여기에 게시판 코드 불러오는 코드 작성
+			List<CommonCode> commonCode = mh.getCommonCode();
+			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+			model.addAttribute("boardList",commonCode);
 			
 			
 			//요구사항 리스트
@@ -305,97 +309,41 @@ public class mhController {
 			return "mh/inquire";
 		}
 		
-	//문의게시판 분류 여행지추가 문의
-		@RequestMapping(value = "inquireTraFilter")
-		public String inquireTraFilter(Inquire inquire, String currentPage, Model model) {
-			log.info("mhController inquireTraFilter Start ..." );
+		//새로 만든 필터~~~너가만든필터~~~
+		@GetMapping(value="inquireCodeFilter")
+		public String inquireFilter(@RequestParam(name = "code") String code,Inquire inquire, String currentPage, Model model) {
+								//@RequestParam 어노테이션은 code라는 이름의 파라미터를 받으며, 이 값은 String 타입의 code 변수에 할당됩니다.
+			log.info("mhController inquireCodeFilter Start ..." );
 			
-			int totalInquire = mh.conditionTravelCount(inquire);
-			log.info("mhController inquireTraFilter totalInquire =>" + totalInquire);
+		
+			List<CommonCode> commonCode = mh.getCommonCode();
+			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+			//				boardList data : 				inq100		, 여행지문의
+			model.addAttribute("boardList",commonCode);
+			//List<CommonCode> 타입의 commonCode 변수에 저장합니다. 이 리스트는 모델 객체에 추가되어 View에서 사용됩니다.
 			
-			// Paging 작업
+			int totalInquire = mh.conditionOptionCount(code);
+			log.info("mhController inquireCodeFilter totalInquire =>" + totalInquire);
+			//메소드를 호출하여 totalInquire 변수에 총 조회된 데이터의 개수를 할당
+			
+			//페이징
 			Paging page = new Paging(totalInquire, currentPage);
 			inquire.setStart(page.getStart());
 			inquire.setEnd(page.getEnd());
+			inquire.setCode(code);
 			
-			List<Inquire> listFilterTraInquire = mh.listFilterTraInquire(inquire);
-			log.info("mhController TraInquireSearch listFilterInquire.size()=>" + listFilterTraInquire.size());
+			
+			List<Inquire> listFilterInquire = mh.listFilterOptionInquire(inquire);
+			//메소드를 호출하여 조건에 맞는 데이터를 조회합니다. 이 데이터는 모델 객체에 추가되어 View에서 사용
+			log.info("mhController TraInquireSearch listFilterInquire.size()=>" + listFilterInquire.size());
 			model.addAttribute("totalInquire", totalInquire);
-			model.addAttribute("inquireList", listFilterTraInquire);
+			model.addAttribute("inquireList", listFilterInquire);
 			model.addAttribute("page", page);
 			model.addAttribute("search", inquire.getKeyword());
 								
 			return "mh/inquire";
 		}
-		
-		//문의게시판 분류 숙소추가 문의
-		@RequestMapping(value = "inquireHouFilter")
-		public String inquireHouFilter(Inquire inquire, String currentPage, Model model) {
-			log.info("mhController inquireHouFilter Start ..." );
-			
-			int totalInquire = mh.conditionHouseCount(inquire);
-			log.info("mhController inquireHouFilter totalInquire =>" + totalInquire);
-			
-			// Paging 작업
-			Paging page = new Paging(totalInquire, currentPage);
-			inquire.setStart(page.getStart());
-			inquire.setEnd(page.getEnd());
-			
-			List<Inquire> listFilterHouInquire = mh.listFilterHouInquire(inquire);
-			log.info("mhController TraInquireSearch listFilterTraInquire.size()=>" + listFilterHouInquire.size());
-			model.addAttribute("totalInquire", totalInquire);
-			model.addAttribute("inquireList", listFilterHouInquire);
-			model.addAttribute("page", page);
-			model.addAttribute("search", inquire.getKeyword());
-			
-			return "mh/inquire";
-		}
-		
-		//문의게시판 분류 맛집추가 문의
-		@RequestMapping(value = "inquireResFilter")
-		public String inquireResFilter(Inquire inquire, String currentPage, Model model) {
-			log.info("mhController inquireResFilter Start ..." );
-			
-			int totalInquire = mh.conditionResCount(inquire);
-			log.info("mhController inquireResFilter totalInquire =>" + totalInquire);
-			
-			// Paging 작업
-			Paging page = new Paging(totalInquire, currentPage);
-			inquire.setStart(page.getStart());
-			inquire.setEnd(page.getEnd());
-			
-			List<Inquire> listFilterResInquire = mh.listFilterResInquire(inquire);
-			log.info("mhController TraInquireSearch listFilterResInquire.size()=>" + listFilterResInquire.size());
-			model.addAttribute("totalInquire", totalInquire);
-			model.addAttribute("inquireList", listFilterResInquire);
-			model.addAttribute("page", page);
-			model.addAttribute("search", inquire.getKeyword());
-			
-			return "mh/inquire";
-		}
-		
-		//문의게시판 분류 기타 문의
-		@RequestMapping(value = "inquireEtcFilter")
-		public String inquireEtcFilter(Inquire inquire, String currentPage, Model model) {
-			log.info("mhController inquireEtcFilter Start ..." );
-			
-			int totalInquire = mh.conditionEtcCount(inquire);
-			log.info("mhController inquireEtcFilter totalInquire =>" + totalInquire);
-			
-			// Paging 작업
-			Paging page = new Paging(totalInquire, currentPage);
-			inquire.setStart(page.getStart());
-			inquire.setEnd(page.getEnd());
-			
-			List<Inquire> listFilterEtcInquire = mh.listFilterEtcInquire(inquire);
-			log.info("mhController TraInquireSearch listFilterEtcInquire.size()=>" + listFilterEtcInquire.size());
-			model.addAttribute("totalInquire", totalInquire);
-			model.addAttribute("inquireList", listFilterEtcInquire);
-			model.addAttribute("page", page);
-			model.addAttribute("search", inquire.getKeyword());
-			
-			return "mh/inquire";
-		}
+				
 		
 
 		
