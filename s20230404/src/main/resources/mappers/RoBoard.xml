@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 위를 통해 mapper 사용 가능 -->
+
+<mapper namespace="com.travelAlone.s20230404.RoBoardMapper">
+	
+	<select id="roBoardAllCount" resultType="int">
+		Select	Count(*)
+		From	Board
+		Where	b_re_level = 0				
+	</select>
+	
+	<select id="roBoardAllList" parameterType="Board" resultType="Board">
+		Select *
+		From
+		(	Select	rownum rn, a.*
+			From	(	
+						Select	b.*, m.m_nickname
+						From	Board b, Member m
+						Where	b.b_re_level = 0
+						and		b.member_id = m.member_id
+						<choose>
+							<when test="orderl == 'view'">
+								order by b.b_view_cnt
+							</when>
+							<when test="orderl == 'like'">
+								order by b.b_like_cnt
+							</when>
+							<otherwise>
+								order by b.create_date desc
+							</otherwise>
+						</choose>
+					)	a
+		)
+		Where rn between #{startRow} and #{endRow}
+		
+		
+	</select>
+	
+	<select id="roBoardCount" parameterType="Board" resultType="int">
+		Select	Count(*)
+		From	Board
+		Where	b_re_level = 0
+		and		b_common_board = #{b_common_board}
+	</select>
+	
+	<select id="roBoardList" parameterType="Board" resultType="Board">
+		Select *
+		From
+		(	Select	rownum rn, a.*
+			From	(	Select	b.*, m.m_nickname
+						From	Board b, Member m
+						Where	b.b_re_level = 0
+						and		b.member_id = m.member_id
+						and		b.b_common_board = #{b_common_board}
+						order by b.create_date desc
+					) a
+		)
+		Where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="roBoardSelList" parameterType="int" resultType="Board">
+		Select	b.*, m.m_nickname
+		From	Board b, Member m
+		Where	b.b_ref = #{board_id}
+		and		b.member_id = m.member_id
+		order by b.b_re_step
+	</select>
+	
+	<insert id="roBoardInsert" parameterType="Board">
+		Insert	into
+		Board	<!-- (board_id, member_id, b_title, b_content, b_view_cnt, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date) -->
+		values	(board_id_seq.nextval, #{member_id}, #{b_title}, #{b_content}, 0, 0, #{b_common_board}, board_id_seq.currval, 0, 0, sysdate, sysdate)
+	</insert>
+	
+	<insert id="roBoardReInsert" parameterType="Board">
+		Insert	into
+		Board	(board_id, member_id, b_content, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
+		values	(
+				 board_id_seq.nextval,
+				 #{member_id},
+				 #{b_content},
+				 0, 
+				 #{b_common_board},
+				 #{b_ref},
+				 (select  nvl(max(b_re_step),0) + 1 from board where b_ref = #{b_ref}),
+				 1,
+				 sysdate,
+				 sysdate
+				)
+	</insert>
+	
+</mapper>

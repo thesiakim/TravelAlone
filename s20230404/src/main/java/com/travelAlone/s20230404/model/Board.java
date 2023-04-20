@@ -1,28 +1,35 @@
 package com.travelAlone.s20230404.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.Data;
 
 @Data
 public class Board {
-	private long	        board_id;			// 글 ID		
-	private	long		    member_id;			// 회원 ID
-	private String	        b_title;			// 제목
-	private String	        b_content;			// 내용
-	private int		        b_view_cnt;			// 조회수
-	private	int		        b_like_cnt;			// 추천수
-	private String	        b_common_board;		// 게시판분류
-	private int		        b_ref;				// 글 그룹
-	private int		        b_re_step;			// 댓글 순서 
-	private int		        b_re_level;			// 댓글 단계
-	private LocalDateTime	create_date;		// 생성일
-	private LocalDateTime	modified_date;		// 수정일
-	private	String			m_nickname;			// 닉네임
+	private long	        board_id;					private	long		    member_id;
+	private String	        b_title;					private String	        b_content;
+	private int		        b_view_cnt;					private	int		        b_like_cnt;
+	private String	        b_common_board;				private int		        b_ref;
+	private int		        b_re_step;			        private int		        b_re_level;
+	private LocalDateTime	create_date;		        private LocalDateTime	modified_date;
 	
-//	조회용
-	private	String	search;		private	String	keyword;
-	private	String	pageNum;
-	private	int		start; 		private	int		end;
+	
+	// 조인용
+	private String	m_nickname;
+	
+	
+	// 조회용
+	private int		startRow;
+	private int 	endRow;
+	private String	pageNum;
+	private int		mcd;
+	private String	orderl;
+	
+	// create_date 날짜 형식 변경
+	public String getFormattedCreateDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return create_date.format(formatter);
+    }
 	
 }
