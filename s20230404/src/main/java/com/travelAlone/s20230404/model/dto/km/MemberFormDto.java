@@ -36,7 +36,7 @@ public class MemberFormDto {
     // 비밀번호는 아래 조건과 같음
     @NotEmpty(message = "비밀번호는 필수 입력값입니다.")
     @Length(min = 6, max = 16, message = "비밀번호는 6자 이상, 16자 이하로 입력해주세요")
-    private String passwd;
+    private String password;
 
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
@@ -51,10 +51,10 @@ public class MemberFormDto {
     private String phone;
 
     @Builder
-    public MemberFormDto(String email, String nickName, String passwd, String name, String gender, String phone) {
+    public MemberFormDto(String email, String nickName, String password, String name, String gender, String phone) {
         this.email = email;
         this.nickName = nickName;
-        this.passwd = passwd;
+        this.password = password;
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -65,7 +65,7 @@ public class MemberFormDto {
 
         return MemberJpa.builder().email(this.email)
                 .nickname(this.nickName)
-                .passwd(passwordEncoder.encode(this.passwd))
+                .password(passwordEncoder.encode(this.password))
                 .name(this.name)
                 .gender(this.gender)
                 .phone(this.phone).build();
