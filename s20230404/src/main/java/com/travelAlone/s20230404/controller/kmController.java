@@ -44,23 +44,6 @@ public class kmController {
 
     /**
      * 2023-04-17 조경민
-     * 설명 : 메인페이지 이동
-     * */
-    @GetMapping("/")
-    public String main(@LoginUser MemberJpa memberJpa, Model model){
-        System.out.println(" mian ");
-        
-        if (memberJpa != null){
-            model.addAttribute("memberId", memberJpa.getId());
-            System.out.println("user.getNickName() = " + memberJpa.getNickname());
-        }
-        
-        return "th/main";
-    }
-
-
-    /**
-     * 2023-04-17 조경민
      * 설명 : 회원가입창 이동
      * */
     @GetMapping("/join")

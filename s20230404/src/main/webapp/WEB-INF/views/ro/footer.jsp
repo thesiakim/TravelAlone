@@ -7,20 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form>
+  <form>
 	<div id="container-left clearfix">
-		<div class="footerForm">
-			<a href="">고객센터</a>
-		</div>
-		<div class="footerForm">
-			<a href="">공지사항</a>
-		</div>
-		<div class="footerInfo">
-			<p>서울시 이대 중앙학원 501호</p><br>
-			<p>모든 저작권은 중앙정보처리 회사에 있습니다</p><br>
-			<p>010-1234-5678</p>
-		</div>
+	  <div class="footerForm">
+		<a href="notice">고객센터</a>
+	  </div>
+	  <div class="footerInfo">
+		<p>서울시 이대 중앙학원 501호</p><br>
+		<p>모든 저작권은 중앙정보처리 회사에 있습니다</p><br>
+		<p>010-1234-5678</p>
+	  </div>
 	</div>
-</form>
+  </form>
 </body>
 </html>

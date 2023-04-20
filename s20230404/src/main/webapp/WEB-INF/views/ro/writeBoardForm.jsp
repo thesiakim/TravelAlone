@@ -8,26 +8,55 @@
 <title>Insert title here</title>
 	<c:import url="header.jsp"/>
 </head>
-	<link href="css/main.css" rel="stylesheet" type="text/css">
-	<link href="/css/list.css" rel="stylesheet" type="text/css">
+	<link href="/css/write.css" rel="stylesheet" type="text/css">
 <body>
+	<c:import url="boardHeader.jsp"/>
 	
-	<h2>글 작성하기</h2>
-		<c:if test="${msg != null }">${msg }</c:if>
-		<form action="writeBoard" method="post">
+	<hr>
+	
+	<c:if test="${msg != null }">${msg }</c:if>
+		
+		<form action="writeBoard" method="post" onsubmit="return chkWrite()">
 			<input type="hidden" name="b_common_board" value="${board.b_common_board }">
 			<input type="hidden" name="member_id" value="3">
 			<table>
-		        <tr><th>제목</th>
-		        	<td><input type="text" name="b_title" required="required"></td>
+		        <tr>
+		        	<td colspan="2">
+		        		<input type="text" id="title" name="b_title" required="required" placeholder="제목">
+		        	</td>
 		        </tr>
-		        <tr><th>내용</th>
-		        	<td><textarea id="content" name="b_content" rows="10" cols="30" required="required"></textarea></td>
+		        <tr>
+		        	<td colspan="2">
+		        		<textarea id="content" name="b_content" rows="10" cols="30" required="required">내용을 작성해 주세요</textarea>
+		        	</td>
 		        </tr>
-		        <tr><td colspan="2"><input type="submit" value="확인"></td></tr>
+		        <tr>
+					<td style="width: 100px;">
+						<label for="title">첨부파일</label>
+					</td>
+					<td>
+						<input type="reset" value="파일 선택">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="title">첨부파일</label>
+					</td>
+					<td>
+						<input type="reset" value="파일 선택">
+					</td>
+				</tr>
+		        <tr>
+					<td colspan="2" id="writeFormSubmit">
+						<input type="submit" value="작성">
+						<input type="reset" value="취소">
+					</td>
+				</tr>
 		    </table>
 		</form>
-	
+		
+		<hr>
+		
 </body>
 	<c:import url="footer.jsp"/>
 </html>

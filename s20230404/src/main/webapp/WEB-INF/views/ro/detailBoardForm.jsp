@@ -14,47 +14,85 @@
 	
 	<c:import url="boardHeader.jsp"/>
 	
+	<hr>
+	
 	<c:set value="${listBoardS }" var="contents"/>
 	
-	<div>
-		<c:forEach items="${contents}" var="content" >
-			<c:choose>
-				<c:when test="${content.b_re_level == 0}">
-					<div>
-						<table>
-							<tr>
-								<td>${content.b_title}</td>
-								<td>${content.m_nickname}</td>
-								<td>${content.getFormattedCreateDate()}</td>
-							</tr>
-						</table>
-					</div>
-					<div>${content.b_content}</div>
-				</c:when>
-				<c:when test="${content.b_re_level > 0}">
-					<div>
-						<table>
-							<tr>
-								<td>${content.m_nickname}</td>
-								<td>${content.b_content}</td>
-								<td>${content.getFormattedCreateDate()}</td>
-								<td>답글</td>
-								<td>신고</td>
-							</tr>
-						</table>
-					</div>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-	</div>
+	<c:forEach items="${contents}" var="content" >
+		<c:choose>
+			<c:when test="${content.b_re_level == 0}">
+				<table>
+					<tr>
+						<td style="width: 500px; font-size: 25px;">${content.b_title}</td>
+						<td style="width: 100px; font-size: 16px;">${content.m_nickname}</td>
+						<td style="width:150px; font-size: 16px;">${content.getFormattedCreateDate()}</td>
+					</tr>
+					<tr>
+						<td colspan="3" height="400px">${content.b_content}</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="padding-left: 395px; color:red;">${content.b_like_cnt}</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="padding-left: 380px;">
+							<input type="button" value="추천">
+							<input type="button" value="신고">
+						</td>
+					</tr>
+				</table>
+				
+				<hr>
+				
+			</c:when>
+							
+			<c:when test="${content.b_re_level > 0}">
+				<form id="reply" action="#" class="reply-form">
+					<table>
+						<tr>
+							<td style="width: 100px;">${content.m_nickname}</td>
+							<td style="width: 400px;">${content.b_content}</td>
+							<td style="width:180px;">${content.getFormattedCreateDate()}</td>
+							<td><input type="button" value="답글" onclick="showMembers(this)"></td>
+							<td><input type="submit" value="신고"></td>
+						</tr>
+						<tr class="members" style="display: none;">
+							<td colspan="5">
+								<input type="text" name="b_content" placeholder="댓글을 입력하세요">
+								<input type="submit" value="등 록">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</c:when>
+			
+		</c:choose>
+	</c:forEach>
+	
+	<script>
+		function showMembers(button) {
+		var membersRow = button.parentNode.parentNode.nextElementSibling;
+			if (membersRow.classList.contains("members")) {
+				if (membersRow.style.display === "none") {
+		    		membersRow.style.display = "table-row";
+				} else {
+					membersRow.style.display = "none";
+				}
+			}
+		}
+	</script>
 	
 	<c:if test="${msg != null }">${msg }</c:if>
+	
+	<h6>명예훼손, 개인정보 유출, 분쟁 유발, 허위 사실 유포 등의 글은 이용약관에 의해 제제는 물론<br> 
+	법률에  의해 처벌받을 수 있습니다.건전한 커뮤니티를 위해 자제 당부 드립니다.</h6>
 	<form action="writeBoardRe" method="post">
-		<input type="hidden" name="b_common_board" value="bor200">
-		<input type="hidden" name="b_ref" value="34">
-		<input type="hidden" name="member_id" value="4">
-		<textarea rows="3" cols="50" name="b_content" required="required"></textarea>
-		<input type="submit" value="등록">
+		<div id="replyForm">
+			<input type="hidden" name="member_id" value="5">
+			<input type="hidden" name="b_common_board" value="bor100">
+			<input type="hidden" name="board_id" value="19">
+			<input type="text" name="b_content" placeholder="댓글을 입력하세요">
+			<input type="submit" value="등 록">
+		</div>
 	</form>
 	
 </body>
