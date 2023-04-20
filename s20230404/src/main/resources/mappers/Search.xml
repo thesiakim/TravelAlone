@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.SearchMapper">
+	
+	<insert id="siUpsert" parameterType="java.lang.String">
+  		MERGE INTO search
+  		USING dual
+  		ON (s_keyword = #{keyword, jdbcType=VARCHAR})
+  		WHEN MATCHED THEN
+    		UPDATE SET s_count = s_count + 1
+  		WHEN NOT MATCHED THEN
+    	INSERT (search_id, s_keyword, s_count, create_date, modified_date)
+    	VALUES (search_id_seq.nextval, #{keyword, jdbcType=VARCHAR}, 1, sysdate, sysdate)
+	</insert>
+	
+	<!-- <update id="siUpdateTravel" parameterType="java.lang.String">
+		update Travel
+		set t_count = t_count + 1
+		where t_name LIKE '%' || #{keyword} || '%'
+	</update>
+	
+	<update id="siUpdateHouse" parameterType="java.lang.String">
+		update House
+		set h_count = h_count + 1
+		where h_name LIKE '%' || #{keyword} || '%'
+	</update>
+	
+	<update id="siUpdateRes" parameterType="java.lang.String">
+		update Restaurant
+		set r_count = r_count + 1
+		where r_name LIKE '%' || #{keyword} || '%'
+	</update> -->
+	
+	<select id="siTravelSearch" parameterType="java.lang.String" resultType="Travel">
+		SELECT *
+  		FROM Travel
+  		WHERE t_name LIKE '%' || #{keyword} || '%' OR t_content LIKE '%' || #{keyword} || '%' OR t_address LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="siHouseSearch" parameterType="java.lang.String" resultType="House">
+  		SELECT *
+  		FROM house
+  		WHERE h_name LIKE '%' || #{keyword} || '%' OR h_content LIKE '%' || #{keyword} || '%' OR h_address LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="siResSearch" parameterType="java.lang.String" resultType="Res">
+  		SELECT *
+  		FROM Restaurant
+  		WHERE r_name LIKE '%' || #{keyword} || '%' OR r_content LIKE '%' || #{keyword} || '%' OR r_address LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="siBoardSearch" parameterType="java.lang.String" resultType="Board">
+  		SELECT *
+  		FROM Board
+  		WHERE b_title LIKE '%' || #{keyword} || '%' OR b_content LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	
+	
+</mapper>
