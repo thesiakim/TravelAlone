@@ -18,6 +18,7 @@ public class mhServiceImpl implements mhService {
 	private final mhDao		mh;
 		//11:19분작업 ㅇㅎㅇㅎㅎㅇㅎㅇㅎㅇㅎㅇㅎㅎㅇㅎㅇㅎ
 	    //11:37 시아작업
+		//11:42 gdgdgddgd
 	@Override
 	public int totalNotice() {
 		System.out.println("mhServiceImpl Start totalNotice..." );
