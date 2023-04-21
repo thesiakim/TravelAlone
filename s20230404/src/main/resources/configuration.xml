@@ -13,6 +13,7 @@
 		<typeAlias alias="Travel" type="com.travelAlone.s20230404.model.Travel"/>
 		<typeAlias alias="Res" type="com.travelAlone.s20230404.model.Res"/>
 		<typeAlias alias="Board" type="com.travelAlone.s20230404.model.Board"/>
+		<typeAlias alias="BodImg" type="com.travelAlone.s20230404.model.BodImg"/>
 		     <typeAlias alias="Common" type="com.travelAlone.s20230404.model.CommonCode"/>
 	</typeAliases>
 </configuration>

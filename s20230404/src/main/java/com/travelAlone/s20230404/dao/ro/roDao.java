@@ -3,6 +3,7 @@ package com.travelAlone.s20230404.dao.ro;
 import java.util.List;
 
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.BodImg;
 
 public interface roDao {
 
@@ -16,10 +17,9 @@ public interface roDao {
 	
 	List<Board> detailBoard(int board_id);
 
-	int insertBoard(Board board);
+	long insertBoard(Board board);
 
 	int insertReBoard(Board board);
 
-	
-	
+    int insertBodImg(List<BodImg> bodImgs);
 }

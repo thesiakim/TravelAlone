@@ -2,6 +2,7 @@ package com.travelAlone.s20230404.dao.ro;
 
 import java.util.List;
 
+import com.travelAlone.s20230404.model.BodImg;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -91,17 +92,24 @@ public class roDaoImpl implements roDao {
 	}
 
 	@Override
-	public int insertBoard(Board board) {
-		int insertResult = 0;
+	public long insertBoard(Board board) {
+		long createBoardId = 0L;
+
 		log.info("roDaoImp insertBoard 시작");
 		
 		try {
-			insertResult = session.insert("roBoardInsert", board);
-			log.info("roDaoImp insertBoard insertResult는 "+ insertResult);
+			int roBoardInsertResult = session.insert("roBoardInsert", board);
+
+			createBoardId = board.getBoard_id();
+
+			log.info("roDaoImp insertBoard createBoardId는 "+ createBoardId);
+
 		} catch (Exception e) {
+
 			log.info("roDaoImp insertBoard e.getMessage는 "+ e.getMessage());
+
 		}
-		return insertResult;
+		return createBoardId;
 	}
 
 	@Override
@@ -119,7 +127,30 @@ public class roDaoImpl implements roDao {
 		return insertResult;
 	}
 
-	
-	
-	
+	@Override
+	public int insertBodImg(List<BodImg> bodImgs) {
+		int insertResult = 0;
+		log.info("roDaoImp insertBoardImg 시작");
+
+		for (BodImg img : bodImgs) {
+			try {
+
+				session.insert("roBoardImgInsert", img);
+
+				log.info("roDaoImp insertReBoard insertResult는 "+ insertResult);
+
+				insertResult++;
+
+			} catch (Exception e) {
+
+				log.info("roDaoImp insertReBoard e.getMessage는 "+ e.getMessage());
+			}
+		}
+
+
+
+		return 0;
+	}
+
+
 }

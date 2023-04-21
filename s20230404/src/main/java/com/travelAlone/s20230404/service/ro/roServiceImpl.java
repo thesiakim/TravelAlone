@@ -2,6 +2,9 @@ package com.travelAlone.s20230404.service.ro;
 
 import java.util.List;
 
+import com.travelAlone.s20230404.model.BodImg;
+import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
+import com.travelAlone.s20230404.service.jh.UploadHandler;
 import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.ro.roDao;
@@ -9,6 +12,7 @@ import com.travelAlone.s20230404.model.Board;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Slf4j
@@ -16,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class roServiceImpl implements roService {
 
 	private final roDao		rd;
+	private final UploadHandler uploadHandler;
 
 	@Override
 	public int boardAllCnt() {
@@ -69,10 +74,16 @@ public class roServiceImpl implements roService {
 	}
 
 	@Override
-	public int insertBoard(Board board) {
+	public int insertBoard(BoardWriteRequestDto requestDto, List<MultipartFile> files) throws Exception {
 		int insertResult = 0;
 		log.info("roService insertBoard 시작");
-		insertResult = rd.insertBoard(board);
+
+		long boardId = rd.insertBoard(requestDto.toBoard());
+
+		List<BodImg> bodImgs = uploadHandler.parseFileInfo(files, boardId);
+
+		insertResult = rd.insertBodImg(bodImgs);
+
 		log.info("roService insertBoard insertResult는 "+ insertResult);
 		
 		return insertResult;

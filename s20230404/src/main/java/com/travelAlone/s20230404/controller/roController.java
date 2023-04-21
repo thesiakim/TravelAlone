@@ -2,12 +2,12 @@ package com.travelAlone.s20230404.controller;
 
 import java.util.List;
 
+import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.domain.km.MemberJpa;
+import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.service.ro.Paging;
@@ -15,6 +15,7 @@ import com.travelAlone.s20230404.service.ro.roService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @Slf4j
@@ -23,8 +24,8 @@ public class roController {
 	
 	private final roService		rs;
 	
-	@RequestMapping(value = "listAllBoard")
-	public String listBoardAll(com.travelAlone.s20230404.model.Board board, String currentPage, Model model) {
+	@GetMapping("listAllBoard")
+	public String listBoardAll(Board board, String currentPage, Model model) {
 		log.info("roController listBoardAll 시작");
 		log.info("roController listBoardAll currentPage는 "+ currentPage);
 		
@@ -92,28 +93,36 @@ public class roController {
 		return "ro/detailBoardForm";
 	}
 	
-	@PostMapping(value = "writeBoardForm")
+	@GetMapping(value = "writeBoardForm")
 	public String writeFormBoard(Board board, Model model) {
 		log.info("roController writeFormBoard 시작");
 		log.info("roController writeFormBoard board.getB_common_board() 는 "+ board.getB_common_board());
 		model.addAttribute("board", board);
 		
-		return "ro/writeBoardForm";
+		return "ro/writeBoardFormTest";
 	}
 	
 	@PostMapping(value = "writeBoard")
-	public String writeBoard(Board board, Model model) {
+	@ResponseBody
+	public String writeBoard(@RequestPart(value = "key") BoardWriteRequestDto requestDto,
+							 @RequestPart(value = "file", required = false) List<MultipartFile> files,
+							 @LoginUser MemberJpa memberJpa,
+							 Model model) throws Exception {
 		log.info("roController writeBoard 시작");
-		
-		int insertResult = rs.insertBoard(board);
+
+		if (memberJpa == null){
+			throw new Exception("로그인 해주세요!");
+		}
+
+		requestDto.addMemberId(memberJpa.getId());
+
+
+		int insertResult = rs.insertBoard(requestDto,files);
+
 		
 		log.info("roController writeBoard insertResult는 "+ insertResult);
 		
-		if(insertResult > 0) return "redirect:listAllBoard";
-		else {
-			model.addAttribute("msg", "입력 실패 확인해 보세요");
-			return "forward:ro/writeFormBoard";
-		}
+		return ""+insertResult;
 	}
 	
 	@RequestMapping(value = "writeBoardRe", method = RequestMethod.POST)
