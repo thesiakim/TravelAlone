@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
+	</div>
 <h2>답변하기 글작성</h2>
 
 	<c:if test="${msg!=null}">${msg}</c:if>

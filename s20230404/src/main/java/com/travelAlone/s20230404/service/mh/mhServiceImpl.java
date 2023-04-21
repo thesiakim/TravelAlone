@@ -171,7 +171,7 @@ public class mhServiceImpl implements mhService {
 		return conditionInquireCnt;
 	}
 
-	
+	//공통코드 리스트
 	@Override
 	public List<CommonCode> getCommonCode() {
 		List<CommonCode> result = mh.getCommonCode();

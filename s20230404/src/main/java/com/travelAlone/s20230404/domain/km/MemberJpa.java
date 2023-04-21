@@ -34,7 +34,7 @@ public class MemberJpa extends BaseTimeEntity{
     @Column(name = "m_nickname")
     private String nickname;
     @Column(name = "m_passwd")
-    private String passwd;
+    private String password;
     @Column(name = "m_name")
     private String name;
     @Column(name = "m_common_gender")
@@ -55,11 +55,11 @@ public class MemberJpa extends BaseTimeEntity{
     private String imagesType;
 
     @Builder
-    public MemberJpa(String email, String nickname, String passwd, String name, String gender, String phone) {
+    public MemberJpa(String email, String nickname, String password, String name, String gender, String phone) {
         // 회원가입시 설정
         this.email = email;
         this.nickname = nickname;
-        this.passwd = passwd;
+        this.password = password;
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -67,14 +67,42 @@ public class MemberJpa extends BaseTimeEntity{
 
     }
 
+
     public void updateProfilePicture(){
 
     }
 
+    /**
+     * 2023-04-20 조경민
+     * 설명 : 닉네임을 변경한다
+     * */
     public void updateNickname(String nickname){
         this.nickname = nickname;
     }
 
 
+    /**
+     * 2023-04-20 조경민
+     * 설명 : 비밀번호 찾기 후 변경에서 변경하기 전에 멤버가 맞는지 확인한다
+     * */
+    public Boolean CheckMember(String email, String name ,String phone){
+        if (this.email == email && this.name == name && this.phone == phone){
+
+            // 정보가 맞으면 true 반환
+            return true;
+
+        }else {
+            // 정보가 맞으면 false 반환
+            return false;
+        }
+    }
+
+    /**
+     * 2023-04-20 조경민
+     * 설명 : 비밀번호를 변경한다
+     * */
+    public void updatePassword(String password){
+        this.password = password;
+    }
 
 }

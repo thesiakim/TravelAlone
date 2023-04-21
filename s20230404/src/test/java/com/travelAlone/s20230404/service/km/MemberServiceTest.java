@@ -26,31 +26,32 @@ class MemberServiceTest {
     PasswordEncoder passwordEncoder;
 
 
-    public MemberJpa createMember() {
+    public MemberFormDto createMember() {
         MemberFormDto memberFormDto = MemberFormDto.builder()
                 .email("test@example.com")
-                .passwd("test pw")
+                .password("test pw")
                 .name("test name")
                 .gender("0")
                 .phone("01012345678")
                 .build();
 
-        return memberFormDto.toEntity(passwordEncoder);
+        return memberFormDto;
     }
+
 
     @Test
     public void 회원가입(){
-        MemberJpa memberJpa = createMember();
-        Long savedMemberId = memberService.save(memberJpa);
+        MemberFormDto memberFormDto = createMember();
+
+        Long savedMemberId = memberService.save(memberFormDto,passwordEncoder);
 
         MemberJpa savedMemberJpa = memberRepository.findById(savedMemberId)
                 .orElse(null);
 
-        Assertions.assertThat(savedMemberJpa.getEmail()).isEqualTo(memberJpa.getEmail());
-        Assertions.assertThat(savedMemberJpa.getPasswd()).isEqualTo(memberJpa.getPasswd());
-        Assertions.assertThat(savedMemberJpa.getName()).isEqualTo(memberJpa.getName());
-        Assertions.assertThat(savedMemberJpa.getGender()).isEqualTo(memberJpa.getGender());
-        Assertions.assertThat(savedMemberJpa.getPhone()).isEqualTo(memberJpa.getPhone());
+        Assertions.assertThat(savedMemberJpa.getEmail()).isEqualTo(memberFormDto.getEmail());
+        Assertions.assertThat(savedMemberJpa.getName()).isEqualTo(memberFormDto.getName());
+        Assertions.assertThat(savedMemberJpa.getGender()).isEqualTo(memberFormDto.getGender());
+        Assertions.assertThat(savedMemberJpa.getPhone()).isEqualTo(memberFormDto.getPhone());
         Assertions.assertThat(savedMemberJpa.getNickname()).isNotBlank();
     }
 

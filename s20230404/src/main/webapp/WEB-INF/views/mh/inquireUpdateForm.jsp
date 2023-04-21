@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
+	</div>
 <h1>문의게시판 글수정</h1>
 
 	<form action="updateInquire" method="post">

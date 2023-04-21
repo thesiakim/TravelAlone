@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
+	</div>
 	<h2>공지사항 글작성</h2>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="noticeWriteForm" method="post" name="frm">
@@ -28,6 +31,21 @@
 				<td>내용</td>
 				<td><textarea name="g_notice_content" rows="10"></textarea></td>
 			</tr>
+			<tr>
+				<td>이미지첨부</td>
+				<td>  
+					<form id="form1" action="uploadForm" method="post" enctype="multipart/form-data" >
+							<input type="file" name="file1"> <p>
+							<input type="text" name="title"> <p>
+							<input type="submit">
+					</form>				
+				</td>
+			</tr>
+			
+			  
+			
+			
+			
 			<tr >
 				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
 				<a href="notice">목록보기</a></td>

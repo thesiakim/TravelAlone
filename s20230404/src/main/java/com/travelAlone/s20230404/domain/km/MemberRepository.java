@@ -1,8 +1,11 @@
 package com.travelAlone.s20230404.domain.km;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -19,4 +22,9 @@ public interface MemberRepository extends JpaRepository<MemberJpa, Long> {
 
     Optional<MemberJpa> findByEmail(String email);
 
+    @Query("SELECT p FROM MemberJpa p WHERE p.name = :name AND p.phone = :phone")
+    List<MemberJpa> findEmailByNameAndPhone(@Param("name") String name, @Param("phone") String phone);
+
+    @Query("SELECT p FROM MemberJpa p WHERE p.name = :name AND p.email = :email AND p.phone = :phone")
+    Optional<MemberJpa> findMemberIdByEmailNamePhone(@Param("name") String name,@Param("email") String email,@Param("phone") String phone);
 }
