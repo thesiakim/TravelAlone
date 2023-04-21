@@ -10,5 +10,7 @@ public interface SkDao {
 	List<Res>			selectResList(Res res);
 	Res					detailRes(int rid);
 	int					insertRes(Res res);
+	int					updateRes(Res res);
+	int					deleteRes(int res_id);
 
 }

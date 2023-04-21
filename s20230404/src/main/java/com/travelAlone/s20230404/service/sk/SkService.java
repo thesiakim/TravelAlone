@@ -10,4 +10,6 @@ public interface SkService {
 	List<Res> 	listRes(Res res);
 	Res			detailRes(int rid);
 	int			insertRes(Res res);
+	int			updateRes(Res res);
+	int			deleteRes(int res_id);
 }

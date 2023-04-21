@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.resMapper">
+
+<!-- 맛집정보글 갯수세기 -->
+<select id="resTotal" resultType="int">
+	select Count(*) FROM RESTAURANT
+</select>
+
+<!-- 맛집 목록가져오기 -->
+		<select id="resList" parameterType="Res" resultType="Res" >
+    		<![CDATA[
+				SELECT *
+				FROM
+				(	SELECT rownum rn , a.*
+				        FROM
+				                   (select  RESTAURANT_ID
+											,R_NAME
+											,R_CONTENT
+											,R_ADDRESS
+											,R_HOUR
+											,R_CALL
+											,R_PARKING
+											,R_MENU
+											,R_COMMON_RESTAURANT
+											,R_COMMON_LOC
+											,CREATE_DATE
+											,MODIFIED_DATE										
+									  from  RESTAURANT 									  									  									  									   
+									  order by RESTAURANT_ID desc) a
+			)   
+		 		WHERE  rn >= #{start} 
+		 		and    rn <= #{end} 
+		 	 ]]>	
+			
+		</select>
+		
+<!-- 맛집 정보글가져오기 -->
+		<select id="resSelOne"  parameterType="int" resultType="Res">		
+		  SELECT	RESTAURANT_ID, R_NAME, R_CONTENT, R_ADDRESS, R_HOUR, R_CALL, R_PARKING,
+					R_MENU, R_COMMON_RESTAURANT, R_COMMON_LOC, CREATE_DATE, MODIFIED_DATE	 
+		 FROM  RESTAURANT  WHERE RESTAURANT_ID = #{RESTAURANT_ID}
+		</select>
+
+
+
+<!-- 맛집 정보글작성하기 -->
+		<insert id="insertRes" parameterType="Res">
+			 insert into RESTAURANT
+			 (RESTAURANT_ID, R_NAME, R_CONTENT, R_ADDRESS, R_HOUR, R_CALL, R_PARKING,
+					R_MENU, R_COMMON_RESTAURANT, R_COMMON_LOC, CREATE_DATE, MODIFIED_DATE)
+			 values 
+			 (RESTAURANT_ID_SEQ.nextval, #{r_name}, #{r_content}, #{r_address}, #{r_hour}, #{r_call} ,
+			  #{r_parking}, #{r_menu}, #{r_common_restaurant}, #{r_common_loc},  sysdate, sysdate ) 				
+		</insert>
+
+<!-- 맛집 정보글수정하기 -->
+		<update id="resUpdate" parameterType="Res">
+		 UPDATE RESTAURANT
+		 SET 
+		  R_COMMON_RESTAURANT    = #{r_common_restaurant},
+		  R_COMMON_LOC 	    	 = #{r_common_loc}, 
+		  R_NAME 		 		 = #{r_name},
+		  R_CONTENT				 = #{r_content} ,
+		  R_ADDRESS				 = #{r_address} ,
+		  R_HOUR				 = #{r_hour} ,
+		  R_CALL				 = #{r_call} ,
+		  R_PARKING				 = #{r_parking},
+		  R_MENU				 = #{r_menu}
+					    
+		 WHERE  RESTAURANT_ID 	= #{restaurant_id}
+		
+		</update>
+
+		<!--  맛집 정보글삭제하기 -->
+		<delete id="deleteRes" parameterType="int">
+			delete from RESTAURANT where RESTAURANT_ID = #{restaurant_id}
+		</delete>
+
+
+</mapper>

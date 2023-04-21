@@ -48,4 +48,19 @@ public class SkServiceImpl implements SkService {
 		return result;
 	}
 
+	@Override
+	public int updateRes(Res res) {
+		log.info("SkServiceImpl update");
+		int updateCount = 0;
+		updateCount = sk.updateRes(res);
+		return updateCount;
+	}
+
+	@Override
+	public int deleteRes(int res_id) {
+		int result = 0;
+		log.info("SkServiceImpl delete Start");
+		result = sk.deleteRes(res_id);		
+		return result;
+	}
 }
