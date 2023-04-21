@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.travelAlone.s20230404.model.Review;
 
-public interface reviewDao {
+public interface ReviewDao {
     int						totalReview();
     List<Review> 			selectReviewList(Review review);
     Review					detailReview(int rid);

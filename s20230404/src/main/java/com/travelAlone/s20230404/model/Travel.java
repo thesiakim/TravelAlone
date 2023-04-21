@@ -30,7 +30,8 @@ public class Travel {
     //            1                          10
     private int start;           private int end;
     
-    
+	//조회용 코드 
+	private String code;
 }
 
 

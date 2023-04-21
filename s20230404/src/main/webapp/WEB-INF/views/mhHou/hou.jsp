@@ -70,18 +70,7 @@
 				<c:forEach items="${houseList}" var="house">
 					<tr>
 						<td hidden>${house.house_id}</td>
-						
-					<%-- 	<td>${house.h_common_loc}</td> --%>
-						<td>
-						
-			
-						${list.value}
-				
-						</td>
-						
-						
-						
-						
+					 	<td>${house.h_common_loc}</td>
 						<td> <a href="houDetail?hid=${house.house_id}">${house.h_name}</a></td>
 						<td>★임시방편</td>
 						<td>777임시방편</td>

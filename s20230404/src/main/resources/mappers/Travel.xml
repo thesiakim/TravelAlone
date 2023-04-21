@@ -4,12 +4,12 @@
 
 <mapper namespace="com.travelAlone.s20230404.TravelMapper">
 
-<!-- 정보글 갯수 세기 -->
+<!-- 여행지정보글 갯수세기 -->
 <select id="smTravelTotal" resultType="int">
 	select Count(*) FROM TRAVEL
 </select>
 
-<!-- 여행지 목록 가져오기 -->
+<!-- 여행지 목록가져오기 -->
 		<select id="smTravelList" parameterType="Travel" resultType="Travel" >
     		<![CDATA[
 				SELECT *
@@ -20,15 +20,15 @@
 											,T_NAME
 											,T_CONTENT
 											,T_ADDRESS
-											,T_CALL
 											,T_HOUR
-											,T_PARKING
+											,T_CALL
 											,T_FEE
+											,T_PARKING
 											,T_COMMON_TRAVEL
 											,T_COMMON_LOC
 											,CREATE_DATE
 											,MODIFIED_DATE										
-									  from  TRAVEL									  									  									  									   
+									  from  TRAVEL 									  									  									  									   
 									  order by TRAVEL_ID desc) a
 			)   
 		 		WHERE  rn >= #{start} 
@@ -37,50 +37,144 @@
 			
 		</select>
 		
-<!-- 여행지 정보글 가져오기 -->
+<!-- 여행지 정보글가져오기 -->
 		<select id="smTravelSelOne"  resultType="Travel">		
-		  SELECT	TRAVEL_ID ,T_NAME, T_CONTENT,T_ADDRESS,T_CALL,T_HOUR,T_PARKING,T_FEE,
-		  			T_COMMON_TRAVEL,T_COMMON_LOC,CREATE_DATE,MODIFIED_DATE		 
-		 FROM  Travel  WHERE TRAVEL_ID = #{TRAVEL_ID}   
+		  SELECT	TRAVEL_ID,	T_NAME, 	T_CONTENT,		 	T_ADDRESS, 		T_HOUR, 		T_CALL,
+		  			T_FEE,	 	T_PARKING,	T_COMMON_TRAVEL,	T_COMMON_LOC,   CREATE_DATE,	MODIFIED_DATE		 
+		 FROM  TRAVEL  WHERE TRAVEL_ID = #{TRAVEL_ID}   
 		</select>
 
-<!-- 숙소 정보글수정하기 -->
+
+
+<!-- 여행지 정보글작성하기 -->
+		<insert id="insertTravel" parameterType="Travel">
+			 insert into TRAVEL 
+			 (TRAVEL_ID,	T_NAME, 	T_CONTENT,		 	T_ADDRESS, 		T_HOUR, 		T_CALL,
+			  T_FEE,	 	T_PARKING,	T_COMMON_TRAVEL,	T_COMMON_LOC,   CREATE_DATE,	MODIFIED_DATE )
+			 values 
+			 (TRAVEL_ID_SEQ.nextval, #{t_name} , #{t_content}, #{t_address}, #{t_hour} , #{t_call} ,
+			  #{t_fee},   #{t_parking},  #{t_common_travel}, #{t_common_loc},  sysdate, sysdate ) 				
+		</insert>
+
+<!-- 여행지 정보글수정하기 -->
 		<update id="smTravelUpdate" parameterType="Travel">
-		 UPDATE TRAVEL
+		 UPDATE TRAVEL 
 		 SET 
-		  T_COMMON_TRAVEL   = #{t_common_travel},
+		  T_COMMON_TRAVEL    = #{t_common_travel},
 		  T_COMMON_LOC 	    = #{t_common_loc}, 
 		  T_NAME 			= #{t_name},
 		  T_CONTENT			= #{t_content} ,
 		  T_ADDRESS			= #{t_address} ,
-		  T_FEE				= #{t_fee} ,
 		  T_HOUR			= #{t_hour} ,
 		  T_CALL			= #{t_call} ,
+		  T_FEE				= #{t_fee} ,
 		  T_PARKING			= #{t_parking} 
 					    
 		 WHERE  TRAVEL_ID 	= #{travel_id}
 		
 		</update>
 
-		<!--  숙소 정보글삭제하기 -->
+		<!--  여행지 정보글삭제하기 -->
 		<delete id="deleteTravel" parameterType="int">
 			delete from TRAVEL where TRAVEL_ID = #{travel_id}
 		</delete>
 
 
+		<!-- 여행지검색어결과갯수 -->
+		<select id="condTravelCnt" parameterType="Travel" resultType="int">
+			select Count(*) FROM TRAVEL
+			where
+			<choose>
+				<when test="search == 's_title'">
+				  h_name  like '%' || #{keyword} || '%' 
+				</when>
+				<otherwise>
+					h_name like '%'
+				</otherwise>
+			</choose> 
+		</select>
+		
+				<!-- 여행지검색결과 -->
+		  <select id="smtravelSearchList" parameterType="Travel"  resultType="Travel" >
+		SELECT *
+		FROM
+		(
+		        SELECT rownum rn , a.*
+		        FROM
+		                   (select * from TRAVEL 
+							<choose>
+					 			<when test="search == 's_title'">
+					                 WHERE h_name  like '%' || #{keyword} || '%'    
+					  			</when>					 	
+					  			
+					            <otherwise>
+					                  WHERE h_name   like '%'   
+					            </otherwise>
+					        </choose>		                   
+		                    order by travel_id) a
+		 )   
+ 		WHERE  rn BETWEEN #{start} and #{end} 
+    </select>
+		
+
+	<!-- 조회된 여행지종류 데이터 갯수 세기 -->  
+		<select id="condOptionTravelCnt" resultType="int">
+			select Count(*) FROM TRAVEL where T_COMMON_TRAVEL = #{code}
+		</select>
+		
+<!-- 조회된 여행지종류데이터 리스트 --> 				
+		<select id="smOptionTravelList" parameterType="Travel" resultType="Travel" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from TRAVEL 
+								     where T_COMMON_TRAVEL = #{code}        
+				                    order by travel_id desc) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+		
+		
+		
+
+
+	<!-- 조회된 지역 데이터 갯수 세기 -->  
+		<select id="condOptionLocCnt" resultType="int">
+			select Count(*) FROM TRAVEL where T_COMMON_LOC = #{code}
+		</select>		
+<!-- 조회된 지역데이터 리스트 --> 				
+		<select id="smOptionLocList" parameterType="Travel" resultType="Travel" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from TRAVEL 
+								     where T_COMMON_LOC = #{code}        
+				                    order by travel_id desc) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+
+
 
 </mapper>
 
+
 <!-- 
-//TRAVEL_ID					NUMBER					여행지 ID
-//T_NAME					VARCHAR2(50)			여행지명
-//T_CONTENT					VARCHAR2(4000)			여행지 정보
-//T_ADDRESS					VARCHAR2(4000)			주소
-//T_CALL					VARCHAR2(4000)			전화번호
-//T_HOUR					VARCHAR2(4000)			운영시간
-//T_PARKING					VARCHAR2(4000)			주차
-//T_FEE						VARCHAR2(4000)			입장료
-//T_COMMON_TRAVEL			VARCHAR2(20)			여행지 종류
-//T_COMMON_LOC				VARCHAR2(20)			여행지 지역
-//CREATE_DATE				DATE					생성일
-//MODIFIED_DATE				DATE 					수정일--> 
+//TRAVEL_ID			NUMBER
+//T_NAME			VARCHAR2(50 BYTE)
+//T_CONTENT			VARCHAR2(4000 BYTE)
+//T_ADDRESS			VARCHAR2(4000 BYTE)
+//T_CALL			VARCHAR2(4000 BYTE)
+//T_HOUR			VARCHAR2(4000 BYTE)
+//T_PARKING			VARCHAR2(4000 BYTE)
+//T_FEE				VARCHAR2(4000 BYTE)
+//T_COMMON_TRAVEL	VARCHAR2(20 BYTE)
+//T_COMMON_LOC		VARCHAR2(20 BYTE)
+//CREATE_DATE		DATE
+//MODIFIED_DATE		DATE -->

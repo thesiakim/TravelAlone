@@ -8,82 +8,52 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
+	</div>
 	
-  <!-- 헤더 -->
-  <div class="main">
-		<div id="header">
-		  <div class="container">
-			<div id="container-left clearfix">
-			  <div class="logo">
-				<a href="mainPage"><img src="img/로고.png"></a>
-			  </div>
-			  <div class="headerLogin">
-				<a href="loginPage.html">로그인</a>
-			  </div> 
-			  <div class="headerLogin">
-				<a href="">회원가입</a>
-			  </div> 
-			</div>
-		  </div>
-		  <div class="headerForm">
-			<div class="headerBenner">
-			  <ul>
-				<li><a href="#">여행지</a>
-				  <ul>
-					<li><a href="#">관 광</a></li>
-	                <li><a href="#">자 연</a></li>
-	                <li><a href="#">레 저</a></li>
-	                <li><a href="#">쇼 핑</a></li>
-				  </ul>
-	            </li>
-	            <li><a href="#">숙소</a>
-	      		  <ul>
-	              	<li><a href="#">호 텔</a></li>
-	              	<li><a href="#">모 텔</a></li>
-	              	<li><a href="#">팬 션</a></li>
-	              	<li><a href="#">캠 핑</a></li>
-	              	<li><a href="#">게스트 하우스</a></li>
-				  </ul>
-				</li>
-				<li><a href="#">맛집</a>
-				  <ul>
-				   <li><a href="#">한 식</a></li>
-				   <li><a href="#">중 식</a></li>
-				   <li><a href="#">일 식</a></li>
-				   <li><a href="#">양 식</a></li>
-				   <li><a href="#">카 페</a></li>
-				   <li><a href="#">기 타</a></li>
-				  </ul>
-				</li>
-	            <li><a href="#">커뮤니티</a>
-				  <ul>
-				   <li><a href="#">자 유</a></li>
-				   <li><a href="#">정 보</a></li>
-				   <li><a href="#">질 문</a></li>
-				   <li><a href="#">홍 보</a></li>
-				   <li><a href="#">모 집</a></li>
-				  </ul>
-				</li>
-			  </ul>
-			</div>
-		  </div>
-		</div>
-	</div>
 
-	<!-- 본문 -->
 
-	<div>
-
-		<h1>여행지 메인화면</h1>
-		<div>여행지 갯수 ${totalTravel}</div>
-
-		<div>
-			<a href="tour"> 관광 </a> <a href="nature"> 자연 </a> <a
-				href="leisure"> 레저 </a> <a href="shopping"> 쇼핑 </a>
-		</div>
-
-	</div>
+<!-- 여행지종류 -->
+			<div >  																						
+				<c:forEach items="${boardList}" var="list">
+							<td>
+									<!-- 컨트롤러로 보내는거 -->
+								<a href="travelCodeFilter?code=${list.code}">${list.value}</a>									
+							</td>
+				</c:forEach>																
+					   <c:set var="num" value="${page.total-page.start+1 }"></c:set>
+			</div>				
+	
+	
+	
+	
+	
+	<!-- 검색 -->
+			<form action="travelSearch">
+				<select name="search">
+					<option value="s_title">제목</option>
+					<option value="s_content">내용</option>
+					
+				</select> <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
+				<button type="submit">keyword검색</button>
+				<p>
+			</form>
+		
+			<c:set var="num" value="${page.total-page.start+1 }"></c:set>
+	
+<!-- 지역 종류 -->
+						<c:forEach items="${boardLocList}" var="list">
+							<td>
+								<!-- 컨트롤러로 보내는거 -->
+								<a href="traLocCodeFilter?code=${list.code}">${list.value}</a> 
+									
+							</td>
+						</c:forEach>
+	
+	
+	
+	
 	
 	<!-- 찐본문 -->
 
@@ -101,7 +71,17 @@
 					<tr>
 						<td hidden>${travel.travel_id}</td>
 						
-						<td>${travel.t_common_loc}</td>
+					<%-- 	<td>${travel.t_common_loc}</td> --%>
+						<td>
+						
+			
+						${list.value}
+				
+						</td>
+						
+						
+						
+						
 						<td> <a href="traDetail?tid=${travel.travel_id}">${travel.t_name}</a></td>
 						<td>★임시방편</td>
 						<td>777임시방편</td>
@@ -109,7 +89,7 @@
 
 				</c:forEach>
 				<tr>
-					<td colspan="5"><a href="travelWriteForm">글 작성</a></td>
+					<td colspan="5"><a href="traWriteForm">글작성</a></td>
 				</tr>
 			</table>
 	
@@ -122,4 +102,5 @@
 
 
 </body>
+	<c:import url="footer.jsp"/>
 </html>

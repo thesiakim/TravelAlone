@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class reviewDaoImpl implements reviewDao {
+public class ReviewDaoImpl implements ReviewDao {
 
 	private final SqlSession session;
 	

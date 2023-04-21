@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.travelAlone.s20230404.model.Review;
 import com.travelAlone.s20230404.service.Paging;
-import com.travelAlone.s20230404.service.sm.reviewService;
+import com.travelAlone.s20230404.service.sm.ReviewService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ReviewController {
 
-	private final reviewService sm;
+	private final ReviewService sm;
 	//리뷰 메인 보기
 	@RequestMapping(value = "rev")
 	public String review(Review review , String currentPage, Model model) {

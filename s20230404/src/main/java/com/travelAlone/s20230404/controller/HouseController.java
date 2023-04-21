@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.House;
-import com.travelAlone.s20230404.model.mh.Inquire;
-import com.travelAlone.s20230404.model.mh.Notice;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.mh.HouseService;
 
@@ -99,7 +97,7 @@ public class HouseController {
 		}
 	
 		//정보글수정 페이지이동
-		@GetMapping(value = "houUpdateForm")
+		@GetMapping(value = "travelUpdateForm")
 		public String houseUpdateForm(int house_id, Model model) {
 			log.info("HouseController Start updateForm...");
 			House house = mh.detailHouse(house_id);			

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.travelAlone.s20230404.dao.sm.reviewDao;
+import com.travelAlone.s20230404.dao.sm.ReviewDao;
 import com.travelAlone.s20230404.model.Review;
 
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-	public class reviewServiceImpl implements reviewService {
-		private final reviewDao sm;
+	public class ReviewServiceImpl implements ReviewService {
+		private final ReviewDao sm;
 
 		@Override
 		public int totalReview() {
