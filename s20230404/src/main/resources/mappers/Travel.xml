@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.TravelMapper">
+
+<!-- 정보글 갯수 세기 -->
+<select id="smTravelTotal" resultType="int">
+	select Count(*) FROM TRAVEL
+</select>
+
+<!-- 여행지 목록 가져오기 -->
+		<select id="smTravelList" parameterType="Travel" resultType="Travel" >
+    		<![CDATA[
+				SELECT *
+				FROM
+				(	SELECT rownum rn , a.*
+				        FROM
+				                   (select  TRAVEL_ID
+											,T_NAME
+											,T_CONTENT
+											,T_ADDRESS
+											,T_CALL
+											,T_HOUR
+											,T_PARKING
+											,T_FEE
+											,T_COMMON_TRAVEL
+											,T_COMMON_LOC
+											,CREATE_DATE
+											,MODIFIED_DATE										
+									  from  TRAVEL									  									  									  									   
+									  order by TRAVEL_ID desc) a
+			)   
+		 		WHERE  rn >= #{start} 
+		 		and    rn <= #{end} 
+		 	 ]]>	
+			
+		</select>
+		
+<!-- 여행지 정보글 가져오기 -->
+		<select id="smTravelSelOne"  resultType="Travel">		
+		  SELECT	TRAVEL_ID ,T_NAME, T_CONTENT,T_ADDRESS,T_CALL,T_HOUR,T_PARKING,T_FEE,
+		  			T_COMMON_TRAVEL,T_COMMON_LOC,CREATE_DATE,MODIFIED_DATE		 
+		 FROM  Travel  WHERE TRAVEL_ID = #{TRAVEL_ID}   
+		</select>
+
+<!-- 숙소 정보글수정하기 -->
+		<update id="smTravelUpdate" parameterType="Travel">
+		 UPDATE TRAVEL
+		 SET 
+		  T_COMMON_TRAVEL   = #{t_common_travel},
+		  T_COMMON_LOC 	    = #{t_common_loc}, 
+		  T_NAME 			= #{t_name},
+		  T_CONTENT			= #{t_content} ,
+		  T_ADDRESS			= #{t_address} ,
+		  T_FEE				= #{t_fee} ,
+		  T_HOUR			= #{t_hour} ,
+		  T_CALL			= #{t_call} ,
+		  T_PARKING			= #{t_parking} 
+					    
+		 WHERE  TRAVEL_ID 	= #{travel_id}
+		
+		</update>
+
+		<!--  숙소 정보글삭제하기 -->
+		<delete id="deleteTravel" parameterType="int">
+			delete from TRAVEL where TRAVEL_ID = #{travel_id}
+		</delete>
+
+
+
+</mapper>
+
+<!-- 
+//TRAVEL_ID					NUMBER					여행지 ID
+//T_NAME					VARCHAR2(50)			여행지명
+//T_CONTENT					VARCHAR2(4000)			여행지 정보
+//T_ADDRESS					VARCHAR2(4000)			주소
+//T_CALL					VARCHAR2(4000)			전화번호
+//T_HOUR					VARCHAR2(4000)			운영시간
+//T_PARKING					VARCHAR2(4000)			주차
+//T_FEE						VARCHAR2(4000)			입장료
+//T_COMMON_TRAVEL			VARCHAR2(20)			여행지 종류
+//T_COMMON_LOC				VARCHAR2(20)			여행지 지역
+//CREATE_DATE				DATE					생성일
+//MODIFIED_DATE				DATE 					수정일--> 
