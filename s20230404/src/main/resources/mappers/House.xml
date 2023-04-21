@@ -82,6 +82,88 @@
 		</delete>
 
 
+		<!-- 숙소검색어결과갯수 -->
+		<select id="condHouseCnt" parameterType="House" resultType="int">
+			select Count(*) FROM HOUSE
+			where
+			<choose>
+				<when test="search == 's_title'">
+				  h_name  like '%' || #{keyword} || '%' 
+				</when>
+				<otherwise>
+					h_name like '%'
+				</otherwise>
+			</choose> 
+		</select>
+		
+				<!-- 숙소검색결과 -->
+		  <select id="mhhouseSearchList" parameterType="House"  resultType="House" >
+		SELECT *
+		FROM
+		(
+		        SELECT rownum rn , a.*
+		        FROM
+		                   (select * from HOUSE 
+							<choose>
+					 			<when test="search == 's_title'">
+					                 WHERE h_name  like '%' || #{keyword} || '%'    
+					  			</when>					 	
+					  			
+					            <otherwise>
+					                  WHERE h_name   like '%'   
+					            </otherwise>
+					        </choose>		                   
+		                    order by house_id) a
+		 )   
+ 		WHERE  rn BETWEEN #{start} and #{end} 
+    </select>
+		
+
+	<!-- 조회된 숙소종류 데이터 갯수 세기 -->  
+		<select id="condOptionHouseCnt" resultType="int">
+			select Count(*) FROM HOUSE where H_COMMON_HOUSE = #{code}
+		</select>
+		
+<!-- 조회된 숙소종류데이터 리스트 --> 				
+		<select id="mhOptionHouseList" parameterType="House" resultType="House" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from HOUSE 
+								     where H_COMMON_HOUSE = #{code}        
+				                    order by house_id desc) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+		
+		
+		
+
+
+	<!-- 조회된 지역 데이터 갯수 세기 -->  
+		<select id="condOptionLocCnt" resultType="int">
+			select Count(*) FROM HOUSE where H_COMMON_LOC = #{code}
+		</select>		
+<!-- 조회된 지역데이터 리스트 --> 				
+		<select id="mhOptionLocList" parameterType="House" resultType="House" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from HOUSE 
+								     where H_COMMON_LOC = #{code}        
+				                    order by house_id desc) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+
+
+
 </mapper>
 
 
