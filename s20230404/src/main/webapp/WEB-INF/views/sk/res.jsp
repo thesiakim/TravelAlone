@@ -76,7 +76,7 @@
 	<div>
 
 		<h1>맛집 메인화면</h1>
-		<div>맛집갯수 ${totalres}</div>
+		<div>맛집갯수 ${totalRes}</div>
 
 		<div>
 			<a href="kfood"> 한식 </a> <a href="cfood"> 중식 </a>
@@ -98,13 +98,13 @@
 					<td>조회수</td>
 
 				</tr>
-				<c:forEach items="${resList}" var="restaurant">
+				<c:forEach items="${resList}" var="res">
 					<tr>
 						<td hidden>${res.restaurant_id}</td>
 						
 						<td>${res.r_common_loc}</td>
 						<td> <a href="resDetail?rid=${res.restaurant_id}">${res.r_name}</a></td>
-						<td>테스트</td>
+						<td>★테스트★</td>
 						<td>테스트1</td>
 						<td>테스트11</td>						
 
