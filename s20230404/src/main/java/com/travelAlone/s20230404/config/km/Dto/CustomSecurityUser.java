@@ -20,7 +20,7 @@ public class CustomSecurityUser extends User implements Serializable {
     private MemberJpa memberJpa;
 
     public CustomSecurityUser(MemberJpa memberJpa){
-        super(memberJpa.getEmail(), memberJpa.getPasswd(), List.of(new SimpleGrantedAuthority("ROLE_USER")));
+        super(memberJpa.getEmail(), memberJpa.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_USER")));
         this.memberJpa = memberJpa;
     }
 
