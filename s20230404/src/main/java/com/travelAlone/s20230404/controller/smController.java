@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.sm.smService;
@@ -27,8 +26,8 @@ public class smController {
 	// ===================여행지===================
 	//여행지 메인 보기
 	@RequestMapping(value = "tra")
-	public String notice(Travel travel , String currentPage, Model model) {
-		log.info("smController2 Start travel...");
+	public String travel(Travel travel , String currentPage, Model model) {
+		log.info("smController Start travel...");
 		int totalTravel = sm.totalTravel();		
 		
 		//페이징
@@ -38,7 +37,7 @@ public class smController {
 		
 
 		List<Travel> listTravel = sm.listTravel(travel);
-		log.info("smController2 list listTravel.size()=>"+ listTravel.size());
+		log.info("smController list listTravel.size()=>"+ listTravel.size());
 				
 		model.addAttribute("totalTravel", totalTravel);
 		model.addAttribute("travelList", listTravel);
@@ -112,7 +111,5 @@ public class smController {
 			int result = sm.deleteTravel(travel_id);			
 			return "redirect:tra";
 		}
-		
-	
-	
+
 }
