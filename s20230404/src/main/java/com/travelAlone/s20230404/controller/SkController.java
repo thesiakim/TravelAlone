@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.travelAlone.s20230404.model.Res;
-import com.travelAlone.s20230404.service.sk.Paging;
+import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.sk.SkService;
 
 import lombok.RequiredArgsConstructor;

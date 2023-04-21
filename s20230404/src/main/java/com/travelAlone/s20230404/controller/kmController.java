@@ -1,14 +1,7 @@
 package com.travelAlone.s20230404.controller;
 
-import com.travelAlone.s20230404.config.km.LoginUser;
-import com.travelAlone.s20230404.domain.km.MemberJpa;
-import com.travelAlone.s20230404.model.dto.km.MemberFindAndChangePasswordRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MemberFindIdRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MemberFindPasswordRequestDto;
-import com.travelAlone.s20230404.vaildator.km.CheckEmailValidator;
-import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
-import com.travelAlone.s20230404.model.dto.km.MemberFormDto;
-import com.travelAlone.s20230404.service.km.MemberService;
+import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -20,11 +13,19 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
-import java.util.List;
-import java.util.Map;
+import com.travelAlone.s20230404.model.dto.km.MemberFindAndChangePasswordRequestDto;
+import com.travelAlone.s20230404.model.dto.km.MemberFindIdRequestDto;
+import com.travelAlone.s20230404.model.dto.km.MemberFindPasswordRequestDto;
+import com.travelAlone.s20230404.model.dto.km.MemberFormDto;
+import com.travelAlone.s20230404.service.km.MemberService;
+import com.travelAlone.s20230404.vaildator.km.CheckEmailValidator;
+import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
