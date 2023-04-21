@@ -9,28 +9,35 @@
 	select Count(*) FROM HOUSE
 </select>
 
-<!-- 숙소 목록가져오기 -->
+<!-- 숙소 목록가져오기 이게  숙소 리스트 가져오는거 ㅇㅇ-->
 		<select id="mhHouseList" parameterType="House" resultType="House" >
     		<![CDATA[
 				SELECT *
 				FROM
 				(	SELECT rownum rn , a.*
 				        FROM
-				                   (select  HOUSE_ID
-											,H_NAME
-											,H_CONTENT
-											,H_ADDRESS
-											,H_CHECKINOUT
-											,H_CALL
-											,H_ROOM
-											,H_EAT
-											,H_PARKING
-											,H_COMMON_HOUSE
-											,H_COMMON_LOC
-											,CREATE_DATE
-											,MODIFIED_DATE										
-									  from  HOUSE 									  									  									  									   
-									  order by HOUSE_ID desc) a
+		                   (select  HOUSE_ID
+			                        ,H_NAME
+			                        ,H_CONTENT
+			                        ,H_ADDRESS
+			                        ,H_CHECKINOUT
+			                        ,H_CALL
+			                        ,H_ROOM
+			                        ,H_EAT
+			                        ,H_PARKING
+			                        ,H_COMMON_HOUSE
+			                        , (select word 
+			                            from(select 
+			                                    bcd||mcd as code, 
+			                                    word 
+			                                from
+			                                    common
+			                                where bcd='loc') b
+			                                where code = H_COMMON_LOC)as H_COMMON_LOC
+			                        ,CREATE_DATE
+			                        ,MODIFIED_DATE										
+			                  from  HOUSE 									  									  									  									   
+			                  order by HOUSE_ID desc) a
 			)   
 		 		WHERE  rn >= #{start} 
 		 		and    rn <= #{end} 
