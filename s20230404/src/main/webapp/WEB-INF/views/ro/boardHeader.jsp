@@ -17,11 +17,35 @@
 	
 	<div id="comunity">
 		<ul>
-			<li><a href="/listBoard?b_common_board=bor100">자유게시판</a></li>
-			<li><a href="/listBoard?b_common_board=bor200">정보게시판</a></li>
-			<li><a href="/listBoard?b_common_board=bor300">질문게시판</a></li>
-			<li><a href="/listBoard?b_common_board=bor400">홍보게시판</a></li>			
-			<li><a href="/listBoard?b_common_board=bor500">모집게시판</a></li>	
+			<% if ("bor100".equals(request.getParameter("b_common_board"))) { %>
+			    <li><a href="/listBoard?b_common_board=bor100" style="color:#205E61;">자유게시판</a></li>
+			<% } else { %>
+			    <li><a href="/listBoard?b_common_board=bor100">자유게시판</a></li>
+			<% } %>
+			
+			<% if ("bor200".equals(request.getParameter("b_common_board"))) { %>
+			    <li><a href="/listBoard?b_common_board=bor200" style="color:#205E61;">정보게시판</a></li>
+			<% } else { %>
+			    <li><a href="/listBoard?b_common_board=bor200">정보게시판</a></li>
+			<% } %>
+			
+			<% if ("bor300".equals(request.getParameter("b_common_board"))) { %>
+			    <li><a href="/listBoard?b_common_board=bor300" style="color:#205E61;">질문게시판</a></li>
+			<% } else { %>
+			    <li><a href="/listBoard?b_common_board=bor300">질문게시판</a></li>
+			<% } %>
+			
+			<% if ("bor400".equals(request.getParameter("b_common_board"))) { %>
+			    <li><a href="/listBoard?b_common_board=bor400" style="color:#205E61;">홍보게시판</a></li>
+			<% } else { %>
+			    <li><a href="/listBoard?b_common_board=bor400">홍보게시판</a></li>
+			<% } %>
+			
+			<% if ("bor500".equals(request.getParameter("b_common_board"))) { %>
+			    <li><a href="/listBoard?b_common_board=bor500" style="color:#205E61;">모집게시판</a></li>
+			<% } else { %>
+			    <li><a href="/listBoard?b_common_board=bor500">모집게시판</a></li>
+			<% } %>
 		</ul>
 	</div>
 </body>

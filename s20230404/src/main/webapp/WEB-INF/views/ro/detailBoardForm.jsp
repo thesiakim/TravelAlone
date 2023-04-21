@@ -87,11 +87,11 @@
 	법률에  의해 처벌받을 수 있습니다.건전한 커뮤니티를 위해 자제 당부 드립니다.</h6>
 	<form action="writeBoardRe" method="post">
 		<div id="replyForm">
-			<input type="hidden" name="member_id" value="5">
-			<input type="hidden" name="b_common_board" value="bor100">
-			<input type="hidden" name="board_id" value="19">
-			<input type="text" name="b_content" placeholder="댓글을 입력하세요">
-			<input type="submit" value="등 록">
+			<input type="hidden" name="board_id" value="${board_id }">
+	         <input type="hidden" name="member_id" value="5">
+	         <input type="hidden" name="b_common_board" value="${b_common_board }">
+	         <input type="text" name="b_content" placeholder="댓글을 입력하세요">
+	         <input type="submit" value="등 록">
 		</div>
 	</form>
 	
