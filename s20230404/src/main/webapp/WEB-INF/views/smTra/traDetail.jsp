@@ -22,10 +22,13 @@
 		<tr><td colspan="2">
 		    <input type="button" value="목록" 
 				onclick="location.href='tra'">
+			<input type="button" value="리뷰" 
+				onclick="location.href='rev'">		
 			<input type="button" value="수정" 
 				onclick="location.href='traUpdateForm?travel_id=${travel.travel_id}'">
 			<input type="button" value="삭제" 
-				onclick="location.href='deleteTravel?travel_id=${travel.travel_id}'"></td>
+				onclick="location.href='deleteTravel?travel_id=${travel.travel_id}'">
+				</td>
 		</tr>
 	</table>
 	
