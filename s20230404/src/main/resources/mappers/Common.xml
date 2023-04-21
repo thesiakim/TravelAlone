@@ -12,7 +12,32 @@
 				common
 			where 
 				bcd = 'inq'
-		</select>		
+		</select>
+		
+		<select id="houseCommonCode" parameterType="Common" resultType="Common" >
+			select 
+				bcd||mcd as code,  
+				word as value
+			from 
+				common
+			where 
+				bcd = 'hou'
+		</select>	
+		
+				
+		<select id="locCommonCode" parameterType="Common" resultType="Common" >
+			select 
+				bcd||mcd as code,  
+				word as value
+			from 
+				common
+			where 
+				bcd = 'loc'
+		</select>			
+		
+		
+		
+		
 		
 </mapper>
 

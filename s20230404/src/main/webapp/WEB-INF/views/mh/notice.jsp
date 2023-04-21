@@ -7,68 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
 </head>
 <body>
-
-  <!-- 헤더 -->
-  <div class="main">
-		<div id="header">
-		  <div class="container">
-			<div id="container-left clearfix">
-			  <div class="logo">
-				<a href="mainPage"><img src="img/로고.png"></a>
-			  </div>
-			  <div class="headerLogin">
-				<a href="loginPage.html">로그인</a>
-			  </div> 
-			  <div class="headerLogin">
-				<a href="">회원가입</a>
-			  </div> 
-			</div>
-		  </div>
-		  <div class="headerForm">
-			<div class="headerBenner">
-			  <ul>
-				<li><a href="#">여행지</a>
-				  <ul>
-					<li><a href="#">관 광</a></li>
-	                <li><a href="#">자 연</a></li>
-	                <li><a href="#">레 저</a></li>
-	                <li><a href="#">쇼 핑</a></li>
-				  </ul>
-	            </li>
-	            <li><a href="#">숙소</a>
-	      		  <ul>
-	              	<li><a href="#">호 텔</a></li>
-	              	<li><a href="#">모 텔</a></li>
-	              	<li><a href="#">팬 션</a></li>
-	              	<li><a href="#">캠 핑</a></li>
-	              	<li><a href="#">게스트 하우스</a></li>
-				  </ul>
-				</li>
-				<li><a href="#">맛집</a>
-				  <ul>
-				   <li><a href="#">한 식</a></li>
-				   <li><a href="#">중 식</a></li>
-				   <li><a href="#">일 식</a></li>
-				   <li><a href="#">양 식</a></li>
-				   <li><a href="#">카 페</a></li>
-				   <li><a href="#">기 타</a></li>
-				  </ul>
-				</li>
-	            <li><a href="#">커뮤니티</a>
-				  <ul>
-				   <li><a href="#">자 유</a></li>
-				   <li><a href="#">정 보</a></li>
-				   <li><a href="#">질 문</a></li>
-				   <li><a href="#">홍 보</a></li>
-				   <li><a href="#">모 집</a></li>
-				  </ul>
-				</li>
-			  </ul>
-			</div>
-		  </div>
-		</div>
+	<!-- 이미지배너 -->
+	<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
 	</div>
 
 	<!-- 본문 -->
@@ -105,7 +49,7 @@
 			<table style="margin:auto;">
 				<tr>
 					<td hidden>번호</td>
-					<td>제목</td>
+					<td >제목</td>
 					<td>날짜</td>
 				</tr>
 				<c:forEach items="${noticeList}" var="notice">
@@ -136,4 +80,5 @@
 	</c:if>
 
 </body>
+	<c:import url="footer.jsp"/>
 </html>

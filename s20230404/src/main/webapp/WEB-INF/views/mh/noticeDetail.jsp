@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ include file="header.jsp"%>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="header.jsp"/>
 </head>
 <body>
-
+<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
+	</div>
 
 <h1>공지사항 글조회 </h1>
 <table>
@@ -25,4 +29,5 @@
 		</tr>
 	</table>
 </body>
+	<c:import url="footer.jsp"/>
 </html>

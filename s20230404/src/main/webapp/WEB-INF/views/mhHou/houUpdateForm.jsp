@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
+	</div>
 	<h1>숙소글 글업데이트	</h1>
 		<form action="updateHouse" method="post">
 		<input type="hidden" name="house_id" value="${house.house_id }">

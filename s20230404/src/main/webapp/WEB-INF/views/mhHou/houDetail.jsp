@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
+	</div>
 	<h1>숙소글 상세		</h1>
 	<table>
 		<tr><th>숙소명</th>			<td>${house.h_name}</td></tr>
@@ -32,4 +36,5 @@
 	
 	
 </body>
+	<c:import url="footer.jsp"/>
 </html>
