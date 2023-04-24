@@ -35,8 +35,26 @@
 	</form>
 	
 	<form action="list" id="list">
-		커뮤니티 - 자유 게시판
-		<input type="checkbox">이미지 첨부글만 보기
+	
+	<c:choose>
+		<c:when test="${board.b_common_board == 'bor100'}">
+           	<h3> 커뮤니티 - 자유 게시판 </h3>
+        </c:when>
+		<c:when test="${board.b_common_board == 'bor200'}">
+			<h3> 커뮤니티 - 정보 게시판 </h3>
+		</c:when>
+		<c:when test="${board.b_common_board == 'bor300'}">
+			<h3> 커뮤니티 - 질문 게시판 </h3>
+		</c:when>
+		<c:when test="${board.b_common_board == 'bor400'}">
+			<h3> 커뮤니티 - 홍보 게시판 </h3>
+		</c:when>
+		<c:when test="${board.b_common_board == 'bor500'}">
+			<h3> 커뮤니티 - 모집 게시판 </h3>
+		</c:when>
+	</c:choose>
+	
+		<input type="checkbox" name="imageOnly">이미지 첨부글만 보기
 		<select>
 			<option value="s_job">최신순</option> 
 			<option value="s_ename">조회수순</option> 

@@ -21,5 +21,4 @@ public interface roDao {
 	int insertReBoard(Board board);
 
 	
-	
 }

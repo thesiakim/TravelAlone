@@ -2,6 +2,7 @@ package com.travelAlone.s20230404.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,6 +19,9 @@ public class Board {
 	// 조인용
 	private String	m_nickname;
 	
+	// 이미지용
+	private int replyCnt;
+	private List<Bod_Img> bod_Img;
 	
 	// 조회용
 	private int		startRow;

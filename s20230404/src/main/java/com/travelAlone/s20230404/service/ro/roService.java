@@ -19,5 +19,5 @@ public interface roService {
 	int insertBoard(Board board);
 
 	int insertReBoard(Board board);
-	
+
 }

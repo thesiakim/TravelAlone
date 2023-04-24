@@ -16,7 +16,7 @@
 	
 	<c:if test="${msg != null }">${msg }</c:if>
 		
-		<form action="writeBoard" method="post" onsubmit="return chkWrite()">
+		<form action="writeBoard" method="post" onsubmit="return chkWrite()" enctype="multipart/form-data">
 			<input type="hidden" name="b_common_board" value="${board.b_common_board }">
 			<input type="hidden" name="member_id" value="3">
 			<table>
@@ -32,18 +32,12 @@
 		        </tr>
 		        <tr>
 					<td style="width: 100px;">
-						<label for="title">첨부파일</label>
+			        	<div class="upLoadImg1">
+							<label for="title">첨부파일</label>
+						</div>
 					</td>
 					<td>
-						<input type="reset" value="파일 선택">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="title">첨부파일</label>
-					</td>
-					<td>
-						<input type="reset" value="파일 선택">
+						 <input type="file" name="file" id="file" value="파일 선택">
 					</td>
 				</tr>
 		        <tr>

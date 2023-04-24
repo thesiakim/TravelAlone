@@ -75,20 +75,20 @@
 	</insert>
 	
 	<insert id="roBoardReInsert" parameterType="Board">
-		Insert	into
-		Board	(board_id, member_id, b_content, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
-		values	(
-				 board_id_seq.nextval,
-				 #{member_id},
-				 #{b_content},
-				 0, 
-				 #{b_common_board},
-				 #{b_ref},
-				 (select  nvl(max(b_re_step),0) + 1 from board where b_ref = #{b_ref}),
-				 1,
-				 sysdate,
-				 sysdate
-				)
-	</insert>
+      Insert   into
+      Board   (board_id, member_id, b_content, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
+      values   (
+             board_id_seq.nextval,
+             #{member_id},
+             #{b_content},
+             0, 
+             #{b_common_board},
+             #{board_id},
+             (select  nvl(max(b_re_step),0) + 1 from board where b_ref = #{board_id}),
+             1,
+             sysdate,
+             sysdate
+            )
+   </insert>
 	
 </mapper>

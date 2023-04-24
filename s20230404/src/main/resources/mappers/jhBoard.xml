@@ -2,8 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.travelAlone.s20230404.RoBoardMapper">
-	
+<mapper namespace="com.travelAlone.s20230404.jhBoardMapper">
 
-
+    <update id="jhLike" parameterType="Board">
+    	UPDATE 	board
+    	SET		b_like_cnt = b_like_cnt + 1
+    	WHERE	board_id = #{board_id}
+    </update>
+    
 </mapper>

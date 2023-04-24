@@ -109,10 +109,32 @@
 		border-bottom: 2px solid rgb(64, 64, 64);
 	 }
 	 
-	 input[type="button"] {
+	 input[type="submit"] {
 	 	width: 50px;			border-radius: 7px;
 	    height: 25px;			box-sizing: border-box;
 	    font-size: 15px;  		font-weight:bolder;
 	    color:white;
 	    border:  #205E61; 		background-color: #205E61;
 	 }
+	 
+	 input[type="submit"]:hover {
+		color: #205E61;
+		background-color:  white;
+		transition: ease 0.5s;
+	}
+	 
+	input[type="button"] {
+	 	width: 50px;			border-radius: 7px;
+	    height: 25px;			box-sizing: border-box;
+	    font-size: 15px;  		font-weight:bolder;
+	    color:white;
+	    border:  #205E61; 		background-color: #205E61;
+	}
+	
+	[type="button"]:hover {
+		color: #205E61;
+		background-color:  white;
+		transition: ease 0.5s;
+	}
+		
+	
