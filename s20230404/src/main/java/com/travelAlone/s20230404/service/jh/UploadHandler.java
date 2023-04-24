@@ -59,6 +59,7 @@ public class UploadHandler {
                 // JPEG, PNG, GIF 만 받음. 확장자 추출
                 String contentType = multipartFile.getContentType();
                 String originalFileExtension;
+                String fileExtentionCode;
 
                 // 확장자명이 없으면 잘못된것
                 if (ObjectUtils.isEmpty(contentType)){
@@ -67,10 +68,13 @@ public class UploadHandler {
                 }else {
                     if (contentType.contains("image/jpeg")){
                         originalFileExtension = ".jpg";
+                        fileExtentionCode = "img100";
                     }else if (contentType.contains("image/png")){
                         originalFileExtension = ".png";
+                        fileExtentionCode = "img200";
                     } else if (contentType.contains("image/gif")){
                         originalFileExtension = ".gif";
+                        fileExtentionCode = "img300";
                     } else{
                         System.out.println("사진파일(jpeg,png,gif)이 아닙니다 : " + contentType);
                         break;
@@ -84,7 +88,7 @@ public class UploadHandler {
                         .img_original_file(multipartFile.getOriginalFilename())
                         .img_stored_file(path + File.separator + newFileName)
                         .img_context(path)
-                        .common_imagesType(originalFileExtension)
+                        .common_imagesType(fileExtentionCode)
                         .board_id(boardId)
                         .build();
 
