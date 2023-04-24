@@ -25,7 +25,7 @@ public class CheckNicknameValidator extends AbstractValidator<MemberFormDto>{
     protected void doValidate(MemberFormDto dto, Errors errors) {
 
         if (memberRepository.existsByNickname(dto.getNickName())) {
-            errors.rejectValue("nickname", "닉네임 중복 오류", "이미 사용중인 닉네임입니다.");
+            errors.rejectValue("nickName", "닉네임 중복 오류", "이미 사용중인 닉네임입니다.");
         }
     }
 }

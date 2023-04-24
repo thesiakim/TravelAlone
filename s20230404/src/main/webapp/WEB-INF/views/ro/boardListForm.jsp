@@ -43,8 +43,8 @@
 			<option value="s_ename">추천순</option> 
 		</select>
 	</form>
-	<form action="writeBoardForm" method="post">
-		<input type="hidden" name="b_common_board" value="${board.b_common_board }">
+	<form action="writeBoardForm">
+		<input type="hidden" name="b_common_board" value="${board.b_common_board}">
 		<button type="submit">글쓰기</button>
 	</form>
 	<c:set var="num" value="${page.totalRow - page.startRow + 1 }"></c:set>

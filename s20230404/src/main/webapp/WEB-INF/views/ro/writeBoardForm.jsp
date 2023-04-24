@@ -17,7 +17,7 @@
 	<c:if test="${msg != null }">${msg }</c:if>
 		
 		<form action="writeBoard" method="post" onsubmit="return chkWrite()">
-			<input type="hidden" name="b_common_board" value="${board.b_common_board }">
+			<input type="hidden" name="b_common_board" id="common_board" value="${board.b_common_board }">
 			<input type="hidden" name="member_id" value="3">
 			<table>
 		        <tr>
@@ -35,7 +35,7 @@
 						<label for="title">첨부파일</label>
 					</td>
 					<td>
-						<input type="reset" value="파일 선택">
+						<input type="file" name="files" value="파일 선택">
 					</td>
 				</tr>
 				<tr>
