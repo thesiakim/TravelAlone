@@ -55,7 +55,8 @@ public class MemberJpa extends BaseTimeEntity{
     private String imagesType;
 
     @Builder
-    public MemberJpa(String email, String nickname, String password, String name, String gender, String phone) {
+    public MemberJpa(String email, String nickname, String password, String name, String gender, String phone,
+                     String imgContext, String imgOriginalFile, String imgStoredFile, String imagesType) {
         // 회원가입시 설정
         this.email = email;
         this.nickname = nickname;
@@ -64,6 +65,10 @@ public class MemberJpa extends BaseTimeEntity{
         this.gender = gender;
         this.phone = phone;
         this.role = Role.rol100;
+        this.imgContext = imgContext;
+        this.imgOriginalFile = imgOriginalFile;
+        this.imgStoredFile = imgStoredFile;
+        this.imagesType = imagesType;
 
     }
 
