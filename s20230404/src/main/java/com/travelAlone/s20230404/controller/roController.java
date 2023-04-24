@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.travelAlone.s20230404.model.Board;
-import com.travelAlone.s20230404.service.ro.Paging;
+import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.ro.roService;
 
 import lombok.RequiredArgsConstructor;
@@ -37,8 +37,8 @@ public class roController {
 		Paging page = new Paging(boardAllCnt, currentPage);
 		
 		// Board에 추가 setting
-		board.setStartRow(page.getStartRow());
-		board.setEndRow(page.getEndRow());
+		board.setStartRow(page.getStart());
+		board.setEndRow(page.getEnd());
 		
 		List<Board> listAllBoard = rs.listAllBoard(board);
 		
@@ -65,8 +65,8 @@ public class roController {
 		Paging page = new Paging(boardCnt, currentPage);
 		
 		// Board에 추가 setting
-		board.setStartRow(page.getStartRow());
-		board.setEndRow(page.getEndRow());
+		board.setStartRow(page.getStart());
+		board.setEndRow(page.getEnd());
 		
 		List<Board> listBoard = rs.listBoard(board);
 		
