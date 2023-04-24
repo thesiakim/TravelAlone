@@ -285,6 +285,8 @@ public class mhController {
 			
 			return "redirect:inquire";
 		}
+		
+		
 		//문의게시판 검색
 		@RequestMapping(value = "inquireSearch")
 		public String inquireSearch(Inquire inquire, String currentPage, Model model) {
@@ -297,6 +299,7 @@ public class mhController {
 			
 			inquire.setStart(page.getStart());
 			inquire.setEnd(page.getEnd());
+			
 			List<Inquire> listSearchInquire = mh.listSearchInquire(inquire);
 			log.info("mhController InquireSearch listSearchInquire.size()=>" + 
 					listSearchInquire.size());
@@ -335,7 +338,7 @@ public class mhController {
 			
 			List<Inquire> listFilterInquire = mh.listFilterOptionInquire(inquire);
 			//메소드를 호출하여 조건에 맞는 데이터를 조회합니다. 이 데이터는 모델 객체에 추가되어 View에서 사용
-			log.info("mhController TraInquireSearch listFilterInquire.size()=>" + listFilterInquire.size());
+			log.info("mhController  listFilterInquire.size()=>" + listFilterInquire.size());
 			model.addAttribute("totalInquire", totalInquire);
 			model.addAttribute("inquireList", listFilterInquire);
 			model.addAttribute("page", page);

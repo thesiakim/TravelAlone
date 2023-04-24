@@ -2,8 +2,6 @@ package com.travelAlone.s20230404.model;
 
 import java.time.LocalDateTime;
 
-import lombok.Data;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,7 +23,6 @@ public class Res {
 	   private String          r_common_loc;
 	   private LocalDateTime   create_date;
 	   private LocalDateTime   modified_date;
-	   private int r_count;
 	   
 	   // 페이지조회용
 	   private String search;      private String keyword;
@@ -33,5 +30,17 @@ public class Res {
 	   //            1                           10
 	   private int start;           private int end;
 
-
+	   
+ //RESTAURANT_ID		NUMBER					맛집ID
+ //R_NAME				VARCHAR2(50 BYTE)		맛집이름
+ //R_CONTENT			VARCHAR2(4000 BYTE)		내용
+ //R_ADDRESS			VARCHAR2(4000 BYTE)		주소
+ //R_HOUR				VARCHAR2(4000 BYTE)		운영시간
+ //R_CALL				VARCHAR2(4000 BYTE)		전화번호
+ //H_PARKING			VARCHAR2(4000 BYTE)		주차
+ //R_MENU				VARCHAR2(4000 BYTE)		메뉴
+ //R_COMMON_RESTAURANT	VARCHAR2(20 BYTE)		맛집 종류
+ //R_COMMON_LOC			VARCHAR2(20 BYTE)		맛집 지역
+ //CREATE_DATE			DATE					생성일
+ //MODIFIED_DATE		DATE					수정일
 }

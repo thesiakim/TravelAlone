@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.mh.HouseDao;
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.House;
 
 import lombok.RequiredArgsConstructor;
@@ -63,5 +64,78 @@ public class HouseServiceImpl implements HouseService {
 		result = mh.deleteHouse(house_id);		
 		return result;
 	}
-		
+
+	@Override
+	public int conditionHouseCount(House house) {
+		log.info("HouseServiceImpl  conditionHouseCount Start" );
+		int conditionHouseCnt = mh.condHouseCnt(house);
+		log.info("HouseServiceImpl  conditionHouseCount conditionHouseCnt" + conditionHouseCnt);						
+		return conditionHouseCnt;
+	}
+
+	@Override
+	public List<House> listSearchHouse(House house) {
+		List<House> houseSearchList = null;
+		log.info("HouseServiceImpl listSearchHouse Start...");
+		houseSearchList = mh.houseSearchList(house);
+		log.info("HouseServiceImpl listSearchHouse inquireHouseList.size()"+ houseSearchList.size());						
+		return houseSearchList;
+	}
+
+	//공통숙소코드 리스트
+	@Override
+	public List<CommonCode> getCommonCode() {
+		List<CommonCode> result = mh.getCommonCode();		
+		return result;
+	}
+		//숙소종류갯수
+	@Override
+	public int conditionOptionCount(String code) {
+		log.info("HouseServiceImpl  conditionOptionCount Start" );
+		int conditionInquireCnt = mh.condOptionInqCnt(code);
+		log.info("HouseServiceImpl  conditionOptionCount conditionInquireCnt" + conditionInquireCnt);	
+		return conditionInquireCnt;
+	}
+
+	
+	@Override
+	public List<House> listFilterOptionHouse(House house) {
+		List<House> houseOptionFilterList = null;
+		log.info("HouseServiceImpl listFilterOptionHouse Start...");
+		houseOptionFilterList = mh.mhOptionHouseList(house);
+		log.info("HouseServiceImpl listFilterOptionHouse houseOptionFilterList.size()"+ houseOptionFilterList.size());		
+		return houseOptionFilterList;
+	}
+
+	
+	
+	
+	//지역 코드가져오기
+	@Override
+	public List<CommonCode> getCommonLocCode() {
+		List<CommonCode> result = mh.getCommonLocCode();
+		return result;
+	}
+
+	@Override
+	public List<House> listFilterOptionLoc(House house) {
+		List<House> locOptionFilterList = null;
+		log.info("HouseServiceImpl listFilterOptionLoc Start...");
+		locOptionFilterList = mh.mhOptionLocList(house);
+		log.info("HouseServiceImpl listFilterOptionLoc locOptionFilterList.size()"+ locOptionFilterList.size());			
+		return locOptionFilterList;
+	}
+
+	@Override
+	public int conditionOptionLocCount(String code) {
+		log.info("HouseServiceImpl  conditionOptionLocCount Start" );
+		int conditionLocCnt = mh.condOptionLocCnt(code);
+		log.info("HouseServiceImpl  conditionOptionLocCount conditionLocCnt" + conditionLocCnt);	
+		return conditionLocCnt;
+	}
+
+
+	
+	
+	
 }

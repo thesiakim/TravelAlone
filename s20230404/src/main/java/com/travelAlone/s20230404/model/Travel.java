@@ -23,7 +23,26 @@ public class Travel {
     private String t_common_loc;
     private LocalDateTime  create_date;
     private LocalDateTime  modified_date;
-    private int t_count;
 	
-
+    // 페이지조회용
+    private String search;      private String keyword;
+    private String pageNum;  
+    //            1                          10
+    private int start;           private int end;
+    
+    
 }
+
+
+//TRAVEL_ID			NUMBER					여행지 ID
+//T_NAME			VARCHAR2(50 BYTE)		여행지명
+//T_CONTENT			VARCHAR2(4000 BYTE)		여행지 정보
+//T_ADDRESS			VARCHAR2(4000 BYTE)		주소
+//T_CALL			VARCHAR2(4000 BYTE)		전화번호
+//T_HOUR			VARCHAR2(4000 BYTE)		운영시간
+//T_PARKING			VARCHAR2(4000 BYTE)		주차
+//T_FEE				VARCHAR2(4000 BYTE)		입장료
+//T_COMMON_TRAVEL	VARCHAR2(20 BYTE)		여행지 종류
+//T_COMMON_LOC		VARCHAR2(20 BYTE)		여행지 지역
+//CREATE_DATE		DATE					생성일
+//MODIFIED_DATE		DATE					수정일

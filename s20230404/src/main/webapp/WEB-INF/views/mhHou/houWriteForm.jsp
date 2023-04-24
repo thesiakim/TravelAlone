@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="img_benner">
+		<img src="img/main-picture.png" alt="배너">
+	</div>
 <h1>숙소글 작성	</h1>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="houWriteForm" method="post" name="frm">

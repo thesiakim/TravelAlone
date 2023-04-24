@@ -8,8 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.House;
+import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.mh.HouseService;
@@ -36,7 +39,21 @@ public class HouseController {
 		house.setStart(page.getStart());
 		house.setEnd(page.getEnd());
 		
-
+		
+		//여기에 게시판 코드 불러오는 코드 작성
+		List<CommonCode> commonCode = mh.getCommonCode();
+		log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+		model.addAttribute("boardList",commonCode);
+		
+		
+		//지역 코드도 가져와볼까나
+		List<CommonCode> commonLocCode = mh.getCommonLocCode();
+		log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
+		model.addAttribute("boardLocList",commonLocCode);
+		
+		
+		
+		//숙소리스트
 		List<House> listHouse = mh.listHouse(house);
 		log.info("mhController2 list listHouse.size()=>"+ listHouse.size());
 				
@@ -113,6 +130,107 @@ public class HouseController {
 			return "redirect:hou";
 		}
 		
-	
-	
+		//숙소 검색
+		@RequestMapping(value = "houseSearch")
+		public String houseSearch(House house, String currentPage, Model model) {
+			log.info("HouseController houseSearch Start ..." );
+			
+			int totalHouse = mh.conditionHouseCount(house);
+			log.info("HouseController houseSearch totalInquire =>" + totalHouse);
+			// Paging 작업
+			Paging page = new Paging(totalHouse, currentPage);
+			
+			house.setStart(page.getStart());
+			house.setEnd(page.getEnd());
+			
+			List<House> listSearchHouse = mh.listSearchHouse(house);
+			log.info("HouseController houseSearch listSearchHouse.size()=>" + 
+					listSearchHouse.size());
+			
+			model.addAttribute("totalHouse", totalHouse);
+			model.addAttribute("houseList", listSearchHouse);
+			model.addAttribute("page", page);
+			model.addAttribute("search", house.getKeyword());
+			
+			return "mhHou/hou";
+		}
+		
+		//숙소종류 구분 필터
+		@GetMapping(value = "houseCodeFilter")
+		public String houseCodeFilter(@RequestParam(name = "code") 
+		String code, House house, String currentPage, Model model  ) {
+			log.info("HouseController houseCodeFilter Start" );
+			
+			//숙소코드
+			List<CommonCode> commonCode = mh.getCommonCode();
+			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+			model.addAttribute("boardList",commonCode);
+			
+			
+			
+			
+			int totalHouse = mh.conditionOptionCount(code);
+			log.info("HouseController houseCodeFilter totalHouse =>" + totalHouse);
+			
+			
+			//페이징
+			Paging page = new Paging(totalHouse, currentPage);
+			house.setStart(page.getStart());
+			house.setEnd(page.getEnd());
+			house.setCode(code);
+			
+			List<House> listFilterHouse = mh.listFilterOptionHouse(house);
+			log.info("HouseController  listFilterHouse.size()=>" + listFilterHouse.size());
+			model.addAttribute("totalHouse", totalHouse);
+			model.addAttribute("houseList", listFilterHouse);
+			model.addAttribute("page", page);
+			model.addAttribute("search", house.getKeyword());
+									
+			return "mhHou/hou";
+		}
+		
+		
+		
+		//지역 구분 필터
+		@GetMapping(value = "houLocCodeFilter")
+		public String locCodeFilter(@RequestParam(name = "code") 
+		String code, House house, String currentPage, Model model) {
+			log.info("HouseController locCodeFilter Start" );
+			
+			//지역 코드도 가져와볼까나
+			List<CommonCode> commonLocCode = mh.getCommonLocCode();
+			log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
+			model.addAttribute("boardLocList",commonLocCode);
+			
+			
+			int totalLoc = mh.conditionOptionLocCount(code);
+			log.info("HouseController locCodeFilter totalLoc =>" + totalLoc);
+			
+			
+			//페이징
+			Paging page = new Paging(totalLoc, currentPage);
+			house.setStart(page.getStart());
+			house.setEnd(page.getEnd());
+			house.setCode(code);
+			
+			List<House> listFilterLoc = mh.listFilterOptionLoc(house);
+			log.info("HouseController  listFilterLoc.size()=>" + listFilterLoc.size());
+			model.addAttribute("totalLoc", totalLoc);
+			model.addAttribute("houseList", listFilterLoc);
+			model.addAttribute("page", page);
+			model.addAttribute("search", house.getKeyword());
+			
+			return "mhHou/hou";
+		}
+		
+
+		
+
+		
+
+
+		
+		
+		
+		
 }
