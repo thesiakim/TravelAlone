@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.dto.km.MemberFormDto;
 import com.travelAlone.s20230404.service.km.MemberService;
 import com.travelAlone.s20230404.vaildator.km.CheckEmailValidator;
