@@ -6,17 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script type="text/javascript">
-      /* function chk()_loginMember() {
-         if ("${member_id}" == null) {
-            alert("로그인 후 사용 가능합니다.")
-            location.href="login"
-         } else {
-            console.log("로그인 확인 성공")
-         }
-      } */
-   </script>
-
 	<c:import url="header.jsp"/>
 </head>
 	<link href="css/main.css" rel="stylesheet" type="text/css">
@@ -172,10 +161,10 @@
 						</tr>
 						<tr class="members" style="display: none;">
 							<form action="#">
-							<td colspan="5">
-								<input type="text" name="b_content" placeholder="댓글을 입력하세요">
-								<input type="submit" value="등 록">
-							</td>
+								<td colspan="5">
+									<input type="text" name="b_content" placeholder="댓글을 입력하세요">
+									<input type="submit" value="등 록">
+								</td>
 							</form>
 						</tr>
 					</table>
@@ -202,38 +191,26 @@
 	
 	<h6>명예훼손, 개인정보 유출, 분쟁 유발, 허위 사실 유포 등의 글은 이용약관에 의해 제제는 물론<br> 
 	법률에  의해 처벌받을 수 있습니다.건전한 커뮤니티를 위해 자제 당부 드립니다.</h6>
+	
 	<form action="writeBoardRe" method="post">
-		<c:if test="${not empty user_id }">
-        	<div id="replyForm">
-	            <input type="hidden" name="board_id" value="${contents.board_id }">
-	            <input type="hidden" name="member_id" value="${user_id }">
-	            <input type="hidden" name="b_common_board" value="${contents.b_common_board }">
-	            <input type="text" name="b_content" placeholder="댓글을 입력하세요">
-	            <input type="submit" value="등 록" onclick="chkId()">
-        	</div>
-      	</c:if>
+       	<div id="replyForm">
+            <input type="hidden" name="board_id" value="${board_id}">
+            <input type="hidden" name="member_id" value="${user_id}">
+            <input type="hidden" name="b_common_board" value="${b_common_board}">
+            <input type="text" name="b_content" placeholder="댓글을 입력하세요">
+            <input type="submit" value="등 록" onclick="chkId()">
+       	</div>
 	</form>
 	
 	<script>
-        function getWriteBoardRe2(memberId){
-           
-        }
-   
-      function showMembers(button) {
-        var membersRow = button.parentNode.parentNode.nextElementSibling;
-         if (membersRow.classList.contains("members")) {
-            if (membersRow.style.display == "none") {
-                membersRow.style.display = "table-row";
-            } else {
-               membersRow.style.display = "none";
-            }
-        }
-      }
-      
-      function chkId() {
-         var member
-      }
-   </script>
+		function chkId() {
+		    var memberId = "${user_id}";
+		    if (!memberId) {
+		        alert("댓글을 작성하시려면 로그인이 필요합니다.");
+		        return false;
+		    }
+		}
+   	</script>
 	
 </body>
 	<c:import url="footer.jsp"/>
