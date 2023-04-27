@@ -22,7 +22,17 @@
 			</tr>
 			<tr>
 				<td> 문의글 종류 </td>
-				<td> <input type="text" name="g_common_csboard" size = "50"> </td>
+				<td> 
+				
+<!-- 		<input type="text" name="g_common_csboard" size = "50">  -->
+				<select name="g_common_csboard">
+					<option value="inq100">여행지문의</option>
+					<option value="inq200">숙소문의</option>
+					<option value="inq300">맛집문의</option>
+					<option value="inq400">기타문의</option>
+				</select>
+				
+				</td>
 			</tr>
 			<tr>
 				<td> 작성자 </td>

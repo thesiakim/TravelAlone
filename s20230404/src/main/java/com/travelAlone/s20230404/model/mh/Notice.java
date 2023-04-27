@@ -1,5 +1,6 @@
 package com.travelAlone.s20230404.model.mh;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,8 @@ public class Notice {
 	private String 				g_common_csboard;
 	private String 				g_notice_title;
 	private String 				g_notice_content;
-	private LocalDateTime		create_date;
+	//private LocalDateTime		create_date;
+	private LocalDate			create_date;
 	private LocalDateTime 		modified_date;
 	
 	

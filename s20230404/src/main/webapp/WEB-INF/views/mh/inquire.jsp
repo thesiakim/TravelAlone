@@ -81,12 +81,12 @@
 				<c:forEach items="${inquireList}" var="inquire">
 					<tr>
 						<td hidden>${inquire.g_writing_id}</td>
-						<td> <a href="inquireDetail?gid=${inquire.g_writing_id}"> ${inquire.g_title}</a>
-							<%-- 		<a href="noticeDetail/${notice.g_notice_id}">${notice.g_notice_title}</a> --%>
+						<td style="text-align: left;"> <a href="inquireDetail?gid=${inquire.g_writing_id}"> ${inquire.g_title}</a>
+
 						</td>
 						<td>${inquire.member_id}</td>
 						<td> 
-							<%-- <c:out  value="${inquire.g_reply_yn}"/> --%>
+							
 							<c:choose>
 								<c:when test="${inquire.g_reply_yn eq '1'.charAt(0)}">
 									<c:out value="답변완료"/>
@@ -95,12 +95,7 @@
 									<c:out value="답변중"/>
 								</c:otherwise>
 							</c:choose>
-							<%-- <c:if test="${}">
-					        	
-					         </c:if>
-					         <c:if test="${inquire.g_reply_yn eq '0'}">
-					            
-					          </c:if> --%>
+						
 					     </td>     
 						<td>${inquire.create_date}</td>
 					</tr>

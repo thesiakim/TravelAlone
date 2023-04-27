@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>	    
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 	</div>
 
 	<h1>문의글 조회</h1>
-	<table>
+	<table  style="margin:auto;">
 		<tr>
 			<th>글번호</th>
 			<td>${inquire.g_writing_id}</td>
@@ -34,15 +35,23 @@
 			<th>답변여부</th>
 			<td>${inquire.g_reply_yn}</td>
 		</tr>
+	</table>
+	<hr>
+	<table  style="margin:auto;">
 		<tr>
 			<td colspan="2">
-			<input type="button" 	value="목록"				onclick="location.href='inquire'"> 
-			<input type="button"	value="수정"				onclick="location.href='inquireUpdateForm?g_writing_id=${inquire.g_writing_id}'">
-			<input type="button"	value="답변"				onclick="location.href='inquireReplyForm?g_writing_id=${inquire.g_writing_id}'">
-			<input type="button" 	value="삭제"				onclick="location.href='deleteInquire?g_writing_id=${inquire.g_writing_id}'"></td>
+	
+			<a href="inquire">목록</a>
+			<a href="inquireUpdateForm?g_writing_id=${inquire.g_writing_id}">수정</a>
+			<a href="inquireReplyForm?g_writing_id=${inquire.g_writing_id}">답변</a>
+			<a href="deleteInquire?g_writing_id=${inquire.g_writing_id}">삭제</a>
+			</td>
 		</tr>
-	</table>
-	<table>
+		</table>
+	
+	<hr>
+	
+	<table  style="margin:auto;">
 		
 		<tr>
 			<th>제목</th>
@@ -61,4 +70,6 @@
 
 
 </body>
+
+<c:import url="footer.jsp"/>
 </html>
