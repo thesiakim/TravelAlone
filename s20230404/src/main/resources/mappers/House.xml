@@ -9,7 +9,7 @@
 	select Count(*) FROM HOUSE
 </select>
 
-<!-- 숙소 목록가져오기 이게  숙소 리스트 가져오는거 ㅇㅇ-->
+<!-- 숙소 목록가져오기 -->
 		<select id="mhHouseList" parameterType="House" resultType="House" >
     		<![CDATA[
 				SELECT *
@@ -34,6 +34,9 @@
 			                                    common
 			                                where bcd='loc') b
 			                                where code = H_COMMON_LOC)as H_COMMON_LOC
+			                          ,TRUNC((SELECT AVG(R_SCORE) FROM hou_rev WHERE house_id = HOUSE.HOUSE_ID), 0) AS H_AvgScore    
+			                         ,(SELECT COUNT(*) FROM hou_rev WHERE house_id = HOUSE.HOUSE_ID) AS H_RevCount 
+			                                
 			                        ,CREATE_DATE
 			                        ,MODIFIED_DATE										
 			                  from  HOUSE 									  									  									  									   

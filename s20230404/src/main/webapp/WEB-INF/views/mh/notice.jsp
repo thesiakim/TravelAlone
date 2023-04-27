@@ -26,47 +26,49 @@
 				  <a href="inquire">문의하기</a>
 			</div>			
 						
-		</div>
+	</div>
 
-	
-	
-			
-			<form action="noticeSearch">
-				<select name="search">
-					<option value="s_title">제목</option>
-					<option value="s_content">내용</option>
-					
-				</select> <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
-				<button type="submit">keyword검색</button>
-				<p>
-			</form>
-		
-			<c:set var="num" value="${page.total-page.start+1 }"></c:set>
-		
-		
-		<!-- 찐본문 -->
+<!--검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 -->						
+	<form action="noticeSearch">
+	    <select name="search">
+	        <option value="s_title">제목</option>
+	        <option value="s_content">내용</option>
+	    </select> 
+	    <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
+	    <a href="noticeSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a>
+	    <p>
+	</form>
 
-			<table style="margin:auto;">
-				<tr>
-					<td hidden>번호</td>
-					<td >제목</td>
-					<td>날짜</td>
-				</tr>
-				<c:forEach items="${noticeList}" var="notice">
-					<tr>
-						<td hidden>${notice.g_notice_id}</td>
-						<td> <a href="noticeDetail?gid=${notice.g_notice_id}">${notice.g_notice_title}</a>
-							<%-- 		<a href="noticeDetail/${notice.g_notice_id}">${notice.g_notice_title}</a> --%>
-						</td>
-						<td>${notice.create_date}</td>
-					</tr>
-				</c:forEach>
-				<tr>
-					<td colspan="5"><a href="noticeWriteForm">글작성</a></td>
-				</tr>
-			</table>
+	<c:set var="num" value="${page.total-page.start+1 }"></c:set>
+		
+	<hr>		
+<!-- 공지글테이블  공지글테이블 공지글테이블 공지글테이블 공지글테이블 -->
 
+	<table style="margin:auto;">
+		<tr>
+			<td hidden>번호</td>
+			<td >제목</td>
+			<td>작성일</td>
+		</tr>
+		
+		<c:forEach items="${noticeList}" var="notice">
+			<tr>
+				<td hidden>${notice.g_notice_id}</td>
+			<td style="text-align: left;"> <a href="noticeDetail?gid=${notice.g_notice_id}">${notice.g_notice_title}</a></td>
+				<td>${notice.create_date}</td>
+			</tr>
+		</c:forEach>
+		
+	</table>
 	
+	<hr>
+
+		<a style="text-align: right;" href="noticeWriteForm">글작성</a>
+	
+
+<!-- 페이징 처리 페이징 처리  페이징 처리  페이징 처리   -->
+
+<div>
 	<c:if test="${page.startPage > page.pageBlock }">
 		<a href="notice?currentPage=${page.startPage-page.pageBlock}">[이전]</a>
 	</c:if>
@@ -78,7 +80,7 @@
 		<a
 			href="notice?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
 	</c:if>
-
+</div>
 </body>
 	<c:import url="footer.jsp"/>
 </html>

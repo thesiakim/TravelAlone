@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 
 	<form action="updateNotice" method="post">
 		<input type="hidden" name="g_notice_id" value="${notice.g_notice_id }">
-		<table>
+		<table style="margin:auto;">
 			<tr>
 				<th>글아이디</th>
 				<td>${notice.g_notice_id }</td>
@@ -47,4 +48,5 @@
 		</table>
 	</form>
 </body>
+<c:import url="footer.jsp"/>
 </html>

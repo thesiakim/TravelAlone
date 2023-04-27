@@ -15,23 +15,28 @@
 	<h2>공지사항 글작성</h2>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="noticeWriteForm" method="post" name="frm">
-		<table>
+		<table style="margin:auto;">
 			<tr>
 				<td> 제목 </td>
 				<td> <input type="text" name="g_notice_title" size = "50"> </td>
 			</tr>
 			<tr>
 				<td> 게시판분류 </td>
-				<td> <input type="text" name="g_common_csboard" size = "50"> </td>
+				<td style="text-align: left;">
+					<select name="g_common_csboard">
+					<option value="not100">공지사항</option>
+					<option value="faq100">자주묻는질문</option>										
+				</select>
+				
+				
+				</td>
 			</tr>
-		
-		
-			
+							
 			<tr>
 				<td>내용</td>
-				<td><textarea name="g_notice_content" rows="10"></textarea></td>
+				<td style="text-align: left;"><textarea name="g_notice_content" rows="10" cols="50"></textarea></td>
 			</tr>
-			<tr>
+	<!-- 		<tr>
 				<td>이미지첨부</td>
 				<td>  
 					<form id="form1" action="uploadForm" method="post" enctype="multipart/form-data" >
@@ -40,17 +45,19 @@
 							<input type="submit">
 					</form>				
 				</td>
-			</tr>
+			</tr> -->
 			
 			  
 			
 			
 			
 			<tr >
-				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
+				<td colspan="2"> 
+				<input type="submit" value="입력"> &nbsp;&nbsp; 
 				<a href="notice">목록보기</a></td>
 			</tr>
 		</table>
 	</form>
 </body>
+<c:import url="footer.jsp"/>
 </html>

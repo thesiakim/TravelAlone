@@ -1,5 +1,6 @@
 package com.travelAlone.s20230404.model.mh;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -21,8 +22,8 @@ public class Inquire {
 	private int  			g_view_cnt;
 	private char			g_reply_yn;
 	private String			g_reply_content;
-	private LocalDateTime	create_date;
-	private LocalDateTime	modified_date;
+	private LocalDate		create_date;
+	private LocalDate		modified_date;
 	
 	// 조회용
 	private String search;   	private String keyword;

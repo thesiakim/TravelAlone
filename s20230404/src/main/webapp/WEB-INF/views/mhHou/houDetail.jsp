@@ -12,7 +12,12 @@
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 	<h1>숙소글 상세		</h1>
+	<!-- 사진 올리기 -->
+	 <img alt="UpLoad Image" src="${pageContext.request.contextPath}/upload/${savedName}">
 	<table style="margin:auto;">
+	
+		
+	
 		<tr><th>숙소명</th>			<td>${house.h_name}</td></tr>
 		<tr><th>숙소주소</th>			<td>${house.h_address}</td></tr>
 		<tr><th>객실 가격</th>			<td>${house.h_room}</td></tr>
@@ -25,37 +30,53 @@
 		
 
 		<tr><td colspan="2">
-		    <input type="button" value="목록" 
-				onclick="location.href='hou'">
-			<input type="button" value="수정" 
+		<!--     <input type="button" value="목록" 
+				onclick="location.href='hou'"> -->
+				
+				<a href="hou" class="button">목록</a>
+				<a href="houUpdateForm?house_id=${house.house_id}" class="button">수정</a>
+				<a href="deleteHouse?house_id=${house.house_id}" class="button">삭제</a>
+			
+			
+		<%-- 	<input type="button" value="수정" 
 				onclick="location.href='houUpdateForm?house_id=${house.house_id}'">
 			<input type="button" value="삭제" 
-				onclick="location.href='deleteHouse?house_id=${house.house_id}'"></td>
+				onclick="location.href='deleteHouse?house_id=${house.house_id}'"></td> --%>
 		</tr>
 	</table>
 	
 		<h3>리뷰		</h3>
 	<table style="margin:auto;">
 				<tr>
-					<td hidden>리뷰번호</td>													
+					<td>리뷰번호</td>													
 					<td>아이디</td>
 					<td>내용</td>
 					<td>평점</td>
+					<td>작성일</td>
+					
 					
 
 				</tr>
+					<c:forEach items="${houRevList}" var="houRev">
 					<tr>
-						<td hidden>${house.house_id}</td>
-						
-						<td>아이디</td>
+						<td>${houRev.review_id}</td>
+					 	<td>${houRev.member_id}</td>
+					 	<td>${houRev.r_content}</td>
+					 	<td>${houRev.r_score}</td>
+					 	<td>${houRev.create_date}</td>
+					 <td><a href="houRevUpdateForm?house_id=${houRev.house_id}&review_id=${houRev.review_id}">수정</a></td>
+					 	<td>
+					 <%-- 	<a href="deleteHouRev?review_id=${review_id}">삭제</a> --%>
+					 	
 
-						<td>내용 내용내용</td>
-						<td>★임시방편</td>
+					 	 <a href="deleteHouRev?review_id=${houRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+					 	 </td>
 						
-
-			
+											
+					</tr>
+				</c:forEach>
 				<tr>
-					<td colspan="5"><a href="houWriteForm">리뷰작성</a></td>
+					<td colspan="5"><a href="houRevWriteForm?house_id=${house.house_id}">리뷰작성</a></td>
 				</tr>
 			</table>
 	

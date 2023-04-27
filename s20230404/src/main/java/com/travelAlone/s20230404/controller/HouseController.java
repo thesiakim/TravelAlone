@@ -2,6 +2,7 @@ package com.travelAlone.s20230404.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
-import com.travelAlone.s20230404.model.mh.Inquire;
-import com.travelAlone.s20230404.model.mh.Notice;
+
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.mh.HouseService;
 
@@ -68,8 +71,16 @@ public class HouseController {
 	public String houseDetail(int hid , Model model ) {
 		log.info("mhController2 Start houseDetail");
 		log.info("mhController2 houseDetail house_id->"+ hid );
-		House house = mh.detailHouse(hid);		
-		model.addAttribute("house", house);		
+		//숙소정보 서비스
+		House house = mh.detailHouse(hid);
+
+		//리뷰리스트
+		List<Hou_Rev> listHouRev = mh.listHouRev(hid);
+		log.info("HouseController list listHouRev.size()=>"+ listHouRev.size());
+		
+		model.addAttribute("house", house);	
+		model.addAttribute("houRevList", listHouRev);
+
 		return "mhHou/houDetail";
 	}
 	
@@ -83,10 +94,11 @@ public class HouseController {
 	
 	//정보글작성
 		@PostMapping(value = "houWriteForm")
-		public String houWrite(House house , Model model) {
+		public String houWrite(House house , Model model
+				,@RequestPart(value = "file", required = false) List<MultipartFile> files) throws Exception {
 			log.info("mhController2  houWrite Start...");
 			
-			int insertResult = mh.insertHou(house);
+			int insertResult = mh.insertHou(house,files);
 			log.info("mhController2 houWrite insertResult->"+insertResult );
 			
 			if (insertResult > 0) {
@@ -222,14 +234,80 @@ public class HouseController {
 			
 			return "mhHou/hou";
 		}
+	//리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
+		
+		//정보 리뷰작성  페이지 이동
+		@GetMapping(value = "houRevWriteForm")
+		public String houRevWriteForm (Hou_Rev hou_Rev, Model model) {
+			log.info("HouseController  houRevWriteForm Start..." );	
+			model.addAttribute("hou_rev", hou_Rev);
+			return "mhHou/houRevWriteForm";
+		}
+		
+		//리뷰작성
+		@PostMapping(value = "houRevWriteForm")
+		public String houRevWrite(Hou_Rev hou_Rev, Model model) {
+			log.info("HouseController  houRevWrite Start...");
+			int insertResult = mh.insertHouRev(hou_Rev);
+			log.info("HouseController houRevWrite insertResult->"+insertResult );
+			if(insertResult >0) {
+				return "redirect:houDetail?hid="+hou_Rev.getHouse_id();
+			}
+			else {				
+				model.addAttribute("msg","입력 실패 확인해 보세요");
+				return "forward:mhHou/houRevWriteForm";
+			}
+			
+		}
+		//리뷰글수정 페이지이동
+//		@GetMapping(value = "houRevUpdateForm")
+//		public String houRevUpdateForm(@RequestParam("review_id") Optional<Integer>  review_id, Model model) {
+//			log.info("HouseController  houRevUpdateForm Start..." );
+//				
+//			return "mhHou/houRevUpdateForm";
+//		}
+		
+		@GetMapping(value = "houRevUpdateForm")
+		public String houRevUpdateForm(@RequestParam("review_id") Optional<Integer> review_id,
+		                               @RequestParam(value = "house_id", required = true) long house_id,
+		                               Model model) {
+			//Required request parameter 'review_id' for method parameter type long is not present
+			log.info("HouseController  houRevUpdateForm Start..." );
+			
+			return "mhHou/houRevUpdateForm";
+		}
+		
+		
+		
+		
+		
+		//리뷰글수정 처리
+		@PostMapping(value = "updateHouseRev")
+		public String updateHouseRev(@RequestParam("review_id") int review_id, Hou_Rev hou_Rev, Model model) {
+		    log.info("HouseController Start update");
+		    //다된듯 올... 이거 복합키라서  어려운 편이지?? 아니 이건 복합키문제가아니고 그냥 review_id 가져오지도않는데 쓴다고 넣어서 그런거임 그리고 애초에 에러터진건 long 형으로 되어잇엇음 review_id가 int로 바꿔줫음 내가
+		    //모델에있는건 ,long이고  그걸 int로 전환한거임?? 모델은 상관없어 너가 request파람 가져다쓰는데 위에 보면 review_id 도 Integer로 선언해놧자나 타입 다맞춰야되는데
+		    //ㅇㅎ.. 일단 이거는 이해안되면 저녁에 다시알려줌 나 이사님이랑 밥먹으러가야되서 ㅋㅋ  ㅇㅋㅇㅋ ㄳㄳ안가심??
+			int updateCount = mh.updateHouseRev(hou_Rev);
+			log.info("HouseController updateHouseRev updateCount ->" + updateCount);
+			
+			model.addAttribute("uptCnt",updateCount);   //
+			model.addAttribute("kk3","Message Test");   // 
+			
+			return "forward:hou";
+		}	
+		
+		//리뷰글 삭제
+		@RequestMapping(value = "deleteHouRev")
+		public String deleteHouRev(int review_id, Model model) {
+			log.info("HouseController Start delete... n_id :" + review_id);
+			int result = mh.deleteHouRev(review_id);
+			return "redirect:hou";
+		}
+		
+		
 		
 
-		
-
-		
-
-
-		
 		
 		
 		

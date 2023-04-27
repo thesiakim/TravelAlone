@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.Hou_ImgMapper">
+
+	<insert id="mhHouseImgInsert" parameterType="Hou_Img">
+		INSERT INTO Hou_Img (house_id
+								, img_id
+								, img_context
+								, img_original_file
+								, img_stored_file
+								, common_imagesType
+								, create_date
+								, modified_date)
+		VALUES (#{house_id},
+						 		hou_img_seq.nextval,
+		  						#{img_context},
+		   						#{img_original_file},
+		    					#{img_stored_file},
+		     					#{common_imagesType},
+		      					sysdate,
+		       					sysdate)
+	</insert>
+
+
+</mapper>
+
+
+<!-- HOUSE_ID
+IMG_ID
+IMG_CONTEXT
+IMG_ORIGINAL_FILE
+IMG_STORED_FILE
+COMMON_IMAGESTYPE
+CREATE_DATE
+MODIFIED_DATE -->

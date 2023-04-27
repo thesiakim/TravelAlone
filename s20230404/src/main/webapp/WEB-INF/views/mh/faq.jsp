@@ -32,13 +32,13 @@
 	
 			
 			<form action="noticeSearch">
-				<select name="search">
-					<option value="s_title">제목</option>
-					<option value="s_content">내용</option>
-					
-				</select> <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
-				<button type="submit">keyword검색</button>
-				<p>
+			    <select name="search">
+			        <option value="s_title">제목</option>
+			        <option value="s_content">내용</option>
+			    </select> 
+			    <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
+			    <a href="noticeSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a>
+			    <p>
 			</form>
 		
 			<c:set var="num" value="${page.total-page.start+1 }"></c:set>

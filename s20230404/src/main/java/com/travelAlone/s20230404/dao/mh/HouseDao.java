@@ -3,6 +3,8 @@ package com.travelAlone.s20230404.dao.mh;
 import java.util.List;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Img;
+import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
 
 public interface HouseDao {
@@ -25,7 +27,25 @@ public interface HouseDao {
 	List<CommonCode> 		getCommonLocCode();
 	List<House> 			mhOptionLocList(House house);
 	int 					condOptionLocCnt(String code);
+	
+	//리뷰리스트가져오기
+	List<Hou_Rev> 			selectHouRevList(int hid);
+	int 					insertHouRev(Hou_Rev hou_Rev);
+	int 					updateHouseRev(Hou_Rev hou_Rev);
+	int 					deleteHouseRev(int review_id);
+	
+	
+	
+	//이미지 삽입
+	int insertHouImg(List<Hou_Img> houImgs);
+	
+	
 
+	
+	
+	
+
+	
 	
 	
 	
