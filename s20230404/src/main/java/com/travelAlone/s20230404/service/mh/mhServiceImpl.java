@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.mh.mhDao;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.mh.Inq_Img;
 import com.travelAlone.s20230404.model.mh.Inquire;
+import com.travelAlone.s20230404.model.mh.Not_Img;
 import com.travelAlone.s20230404.model.mh.Notice;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,6 @@ public class mhServiceImpl implements mhService {
 		System.out.println("mhServiceImpl Start totalNotice..." );
 		int totNoticeCnt = mh.totalNotice();
 		System.out.println("mhServiceImpl totalNotice totalNoticeCnt->" + totNoticeCnt);
-		//원격저장소에서 수정함
 		return totNoticeCnt;
 	}
 
@@ -208,9 +209,73 @@ public class mhServiceImpl implements mhService {
 		return replyCount;
 	}
 
+	
+	//이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드
+	
+	@Override
+	public int insertInqImg(Inq_Img inq_Img) {
+		int result = 0;
+		log.info("InquireServiceImpl insert Start" );
+		result = mh.insertInqImg(inq_Img);
+		return result;
+	}
+	//문의글 시퀀스 가져오기
+	@Override
+	public int seqInq(Inquire inquire) {
+		int result = 0;
+		log.info("InquireServiceImpl seqInq Start" );
+		result = mh.seqInquire(inquire);
+		return result;
+	}
 
 
 
+	@Override
+	public List<Inq_Img> listInq_Img(Inq_Img inq_Img) {
+		log.info("InquireServiceImpl Start listInq_Img");
+		List<Inq_Img> inqImgList = mh.selectInqImgList(inq_Img);
+		return inqImgList;
+	}
+
+	
+	@Override
+	public int deleteInqImg(int g_writing_id) {
+		int result = 0;
+		log.info("InquireServiceImpl deleteInqImg Start");
+		result = mh.deleteInqImg(g_writing_id);
+		return result;
+	}
+
+	@Override
+	public int seqNot(Notice notice) {
+		int result = 0;
+		log.info("NoticeServiceImpl seqNot Start" );
+		result = mh.seqNotice(notice);
+		return result;
+	}
+
+	@Override
+	public int insertNotImg(Not_Img not_Img) {
+		int result = 0;
+		log.info("NoticeServiceImpl insert Start" );
+		result = mh.insertNotImg(not_Img);
+		return result;
+	}
+//공지사항 사진리스트
+	@Override
+	public List<Not_Img> listNot_Img(Not_Img not_Img) {
+		log.info("NoticeServiceImpl Start listInq_Img");
+		List<Not_Img> notImgList = mh.selectNotImgList(not_Img);
+		return notImgList;
+	}
+
+	
+//	@Override
+//	public List<Inq_Img> listInq_Img(Inq_Img inq_Img) {
+//		log.info("InquireServiceImpl Start listInq_Img");
+//		List<Inq_Img> inqImgList = mh.selectInqImgList(inq_Img);
+//		return inqImgList;
+//	}
 
 
 

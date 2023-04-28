@@ -14,7 +14,7 @@
 <h2>문의하기 글작성</h2>
 
 	<c:if test="${msg!=null}">${msg}</c:if>
-	<form action="inquireWriteForm" method="post" name="frm">
+	<form action="inquireWriteForm" method="post" name="frm"  enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td> 제목 </td>
@@ -42,13 +42,22 @@
 				<td> 비밀번호 </td>
 				<td> <input type="text" name="g_passwd" size = "50"> </td>
 			</tr>
-			
-		
-			
+								
 			<tr>
 				<td>내용</td>
 				<td><textarea name="g_content" rows="10"></textarea></td>
 			</tr>
+			
+			<tr>
+				<td> 
+				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/inquireUpload/${savedName}">
+						<input type="file" name="file1" multiple="multiple"> <p>						
+				</td>						
+			</tr>
+			
+			
+			
+			
 			<tr >
 				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
 				<a href="inquire">목록보기</a></td>

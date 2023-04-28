@@ -39,17 +39,26 @@
 		</select>
 		
 		
-		<!-- 공지사항 게시글가져오기 -->
+<!-- 공지사항 게시글가져오기 -->
 		<select id="mhNoticeSelOne"  resultType="Notice">		
 		  SELECT G_NOTICE_ID , G_NOTICE_TITLE,  MEMBER_ID, g_notice_content FROM  G_NOTICE  WHERE G_NOTICE_ID = #{G_NOTICE_ID}   
 		</select>
 		
+		
+<!-- 문의글 시퀀스가져오기 -->		
+		<select id="mhSeqNotice"  parameterType="Notice" resultType="int">
+			select G_NOTICE_ID_SEQ.nextval from dual
+		</select>		
+		
+		
+		
+		
 		<!-- 공지사항 게시글작성하기 -->
 		<insert id="insertNotice" parameterType="Notice">
 			 insert into G_NOTICE 
-			 (G_NOTICE_ID,			 MEMBER_ID, G_COMMON_CSBOARD, G_NOTICE_TITLE, G_NOTICE_CONTENT, CREATE_DATE, MODIFIED_DATE)
+			 (G_NOTICE_ID,	 MEMBER_ID, G_COMMON_CSBOARD, G_NOTICE_TITLE, G_NOTICE_CONTENT, CREATE_DATE, MODIFIED_DATE)
 			 values 
-			 (G_NOTICE_ID_SEQ.nextval, '2',  #{g_common_csboard} , 	#{g_notice_title}, #{g_notice_content}, sysdate, sysdate ) 				
+			 (#{ g_notice_id}, '2',  #{g_common_csboard} , 	#{g_notice_title}, #{g_notice_content}, sysdate, sysdate ) 				
 		</insert>
 		
 		

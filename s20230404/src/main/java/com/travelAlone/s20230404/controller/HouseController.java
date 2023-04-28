@@ -1,11 +1,16 @@
 package com.travelAlone.s20230404.controller;
 
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
 
@@ -68,12 +74,19 @@ public class HouseController {
 	
 	//숙소   정보글조회
 	@GetMapping(value = "houDetail")
-	public String houseDetail(int hid , Model model ) {
-		log.info("mhController2 Start houseDetail");
-		log.info("mhController2 houseDetail house_id->"+ hid );
+	public String houseDetail(int hid , Model model , Hou_Img hou_Img ) {
+		log.info("HouseController Start houseDetail");
+		log.info("HouseController houseDetail house_id->"+ hid );
 		//숙소정보 서비스
 		House house = mh.detailHouse(hid);
 
+		//사진 리스트
+		log.info("Hou_Img Start");
+		hou_Img.setHouse_id(hid);
+		List<Hou_Img> listImg = mh.listHou_Img(hou_Img);
+		log.info("HouseController  listImg.size()=>"+ listImg.size());
+		model.addAttribute("imgHouList", listImg);
+		
 		//리뷰리스트
 		List<Hou_Rev> listHouRev = mh.listHouRev(hid);
 		log.info("HouseController list listHouRev.size()=>"+ listHouRev.size());
@@ -87,29 +100,77 @@ public class HouseController {
 	//정보글작성  페이지 이동
 	@GetMapping(value = "houWriteForm")
 	public String houWriteForm(House house, Model model) {
-		log.info("mhController2  houWriteForm Start..." );
+		log.info("HouseController  houWriteForm Start..." );
 		return "mhHou/houWriteForm";
 	}
 	
 	
 	//정보글작성
 		@PostMapping(value = "houWriteForm")
-		public String houWrite(House house , Model model
-				,@RequestPart(value = "file", required = false) List<MultipartFile> files) throws Exception {
-			log.info("mhController2  houWrite Start...");
+		public String houWrite(HttpServletRequest request,  List<MultipartFile> file1, Hou_Img hou_Img,
+				House house , Model model) throws Exception  {
+			log.info("HouseController  houWrite Start");
+			//1. 시퀀스 가져오기 
+			//숙소 시퀀스 가져오는 쿼리
+			int houseSeq = mh.seqHou(house);
+			log.info("HouseController houWrite houseSeq->" + houseSeq );
 			
-			int insertResult = mh.insertHou(house,files);
-			log.info("mhController2 houWrite insertResult->"+insertResult );
+			//2. 가져온 시퀀스 세팅하여 house에 insert
+			house.setHouse_id(houseSeq);
+			int insertResult = mh.insertHou(house);
+			log.info("HouseController houWrite insertResult->"+insertResult );
+			
+
+			
+			
+			//3. 가져온 시퀀스 세팅하여 img insert
+			//이미지를 넣어보자 ㅠㅠ	
+			String img_context = request.getSession().getServletContext().getRealPath("/upload/");
+			log.info("IMG POST Start");
+			//이렇게 for문으로 돌려서 여러번 넣어주면 됨 아니면 list 형태로 한번에 넣는방법도 있긴한데 그건 좀 귀찮고 찾아봐야댐 
+			
+			for (MultipartFile multipartFile : file1) {
+				log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+				String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
+				// Service --> DB IMG CRUD
+				hou_Img.setImg_original_file(multipartFile.getOriginalFilename());
+				hou_Img.setImg_stored_file(img_stored_file);
+				hou_Img.setHouse_id(houseSeq);
+
+				int insertImgResult = mh.insertImg(hou_Img);
+				log.info("HouseController insertImg insertImgResult->"+ insertImgResult);
+			}
 			
 			if (insertResult > 0) {
 				return "redirect:hou";}
 			else {
 				model.addAttribute("msg","입력 실패 확인해 보세요");
 				return "forward:mhHou/houWriteForm";
-			}
-			
+			}			
 		}
 	
+		private String uploadFile(String originalName,byte[] fileData, String img_context) throws Exception {
+			 UUID uid = UUID.randomUUID();
+			 // requestPath = requestPath + "/resources/image";
+			 log.info("img_context->" + img_context);
+			 
+			// Directory 생성 
+			 File fileDirectory = new File(img_context);
+			 if (!fileDirectory.exists()) {
+				 fileDirectory.mkdirs();
+				log.info("업로드용 폴더 생성" + img_context ); 
+				
+			}
+			 String img_stored_file = uid.toString() + "_" + originalName;
+			 log.info("img_stored_file ->" + img_stored_file);
+			 File target = new File(img_context, img_stored_file);
+			 
+			 FileCopyUtils.copy(fileData,target);
+			 return img_stored_file;
+		}
+		
+		
+		
 		//정보글수정 페이지이동
 		@GetMapping(value = "houUpdateForm")
 		public String houseUpdateForm(int house_id, Model model) {
@@ -137,8 +198,9 @@ public class HouseController {
 		//정보 글 삭제
 		@RequestMapping(value = "deleteHouse")
 		public String deleteHouse(int house_id, Model model) {
-			log.info("HouseController Start delete... n_id :" +house_id);
-			int result = mh.deleteHouse(house_id);			
+			log.info("HouseController Start delete house_id :" +house_id);
+			int result2 = mh.deleteHouImg(house_id);
+			int result = mh.deleteHouse(house_id);	
 			return "redirect:hou";
 		}
 		
@@ -285,9 +347,7 @@ public class HouseController {
 		@PostMapping(value = "updateHouseRev")
 		public String updateHouseRev(@RequestParam("review_id") int review_id, Hou_Rev hou_Rev, Model model) {
 		    log.info("HouseController Start update");
-		    //다된듯 올... 이거 복합키라서  어려운 편이지?? 아니 이건 복합키문제가아니고 그냥 review_id 가져오지도않는데 쓴다고 넣어서 그런거임 그리고 애초에 에러터진건 long 형으로 되어잇엇음 review_id가 int로 바꿔줫음 내가
-		    //모델에있는건 ,long이고  그걸 int로 전환한거임?? 모델은 상관없어 너가 request파람 가져다쓰는데 위에 보면 review_id 도 Integer로 선언해놧자나 타입 다맞춰야되는데
-		    //ㅇㅎ.. 일단 이거는 이해안되면 저녁에 다시알려줌 나 이사님이랑 밥먹으러가야되서 ㅋㅋ  ㅇㅋㅇㅋ ㄳㄳ안가심??
+
 			int updateCount = mh.updateHouseRev(hou_Rev);
 			log.info("HouseController updateHouseRev updateCount ->" + updateCount);
 			

@@ -1,16 +1,26 @@
 package com.travelAlone.s20230404.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.mh.Inq_Img;
 import com.travelAlone.s20230404.model.mh.Inquire;
+import com.travelAlone.s20230404.model.mh.Not_Img;
 import com.travelAlone.s20230404.model.mh.Notice;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.mh.mhService;
@@ -32,7 +42,7 @@ public class mhController {
 	//공지사항 목록보기
 	@RequestMapping(value = "notice")
 	public String notice(Notice notice, String currentPage, Model model) {
-		System.out.println("mhController Start notice..." );
+		log.info("NoticeController Start notice");
 		int totalNotice = mh.totalNotice();		
 		
 		//페이징
@@ -41,10 +51,8 @@ public class mhController {
 		notice.setEnd(page.getEnd());
 		
 		List<Notice> listNotice = mh.listNotice(notice);
-		System.out.println("mhController list listNotice.size()=>" + listNotice.size());
-
+		log.info("NoticeController list listNotice.size()=>" + listNotice.size());
 		
-		System.out.println("currentPage는 ?"+ currentPage);
 		model.addAttribute("totalNotice", totalNotice);
 		model.addAttribute("noticeList", listNotice);
 		model.addAttribute("page", page);
@@ -53,15 +61,27 @@ public class mhController {
 	
 	//공지사항   게시글조회
 	@GetMapping(value = "noticeDetail")
-	public String noticeDetail(int gid , Model model ) {
-		System.out.println("mhController Start noticeDetail..." );
-		System.out.println("mhController noticeDetail g_notice_id->"+ gid );
+	public String noticeDetail(int gid , Model model, Not_Img not_Img ) {
+		log.info("NoticeController Start noticeDetail");
+		log.info("NoticeController noticeDetail g_notice_id->"+ gid );
 		
 		Notice notice = mh.detailNotice(gid);
+		//사진 리스트
+		log.info("Not_Img Start");
+		not_Img.setG_notice_id(gid);
+		List<Not_Img> listImg = mh.listNot_Img(not_Img);
+		log.info("NoticeController  listImg.size()=>"+ listImg.size());
+		
+		model.addAttribute("imgNotList", listImg);
+		
 		model.addAttribute("notice", notice);
 		
 		return "mh/noticeDetail";
 	}
+	
+	
+	
+	
 	/*
 	//공지사항   게시글조회 (rest api 방식으로 작성)
 	@GetMapping(value = "noticeDetail/{gid}")
@@ -79,16 +99,41 @@ public class mhController {
 	//공지사항 글작성 페이지 이동
 	@GetMapping(value = "noticeWriteForm")
 	public String noticeWriteForm(Notice notice, Model model) {
-		System.out.println("mhController  noticeWriteForm Start..." );
+		System.out.println("NoticeController  noticeWriteForm Start..." );
 		return "mh/noticeWriteForm";
 	}
 		
 	//공지사항 글작성
 	@PostMapping(value = "noticeWriteForm")
-	public String noticeWrite(Notice notice, Model model) {
-		log.info("mhController  noticeWrite Start...");
+	public String noticeWrite(Notice notice, Model model, HttpServletRequest request,   List<MultipartFile>  file1
+			,Not_Img not_Img) throws Exception {
+		log.info("NoticeController  noticeWrite Start...");
+		int noticeSeq = mh.seqNot(notice);
+		log.info("NoticeController noticeWrite noticeSeq->" + noticeSeq );
+		
+		notice.setG_notice_id(noticeSeq);
 		int insertResult = mh.insertNotice(notice);
-		log.info("mhController noticeWrite insertResult->"+insertResult );
+		log.info("NoticeController noticeWrite insertResult->"+insertResult );
+		
+		
+		//이미지 삽입
+		String img_context = request.getSession().getServletContext().getRealPath("/noticeUpload/");
+		log.info("IMG POST Start");
+		for(MultipartFile multipartFile : file1) {
+			log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+			String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
+			
+		    // Service --> DB IMG CRUD
+			not_Img.setImg_original_file(multipartFile.getOriginalFilename());
+			not_Img.setImg_stored_file(img_stored_file);
+			not_Img.setG_notice_id(noticeSeq);
+		    
+				
+			int insertImgResult = mh.insertNotImg(not_Img);
+			log.info("NoticeController insertNotImg insertImgResult->"+ insertImgResult);
+		}
+		
+		
 		if (insertResult > 0) {
 			return "redirect:notice";}
 		else {
@@ -98,6 +143,31 @@ public class mhController {
 		
 	}
 	 
+	
+
+//	
+//	private String uploadFile(String originalName,byte[] fileData, String img_context) throws Exception {
+//		 UUID uid = UUID.randomUUID();
+//		 // requestPath = requestPath + "/resources/image";
+//		 log.info("img_context->" + img_context);
+//		 
+//		// Directory 생성 
+//		 File fileDirectory = new File(img_context);
+//		 if (!fileDirectory.exists()) {
+//			 fileDirectory.mkdirs();
+//			log.info("업로드용 폴더 생성" + img_context ); 
+//			
+//		}
+//		 String img_stored_file = uid.toString() + "_" + originalName;
+//		 log.info("img_stored_file ->" + img_stored_file);
+//		 File target = new File(img_context, img_stored_file);
+//		 
+//		 FileCopyUtils.copy(fileData,target);						
+//		 return img_stored_file;
+//	}
+	
+	
+
 	
 	//공지사항 글수정 페이지이동
 	@GetMapping(value = "noticeUpdateForm")
@@ -189,7 +259,7 @@ public class mhController {
 		//문의게시판 글목록
 		@RequestMapping(value = "inquire")
 		public String inquire( Inquire inquire, String currentPage, Model model) {
-			log.info("mhController Start inquire...");
+			log.info("InquireController Start inquire...");
 			int totalInquire = mh.totalInquire();
 			
 			//페이징
@@ -206,7 +276,7 @@ public class mhController {
 			
 			//요구사항 리스트
 			List<Inquire> listInquire = mh.listInquire(inquire);
-			log.info("mhController  listInquire.size()=>" + listInquire.size());
+			log.info("InquireController  listInquire.size()=>" + listInquire.size());
 			
 			model.addAttribute("totalInquire", totalInquire);
 			model.addAttribute("inquireList", listInquire);
@@ -219,10 +289,20 @@ public class mhController {
 	
 		//문의게시판  게시글조회
 		@GetMapping(value = "inquireDetail")
-		public String inquireDetail(int gid , Model model ) {
-			log.info("mhController Start inquireDetail..." );
-			log.info("mhController Start inquireDetail g_notice_id"+ gid  );
+		public String inquireDetail(int gid , Model model, Inq_Img inq_Img ) {
+			log.info("InquireController Start inquireDetail..." );
+			log.info("InquireController Start inquireDetail g_notice_id"+ gid  );
+			//문의글  보기
 			Inquire inquire = mh.detailInquire(gid);
+			
+			//사진 리스트
+			log.info("Inq_Img Start");
+			inq_Img.setG_writing_id(gid);
+			List<Inq_Img> listImg = mh.listInq_Img(inq_Img);
+			log.info("InquireController  listImg.size()=>"+ listImg.size());
+			model.addAttribute("imgInqList", listImg);
+			
+			
 			model.addAttribute("inquire", inquire);			
 	
 			return "mh/inquireDetail";
@@ -233,7 +313,7 @@ public class mhController {
 		//문의게시판 글작성 페이지이동
 		@GetMapping(value = "inquireWriteForm")
 		public String inquireWriteForm(Inquire inquire,Model model) {
-			log.info("mhController inquireWriteForm Start... ");
+			log.info("InquireController inquireWriteForm Start... ");
 			return "mh/inquireWriteForm";
 		}
 		
@@ -241,11 +321,37 @@ public class mhController {
 		
 		//문의게시판 글작성
 		@PostMapping(value = "inquireWriteForm")
-		public String  inquireWrite(Inquire inquire, Model model) {
-			log.info("mhController  inquireWrite Start...");
-			int insertResult = mh.insertInquire(inquire);
-			log.info("mhController  inquireWrite insertResult0> " + insertResult);
+		public String  inquireWrite(HttpServletRequest request,   List<MultipartFile>  file1, Inq_Img inq_Img,
+				Inquire inquire, Model model) throws Exception {
+		
+			log.info("InquireController  inquireWrite Start");
+			int inquireSeq = mh.seqInq(inquire);
+			log.info("InquireController inqWrite inquireSeq->" + inquireSeq );
 			
+			
+			inquire.setG_writing_id(inquireSeq);									
+			int insertResult = mh.insertInquire(inquire);
+			log.info("InquireController  inquireWrite insertResult0> " + insertResult);
+			
+																					
+			
+			//이미지 삽입
+			String img_context = request.getSession().getServletContext().getRealPath("/inquireUpload/");
+			log.info("IMG POST Start");
+			for(MultipartFile multipartFile : file1) {
+				log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+				String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
+				
+			    // Service --> DB IMG CRUD
+				inq_Img.setImg_original_file(multipartFile.getOriginalFilename());
+			    inq_Img.setImg_stored_file(img_stored_file);
+			    inq_Img.setG_writing_id(inquireSeq);
+			    
+					
+				int insertImgResult = mh.insertInqImg(inq_Img);
+				log.info("mhController insertImg insertImgResult->"+ insertImgResult);
+			}						
+
 			if (insertResult>0) {
 				return "redirect:inquire";
 			}
@@ -254,6 +360,31 @@ public class mhController {
 				return "forward:mh/inquireWriteForm";
 			}
 		}
+		
+		private String uploadFile(String originalName,byte[] fileData, String img_context) throws Exception {
+			 UUID uid = UUID.randomUUID();
+			 // requestPath = requestPath + "/resources/image";
+			 log.info("img_context->" + img_context);
+			 
+			// Directory 생성 
+			 File fileDirectory = new File(img_context);
+			 if (!fileDirectory.exists()) {
+				 fileDirectory.mkdirs();
+				log.info("업로드용 폴더 생성" + img_context ); 
+				
+			}
+			 String img_stored_file = uid.toString() + "_" + originalName;
+			 log.info("img_stored_file ->" + img_stored_file);
+			 File target = new File(img_context, img_stored_file);
+			 
+			 FileCopyUtils.copy(fileData,target);						
+			 return img_stored_file;
+		}
+		
+		
+		
+		
+		
 		
 		//문의게시판 글수정 페이지이동
 		@GetMapping(value = "inquireUpdateForm")
@@ -277,10 +408,14 @@ public class mhController {
 			return "forward:inquire";
 		}
 		
+		
+		
+		
 		//문의게시판 글 삭제
 		@RequestMapping(value = "deleteInquire")
 		public String deleteInquire(int g_writing_id, Model model) {
 			log.info("mhController Start delete..." + g_writing_id);
+			int result2 = mh.deleteInqImg(g_writing_id);
 			int result = mh.deleteInquire(g_writing_id);
 			
 			return "redirect:inquire";
@@ -312,7 +447,7 @@ public class mhController {
 			return "mh/inquire";
 		}
 		
-		//새로 만든 필터~~~너가만든필터~~~
+		//필터
 		@GetMapping(value="inquireCodeFilter")
 		public String inquireFilter(@RequestParam(name = "code") String code,Inquire inquire, String currentPage, Model model) {
 								//@RequestParam 어노테이션은 code라는 이름의 파라미터를 받으며, 이 값은 String 타입의 code 변수에 할당됩니다.

@@ -7,14 +7,16 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="Notice" type="com.travelAlone.s20230404.model.mh.Notice"/>
+		<typeAlias alias="Not_Img" type="com.travelAlone.s20230404.model.mh.Not_Img"/>
 		<typeAlias alias="Search" type="com.travelAlone.s20230404.model.si.Search"/>
 		<typeAlias alias="Inquire" type="com.travelAlone.s20230404.model.mh.Inquire"/>
+		<typeAlias alias="Inq_Img" type="com.travelAlone.s20230404.model.mh.Inq_Img"/>
 		<typeAlias alias="House" type="com.travelAlone.s20230404.model.House"/>
 		<typeAlias alias="Hou_Img" type="com.travelAlone.s20230404.model.Hou_Img"/>
 		<typeAlias alias="Hou_Rev" type="com.travelAlone.s20230404.model.Hou_Rev"/>
 		<typeAlias alias="Travel" type="com.travelAlone.s20230404.model.Travel"/>
 		<typeAlias alias="Res" type="com.travelAlone.s20230404.model.Res"/>
-		<typeAlias alias="Review" type="com.travelAlone.s20230404.model.Review"/>
+	<!-- 	<typeAlias alias="Review" type="com.travelAlone.s20230404.model.Review"/> -->
 		<typeAlias alias="Board" type="com.travelAlone.s20230404.model.Board"/>
 		<typeAlias alias="BodImg" type="com.travelAlone.s20230404.model.BodImg"/>
 		     <typeAlias alias="Common" type="com.travelAlone.s20230404.model.CommonCode"/>

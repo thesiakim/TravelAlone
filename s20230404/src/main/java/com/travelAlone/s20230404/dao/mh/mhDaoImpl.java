@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.mh.Inq_Img;
 import com.travelAlone.s20230404.model.mh.Inquire;
+import com.travelAlone.s20230404.model.mh.Not_Img;
 import com.travelAlone.s20230404.model.mh.Notice;
 
 import lombok.RequiredArgsConstructor;
@@ -324,6 +326,104 @@ public class mhDaoImpl implements mhDao {
 	}
 
 	
+	//이미지 디비삽입
+	@Override
+	public int insertInqImg(Inq_Img inq_Img) {
+		int result = 0;
+		log.info("InquireImpl insert Start");
+		log.info("InquireImpl insertImg inq_Img->"+ inq_Img);
+		try {
+			result = session.insert("insertInqImg",inq_Img);
+		} catch (Exception e) {
+			log.info("InquireImpl insert Exception->"+e.getMessage());
+		}				
+		return result;
+	}
+
+	@Override
+	public int seqInquire(Inquire inquire) {
+		int result = 0;
+		log.info("InquireDaoImpl seqInquire Start");
+		try {
+			result = session.selectOne("mhSeqInquire",inquire);
+		} catch (Exception e) {
+			log.info("InquireDaoImpl mhSeqInquire Exception->"+e.getMessage());
+		}
+		return result;
+	}
+
+	
+	@Override
+	public List<Inq_Img> selectInqImgList(Inq_Img inq_Img) {
+		List<Inq_Img> inqImgList = new ArrayList<Inq_Img>();
+		try {
+			log.info("InquireDaoImpl selectInqImgList inqImgList Start");
+			inqImgList = session.selectList("mhInqImgList", inq_Img);
+		} catch (Exception e) {
+			log.info("InquireDaoImpl selectInqImgList Exception " +e.getMessage());
+		}
+		
+		return inqImgList;
+	}
+	
+	
+	
+	
+	@Override
+	public int deleteInqImg(int g_writing_id) {
+		log.info("InquireDaoImpl deleteInqImg start");
+		int result = 0;
+		log.info("InquireDaoImpl deleteInqImg g_writing_id->"+ g_writing_id);
+		try {
+			result = session.delete("deleteInqImg", g_writing_id);			
+		} catch (Exception e) {
+			log.info("InquireDaoImpl delete Exception->"+ e.getMessage());
+		}		
+		return result;
+	}
+
+	@Override
+	public int seqNotice(Notice notice) {
+		int result = 0;
+		log.info("NoticeDaoImpl seqNotice Start");
+		try {
+			result = session.selectOne("mhSeqNotice",notice);
+		} catch (Exception e) {
+			log.info("NoticeDaoImpl seqNotice Exception->"+e.getMessage());
+		}
+		return result;
+	}
+	//이미지 디비삽입
+	@Override
+	public int insertNotImg(Not_Img not_Img) {
+		int result = 0;
+		log.info("NoticeDaoImpl insert Start");
+		log.info("NoticeDaoImpl insertImg not_Img->"+ not_Img);
+		try {
+			result = session.insert("insertNotImg",not_Img);
+		} catch (Exception e) {
+			log.info("NoticeDaoImpl insert Exception->"+e.getMessage());
+		}	
+		
+		return result;
+	}
+	//공지사항 이미지 리스트
+	@Override
+	public List<Not_Img> selectNotImgList(Not_Img not_Img) {
+		List<Not_Img> notImgList = new ArrayList<Not_Img>();
+		try {
+			log.info("NoticeDaoImpl selectNotImgList notImgList Start");
+			notImgList = session.selectList("mhNotImgList", not_Img);
+		} catch (Exception e) {
+			log.info("NoticeDaoImpl selectNotImgList Exception " + e.getMessage());
+		}
+		
+		return notImgList;
+	}
+
+	
+
+
 	
 
 	
