@@ -4,104 +4,138 @@
 <!-- 위를 통해 mapper 사용 가능 -->
 
 <mapper namespace="com.travelAlone.s20230404.RoBoardMapper">
+   
+   <select id="roBoardAllCount" resultType="int">
+      Select   Count(*)
+      From   Board
+      Where   b_re_level = 0            
+   </select>
+   
+   <select id="roBoardAllList" parameterType="Board" resultType="Board">
+      Select *
+      From
+      (   Select   rownum rn, a.*
+         From   (   
+                  Select   b.*, m.m_nickname
+                  From   Board b, Member m
+                  Where   b.b_re_level = 0
+                  and      b.member_id = m.member_id
+                  <choose>
+                     <when test="orderList == 'view'">
+                        order by b.b_view_cnt desc
+                     </when>
+                     <when test="orderList == 'like'">
+                        order by b.b_like_cnt desc
+                     </when>
+                     <otherwise>
+                        order by b.create_date desc
+                     </otherwise>
+                  </choose>
+               )   a
+      )
+      Where rn between #{start} and #{end}
+      
+   </select>
+   
+   
+   
+   <select id="roBoardCount" parameterType="Board" resultType="int">
+      Select   Count(*)
+      From   Board
+      Where   b_re_level = 0
+      and      b_common_board = #{b_common_board}
+   </select>
+   
+   <select id="roBoardList" parameterType="Board" resultType="Board">
+      Select *
+      From
+      (   Select   rownum rn, a.*
+         From   (   
+                  Select   b.*, m.m_nickname
+                  From   Board b, Member m
+                  Where   b.b_re_level = 0
+                  and      b.member_id = m.member_id
+                  and		b.b_common_board = #{b_common_board}
+                  <choose>
+                     <when test="orderList == 'view'">
+                        order by b.b_view_cnt desc
+                     </when>
+                     <when test="orderList == 'like'">
+                        order by b.b_like_cnt desc
+                     </when>
+                     <otherwise>
+                        order by b.create_date desc
+                     </otherwise>
+                  </choose>
+               )   a
+      )
+      Where rn between #{start} and #{end}
+   </select>
+   
+   <update id="roBoardView" parameterType="int">
+      Update   Board
+      Set      b_view_cnt = b_view_cnt + 1
+      Where   board_id = #{board_id}
+   </update>
+   
+   <select id="roBoardSelList" parameterType="int" resultType="Board">
+      Select   b.*, m.m_nickname
+      From   Board b, Member m
+      Where   b.b_ref = #{board_id}
+      and      b.member_id = m.member_id
+      order by b.b_re_step
+   </select>
+   
+   <insert id="roBoardInsert" parameterType="Board">
+      Insert into
+      Board
+      <!-- (board_id, member_id, b_title, b_content, b_view_cnt, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date) -->
+      values (board_id_seq.nextval, #{member_id, jdbcType=NUMERIC}, #{b_title}, #{b_content}, 0, 0, #{b_common_board}, board_id_seq.currval, 0, 0, sysdate, sysdate)
 
-	<select id="roBoardAllCount" resultType="int">
-		Select	Count(*)
-		From	Board
-		Where	b_re_level = 0
-	</select>
-
-	<select id="roBoardAllList" parameterType="Board" resultType="Board">
-		Select *
-		From
-		(	Select	rownum rn, a.*
-			From	(
-						Select	b.*, m.m_nickname
-						From	Board b, Member m
-						Where	b.b_re_level = 0
-						and		b.member_id = m.member_id
-						<choose>
-							<when test="orderl == 'view'">
-								order by b.b_view_cnt
-							</when>
-							<when test="orderl == 'like'">
-								order by b.b_like_cnt
-							</when>
-							<otherwise>
-								order by b.create_date desc
-							</otherwise>
-						</choose>
-					)	a
-		)
-		Where rn between #{startRow} and #{endRow}
-
-
-	</select>
-
-	<select id="roBoardCount" parameterType="Board" resultType="int">
-		Select	Count(*)
-		From	Board
-		Where	b_re_level = 0
-		and		b_common_board = #{b_common_board}
-	</select>
-
-	<select id="roBoardList" parameterType="Board" resultType="Board">
-		Select *
-		From
-		(	Select	rownum rn, a.*
-			From	(	Select	b.*, m.m_nickname
-						From	Board b, Member m
-						Where	b.b_re_level = 0
-						and		b.member_id = m.member_id
-						and		b.b_common_board = #{b_common_board}
-						order by b.create_date desc
-					) a
-		)
-		Where rn between #{startRow} and #{endRow}
-	</select>
-
-	<select id="roBoardSelList" parameterType="int" resultType="Board">
-		Select	b.*, m.m_nickname
-		From	Board b, Member m
-		Where	b.b_ref = #{board_id}
-		and		b.member_id = m.member_id
-		order by b.b_re_step
-	</select>
-
-	<insert id="roBoardInsert" parameterType="Board">
-		Insert into
-		Board
-		<!-- (board_id, member_id, b_title, b_content, b_view_cnt, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date) -->
-		values (board_id_seq.nextval, #{member_id, jdbcType=NUMERIC}, #{b_title}, #{b_content}, 0, 0, #{b_common_board}, board_id_seq.currval, 0, 0, sysdate, sysdate)
-
-		<!-- 시퀀스로 생성된 값을 반환받기 위한 SELECT 문 정의 -->
-		<selectKey keyProperty="board_id" resultType="long" order="AFTER">
-			SELECT board_id_seq.currval AS board_id FROM dual
-		</selectKey>
-	</insert>
-
-
+      <!-- 시퀀스로 생성된 값을 반환받기 위한 SELECT 문 정의 -->
+      <selectKey keyProperty="board_id" resultType="long" order="AFTER">
+         SELECT board_id_seq.currval AS board_id FROM dual
+      </selectKey>
+   </insert>
 
 	<insert id="roBoardReInsert" parameterType="Board">
-		Insert	into
-		Board	(board_id, member_id, b_content, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
-		values	(
-				 board_id_seq.nextval,
-				 #{member_id},
-				 #{b_content},
-				 0,
-				 #{b_common_board},
-				 #{b_ref},
-				 (select  nvl(max(b_re_step),0) + 1 from board where b_ref = #{b_ref}),
-				 1,
-				 sysdate,
-				 sysdate
-				)
-	</insert>
+      Insert   into
+      Board   (board_id, member_id, b_content, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
+      values   (
+             board_id_seq.nextval,
+             #{member_id},
+             #{b_content},
+             0, 
+             #{b_common_board},
+             #{board_id},
+             (select  nvl(max(b_re_step),0) + 1 from board where b_ref = #{board_id}),
+             1,
+             sysdate,
+             sysdate
+            )
+   </insert>
 
-	<insert id="roBoardImgInsert" parameterType="BodImg">
-		INSERT INTO BOD_IMG (board_id, img_id, img_context, img_original_file, img_stored_file, common_imagesType, create_date, modified_date)
-		VALUES (#{board_id}, bod_img_seq.nextval, #{img_context}, #{img_original_file}, #{img_stored_file}, #{common_imagesType}, sysdate, sysdate)
-	</insert>
-
+   <delete id="roBoardDelete" parameterType="long">
+         Delete  From Board
+         Where
+         <choose>
+            <when test="b_re_level == 2">
+               board_id = #{board_id}
+            </when>
+            <otherwise>
+               b_ref = #{board_id}
+            </otherwise>
+        </choose>
+   </delete>
+   
+     <select id="roBoardDeleteRe" parameterType="Board" statementType="CALLABLE">
+      {
+         call boardDelRe(
+             #{b_ref,      mode=IN,   jdbcType=INTEGER}
+            ,#{b_re_step,   mode=IN,   jdbcType=INTEGER}
+            ,#{b_re_level,   mode=IN,   jdbcType=INTEGER}
+         )
+      }
+   </select>
+   
 </mapper>

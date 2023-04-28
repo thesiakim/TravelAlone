@@ -12,10 +12,10 @@
 		<typeAlias alias="House" type="com.travelAlone.s20230404.model.House"/>
 		<typeAlias alias="Travel" type="com.travelAlone.s20230404.model.Travel"/>
 		<typeAlias alias="Res" type="com.travelAlone.s20230404.model.Res"/>
-		<typeAlias alias="Review" type="com.travelAlone.s20230404.model.Review"/>
 		<typeAlias alias="Board" type="com.travelAlone.s20230404.model.Board"/>
 		<typeAlias alias="BodImg" type="com.travelAlone.s20230404.model.BodImg"/>
-		     <typeAlias alias="Common" type="com.travelAlone.s20230404.model.CommonCode"/>
+		<typeAlias alias="Common" type="com.travelAlone.s20230404.model.CommonCode"/>
+		<typeAlias alias="Warning" type="com.travelAlone.s20230404.model.Warning"/>
 	</typeAliases>
 </configuration>
 

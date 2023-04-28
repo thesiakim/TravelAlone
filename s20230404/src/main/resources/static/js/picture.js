@@ -39,9 +39,5 @@ var main = {
             });
     },
 
-
-
 }
-
-
 main.init();
