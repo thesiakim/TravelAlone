@@ -3,9 +3,12 @@ package com.travelAlone.s20230404.service.mh;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.dao.mh.HouseDao;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Img;
+import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
 
 import lombok.RequiredArgsConstructor;
@@ -19,32 +22,32 @@ public class HouseServiceImpl implements HouseService {
 
 	@Override
 	public int totalHouse() {
-		log.info("mhServiceImpl2 start totalHouse ");
+		log.info("HouseServiceImpl start totalHouse ");
 		int totHouseCnt = mh.totalHouse();
-		log.info("mhServiceImpl2  totalHouse totHouseCnt->" + totHouseCnt );		
+		log.info("HouseServiceImpl  totalHouse totHouseCnt->" + totHouseCnt );		
 		return totHouseCnt;
 	}
-
+	//숙소 리스트
 	@Override
 	public List<House> listHouse(House house) {
-		log.debug("mhServiceImpl2 Start listHouse...");
+		log.debug("HouseServiceImpl Start listHouse...");
 		List<House> houseList = mh.selectHouseList(house);
-		log.debug("mhServiceImpl2 End listHouse...");
+		log.debug("HouseServiceImpl End listHouse...");
 		return houseList;
 	}
 
 	@Override
 	public House detailHouse(int hid) {
-		log.info("mhServiceImpl2 detail");
+		log.info("HouseServiceImpl detail");
 		House house = null;
 		house = mh.detailHouse(hid);		
 		return house;
 	}
-
+	//숙소정보작성
 	@Override
 	public int insertHou(House house) {
 		int result = 0;
-		log.info("mhServiceImpl2 insert Start...");
+		log.info("HouseServiceImpl insert Start...");
 		result = mh.insertHou(house);
 		return result;
 	}
@@ -134,7 +137,78 @@ public class HouseServiceImpl implements HouseService {
 		return conditionLocCnt;
 	}
 
+	
+	//==========리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰====================================
+	@Override
+	public List<Hou_Rev> listHouRev(int hid) {
+		log.debug("HouseServiceImpl Start listHouRev...");
+		List<Hou_Rev> houRevList = mh.selectHouRevList(hid);
+		
+		log.debug("HouseServiceImpl End listHouRev...");
+		return houRevList;
+	}
+	//리뷰작성
+	@Override
+	public int insertHouRev(Hou_Rev hou_Rev) {
+		int result = 0;
+		log.info("HouseServiceImpl insert Start...");
+		result = mh.insertHouRev(hou_Rev);
+		return result;
+	}
+	
+	
+	@Override
+	public int updateHouseRev(Hou_Rev hou_Rev) {
+		log.info("HouseServiceImpl update");
+		int updateCount = 0;
+		updateCount = mh.updateHouseRev(hou_Rev);	
+		return updateCount;
+	}
+	@Override
+	public int deleteHouRev(int review_id) {
+		int result = 0;
+		log.info("HouseServiceImpl delete Start");
+		result = mh.deleteHouseRev(review_id);		
+		return result;
+	}
+	
+	
+	
+	//이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드
+	@Override
+	public int insertImg(Hou_Img hou_Img) {
+		int result = 0;
+		log.info("HouseServiceImpl insert Start..." );
+		result = mh.insertImg(hou_Img);
+		return result;
+		
+	}
+	@Override
+	public int seqHou(House house) {
+		int result = 0;
+		log.info("HouseServiceImpl seqHou Start..." );
+		result = mh.seqHouse(house);
+		return result;
+	}
+	@Override
+	public List<Hou_Img> listHou_Img(Hou_Img hou_Img) {
+		log.info("HouseServiceImpl Start listHou_Img");
+		List<Hou_Img> houImgList = mh.selectHouImgList(hou_Img);						
+		return houImgList;
+	}
+	@Override
+	public int deleteHouImg(int house_id) {
+		int result = 0;
+		log.info("HouseServiceImpl deleteHouImg Start");
+		result = mh.deleteHouImg(house_id);		
+		return result;
+	}
 
+	
+	
+
+
+	
 	
 	
 	

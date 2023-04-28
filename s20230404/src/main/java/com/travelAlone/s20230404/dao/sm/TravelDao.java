@@ -3,39 +3,44 @@ package com.travelAlone.s20230404.dao.sm;
 import java.util.List;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Img;
+import com.travelAlone.s20230404.model.House;
+import com.travelAlone.s20230404.model.Tra_Img;
+import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 
 public interface TravelDao {
 
-	int 					totalTravel();
-	List<Travel> 			selectTravelList(Travel travel);
-	Travel 					detailTravel(int tid);
-	int 					insertTravel(Travel travel);
-	int 					updateTravel(Travel travel);
-	int 					deleteTravel(int travel_id);
+	int 					traTotal();
+	List<Travel> 			traList(Travel travel);
+	Travel 					traDetail(int tid);
+	int 					traInsert(Travel travel);
+	int 					traUpdate(Travel travel);
+	int 					traDelete(int travel_id);
 	//검색
-	int 					condTravelCnt(Travel travel);
-	List<Travel> 			travelSearchList(Travel travel);
+	int 					traSearch(Travel travel);
+	List<Travel> 			traSearchList(Travel travel);
 	
-	//필터링  숙소구분
+	//필터링  여행지구분
 	List<CommonCode> 		getCommonCode();
-	int 					condOptionInqCnt(String code);
-	List<Travel> 			smOptionTravelList(Travel travel);
+	int 					traFilter(String code);
+	List<Travel> 			optTraList(Travel travel);
+	
 	//지역구분
 	List<CommonCode> 		getCommonLocCode();
-	List<Travel> 			smOptionLocList(Travel travel);
-	int 					condOptionLocCnt(String code);
+	int 					traLocFilter(String code);
+	List<Travel> 			traLocList(Travel travel);
+	
+	
+	//리뷰리스트가져오기
+	List<Tra_Rev> 			traRevList(int tid);
+	int 					traRevInsert(Tra_Rev tra_Rev);
+	int 					traRevUpdate(Tra_Rev tra_Rev);
+	int 					traRevDelete(int review_id);
 
-	
-	
-	
-	
-	
-	
-	
-			
-	
-	
-	
-	
+	//이미지 삽입
+	int 					traImgInsert(Tra_Img tra_Img);
+	int 					traSeq(Travel travel);
+	List<Tra_Img> 			traImgList(Tra_Img tra_Img);
+	int 					traImgDelete(int travel_id);
 }

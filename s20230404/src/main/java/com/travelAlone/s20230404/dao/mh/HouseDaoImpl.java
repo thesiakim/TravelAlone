@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Img;
+import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
 
 import lombok.RequiredArgsConstructor;
@@ -62,7 +64,7 @@ public class HouseDaoImpl implements HouseDao {
 		return house;
 	}
 
-
+	//정보글 작성
 	@Override
 	public int insertHou(House house) {
 		int result = 0;
@@ -98,6 +100,7 @@ public class HouseDaoImpl implements HouseDao {
 		log.info("HouseDaoImpl delete house_id->"+ house_id);
 		try {
 			result = session.delete("deleteHouse",house_id);
+			//result = session.delete("deleteHouImg",house_id );
 			log.info("HouseDaoImpl delete result->"+ result);
 		} catch (Exception e) {
 			log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
@@ -218,8 +221,124 @@ public class HouseDaoImpl implements HouseDao {
 		return count;
 	}
 
+	//==========리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰====================================
 
-	
+	@Override
+	public List<Hou_Rev> selectHouRevList(int hid) {
+		List<Hou_Rev> houRevList = new ArrayList<Hou_Rev>();
+		try {
+			log.info("HouseDaoImpl selectHouRevList houRevList Start...");
+			houRevList = session.selectList("houRevList",hid);
+			log.info("HouseDaoImpl selectHouRevList houRevList End...");
+		} catch (Exception e) {
+			log.info("HouseDaoImpl houRevList Exception " +e.getMessage());
+		}				
+		return houRevList;
+	}
+
+
+	@Override
+	public int insertHouRev(Hou_Rev hou_Rev) {
+		int result = 0;
+		log.info("HouseDaoImpl insert Start...");
+		try {
+			result = session.insert("insertHouseRev",hou_Rev);			
+		} catch (Exception e) {
+			log.info("HouseDaoImpl insert Exception" + e.getMessage());
+		}
+		
+		return result;
+	}
+
+
+	@Override
+	public int updateHouseRev(Hou_Rev hou_Rev) {
+		log.info("HouseDaoImpl updateHouse  start");
+		int updateCount= 0;
+		try {
+			updateCount = session.update("mhHouseRevUpdate" , hou_Rev);			
+		} catch (Exception e) {
+			log.info("HouseDaoImpl updateHouseRev Exception->"+e.getMessage());
+		}
+		return updateCount;
+	}
+
+
+	@Override
+	public int deleteHouseRev(int review_id) {
+		log.info("HouseDaoImpl delete start..");
+		int result = 0;
+		log.info("HouseDaoImpl delete review_id->"+ review_id);
+		try {
+			result = session.delete("deleteHouRev",review_id);
+			log.info("HouseDaoImpl delete result->"+ result);
+		} catch (Exception e) {
+			log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+		}
+		
+		
+		return result;
+	}
+
+
+	//이미지 디비삽입
+		@Override
+		public int insertImg(Hou_Img hou_Img) {
+			int result = 0;
+			log.info("HouseDaoImpl insert Start");
+			log.info("HouseDaoImpl insertImg hou_Img->"+ hou_Img);
+			
+			try {
+				result = session.insert("insertImg",hou_Img);
+			} catch (Exception e) {
+				log.info("HouseDaoImpl insert Exception->"+e.getMessage());
+			}				
+			return result;
+		}
+
+
+		@Override
+		public int seqHouse(House house) {
+			int result = 0;
+			log.info("HouseDaoImpl seqHouse Start");
+			try {
+				result = session.selectOne("mhSeqHouse",house);
+			} catch (Exception e) {
+				log.info("HouseDaoImpl mhSeqHouse Exception->"+e.getMessage());
+			}
+			return result;
+		}
+
+
+		@Override
+		public List<Hou_Img> selectHouImgList(Hou_Img hou_Img) {
+			List<Hou_Img> houImgList = new ArrayList<Hou_Img>();
+			try {
+				log.info("HouseDaoImpl selectHouImgList houImgList Start");
+				houImgList = session.selectList("mhHouImgList" , hou_Img);
+			} catch (Exception e) {
+				log.info("ImgImpl selectImgList Exception " +e.getMessage());
+			}
+			
+			return houImgList;
+		}
+
+
+		@Override
+		public int deleteHouImg(int house_id) {
+			log.info("HouseDaoImpl deleteHouImg start..");
+			int result = 0;
+			log.info("HouseDaoImpl deleteHouImg house_id->"+ house_id);
+			try {
+				result = session.delete("deleteHouImg",house_id );
+			} catch (Exception e) {
+				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+			}
+			
+			return result;
+		}
+
+
 	
 	
 }

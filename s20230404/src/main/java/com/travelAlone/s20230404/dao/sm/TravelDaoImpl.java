@@ -7,6 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Img;
+import com.travelAlone.s20230404.model.House;
+import com.travelAlone.s20230404.model.Tra_Img;
+import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 
 import lombok.RequiredArgsConstructor;
@@ -21,56 +25,56 @@ public class TravelDaoImpl implements TravelDao {
 	
 	
 	@Override
-	public int totalTravel() {
+	public int traTotal() {
 		int totTravelCount = 0;
 		log.info("smDaoImpl Start total...");
 		try {
-			totTravelCount = session.selectOne("smTravelTotal");
-			log.info("smDaoImpl totalTravel totTravelCount->" + totTravelCount);
+			totTravelCount = session.selectOne("traTotal");
+			log.info("smDaoImpl traTotal totTravelCount->" + totTravelCount);
 		} catch (Exception e) {
-			log.info("smDaoImpl totalTravel Exception " +e.getMessage());
+			log.info("smDaoImpl traTotal Exception " +e.getMessage());
 		}						
 		return totTravelCount;
 	}
 
 
 	@Override
-	public List<Travel> selectTravelList(Travel travel) {
+	public List<Travel> traList(Travel travel) {
 		List<Travel> travelList = new ArrayList<Travel>();
 		
 	try {
-		log.info("smDaoImpl selectTravelList smTravelList Start...");					
-		travelList = session.selectList("smTravelList",travel);
-		log.info("smDaoImpl selectTravelList smTravelList End...");
+		log.info("smDaoImpl traList Start...");					
+		travelList = session.selectList("traList",travel);
+		log.info("smDaoImpl traList End...");
 	} catch (Exception e) {
-		log.info("smDaoImpl smTravelList Exception " +e.getMessage());
+		log.info("smDaoImpl traList Exception " +e.getMessage());
 	}
 		return travelList;
 	}
 
 	//정보글 자세히보기
 	@Override
-	public Travel detailTravel(int tid) {
-		log.info("smDaoImpl detail start..");
+	public Travel traDetail(int tid) {
+		log.info("smDaoImpl traDetail start..");
 		Travel travel = new Travel();
 		try {
-			travel = session.selectOne("smTravelSelOne", tid);
-			log.info("smDaoImpl detail travel.getT_name()->"+ travel.getT_name());
+			travel = session.selectOne("traDetail", tid);
+			log.info("smDaoImpl traDetail travel.getT_name()->"+ travel.getT_name());
 		} catch (Exception e) {
-			log.info("smDaoImpl smTravelSelOne Exception " +e.getMessage());
+			log.info("smDaoImpl traDetail Exception " +e.getMessage());
 		}				
 		return travel;
 	}
 
-
+	//정보글 작성
 	@Override
-	public int insertTravel(Travel travel) {
+	public int traInsert(Travel travel) {
 		int result = 0;
-		log.info("TravelDaoImpl insert Start...");
+		log.info("TravelDaoImpl traInsert Start...");
 		try {
-			result = session.insert("insertTravel",travel);
+			result = session.insert("traInsert",travel);
 		} catch (Exception e) {
-			log.info("TravelDaoImpl insert Exception" + e.getMessage());
+			log.info("TravelDaoImpl traInsert Exception" + e.getMessage());
 		}
 		
 		return result;
@@ -78,13 +82,13 @@ public class TravelDaoImpl implements TravelDao {
 
 
 	@Override
-	public int updateTravel(Travel travel) {
-		log.info("TravelDaoImpl updateTravel  start");
+	public int traUpdate(Travel travel) {
+		log.info("TravelDaoImpl traUpdate  start");
 		int updateCount= 0;
 		try {
-			updateCount = session.update("smTravelUpdate",travel);
+			updateCount = session.update("traUpdate",travel);
 		} catch (Exception e) {
-			log.info("TravelDaoImpl updateTravel Exception->"+e.getMessage());
+			log.info("TravelDaoImpl traUpdate Exception->"+e.getMessage());
 		}		
 		
 		return updateCount;
@@ -92,15 +96,15 @@ public class TravelDaoImpl implements TravelDao {
 
 
 	@Override
-	public int deleteTravel(int travel_id) {
-		log.info("TravelDaoImpl delete start..");
+	public int traDelete(int travel_id) {
+		log.info("TravelDaoImpl traDelete start..");
 		int result = 0;
-		log.info("TravelDaoImpl delete travel_id->"+ travel_id);
+		log.info("TravelDaoImpl traDelete travel_id->"+ travel_id);
 		try {
-			result = session.delete("deleteTravel",travel_id);
-			log.info("TravelDaoImpl delete result->"+ result);
+			result = session.delete("traDelete",travel_id);
+			log.info("TravelDaoImpl traDelete result->"+ result);
 		} catch (Exception e) {
-			log.info("TravelDaoImpl delete Exception->"+ e.getMessage());
+			log.info("TravelDaoImpl traDelete Exception->"+ e.getMessage());
 		}
 		
 		return result;
@@ -109,14 +113,14 @@ public class TravelDaoImpl implements TravelDao {
 
 	//숙소검색결과갯수
 	@Override
-	public int condTravelCnt(Travel travel) {
+	public int traSearch(Travel travel) {
 		int conditionTravelCount = 0;
-		log.info("TravelDaoImpl Start total...");
+		log.info("TravelDaoImpl traSearch Start...");
 		try {
-			conditionTravelCount = session.selectOne("condTravelCnt",travel);
+			conditionTravelCount = session.selectOne("traSearch",travel);
 			log.info("TravelDaoImpl conditionInquireCount->"+conditionTravelCount);		
 		} catch (Exception e) {
-			log.info("TravelDaoImpl Exception"+ e.getMessage());
+			log.info("TravelDaoImpl traSearch Exception"+ e.getMessage());
 		}			
 		return conditionTravelCount;
 	}
@@ -124,13 +128,13 @@ public class TravelDaoImpl implements TravelDao {
 	
 	//숙소 검색결과
 	@Override
-	public List<Travel> travelSearchList(Travel travel) {
+	public List<Travel> traSearchList(Travel travel) {
 		List<Travel> travelSearchList = null;
-		log.info("TravelDaoImpl travelSearchList start");
+		log.info("TravelDaoImpl traSearchList start");
 		try {
-			travelSearchList = session.selectList("smtravelSearchList", travel);
+			travelSearchList = session.selectList("traSearchList", travel);
 		} catch (Exception e) {
-			log.info("TravelDaoImpl travelSearchList Exception " + e.getMessage());
+			log.info("TravelDaoImpl traSearchList Exception " + e.getMessage());
 		}
 		
 		return travelSearchList;
@@ -144,35 +148,35 @@ public class TravelDaoImpl implements TravelDao {
 	@Override
 	public List<CommonCode> getCommonCode() {
 		log.info("getCommonCode 호출부 .......");
-		List<CommonCode> result = session.selectList("travelCommonCode");
+		List<CommonCode> result = session.selectList("traCommonCode");
 		log.info("getCommonCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
 		return result;
 	}
 
 	//숙소 필터갯수
 	@Override
-	public int condOptionInqCnt(String code) {
+	public int traFilter(String code) {
 		int count = 0;		
-		log.info("TravelDaoImpl Start total...");
+		log.info("TravelDaoImpl traFilter Start...");
 		try {
-			count = session.selectOne("condOptionTravelCnt",code);
-			log.info("TravelDaoImpl condOptionInquireCnt->"+count);		
+			count = session.selectOne("traFilter",code);
+			log.info("TravelDaoImpl traFilter->"+count);		
 		} catch (Exception e) {
-			log.info("TravelDaoImpl Exception"+ e.getMessage());
+			log.info("TravelDaoImpl traFilter Exception"+ e.getMessage());
 		}			
 		return count;
 	}
 
 	//숙소필터
 	@Override
-	public List<Travel> smOptionTravelList(Travel travel) {
+	public List<Travel> optTraList(Travel travel) {
 		List<Travel> travelFilterList = null;
-		log.info("TravelDaoImpl travelFilterList start");
+		log.info("TravelDaoImpl optTraList start");
 		try {
-			travelFilterList = session.selectList("smOptionTravelList",travel);
+			travelFilterList = session.selectList("optTraList",travel);
 
 		} catch (Exception e) {
-			log.info("TravelDaoImpl travelFilterList Exception " + e.getMessage());
+			log.info("TravelDaoImpl optTraList Exception " + e.getMessage());
 		}
 
 		return travelFilterList;
@@ -186,14 +190,28 @@ public class TravelDaoImpl implements TravelDao {
 		log.info("getCommonLocCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
 		return result;
 	}
+	
+	@Override
+	public int traLocFilter(String code) {
+		int count = 0;
+		log.info("TravelDaoImpl Start total");
+		try {
+			count = session.selectOne("traLocFilter",code);
+			log.info("TravelDaoImpl traLocFilter->"+count);		
+		} catch (Exception e) {
+			log.info("TravelDaoImpl Exception"+ e.getMessage());
+		}
+		
+		return count;
+	}
 
 
 	@Override
-	public List<Travel> smOptionLocList(Travel travel) {
+	public List<Travel> traLocList(Travel travel) {
 		List<Travel> locFilterList = null;
-		log.info("TravelDaoImpl locFilterList start");
+		log.info("TravelDaoImpl traLocList start");
 		try {
-			locFilterList = session.selectList("smOptionLocList",travel);
+			locFilterList = session.selectList("traLocList",travel);
 			
 		} catch (Exception e) {
 			log.info("TravelDaoImpl locFilterList Exception " + e.getMessage());
@@ -204,22 +222,126 @@ public class TravelDaoImpl implements TravelDao {
 
 
 	
+	//==========리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰====================================
+
 	@Override
-	public int condOptionLocCnt(String code) {
-		int count = 0;
-		log.info("TravelDaoImpl Start total");
+	public List<Tra_Rev> traRevList(int tid) {
+		List<Tra_Rev> traRevList = new ArrayList<Tra_Rev>();
 		try {
-			count = session.selectOne("condOptionLocCnt",code);
-			log.info("TravelDaoImpl condOptionLocCnt->"+count);		
+			log.info("TravelDaoImpl traRevList Start...");
+			traRevList = session.selectList("traRevList", tid);
+			log.info("TravelDaoImpl traRevList End...");
 		} catch (Exception e) {
-			log.info("TravelDaoImpl Exception"+ e.getMessage());
-		}
-		
-		return count;
+			log.info("TravelDaoImpl traRevList Exception " +e.getMessage());
+		}				
+		return traRevList;
 	}
 
 
-	
+	@Override
+	public int traRevInsert(Tra_Rev tra_Rev) {
+		int result = 0;
+		log.info("TravelDaoImpl insert Start...");
+		try {
+			result = session.insert("traRevInsert",tra_Rev);			
+		} catch (Exception e) {
+			log.info("TravelDaoImpl insert Exception" + e.getMessage());
+		}
+		
+		return result;
+	}
+
+
+	@Override
+	public int traRevUpdate(Tra_Rev tra_Rev) {
+		log.info("TravelDaoImpl traRevUpdate  start");
+		int updateCount= 0;
+		try {
+			updateCount = session.update("traRevUpdate" , tra_Rev);			
+		} catch (Exception e) {
+			log.info("TravelDaoImpl traRevUpdate Exception->"+e.getMessage());
+		}
+		return updateCount;
+	}
+
+
+	@Override
+	public int traRevDelete(int review_id) {
+		log.info("TravelDaoImpl delete start..");
+		int result = 0;
+		log.info("TravelDaoImpl delete review_id->"+ review_id);
+		try {
+			result = session.delete("traRevDelete",review_id);
+			log.info("TravelDaoImpl delete result->"+ result);
+		} catch (Exception e) {
+			log.info("TravelDaoImpl delete Exception->"+ e.getMessage());
+		}
+		
+		
+		return result;
+	}
+
+
+	//이미지 디비삽입
+		@Override
+		public int traImgInsert(Tra_Img tra_Img) {
+			int result = 0;
+			log.info("TravelDaoImpl traImgInsert Start");
+			log.info("TravelDaoImpl traImgInsert tra_Img->"+ tra_Img);
+			
+			try {
+				System.out.println("Dao traImgInsert tra_Img->" + tra_Img);
+				result = session.insert("traImgInsert",tra_Img);
+			} catch (Exception e) {
+				log.info("TravelDaoImpl traImgInsert Exception->"+e.getMessage());
+			}				
+			return result;
+		}
+
+
+		@Override
+		public int traSeq(Travel travel) {
+			int result = 0;
+			log.info("TravelDaoImpl traSeq Start");
+			try {
+				result = session.selectOne("traSeq",travel);
+			} catch (Exception e) {
+				log.info("TravelDaoImpl traSeq Exception->"+e.getMessage());
+			}
+			return result;
+		}
+
+
+		@Override
+		public List<Tra_Img> traImgList(Tra_Img tra_Img) {
+			List<Tra_Img> traImgList = new ArrayList<Tra_Img>();
+			try {
+				log.info("TravelDaoImpl TraImgList Start");
+				traImgList = session.selectList("traImgList" , tra_Img);
+			} catch (Exception e) {
+				log.info("ImgImpl selectImgList Exception " +e.getMessage());
+			}
+			
+			return traImgList;
+		}
+
+
+		@Override
+		public int traImgDelete(int travel_id) {
+			log.info("TravelDaoImpl traImgDelete start..");
+			int result = 0;
+			log.info("TravelDaoImpl traImgDelete travel_id->"+ travel_id);
+			try {
+				result = session.delete("traImgDelete",travel_id );
+			} catch (Exception e) {
+				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+			}
+			
+			return result;
+		}
+
+
 	
 	
 }
+

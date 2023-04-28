@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.Hou_ImgMapper">
+
+	<insert id="insertImg" parameterType="Hou_Img">
+		INSERT INTO Hou_Img (	  house_id
+								, img_id
+								, img_original_file
+								, img_stored_file
+								)
+		VALUES (				#{house_id},
+								Hou_Img_SEQ.nextval,						 		
+		   						#{img_original_file	, jdbcType=VARCHAR},
+		    					#{img_stored_file}
+		     				)
+	</insert>
+
+<!-- 이미지 목록가져오기 -->
+	<select id="mhHouImgList" parameterType="Hou_Img" resultType="Hou_Img" >
+			select IMG_ID
+					,IMG_STORED_FILE
+					,IMG_ORIGINAL_FILE
+			from  Hou_Img
+			WHERE house_id = #{house_id}
+			order by IMG_ID desc
+		</select>
+
+<!-- 이미지 목록삭제하기 -->
+	<delete id="deleteHouImg" parameterType="int">
+		delete from Hou_Img where HOUSE_ID = #{house_id}
+	</delete>
+
+
+
+</mapper>
+
+
+<!-- HOUSE_ID    임시로 하우스 id1로함
+IMG_ID
+IMG_CONTEXT
+IMG_ORIGINAL_FILE
+IMG_STORED_FILE
+COMMON_IMAGESTYPE
+CREATE_DATE
+MODIFIED_DATE -->

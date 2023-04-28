@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.Hou_RevMapper">
+
+	<!-- 리뷰목록 가져오기 -->
+<select id="houRevList" parameterType="Hou_Rev" resultType="Hou_Rev" >
+    		<![CDATA[
+			SELECT							  
+		            REVIEW_ID ,HOUSE_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
+		            ,CREATE_DATE ,MODIFIED_DATE
+			 FROM    HOU_REV
+			 WHERE    HOUSE_ID =    #{HOUSE_ID}   
+			                      					 		
+		 	 ]]>	
+			
+		</select>
+
+
+<!-- 숙소 리뷰글작성하기 -->
+		<insert id="insertHouseRev" parameterType="Hou_Rev">
+			 insert into HOU_REV 
+			  (REVIEW_ID ,			HOUSE_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
+		            ,CREATE_DATE ,MODIFIED_DATE )
+		  	values
+		  	  (REVIEW_ID_SEQ.nextval,#{house_id}	,#{member_id}, #{r_content}, #{r_score}
+		  	  ,sysdate, sysdate	)        
+				
+		</insert>
+
+<!-- 숙소 리뷰글수정하기 -->
+		<update id="mhHouseRevUpdate" parameterType="Hou_Rev">
+		 UPDATE  HOU_REV 
+		 SET 
+		  R_CONTENT   	   = #{r_content},
+		  R_SCORE 		   = #{r_score}
+	
+		 WHERE  review_id = #{review_id}
+		
+		</update>
+
+<!--  문의사항 글삭제하기 -->
+		<delete id="deleteHouRev" parameterType="int">
+			delete from HOU_REV where REVIEW_ID = #{review_id}
+		</delete>
+
+
+
+</mapper>

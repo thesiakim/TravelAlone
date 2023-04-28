@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class House {
 
-	private int				house_id;
+	private long			house_id;
 	private String			h_name;
 	private String			h_content;
 	private String			h_address;
@@ -25,6 +25,9 @@ public class House {
 	private String			h_common_loc;
 	private LocalDateTime	create_date;
 	private LocalDateTime	modified_date;
+	private String			h_revcount;
+	private String			h_avgscore;
+	
 	
 	// 페이지조회용
 	private String search;   	private String keyword;

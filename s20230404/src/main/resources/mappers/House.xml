@@ -16,21 +16,31 @@
 				FROM
 				(	SELECT rownum rn , a.*
 				        FROM
-				                   (select  HOUSE_ID
-											,H_NAME
-											,H_CONTENT
-											,H_ADDRESS
-											,H_CHECKINOUT
-											,H_CALL
-											,H_ROOM
-											,H_EAT
-											,H_PARKING
-											,H_COMMON_HOUSE
-											,H_COMMON_LOC
-											,CREATE_DATE
-											,MODIFIED_DATE										
-									  from  HOUSE 									  									  									  									   
-									  order by HOUSE_ID desc) a
+		                   (select  HOUSE_ID
+			                        ,H_NAME
+			                        ,H_CONTENT
+			                        ,H_ADDRESS
+			                        ,H_CHECKINOUT
+			                        ,H_CALL
+			                        ,H_ROOM
+			                        ,H_EAT
+			                        ,H_PARKING
+			                        ,H_COMMON_HOUSE
+			                        , (select word 
+			                            from(select 
+			                                    bcd||mcd as code, 
+			                                    word 
+			                                from
+			                                    common
+			                                where bcd='loc') b
+			                                where code = H_COMMON_LOC)as H_COMMON_LOC
+			                          ,TRUNC((SELECT AVG(R_SCORE) FROM hou_rev WHERE house_id = HOUSE.HOUSE_ID), 0) AS H_AvgScore    
+			                         ,(SELECT COUNT(*) FROM hou_rev WHERE house_id = HOUSE.HOUSE_ID) AS H_RevCount 
+			                                
+			                        ,CREATE_DATE
+			                        ,MODIFIED_DATE										
+			                  from  HOUSE 									  									  									  									   
+			                  order by HOUSE_ID desc) a
 			)   
 		 		WHERE  rn >= #{start} 
 		 		and    rn <= #{end} 
@@ -53,9 +63,14 @@
 			 (HOUSE_ID,			 H_NAME, 	H_CONTENT,		 H_ADDRESS, H_CHECKINOUT, H_CALL,
 			  H_ROOM,		 H_EAT,	 H_PARKING,		H_COMMON_HOUSE,		H_COMMON_LOC, CREATE_DATE,	MODIFIED_DATE )
 			 values 
-			 (HOUSE_ID_SEQ.nextval, #{h_name} , #{h_content}, #{h_address}, #{h_checkinout} , #{h_call} ,
+			 (#{house_id}, #{h_name} , #{h_content}, #{h_address}, #{h_checkinout} , #{h_call} ,
 			  #{h_room},    #{h_eat}, #{h_parking},  #{h_common_house}, #{h_common_loc},  sysdate, sysdate ) 				
 		</insert>
+		
+<!-- 숙소 정보글 쿼리작성하기 -->		
+		<select id="mhSeqHouse"  parameterType="House" resultType="int">
+			select HOUSE_ID_SEQ.nextval from dual
+		</select>
 
 <!-- 숙소 정보글수정하기 -->
 		<update id="mhHouseUpdate" parameterType="House">
@@ -80,6 +95,8 @@
 		<delete id="deleteHouse" parameterType="int">
 			delete from HOUSE where HOUSE_ID = #{house_id}
 		</delete>
+		
+
 
 
 		<!-- 숙소검색어결과갯수 -->

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.Tra_ImgMapper">
+	
+	<!-- 이미지 삽입 -->
+	<insert id="traImgInsert" parameterType="Tra_Img">
+		INSERT INTO Tra_Img (	  travel_id
+								, img_id
+								, img_original_file
+								, img_stored_file
+								)
+		VALUES (				#{travel_id},
+								Tra_Img_SEQ.nextval,						 		
+		   						#{img_original_file	, jdbcType=VARCHAR},
+		    					#{img_stored_file, jdbcType=VARCHAR}
+		     				)
+	</insert>
+
+<!-- 이미지 목록가져오기 -->
+	<select id="traImgList" parameterType="Tra_Img" resultType="Tra_Img" >
+			select 	 IMG_ID
+					,IMG_STORED_FILE
+					,IMG_ORIGINAL_FILE
+			from  Tra_Img
+			WHERE travel_id = #{travel_id}
+			order by IMG_ID desc
+		</select>
+
+<!-- 이미지 목록삭제하기 -->
+	<delete id="traImgDelete" parameterType="int">
+		delete from Tra_Img where TRAVEL_ID = #{travel_id}
+	</delete>
+
+
+
+</mapper>
+
+
+<!-- Travel_ID 
+IMG_ID
+IMG_CONTEXT
+IMG_ORIGINAL_FILE
+IMG_STORED_FILE
+COMMON_IMAGESTYPE
+CREATE_DATE
+MODIFIED_DATE -->

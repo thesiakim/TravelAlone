@@ -69,7 +69,7 @@ public class kmController {
      * 설명 : 회원가입 요청 처리 메서드
      * */
     @PostMapping("api/v1/join")
-    public String goJoin(@Valid @ModelAttribute("memberDto") MemberFormDto requestDto, BindingResult errors, Model model){
+    public String join(@Valid @ModelAttribute("memberDto") MemberFormDto requestDto, BindingResult errors, Model model){
         if (errors.hasErrors()){
             // 회원가입 실패시 입력 데이터값 유지
             model.addAttribute("memberDto", requestDto);
@@ -91,7 +91,7 @@ public class kmController {
         // 검사에 이상이 없을경우 암호화 하여 저장
         memberService.save(requestDto,passwordEncoder);
 
-        return "redirect:/login";
+        return "th/login";
     }
 
 

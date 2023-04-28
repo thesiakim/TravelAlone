@@ -14,16 +14,6 @@
 				bcd = 'inq'
 		</select>
 		
-		<select id="smCommonCode" parameterType="Common" resultType="Common" >
-			select 
-				bcd||mcd as code,  
-				word as value
-			from 
-				common
-			where 
-				bcd = 'inq'
-		</select>
-		
 		<select id="houseCommonCode" parameterType="Common" resultType="Common" >
 			select 
 				bcd||mcd as code,  
@@ -34,7 +24,7 @@
 				bcd = 'hou'
 		</select>	
 		
-		<select id="travelCommonCode" parameterType="Common" resultType="Common" >
+		<select id="traCommonCode" parameterType="Common" resultType="Common" >
 			select 
 				bcd||mcd as code,  
 				word as value
