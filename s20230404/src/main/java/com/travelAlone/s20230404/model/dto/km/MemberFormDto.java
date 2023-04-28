@@ -70,9 +70,9 @@ public class MemberFormDto {
                 .gender(this.gender)
                 .phone(this.phone)
                 .imgContext("normal")
-                .imagesType("png")
+                .imagesType("img300")
                 .imgOriginalFile("userPicture")
-                .imgStoredFile("classpath:images/user-picture.png")
+                .imgStoredFile("src/main/resources/static/img/user-picture.png")
                 .build();
     }
 

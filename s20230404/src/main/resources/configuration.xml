@@ -15,7 +15,12 @@
 		<typeAlias alias="Review" type="com.travelAlone.s20230404.model.Review"/>
 		<typeAlias alias="Board" type="com.travelAlone.s20230404.model.Board"/>
 		<typeAlias alias="BodImg" type="com.travelAlone.s20230404.model.BodImg"/>
-		     <typeAlias alias="Common" type="com.travelAlone.s20230404.model.CommonCode"/>
+		<typeAlias alias="Common" type="com.travelAlone.s20230404.model.CommonCode"/>
+		<typeAlias alias="Interest" type="com.travelAlone.s20230404.model.Interest"/>
+		<typeAlias alias="Score" type="com.travelAlone.s20230404.model.Score"/>
+		<typeAlias alias="Member" type="com.travelAlone.s20230404.model.Member"/>
+		<typeAlias alias="ScoreCount" type="com.travelAlone.s20230404.model.dto.km.ScoreCount"/>
+		<typeAlias alias="WritingCount" type="com.travelAlone.s20230404.model.dto.km.WritingCount"/>
 	</typeAliases>
 </configuration>
 

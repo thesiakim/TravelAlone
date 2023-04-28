@@ -1,0 +1,99 @@
+.profile-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+.button-block {
+    text-align: center;
+}
+.content-block {
+    width: auto;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.nickname {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.tag {
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    background-color: green;
+    color: white;
+    font-size: 14px;
+}
+.review-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    width: 500px;
+}
+
+.bar-label {
+    margin-right: 10px;
+    width: 200px;
+    text-align: right;
+}
+
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.bar {
+    height: 30px;
+    background-color: green;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    position: relative;
+    transition: width 0.5s ease-in-out;
+}
+
+.bar-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+}
+.member-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.info {
+    width: 50%;
+}
+.writing-history {
+    width: 50%;
+}
