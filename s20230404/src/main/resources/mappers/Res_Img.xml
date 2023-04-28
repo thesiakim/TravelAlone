@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.Res_ImgMapper">
+
+	<insert id="insertImg" parameterType="Res_Img">
+		INSERT INTO Res_Img (	  restaurant_id
+								, img_id
+								, img_original_file
+								, img_stored_file
+								)
+		VALUES (				#{res_id},
+								Res_Img_SEQ.nextval,						 		
+		   						#{img_original_file	, jdbcType=VARCHAR},
+		    					#{img_stored_file}
+		     				)
+	</insert>
+
+<!-- 이미지 목록가져오기 -->
+	<select id="resImgList" parameterType="Res_Img" resultType="Res_Img" >
+			select IMG_ID
+					,IMG_STORED_FILE
+					,IMG_ORIGINAL_FILE
+			from  Res_Img
+			WHERE res_id = #{res_id}
+			order by IMG_ID desc
+		</select>
+
+<!-- 이미지 목록삭제하기 -->
+	<delete id="deleteResImg" parameterType="int">
+		delete from Res_Img where RESTAURNAT_ID = #{res_id}
+	</delete>
+
+
+
+</mapper>

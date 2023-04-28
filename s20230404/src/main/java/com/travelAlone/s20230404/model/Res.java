@@ -23,12 +23,17 @@ public class Res {
 	   private String          r_common_loc;
 	   private LocalDateTime   create_date;
 	   private LocalDateTime   modified_date;
+	   private String		   r_revcount;
+	   private String		   r_avgscore;
 	   
 	   // 페이지조회용
 	   private String search;      private String keyword;
 	   private String pageNum;  
 	   //            1                           10
 	   private int start;           private int end;
+	   
+	   //조회용 코드 
+	   private String code;
 
 	   
  //RESTAURANT_ID		NUMBER					맛집ID
