@@ -3,7 +3,9 @@ package com.travelAlone.s20230404.dao.mh;
 import java.util.List;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.mh.Inq_Img;
 import com.travelAlone.s20230404.model.mh.Inquire;
+import com.travelAlone.s20230404.model.mh.Not_Img;
 import com.travelAlone.s20230404.model.mh.Notice;
 
 
@@ -32,6 +34,10 @@ public interface mhDao {
 	List<Inquire> 		inquireSearchList(Inquire inquire);
 	int 				condInquireCnt(Inquire inquire);
 	
+	//문의하기 이미지
+	int insertInqImg(Inq_Img inq_Img);
+	
+	
 	//필터링
 	List<CommonCode> getCommonCode();
 	List<Inquire> mhOptionInquireList(Inquire inquire);
@@ -40,10 +46,20 @@ public interface mhDao {
 	
 	//답변
 	int replyCount(Inquire inquire);
-			
 	
 	
+	//시퀀스
+	int seqInquire(Inquire inquire);
+	
+	int deleteInqImg(int g_writing_id);
+	List<Inq_Img> selectInqImgList(Inq_Img inq_Img);
+	
+	int seqNotice(Notice notice);
+	
+	int insertNotImg(Not_Img not_Img);
+	List<Not_Img> selectNotImgList(Not_Img not_Img);
 	
 	
+
 	
 }

@@ -100,6 +100,7 @@ public class HouseDaoImpl implements HouseDao {
 		log.info("HouseDaoImpl delete house_id->"+ house_id);
 		try {
 			result = session.delete("deleteHouse",house_id);
+			//result = session.delete("deleteHouImg",house_id );
 			log.info("HouseDaoImpl delete result->"+ result);
 		} catch (Exception e) {
 			log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
@@ -280,27 +281,62 @@ public class HouseDaoImpl implements HouseDao {
 	}
 
 
-	@Override
-	public int insertHouImg(List<Hou_Img> houImgs) {
-		int insertResult = 0;
-		log.info("HouseDaoImpl insertHouImg 시작");
-		for (Hou_Img img : houImgs) {
+	//이미지 디비삽입
+		@Override
+		public int insertImg(Hou_Img hou_Img) {
+			int result = 0;
+			log.info("HouseDaoImpl insert Start");
+			log.info("HouseDaoImpl insertImg hou_Img->"+ hou_Img);
+			
 			try {
-				session.insert("mhHouseImgInsert", img);
-				log.info("HouseDaoImpl insertHouImg insertResult는 "+ insertResult);
-				insertResult++;
+				result = session.insert("insertImg",hou_Img);
 			} catch (Exception e) {
-				log.info("HouseDaoImpl insertHouImg e.getMessage는 "+ e.getMessage());
-			}
+				log.info("HouseDaoImpl insert Exception->"+e.getMessage());
+			}				
+			return result;
 		}
-						
-		return 0;
-	}
 
 
-	
-	
-	
+		@Override
+		public int seqHouse(House house) {
+			int result = 0;
+			log.info("HouseDaoImpl seqHouse Start");
+			try {
+				result = session.selectOne("mhSeqHouse",house);
+			} catch (Exception e) {
+				log.info("HouseDaoImpl mhSeqHouse Exception->"+e.getMessage());
+			}
+			return result;
+		}
+
+
+		@Override
+		public List<Hou_Img> selectHouImgList(Hou_Img hou_Img) {
+			List<Hou_Img> houImgList = new ArrayList<Hou_Img>();
+			try {
+				log.info("HouseDaoImpl selectHouImgList houImgList Start");
+				houImgList = session.selectList("mhHouImgList" , hou_Img);
+			} catch (Exception e) {
+				log.info("ImgImpl selectImgList Exception " +e.getMessage());
+			}
+			
+			return houImgList;
+		}
+
+
+		@Override
+		public int deleteHouImg(int house_id) {
+			log.info("HouseDaoImpl deleteHouImg start");
+			int result = 0;
+			log.info("HouseDaoImpl deleteHouImg house_id->"+ house_id);
+			try {
+				result = session.delete("deleteHouImg",house_id );
+			} catch (Exception e) {
+				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+			}
+			
+			return result;
+		}
 
 
 	

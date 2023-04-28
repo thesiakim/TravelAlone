@@ -12,12 +12,32 @@
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 	<h1>숙소글 상세		</h1>
+	
+<div style="display:flex; justify-content:center;">	
 	<!-- 사진 올리기 -->
-	 <img alt="UpLoad Image" src="${pageContext.request.contextPath}/upload/${savedName}">
-	<table style="margin:auto;">
-	
+<table style="margin:left;">
+		<tr>
+			<td hidden>번호</td>													
+			<td>사진</td>
+			
+		</tr>
+		<c:forEach items="${imgHouList}" var="houImg">
+			<tr>
+				<td hidden>${houImg.img_id}</td>
+			 	<td >
+		<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/upload/${houImg.img_stored_file}" width="500" height="300"> 
+			 	
+			 	</td>
+								
+		</c:forEach>
 		
-	
+</table>
+	 
+	 
+	 
+	 
+	<table style="margin:auto;">
+				
 		<tr><th>숙소명</th>			<td>${house.h_name}</td></tr>
 		<tr><th>숙소주소</th>			<td>${house.h_address}</td></tr>
 		<tr><th>객실 가격</th>			<td>${house.h_room}</td></tr>
@@ -44,6 +64,9 @@
 				onclick="location.href='deleteHouse?house_id=${house.house_id}'"></td> --%>
 		</tr>
 	</table>
+
+
+</div>
 	
 		<h3>리뷰		</h3>
 	<table style="margin:auto;">

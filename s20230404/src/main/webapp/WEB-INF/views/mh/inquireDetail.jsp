@@ -13,6 +13,13 @@
 	</div>
 
 	<h1>문의글 조회</h1>
+	
+
+
+
+
+	
+	
 	<table  style="margin:auto;">
 		<tr>
 			<th>글번호</th>
@@ -36,6 +43,28 @@
 			<td>${inquire.g_reply_yn}</td>
 		</tr>
 	</table>
+	
+		<table  style="margin:auto;"">
+			<tr>
+				<td hidden>번호</td>													
+				<td>사진</td>
+				
+			</tr>
+			<c:forEach items="${imgInqList}" var="InqImg">
+				<tr>
+					<td hidden>${InqImg.img_id}</td>
+				 	<td >
+			<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/inquireUpload/${InqImg.img_stored_file}" width="500" height="300"> 
+				 	
+				 	</td>
+									
+			</c:forEach>
+			
+	</table>	
+	
+	
+	
+
 	<hr>
 	<table  style="margin:auto;">
 		<tr>

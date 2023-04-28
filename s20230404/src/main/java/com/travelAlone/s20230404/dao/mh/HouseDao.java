@@ -37,24 +37,15 @@ public interface HouseDao {
 	
 	
 	//이미지 삽입
-	int insertHouImg(List<Hou_Img> houImgs);
+	int 					insertImg(Hou_Img hou_Img);
+	
+	int 					seqHouse(House house);
+	List<Hou_Img> selectHouImgList(Hou_Img hou_Img);
+	int deleteHouImg(int house_id);
+	
 	
 	
 
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-			
-	
 	
 	
 	

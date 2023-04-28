@@ -45,14 +45,10 @@ public class HouseServiceImpl implements HouseService {
 	}
 	//숙소정보작성
 	@Override
-	public int insertHou(House house, List<MultipartFile> files) throws Exception {
+	public int insertHou(House house) {
 		int result = 0;
-		log.info("HouseServiceImpl insert Start");
-		//result = mh.insertHou(house);
-		long house_id = mh.insertHou(house);
-		List<Hou_Img> houImgs = HouImgUploadHandler.parseFileInfo(files, house_id);
-		result =mh.insertHouImg(houImgs);
-		
+		log.info("HouseServiceImpl insert Start...");
+		result = mh.insertHou(house);
 		return result;
 	}
 
@@ -175,7 +171,40 @@ public class HouseServiceImpl implements HouseService {
 		result = mh.deleteHouseRev(review_id);		
 		return result;
 	}
+	
+	
+	
+	//이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드
+	@Override
+	public int insertImg(Hou_Img hou_Img) {
+		int result = 0;
+		log.info("HouseServiceImpl insert Start..." );
+		result = mh.insertImg(hou_Img);
+		return result;
+		
+	}
+	@Override
+	public int seqHou(House house) {
+		int result = 0;
+		log.info("HouseServiceImpl seqHou Start..." );
+		result = mh.seqHouse(house);
+		return result;
+	}
+	@Override
+	public List<Hou_Img> listHou_Img(Hou_Img hou_Img) {
+		log.info("HouseServiceImpl Start listHou_Img");
+		List<Hou_Img> houImgList = mh.selectHouImgList(hou_Img);						
+		return houImgList;
+	}
+	@Override
+	public int deleteHouImg(int house_id) {
+		int result = 0;
+		log.info("HouseServiceImpl deleteHouImg Start");
+		result = mh.deleteHouImg(house_id);		
+		return result;
+	}
 
+	
 	
 
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.Inq_ImgMapper">
+
+	<insert id="insertInqImg" parameterType="Inq_Img">
+		INSERT INTO G_WRT_IMG (	  g_writing_id
+								, img_id
+								, img_original_file
+								, img_stored_file
+								)
+		VALUES (				#{ g_writing_id},
+								G_WRT_IMG_SEQ.nextval,						 		
+		   						#{img_original_file	, jdbcType=VARCHAR},
+		    					#{img_stored_file}
+		     				)
+	</insert>
+
+<!-- 이미지 목록가져오기 -->
+	<select id="mhInqImgList" parameterType="Inq_Img" resultType="Inq_Img" >
+			select IMG_ID
+					,IMG_STORED_FILE
+					,IMG_ORIGINAL_FILE
+			from  G_WRT_IMG
+			WHERE g_writing_id = #{g_writing_id}
+			order by IMG_ID desc
+	</select>
+
+
+
+
+
+<!-- 이미지 목록삭제하기 -->
+	<delete id="deleteInqImg" parameterType="int">
+		delete from G_WRT_IMG where G_WRITING_ID = #{g_writing_id}
+	</delete>
+
+	
+	
+	</mapper>
+	
+	
+<!--
+G_WRT_IMG 	
+G_WRITING_ID
+IMG_ID
+IMG_CONTEXT
+IMG_ORIGINAL_FILE
+IMG_STORED_FILE
+ -->

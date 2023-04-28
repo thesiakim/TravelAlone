@@ -12,7 +12,7 @@
 	</div>
 <h1>숙소글 작성	</h1>
 	<c:if test="${msg!=null}">${msg}</c:if>
-	<form action="houWriteForm" method="post" name="frm" encType = "multipart/form-data">
+	<form action="houWriteForm" method="post" name="frm" enctype="multipart/form-data">
 		<table style="margin:auto;">
 			<tr>
 				<td > 숙소종류</td>
@@ -24,16 +24,11 @@
 					<option value="hou400">캠핑/글램핑</option>
 					<option value="hou500">게스트하우스</option>									
 				</select>
-				
-				
-				
-				</td>
-				
-				
-													
+												
+				</td>																					
 				
 			</tr>
-				<tr>
+			<tr>
 				<td> 숙소지역</td>	
 				<td style="text-align: left;">
 					<select name="h_common_loc">
@@ -52,18 +47,10 @@
 						<option value="loc161">전남</option>
 						<option value="loc162">광주</option>
 						<option value="loc163">전죽</option>
-						<option value="loc164">제주</option>
-											
-				</select>
-				
-				
-				 </td>			
-	
-				
-				
-				
-			</tr>
-		
+						<option value="loc164">제주</option>										
+					</select>									
+				 </td>															
+		    </tr>		
 			<tr>
 				<td> 숙소명</td>
 				<td> <input type="text" name="h_name" size = "50"> </td>
@@ -102,13 +89,11 @@
 				<td> <input type="text" name="h_parking" size = "50"> </td>
 			</tr>
 				
-				<tr>
-				<td>
-					<label for="title">첨부파일</label>
-				</td>
-				<td>
-					<td><input type="file" name="fileName"></td>
-
+			<tr>
+				<td> 
+				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/upload/${savedName}">
+						<input type="file" name="file1" multiple="multiple"> <p>						
+				</td>						
 			</tr>			
 				
 								

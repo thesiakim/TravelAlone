@@ -4,30 +4,40 @@
 
 <mapper namespace="com.travelAlone.s20230404.Hou_ImgMapper">
 
-	<insert id="mhHouseImgInsert" parameterType="Hou_Img">
-		INSERT INTO Hou_Img (house_id
+	<insert id="insertImg" parameterType="Hou_Img">
+		INSERT INTO Hou_Img (	  house_id
 								, img_id
-								, img_context
 								, img_original_file
 								, img_stored_file
-								, common_imagesType
-								, create_date
-								, modified_date)
-		VALUES (#{house_id},
-						 		hou_img_seq.nextval,
-		  						#{img_context},
-		   						#{img_original_file},
-		    					#{img_stored_file},
-		     					#{common_imagesType},
-		      					sysdate,
-		       					sysdate)
+								)
+		VALUES (				#{house_id},
+								Hou_Img_SEQ.nextval,						 		
+		   						#{img_original_file	, jdbcType=VARCHAR},
+		    					#{img_stored_file}
+		     				)
 	</insert>
+
+<!-- 이미지 목록가져오기 -->
+	<select id="mhHouImgList" parameterType="Hou_Img" resultType="Hou_Img" >
+			select IMG_ID
+					,IMG_STORED_FILE
+					,IMG_ORIGINAL_FILE
+			from  Hou_Img
+			WHERE house_id = #{house_id}
+			order by IMG_ID desc
+		</select>
+
+<!-- 이미지 목록삭제하기 -->
+	<delete id="deleteHouImg" parameterType="int">
+		delete from Hou_Img where HOUSE_ID = #{house_id}
+	</delete>
+
 
 
 </mapper>
 
 
-<!-- HOUSE_ID
+<!-- HOUSE_ID    임시로 하우스 id1로함
 IMG_ID
 IMG_CONTEXT
 IMG_ORIGINAL_FILE
