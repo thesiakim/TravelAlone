@@ -2,6 +2,7 @@ package com.travelAlone.s20230404.model;
 
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class House {
 
-	private int				house_id;
+	private long			house_id;
 	private String			h_name;
 	private String			h_content;
 	private String			h_address;
@@ -34,6 +35,13 @@ public class House {
 	
 	//조회용 코드 
 	private String code;
+	
+	// create_date 날짜 형식 변경
+	public String getFormattedCreateDate() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+	    return create_date.format(formatter);
+	  }
+
 	
 	
 

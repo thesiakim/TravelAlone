@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.mh.HouseDao;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class HouseServiceImpl implements HouseService {
 		log.info("mhServiceImpl2  totalHouse totHouseCnt->" + totHouseCnt );		
 		return totHouseCnt;
 	}
-
+	//숙소 리스트
 	@Override
 	public List<House> listHouse(House house) {
 		log.debug("mhServiceImpl2 Start listHouse...");
@@ -40,7 +41,7 @@ public class HouseServiceImpl implements HouseService {
 		house = mh.detailHouse(hid);		
 		return house;
 	}
-
+	//숙소정보작성
 	@Override
 	public int insertHou(House house) {
 		int result = 0;
@@ -134,7 +135,45 @@ public class HouseServiceImpl implements HouseService {
 		return conditionLocCnt;
 	}
 
+	
+	//==========리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰====================================
+	@Override
+	public List<Hou_Rev> listHouRev(int hid) {
+		log.debug("HouseServiceImpl Start listHouRev...");
+		List<Hou_Rev> houRevList = mh.selectHouRevList(hid);
+		
+		log.debug("HouseServiceImpl End listHouRev...");
+		return houRevList;
+	}
+	//리뷰작성
+	@Override
+	public int insertHouRev(Hou_Rev hou_Rev) {
+		int result = 0;
+		log.info("HouseServiceImpl insert Start...");
+		result = mh.insertHouRev(hou_Rev);
+		return result;
+	}
+	
+	
+	@Override
+	public int updateHouseRev(Hou_Rev hou_Rev) {
+		log.info("HouseServiceImpl update");
+		int updateCount = 0;
+		updateCount = mh.updateHouseRev(hou_Rev);	
+		return updateCount;
+	}
+	@Override
+	public int deleteHouRev(int review_id) {
+		int result = 0;
+		log.info("HouseServiceImpl delete Start");
+		result = mh.deleteHouseRev(review_id);		
+		return result;
+	}
 
+	
+
+
+	
 	
 	
 	

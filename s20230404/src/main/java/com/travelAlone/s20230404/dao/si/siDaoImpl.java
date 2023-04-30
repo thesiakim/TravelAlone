@@ -11,6 +11,8 @@ import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Travel;
+import com.travelAlone.s20230404.model.si.TimeDTO;
+import com.travelAlone.s20230404.model.si.Search;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -116,4 +118,68 @@ public class siDaoImpl implements siDao {
 		}
 		
 	}
+
+	
+	//일간 인기 검색어 구하기
+	@Override
+	public List<Search> getDailyPopularSearches(String startOfToday, String endOfToday) {
+		logger.info("siDaoImpl getDailyPopularSearches Start");
+		
+		List<Search> dailyPopularKeywords = null;
+		TimeDTO timeDto = new TimeDTO();
+		timeDto.setStartOfToday(startOfToday);
+		timeDto.setEndOfToday(endOfToday);
+
+		try {
+			dailyPopularKeywords = session.selectList("siGetPopularSearches", timeDto);
+		} catch(Exception e) {
+			logger.info("siDaoImpl getDailyPopularSearches e.getMessage() : " + e.getMessage());
+		}
+		
+		return dailyPopularKeywords;
+	}
+
+
+	//주간 인기 검색어 구하기
+	@Override
+	public List<Search> getWeeklyPopularSearches(String startOfWeek, String endOfWeek) {
+		logger.info("siDaoImpl getWeeklyPopularSearches Start");
+		
+		List<Search> weeklyPopularKeywords = null;
+		TimeDTO timeDto = new TimeDTO();
+		timeDto.setStartOfToday(startOfWeek);
+		timeDto.setEndOfToday(endOfWeek);
+		
+		try {
+			weeklyPopularKeywords = session.selectList("siGetPopularSearches", timeDto);
+		} catch(Exception e) {
+			logger.info("siDaoImpl getWeeklyPopularSearches e.getMessage() : " + e.getMessage());
+		}
+		return weeklyPopularKeywords;
+	}
+
+
+	//월간 인기 검색어 구하기
+	@Override
+	public List<Search> getMonthlyPopularSearches(String startOfMonth, String endOfMonth) {
+		logger.info("siDaoImpl getMonthlyPopularSearches Start");
+		
+		List<Search> monthlyPopularKeywords = null;
+		TimeDTO timeDto = new TimeDTO();
+		timeDto.setStartOfToday(startOfMonth);
+		timeDto.setEndOfToday(endOfMonth);
+		
+		try {
+			monthlyPopularKeywords = session.selectList("siGetPopularSearches", timeDto);
+		} catch(Exception e) {
+			logger.info("siDaoImpl getMonthlyPopularSearches e.getMessage() : " + e.getMessage());
+		}
+		return monthlyPopularKeywords;
+	}
+
+
+	
+
+
+	
 }

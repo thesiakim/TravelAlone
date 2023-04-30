@@ -9,7 +9,7 @@
 	select Count(*) FROM HOUSE
 </select>
 
-<!-- 숙소 목록가져오기 이게  숙소 리스트 가져오는거 ㅇㅇ-->
+<!-- 숙소 목록가져오기 -->
 		<select id="mhHouseList" parameterType="House" resultType="House" >
     		<![CDATA[
 				SELECT *

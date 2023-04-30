@@ -1,6 +1,7 @@
 package com.travelAlone.s20230404.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.ToString;
 import lombok.Getter;
@@ -29,6 +30,12 @@ public class Travel {
     private String pageNum;  
     //            1                          10
     private int start;           private int end;
+    
+    // create_date 날짜 형식 변경
+ 	public String getFormattedCreateDate() {
+ 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+ 	    return create_date.format(formatter);
+ 	  }
     
     
 }
