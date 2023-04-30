@@ -172,3 +172,54 @@
 		box-shadow: 0 0 5px #555;
 		max-width: 100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
 	}
+	
+	/* 검색창과 카테고리 */
+	#category {
+	  width: 150px;
+	  height: 40px;
+	  font-size: 15px;
+	  margin-right: 10px;
+	  border-radius: 25px;
+	  padding: 0 20px;
+	  background-color: #F8F8F8;
+	  color: #205E61;
+	  font-weight: bold;
+	  font-family: 'Roboto', sans-serif;
+	  border: 3px solid #205E61;
+	}
+	
+	#serch {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  
+	}
+	
+	#serch > input {
+	  width: 600px;
+	  height: 40px;
+	  padding: 20px;
+	  font-size: 15px;
+	  border-radius: 25px;
+	  color: #205E61;
+	  font-weight: bold;
+	  box-sizing: border-box;
+	  background-color: #F8F8F8;
+	  font-family: 'Roboto', sans-serif;
+	  border: 3px solid #205E61;
+	}
+	
+	#serch > input::placeholder {
+	  color: #5F9EA0;
+	}
+	
+	#serch > input:focus {
+	  outline: none;
+	}
+		
+	#category,
+	#serch {
+	  display: inline-block;
+	  vertical-align: middle;
+	  margin: 0;
+	}

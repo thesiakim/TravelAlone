@@ -105,6 +105,31 @@
 			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
 	  	</div>
 	  </form>
+	  
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+	  <script>
+	  	$(function(){
+	  		$("#searchId").autocomplete({
+	  			source: function(request, response){
+	  				$.ajax({
+	  					url: "/autocomplete",
+	  					dataType: "json",
+	  					data:{
+	  						keyword: request.term,
+	  						category: $("#category").val()
+	  					},
+	  					success: function(data){
+	  						response(data);
+	  					}
+	  				});
+	  			},
+	  			minLength: 1
+	  		});
+	  	});
+	  </script>
+	  
+	  
 	  <hr>
 	  <!-- 인기맛집 -->
 	  <div id="session1">
