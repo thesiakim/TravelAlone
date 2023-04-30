@@ -39,20 +39,6 @@ public class SiRepository {
 		
 		log.info("테스트 {}",travel);
 		
-//		List<String> travel = em.createNativeQuery(
-//			    "SELECT DISTINCT SUBSTR(t_name, start_pos, end_pos - start_pos) as t_names " +
-//			    	    "FROM ( " +
-//			    	    "     SELECT t_name, LEVEL as word_num, " +
-//			    	    "            INSTR(' ' || t_name || ' ', ' ', 1, LEVEL) as start_pos, " +
-//			    	    "            INSTR(' ' || t_name || ' ', ' ', 1, LEVEL + 1) as end_pos " +
-//			    	    "     FROM Travel " +
-//			    	    "     CONNECT BY LEVEL <= LENGTH(t_name) - LENGTH(REPLACE(t_name, ' ', '')) + 1 " +
-//			    	    "     ) words " +
-//			    	    "WHERE SUBSTR(t_name, start_pos, end_pos - start_pos) LIKE '%' || :keyword || '%'", TravelJPA.class)
-//			    	.setParameter("keyword", keyword)
-//			    	.getResultList();
-		
-		
 		return travel;
 	}
 

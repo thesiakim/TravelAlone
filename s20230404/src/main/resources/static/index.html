@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
 	document.getElementById('searchId').addEventListener('keyup', function(event) {
@@ -104,29 +105,46 @@
 	  	<div id="serch">
 			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
 	  	</div>
+	  	<div id="search-autocomplete">
+	  		<ul id="autocomplete-results"></ul>
+	  	</div>
 	  </form>
 	  
 	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 	  <script>
-	  	$(function(){
-	  		$("#searchId").autocomplete({
-	  			source: function(request, response){
-	  				$.ajax({
-	  					url: "/autocomplete",
-	  					dataType: "json",
-	  					data:{
-	  						keyword: request.term,
-	  						category: $("#category").val()
-	  					},
-	  					success: function(data){
-	  						response(data);
-	  					}
-	  				});
-	  			},
-	  			minLength: 1
-	  		});
-	  	});
+		  $(function(){
+			  var $searchId = $("#searchId");
+			  var $autocompleteResults = $("#autocomplete-results");
+	
+			  $searchId.autocomplete({
+			    source: function(request, response){
+			      $.ajax({
+			        url: "/autocomplete",
+			        dataType: "json",
+			        data:{
+			          keyword: request.term,
+			          category: $("#category").val()
+			        },
+			        success: function(data){
+			          $autocompleteResults.empty();
+			          $.each(data, function(index, value) {
+			            $autocompleteResults.append("<li>" + value + "</li>");
+			          });
+			          $autocompleteResults.show();
+			        }
+			      });
+			    },
+			    minLength: 1
+			  });
+	
+			  //검색창에서 키보드를 떼는 순간마다 자동완성 결과 숨김
+			  $searchId.on("keyup", function() {
+			    if ($searchId.val() === '') {
+			      $autocompleteResults.hide();
+			    }
+			  });
+			});
 	  </script>
 	  
 	  
@@ -199,7 +217,7 @@
 		<!-- 클래스명은 변경하면 안 됨 -->
 		<div class="swiper-container">
 		  <div class="swiper-wrapper">
-			<div class="swiper-slide"><img src="image1.jpg" alt="이미지 1"></div>
+			<div class="swiper-slide"><a href="/houDetail?hid=34"><img src="image1.png" alt="이미지 1"></a></div>
 			<div class="swiper-slide"><img src="image2.jpg" alt="이미지 2"></div>
 			<div class="swiper-slide"><img src="image3.jpg" alt="이미지 3"></div>
 			<div class="swiper-slide"><img src="image4.jpg" alt="이미지 4"></div>
