@@ -38,7 +38,7 @@
 		</select> 
 		<input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
 		<!-- <button type="submit">keyword검색</button> -->
-		   <a href="houseSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a>
+		   <a href="houseSearch?search=${search}&amp;keyword=${keyword}">검색</a>
 		
 		<p>
 	</form>

@@ -44,7 +44,15 @@
 				bcd = 'loc'
 		</select>			
 		
-		
+		<select id="traCommonCode" parameterType="Common" resultType="Common" >
+			select 
+				bcd||mcd as code,  
+				word as value
+			from 
+				common
+			where 
+				bcd = 'tra'
+		</select>	
 		
 		
 		
