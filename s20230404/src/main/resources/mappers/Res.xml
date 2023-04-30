@@ -25,9 +25,18 @@
 											,R_PARKING
 											,R_MENU
 											,R_COMMON_RESTAURANT
-											,R_COMMON_LOC
-											,CREATE_DATE
-											,MODIFIED_DATE										
+											, (select word 
+			                          		  from(select 
+			                                    bcd||mcd as code, 
+			                                    word 
+			                                from
+			                                    common
+			                                where bcd='loc') b
+			                                where code = R_COMMON_LOC)as R_COMMON_LOC
+			                                ,TRUNC((SELECT AVG(R_SCORE) FROM res_rev WHERE restaurant_id = RESTAURANT.RESTAURANT_ID), 0) AS R_AvgScore    
+			                         ,(SELECT COUNT(*) FROM res_rev WHERE restaurant_id = RESTAURANT.RESTAURANT_ID) AS R_RevCount 
+			                      	  	 ,CREATE_DATE
+			                       		 ,MODIFIED_DATE										
 									  from  RESTAURANT 									  									  									  									   
 									  order by RESTAURANT_ID desc) a
 			)   
@@ -38,7 +47,7 @@
 		</select>
 		
 <!-- 맛집 정보글가져오기 -->
-		<select id="resSelOne"  parameterType="int" resultType="Res">		
+		<select id="resSelOne" resultType="Res">		
 		  SELECT	RESTAURANT_ID, R_NAME, R_CONTENT, R_ADDRESS, R_HOUR, R_CALL, R_PARKING,
 					R_MENU, R_COMMON_RESTAURANT, R_COMMON_LOC, CREATE_DATE, MODIFIED_DATE	 
 		 FROM  RESTAURANT  WHERE RESTAURANT_ID = #{RESTAURANT_ID}
@@ -52,7 +61,7 @@
 			 (RESTAURANT_ID, R_NAME, R_CONTENT, R_ADDRESS, R_HOUR, R_CALL, R_PARKING,
 					R_MENU, R_COMMON_RESTAURANT, R_COMMON_LOC, CREATE_DATE, MODIFIED_DATE)
 			 values 
-			 (RESTAURANT_ID_SEQ.nextval, #{r_name}, #{r_content}, #{r_address}, #{r_hour}, #{r_call} ,
+			 (retaurant_id, #{r_name}, #{r_content}, #{r_address}, #{r_hour}, #{r_call} ,
 			  #{r_parking}, #{r_menu}, #{r_common_restaurant}, #{r_common_loc},  sysdate, sysdate ) 				
 		</insert>
 
@@ -74,10 +83,84 @@
 		
 		</update>
 
-		<!--  맛집 정보글삭제하기 -->
+<!--  맛집 정보글삭제하기 -->
 		<delete id="deleteRes" parameterType="int">
 			delete from RESTAURANT where RESTAURANT_ID = #{restaurant_id}
 		</delete>
 
+<!-- 맛집 검색 횟수 -->
+		<select id="condResCnt" parameterType="Res" resultType="int">
+			select Count(*) FROM RESTAURANT
+			where
+			<choose>
+				<when test="search == 's_title'">
+				  r_name  like '%' || #{keyword} || '%' 
+				</when>
+				<otherwise>
+					r_name like '%'
+				</otherwise>
+			</choose> 
+		</select>
+		
+<!-- 맛집 검색 결과 -->
+		  <select id="resSearchList" parameterType="Res"  resultType="Res" >
+		SELECT *
+		FROM
+		(
+		        SELECT rownum rn , a.*
+		        FROM
+		                   (select * from RESTAURANT
+							<choose>
+					 			<when test="search == 's_title'">
+					                 WHERE r_name  like '%' || #{keyword} || '%'    
+					  			</when>					 	
+					  			
+					            <otherwise>
+					                  WHERE r_name   like '%'   
+					            </otherwise>
+					        </choose>		                   
+		                    order by restaurant_id) a
+		 )   
+ 		WHERE  rn BETWEEN #{start} and #{end} 
+    </select>
+		
 
+<!-- 조회된 맛집 종류 데이터 갯수 세기 -->  
+		<select id="resFilter" resultType="int">
+			select Count(*) FROM RESTAURANT where R_COMMON_RESTAURANT = #{code}
+		</select>
+		
+<!-- 조회된 숙소종류데이터 리스트 --> 				
+		<select id="optResList" parameterType="Res" resultType="Res" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from RESTAURANT 
+								     where R_COMMON_RESTAURANT = #{code}        
+				                    order by restaurant_id desc) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
+
+<!-- 조회된 지역 데이터 갯수 세기 -->  
+		<select id="condOptionLocCnt" resultType="int">
+			select Count(*) FROM RESTAURANT where R_COMMON_LOC = #{code}
+		</select>		
+<!-- 조회된 지역데이터 리스트 --> 				
+		<select id="optionLocList" parameterType="Res" resultType="Res" >
+		 		SELECT *
+				FROM
+				(
+				        SELECT rownum rn , a.*
+				        FROM
+				                   (select * from RESTAURANT 
+								     where R_COMMON_LOC = #{code}        
+				                    order by restaurant_id desc) a
+				 )   
+		 		WHERE  rn BETWEEN #{start} and #{end} 
+			
+		</select>
 </mapper>
