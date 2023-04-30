@@ -2,102 +2,133 @@ package com.travelAlone.s20230404.service.ro;
 
 import java.util.List;
 
-import com.travelAlone.s20230404.model.BodImg;
-import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
-import com.travelAlone.s20230404.service.jh.UploadHandler;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.dao.ro.roDao;
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class roServiceImpl implements roService {
 
-	private final roDao		rd;
-	private final UploadHandler uploadHandler;
+   private final roDao      rd;
+
+   @Override
+   public int boardAllCnt() {
+      log.info("roService boardAllCnt 시작");
+      int boardAllCnt = rd.boardAllCnt();
+      log.info("roService boardAllCnt는 "+ boardAllCnt);
+      
+      return boardAllCnt;
+   }
+
+   @Override
+   public List<Board> listAllBoard(Board board) {
+      List<Board> listBoardAll = null;
+      log.info("roService listAllBoard 시작");
+      
+      listBoardAll = rd.listAllBoard(board);
+      log.info("roService listAllBoard listBoardAll.size()는 "+ listBoardAll.size());
+      
+      return listBoardAll;
+   }
+
+   @Override
+   public int boardCnt(Board board) {
+      log.info("roService boardCnt 시작");
+      int boardCnt = rd.boardCnt(board);
+      log.info("roService boardCnt는 "+ boardCnt);
+      
+      return boardCnt;
+   }
+
+   @Override
+   public List<Board> listBoard(Board board) {
+      List<Board> listBoard = null;
+      log.info("roService listBoard 시작");
+      
+      listBoard = rd.listBoard(board);
+      log.info("roService listBoard listBoard.size()는 "+ listBoard.size());
+      
+      return listBoard;
+   }
+   
+   @Override
+   public int veiwCount(int board_id) {
+      log.info("roServiceImpl veiwCount Start...");
+      int veiwCount = 0;
+      veiwCount = rd.veiwCount(board_id);
+      return veiwCount;
+   }
+   
+   @Override
+   public List<Board> detailBoard(int board_id) {
+      List<Board> listBoardS = null;
+      log.info("roService detailBoard 시작");
+      
+      listBoardS = rd.detailBoard(board_id);
+      List<String> listBoardImg = rd.detailBoardImg(board_id);
+      
+      if(listBoardImg.size() > 0) {
+    	  // 이게 뭐야!!!! 0번 인덱스만 적었는데 인덱스 1, 2 순차적으로 어떻게 갖고와!!!!! 그냥 문법인건가!!!!?!??!???
+    	  listBoardS.get(0).setImg_stored_file(listBoardImg);    	  
+    	  log.info("roService detailBoard listBoardC.size()는 "+ listBoardS.size());
+    	  
+      }
+      
+      return listBoardS;
+   }
+
+   @Override
+   public int insertReBoard(Board board) {
+      int insertResult = 0;
+      log.info("roService insertReBoard 시작");
+      insertResult = rd.insertReBoard(board);
+      log.info("roService insertReBoard insertResult는 "+ insertResult);
+      
+      return insertResult;
+   }
+
+   @Override
+   public int deleteBoard(long board_id) {
+     int delImgResult = 0;
+      int delResult = 0;
+      log.info("roService deleteBoard 시작");
+      
+      delImgResult = rd.deleteImgBoard(board_id);
+      log.info("roService deleteBoard delImgResult는 "+ delImgResult);
+      
+      delResult = rd.deleteBoard(board_id);
+      log.info("roService deleteBoard delResult는 "+ delResult);
+      
+      log.info("roService deleteBoard delImgResult + delResult = "+ delImgResult + delResult);
+      
+      return delImgResult + delResult;
+   }
+
+   @Override
+   public void deleteReBoard(Board board) {
+      log.info("roService deleteReBoard 시작");
+      rd.deleteReBoard(board);
+      
+   }
 
 	@Override
-	public int boardAllCnt() {
-		log.info("roService boardAllCnt 시작");
-		int boardAllCnt = rd.boardAllCnt();
-		log.info("roService boardAllCnt는 "+ boardAllCnt);
+	public int updateReBoard(Board board) {
+		int updateCount = 0;
+		log.info("roService updateReBoard 시작");
 		
-		return boardAllCnt;
+		updateCount = rd.updateReBoard(board);
+		
+		return updateCount;
 	}
 
-	@Override
-	public List<Board> listAllBoard(Board board) {
-		List<Board> listBoardAll = null;
-		log.info("roService listAllBoard 시작");
-		
-		listBoardAll = rd.listAllBoard(board);
-		log.info("roService listAllBoard listBoardAll.size()는 "+ listBoardAll.size());
-		
-		return listBoardAll;
-	}
 
-	@Override
-	public int boardCnt(Board board) {
-		log.info("roService boardCnt 시작");
-		int boardCnt = rd.boardCnt(board);
-		log.info("roService boardCnt는 "+ boardCnt);
-		
-		return boardCnt;
-	}
-
-	@Override
-	public List<Board> listBoard(Board board) {
-		List<Board> listBoard = null;
-		log.info("roService listBoard 시작");
-		
-		listBoard = rd.listBoard(board);
-		log.info("roService listBoard listBoard.size()는 "+ listBoard.size());
-		
-		return listBoard;
-	}
-
-	@Override
-	public List<Board> detailBoard(int board_id) {
-		List<Board> listBoardS = null;
-		log.info("roService detailBoard 시작");
-		
-		listBoardS = rd.detailBoard(board_id);
-		log.info("roService detailBoard listBoardC.size()는 "+ listBoardS.size());
-		
-		return listBoardS;
-	}
-
-	@Override
-	public int insertBoard(BoardWriteRequestDto requestDto, List<MultipartFile> files) throws Exception {
-		int insertResult = 0;
-		log.info("roService insertBoard 시작");
-
-		long boardId = rd.insertBoard(requestDto.toBoard());
-
-		List<BodImg> bodImgs = uploadHandler.parseFileInfo(files, boardId);
-
-		insertResult = rd.insertBodImg(bodImgs);
-
-		log.info("roService insertBoard insertResult는 "+ insertResult);
-		
-		return insertResult;
-	}
-
-	@Override
-	public int insertReBoard(Board board) {
-		int insertResult = 0;
-		log.info("roService insertReBoard 시작");
-		insertResult = rd.insertReBoard(board);
-		log.info("roService insertReBoard insertResult는 "+ insertResult);
-		
-		return insertResult;
-	}
-	
-	
+   
 }

@@ -8,18 +8,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface roService {
 
-	int boardAllCnt();
-
-	List<Board> listAllBoard(Board board);
-
-	int boardCnt(Board board);
-
-	List<Board> listBoard(Board board);
-	
-	List<Board> detailBoard(int board_id);
-
-	int insertBoard(BoardWriteRequestDto requestDto, List<MultipartFile> files) throws Exception;
-
-	int insertReBoard(Board board);
+	int 				boardAllCnt();
+	List<Board> 		listAllBoard(Board board);
+	int 				boardCnt(Board board);
+	List<Board> 		listBoard(Board board);
+	List<Board> 		detailBoard(int board_id);
+	int 				insertReBoard(Board board);
+	int 				veiwCount(int board_id);
+	int 				deleteBoard(long board_id);
+	void				deleteReBoard(Board board);
+	int					updateReBoard(Board board);
 	
 }

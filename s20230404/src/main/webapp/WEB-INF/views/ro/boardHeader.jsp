@@ -10,7 +10,7 @@
 	<link href="/css/list.css" rel="stylesheet" type="text/css">
 	<!-- 이미지배너 -->
 	<div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/community-picture.png" alt="배너">
 	</div>
 	
 	<h1><a href="listAllBoard">커뮤니티</a></h1>

@@ -25,7 +25,7 @@ public class UploadHandler {
      * 설명 : 들어온 MultiPartFile을 저장하고 해당 목록을 반환
      * */
 
-    public List<BodImg> parseFileInfo(List<MultipartFile> multipartFiles, Long boardId) throws Exception{
+    public static List<BodImg> parseFileInfo(List<MultipartFile> multipartFiles, Long boardId) throws Exception{
         // 반환 파일 리스트
         List<BodImg> fileList = new ArrayList<>();
 

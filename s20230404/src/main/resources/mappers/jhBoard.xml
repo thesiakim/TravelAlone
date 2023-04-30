@@ -2,8 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.travelAlone.s20230404.RoBoardMapper">
-	
+<mapper namespace="com.travelAlone.s20230404.jhBoardMapper">
 
-
+    <update id="jhLike" parameterType="Board">
+       UPDATE    board
+       SET      b_like_cnt = b_like_cnt + 1
+       WHERE   board_id = #{board_id}
+    </update>
+    
+    <update id="updateReLevel" parameterType="Board">
+       UPDATE    board
+       SET      b_re_step = b_re_step + 1
+       WHERE   b_ref = #{b_ref}
+       AND      b_re_step > #{b_re_step}
+       AND      b_re_level >= #{b_re_level}
+    </update>
+    
+    <insert id="insertReLevel" parameterType="Board">
+      INSERT INTO board
+        (board_id, member_id, b_content, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
+         values   (
+         board_id_seq.nextval,
+         #{member_id},
+         #{b_content},
+         #{b_common_board},
+         #{board_id},
+         #{b_re_step} + 1,
+         #{b_re_level} + 1,
+         sysdate,
+         sysdate )
+    
+    </insert>
+    
 </mapper>

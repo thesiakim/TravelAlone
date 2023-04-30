@@ -1,0 +1,61 @@
+	function BoardReUpdate(index) {
+	   if (confirm("수정하시겠습니까?")) {
+	   		
+	   		var selBoard_id =  0;
+	   		var selB_ref = 0;
+	   		var selB_common_board = "";
+	   		var selB_content = $("#b_content"+index).val();
+	   		console.log(selB_content);	
+	   		
+	   		const elements = document.querySelector('#bruForm').elements;
+	   		console.log("bruForm Start... ");	
+
+			for (const item of elements) {
+			  switch (item.name) {
+				    case 'board_id':
+				      selBoard_id = item.value;
+					  console.log("board_id -> "+ selBoard_id);	
+				      break;
+				    case 'b_ref':
+				      selB_ref = item.value;
+					  console.log("b_ref -> "+ selB_ref);	
+				      break;
+				    case 'b_common_board':
+				      selB_common_board = item.value;
+					  console.log("b_common_board -> "+ selB_common_board);	
+				      break;
+				    default:
+				      break;
+			  }
+	   		}
+	   		console.log("board_id -> "+ selBoard_id);
+	   		console.log("b_content -> "+ selB_content);
+	   		
+	   		
+	   		$.ajax(
+	   			{
+	   				// controller 실행되기 전 setting
+	   				url : "UpdateBoardRe",
+	   				type : 'POST',
+	   				data : {
+	   						board_id	: selBoard_id,
+	   						b_content	: selB_content
+	   					   },
+	   				dataType : 'text',
+					// data의 dataType은 'text'
+					
+					success : function(data){
+						alert("수정되었습니다");
+						
+						if(parseInt(data) > 0){
+							location.href = ("/detailBoard?board_id="+selB_ref+"&b_common_board="+selB_common_board);
+						}
+					}
+	   				
+	   			}
+	   		);
+	   } else {
+	   		// 취소
+	   		console.log("취소");
+	   }
+	}
