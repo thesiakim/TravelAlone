@@ -20,7 +20,7 @@ public class BoardWriteRequestDto {
     private String b_common_board;
 
     @Builder
-    public BoardWriteRequestDto(String b_title, String b_content, String b_common_board, List<MultipartFile> files) {
+    public BoardWriteRequestDto(String b_title, String b_content, String b_common_board) {
         this.b_title = b_title;
         this.b_content = b_content;
         this.b_common_board = b_common_board;
@@ -31,8 +31,6 @@ public class BoardWriteRequestDto {
     }
 
     public Board toBoard(){
-
         return new Board(this.member_id,this.b_title, this.b_content, this.b_common_board);
-
     }
 }

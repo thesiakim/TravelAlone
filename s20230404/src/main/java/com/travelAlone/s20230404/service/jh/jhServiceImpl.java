@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.dao.jh.jhDao;
+import com.travelAlone.s20230404.dao.ro.roDao;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Warning;

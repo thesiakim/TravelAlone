@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Warning;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 
