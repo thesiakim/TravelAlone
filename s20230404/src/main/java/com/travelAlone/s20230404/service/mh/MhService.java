@@ -8,7 +8,7 @@ import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Not_Img;
 import com.travelAlone.s20230404.model.mh.Notice;
 
-public interface mhService {
+public interface MhService {
 	//공지사항
 	int 					totalNotice();
 	List<Notice> 			listNotice(Notice notice);

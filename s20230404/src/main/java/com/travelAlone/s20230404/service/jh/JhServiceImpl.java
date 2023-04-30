@@ -8,8 +8,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.travelAlone.s20230404.dao.jh.jhDao;
-import com.travelAlone.s20230404.dao.ro.roDao;
+import com.travelAlone.s20230404.dao.jh.JhDao;
+import com.travelAlone.s20230404.dao.ro.RoDao;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Warning;
@@ -18,8 +18,8 @@ import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class jhServiceImpl implements jhService {
-	private final jhDao jd;
+public class JhServiceImpl implements JhService {
+	private final JhDao jd;
 
 	// 추천 버튼
 	@Override

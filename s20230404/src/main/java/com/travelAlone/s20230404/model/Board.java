@@ -47,6 +47,12 @@ public class Board {
 		return create_date.format(formatter);
 	}
 	
+	//전체 검색 결과 페이지용 create_date 날짜 형식 변경
+	public String getFormattedCreateDate_search() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+		return create_date.format(formatter);
+		  }
+	
 	// 이미지 업로드용
 	public Board(long member_id, String b_title, String b_content, String b_common_board) {
 		this.member_id = member_id;

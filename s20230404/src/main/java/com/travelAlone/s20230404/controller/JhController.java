@@ -26,7 +26,7 @@ import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Warning;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
-import com.travelAlone.s20230404.service.jh.jhService;
+import com.travelAlone.s20230404.service.jh.JhService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,9 +34,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class jhController {
+public class JhController {
 	
-	private final jhService		js;
+	private final JhService		js;
 	
 	// 추천 버튼
 	@RequestMapping(value = "/boardlike")

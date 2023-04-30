@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.travelAlone.s20230404.dao.ro.roDao;
+import com.travelAlone.s20230404.dao.ro.RoDao;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
@@ -16,9 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class roServiceImpl implements roService {
+public class RoServiceImpl implements RoService {
 
-   private final roDao      rd;
+   private final RoDao      rd;
 
    @Override
    public int boardAllCnt() {

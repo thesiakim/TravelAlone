@@ -5,7 +5,7 @@ import java.util.List;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.BodImg;
 
-public interface roDao {
+public interface RoDao {
 
 	int 			boardAllCnt();
 	List<Board> 	listAllBoard(Board board);

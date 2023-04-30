@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @Slf4j
 @RequiredArgsConstructor
-public class jhDaoImpl implements jhDao {
+public class JhDaoImpl implements JhDao {
 	
 	private final SqlSession	session;
 
