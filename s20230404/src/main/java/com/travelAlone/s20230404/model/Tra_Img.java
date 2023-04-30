@@ -1,14 +1,8 @@
 package com.travelAlone.s20230404.model;
 
-import java.time.LocalDateTime;
+import lombok.Data;
 
-import lombok.ToString;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-@ToString
+@Data
 public class Tra_Img {
 	
 	 private long travel_id;
@@ -16,9 +10,11 @@ public class Tra_Img {
 	 private String img_context;
 	 private String img_original_file;
 	 private String img_stored_file;
-	 private String common_imagesType;
-	 private LocalDateTime  create_date;
-	 private LocalDateTime  modified_date;
-	   
 
 }
+
+//IMG_ID				= imgup_id;
+//TRAVEL_ID				= 여행지번호
+//IMG_CONTEXT  			= 이미지경로
+//IMG_ORIGINAL_FILE		= 원본이미지이름
+//IMG_STORED_FILE       = savedName;
