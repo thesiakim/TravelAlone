@@ -5,22 +5,19 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.domain.km.MemberJpa;
+import com.travelAlone.s20230404.model.Member;
+import com.travelAlone.s20230404.model.dto.km.*;
+import com.travelAlone.s20230404.service.km.MypageService;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.travelAlone.s20230404.model.dto.km.MemberFindAndChangePasswordRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MemberFindIdRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MemberFindPasswordRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MemberFormDto;
 import com.travelAlone.s20230404.service.km.MemberService;
 import com.travelAlone.s20230404.vaildator.km.CheckEmailValidator;
 import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
@@ -35,6 +32,7 @@ public class kmController {
     private final CheckEmailValidator checkEmailValidator;
     private final CheckNicknameValidator checkNicknameValidator;
     private final PasswordEncoder passwordEncoder;
+    private final MypageService mypageService;
 
 
     /**
@@ -91,7 +89,7 @@ public class kmController {
         // 검사에 이상이 없을경우 암호화 하여 저장
         memberService.save(requestDto,passwordEncoder);
 
-        return "th/login";
+        return "redirect:/login";
     }
 
 
@@ -200,6 +198,61 @@ public class kmController {
 
         return "th/login";
     }
+
+    //마이페이지 Controller (MyBatis 사용)---------------------------------------------------------------
+
+    /**
+     * 2023-04-24 조경민
+     * 설명 : 마이페이지 정보 불러오기
+     * */
+    @GetMapping("/mypage")
+    public String mypageMain(@LoginUser MemberJpa memberJpa, Model model){
+
+        MypageResponseDto responseDto = mypageService.mypageMain(memberJpa.getId());
+        responseDto.addMemberInfo(memberJpa);
+
+        model.addAttribute("response", responseDto);
+
+
+        return "km/mypage";
+    }
+
+    /**
+     * 2023-04-26 조경민
+     * 설명 : 마이페이지 회원정보 수정창 띄우기
+     * */
+    @GetMapping("/mypage/member-info")
+    public String mypageMemberInfo(@LoginUser MemberJpa memberJpa, Model model){
+        model.addAttribute("email", memberJpa.getEmail());
+        model.addAttribute("name", memberJpa.getName());
+        model.addAttribute("nickName", memberJpa.getNickname());
+        model.addAttribute("phone", memberJpa.getPhone());
+
+        return "km/mypage-member-info";
+    }
+
+    /**
+     * 2023-04-26 조경민
+     * 설명 : 마이페이지 회원정보 변경
+     * */
+    @PostMapping("api/v1/mypage")
+    @ResponseBody
+    public String mypageMemberInfoUpdate(@RequestBody Member member, @LoginUser MemberJpa memberJpa){
+
+        member.setMember_id(memberJpa.getId());
+
+        System.out.println("member = " + member);
+
+        mypageService.memberInfoUpdate(member);
+
+        return "성공";
+    }
+
+    /**
+     * 2023-04-26 조경민
+     * 설명 : 마이페이지 프로필 사진 수정
+     * */
+
 
 
 

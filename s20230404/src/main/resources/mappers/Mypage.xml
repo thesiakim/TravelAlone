@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travelAlone.s20230404.CommonMapper">
+
+		<select id="interestFindById" resultType="Interest" >
+			<![CDATA[
+			select i.interest_id, i.member_id, i.i_common_interest, i.create_date, i.modified_date, c.word
+			from interest i inner join common c on i.i_common_interest = concat(c.bcd, c.mcd)
+			where i.member_id = #{memberId}
+			]]>
+		</select>
+
+		<select id="scoreCountById" resultType="ScoreCount" >
+			<![CDATA[
+			Select count(*) as count, c.word
+			from score s inner join common c
+			on s.s_common_spec = concat(c.bcd, c.mcd)
+			where s.member_id= #{memberId}
+			group by c.word
+		]]>
+		</select>
+
+		<select id="writingCountById" resultType="WritingCount" >
+			<![CDATA[
+			SELECT a.board_count, b.hou_review_count, c.res_review_count, d.tra_review_count,e.favorites_count,f.g_writing_count
+			FROM (SELECT COUNT(*) as board_count  FROM board WHERE member_id = #{memberId}) a ,
+				 (SELECT COUNT(*) as hou_review_count FROM HOU_REV WHERE MEMBER_id = #{memberId}) b ,
+				 (SELECT COUNT(*) as res_review_count FROM res_REV WHERE MEMBER_id = #{memberId}) c ,
+				 (SELECT COUNT(*) as tra_review_count FROM tra_REV WHERE MEMBER_id = #{memberId}) d ,
+				 (SELECT COUNT(*) as favorites_count FROM favorites WHERE MEMBER_id = #{memberId}) e ,
+				 (SELECT COUNT(*) as g_writing_count FROM g_writing WHERE MEMBER_id = #{memberId}) f
+			]]>
+		</select>
+
+		<update id="mypageMemberInfoUpdate" parameterType="Member" >
+			<![CDATA[
+			UPDATE MEMBER
+			SET M_NICKNAME = #{m_nickname},
+				M_PHONE    = #{m_phone}
+			WHERE MEMBER_ID = #{member_id}
+			]]>
+		</update>
+
+		
+		
+		
+		
+		
+</mapper>

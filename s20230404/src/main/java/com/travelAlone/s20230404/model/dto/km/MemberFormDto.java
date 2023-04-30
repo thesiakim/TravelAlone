@@ -68,7 +68,12 @@ public class MemberFormDto {
                 .password(passwordEncoder.encode(this.password))
                 .name(this.name)
                 .gender(this.gender)
-                .phone(this.phone).build();
+                .phone(this.phone)
+                .imgContext("normal")
+                .imagesType("img300")
+                .imgOriginalFile("userPicture")
+                .imgStoredFile("src/main/resources/static/img/user-picture.png")
+                .build();
     }
 
 }
