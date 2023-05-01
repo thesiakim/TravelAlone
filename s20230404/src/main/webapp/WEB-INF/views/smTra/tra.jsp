@@ -52,7 +52,7 @@
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 	
-
+<h1><a href="tra">여행지</a></h1>
 
 <!-- 여행지종류 -->
 			<div >  																						
@@ -243,7 +243,7 @@
 
 	<!-- 여행지리스트 테이블 -->
 		  <h3>국내 전체 여행지 </h3>
-			<table style="margin:auto;">
+		<table style="margin:auto;">
 		<tr>
 			<td hidden>번호</td>													
 			<td>지역</td>

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.model.CommonCode;
-import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
@@ -74,12 +73,19 @@ public class TravelController {
 	
 	//여행지  정보글조회
 	@GetMapping(value = "traDetail")
-	public String traDetail(int tid , Model model ) {
+	public String traDetail(int tid , Model model, Tra_Img tra_Img ) {
 		log.info("smController Start traDetail");
 		log.info("smController traDetail travel_id->"+ tid );
 		
 		//여행지정보 서비스
 		Travel travel = sm.traDetail(tid);
+		
+		//사진 리스트
+		log.info("Tra_Img Start");
+		tra_Img.setTravel_id(tid);
+		List<Tra_Img> listImg = sm.traImgList(tra_Img);
+		log.info("TravelController  listImg.size()=>"+ listImg.size());
+		model.addAttribute("traImgList", listImg);
 
 		//리뷰리스트
 		List<Tra_Rev> traRevList = sm.traRevList(tid);
@@ -191,6 +197,7 @@ public class TravelController {
 		@RequestMapping(value = "traDelete")
 		public String traDelete(int travel_id, Model model) {
 			log.info("TravelController Start delete... t_id :" +travel_id);
+			int result2 = sm.traDelete(travel_id);
 			int result = sm.traDelete(travel_id);			
 			return "redirect:tra";
 		}
@@ -222,7 +229,7 @@ public class TravelController {
 		
 		//여행지종류 구분 필터
 		@GetMapping(value = "traFilter")
-		public String traFilter(@RequestParam(name = "code") 
+		public String traCodeFilter(@RequestParam(name = "code") 
 		String code, Travel travel, String currentPage, Model model  ) {
 			log.info("TravelController traFilter Start" );
 			
@@ -230,9 +237,6 @@ public class TravelController {
 			List<CommonCode> commonCode = sm.getCommonCode();
 			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
 			model.addAttribute("boardList",commonCode);
-			
-			
-			
 			
 			int traTotal = sm.traFilter(code);
 			log.info("TravelController traFilter traTotal =>" + traTotal);
@@ -244,10 +248,10 @@ public class TravelController {
 			travel.setEnd(page.getEnd());
 			travel.setCode(code);
 			
-			List<Travel> optTraList = sm.optTraList(travel);
-			log.info("TravelController  listFilterTravel.size()=>" + optTraList.size());
+			List<Travel> traOptList = sm.traOptList(travel);
+			log.info("TravelController  traOptList.size()=>" + traOptList.size());
 			model.addAttribute("traTotal", traTotal);
-			model.addAttribute("optTraList", optTraList);
+			model.addAttribute("traOptList", traOptList);
 			model.addAttribute("page", page);
 			model.addAttribute("search", travel.getKeyword());
 									
@@ -279,7 +283,7 @@ public class TravelController {
 			travel.setCode(code);
 			
 			List<Travel> traLocList = sm.traLocList(travel);
-			log.info("TravelController  listFilterLoc.size()=>" + traLocList.size());
+			log.info("TravelController  traLocList.size()=>" + traLocList.size());
 			model.addAttribute("totalLoc", totalLoc);
 			model.addAttribute("traLocList", traLocList);
 			model.addAttribute("page", page);
