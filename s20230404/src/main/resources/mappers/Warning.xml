@@ -6,8 +6,8 @@
 	
 	<insert id="reportMember" parameterType="Warning">
 		Insert	into Warning 
-		<!-- (w_id, member_id, u_nickname, w_common_warning, w_cnt, create_date, modified_date) -->
-		values	(w_id_seq.nextval, #{member_id}, #{u_nickname}, #{w_common_warning}, 1, sysdate, sysdate)
+		<!-- (w_id, member_id, u_nickname, w_common_warning, create_date, modified_date) -->
+		values	(w_id_seq.nextval, #{member_id}, #{u_nickname}, #{w_common_warning}, sysdate, sysdate)
 	
 	</insert>
 	

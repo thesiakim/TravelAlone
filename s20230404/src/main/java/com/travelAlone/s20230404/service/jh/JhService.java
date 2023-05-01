@@ -13,6 +13,6 @@ public interface JhService {
 
 	int 			updateCount(Board board);
 	int 			reportMember(Warning warning);
-	int   			insertBoard(BoardWriteRequestDto requestDto, List<MultipartFile> files) throws Exception;
 	int 			insertReLevel(Board board);
+	int 			insertBoard(BoardWriteRequestDto requestDto, List<MultipartFile> files) throws Exception;
 }

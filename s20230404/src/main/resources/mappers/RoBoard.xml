@@ -89,8 +89,8 @@
    <insert id="roBoardInsert" parameterType="Board">
       Insert into
       Board
-      <!-- (board_id, member_id, b_title, b_content, b_view_cnt, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date) -->
-      values (board_id_seq.nextval, #{member_id, jdbcType=NUMERIC}, #{b_title}, #{b_content}, 0, 0, #{b_common_board}, board_id_seq.currval, 0, 0, sysdate, sysdate)
+      <!-- (board_id, member_id, b_title, b_content, b_view_cnt, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date, IMG_STORED_FILE_YN) -->
+      values (board_id_seq.nextval, #{member_id, jdbcType=NUMERIC}, #{b_title}, #{b_content}, 0, 0, #{b_common_board}, board_id_seq.currval, 0, 0, sysdate, sysdate,0)
 
       <!-- 시퀀스로 생성된 값을 반환받기 위한 SELECT 문 정의 -->
       <selectKey keyProperty="board_id" resultType="long" order="AFTER">

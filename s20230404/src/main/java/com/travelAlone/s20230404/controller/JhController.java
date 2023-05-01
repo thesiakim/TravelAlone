@@ -118,7 +118,7 @@ public class JhController {
 			throw new Exception("로그인 해주세요!");
 		}
 		requestDto.addMemberId(memberJpa.getId());
-		int insertResult = js.insertBoard(requestDto,files);
+		int insertResult = js.insertBoard(requestDto, files);
 		log.info("roController writeBoard insertResult는 "+ insertResult);
 		return ""+insertResult;
 	}

@@ -10,6 +10,18 @@
 
 <c:import url="header.jsp"/>
 
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script defer src="/js/detailBoardLoginChk.js"></script>
+<script type="text/javascript">
+	function imgOnclickCheck() {
+        var checked = $('#imgOnlyCheckbox').is(':checked');
+		if(checked) {
+			 $(".img_stored_file_no").css("display", "none");
+		} else {
+			$(".img_stored_file_no").css("display", "");
+		}
+	}
+</script>
 <script type="text/javascript">
 	function getOrderList() { location.href= "/listAllBoard"; }
 </script>
@@ -33,7 +45,9 @@
 		<hr>
 		<form action="list" id="list">
         	<h3> 커뮤니티 - 전체 게시판 </h3>
-        <input type="checkbox" style="margin-bottom: 30px;">이미지 첨부글만 보기
+        	
+        <input type="checkbox" id="imgOnlyCheckbox" onclick="imgOnclickCheck()">
+		<label for="imgOnlyCheckbox">이미지 첨부글만 보기</label>
         
         <select id="orderList" style="margin-right: 500px;">
 	        <option value="new" ${board.orderList == 'new' ? 'selected="selected"' : '' }>최신순</option> 
@@ -52,18 +66,26 @@
    
    	<div>
       	<table>
+      	  	<!--  img_stored_file_yn  파일 유무 Check -->
          	<c:forEach var="board" items="${listAllBoard}">
-            	<tr>
-					<td style="width: 300px;">
-						<a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board}">${board.b_title }</a>
-					</td>
-					<td style="width: 100px;">${board.m_nickname }</td>
-					<td style="width: 200px;">${board.getFormattedCreateDate() }</td>
-					<td style="width: 50px;">${board.b_like_cnt }</td>
-					<td style="width: 30px;">${board.b_view_cnt }</td>
-					
-					<c:set var="num" value="${num - 1 }"></c:set>
-            	</tr>
+            	<c:choose>
+					<c:when test="${board.img_stored_file_yn == 0}">
+						<tr class="img_stored_file_no" >
+					</c:when>
+					<c:when test="${board.img_stored_file_yn > 0}">
+						<tr class="img_stored_file_yes" >
+					</c:when>
+				</c:choose>
+							<td style="width: 300px;">
+								<a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board}">${board.b_title }</a>
+							</td>
+							<td style="width: 100px;">${board.m_nickname }</td>
+							<td style="width: 200px;">${board.getFormattedCreateDate() }</td>
+							<td style="width: 50px;">${board.b_like_cnt }</td>
+							<td style="width: 30px;">${board.b_view_cnt }</td>
+							
+							<c:set var="num" value="${num - 1 }"></c:set>
+		            	</tr>
          	</c:forEach>
       	</table>
    	</div>

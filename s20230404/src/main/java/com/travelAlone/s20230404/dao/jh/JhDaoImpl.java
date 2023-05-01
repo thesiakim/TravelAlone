@@ -76,14 +76,15 @@ public class JhDaoImpl implements JhDao {
 	public int insertBodImg(List<BodImg> bodImgs) {
 		int insertResult = 0;
 		log.info("jhDaoImpl insertBoardImg start");
-
 		for (BodImg img : bodImgs) {
 			try {
 				session.insert("roBoardImgInsert", img);
-				log.info("jhDaoImpl insertReBoard insertResult는 "+ insertResult);
+				log.info("jhDaoImpl insertBodImg insertResult는 "+ insertResult);
+				
+				
 				insertResult++;
 			} catch (Exception e) {
-				log.info("jhDaoImpl insertReBoard e.getMessage는 "+ e.getMessage());
+				log.info("jhDaoImpl insertBodImg e.getMessage는 "+ e.getMessage());
 			}
 		}
 		return insertResult;
@@ -109,5 +110,20 @@ public class JhDaoImpl implements JhDao {
 		return insertReLevel;
 	}
 
+	@Override
+	public int updateBoardImgYn(long boardId) {
+		int result = 0;
+		log.info("jhDaoImpl updateBoardImgYn start");
+		
+		try {
+			result = session.update("imgStoredFileYn",boardId);
+			log.info("jhDaoImpl updateBoardImgYn boardId-> " + boardId);
+			
+		} catch (Exception e) {
+			log.info("jhDaoImpl updateBoardImgYn Exception -> " + e.getMessage());
+			
+		}
+		return result;
+	}
 	
 }

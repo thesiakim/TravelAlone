@@ -6,8 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+<c:import url="header.jsp"/>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script defer src="/js/detailBoardLoginChk.js"></script>
 <script type="text/javascript">
 	function imgOnclickCheck() {
         var checked = $('#imgOnlyCheckbox').is(':checked');
@@ -18,8 +21,6 @@
 		}
 	}
 </script>
-<c:import url="header.jsp"/>
-   
 <script type="text/javascript">
 	function getOrderList() { location.href= "/listBoard"; }
 </script>
@@ -73,7 +74,7 @@
 		   	</script>   
 		</form>
 		
-		<form action="writeBoardForm" method="post" >
+		<form action="writeBoardForm" method="post" onsubmit="return chkId();">
 	         <input type="hidden" name="b_common_board" value="${board.b_common_board }">
 	         <button type="submit" style="margin-left: 664px; margin-bottom: 10px">글 쓰기</button>
 		</form>
@@ -82,15 +83,15 @@
    
 	<div>
       	<table>
-      	  <!--  img_stored_file_yn  파일 유무 Check -->
+      	  	<!--  img_stored_file_yn  파일 유무 Check -->
          	<c:forEach var="board" items="${listBoard}">
          		<c:choose>
-					<c:when test="${board.img_stored_file.size() == 0}">
+					<c:when test="${board.img_stored_file_yn == 0}">
 						<tr class="img_stored_file_no" >
 					</c:when>
-					<c:otherwise>
+					<c:when test="${board.img_stored_file_yn > 0}">
 						<tr class="img_stored_file_yes" >
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 							<td style="width: 300px;">
 								<a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board }">${board.b_title }</a>
