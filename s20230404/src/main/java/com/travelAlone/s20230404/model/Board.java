@@ -37,12 +37,11 @@ public class Board {
 	private int mcd;
 	private String listCategory;
 
-	
 	//	사진 파일 이름 가져오기
 	private List<String> img_stored_file = new ArrayList<>();
 	
 	// 파일 유무 확인
-	
+	private String keyWord;
 	
 	// create_date 날짜 형식 변경
 	public String getFormattedCreateDate() {

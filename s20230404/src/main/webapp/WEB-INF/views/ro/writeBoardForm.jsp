@@ -9,8 +9,8 @@
 	<c:import url="header.jsp"/>
 </head>
 	<link href="/css/write.css" rel="stylesheet" type="text/css">
-<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-<script defer src="/js/picture.js"></script>
+	<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+	<script defer src="/js/picture.js"></script>
 <body>
 	<c:import url="boardHeader.jsp"/>
 	
@@ -19,7 +19,7 @@
 	<c:if test="${msg != null }">${msg }</c:if>
 
 	<input type="hidden" name="b_common_board" id="common_board" value="${board.b_common_board}">
-	<input type="hidden" name="member_id" value="3">
+	<input type="hidden" name="member_id" value="${board.member_id }">
 		<table>
 	        <tr>
 	        	<td colspan="2">

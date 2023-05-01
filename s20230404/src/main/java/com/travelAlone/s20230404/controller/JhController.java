@@ -56,8 +56,7 @@ public class JhController {
                }
            }
        }
-
-       // 이미 추천한 경우는 추천수를 증가시키지 않습니다.
+       
        if (!boardLikeChk) {
            updateCount = js.updateCount(board);
            log.info("jhController like result ->" + updateCount);

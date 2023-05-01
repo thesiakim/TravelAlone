@@ -45,7 +45,7 @@
 	  		<option value="lc_writer">글쓴이</option>
 	  	</select>
        	<div id="serch">
-         	<input type="text" placeholder="종합 검색">
+         	<input type="text" name="keyWord" placeholder="종합 검색" value="${board.keyWord }">
        	</div>
 	</form>
 		<hr>
@@ -63,7 +63,7 @@
          
 	   	<script>
 		   	document.getElementById('orderList').onchange = function() {
-		       	location.href="listAllBoard?orderList="+orderList.value;
+		       	location.href="listAllBoard?orderList="+orderList.value+"&listCategory=${board.listCategory}&keyWord=${board.keyWord}";
 		   	}
 		</script>
    	</form>
@@ -97,13 +97,13 @@
    	</div>
    
 	<c:if test="${page.startPage > page.pageBlock }">
-      	<a href="listAllBoard?currentPage=${page.startPage - page.pageBlock }&orderList=${board.orderList}">[이전]</a>
+      	<a href="listAllBoard?currentPage=${page.startPage - page.pageBlock }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[이전]</a>
 	</c:if>
 	<c:forEach var="i" begin="${page.startPage }" end="${page.endPage }">
-      	<a href="listAllBoard?currentPage=${i }&orderList=${board.orderList}">[${i }]</a>
+      	<a href="listAllBoard?currentPage=${i }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[${i }]</a>
 	</c:forEach>
 	<c:if test="${page.endPage < page.totalPage }">
-      	<a href="listAllBoard?currentPage=${page.startPage + page.pageBlock }&orderList=${board.orderList}">[다음]</a>
+      	<a href="listAllBoard?currentPage=${page.startPage + page.pageBlock }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[다음]</a>
 	</c:if>
    
 </body>
