@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class IndexController {
 
+
 //      /**
 //       * 2023-04-17 조경민 설명 : 메인페이지 이동
 //       */
@@ -42,7 +43,7 @@ public class IndexController {
 
 
    
-   /**
+  
      * 2023-04-25 조경민
      * 설명: 저장된 이미지를 /display?file=~~~~ 형식으로 주소를 적으면 사진을 보여줌
      * */

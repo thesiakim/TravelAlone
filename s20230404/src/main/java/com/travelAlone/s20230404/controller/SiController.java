@@ -10,7 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.travelAlone.s20230404.model.House;
+import com.travelAlone.s20230404.model.Res;
+import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.ResultList;
 import com.travelAlone.s20230404.service.si.SiServiceJpa;
 import com.travelAlone.s20230404.service.si.SiService;
@@ -27,6 +31,8 @@ public class SiController {
 	private final SiServiceJpa siServiceJpa;
 	private final Logger logger = LoggerFactory.getLogger(SiController.class);
 	
+	ResultList resultList;
+	
 	//검색창에 검색한 경우
 	@GetMapping(value = "search")
 	public String search(@RequestParam("searchName") String keyword, @RequestParam("category") String category, Model model) {
@@ -34,7 +40,7 @@ public class SiController {
 		logger.info("siController search start");
 		
 		//Travel, House, Restaurant, Board가 List 타입으로 선언된 클래스 객체 선언
-		ResultList resultList = new ResultList();
+		resultList = new ResultList();
 		
 		//카테고리가 전체인 경우
 		if(category.equals("category_total")) {
@@ -103,8 +109,6 @@ public class SiController {
 		//월별 인기 검색어 구하기
 		List<String> monthlyPopularKeywords = siService.getMonthlyPopularSearches();
 		
-		
-		
 		model.addAttribute("category", category);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("resultList", resultList);
@@ -116,6 +120,7 @@ public class SiController {
 	
 		return "si/searchResult";
 	}
+	
 	
 	
 	
@@ -147,6 +152,46 @@ public class SiController {
 		return data;
 		
 		} 
+	
+	
+	//검색 결과 페이지에서 '더보기'를 클릭한 경우 
+	@GetMapping(value = "/nextPage")
+	public ModelAndView nextPage() {
+		ModelAndView mav = new ModelAndView("si/nextPage");
+		mav.addObject("travelList", resultList.getTravelList());
+		
+		return mav;
 	}
+	
+	
+	//메인 페이지에서 인기 명소/숙소/맛집 보여주기
+	@GetMapping(value = {"/", "/index"})
+	public String popular(Model model) {
+		
+		//인기 명소
+		List<Travel> popularTravel = siService.getPopularTravel();
+		
+		//인기 숙소
+		List<House> popularHouse = siService.getPopularHouse();
+		
+		//인기 맛집
+		List<Res> popularRes = siService.getPopularRes();
+				             
+		model.addAttribute("popularTravel", popularTravel);
+		model.addAttribute("popularRes", popularRes);
+		model.addAttribute("popularHouse", popularHouse);
+		
+		return "index";
+	}
+	
+		
+		
+}
+	
+	
+	
+
+
+
 
 

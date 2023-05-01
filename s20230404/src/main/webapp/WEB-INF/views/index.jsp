@@ -1,9 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
 	document.getElementById('searchId').addEventListener('keyup', function(event) {
@@ -55,7 +60,7 @@
                 <li><a href="#">쇼 핑</a></li>
 			  </ul>
             </li>
-            <li><a href="/hou">숙소</a>
+            <li><a href="#">숙소</a>
       		  <ul>
               	<li><a href="#">호 텔</a></li>
               	<li><a href="#">모 텔</a></li>
@@ -158,9 +163,10 @@
 		<!-- 클래스명은 변경하면 안 됨 -->
 		<div class="swiper-container">
 		  <div class="swiper-wrapper">
-		  	<c:forEach var="travel" items="${popularTravel }">
+		  	<c:forEach var="travel" items="${popularTravel}">
             	<div class="swiper-slide">
-                <a href="/traDetail?tid=${travel.travel_id}"><img src="images1.png" alt="이미지1"></a>
+                	<a href="/traDetail?tid=${travel.travel_id}">
+                	<img src="images1.png" alt="<c:out value='${travel.t_name}'/>"></a>
                 </div>
             </c:forEach>
 		  </div>
@@ -172,9 +178,9 @@
 		</div>
 		<script>
 		  new Swiper('.swiper-container', {
-			slidesPerView : 5, // 동시에 보여줄 슬라이드 갯수
+			slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
 			spaceBetween : 20, // 슬라이드간 간격
-			slidesPerGroup : 5, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+			slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 			// 그룹수가 맞지 않을 경우 빈칸으로 메우기
 			// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
 			loopFillGroupWithBlank : true,
@@ -198,16 +204,12 @@
 		<!-- 클래스명은 변경하면 안 됨 -->
 		<div class="swiper-container">
 		  <div class="swiper-wrapper">
-			<div class="swiper-slide"><a href="/houDetail?hid=${}"><img src="image1.png" alt="이미지 1"></a></div>
-			<div class="swiper-slide"><img src="image2.jpg" alt="이미지 2"></div>
-			<div class="swiper-slide"><img src="image3.jpg" alt="이미지 3"></div>
-			<div class="swiper-slide"><img src="image4.jpg" alt="이미지 4"></div>
-			<div class="swiper-slide"><img src="image5.jpg" alt="이미지 5"></div>
-			<div class="swiper-slide"><img src="image6.jpg" alt="이미지 6"></div>
-			<div class="swiper-slide"><img src="image7.jpg" alt="이미지 7"></div>
-			<div class="swiper-slide"><img src="image8.jpg" alt="이미지 8"></div>
-			<div class="swiper-slide"><img src="image9.jpg" alt="이미지 9"></div>
-			<div class="swiper-slide"><img src="image10.jpg" alt="이미지 10"></div>
+		  	<c:forEach var="house" items="${popularHouse}">
+            	<div class="swiper-slide">
+                	<a href="/houDetail?hid=${house.house_id}">
+                	<img src="images1.png" alt="<c:out value='${house.h_name}'/>"></a>
+                </div>
+            </c:forEach>
 		  </div>
 		  <!-- 네비게이션 -->
 		  <div class="swiper-button-next"></div> <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
@@ -217,9 +219,9 @@
 		</div>
 		<script>
 		  new Swiper('.swiper-container', {
-			slidesPerView : 5, // 동시에 보여줄 슬라이드 갯수
+			slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
 			spaceBetween : 20, // 슬라이드간 간격
-			slidesPerGroup : 5, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+			slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 			// 그룹수가 맞지 않을 경우 빈칸으로 메우기
 			// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
 			loopFillGroupWithBlank : true,
@@ -243,16 +245,12 @@
 		<!-- 클래스명은 변경하면 안 됨 -->
 		<div class="swiper-container">
 		  <div class="swiper-wrapper">
-			<div class="swiper-slide"><img src="image1.jpg" alt="이미지 1"></div>
-			<div class="swiper-slide"><img src="image2.jpg" alt="이미지 2"></div>
-			<div class="swiper-slide"><img src="image3.jpg" alt="이미지 3"></div>
-			<div class="swiper-slide"><img src="image4.jpg" alt="이미지 4"></div>
-			<div class="swiper-slide"><img src="image5.jpg" alt="이미지 5"></div>
-			<div class="swiper-slide"><img src="image6.jpg" alt="이미지 6"></div>
-			<div class="swiper-slide"><img src="image7.jpg" alt="이미지 7"></div>
-			<div class="swiper-slide"><img src="image8.jpg" alt="이미지 8"></div>
-			<div class="swiper-slide"><img src="image9.jpg" alt="이미지 9"></div>
-			<div class="swiper-slide"><img src="image10.jpg" alt="이미지 10"></div>
+		  	<c:forEach var="res" items="${popularRes}">
+            	<div class="swiper-slide">
+                	<a href="/resDetail?rid=${res.restaurant_id}">
+                	<img src="images1.png" alt="<c:out value='${res.r_name}'/>"></a>
+                </div>
+            </c:forEach>
 		  </div>
 		  <!-- 네비게이션 -->
 		  <div class="swiper-button-next"></div> <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
@@ -262,9 +260,9 @@
 		</div>
 		<script>
 		  new Swiper('.swiper-container', {
-			slidesPerView : 5, // 동시에 보여줄 슬라이드 갯수
+			slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
 			spaceBetween : 20, // 슬라이드간 간격
-		    slidesPerGroup : 5, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+		    slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 		    // 그룹수가 맞지 않을 경우 빈칸으로 메우기
 		    // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
 		    loopFillGroupWithBlank : true,

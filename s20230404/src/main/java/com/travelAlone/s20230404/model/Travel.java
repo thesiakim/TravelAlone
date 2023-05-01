@@ -22,6 +22,7 @@ public class Travel {
     private LocalDateTime  modified_date;
     private String		   t_revcount;
     private String		   t_avgscore;
+    private int            t_count;
 	
     // 페이지조회용
     private String search;      private String keyword;

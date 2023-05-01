@@ -28,6 +28,7 @@ public class House {
 	private LocalDateTime	modified_date;
 	private String			h_revcount;
 	private String			h_avgscore;
+	private int             h_count;
 	
 	
 	// 페이지조회용

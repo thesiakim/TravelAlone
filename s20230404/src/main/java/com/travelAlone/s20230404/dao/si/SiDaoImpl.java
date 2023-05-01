@@ -178,6 +178,44 @@ public class SiDaoImpl implements SiDao {
 	}
 
 
+	//인기 명소 구하기
+	@Override
+	public List<Travel> getPopularTravel() {
+		logger.info("siDaoImpl getPopularTravel Start ");
+		List<Travel> popularTravel = null;
+		try {
+			popularTravel = session.selectList("sigetPopularT");
+		} catch(Exception e) {
+			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
+		}
+		return popularTravel;
+	}
+
+
+	@Override
+	public List<Res> getPopularRes() {
+		List<Res> popularRes = null;
+		try {
+			popularRes = session.selectList("sigetPopularR");
+		} catch(Exception e) {
+			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
+		}
+		return popularRes;
+	}
+
+
+	@Override
+	public List<House> getPopularHouse() {
+		List<House> popularHouse = null;
+		try {
+			popularHouse = session.selectList("sigetPopularH");
+		} catch(Exception e) {
+			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
+		}
+		return popularHouse;
+	}
+
+
 	
 
 

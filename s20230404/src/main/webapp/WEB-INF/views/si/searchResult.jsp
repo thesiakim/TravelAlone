@@ -82,6 +82,56 @@
   text-align: left;
 }
 
+/* 검색 결과 박스 */
+.integration {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px; /* 통합 검색과 총 건수의 폰트 크기 */
+  margin-bottom: 20px;
+}
+
+.integration li:last-child {
+  font-size: 14px; /* 총 건수의 폰트 크기 */
+}
+
+.integration_box {
+  display: flex;
+  align-items: center;
+  width: 75%; /* 검색 결과를 보여줄 박스의 너비 */
+}
+
+.integration_title {
+  font-size: 18px; /* 검색 결과 타이틀의 폰트 크기 */
+  margin-right: 10px;
+}
+
+.integration_list {
+  display: flex;
+}
+
+.integration_list li {
+  font-size: 14px; /* 각 결과 항목의 폰트 크기 */
+  margin-right: 20px;
+}
+
+/* 결과 항목마다 다른 색상을 지정해줍니다. */
+.integration_list li:nth-child(1) {
+  color: blue;
+}
+
+.integration_list li:nth-child(2) {
+  color: green;
+}
+
+.integration_list li:nth-child(3) {
+  color: red;
+}
+
+.integration_list li:nth-child(4) {
+  color: purple;
+}
+
 
 
 
@@ -98,7 +148,7 @@
 
 <div class="container-search">
 
-  <div class="sidebar">
+  <!-- <div class="sidebar">
     <ul>
       <li><a href="#">전체</a></li>
       <li><a href="#">여행지</a></li>
@@ -106,7 +156,7 @@
       <li><a href="#">맛집</a></li>
       <li><a href="#">커뮤니티</a></li>
     </ul>
-  </div> 
+  </div>  -->
   
   <div class="integration">
   	<ul class="menu_title">
@@ -144,141 +194,159 @@
   			</div>
   		</div>
   	</div>
-  	
   </div>
   
   
 
   
-  
+  <!-- 검색 결과 안내  -->
   <div class="search-content">
     <h2>검색어 <span style="color: rgb(31,171,137)">"<c:out value="${keyword}" />"</span>에 대해 <span style="color: rgb(31,171,137)">총 <c:out value="${resultCount}" />건</span>의 결과를 찾았습니다.</h2>
-    <ul><c:if test="${not empty resultList.getTravelList()}">
-    <h1>여행지</h1>
-    <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-        <c:if test="${status.index < 5}">
-            <tr>
-                <td><c:out value="${travel.t_name}" /></td>
-                <td>${travel.formattedCreateDate }</td>
-                <c:set var="content" value="${fn:substring(travel.t_content, 0, 10)}"/>
-                <c:if test="${fn:length(travel.t_content) > 10}">
-                    <c:set var="content" value="${content }..."/>
-                </c:if>
-                <td><c:out value="${content }"></c:out></td>
-            </tr>
+    
+    <!-- 여행지 검색 결과 리스트 -->
+    <div class="travel-result">
+    	<ul><c:if test="${not empty resultList.getTravelList()}">
+    	<h1>여행지</h1>
+    	<c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+        	<c:if test="${status.index < 5}">
+            	<tr>
+                	<td><c:out value="${travel.t_name}" /></td>
+                	<td>${travel.formattedCreateDate }</td>
+                	<c:set var="content" value="${fn:substring(travel.t_content, 0, 10)}"/>
+                		<c:if test="${fn:length(travel.t_content) > 10}">
+                    		<c:set var="content" value="${content }..."/>
+             			</c:if>
+                	<td><c:out value="${content }"></c:out></td>
+            	</tr>
             <c:if test="${not status.last }"><br/></c:if>
-        </c:if>
-    </c:forEach>
+        	</c:if>
+    	</c:forEach>
+  
         <c:if test="${fn:length(resultList.travelList) > 5}">
-            <a href="nextPage.jsp">더보기</a>
+        	<a href="<c:url value='/nextPage'/>">더보기</a>
         </c:if>
 	</c:if></ul>
+	</div>
 	
-	<ul><c:if test="${not empty resultList.getHouseList()}">
-    <h1>숙소</h1>
-    <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
-        <c:if test="${status.index < 5}">
-            <tr>
-                <td><c:out value="${house.h_name}" /></td>
-                <td>${house.formattedCreateDate }</td>
-                <c:set var="content" value="${fn:substring(travel.t_content, 0, 10)}"/>
-                <c:if test="${fn:length(house.h_content) > 10}">
-                    <c:set var="content" value="${content }..."/>
-                </c:if>
-                <td><c:out value="${content }"></c:out></td>
-            </tr>
-            <c:if test="${not status.last }"><br/></c:if>
-        </c:if>
-    </c:forEach>
-        <c:if test="${fn:length(resultList.houseList) > 5}">
-            <a href="nextPage.jsp">더보기</a>
-        </c:if>
-	</c:if></ul>
+	<!-- 숙소 검색 결과 리스트 -->
+	<div class="house-result">
+		<ul><c:if test="${not empty resultList.getHouseList()}">
+    	<h1>숙소</h1>
+    	<c:forEach items="${resultList.houseList}" var="house" varStatus="status">
+        	<c:if test="${status.index < 5}">
+            	<tr>
+                	<td><c:out value="${house.h_name}" /></td>
+                	<td>${house.formattedCreateDate }</td>
+                	<c:set var="content" value="${fn:substring(travel.t_content, 0, 10)}"/>
+                	<c:if test="${fn:length(house.h_content) > 10}">
+                    	<c:set var="content" value="${content }..."/>
+                	</c:if>
+                	<td><c:out value="${content }"></c:out></td>
+            	</tr>
+            	<c:if test="${not status.last }"><br/></c:if>
+        	</c:if>
+    	</c:forEach>
+        	<c:if test="${fn:length(resultList.houseList) > 5}">
+            	<a href="nextPage.jsp">더보기</a>
+        	</c:if>
+		</c:if></ul>
+	</div>
 	
-	<ul><c:if test="${not empty resultList.getRestaurantList()}">
-    <h1>맛집</h1>
-    <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
-        <c:if test="${status.index < 5}">
-            <tr>
-                <td><c:out value="${res.r_name}" /></td>
-                <td>${res.formattedCreateDate }</td>
-                <c:set var="content" value="${fn:substring(res.r_content, 0, 10)}"/>
-                <c:if test="${fn:length(res.r_content) > 10}">
-                    <c:set var="content" value="${content }..."/>
-                </c:if>
-                <td><c:out value="${content }"></c:out></td>
-            </tr>
-            <c:if test="${not status.last }"><br/></c:if>
-        </c:if>
-    </c:forEach>
-        <c:if test="${fn:length(resultList.restaurantList) > 5}">
-            <a href="nextPage.jsp">더보기</a>
-        </c:if>
-	</c:if></ul>
+	<!-- 맛집 검색 결과 리스트 -->
+	<div class="res-result">
+		<ul><c:if test="${not empty resultList.getRestaurantList()}">
+    	<h1>맛집</h1>
+    	<c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
+        	<c:if test="${status.index < 5}">
+            	<tr>
+                	<td><c:out value="${res.r_name}" /></td>
+                	<td>${res.formattedCreateDate }</td>
+                	<c:set var="content" value="${fn:substring(res.r_content, 0, 10)}"/>
+                	<c:if test="${fn:length(res.r_content) > 10}">
+                    	<c:set var="content" value="${content }..."/>
+                	</c:if>
+                	<td><c:out value="${content }"></c:out></td>
+            	</tr>
+            	<c:if test="${not status.last }"><br/></c:if>
+        	</c:if>
+    	</c:forEach>
+        	<c:if test="${fn:length(resultList.restaurantList) > 5}">
+            	<a href="nextPage.jsp">더보기</a>
+        	</c:if>
+		</c:if></ul>
+	</div>
 	
-	<ul><c:if test="${not empty resultList.getBoardList()}">
-    <h1>커뮤니티</h1>
-    <c:forEach items="${resultList.boardList}" var="board" varStatus="status">
-        <c:if test="${status.index < 5}">
-            <tr>
-                <td><c:out value="${board.b_title}" /></td>
-                <td>${board.formattedCreateDate_search }</td>
-                <c:set var="content" value="${fn:substring(res.r_content, 0, 10)}"/>
-                <c:if test="${fn:length(board.b_content) > 10}">
-                    <c:set var="content" value="${content }..."/>
-                </c:if>
-                <td><c:out value="${content }"></c:out></td>
-            </tr>
-            <c:if test="${not status.last }"><br/></c:if>
-        </c:if>
-    </c:forEach>
-        <c:if test="${fn:length(resultList.boardList) > 5}">
-            <a href="nextPage.jsp">더보기</a>
-        </c:if>
-	</c:if></ul>
-  </div>
+	<!-- 커뮤니티 검색 결과 리스트 -->
+	<div class="board-result">
+		<ul><c:if test="${not empty resultList.getBoardList()}">
+    	<h1>커뮤니티</h1>
+    	<c:forEach items="${resultList.boardList}" var="board" varStatus="status">
+        	<c:if test="${status.index < 5}">
+            	<tr>
+                	<td><c:out value="${board.b_title}" /></td>
+                	<td>${board.formattedCreateDate_search }</td>
+                	<c:set var="content" value="${fn:substring(res.r_content, 0, 10)}"/>
+                	<c:if test="${fn:length(board.b_content) > 10}">
+                    	<c:set var="content" value="${content }..."/>
+                	</c:if>
+                	<td><c:out value="${content }"></c:out></td>
+            	</tr>
+            	<c:if test="${not status.last }"><br/></c:if>
+        	</c:if>
+    	</c:forEach>
+        	<c:if test="${fn:length(resultList.boardList) > 5}">
+            	<a href="nextPage.jsp">더보기</a>
+        	</c:if>
+		</c:if></ul>
+  	</div>
   
   
-  <!-- 인기 검색어 -->
-  <div class="search-rank">
+    <!-- 인기 검색어 -->
     <div class="popular-searches">
-     <h2>일간 검색어</h2>
-    	<ul>
-    		<c:forEach var="daily" items="${dailyPopularKeywords}">
-				<li><a href="/search?category=category_total&amp;searchName=${daily}">
-			    	<c:out value="${daily}" /></a>
-			    </li>
-			</c:forEach>
-    	</ul>   
-    	
-     <h2>주간 검색어</h2> 
-     	<ul>
-    		<c:forEach var="weekly" items="${weeklyPopularKeywords}">
-				<li><a href="/search?category=category_total&amp;searchName=${weekly}">
-			    	<c:out value="${weekly}" /></a>
-			    </li>
-			</c:forEach>
-    	</ul>   
-    	
-     <h2>월간 검색어</h2>
-     	<ul>
-    		<c:forEach var="monthly" items="${monthlyPopularKeywords}">
-				<li><a href="/search?category=category_total&amp;searchName=${monthly}">
-			    	<c:out value="${monthly}" /></a>
-			    </li>
-			</c:forEach>
-    	</ul>   
-         	
+	    <div class="popular-daily">
+	     	<h2>일간 검색어</h2>
+	    		<ul>
+	    			<c:forEach var="daily" items="${dailyPopularKeywords}">
+						<li><a href="/search?category=category_total&amp;searchName=${daily}">
+				    		<c:out value="${daily}" /></a>
+				    	</li>
+					</c:forEach>
+	    		</ul>   
+	    </div>
+	    
+	    <div class="popular-weekly">
+	     	<h2>주간 검색어</h2> 
+	     		<ul>
+	    			<c:forEach var="weekly" items="${weeklyPopularKeywords}">
+						<li><a href="/search?category=category_total&amp;searchName=${weekly}">
+				    		<c:out value="${weekly}" /></a>
+				    	</li>
+					</c:forEach>
+	    		</ul>   
+	    </div>
+	    
+	    <div class="popular-monthly">	
+	     	<h2>월간 검색어</h2>
+	     		<ul>
+	    			<c:forEach var="monthly" items="${monthlyPopularKeywords}">
+						<li><a href="/search?category=category_total&amp;searchName=${monthly}">
+				    		<c:out value="${monthly}" /></a>
+				    	</li>
+					</c:forEach>
+	    		</ul>
+	    </div>   
     </div>
-    <div class="latest-searches">
+    
+    <!-- <div class="latest-searches">
       <h2>최근 검색어</h2>
     <ul>
       <li><a href="#">대전 여행지</a></li>
       <li><a href="#">제주 숙소</a></li>
       <li><a href="#">서울 맛집</a></li>
     </ul>
-    </div>
-  </div>
+    </div> -->
+ 
+</div> 
   
   
 </div>
