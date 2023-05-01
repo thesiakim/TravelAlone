@@ -289,7 +289,7 @@ public class HouseDaoImpl implements HouseDao {
 			log.info("HouseDaoImpl insertImg hou_Img->"+ hou_Img);
 			
 			try {
-				result = session.insert("insertImg",hou_Img);
+				result = session.insert("insertHouImg",hou_Img);
 			} catch (Exception e) {
 				log.info("HouseDaoImpl insert Exception->"+e.getMessage());
 			}				

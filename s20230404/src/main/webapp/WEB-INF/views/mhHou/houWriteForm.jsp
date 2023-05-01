@@ -91,7 +91,7 @@
 				
 			<tr>
 				<td> 
-				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/upload/${savedName}">
+				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/houseUpload/${savedName}">
 						<input type="file" name="file1" multiple="multiple"> <p>						
 				</td>						
 			</tr>			
