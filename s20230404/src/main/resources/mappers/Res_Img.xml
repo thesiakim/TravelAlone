@@ -4,7 +4,7 @@
 
 <mapper namespace="com.travelAlone.s20230404.Res_ImgMapper">
 
-	<insert id="insertImg" parameterType="Res_Img">
+	<insert id="insertResImg" parameterType="Res_Img">
 		INSERT INTO Res_Img (	  restaurant_id
 								, img_id
 								, img_original_file

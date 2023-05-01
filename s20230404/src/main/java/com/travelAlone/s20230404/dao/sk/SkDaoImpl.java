@@ -266,7 +266,7 @@ public class SkDaoImpl implements SkDao {
 		log.info("SkDaoImpl insertImg res_Img->"+ res_Img);
 		
 		try {
-			result = session.insert("insertImg",res_Img);
+			result = session.insert("insertResImg",res_Img);
 		} catch (Exception e) {
 			log.info("SkDaoImpl insert Exception->"+e.getMessage());
 		}				

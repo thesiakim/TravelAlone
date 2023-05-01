@@ -25,7 +25,7 @@
 			<tr>
 				<td hidden>${houImg.img_id}</td>
 			 	<td >
-		<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/upload/${houImg.img_stored_file}" width="500" height="300"> 
+		<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/houseUpload/${houImg.img_stored_file}" width="500" height="300"> 
 			 	
 			 	</td>
 								

@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class HouseController {
 
-	private final HouseService mh;
+private final HouseService mh;
 	
 	// ===================숙소===================
 	//숙소 메인 보기
@@ -109,7 +109,7 @@ public class HouseController {
 		@PostMapping(value = "houWriteForm")
 		public String houWrite(HttpServletRequest request,  List<MultipartFile> file1, Hou_Img hou_Img,
 				House house , Model model) throws Exception  {
-			log.info("HouseController  houWrite Start...");
+			log.info("HouseController  houWrite Start");
 			//1. 시퀀스 가져오기 
 			//숙소 시퀀스 가져오는 쿼리
 			int houseSeq = mh.seqHou(house);
@@ -125,9 +125,10 @@ public class HouseController {
 			
 			//3. 가져온 시퀀스 세팅하여 img insert
 			//이미지를 넣어보자 ㅠㅠ	
-			String img_context = request.getSession().getServletContext().getRealPath("/upload/");
+			String img_context = request.getSession().getServletContext().getRealPath("/houseUpload/");
 			log.info("IMG POST Start");
 			//이렇게 for문으로 돌려서 여러번 넣어주면 됨 아니면 list 형태로 한번에 넣는방법도 있긴한데 그건 좀 귀찮고 찾아봐야댐 
+			
 			for (MultipartFile multipartFile : file1) {
 				log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
 				String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
@@ -145,8 +146,7 @@ public class HouseController {
 			else {
 				model.addAttribute("msg","입력 실패 확인해 보세요");
 				return "forward:mhHou/houWriteForm";
-			}
-			
+			}			
 		}
 	
 		private String uploadFile(String originalName,byte[] fileData, String img_context) throws Exception {
@@ -166,9 +166,7 @@ public class HouseController {
 			 File target = new File(img_context, img_stored_file);
 			 
 			 FileCopyUtils.copy(fileData,target);
-			
-			
-			return img_stored_file;
+			 return img_stored_file;
 		}
 		
 		
@@ -367,6 +365,9 @@ public class HouseController {
 			return "redirect:hou";
 		}
 		
+		
+		
+
 		
 		
 
