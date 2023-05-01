@@ -224,7 +224,7 @@ private final HouseService mh;
 			// Service --> DB IMG CRUD
 			hou_Img.setImg_original_file(multipartFile.getOriginalFilename());
 			hou_Img.setImg_stored_file(img_stored_file);
-//			hou_Img.setHouse_id(house);
+
 
 			int insertImgResult = mh.insertImg(hou_Img);
 			log.info("HouseController insertImg insertImgResult->"+ insertImgResult);

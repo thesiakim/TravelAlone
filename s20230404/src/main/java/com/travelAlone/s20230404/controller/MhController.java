@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.model.CommonCode;
@@ -143,29 +144,6 @@ public class MhController {
 		
 	}
 	 
-	
-
-//	
-//	private String uploadFile(String originalName,byte[] fileData, String img_context) throws Exception {
-//		 UUID uid = UUID.randomUUID();
-//		 // requestPath = requestPath + "/resources/image";
-//		 log.info("img_context->" + img_context);
-//		 
-//		// Directory 생성 
-//		 File fileDirectory = new File(img_context);
-//		 if (!fileDirectory.exists()) {
-//			 fileDirectory.mkdirs();
-//			log.info("업로드용 폴더 생성" + img_context ); 
-//			
-//		}
-//		 String img_stored_file = uid.toString() + "_" + originalName;
-//		 log.info("img_stored_file ->" + img_stored_file);
-//		 File target = new File(img_context, img_stored_file);
-//		 
-//		 FileCopyUtils.copy(fileData,target);						
-//		 return img_stored_file;
-//	}
-	
 	
 
 	
@@ -342,7 +320,7 @@ public class MhController {
 																					
 			
 			//이미지 삽입
-			String img_context = request.getSession().getServletContext().getRealPath("/inquireUpload/");
+			String img_context = "images"+File.separator+"InquireUpload" + File.separator;
 			log.info("IMG POST Start");
 			for(MultipartFile multipartFile : file1) {
 				log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
@@ -394,21 +372,55 @@ public class MhController {
 		
 		//문의게시판 글수정 페이지이동
 		@GetMapping(value = "inquireUpdateForm")
-		public String inquireUpdateForm(int g_writing_id, Model model) {
-			log.info("mhController Start updateForm...");
+		public String inquireUpdateForm(int g_writing_id, Model model, Inq_Img inq_Img) {
+			log.info("InquireController Start updateForm...");
 			Inquire inquire = mh.detailInquire(g_writing_id);
-			log.info("mhController updateFormInquire inquire->"+inquire);			
+			log.info("InquireController updateFormInquire inquire->"+inquire);			
+			
+			//사진리스트
+			log.info("Inq_Img Start");
+			inq_Img.setG_writing_id(g_writing_id);
+			List<Inq_Img> listImg = mh.listInq_Img(inq_Img);
+			log.info("InquireController  listImg.size()=>"+ listImg.size());
+			model.addAttribute("imgInqList", listImg);
+									
 			
 			model.addAttribute("inquire", inquire);	
 			return "mh/inquireUpdateForm";
 		}	
 
+		
+						
+		
+		
 		//문의게시판 글수정 
 		@PostMapping(value = "updateInquire")
-		public String updateInquire(Inquire inquire, Model model) {
-			log.info("mhController Start update...");
+		public String updateInquire(Inquire inquire, Model model,
+				HttpServletRequest request,  List<MultipartFile> file1, Inq_Img	 inq_Img
+				) throws IOException, Exception {
+			
+			
+			//이미지삽입
+			String img_context = "images"+File.separator+"inquireUpload" + File.separator;
+			log.info("IMG POST Start");
+			
+			for (MultipartFile multipartFile : file1){
+				log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+				String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
+				// Service --> DB IMG CRUD
+				inq_Img.setImg_original_file(multipartFile.getOriginalFilename());
+				inq_Img.setImg_stored_file(img_stored_file);
+
+
+				int insertImgResult = mh.insertInqImg(inq_Img);
+				log.info("HouseController insertImg insertImgResult->"+ insertImgResult);
+			}
+			
+	
+			log.info("InquireController Start update...");
 			int updateCount = mh.updateInquire(inquire);
-			log.info("mhController es.updateNotice updateCount-->"+ updateCount);
+			log.info("InquireController es.updateNotice updateCount-->"+ updateCount);
+			
 			model.addAttribute("uptCnt", updateCount);
 			model.addAttribute("kk3"," Message Test");
 			return "forward:inquire";
@@ -420,7 +432,7 @@ public class MhController {
 		//문의게시판 글 삭제
 		@RequestMapping(value = "deleteInquire")
 		public String deleteInquire(int g_writing_id, Model model) {
-			log.info("mhController Start delete..." + g_writing_id);
+			log.info("InquireController Start delete..." + g_writing_id);
 			int result2 = mh.deleteInqImg(g_writing_id);
 			int result = mh.deleteInquire(g_writing_id);
 			
@@ -428,13 +440,28 @@ public class MhController {
 		}
 		
 		
+		
+		//문의게시판글 수정시 사진만 삭제
+		@ResponseBody
+		@RequestMapping(value = "deleteInqImg")
+		public String deleteInqImg(int g_writing_id, int img_id, Model model) {
+			log.info("InquireController Start delete g_writing_id :" + g_writing_id);
+			log.info("InquireController Start delete img_id :" + img_id);
+			int result = mh.deleteHouOneImg(g_writing_id,img_id);
+			String resultStr = Integer.toString(result);
+			return resultStr;
+		}
+		
+		
+
+		
 		//문의게시판 검색
 		@RequestMapping(value = "inquireSearch")
 		public String inquireSearch(Inquire inquire, String currentPage, Model model) {
-			log.info("mhController inquireSearch Start ..." );
+			log.info("InquireController inquireSearch Start ..." );
 			
 			int totalInquire = mh.conditionInquireCount(inquire);
-			log.info("mhController inquireSearch totalInquire =>" + totalInquire);
+			log.info("InquireController inquireSearch totalInquire =>" + totalInquire);
 			// Paging 작업
 			Paging page = new Paging(totalInquire, currentPage);
 			

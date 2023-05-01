@@ -435,10 +435,26 @@ public class MhDaoImpl implements MhDao {
 		return result;
 	}
 
-
+	@Override
+	public int deleteInqImg(int g_writing_id, int img_id) {
+		Inq_Img inq_Img = new Inq_Img();
+		inq_Img.setG_writing_id(g_writing_id);
+		inq_Img.setImg_id(img_id);
+		
+		log.info("InquireDaoImpl deleteInqImg start");
+		int result = 0;
+		log.info("InquireDaoImpl deleteHouImg g_writing_id->"+ g_writing_id);
+		log.info("InquireDaoImpl deleteHouImg img_id->"+ img_id);
+		try {
+			result = session.delete("deleteInqOneImg",inq_Img );
+		} catch (Exception e) {
+			log.info("InquireDaoImpl delete Exception->"+ e.getMessage());
+		}
+				
+		return result;
+	}
 
 	
-
 	
 
 }

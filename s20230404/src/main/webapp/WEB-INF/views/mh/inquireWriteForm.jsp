@@ -50,7 +50,7 @@
 			
 			<tr>
 				<td> 
-				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/inquireUpload/${savedName}">
+				   <img alt="사진추가" src="/images/inquireUpload/${savedName}">
 						<input type="file" name="file1" multiple="multiple"> <p>						
 				</td>						
 			</tr>

@@ -268,7 +268,7 @@ public class MhServiceImpl implements MhService {
 		List<Not_Img> notImgList = mh.selectNotImgList(not_Img);
 		return notImgList;
 	}
-
+	
 	@Override
 	public int deleteNotImg(int g_notice_id) {
 		int result = 0;
@@ -277,6 +277,16 @@ public class MhServiceImpl implements MhService {
 		return result;
 	}
 
+	@Override
+	public int deleteHouOneImg(int g_writing_id, int img_id) {
+		int result = 0;
+		log.info("InquireServiceImpl deleteHouOneImg Start");
+		result = mh.deleteInqImg(g_writing_id,img_id);
+		return result;
+	}
+
+
+	
 
 
 

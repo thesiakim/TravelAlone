@@ -1,11 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+	String context = request.getContextPath();
+%>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	function deleteImage(house_id, img_id, p_index) {
+	/* 	alert("house_id:"   + house_id);
+		alert("img_id:"	    + img_id);
+		alert("p_index:"	+ p_index); */
+		
+		$.ajax({
+		    url: "<%=context%>/deleteHouImg",
+		    data: {   house_id : house_id
+		    	    , img_id   : img_id 
+		          },
+			dataType:'text',
+		    success: function(result) {
+		   /*  	alert(".ajax deleteImage success ..."); 
+				alert(".ajax deleteImage data->"+result);  */
+				if (result == '1') {
+					alert("사진삭제성공 "+result); 
+					// 성공하면 아래라인 수행 
+					$('#delImage'+p_index).remove();     /*  Delete Tag */
+				} else {
+			    	alert(".ajax deleteImage 실패하였습니다..."); 
+				}
+		      
+		    }
+		});
+	 }
+
+</script>
+
 <body>
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">

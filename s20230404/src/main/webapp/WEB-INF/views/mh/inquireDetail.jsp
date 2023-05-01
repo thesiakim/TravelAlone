@@ -50,11 +50,18 @@
 				<td>사진</td>
 				
 			</tr>
-			<c:forEach items="${imgInqList}" var="InqImg">
+			<c:forEach items="${imgInqList}" var="inqImg">
 				<tr>
-					<td hidden>${InqImg.img_id}</td>
+					<td hidden>${inqImg.img_id}</td>
 				 	<td >
-			<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/inquireUpload/${InqImg.img_stored_file}" width="500" height="300"> 
+				 	
+<%-- 			<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/inquireUpload/${InqImg.img_stored_file}" width="500" height="300"> 
+ --%>				 	
+ 				<c:url value='/display' var='url'>
+						<c:param name='file' value='${inqImg.img_stored_file}'/>
+				</c:url>
+                     <img alt="#" src="${url}"  width="500" height="300">
+				 	
 				 	
 				 	</td>
 									

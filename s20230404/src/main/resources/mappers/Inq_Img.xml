@@ -35,6 +35,14 @@
 	<delete id="deleteInqImg" parameterType="int">
 		delete from G_WRT_IMG where G_WRITING_ID = #{g_writing_id}
 	</delete>
+	
+	
+	<!-- 이미지 한개 삭제하기 -->
+	<delete id="deleteInqOneImg" parameterType="Inq_Img">
+		delete from G_WRT_IMG 
+		where IMG_ID = #{img_id}
+		and   G_WRITING_ID = #{g_writing_id}
+	</delete>
 
 	
 	

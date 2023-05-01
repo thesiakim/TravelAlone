@@ -66,6 +66,12 @@ public interface MhService {
 	List<Not_Img> listNot_Img(Not_Img not_Img);
 	int deleteNotImg(int g_notice_id);
 	
+	//문의사항 사진하나삭제
+	int deleteHouOneImg(int g_writing_id, int img_id);
+	
+	
+
+	
 	
 	
 	

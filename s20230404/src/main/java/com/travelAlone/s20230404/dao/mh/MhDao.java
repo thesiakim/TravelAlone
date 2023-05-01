@@ -59,6 +59,8 @@ public interface MhDao {
 	int insertNotImg(Not_Img not_Img);
 	List<Not_Img> selectNotImgList(Not_Img not_Img);
 	int deleteNotImg(int g_notice_id);
+	int deleteInqImg(int g_writing_id, int img_id);
+	
 	
 	
 	
