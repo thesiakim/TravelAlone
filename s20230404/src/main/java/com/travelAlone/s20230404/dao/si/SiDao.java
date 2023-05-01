@@ -18,6 +18,9 @@ public interface SiDao {
 	List<Search>     getDailyPopularSearches(String startOfToday, String endOfToday);
 	List<Search>     getWeeklyPopularSearches(String startOfWeek, String endOfWeek);
 	List<Search>     getMonthlyPopularSearches(String startOfMonth, String endOfMonth);
+	List<Travel>     getPopularTravel();
+	List<Res>        getPopularRes();
+	List<House>      getPopularHouse();
 	
 	
 

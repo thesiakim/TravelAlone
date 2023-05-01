@@ -145,6 +145,26 @@ public class SiServiceImpl implements SiService {
 	}
 
 
+	//인기 명소 구하기
+	@Override
+	public List<Travel> getPopularTravel() {
+		System.out.println("SiServiceImpl getPopularTravel Start");
+		return siDao.getPopularTravel();
+	}
+
+
+	@Override
+	public List<Res> getPopularRes() {
+		return siDao.getPopularRes();
+	}
+
+
+	@Override
+	public List<House> getPopularHouse() {
+		return siDao.getPopularHouse();
+	}
+
+
 	
 
 

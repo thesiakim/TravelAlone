@@ -23,21 +23,21 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 public class IndexController {
 
-//		/**
-//		 * 2023-04-17 조경민 설명 : 메인페이지 이동
-//		 */
-//
-//		  @GetMapping("/") public String main(@LoginUser MemberJpa memberJpa, Model
-//		  model){
-//
-//		  if (memberJpa != null){
-//			  model.addAttribute("memberId", memberJpa.getId());
-//			  System.out.println("user.getNickName() = " + memberJpa.getNickname());
-//		  }
-//
-//		  return "th/main";
-//		  }
+		/**
+		 * 2023-04-17 조경민 설명 : 메인페이지 이동
+		 */
+/*
+		  @GetMapping("/") public String main(@LoginUser MemberJpa memberJpa, Model
+		  model){
 
+		  if (memberJpa != null){
+			  model.addAttribute("memberId", memberJpa.getId());
+			  System.out.println("user.getNickName() = " + memberJpa.getNickname());
+		  }
+
+		  return "th/main";
+		  }
+*/
     /**
      * 2023-04-25 조경민
      * 설명: 저장된 이미지를 /display?file=~~~~ 형식으로 주소를 적으면 사진을 보여줌

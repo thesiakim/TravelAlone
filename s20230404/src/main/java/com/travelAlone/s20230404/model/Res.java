@@ -26,6 +26,7 @@ public class Res {
 	   private LocalDateTime   modified_date;
 	   private String		   r_revcount;
 	   private String		   r_avgscore;
+	   private int             r_count;
 	   
 	   // 페이지조회용
 	   private String search;      private String keyword;

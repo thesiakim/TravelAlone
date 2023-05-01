@@ -138,4 +138,45 @@
 	</select>
 	
 	
+	
+	<!-- 검색 횟수를 기준으로 인기 명소 구하기  -->
+	<select id="sigetPopularT" resultType="Travel">
+		<![CDATA[
+			SELECT *
+            FROM (
+                  SELECT *
+                  FROM Travel
+                  ORDER BY t_count DESC
+                 )
+            WHERE ROWNUM <= 6
+		]]>
+	</select>
+	
+	<!-- 검색 횟수를 기준으로 인기 숙소 구하기  -->
+	<select id="sigetPopularH" resultType="House">
+		<![CDATA[
+			SELECT *
+            FROM (
+                  SELECT *
+                  FROM House
+                  ORDER BY h_count DESC
+                 )
+            WHERE ROWNUM <= 6
+		]]>
+	</select>
+	
+	<!-- 검색 횟수를 기준으로 인기 맛집 구하기  -->
+	<select id="sigetPopularR" resultType="Res">
+		<![CDATA[
+			SELECT *
+            FROM (
+                  SELECT *
+                  FROM Restaurant
+                  ORDER BY r_count DESC
+                 )
+            WHERE ROWNUM <= 6
+		]]>
+	</select>
+	
+	
 </mapper>
