@@ -38,6 +38,12 @@
 	<c:import url="boardHeader.jsp"/>
 	<form action="listAllBoard">
 		<!-- 검색창 -->
+		<select name="listCategory">
+	  		<option value="lc_total">전체</option>
+	  		<option value="lc_title">제목</option>
+	  		<option value="lc_content">내용</option>
+	  		<option value="lc_writer">글쓴이</option>
+	  	</select>
        	<div id="serch">
          	<input type="text" placeholder="종합 검색">
        	</div>

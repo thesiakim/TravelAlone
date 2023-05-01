@@ -244,10 +244,6 @@ public class RoController {
 	   
    }
    
-//   @PostMapping(value = "warningBoardRe")
-//   public String warningReBoard(Board board) {
-//	   log.info("roController deleteReBoard 시작");
-//   }
    
 
 }
