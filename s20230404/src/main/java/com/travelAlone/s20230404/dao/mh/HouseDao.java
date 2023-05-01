@@ -43,6 +43,8 @@ public interface HouseDao {
 	List<Hou_Img> selectHouImgList(Hou_Img hou_Img);
 	int deleteHouImg(int house_id);
 	
+	int deleteHouOneImg( int house_id,int img_id);
+	
 	
 	
 

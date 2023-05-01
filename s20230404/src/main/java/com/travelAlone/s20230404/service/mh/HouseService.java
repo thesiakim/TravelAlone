@@ -43,6 +43,8 @@ public interface HouseService {
 	
 	List<Hou_Img> listHou_Img(Hou_Img hou_Img);
 	int deleteHouImg(int house_id);
+	//사진 하나만 지우기
+	int deleteHouOneImg(int house_id,int img_id );
 	
 	
 	

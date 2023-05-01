@@ -339,6 +339,26 @@ public class HouseDaoImpl implements HouseDao {
 		}
 
 
+		@Override
+		public int deleteHouOneImg(int house_id,int img_id) {
+			Hou_Img hou_Img =new Hou_Img();
+			hou_Img.setHouse_id(house_id);
+			hou_Img.setImg_id(img_id);
+			
+			
+			log.info("HouseDaoImpl deleteHouOneImg start");
+			int result = 0;
+			log.info("HouseDaoImpl deleteHouImg house_id->"+ house_id);
+			log.info("HouseDaoImpl deleteHouImg img_id->"+ img_id);
+			try {
+				result = session.delete("deleteHouOneImg",hou_Img );
+			} catch (Exception e) {
+				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+			}
+			return result;
+		}
+
+
 	
 	
 }

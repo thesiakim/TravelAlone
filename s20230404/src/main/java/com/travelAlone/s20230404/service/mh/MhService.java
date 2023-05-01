@@ -64,6 +64,8 @@ public interface MhService {
 	int insertNotImg(Not_Img not_Img);
 	
 	List<Not_Img> listNot_Img(Not_Img not_Img);
+	int deleteNotImg(int g_notice_id);
+	
 	
 	
 	

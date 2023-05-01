@@ -91,7 +91,7 @@
 				
 			<tr>
 				<td> 
-				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/houseUpload/${savedName}">
+				   UpLoad Image : <img alt="사진추가 " src="/images/houseUpload/${savedName}">
 						<input type="file" name="file1" multiple="multiple"> <p>						
 				</td>						
 			</tr>			

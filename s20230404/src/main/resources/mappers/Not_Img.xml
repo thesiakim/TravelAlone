@@ -20,12 +20,12 @@
 	</insert>
 
 <!-- 이미지 목록가져오기 -->
-	<select id="mhNotImgList" parameterType="Inq_Img" resultType="Inq_Img" >
-			select IMG_ID
+	<select id="mhNotImgList" parameterType="Not_Img" resultType="Not_Img" >
+			select 	IMG_ID
 					,IMG_STORED_FILE
 					,IMG_ORIGINAL_FILE
-			from  G_WRT_IMG
-			WHERE g_writing_id = #{g_writing_id}
+			from  G_NOT_IMG
+			WHERE g_notice_id = #{g_notice_id}
 			order by IMG_ID desc
 	</select>
 
@@ -34,8 +34,8 @@
 
 
 <!-- 이미지 목록삭제하기 -->
-	<delete id="deleteInqImg" parameterType="int">
-		delete from G_WRT_IMG where G_WRITING_ID = #{g_writing_id}
+	<delete id="deleteNotImg" parameterType="int">
+		delete from G_NOT_IMG where G_NOTICE_ID = #{g_notice_id}
 	</delete>
 
 

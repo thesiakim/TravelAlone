@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="header.jsp"/>
 </head>
 <body>
 <div id="img_benner">
@@ -14,7 +13,27 @@
 	</div>
 
 <h1>공지사항 글조회 </h1>
+
+		<table  style="margin:auto;"">
+			<tr>
+				<td hidden>번호</td>													
+				<td>사진</td>
+				
+			</tr>
+			<c:forEach items="${imgNotList}" var="NotImg">
+				<tr>
+					<td hidden>${NotImg.img_id}</td>
+				 	<td >
+			<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/noticeUpload/${NotImg.img_stored_file}" width="500" height="300"> 
+				 	
+				 	</td>
+									
+			</c:forEach>
+			
+	</table>	
+
 <table  style="margin:auto;">
+
 		<tr><th>제목</th><td>${notice.g_notice_title}</td></tr>
 		<tr><th>작성자</th><td>${notice.member_id}</td></tr>
 		<tr><th>내용</th><td>${notice.g_notice_content}</td></tr>
