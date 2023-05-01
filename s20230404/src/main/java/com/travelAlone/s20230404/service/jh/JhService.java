@@ -15,4 +15,6 @@ public interface JhService {
 	int 			reportMember(Warning warning);
 	int 			insertReLevel(Board board);
 	int 			insertBoard(BoardWriteRequestDto requestDto, List<MultipartFile> files) throws Exception;
+	List<Board> 	myPageCommunityList(Board board);
+	int 			myPageCommunityListCnt(long memberId);
 }

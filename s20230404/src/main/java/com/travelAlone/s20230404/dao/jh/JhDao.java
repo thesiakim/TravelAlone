@@ -15,6 +15,8 @@ public interface JhDao {
 	int 				insertReLevel(Board board);
 	int 				updateBoardImgYn(long boardId);
 	int					reportUpdate(Warning warning);
+	List<Board> 		myPageCommunityList(Board board);
+	int 				myPageCommunityListCnt(long memberId);
 
 
 }
