@@ -197,10 +197,16 @@ public class MhController {
 	@RequestMapping(value = "deleteNotice")
 	public String deleteNotice(int g_notice_id, Model model) {
 		System.out.println("mhController Start delete... n_id :" +g_notice_id);
+		int result2 = mh.deleteNotImg(g_notice_id);
 		int result = mh.deleteNotice(g_notice_id);
 		
 		return "redirect:notice";
 	}
+	
+	
+
+	
+	
 	
 	
 	

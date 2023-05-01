@@ -421,7 +421,20 @@ public class MhDaoImpl implements MhDao {
 		return notImgList;
 	}
 
-	
+	@Override
+	public int deleteNotImg(int g_notice_id) {
+		log.info("NoticeDaoImpl deleteNotImg start");
+		int result = 0;
+		log.info("NoticeDaoImpl deleteNotImg g_notice_id->"+ g_notice_id);
+		try {
+			result = session.delete("deleteNotImg",g_notice_id);
+		} catch (Exception e) {
+		 log.info("NoticeDaoImpl delete Exception->"+ e.getMessage());
+		}
+		
+		return result;
+	}
+
 
 
 	

@@ -19,7 +19,8 @@
 
 <!-- 이미지 목록가져오기 -->
 	<select id="mhHouImgList" parameterType="Hou_Img" resultType="Hou_Img" >
-			select IMG_ID
+			select 	 HOUSE_ID
+			       , IMG_ID
 					,IMG_STORED_FILE
 					,IMG_ORIGINAL_FILE
 			from  Hou_Img
@@ -32,7 +33,12 @@
 		delete from Hou_Img where HOUSE_ID = #{house_id}
 	</delete>
 
-
+<!-- 이미지 한개 삭제하기 -->
+	<delete id="deleteHouOneImg" parameterType="Hou_Img">
+		delete from Hou_Img 
+		where IMG_ID = #{img_id}
+		and   HOUSE_ID = #{house_id}
+	</delete>
 
 </mapper>
 

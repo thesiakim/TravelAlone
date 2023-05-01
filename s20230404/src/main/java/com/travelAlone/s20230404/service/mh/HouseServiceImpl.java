@@ -203,6 +203,14 @@ public class HouseServiceImpl implements HouseService {
 		result = mh.deleteHouImg(house_id);		
 		return result;
 	}
+	
+	@Override
+	public int deleteHouOneImg(int house_id,int img_id) {
+		int result = 0;
+		log.info("HouseServiceImpl deleteHouOneImg Start");
+		result = mh.deleteHouOneImg(house_id,img_id);		
+		return result;
+	}
 
 	
 	

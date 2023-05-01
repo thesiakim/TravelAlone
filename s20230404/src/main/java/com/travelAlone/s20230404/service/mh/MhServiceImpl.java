@@ -269,13 +269,15 @@ public class MhServiceImpl implements MhService {
 		return notImgList;
 	}
 
-	
-//	@Override
-//	public List<Inq_Img> listInq_Img(Inq_Img inq_Img) {
-//		log.info("InquireServiceImpl Start listInq_Img");
-//		List<Inq_Img> inqImgList = mh.selectInqImgList(inq_Img);
-//		return inqImgList;
-//	}
+	@Override
+	public int deleteNotImg(int g_notice_id) {
+		int result = 0;
+		log.info("NoticeServiceImpl deleteNotImg Start..." );		
+		result = mh.deleteNotImg(g_notice_id);		
+		return result;
+	}
+
+
 
 
 

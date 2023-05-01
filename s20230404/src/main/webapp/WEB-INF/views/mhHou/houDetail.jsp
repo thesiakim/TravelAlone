@@ -25,7 +25,15 @@
 			<tr>
 				<td hidden>${houImg.img_id}</td>
 			 	<td >
-		<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/houseUpload/${houImg.img_stored_file}" width="500" height="300"> 
+				<%-- 	
+				<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/houseUpload/${houImg.img_stored_file}" width="500" height="300">  --%>		
+				<%-- <img  alt="UpLoad Image" src="/images/houseUpload/${houImg.img_stored_file}" width="500" height="300">  --%>
+				<%-- <img  alt="UpLoad Image" src="${pageContext.request.contextPath}/images/houseUpload/${houImg.img_stored_file}" width="500" height="300">  --%>
+				<c:url value='/display' var='url'>
+					<c:param name='file' value='${houImg.img_stored_file}'/>
+				</c:url>
+                     <img alt="#" src="${url}"  width="500" height="300">
+
 			 	
 			 	</td>
 								
@@ -57,11 +65,7 @@
 				<a href="houUpdateForm?house_id=${house.house_id}" class="button">수정</a>
 				<a href="deleteHouse?house_id=${house.house_id}" class="button">삭제</a>
 			
-			
-		<%-- 	<input type="button" value="수정" 
-				onclick="location.href='houUpdateForm?house_id=${house.house_id}'">
-			<input type="button" value="삭제" 
-				onclick="location.href='deleteHouse?house_id=${house.house_id}'"></td> --%>
+
 		</tr>
 	</table>
 

@@ -14,7 +14,7 @@
 	</div>
 	<h2>공지사항 글작성</h2>
 	<c:if test="${msg!=null}">${msg}</c:if>
-	<form action="noticeWriteForm" method="post" name="frm">
+	<form action="noticeWriteForm" method="post" name="frm" enctype="multipart/form-data">
 		<table style="margin:auto;">
 			<tr>
 				<td> 제목 </td>
@@ -36,16 +36,12 @@
 				<td>내용</td>
 				<td style="text-align: left;"><textarea name="g_notice_content" rows="10" cols="50"></textarea></td>
 			</tr>
-	<!-- 		<tr>
-				<td>이미지첨부</td>
-				<td>  
-					<form id="form1" action="uploadForm" method="post" enctype="multipart/form-data" >
-							<input type="file" name="file1"> <p>
-							<input type="text" name="title"> <p>
-							<input type="submit">
-					</form>				
-				</td>
-			</tr> -->
+			<tr>
+				<td> 
+				   이미지첨부 : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/noticeUpload/${savedName}">
+						<input type="file" name="file1" multiple="multiple"> <p>						
+				</td>						
+			</tr>
 			
 			  
 			
