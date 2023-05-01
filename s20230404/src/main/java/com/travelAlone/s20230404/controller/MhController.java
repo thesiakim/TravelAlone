@@ -13,7 +13,7 @@ import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
 import com.travelAlone.s20230404.service.Paging;
-import com.travelAlone.s20230404.service.mh.mhService;
+import com.travelAlone.s20230404.service.mh.MhService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class mhController {
+public class MhController {
 	
-	private final mhService mh;
+	private final MhService mh;
 	
 	
 	

@@ -19,7 +19,7 @@ import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.service.Paging;
-import com.travelAlone.s20230404.service.ro.roService;
+import com.travelAlone.s20230404.service.ro.RoService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class roController {
+public class RoController {
    
-   private final roService      rs;
+   private final RoService      rs;
    
    
 // 전체 게시판 이동

@@ -6,7 +6,7 @@ import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 import org.springframework.web.multipart.MultipartFile;
 
-public interface roService {
+public interface RoService {
 
 	int 				boardAllCnt();
 	List<Board> 		listAllBoard(Board board);

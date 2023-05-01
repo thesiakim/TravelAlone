@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.travelAlone.s20230404.model.si.ResultList;
-import com.travelAlone.s20230404.service.si.siService;
+import com.travelAlone.s20230404.service.si.SiService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class siController {
+public class SiController {
 	
-	private final siService siService;
-	private final Logger logger = LoggerFactory.getLogger(siController.class);
+	private final SiService siService;
+	private final Logger logger = LoggerFactory.getLogger(SiController.class);
 	
 	//검색창에 검색한 경우
 	@GetMapping(value = "search")

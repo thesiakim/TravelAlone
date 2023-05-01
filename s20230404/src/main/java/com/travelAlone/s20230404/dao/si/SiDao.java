@@ -7,7 +7,7 @@ import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Travel;
 
-public interface siDao {
+public interface SiDao {
 	
 	void upsertSearch(String keyword);
 	List<House> houseSearch(String keyword);

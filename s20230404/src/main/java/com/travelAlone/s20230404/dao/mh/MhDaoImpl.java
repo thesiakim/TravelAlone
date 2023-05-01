@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class mhDaoImpl implements mhDao {
+public class MhDaoImpl implements MhDao {
 
 	
 	private final SqlSession session;

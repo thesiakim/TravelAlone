@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @Slf4j
 @RequiredArgsConstructor
-public class roDaoImpl implements roDao {
+public class RoDaoImpl implements RoDao {
 
    private final SqlSession   session;
 

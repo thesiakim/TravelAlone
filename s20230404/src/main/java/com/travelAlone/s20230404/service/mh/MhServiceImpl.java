@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.travelAlone.s20230404.dao.mh.mhDao;
+import com.travelAlone.s20230404.dao.mh.MhDao;
 import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
@@ -15,8 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class mhServiceImpl implements mhService {
-	private final mhDao		mh;
+public class MhServiceImpl implements MhService {
+	private final MhDao		mh;
 
 	@Override
 	public int totalNotice() {

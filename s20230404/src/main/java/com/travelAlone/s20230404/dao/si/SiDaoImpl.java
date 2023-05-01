@@ -18,9 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class siDaoImpl implements siDao {
+public class SiDaoImpl implements SiDao {
 	
-	private final Logger logger = LoggerFactory.getLogger(siDao.class);
+	private final Logger logger = LoggerFactory.getLogger(SiDao.class);
 	private final SqlSession session;
 	
 	//Travel 테이블에 검색 키워드가 있는지 조회

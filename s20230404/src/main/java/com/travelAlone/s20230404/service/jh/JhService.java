@@ -9,7 +9,7 @@ import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Warning;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 
-public interface jhService {
+public interface JhService {
 
 	int 			updateCount(Board board);
 	int 			reportMember(Warning warning);

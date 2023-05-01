@@ -7,7 +7,7 @@ import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.model.mh.Notice;
 
 
-public interface mhDao {
+public interface MhDao {
 
 	int 				totalNotice();
 	List<Notice> 		selectNoticeList(Notice notice);

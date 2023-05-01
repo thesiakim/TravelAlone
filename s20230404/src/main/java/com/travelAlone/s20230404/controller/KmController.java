@@ -29,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class kmController {
+public class KmController {
 
     private final MemberService memberService;
     private final CheckEmailValidator checkEmailValidator;

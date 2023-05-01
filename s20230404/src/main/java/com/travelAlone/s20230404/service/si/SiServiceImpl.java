@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.travelAlone.s20230404.dao.si.siDao;
+import com.travelAlone.s20230404.dao.si.SiDao;
 import com.travelAlone.s20230404.model.si.ResultList;
 
 import lombok.RequiredArgsConstructor;
@@ -13,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class siServiceImpl implements siService {
+public class SiServiceImpl implements SiService {
 	
-	private final Logger logger = LoggerFactory.getLogger(siService.class);
-	private final siDao siDao;
+	private final Logger logger = LoggerFactory.getLogger(SiService.class);
+	private final SiDao siDao;
 	
 	//검색 시 선택한 카테고리에 따라 DB 데이터에  검색 키워드가 존재하는지 조회
 	@Override
