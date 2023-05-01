@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.dao.jh.JhDao;
-import com.travelAlone.s20230404.dao.ro.RoDao;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Warning;
@@ -50,7 +49,9 @@ public class JhServiceImpl implements JhService {
 		List<BodImg> bodImgs = UploadHandler.parseFileInfo(files, boardId);
 
 		insertResult = jd.insertBodImg(bodImgs);
-
+		if (insertResult >= 1) {
+			insertResult = jd.updateBoardImgYn(boardId);
+		}
 		log.info("jhServiceImpl insertBoard insertResult는 "+ insertResult);
 		
 		return insertResult;

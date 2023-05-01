@@ -15,7 +15,6 @@
     	SET		b_re_step = b_re_step + 1
     	WHERE	b_ref = #{b_ref}
     	AND		b_re_step > #{b_re_step}
-    	AND		b_re_level >= #{b_re_level}
     </update>
     
     <insert id="insertReLevel" parameterType="Board">
@@ -31,7 +30,13 @@
 			#{b_re_level} + 1,
 			sysdate,
 			sysdate )
-    
     </insert>
+    
+    <update id="imgStoredFileYn" parameterType="Board">
+    	UPDATE 	board
+    	SET		img_stored_file_yn = 1
+    	WHERE	board_id = #{board_id}
+    </update>
+   
     
 </mapper>
