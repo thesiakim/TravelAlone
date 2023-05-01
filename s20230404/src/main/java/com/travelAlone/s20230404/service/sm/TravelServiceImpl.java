@@ -26,7 +26,7 @@ public class TravelServiceImpl implements TravelService {
 		log.info("smServiceImpl  totalTravel totTravelCnt->" + totTravelCnt );		
 		return totTravelCnt;
 	}
-	//숙소 리스트
+	//여행지 리스트
 	@Override
 	public List<Travel> traList(Travel travel) {
 		log.debug("smServiceImpl Start traList...");
@@ -42,7 +42,7 @@ public class TravelServiceImpl implements TravelService {
 		travel = sm.traDetail(tid);		
 		return travel;
 	}
-	//숙소정보작성
+	//여행지정보작성
 	@Override
 	public int traInsert(Travel travel) {
 		int result = 0;
@@ -84,29 +84,29 @@ public class TravelServiceImpl implements TravelService {
 		return travelSearchList;
 	}
 
-	//공통숙소코드 리스트
+	//공통여행지코드 리스트
 	@Override
 	public List<CommonCode> getCommonCode() {
 		List<CommonCode> result = sm.getCommonCode();		
 		return result;
 	}
-		//숙소종류갯수
+		//여행지종류갯수
 	@Override
 	public int traFilter(String code) {
 		log.info("TravelServiceImpl  traFilter Start" );
-		int conditionInquireCnt = sm.traFilter(code);
-		log.info("TravelServiceImpl  traFilter conditionInquireCnt" + conditionInquireCnt);	
-		return conditionInquireCnt;
+		int traFilter = sm.traFilter(code);
+		log.info("TravelServiceImpl  traFilter->" + traFilter);	
+		return traFilter;
 	}
 
 	
 	@Override
-	public List<Travel> optTraList(Travel travel) {
-		List<Travel> travelOptionFilterList = null;
-		log.info("TravelServiceImpl optTraList Start...");
-		travelOptionFilterList = sm.optTraList(travel);
-		log.info("TravelServiceImpl optTraList travelOptionFilterList.size()"+ travelOptionFilterList.size());		
-		return travelOptionFilterList;
+	public List<Travel> traOptList(Travel travel) {
+		List<Travel> traOptList = null;
+		log.info("TravelServiceImpl traOptList Start...");
+		traOptList = sm.traOptList(travel);
+		log.info("TravelServiceImpl traOptList traOptList.size()->"+ traOptList.size());		
+		return traOptList;
 	}
 
 	
@@ -122,19 +122,19 @@ public class TravelServiceImpl implements TravelService {
 	@Override
 	public int traLocFilter(String code) {
 		log.info("TravelServiceImpl  traLocFilter Start" );
-		int conditionLocCnt = sm.traLocFilter(code);
-		log.info("TravelServiceImpl  traLocFilter conditionLocCnt" + conditionLocCnt);	
-		return conditionLocCnt;
+		int traLocFilter = sm.traLocFilter(code);
+		log.info("TravelServiceImpl  traLocFilter" + traLocFilter);	
+		return traLocFilter;
 	}
 
 
 	@Override
 	public List<Travel> traLocList(Travel travel) {
-		List<Travel> locOptionFilterList = null;
+		List<Travel> traLocList = null;
 		log.info("TravelServiceImpl traLocList Start...");
-		locOptionFilterList = sm.traLocList(travel);
-		log.info("TravelServiceImpl traLocList locOptionFilterList.size()"+ locOptionFilterList.size());			
-		return locOptionFilterList;
+		traLocList = sm.traLocList(travel);
+		log.info("TravelServiceImpl traLocList traLocList.size()"+ traLocList.size());			
+		return traLocList;
 	}
 	
 	

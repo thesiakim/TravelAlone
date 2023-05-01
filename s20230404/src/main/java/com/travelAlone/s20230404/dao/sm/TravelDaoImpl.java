@@ -7,8 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.CommonCode;
-import com.travelAlone.s20230404.model.Hou_Img;
-import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
@@ -111,7 +109,7 @@ public class TravelDaoImpl implements TravelDao {
 	}
 
 
-	//숙소검색결과갯수
+	//여행지검색결과갯수
 	@Override
 	public int traSearch(Travel travel) {
 		int conditionTravelCount = 0;
@@ -126,7 +124,7 @@ public class TravelDaoImpl implements TravelDao {
 	}
 
 	
-	//숙소 검색결과
+	//여행지 검색결과
 	@Override
 	public List<Travel> traSearchList(Travel travel) {
 		List<Travel> travelSearchList = null;
@@ -144,7 +142,7 @@ public class TravelDaoImpl implements TravelDao {
 	
 	
 	
-	//숙소필터구분
+	//여행지필터구분
 	@Override
 	public List<CommonCode> getCommonCode() {
 		log.info("getCommonCode 호출부 .......");
@@ -153,7 +151,7 @@ public class TravelDaoImpl implements TravelDao {
 		return result;
 	}
 
-	//숙소 필터갯수
+	//여행지 필터갯수
 	@Override
 	public int traFilter(String code) {
 		int count = 0;		
@@ -167,19 +165,19 @@ public class TravelDaoImpl implements TravelDao {
 		return count;
 	}
 
-	//숙소필터
+	//여행지필터 리스트
 	@Override
-	public List<Travel> optTraList(Travel travel) {
-		List<Travel> travelFilterList = null;
-		log.info("TravelDaoImpl optTraList start");
+	public List<Travel> traOptList(Travel travel) {
+		List<Travel> traOptList = null;
+		log.info("TravelDaoImpl traOptList start");
 		try {
-			travelFilterList = session.selectList("optTraList",travel);
+			traOptList = session.selectList("traOptList",travel);
 
 		} catch (Exception e) {
-			log.info("TravelDaoImpl optTraList Exception " + e.getMessage());
+			log.info("TravelDaoImpl traOptList Exception " + e.getMessage());
 		}
 
-		return travelFilterList;
+		return traOptList;
 	}
 
 	//지역코드가져오기
@@ -194,7 +192,7 @@ public class TravelDaoImpl implements TravelDao {
 	@Override
 	public int traLocFilter(String code) {
 		int count = 0;
-		log.info("TravelDaoImpl Start total");
+		log.info("TravelDaoImpl traLocFilter Start");
 		try {
 			count = session.selectOne("traLocFilter",code);
 			log.info("TravelDaoImpl traLocFilter->"+count);		
@@ -204,20 +202,19 @@ public class TravelDaoImpl implements TravelDao {
 		
 		return count;
 	}
-
-
+	
 	@Override
 	public List<Travel> traLocList(Travel travel) {
-		List<Travel> locFilterList = null;
+		List<Travel> traLocList = null;
 		log.info("TravelDaoImpl traLocList start");
 		try {
-			locFilterList = session.selectList("traLocList",travel);
+			traLocList = session.selectList("traLocList",travel);
 			
 		} catch (Exception e) {
-			log.info("TravelDaoImpl locFilterList Exception " + e.getMessage());
+			log.info("TravelDaoImpl traLocList Exception " + e.getMessage());
 		}
 		
-		return locFilterList;
+		return traLocList;
 	}
 
 
@@ -290,7 +287,6 @@ public class TravelDaoImpl implements TravelDao {
 			log.info("TravelDaoImpl traImgInsert tra_Img->"+ tra_Img);
 			
 			try {
-				System.out.println("Dao traImgInsert tra_Img->" + tra_Img);
 				result = session.insert("traImgInsert",tra_Img);
 			} catch (Exception e) {
 				log.info("TravelDaoImpl traImgInsert Exception->"+e.getMessage());
@@ -325,6 +321,21 @@ public class TravelDaoImpl implements TravelDao {
 			return traImgList;
 		}
 
+		
+		@Override
+		public int traImgUpdate(Tra_Img tra_Img) {
+			log.info("TravelDaoImpl traImgUpdate  start");
+			int updateCount= 0;
+			try {
+				updateCount = session.update("traImgUpdate",tra_Img);
+			} catch (Exception e) {
+				log.info("TravelDaoImpl traImgUpdate Exception->"+e.getMessage());
+			}		
+			
+			return updateCount;
+		}
+
+		
 
 		@Override
 		public int traImgDelete(int travel_id) {
@@ -334,14 +345,10 @@ public class TravelDaoImpl implements TravelDao {
 			try {
 				result = session.delete("traImgDelete",travel_id );
 			} catch (Exception e) {
-				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+				log.info("TravelDaoImpl delete Exception->"+ e.getMessage());
 			}
 			
 			return result;
 		}
-
-
-	
-	
 }
 

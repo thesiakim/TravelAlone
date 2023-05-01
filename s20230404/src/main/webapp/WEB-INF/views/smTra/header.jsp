@@ -27,7 +27,7 @@
 	<div class="headerForm">
 	  <div class="headerBenner">
 		<ul>
-		<li><a href="#">여행지</a>
+		<li><a href="/tra">여행지</a>
 		  <ul>
 			<li><a href="#">관 광</a></li>
 			<li><a href="#">자 연</a></li>

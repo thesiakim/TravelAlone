@@ -24,14 +24,13 @@ public interface TravelService {
 	//공통코드 활용(여행지종류)
 	List<CommonCode> 		getCommonCode();
 	int 					traFilter(String code);
-	List<Travel> 			optTraList(Travel travel);
+	List<Travel> 			traOptList(Travel travel);
 	
 	
 	//공통코드 활용(지역종류)
 	List<CommonCode> 		getCommonLocCode();	
 	int 					traLocFilter(String code);
 	List<Travel> 			traLocList(Travel travel);
-	
 	
 	
 	//리뷰 

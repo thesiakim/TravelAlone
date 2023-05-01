@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,20 +11,46 @@
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 	<h1>여행지 글업데이트	</h1>
-		<form action=traUpdate" method="post">
+		<form action="traUpdate" method="post">
 		<input type="hidden" name="travel_id" value="${travel.travel_id }">
 		<table>
 											
 			<tr>
-				<th>여행지종류</th>
-				<td><input type="text" name="t_common_travel"
-					required="required" value="${travel.t_common_travel }"></td>
-			</tr>	
-			<tr>
-				<th>여행지지역</th>
-				<td><input type="text" name="t_common_loc"
-					required="required" value="${travel.t_common_loc }"></td>
-			</tr>	
+				<td> 여행지종류</td>
+				<td style="text-align: left;"> 
+				<select name="t_common_travel">
+					<option value="tra100">관광</option>
+					<option value="tra200">자연</option>
+					<option value="tra300">레저</option>
+					<option value="tra400">쇼핑</option>								
+				</select>
+												
+				</td>																					
+				
+			</tr>
+				<tr>
+				<td> 여행지지역</td>
+				<td style="text-align: left;">
+					<select name="t_common_loc">
+						<option value="tra102">서울</option>
+						<option value="tra132">인천</option>
+						<option value="tra131">경기</option>
+						<option value="tra133">강원</option>
+						<option value="tra142">대전</option>
+						<option value="tra141">충남</option>
+						<option value="tra143">충북</option>
+						<option value="tra151">부산</option>
+						<option value="tra152">울산</option>
+						<option value="tra153">대구</option>
+						<option value="tra155">경남</option>
+						<option value="tra154">경북</option>
+						<option value="tra162">광주</option>
+						<option value="tra161">전남</option>
+						<option value="tra163">전북</option>
+						<option value="tra164">제주</option>								
+					</select>									
+				 </td>				
+			</tr>
 								
 			<tr>
 				<th>여행지명</th>
@@ -61,65 +87,25 @@
 				<td><input type="text" name="t_parking"
 					required="required" value="${travel.t_parking }"></td>
 			</tr>
-<%-- 			<tr>
-				<th>첨부파일</th>
-				<td> 
-				   <img alt="UpLoad Image" src="${pageContext.request.contextPath}/traUpload/${savedName}">
-	
-						<input type="file" name="file1"> <p>						
+				<tr>
+   				<th>첨부파일</th>
+    <td>
+        <input type="file" name="file1" accept="image/*">
+        <input type="hidden" name="traImgId" value="${traImg.img_id}">
+        <input type="hidden" name="traImgStoredFile" value="${traImg.img_stored_file}">
+    </td>
+</tr>
 				
-				</td>
-			
-			
-			</tr>	
-			<tr>
-				<th>첨부파일 1</th>
-				<td><input type="file" name="file1"></td>
+								
+			<tr >
+				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
+				<a href="tra">목록보기</a></td>
 			</tr>
-			<tr>
-				<th>첨부파일 2</th>
-				<td><input type="file" name="file2"></td>
-			</tr>
-			<tr>
-				<th>첨부파일 3</th>
-				<td><input type="file" name="file3"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="확인"></td>
-			</tr> --%>
 		</table>
-		</form>
-<!--실험이지로오오롤오롱로오로롱--!>		
-	<h1>File Upload (파일 업로드)</h1>
-<!-- action의 값이 endpoint를 바라봅니다., enctype은 멀티파트 옵션을 줌 -->
-<!-- form 태그의 enctype 속성은 multipart/form-data로 세팅하여 브라우져가 파일 업로드 방식으로 동작하도록 설정 -->
-<form action="<%= application.getContextPath() %>/fileUpload"  method="post" enctype="multipart/form-data">>
-	<!-- input 태그 file 속성으로 작성하여 form 방식으로 파일 업로드를 할 수 있습니다.-->
-	<input type="file"  name="file1" placeholder="파일 선택" /><br /> 
-	<input type="file"  name="file2" placeholder="파일 선택" /><br /> 
-	<input type="file"  name="file3" placeholder="파일 선택" /><br /> 
-	<input type="submit" value="upload">
 	</form>
-	  
-         <!--    파일 설명 : <input type="text" name="description"><br>
-            파일1 : <input type="file" name="file1"><br>
-            파일2 : <input type="file" name="file2"><br>
-            <input type="submit" value="전송">
-      </form> -->
 
-<!-- <h1>Multi File Upload (다중 파일 업로드)</h1>
-<form action="multi_fileUpload"  method="post" enctype="multipart/form-data">
-	multiple 속성추가
-    <input type="file" name="uploadfiles" placeholder="파일 선택" multiple/><br/>
-    <input type="submit" value="upload">
-</form> -->
-	
-<!-- 	  <form action="<%= application.getContextPath() %>/fileUpload"  method="post" enctype="multipart/form-data">
-            파일 설명 : <input type="text" name="description"><br>
-            파일1 : <input type="file" name="file1"><br>
-            파일2 : <input type="file" name="file2"><br>
-            <input type="submit" value="전송">
-      </form> -->
-	
+
+
 </body>
+<c:import url="footer.jsp"/>
 </html>

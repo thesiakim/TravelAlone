@@ -24,7 +24,7 @@ public interface TravelDao {
 	//필터링  여행지구분
 	List<CommonCode> 		getCommonCode();
 	int 					traFilter(String code);
-	List<Travel> 			optTraList(Travel travel);
+	List<Travel> 			traOptList(Travel travel);
 	
 	//지역구분
 	List<CommonCode> 		getCommonLocCode();
@@ -41,6 +41,10 @@ public interface TravelDao {
 	//이미지 삽입
 	int 					traImgInsert(Tra_Img tra_Img);
 	int 					traSeq(Travel travel);
-	List<Tra_Img> 			traImgList(Tra_Img tra_Img);
+	int 					traImgUpdate(Tra_Img tra_Img);
 	int 					traImgDelete(int travel_id);
+	List<Tra_Img> 			traImgList(Tra_Img tra_Img);
+	
+
+	
 }
