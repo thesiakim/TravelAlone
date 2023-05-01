@@ -35,9 +35,8 @@
       )
       Where rn between #{start} and #{end}
       
+      
    </select>
-   
-   
    
    <select id="roBoardCount" parameterType="Board" resultType="int">
       Select   Count(*)
@@ -50,12 +49,11 @@
       Select *
       From
       (   Select   rownum rn, a.*
-         From   (   
-                  Select   b.*, m.m_nickname
+         From   (   Select   b.*, m.m_nickname
                   From   Board b, Member m
                   Where   b.b_re_level = 0
                   and      b.member_id = m.member_id
-                  and		b.b_common_board = #{b_common_board}
+                  and      b.b_common_board = #{b_common_board}
                   <choose>
                      <when test="orderList == 'view'">
                         order by b.b_view_cnt desc
@@ -67,7 +65,7 @@
                         order by b.create_date desc
                      </otherwise>
                   </choose>
-               )   a
+               ) a
       )
       Where rn between #{start} and #{end}
    </select>
@@ -79,11 +77,11 @@
    </update>
    
    <select id="roBoardSelList" parameterType="int" resultType="Board">
-      Select   b.*, m.m_nickname
-      From   Board b, Member m
-      Where   b.b_ref = #{board_id}
-      and      b.member_id = m.member_id
-      order by b.b_re_step
+      Select	b.*, m.m_nickname
+      From		Board b, Member m
+      Where		b.b_ref = #{board_id}
+      and		b.member_id = m.member_id
+      order by	b.b_re_step
    </select>
    
    <insert id="roBoardInsert" parameterType="Board">
@@ -97,8 +95,8 @@
          SELECT board_id_seq.currval AS board_id FROM dual
       </selectKey>
    </insert>
-
-	<insert id="roBoardReInsert" parameterType="Board">
+   
+   <insert id="roBoardReInsert" parameterType="Board">
       Insert   into
       Board   (board_id, member_id, b_content, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
       values   (
@@ -128,7 +126,7 @@
         </choose>
    </delete>
    
-     <select id="roBoardDeleteRe" parameterType="Board" statementType="CALLABLE">
+   <select id="roBoardDeleteRe" parameterType="Board" statementType="CALLABLE">
       {
          call boardDelRe(
              #{b_ref,      mode=IN,   jdbcType=INTEGER}
@@ -137,5 +135,12 @@
          )
       }
    </select>
+   
+   <update id="roBoardUpdateRe" parameterType="Board">
+   		Update	board
+   		Set		b_content = #{b_content},
+   				modified_date = sysdate
+   		Where	board_id = #{board_id}
+   </update>
    
 </mapper>

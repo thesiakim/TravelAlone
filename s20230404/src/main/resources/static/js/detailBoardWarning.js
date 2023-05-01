@@ -1,10 +1,10 @@
 function showRadio(button) {
-	var form = document.getElementById("reportForm");
-	if (form.style.display == "none") { 
-		form.style.display = "block";
-	} else {
-		form.style.display = "none"; 
-	}
+   var form = document.getElementById("reportForm");
+   if (form.style.display == "none") { 
+      form.style.display = "block";
+   } else {
+      form.style.display = "none"; 
+   }
 }
 
 function submitForm() {

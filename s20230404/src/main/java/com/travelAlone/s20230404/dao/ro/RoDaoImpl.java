@@ -42,7 +42,6 @@ public class RoDaoImpl implements RoDao {
       try {
          listBoardAll = session.selectList("roBoardAllList", board);
          log.info("roDaoImpl listAllBoard listBoardAll.size()는 "+ listBoardAll.size());
-         
       } catch (Exception e) {
          log.info("roDaoImpl listAllBoard e.getMessage() -> "+ e.getMessage());
       }
@@ -94,11 +93,11 @@ public class RoDaoImpl implements RoDao {
    @Override
    public List<Board> detailBoard(int board_id) {
       List<Board> listBoardS = null;
-      log.info("roDaoImpl detailBoardRe 시작");
+      log.info("roDaoImpl detailBoard 시작");
       
       try {
          listBoardS = session.selectList("roBoardSelList", board_id);
-         log.info("roDaoImp detailBoardRe listBoardRe.size()는 "+ listBoardS.size());
+         log.info("roDaoImp detailBoard listBoardRe.size()는 "+ listBoardS.size());
       } catch (Exception e) {
          log.info("roDaoImpl detailBoard e.getMessage -> "+ e.getMessage());
       }
@@ -138,7 +137,7 @@ public class RoDaoImpl implements RoDao {
 
 @Override
 public List<String> detailBoardImg(int board_id) {
-	List<String> result = new ArrayList<>();
+   List<String> result = new ArrayList<>();
     log.info("roDaoImp detailBoardImg 시작");
     
     try {
@@ -147,30 +146,44 @@ public List<String> detailBoardImg(int board_id) {
     } catch (Exception e) {
        log.info("roDaoImp detailBoardImg Exception -> "+ e.getMessage());
     }
-	
-	return result;
+   
+   return result;
 }
 
+   @Override
+   public int deleteBoard(long board_id) {
+      int delResult = 0;
+      log.info("roDaoImp delResult 시작");
+      
+      try {
+         delResult = session.delete("roBoardDelete", board_id);
+         log.info("roDaoImp deleteBoard delResult는 "+ delResult);
+      } catch (Exception e) {
+         log.info("roDaoImp deleteBoard Exception -> "+ e.getMessage());
+      }
+      
+      return delResult;
+   }
+   
+   @Override
+   public void deleteReBoard(Board board) {
+      log.info("roDaoImp deleteReBoard 시작");
+      session.selectList("roBoardDeleteRe", board);
+      // call by reference여서 리턴을 void로 해도 상관없음
+   }
+
 	@Override
-	public int deleteBoard(long board_id) {
-	   int delResult = 0;
-	   log.info("roDaoImp delResult 시작");
-	   
-	   try {
-	      delResult = session.delete("roBoardDelete", board_id);
-	      log.info("roDaoImp deleteBoard delResult는 "+ delResult);
-	   } catch (Exception e) {
-	      log.info("roDaoImp deleteBoard Exception -> "+ e.getMessage());
-	   }
-	   
-	   return delResult;
-	}
-	
-	@Override
-	public void deleteReBoard(Board board) {
-	   log.info("roDaoImp deleteReBoard 시작");
-	   session.selectList("roBoardDeleteRe", board);
-	   // call by reference여서 리턴을 void로 해도 상관없음
+	public int updateReBoard(Board board) {
+		int updateCount = 0;
+		log.info("roDaoImp updateReBoard 시작");
+		
+		try {
+			updateCount = session.update("roBoardUpdateRe", board);
+			log.info("roDaoImp updateReBoard updateCount는 "+ updateCount);
+		} catch (Exception e) {
+			log.info("roDaoImp updateReBoard Exception -> "+ e.getMessage());
+		}
+		return updateCount;
 	}
 
    

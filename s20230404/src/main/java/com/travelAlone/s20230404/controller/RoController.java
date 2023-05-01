@@ -19,6 +19,7 @@ import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.BodImg;
+
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.ro.RoService;
 
@@ -66,29 +67,32 @@ public class RoController {
    // 게시판 이동
    @RequestMapping(value = "listBoard")
    public String boardList(@LoginUser MemberJpa memberJpa, Board board, String currentPage, Model model) {
-	   log.info("roController boardList 시작");
-	   log.info("roController boardList cuurentPage는 "+ currentPage);
-	   int boardCnt = rs.boardCnt(board);
-	   log.info("roController boardList boardCnt는 "+ boardCnt);
+
+      log.info("roController boardList 시작");
+      log.info("roController boardList cuurentPage는 "+ currentPage);
       
-	   // Paging 작업
+      int boardCnt = rs.boardCnt(board);
+      log.info("roController boardList boardCnt는 "+ boardCnt);
       
-	   Paging page = new Paging(boardCnt, currentPage);
+      // Paging 작업
       
-	   // Board에 추가 setting
-	   board.setStart(page.getStart());
-	   board.setEnd(page.getEnd());
+      Paging page = new Paging(boardCnt, currentPage);
       
-	   List<Board> listBoard = rs.listBoard(board);
+      // Board에 추가 setting
+      board.setStart(page.getStart());
+      board.setEnd(page.getEnd());
       
-	   log.info("roController boardList listBoard.size()는 "+ listBoard.size());
+      List<Board> listBoard = rs.listBoard(board);
       
-	   model.addAttribute("boardCnt" ,boardCnt);
-	   model.addAttribute("listBoard", listBoard);
-	   model.addAttribute("page", page);
+      log.info("roController boardList listBoard.size()는 "+ listBoard.size());
       
-	   return "ro/boardListForm";
-   	}
+      model.addAttribute("boardCnt" ,boardCnt);
+      model.addAttribute("listBoard", listBoard);
+      model.addAttribute("page", page);
+      
+      return "ro/boardListForm";
+      }
+
    
    // 게시판 글 보는 폼 이동
    @RequestMapping(value = "detailBoard")
@@ -107,7 +111,9 @@ public class RoController {
            for (Cookie cookie : cookies) {
                if (cookie.getName().equals(cookieKey)) {
                    // 쿠키에 해당 게시물을 이미 조회한 경우, 조회수 증가하지 않음
+
             	   boardViewChk = true;
+
                    break;
                }
            }
@@ -124,6 +130,7 @@ public class RoController {
        model.addAttribute("b_common_board", board.getB_common_board());
 
        List<Board> listBoardS = rs.detailBoard((int) board.getBoard_id());
+
        log.info("roController detailBoard listBoardC.size()는 "+ listBoardS.size());
 
        model.addAttribute("viewCount", viewCount);
@@ -149,8 +156,9 @@ public class RoController {
       if(memberJpa != null) {
          log.info("roController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
          model.addAttribute("user_id", memberJpa.getId());
-         model.addAttribute("b_common", board.getB_common_board());
+         model.addAttribute("b_common_board", board.getB_common_board());
          resultForm = "ro/writeBoardForm";
+
       }else {
          resultForm = "th/login";
       }
@@ -197,7 +205,8 @@ public class RoController {
    
    @ResponseBody
    @PostMapping(value = "deleteBoard")
-   public String deleteBoard(long board_id) {
+   public String deleteBoard(long board_id, Model model) {
+
       log.info("roController deleteBoard 시작");
       log.info("roController deleteBoard board_id는 "+ board_id);
       
@@ -210,7 +219,8 @@ public class RoController {
    
    @ResponseBody
    @PostMapping(value = "deleteBoardRe")
-   public String deleteReBoard(Board board) {   
+   public String deleteReBoard(Board board, Model model) {   
+
       String successStatus = "1";
       log.info("roController deleteReBoard 시작");
       log.info("roController deleteReBoard board.b_re_step는 "+ board.getB_re_step());
@@ -220,4 +230,24 @@ public class RoController {
       return successStatus;
    }
    
+
+   @ResponseBody
+   @PostMapping(value = "UpdateBoardRe")
+   public String updateReBoard(Board board, Model model) {
+	   log.info("roController updateReBoard 시작");
+	   
+	   int updateCount = rs.updateReBoard(board);
+	   log.info("roController updateReBoard updateCount는 "+ updateCount);
+	   String updateResult = Integer.toString(updateCount);
+	   
+	   return updateResult;
+	   
+   }
+   
+//   @PostMapping(value = "warningBoardRe")
+//   public String warningReBoard(Board board) {
+//	   log.info("roController deleteReBoard 시작");
+//   }
+   
+
 }

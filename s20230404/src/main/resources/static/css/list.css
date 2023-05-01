@@ -1,163 +1,163 @@
 @charset "UTF-8";
-	
-	#comunity > ul{ text-align:center;		padding: 0; }
-	
-	#comunity > ul > li{ display:inline-block; 	margin:0 15px; 
-		padding: 0;}
-	table {
-		text-align:center;		padding: 0;
-		display:inline-block; 	margin:0 15px; 
-		border-collapse : collapse;
-	}
-	
-	td { 
-		text-align: left;		font-size: 18px;
-		padding:7px; 			color: rgb(64, 64, 64); 
-		position: relative;
-	}
-	
-	
-	#list {
-		font-size: 15px;	padding: 10px;
-	}
-	
-	h6{
-		color:red;
-	}
-	
-	#serch > input {
-	    
-	    padding: 20px; 		
-	    border-radius:25px;	margin: 16px;
-		color: #205E61;  	font-weight: bolder;
-	    box-sizing: border-box;
-	    background-color: #F8F8F8;
-		font-family: 'Roboto', sans-serif; 
-		border: 3px solid  #205E61;
-	}
-	
-	
-	
-	
-	.titleForm input[type="submit"] {
-		width: 50px;			border-radius: 7px;
-	    height: 25px;			box-sizing: border-box;
-	    font-size: 15px;  		font-weight:bolder;
-	    color:white;
-	    border:  #205E61; 		background-color: #205E61;
-	}
-	
-	.titleForm input[type="submit"]:hover {
-		color: #205E61;
-		background-color:  white;
-		transition: ease 0.5s;
-	}
-	
-	#reply input[type="submit"] {
-		width: 50px;			border-radius: 7px;
-	    height: 25px;			box-sizing: border-box;
-	    font-size: 15px;  		font-weight:bolder;
-	    color:white;
-	    border:  #205E61; 		background-color: #205E61;
-	}
-	
-	#reply input[type="submit"]:hover {
-		color: #205E61;
-		background-color:  white;
-		transition: ease 0.5s;
-	}
-	
-	#reply input[type="text"] {
-		width: 770px; 			height: 90px;
-	    padding: 0 5px; 		font-size: 15px; 
-	    margin:0 3px 16px; 		box-sizing: border-box;
-	    border-radius: 10px; 	background-color: #F8F8F8;
-	    border: 3px solid  #205E61;
-	}
-	
-	#reply input:focus{ outline: 0px solid #205E61; }
-	
-	#reply input::placeholder{ color: #5F9EA0; }
-	
-	#reply table  td { 
-		border-bottom: 2px solid rgb(64, 64, 64);
-	 }
-	 
-	 input[type="submit"] {
-	 	width: 50px;			border-radius: 7px;
-	    height: 25px;			box-sizing: border-box;
-	    font-size: 15px;  		font-weight:bolder;
-	    color:white;
-	    border:  #205E61; 		background-color: #205E61;
-	 }
-	 
-	 input[type="submit"]:hover {
-		color: #205E61;
-		background-color:  white;
-		transition: ease 0.5s;
-	}
-	 
-	input[type="button"] {
-	 	width: 50px;			border-radius: 7px;
-	    height: 25px;			box-sizing: border-box;
-	    font-size: 15px;  		font-weight:bolder;
-	    color:white;
-	    border:  #205E61; 		background-color: #205E61;
-	}
-	
-	input[type="button"]:hover {
-		color: #205E61;
-		background-color:  white;
-		transition: ease 0.5s;
-	}
-	
-	button[type="submit"] {
-		width: 80px;			border-radius: 7px;
-	    height: 32px;			box-sizing: border-box;
-	    font-size: 15px;  		font-weight:bolder;
-	    color:white;
-	    border:  #205E61; 		background-color: #205E61;
-	}
-	
-	button[type="submit"]:hover {
-		color: #205E61;
-		background-color:  white;
-		transition: ease 0.5s;
-	}
-	
-	// 맨 밑 댓글창
-	#replyForm > input:focus{ outline: 0px solid #205E61; }
-	
-	#replyForm > input::placeholder{ color: #5F9EA0; }
+   
+   #comunity > ul{ text-align:center;      padding: 0; }
+   
+   #comunity > ul > li{ display:inline-block;    margin:0 15px; 
+      padding: 0;}
+   table {
+      text-align:center;      padding: 0;
+      display:inline-block;    margin:0 15px; 
+      border-collapse : collapse;
+   }
+   
+   td { 
+      text-align: left;      font-size: 18px;
+      padding:7px;          color: rgb(64, 64, 64); 
+      position: relative;
+   }
+   
+   
+   #list {
+      font-size: 15px;   padding: 10px;
+   }
+   
+   h6{
+      color:red;
+   }
+   
+   #serch > input {
+       
+       padding: 20px;       
+       border-radius:25px;   margin: 16px;
+      color: #205E61;     font-weight: bolder;
+       box-sizing: border-box;
+       background-color: #F8F8F8;
+      font-family: 'Roboto', sans-serif; 
+      border: 3px solid  #205E61;
+   }
+   
+   
+   
+   
+   .titleForm input[type="submit"] {
+      width: 50px;         border-radius: 7px;
+       height: 25px;         box-sizing: border-box;
+       font-size: 15px;        font-weight:bolder;
+       color:white;
+       border:  #205E61;       background-color: #205E61;
+   }
+   
+   .titleForm input[type="submit"]:hover {
+      color: #205E61;
+      background-color:  white;
+      transition: ease 0.5s;
+   }
+   
+   #reply input[type="submit"] {
+      width: 50px;         border-radius: 7px;
+       height: 25px;         box-sizing: border-box;
+       font-size: 15px;        font-weight:bolder;
+       color:white;
+       border:  #205E61;       background-color: #205E61;
+   }
+   
+   #reply input[type="submit"]:hover {
+      color: #205E61;
+      background-color:  white;
+      transition: ease 0.5s;
+   }
+   
+   #reply input[type="text"] {
+      width: 770px;          height: 90px;
+       padding: 0 5px;       font-size: 15px; 
+       margin:0 3px 16px;       box-sizing: border-box;
+       border-radius: 10px;    background-color: #F8F8F8;
+       border: 3px solid  #205E61;
+   }
+   
+   #reply input:focus{ outline: 0px solid #205E61; }
+   
+   #reply input::placeholder{ color: #5F9EA0; }
+   
+   #reply table  td { 
+      border-bottom: 2px solid rgb(64, 64, 64);
+    }
+    
+    input[type="submit"] {
+       width: 50px;         border-radius: 7px;
+       height: 25px;         box-sizing: border-box;
+       font-size: 15px;        font-weight:bolder;
+       color:white;
+       border:  #205E61;       background-color: #205E61;
+    }
+    
+    input[type="submit"]:hover {
+      color: #205E61;
+      background-color:  white;
+      transition: ease 0.5s;
+   }
+    
+   input[type="button"] {
+       width: 50px;         border-radius: 7px;
+       height: 25px;         box-sizing: border-box;
+       font-size: 15px;        font-weight:bolder;
+       color:white;
+       border:  #205E61;       background-color: #205E61;
+   }
+   
+   input[type="button"]:hover {
+      color: #205E61;
+      background-color:  white;
+      transition: ease 0.5s;
+   }
+   
+   button[type="submit"] {
+      width: 80px;         border-radius: 7px;
+       height: 32px;         box-sizing: border-box;
+       font-size: 15px;        font-weight:bolder;
+       color:white;
+       border:  #205E61;       background-color: #205E61;
+   }
+   
+   button[type="submit"]:hover {
+      color: #205E61;
+      background-color:  white;
+      transition: ease 0.5s;
+   }
+   
+   // 맨 밑 댓글창
+   #replyForm > input:focus{ outline: 0px solid #205E61; }
+   
+   #replyForm > input::placeholder{ color: #5F9EA0; }
 
-	#replyForm > input[type="text"] {
-		width: 800px; 				height: 120px;
-	    padding: 0 5px; 			font-size: 15px; 
-	    margin:0 3px 16px; 			box-sizing: border-box;
-	    border-radius: 10px; 		background-color: #F8F8F8;
-	    border: 3px solid  #205E61;	margin-left: 40px;
-	}
-	
-	#replyForm > input[type="submit"] {
-		width: 80px;			height: 40px;	
-	    font-size: 17px;  		font-weight:bolder;
-	    padding: 0 5px; 		box-sizing: border-box;
-	    margin:0 3px 16px; 		border-radius: 10px;
-	    border:  #205E61; 		color: white;
-	    background-color: #205E61;
-	}
-	
-	#replyForm > input:hover { 
-		color: #205E61;
-		background-color:  white;
-		transition: ease 0.5s;
-	}
-	
-	.level-2{ text-align: center; }	
-	
-	.level-3{ text-align: right; }
-	
-	.level-2::before {
+   #replyForm > input[type="text"] {
+      width: 800px;             height: 120px;
+       padding: 0 5px;          font-size: 15px; 
+       margin:0 3px 16px;          box-sizing: border-box;
+       border-radius: 10px;       background-color: #F8F8F8;
+       border: 3px solid  #205E61;   margin-left: 40px;
+   }
+   
+   #replyForm > input[type="submit"] {
+      width: 80px;         height: 40px;   
+       font-size: 17px;        font-weight:bolder;
+       padding: 0 5px;       box-sizing: border-box;
+       margin:0 3px 16px;       border-radius: 10px;
+       border:  #205E61;       color: white;
+       background-color: #205E61;
+   }
+   
+   #replyForm > input:hover { 
+      color: #205E61;
+      background-color:  white;
+      transition: ease 0.5s;
+   }
+   
+   .level-2{ text-align: center; }   
+   
+   .level-3{ text-align: right; }
+   
+   .level-2::before {
         content: 'ㄴ';
         display: inline-block;
         margin-right: 5px;
@@ -168,7 +168,7 @@
         display: inline-block;
         margin-right: 5px;
     }
-	
+   
     .button-container {
         display: flex;
         justify-content: flex-end;
@@ -179,4 +179,4 @@
     .button-container form {
         margin-right: 10px;
     }
-	
+   

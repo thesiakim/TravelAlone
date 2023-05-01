@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.dao.ro.RoDao;
 import com.travelAlone.s20230404.model.Board;
-import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 
 import lombok.RequiredArgsConstructor;
@@ -35,6 +34,7 @@ public class RoServiceImpl implements RoService {
       log.info("roService listAllBoard 시작");
       
       listBoardAll = rd.listAllBoard(board);
+      log.info("roService listAllBoard listBoardAll.size()는 "+ listBoardAll.size());
       
       return listBoardAll;
    }
@@ -74,13 +74,13 @@ public class RoServiceImpl implements RoService {
       
       listBoardS = rd.detailBoard(board_id);
       List<String> listBoardImg = rd.detailBoardImg(board_id);
-      listBoardS.get(0).setImg_stored_file(listBoardImg);
       
-      if (!listBoardImg.isEmpty()) {
-      } else {
+      if(listBoardImg.size() > 0) {
+    	  // 이게 뭐야!!!! 0번 인덱스만 적었는데 인덱스 1, 2 순차적으로 어떻게 갖고와!!!!! 그냥 문법인건가!!!!?!??!???
+    	  listBoardS.get(0).setImg_stored_file(listBoardImg);    	  
+    	  log.info("roService detailBoard listBoardC.size()는 "+ listBoardS.size());
+    	  
       }
-      
-      log.info("roService detailBoard listBoardC.size()는 "+ listBoardS.size());
       
       return listBoardS;
    }
@@ -118,6 +118,16 @@ public class RoServiceImpl implements RoService {
       rd.deleteReBoard(board);
       
    }
+
+	@Override
+	public int updateReBoard(Board board) {
+		int updateCount = 0;
+		log.info("roService updateReBoard 시작");
+		
+		updateCount = rd.updateReBoard(board);
+		
+		return updateCount;
+	}
 
 
    

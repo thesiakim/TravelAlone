@@ -14,8 +14,10 @@ public interface RoDao {
 	List<Board> 	detailBoard(int board_id);
 	int 			insertReBoard(Board board);
 	int 			veiwCount(int board_id);
-	List<String>	detailBoardImg(int board_id);
-	void 			deleteReBoard(Board board);
+	int				deleteImgBoard(long board_id);
 	int 			deleteBoard(long board_id);
-	int 			deleteImgBoard(long board_id);
+	void			deleteReBoard(Board board);
+	List<String>	detailBoardImg(int board_id);
+	int				updateReBoard(Board board);
+	
 }

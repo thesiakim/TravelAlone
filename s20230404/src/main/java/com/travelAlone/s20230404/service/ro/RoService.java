@@ -16,6 +16,7 @@ public interface RoService {
 	int 				insertReBoard(Board board);
 	int 				veiwCount(int board_id);
 	int 				deleteBoard(long board_id);
-	void 				deleteReBoard(Board board);
+	void				deleteReBoard(Board board);
+	int					updateReBoard(Board board);
 	
 }
