@@ -203,6 +203,7 @@ public class RoController {
       return "ro/updateBoardForm";
    }
    
+   
    @ResponseBody
    @PostMapping(value = "deleteBoard")
    public String deleteBoard(long board_id, Model model) {
@@ -241,7 +242,6 @@ public class RoController {
 	   String updateResult = Integer.toString(updateCount);
 	   
 	   return updateResult;
-	   
    }
    
    

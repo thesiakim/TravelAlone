@@ -24,9 +24,15 @@
    	<c:import url="boardHeader.jsp"/>
    	<form action="listBoard?b_common_board=${board.b_common_board }">
 		<!-- 검색창 -->
+		<select name="listCategory">
+	  		<option value="lc_total">전체</option>
+	  		<option value="lc_title">제목</option>
+	  		<option value="lc_content">내용</option>
+	  		<option value="lc_writer">글쓴이</option>
+	  	</select>
        	<div id="serch">
-         	<input type="text" placeholder="종합 검색">
-        </div>
+         	<input type="text" name="keyWord" placeholder="종합 검색" value="${board.keyWord }">
+       	</div>
 	</form>
 		<hr>
 		<form action="list" id="list">
@@ -57,7 +63,7 @@
          	</select>
 			<script>
 			   	document.getElementById('orderList').onchange = function() {
-			      	location.href="listBoard?orderList="+orderList.value+"&b_common_board=${board.b_common_board}";
+			      	location.href="listBoard?orderList="+orderList.value+"&b_common_board=${board.b_common_board}&listCategory=${board.listCategory}&keyWord=${board.keyWord}";
 			   	}
 		   	</script>   
 		</form>
@@ -87,13 +93,13 @@
       	</table>
    	</div>
    	<c:if test="${page.startPage > page.pageBlock }">
-      	<a href="listBoard?currentPage=${page.startPage - page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}">[이전]</a>
+      	<a href="listBoard?currentPage=${page.startPage - page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[이전]</a>
    	</c:if>
    	<c:forEach var="i" begin="${page.startPage }" end="${page.endPage }">
-      	<a href="listBoard?currentPage=${i }&b_common_board=${board.b_common_board }&orderList=${board.orderList}">[${i }]</a>
+      	<a href="listBoard?currentPage=${i }&b_common_board=${board.b_common_board }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[${i }]</a>
    	</c:forEach>
    	<c:if test="${page.endPage < page.totalPage }">
-      	<a href="listBoard?currentPage=${page.startPage + page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}">[다음]</a>
+      	<a href="listBoard?currentPage=${page.startPage + page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[다음]</a>
    	</c:if>
 </body>
 	<c:import url="footer.jsp"/>

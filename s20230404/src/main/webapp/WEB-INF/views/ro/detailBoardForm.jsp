@@ -22,8 +22,7 @@
        <script type="text/javascript">
           alert("${message}");
        </script>
-   </c:if>
-      
+      </c:if>
       
       <c:import url="boardHeader.jsp"/>
       
@@ -47,6 +46,9 @@
                              <div class="button-container">
                                 <form action="updateBoardForm" method="post">
                                    <input type="hidden" name="board_id" value="${board_id }">
+                                   <input type="hidden" name="member_id" value="${content.member_id }">
+                                   <input type="hidden" name="b_title" value="${content.b_title}">
+                                   <input type="hidden" name="b_content" value="${content.b_content}">
                                    <input type="submit" value="수정">
                                 </form>
                                 <input type="button" id="del_board" value="삭제" onclick="delConfirm(${board_id })" >
@@ -69,11 +71,11 @@
                      <td colspan="3" style="padding-left: 250px; color:red;">${content.b_like_cnt}</td>
                   </tr>
             <tr>
-                     <td style="padding-left: 230px;">
-                        <form action="boardlike" method="post">
-                           <input type="hidden" name="board_id" value="${content.board_id}">
-                           <input type="hidden" name="b_common_board" value="${b_common_board}">
-                           <input type="submit" value="추천" onsubmit="return chkId();">
+               <td style="padding-left: 230px;">
+                  <form action="boardlike" method="post">
+                     <input type="hidden" name="board_id" value="${content.board_id}">
+                     <input type="hidden" name="b_common_board" value="${b_common_board}">
+                     <input type="submit" value="추천" onsubmit="return chkId();">
                   </form>
                </td>
                <td colspan="2">
@@ -133,8 +135,8 @@
                </tr>
                <tr class="members" style="display: none;">
                     <td colspan="7">
-                      <form id="bruForm">
-                         <input type="hidden" 
+                      <form id="bruForm" onsubmit="BoardReUpdate(${status.index})">
+                         <input type="hidden"
                                 id="board_id${status.index}" 
                                 name="board_id" 
                                 value="${content.board_id}">
@@ -143,8 +145,7 @@
                          <input type="text" 
                                 id="b_content${status.index}" 
                                 placeholder="수정할 댓글을 입력하세요">
-                       <!--  <input type="submit" value="수 정"> -->
-                         <input type="button" value="수 정" onclick="BoardReUpdate(${status.index})">
+                         <input type="submit" value="수 정">
                       </form>
                  </td>
                </tr>
