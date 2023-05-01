@@ -134,11 +134,16 @@
                <tr class="members" style="display: none;">
                     <td colspan="7">
                       <form id="bruForm">
-                         <input type="hidden" name="board_id" value="${content.board_id}">
+                         <input type="hidden" 
+                                id="board_id${status.index}" 
+                                name="board_id" 
+                                value="${content.board_id}">
                          <input type="hidden" name="b_ref" value="${content.b_ref}">
                          <input type="hidden" name="b_common_board" value="${b_common_board}">
-                         <input type="text" id="b_content${status.index}" placeholder="수정할 댓글을 입력하세요">
-                    	<!--  <input type="submit" value="수 정"> -->
+                         <input type="text" 
+                                id="b_content${status.index}" 
+                                placeholder="수정할 댓글을 입력하세요">
+                       <!--  <input type="submit" value="수 정"> -->
                          <input type="button" value="수 정" onclick="BoardReUpdate(${status.index})">
                       </form>
                  </td>

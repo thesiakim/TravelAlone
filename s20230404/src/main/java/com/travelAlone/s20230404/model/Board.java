@@ -35,6 +35,7 @@ public class Board {
 	private String pageNum;
 	private int mcd;
 	private String orderList;
+	private String listCategory;
 	
 	// 사진 파일 이름 가져오기
 	List<String> img_stored_file = new ArrayList<>();

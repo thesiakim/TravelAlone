@@ -11,5 +11,23 @@
 	
 	</insert>
 	
-
+	<update id="updateReportContent" parameterType="Warning">
+		<![CDATA[
+		Update Board
+		Set    b_content = '신고당한 글입니다.'
+		Where  b_content in (
+                     Select  b.b_content
+                     From    board b,   (
+                                         Select member_id, Count(member_id)
+                                         From Warning
+                                         Group by member_id
+                                         Having Count(member_id) >= 10
+                                        ) w
+                     Where   b.member_id = w.member_id
+                     And     b_re_level > 0
+                    )
+        ]]>
+	</update>
+	
+	
 </mapper>

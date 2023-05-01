@@ -21,6 +21,10 @@
                   Where   b.b_re_level = 0
                   and      b.member_id = m.member_id
                   <choose>
+                  	<when test=listCategory
+                  </choose>
+                  
+                  <choose>
                      <when test="orderList == 'view'">
                         order by b.b_view_cnt desc
                      </when>

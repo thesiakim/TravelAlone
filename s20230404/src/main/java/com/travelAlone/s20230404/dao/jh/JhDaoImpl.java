@@ -109,5 +109,19 @@ public class JhDaoImpl implements JhDao {
 		return insertReLevel;
 	}
 
+	@Override
+	public int reportUpdate(Warning warning) {
+		int updateResult = 0;
+		log.info("jhDaoImpl reportUpdate start");
+		
+		try {
+			updateResult = session.update("updateReportContent", warning);
+			log.info("jhDaoImpl reportUpdate updateResult -> " + updateResult);
+		} catch (Exception e) {
+			log.info("jhDaoImpl reportUpdate Exception -> " + e.getMessage());
+		}
+		return updateResult;
+	}
+
 	
 }

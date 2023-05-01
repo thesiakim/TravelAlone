@@ -35,8 +35,12 @@ public class JhServiceImpl implements JhService {
 	public int reportMember(Warning warning) {
 		log.info("jhServiceImpl reportMember start...");
 		int reportMember = 0;
+		int updateResult = 0;
+		
 		reportMember = jd.reportMember(warning);
-		return reportMember;
+		updateResult = jd.reportUpdate(warning);
+		
+		return reportMember + updateResult;
 	}
 	
 	// 이미지 삽입

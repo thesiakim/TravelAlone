@@ -13,5 +13,6 @@ public interface JhDao {
 	long  				insertBoard(Board board);
 	int 				insertBodImg(List<BodImg> bodImgs);
 	int 				insertReLevel(Board board);
+	int					reportUpdate(Warning warning);
 
 }
