@@ -19,7 +19,8 @@
 
 <!-- 이미지 목록가져오기 -->
 	<select id="mhInqImgList" parameterType="Inq_Img" resultType="Inq_Img" >
-			select IMG_ID
+			select 	G_WRITING_ID
+					,IMG_ID
 					,IMG_STORED_FILE
 					,IMG_ORIGINAL_FILE
 			from  G_WRT_IMG

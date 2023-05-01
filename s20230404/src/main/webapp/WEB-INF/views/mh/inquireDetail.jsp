@@ -14,11 +14,6 @@
 
 	<h1>문의글 조회</h1>
 	
-
-
-
-
-	
 	
 	<table  style="margin:auto;">
 		<tr>
@@ -55,8 +50,7 @@
 					<td hidden>${inqImg.img_id}</td>
 				 	<td >
 				 	
-<%-- 			<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/inquireUpload/${InqImg.img_stored_file}" width="500" height="300"> 
- --%>				 	
+				 	
  				<c:url value='/display' var='url'>
 						<c:param name='file' value='${inqImg.img_stored_file}'/>
 				</c:url>

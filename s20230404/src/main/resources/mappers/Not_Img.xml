@@ -21,7 +21,8 @@
 
 <!-- 이미지 목록가져오기 -->
 	<select id="mhNotImgList" parameterType="Not_Img" resultType="Not_Img" >
-			select 	IMG_ID
+			select 	G_NOTICE_ID
+					,IMG_ID
 					,IMG_STORED_FILE
 					,IMG_ORIGINAL_FILE
 			from  G_NOT_IMG

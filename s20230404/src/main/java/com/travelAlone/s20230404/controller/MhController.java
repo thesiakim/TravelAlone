@@ -118,7 +118,7 @@ public class MhController {
 		
 		
 		//이미지 삽입
-		String img_context = request.getSession().getServletContext().getRealPath("/noticeUpload/");
+		String img_context = "images"+File.separator+"noticeUpload" + File.separator;
 		log.info("IMG POST Start");
 		for(MultipartFile multipartFile : file1) {
 			log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
@@ -149,22 +149,31 @@ public class MhController {
 	
 	//공지사항 글수정 페이지이동
 	@GetMapping(value = "noticeUpdateForm")
-	public String noticeUpdateForm(int g_notice_id, Model model) {
-		log.info("mhController Start updateForm...");
+	public String noticeUpdateForm(int g_notice_id, Model model, Not_Img not_Img) {
+		log.info("NoticeController Start updateForm...");
 		Notice notice = mh.detailNotice(g_notice_id);
-		log.info("mhController updateFormNotice house->" + notice);		
+		log.info("NoticeController updateFormNotice house->" + notice);		
+		
+		//사진리스트
+		log.info("Not_Img Start");
+		not_Img.setG_notice_id(g_notice_id);
+		List<Not_Img> listImg  = mh.listNot_Img(not_Img);
+		log.info("NoticeController  listImg.size()=>"+ listImg.size());
+		model.addAttribute("imgNotList", listImg);
 		
 		model.addAttribute("notice", notice);	
 		return "mh/noticeUpdateForm";
 	}
-	
+//	0502
+//	0502050205020502050205020502
 	//공지사항 글수정 처리
 	@PostMapping(value = "updateNotice")
-	public String updateNotice(Notice notice , Model model) {
-		System.out.println("mhController Start update..." );
+	public String updateNotice(Notice notice , Model model,
+			HttpServletRequest request,  List<MultipartFile> file1, Not_Img  not_Img) {
+		System.out.println("NoticeController Start update..." );
 		
 		int updateCount = mh.updateNotice(notice);
-		System.out.println("mhController es.updateNotice updateCount-->"+ updateCount);
+		System.out.println("NoticeController es.updateNotice updateCount-->"+ updateCount);
 		model.addAttribute("uptCnt",updateCount);   // Test Controller간 Data 전달
 		model.addAttribute("kk3","Message Test");   // Test Controller간 Data 전달
 		
@@ -174,7 +183,7 @@ public class MhController {
 	//공지사항 글 삭제
 	@RequestMapping(value = "deleteNotice")
 	public String deleteNotice(int g_notice_id, Model model) {
-		System.out.println("mhController Start delete... n_id :" +g_notice_id);
+		System.out.println("NoticeController Start delete... n_id :" +g_notice_id);
 		int result2 = mh.deleteNotImg(g_notice_id);
 		int result = mh.deleteNotice(g_notice_id);
 		
@@ -356,12 +365,12 @@ public class MhController {
 				 fileDirectory.mkdirs();
 				log.info("업로드용 폴더 생성" + img_context ); 
 				
-			}
-			 String img_stored_file = uid.toString() + "_" + originalName;
+			 }
+			 String img_stored_file = img_context + uid.toString() + "_" + originalName;
 			 log.info("img_stored_file ->" + img_stored_file);
-			 File target = new File(img_context, img_stored_file);
+			 File target = new File(img_stored_file);
 			 
-			 FileCopyUtils.copy(fileData,target);						
+			 FileCopyUtils.copy(fileData,target);
 			 return img_stored_file;
 		}
 		
