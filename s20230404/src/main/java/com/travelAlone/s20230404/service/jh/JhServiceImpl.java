@@ -70,5 +70,26 @@ public class JhServiceImpl implements JhService {
 		return insertReLevel;
 	}
 	
+	// 마이페이지 커뮤니티 페이징용 
+	@Override
+	public int myPageCommunityListCnt(long memberId) {
+		log.info("jhServiceImpl myPageCommunityListCnt start");
+		int myPageCommunityListCnt = jd.myPageCommunityListCnt(memberId);
+		log.info("jhServiceImpl myPageCommunityListCnt는 "+ myPageCommunityListCnt);
+		return myPageCommunityListCnt;
+	}
+	
+	// 마이페이지 커뮤니티  리스트
+	@Override
+	public List<Board> myPageCommunityList(Board board) {
+		List<Board> myPageCommunityList = null;
+		log.info("jhServiceImpl myPageCommunityList start");
+	      
+		myPageCommunityList = jd.myPageCommunityList(board);
+		log.info("jhServiceImpl myPageCommunityList.size()는 "+ myPageCommunityList.size());
+		      
+		return myPageCommunityList;
+	}
+	
 
 }

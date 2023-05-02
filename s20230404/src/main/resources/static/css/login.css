@@ -1,0 +1,72 @@
+@charset "UTF-8";
+	
+	body {
+		 font-size: 20px;		color: #205E61;
+		 font-weight: bolder;
+		 font-family: 'Roboto', sans-serif; 
+		 margin: 0; 			padding: 0;
+		 text-align: center;
+	}
+	
+	/* 기본 p 글자 */
+	p {
+		font-size: 13px; 		weight: 100%;
+		float:left;				height: 1px;
+	}	
+
+	/* 이메일 주소, 비밀번호 입력 창 */
+	input {
+		width: 275px;		box-sizing: border-box;
+		height: 40px;		font-family: 'Roboto', sans-serif; 
+		border-radius:12px;	border: 2px solid  #205E61;
+		color: #205E61;  	background-color: #F8F8F8;
+		font-weight: bolder;
+		
+	}
+	
+	/* 입력창 기본 글자 색 */
+	input::placeholder{ color: #5F9EA0; }
+	input:focus{ outline: 0px solid #205E61; }
+	
+	/* 에러 메세지 */
+	.error {
+	
+	}
+	
+	/* 로그인메인 고순이 */
+	.loginLogo > a {
+		display: flex;
+		justify-content: center;
+	}
+	a > img{
+		float : center;		margin : 100px 0 50px 0;
+		display: block; 	width: 200px;
+		height: 200px;		object-fit: cover;
+	}
+	
+	
+	/* 로그인, 회원가입 버튼  */
+	.py-3 {
+		
+	}
+	
+   /* 회원가입 버튼 */
+	button[type="button"] {
+		width: 80px;         border-radius: 7px;
+		height: 32px;         box-sizing: border-box;
+		font-size: 15px;        font-weight:bolder;
+		color:white;
+		border:  #205E61;       background-color: #205E61;
+	}
+	button[type="button"]:hover {
+		color: #205E61;
+		background-color:  white;
+		transition: ease 0.5s;
+	}
+	
+	/* 라디오 버튼 */
+	input[type="radio"] {
+		width: 15px;         
+		height: 15px;         
+	}
+   

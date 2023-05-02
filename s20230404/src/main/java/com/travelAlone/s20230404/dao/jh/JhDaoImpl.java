@@ -23,7 +23,7 @@ public class JhDaoImpl implements JhDao {
 	// 추천 버튼
 	@Override
 	public int updateCount(Board board) {
-		log.info("jhDaoImpl updateCount Start...");
+		log.info("jhDaoImpl updateCount Start");
 		int updateCount = 0;
 		try {
 			updateCount = session.update("jhLike",board);
@@ -38,7 +38,7 @@ public class JhDaoImpl implements JhDao {
 	// 신고 버튼
 	@Override
 	public int reportMember(Warning warning) {
-		log.info("jhDaoImpl reportMember Start...");
+		log.info("jhDaoImpl reportMember Start");
 		int reportMember = 0;
 		try {
 			reportMember = session.insert("reportMember", warning);
@@ -110,14 +110,15 @@ public class JhDaoImpl implements JhDao {
 		return insertReLevel;
 	}
 
+	// 게시글 이미지 첨부 여부
 	@Override
 	public int updateBoardImgYn(long boardId) {
 		int result = 0;
 		log.info("jhDaoImpl updateBoardImgYn start");
 		
 		try {
-			result = session.update("imgStoredFileYn",boardId);
-			log.info("jhDaoImpl updateBoardImgYn boardId-> " + boardId);
+			result = session.update("imgStoredFileYn", boardId);
+			log.info("jhDaoImpl updateBoardImgYn board_id-> " + boardId);
 			
 		} catch (Exception e) {
 			log.info("jhDaoImpl updateBoardImgYn Exception -> " + e.getMessage());
@@ -126,7 +127,8 @@ public class JhDaoImpl implements JhDao {
 		return result;
 	}
 
-      @Override
+	// 신고 수에 따른 게시글, 댓글 자동 블락
+	@Override
 	public int reportUpdate(Warning warning) {
 		int updateResult = 0;
 		log.info("jhDaoImpl reportUpdate start");
@@ -140,6 +142,37 @@ public class JhDaoImpl implements JhDao {
 		return updateResult;
 	}
 
+   // 마이페이지 커뮤니티 페이징용
+	@Override
+	public int myPageCommunityListCnt(long memberId) {
+		int myPageCommunityListCnt = 0;
+		log.info("jhDaoImpl myPageCommunityListCnt start");
+	      
+		try {
+			myPageCommunityListCnt = session.selectOne("myPageCommunityListCnt", memberId);
+			log.info("jhDaoImpl myPageCommunityListCnt -> "+ myPageCommunityListCnt);
+	         
+		} catch (Exception e) {
+			log.info("jhDaoImpl myPageCommunityListCnt Exception -> "+ e.getMessage());
+		}
+		
+		return myPageCommunityListCnt;
+	}
+
+	// 마이페이지 커뮤니티  리스트
+	@Override
+	public List<Board> myPageCommunityList(Board board) {
+		List<Board> myPageCommunityList = null;
+		log.info("jhDaoImpl myPageCommunityList start");
+	      
+		try {
+			myPageCommunityList = session.selectList("myPageCommunityList", board);
+			log.info("jhDaoImpl myPageCommunityList.size()는 "+ myPageCommunityList.size());
+		} catch (Exception e) {
+			log.info("jhDaoImpl myPageCommunityList e.getMessage() -> "+ e.getMessage());
+		}
+		return myPageCommunityList;
+	}
 
 	
 }

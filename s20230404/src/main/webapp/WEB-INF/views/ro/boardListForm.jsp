@@ -74,6 +74,7 @@
 		   	</script>   
 		</form>
 		
+		
 		<form action="writeBoardForm" method="post" onsubmit="return chkId();">
 	         <input type="hidden" name="b_common_board" value="${board.b_common_board }">
 	         <button type="submit" style="margin-left: 664px; margin-bottom: 10px">글 쓰기</button>
@@ -106,6 +107,7 @@
          	</c:forEach>
       	</table>
    	</div>
+   	
    	<c:if test="${page.startPage > page.pageBlock }">
       	<a href="listBoard?currentPage=${page.startPage - page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}">[이전]</a>
    	</c:if>

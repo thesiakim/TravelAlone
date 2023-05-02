@@ -59,7 +59,7 @@ public class KmController {
     public String goJoin(Model model){
         model.addAttribute("memberDto", new MemberFormDto());
 
-        return "th/join";
+        return "km/join";
     }
 
     /**
@@ -82,7 +82,7 @@ public class KmController {
             }
 
             // 회원가입 페이지로 다시 리턴
-            return "th/join";
+            return "km/join";
 
         }
 
@@ -100,7 +100,7 @@ public class KmController {
     @GetMapping("/login")
     public String goLogin(){
 
-        return "th/login";
+        return "km/login";
     }
 
     /**
@@ -110,7 +110,7 @@ public class KmController {
     @GetMapping("/login/error")
     public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요.");
-        return "th/login";
+        return "km/login";
     }
 
 
@@ -196,7 +196,7 @@ public class KmController {
 
         memberService.checkMemberAndChangePassword(id, requestDto, passwordEncoder);
 
-        return "th/login";
+        return "km/login";
     }
 
     //마이페이지 Controller (MyBatis 사용)---------------------------------------------------------------

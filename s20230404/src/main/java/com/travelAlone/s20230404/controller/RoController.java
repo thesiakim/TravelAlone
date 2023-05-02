@@ -5,11 +5,9 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Board;
-import com.travelAlone.s20230404.model.BodImg;
 
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.ro.RoService;
@@ -160,7 +157,7 @@ public class RoController {
          resultForm = "ro/writeBoardForm";
 
       }else {
-         resultForm = "th/login";
+         resultForm = "km/login";
       }
       return resultForm;
       
@@ -187,7 +184,7 @@ public class RoController {
          
       } else {
          model.addAttribute("msg", "입력 실패 확인해 보세요");
-         resultForm = "th/login";
+         resultForm = "km/login";
       }
       return resultForm;
    }

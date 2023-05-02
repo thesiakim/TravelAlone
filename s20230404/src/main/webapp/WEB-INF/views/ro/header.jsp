@@ -17,11 +17,15 @@
 		  <a href="/"><img src="img/gosunee.png"></a>
 		</div>
 		<div class="headerLogin">
-		  <a href="loginPage.html">로그인</a>
+		  <a href="login">로그인</a>
 		</div> 
 		<div class="headerLogin">
-		  <a href="">회원가입</a>
-		</div> 
+		  <a href="join">회원가입</a>
+		  <c:if test="">
+		  	<a href="myPageCommunityList">마이페이지</a>
+		  </c:if>
+		</div>
+		
 	  </div>
 	</div>
 	<div class="headerForm">

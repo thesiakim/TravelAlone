@@ -90,7 +90,7 @@
 		<div>
 			<table>
 				<tr>
-					<th>내가 작성한 글</th>
+					<th><a href="myPageCommunityList">내가 작성한 글</a></th>
 					<td>${response.writingCount}</td>
 				</tr>
 				<tr>

@@ -18,8 +18,8 @@
 	
 	<c:if test="${msg != null }">${msg }</c:if>
 
-	<input type="hidden" name="b_common_board" id="common_board" value="${board.b_common_board}">
-	<input type="hidden" name="member_id" value="3">
+		<input type="hidden" name="b_common_board" id="common_board" value="${board.b_common_board}">
+		<input type="hidden" name="member_id" value="3">
 		<table>
 	        <tr>
 	        	<td colspan="2">
@@ -49,7 +49,6 @@
 				</td>
 			</tr>
 	    </table>
-	<hr>
 </body>
 	<c:import url="footer.jsp"/>
 </html>
