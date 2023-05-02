@@ -2,11 +2,13 @@ package com.travelAlone.s20230404.dao.km;
 
 import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Member;
-import com.travelAlone.s20230404.model.dto.km.MypageMemberInfoUpdateRequestDto;
+import com.travelAlone.s20230404.model.dto.km.MypageReviewRequestDto;
+import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
 import com.travelAlone.s20230404.model.dto.km.ScoreCount;
 import com.travelAlone.s20230404.model.dto.km.WritingCount;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Repository;
 
 import org.apache.ibatis.session.SqlSession;
@@ -66,4 +68,39 @@ public class MypageDaoImpl implements MypageDao{
     public int memberInfoUpdate(Member member) {
         return session.update("mypageMemberInfoUpdate", member);
     }
+
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 마이페이지 안에서 회원 프로필사진 수정
+     * */
+    @Override
+    public int memberProfileUpdate(Member member) {
+
+        return session.update("mypageMemberProfileUpdate", member);
+    }
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 회원탈퇴
+     * */
+
+    @Override
+    public int memberWithdrawal(long id){
+
+        return session.delete("mypageMemberWithdrawal", id);
+    }
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 마이페이지 내 리뷰 보여주기
+     * */
+    @Override
+    public List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto) {
+
+        return session.selectList("mypageReviewShow"+requestDto.getCategory(), requestDto);
+
+    }
+
+
 }
