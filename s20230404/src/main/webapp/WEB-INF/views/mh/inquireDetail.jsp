@@ -96,13 +96,23 @@
 	<table  style="margin:auto;">
 		
 		<tr>
-			<th>제목</th>
-			<td>답변드립니다</td>
+			<th></th>
+			<td>
+			
+			<c:choose>
+			<c:when test="${inquire.g_reply_yn eq '1'.charAt(0)}">
+				<c:out value="답변드립니다"/>
+			</c:when>
+			<c:otherwise>
+				<c:out value="답변중입니다"/>
+			</c:otherwise>
+		</c:choose>
+			
+			
+			
+			</td>
 		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>관리자</td>
-		</tr>
+		
 		<tr>
 			<th>답변내용</th>
 			<td>${inquire.g_reply_content}</td>

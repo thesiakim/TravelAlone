@@ -39,6 +39,15 @@
 		delete from G_NOT_IMG where G_NOTICE_ID = #{g_notice_id}
 	</delete>
 
+<!-- 이미지 한개 삭제하기 -->
+	<delete id="deleteNotOneImg" parameterType="Not_Img">
+		delete from G_NOT_IMG 
+		where IMG_ID = #{img_id}
+		and   G_NOTICE_ID = #{g_notice_id}
+	</delete>
+
+
+
 
 
 </mapper>

@@ -16,7 +16,7 @@
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="replyInquire" method="post" name="frm">
 	<input type="hidden" name = "g_writing_id" value="${inquire.g_writing_id }">
-		<table>
+		<table style="margin:auto;">
 			<tr>
 				<th>글아이디</th>
 				<td>${inquire.g_writing_id }</td>
@@ -25,7 +25,7 @@
 							
 			<tr>
 				<td>답변 내용</td>
-				<td><textarea name="g_reply_content" rows="10"></textarea></td>
+				<td><textarea name="g_reply_content" rows="10" cols="50"></textarea></td>
 			</tr>
 			<tr >
 				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 

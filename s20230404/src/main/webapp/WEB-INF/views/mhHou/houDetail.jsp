@@ -22,7 +22,7 @@
 			
 		</tr>
 		<c:forEach items="${imgHouList}" var="houImg">
-			<tr>
+		<!-- 	<tr> -->
 				<td hidden>${houImg.img_id}</td>
 			 	<td >
 			

@@ -7,6 +7,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function() {
+	  $(".accordion").click(function(event) {
+	    event.preventDefault(); // 기본 이벤트 방지
+	    var content = $(this).closest("tr").find(".accordion-content");
+	    if (content.is(":hidden")) { // 펼쳐진 상태가 아니면
+	      content.slideDown(); // 내용을 펼침
+	    } else {
+	      content.slideUp(); // 내용을 닫음
+	    }
+	  });
+	});
+
+
+</script>
 <body>
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
@@ -43,7 +59,7 @@
 		
 			<c:set var="num" value="${page.total-page.start+1 }"></c:set>
 		
-		
+		<hr>
 		<!-- 찐본문 -->
 		<table style="margin:auto;">
 				<tr>
@@ -54,9 +70,26 @@
 				<c:forEach items="${noticeList}" var="notice">
 					<tr>
 						<td hidden>${notice.g_notice_id}</td>
-						<td><a href="noticeDetail?gid=${notice.g_notice_id}">${notice.g_notice_title}</a>
-							<%-- 		<a href="noticeDetail/${notice.g_notice_id}">${notice.g_notice_title}</a> --%>
+						<%-- <td style="text-align: left;">
+						
+						<a href="noticeDetail?gid=${notice.g_notice_id}">${notice.g_notice_title}</a>
+						</td> --%>
+						
+						
+						
+						<td style="text-align: left;">
+						
+						
+						<a href="noticeDetail?gid=${notice.g_notice_id}" class="accordion">${notice.g_notice_title}</a>
+						  <div class="accordion-content" style="display:none;">
+						    <p>${notice.g_notice_content}</p>
+						  </div>
+						
 						</td>
+						
+						
+						
+						
 						<td>${notice.create_date}</td>
 					</tr>
 				</c:forEach>

@@ -25,7 +25,7 @@
 				<td style="text-align: left;">
 					<select name="g_common_csboard">
 					<option value="not100">공지사항</option>
-					<option value="faq100">자주묻는질문</option>										
+					<option value="not200">자주묻는질문</option>										
 				</select>
 				
 				

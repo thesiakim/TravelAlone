@@ -53,13 +53,13 @@
 		
 		
 		
-		<!-- 공지사항 게시글작성하기 -->
-		<insert id="insertNotice" parameterType="Notice">
-			 insert into G_NOTICE 
-			 (G_NOTICE_ID,	 MEMBER_ID, G_COMMON_CSBOARD, G_NOTICE_TITLE, G_NOTICE_CONTENT, CREATE_DATE, MODIFIED_DATE)
-			 values 
-			 (#{ g_notice_id}, '2',  #{g_common_csboard} , 	#{g_notice_title}, #{g_notice_content}, sysdate, sysdate ) 				
-		</insert>
+<!-- 공지사항 게시글작성하기 -->
+<insert id="insertNotice" parameterType="Notice">
+	 insert into G_NOTICE 
+	 (G_NOTICE_ID,	 MEMBER_ID, G_COMMON_CSBOARD, G_NOTICE_TITLE, G_NOTICE_CONTENT, CREATE_DATE, MODIFIED_DATE)
+	 values 
+	 (#{ g_notice_id}, '2',  #{g_common_csboard} , 	#{g_notice_title}, #{g_notice_content}, sysdate, sysdate ) 				
+</insert>
 		
 		
 		<!-- 공지사항 게시글수정하기 -->

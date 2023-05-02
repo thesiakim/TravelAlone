@@ -12,7 +12,7 @@
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 
-<h1>공지사항 글조회 </h1>
+<h1> 글조회 </h1>
 
 		<table  style="margin:auto;"">
 			<tr>
@@ -23,10 +23,15 @@
 			<c:forEach items="${imgNotList}" var="NotImg">
 				<tr>
 					<td hidden>${NotImg.img_id}</td>
-				 	<td >
-			<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/noticeUpload/${NotImg.img_stored_file}" width="500" height="300"> 
-				 	
-				 	</td>
+				  	<td >
+			
+						<c:url value='/display' var='url'>
+							<c:param name='file' value='${NotImg.img_stored_file}'/>
+						</c:url>
+		                     <img alt="#" src="${url}"  width="500" height="300">
+
+			 	
+			 	</td>
 									
 			</c:forEach>
 			

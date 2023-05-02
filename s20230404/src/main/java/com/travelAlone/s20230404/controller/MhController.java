@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -229,8 +230,8 @@ public String deleteNotice(int g_notice_id, Model model) {
 @ResponseBody
 @RequestMapping(value = "deleteNotImg")
 public String deleteNotImg(int g_notice_id, int img_id, Model model) {
-	log.info("InquireController Start delete g_writing_id :" + g_notice_id);
-	log.info("InquireController Start delete img_id :" + img_id);
+	log.info("NoticeController Start delete g_notice_id :" + g_notice_id);
+	log.info("NoticeController Start delete img_id :" + img_id);
 	int result = mh.deleteNotOneImg(g_notice_id,img_id);
 	String resultStr = Integer.toString(result);
 	return resultStr;
@@ -293,6 +294,7 @@ public String noticeSearch(Notice notice, String currentPage, Model model) {
 //문의게시판 글목록
 @RequestMapping(value = "inquire")
 public String inquire( Inquire inquire, String currentPage, Model model) {
+	
 	log.info("InquireController Start inquire...");
 	int totalInquire = mh.totalInquire();
 	

@@ -9,6 +9,7 @@
 
 
 </head>
+	<link href="css/main.css" rel="stylesheet" type="text/css">
 <body>
 	<!-- 이미지배너 -->
 	<div id="img_benner">
@@ -34,8 +35,10 @@
 	        <option value="s_title">제목</option>
 	        <option value="s_content">내용</option>
 	    </select> 
-	    <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
+	    <div id="serch">
+	    <input type="text" name="keyword" placeholder="검색어를 입력해주세요 " value="${search}">
 	    <a href="noticeSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a>
+	    </div>
 	    <p>
 	</form>
 
