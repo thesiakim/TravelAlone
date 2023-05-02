@@ -17,10 +17,10 @@
 		  <a href="/"><img src="img/gosunee.png"></a>
 		</div>
 		<div class="headerLogin">
-		  <a href="loginPage.html">로그인</a>
+		  <a href="/login">로그인</a>
 		</div> 
 		<div class="headerLogin">
-		  <a href="">회원가입</a>
+		  <a href="/join">회원가입</a>
 		</div> 
 	  </div>
 	</div>

@@ -2,7 +2,7 @@ package com.travelAlone.s20230404.service.jh;
 
 import com.travelAlone.s20230404.model.BodImg;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
+
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;

@@ -10,7 +10,6 @@ import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
 import com.travelAlone.s20230404.service.km.MypageService;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -317,7 +316,7 @@ public class KmController {
         List<MypageReviewResponseDto> responseDtos =
                 mypageService.mypageReviewShow(new MypageReviewRequestDto(memberJpa.getId(), category, page));
 
-        model.addAttribute(경"category", category);
+        model.addAttribute("category", category);
         model.addAttribute("page", page);
         model.addAttribute("responseDtos", responseDtos);
 

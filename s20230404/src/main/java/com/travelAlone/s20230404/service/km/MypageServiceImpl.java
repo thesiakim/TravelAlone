@@ -23,7 +23,6 @@ import java.util.List;
 public class MypageServiceImpl implements MypageService{
 
     private final MypageDao mypageDao;
-    private final UploadHandler uploadHandler;
 
     /**
      * 2023-04-26 조경민
@@ -63,10 +62,10 @@ public class MypageServiceImpl implements MypageService{
     @Override
     public int memberProfileUpdate(List<MultipartFile> pictureFile, Member member) throws Exception {
         // 이미지 저장
-        BodImg bodImg = uploadHandler.parseFileInfo(pictureFile, member.getMember_id()).get(0);
+        BodImg bodImg = UploadHandler.parseFileInfo(pictureFile, member.getMember_id()).get(0);
 
         // 기존 이미지 삭제
-        uploadHandler.delete(member.getM_img_stored_file());
+        UploadHandler.delete(member.getM_img_stored_file());
 
         // DB 변경
         member.updateProfile(bodImg.getImg_context(), bodImg.getImg_original_file(), bodImg.getImg_stored_file(),bodImg.getCommon_imagesType());
@@ -81,7 +80,7 @@ public class MypageServiceImpl implements MypageService{
     @Override
     public int memberProfileReset(Member member) {
         // 기존 이미지 삭제
-        uploadHandler.delete(member.getM_img_stored_file());
+        UploadHandler.delete(member.getM_img_stored_file());
 
         // 기본 이미지 저장
         member.updateProfile("normal","img300","userPicture","src/main/resources/static/img/user-picture.png");
