@@ -62,7 +62,12 @@
 						 ORDER BY	b.create_date DESC ) a  
 				) 
 		WHERE rn BETWEEN #{start} AND #{end} 
-		
+	</select>
+	
+	<select id="memberIdChk" parameterType="Long">
+		SELECT	*
+		FROM	member
+		WHERE	member_id = #{member_id}
 	</select>
     
 </mapper>

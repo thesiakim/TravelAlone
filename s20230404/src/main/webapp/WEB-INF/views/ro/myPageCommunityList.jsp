@@ -10,7 +10,6 @@
 <c:import url="header.jsp"/>
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script defer src="/js/detailBoardLoginChk.js"></script>
 <script type="text/javascript">
 	function imgOnclickCheck() {
         var checked = $('#imgOnlyCheckbox').is(':checked');
@@ -34,17 +33,12 @@
 	<link href="/css/list.css" rel="stylesheet" type="text/css">
 <body>
    	<c:import url="boardHeader.jsp"/>
-   	<form action="listBoard?b_common_board=${board.b_common_board }">
-		<!-- 검색창 -->
-       	<div id="serch">
-         	<input type="text" placeholder="종합 검색">
-        </div>
-	</form>
 	
 	<hr>
 	
-		<h3> 커뮤니티 - 마이 페이지</h3> 
-		<h5> 커뮤니티 활동 내역 </h5>
+		<h3>커뮤니티 - 마이 페이지</h3>
+
+		<h5> ${m_nickname} 커뮤니티 활동 내역</h5>
   
 	<c:set var="num" value="${page.total - page.start + 1 }"></c:set>
    
@@ -52,14 +46,7 @@
       	<table>
       	  	<!--  img_stored_file_yn  파일 유무 Check -->
          	<c:forEach var="board" items="${myPageCommunityList}">
-         		<c:choose>
-					<c:when test="${board.img_stored_file_yn == 0}">
-						<tr class="img_stored_file_no" >
-					</c:when>
-					<c:when test="${board.img_stored_file_yn > 0}">
-						<tr class="img_stored_file_yes" >
-					</c:when>
-				</c:choose>
+						<tr>
 							<td style="width: 300px;">
 								<a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board }">${board.b_title }</a>
 							</td>
@@ -90,13 +77,13 @@
       	</table>
    	</div>
    	<c:if test="${page.startPage > page.pageBlock }">
-      	<a href="listBoard?currentPage=${page.startPage - page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}">[이전]</a>
+      	<a href="myPageCommunityList?currentPage=${page.startPage - page.pageBlock }">[이전]</a>
    	</c:if>
    	<c:forEach var="i" begin="${page.startPage }" end="${page.endPage }">
-      	<a href="listBoard?currentPage=${i }&b_common_board=${board.b_common_board }&orderList=${board.orderList}">[${i }]</a>
+      	<a href="myPageCommunityList?currentPage=${i }">[${i }]</a>
    	</c:forEach>
    	<c:if test="${page.endPage < page.totalPage }">
-      	<a href="listBoard?currentPage=${page.startPage + page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}">[다음]</a>
+      	<a href="myPageCommunityList?currentPage=${page.startPage + page.pageBlock }">[다음]</a>
    	</c:if>
 </body>
 	<c:import url="footer.jsp"/>

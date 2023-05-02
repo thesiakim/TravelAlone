@@ -91,7 +91,5 @@ public class JhServiceImpl implements JhService {
 		return myPageCommunityList;
 	}
 	
-	
-	
 
 }
