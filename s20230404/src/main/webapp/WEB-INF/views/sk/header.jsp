@@ -27,24 +27,24 @@
 	<div class="headerForm">
 	  <div class="headerBenner">
 		<ul>
-		<li><a href="#">여행지</a>
+				<li><a href="tra">여행지</a>
 		  <ul>
-			<li><a href="#">관 광</a></li>
-			<li><a href="#">자 연</a></li>
-			<li><a href="#">레 저</a></li>
-			<li><a href="#">쇼 핑</a></li>
+			<li><a href="traFilter?code=tra100">관 광</a></li>
+               <li><a href="traFilter?code=tra200">자 연</a></li>
+               <li><a href="traFilter?code=tra300">레 저</a></li>
+               <li><a href="traFilter?code=tra400">쇼 핑</a></li>
 		  </ul>
-		</li>
-		<li><a href="#">숙소</a>
-		  <ul>
-			<li><a href="#">호 텔</a></li>
-			<li><a href="#">모 텔</a></li>
-			<li><a href="#">팬 션</a></li>
-			<li><a href="#">캠 핑</a></li>
-			<li><a href="#">게스트 하우스</a></li>
-          </ul>
-		</li>
-		<li><a href="#">맛집</a>
+        </li>
+	    <li><a href="hou">숙소</a>
+      		  <ul>
+              	<li><a href="houseCodeFilter?code=hou100">호 텔</a></li>
+              	<li><a href="houseCodeFilter?code=hou200">모 텔</a></li>
+              	<li><a href="houseCodeFilter?code=hou300">팬 션</a></li>
+              	<li><a href="houseCodeFilter?code=hou400">캠 핑</a></li>
+              	<li><a href="houseCodeFilter?code=hou500">게스트 하우스</a></li>
+			  </ul>
+			</li>
+		<li><a href="res">맛집</a>
 		  <ul>
 			<li><a href="#">한 식</a></li>
 			<li><a href="#">중 식</a></li>

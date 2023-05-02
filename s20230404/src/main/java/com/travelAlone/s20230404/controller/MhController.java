@@ -88,18 +88,19 @@ public String noticeDetail(int gid , Model model, Not_Img not_Img ) {
 	
 //공지사항 글작성 페이지 이동
 @GetMapping(value = "noticeWriteForm")
-public String noticeWriteForm(@LoginUser MemberJpa memberJpa, Notice notice, Model model) {
+//public String noticeWriteForm(@LoginUser MemberJpa memberJpa, Notice notice, Model model) {
+	public String noticeWriteForm( Notice notice, Model model) {
 	  
-	if(memberJpa != null) {
+	//if(memberJpa != null) {
 	log.info("NoticeController  noticeWriteForm Start");	
-	 log.info("NoticeController noticeWriteForm memberJpa.getId()는 "+ memberJpa.getId());
-     model.addAttribute("user_id", memberJpa.getId());
+	// log.info("NoticeController noticeWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+  //   model.addAttribute("user_id", memberJpa.getId());
 	return "mh/noticeWriteForm";
 	
-	 }	
-	else {
-    	  return  "th/login";
-     }		 	
+	// }	
+	//else {
+    //	  return  "th/login";
+     //}		 	
 	
 	
 }
@@ -152,12 +153,13 @@ public String noticeWrite(Notice notice, Model model, HttpServletRequest request
 	
 //공지사항 글수정 페이지이동
 @GetMapping(value = "noticeUpdateForm")
-public String noticeUpdateForm(@LoginUser MemberJpa memberJpa,int g_notice_id, Model model, Not_Img not_Img) {
+//public String noticeUpdateForm(@LoginUser MemberJpa memberJpa,int g_notice_id, Model model, Not_Img not_Img) {
+	public String noticeUpdateForm(int g_notice_id, Model model, Not_Img not_Img) {
 	log.info("NoticeController Start updateForm...");
 	
-	if(memberJpa != null) {
-			log.info("NoticeController noticeUpdateForm memberJpa.getId()는 "+ memberJpa.getId());
-	        model.addAttribute("user_id", memberJpa.getId());
+//	if(memberJpa != null) {
+	//		log.info("NoticeController noticeUpdateForm memberJpa.getId()는 "+ memberJpa.getId());
+	  //      model.addAttribute("user_id", memberJpa.getId());
 	        
 		
 			Notice notice = mh.detailNotice(g_notice_id);
@@ -173,9 +175,9 @@ public String noticeUpdateForm(@LoginUser MemberJpa memberJpa,int g_notice_id, M
 			model.addAttribute("notice", notice);	
 			return "mh/noticeUpdateForm";
 	
-	  }else {
-    	  return  "th/login";
-      }		 		
+	 // }else {
+    //	  return  "th/login";
+   //   }		 		
 		
 	}
 

@@ -7,7 +7,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-
+<script type="text/javascript">
+    /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
+	document.getElementById('searchId').addEventListener('keyup', function(event) {
+   		 if (event.code === 'Enter')
+    	{
+        	event.preventDefault();
+        	document.querySelector('form').submit();
+    	}
+	});
+	
+	/* 카테고리 선택에서 Enter키 입력 시 검색 수행 */
+	document.getElementById('category').addEventListener('keyup', function(event) {
+  		 if (event.code === 'Enter')
+     	{
+         	event.preventDefault();
+         	document.querySelector('form').submit();
+     	}
+ 	});
+</script>
 </head>
 	<link href="css/main.css" rel="stylesheet" type="text/css">
 <body>
@@ -31,13 +49,14 @@
 
 <!--검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 -->						
 	<form action="noticeSearch">
-	    <select name="search">
+	    <select id="category" name="search">
 	        <option value="s_title">제목</option>
 	        <option value="s_content">내용</option>
 	    </select> 
 	    <div id="serch">
-	    <input type="text" name="keyword" placeholder="검색어를 입력해주세요 " value="${search}">
-	    <a href="noticeSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a>
+	<%--     <input type="text" name="keyword" placeholder="검색어를 입력해주세요 " value="${search}"> --%>
+	    <input type="text" name="keyword" placeholder="검색어를 입력해주세요 " value="${search}" id="searchId">
+	   <%--  <a href="noticeSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a> --%>
 	    </div>
 	    <p>
 	</form>

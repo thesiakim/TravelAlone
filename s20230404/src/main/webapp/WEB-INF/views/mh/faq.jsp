@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+	<link href="css/main.css" rel="stylesheet" type="text/css">
+
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript"> 
 $(document).ready(function() {
@@ -21,7 +23,23 @@ $(document).ready(function() {
 	  });
 	});
 
+/* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
+document.getElementById('searchId').addEventListener('keyup', function(event) {
+		 if (event.code === 'Enter')
+	{
+    	event.preventDefault();
+    	document.querySelector('form').submit();
+	}
+});
 
+/* 카테고리 선택에서 Enter키 입력 시 검색 수행 */
+document.getElementById('category').addEventListener('keyup', function(event) {
+		 if (event.code === 'Enter')
+ 	{
+     	event.preventDefault();
+     	document.querySelector('form').submit();
+ 	}
+	});
 </script>
 <body>
 <div id="img_benner">
@@ -48,12 +66,16 @@ $(document).ready(function() {
 	
 			
 			<form action="noticeSearch">
-			    <select name="search">
+			    <select id="category" name="search">
 			        <option value="s_title">제목</option>
 			        <option value="s_content">내용</option>
 			    </select> 
-			    <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
-			    <a href="noticeSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a>
+			    <div id="serch">
+			
+			  	    <input type="text" name="keyword" placeholder="검색어를 입력해주세요 " value="${search}" id="searchId">
+			  
+			    <%-- <a href="noticeSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a> --%>
+			    </div>
 			    <p>
 			</form>
 		

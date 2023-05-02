@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="header.jsp"%>
-    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+   <%--  <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> --%>
 <%--     <% String role = request.getUserPrincipal().; %> --%>
 <!DOCTYPE html>
 <html>
@@ -43,6 +43,26 @@ var password =  prompt("PASSWD 입력","");
 	
 }	
 
+
+
+
+/* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
+document.getElementById('searchId').addEventListener('keyup', function(event) {
+		 if (event.code === 'Enter')
+	{
+    	event.preventDefault();
+    	document.querySelector('form').submit();
+	}
+});
+
+/* 카테고리 선택에서 Enter키 입력 시 검색 수행 */
+document.getElementById('category').addEventListener('keyup', function(event) {
+		 if (event.code === 'Enter')
+ 	{
+     	event.preventDefault();
+     	document.querySelector('form').submit();
+ 	}
+	});
 </script>
 <body>
 <div id="img_benner">
@@ -69,12 +89,15 @@ var password =  prompt("PASSWD 입력","");
 	
 			<!-- 검색 -->
 			<form action="inquireSearch">
-				<select name="search">
+				<select id="category" name="search">
 					<option value="s_title">제목</option>
 					<option value="s_content">내용</option>
 					
-				</select> <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
-				<button type="submit">keyword검색</button>
+				</select> 
+				  <div id="serch">
+				<input type="text" name="keyword" placeholder="검색어를 입력해주세요" value="${search}" id="searchId">
+				<!-- <button type="submit">keyword검색</button> -->
+				</div>
 				<p>
 			</form>
 		
@@ -106,26 +129,26 @@ var password =  prompt("PASSWD 입력","");
 		
 		<!-- 찐본문 -->
 	<div style = "text-align:center;">
-			<table style="margin:auto;">
+			<table style="margin:auto; padding-top:10px; cellpadding:10px">
 				<tr>
 					<td hidden>번호</td>
 					<td>제목</td>
-					<td>작성자</td>					
-					<td>답변여부</td>					
-					<td>작성일</td>
+					<td style=" padding-left:50px;">작성자</td>					
+					<td style=" padding-left:50px;">답변여부</td>					
+					<td style=" padding-left:50px;">작성일</td>
 				</tr>
 				<c:forEach items="${inquireList}" var="inquire">
 					<tr>
 						<td hidden>${inquire.g_writing_id}</td>
 						<td style="text-align: left;"> 
-						<sec:authorize access="hasRole('ROLE_rol200')">
+					<!-- 	<sec:authorize access="hasRole('ROLE_rol200')">
 						<div> 롤 200인거 확인됨 </div>							
-						</sec:authorize>
+						</sec:authorize> -->
 						<!-- 눌렀을때 비밀번호창나오게하기 -->
 						<a href="#" onclick="detail('${inquire.g_writing_id}', '${inquire.g_passwd}')">${inquire.g_title}</a>
 						</td>
-						<td>${inquire.m_nickname}</td>
-						<td> 
+						<td style=" padding-left:50px;">${inquire.m_nickname}</td>
+						<td style=" padding-left:50px;"> 
 							
 							<c:choose>
 								<c:when test="${inquire.g_reply_yn eq '1'.charAt(0)}">
@@ -137,7 +160,7 @@ var password =  prompt("PASSWD 입력","");
 							</c:choose>
 						
 					     </td>     
-						<td>${inquire.create_date}</td>
+						<td style=" padding-left:50px;">${inquire.create_date}</td>
 					</tr>
 				</c:forEach>
 				<tr>

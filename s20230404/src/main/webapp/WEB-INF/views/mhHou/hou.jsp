@@ -6,7 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript">
+    /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
+	document.getElementById('searchId').addEventListener('keyup', function(event) {
+   		 if (event.code === 'Enter')
+    	{
+        	event.preventDefault();
+        	document.querySelector('form').submit();
+    	}
+	});
+	
+	/* 카테고리 선택에서 Enter키 입력 시 검색 수행 */
+	document.getElementById('category').addEventListener('keyup', function(event) {
+  		 if (event.code === 'Enter')
+     	{
+         	event.preventDefault();
+         	document.querySelector('form').submit();
+     	}
+ 	});
+</script>
 </head>
+	<link href="css/main.css" rel="stylesheet" type="text/css">
+
 <body>
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
@@ -31,15 +53,16 @@
 	
 <!--검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 검색창 -->	
 	<form action="houseSearch">
-		<select name="search">
+		<select id="category" name="search">
 			<option value="s_title">제목</option>
 			<option value="s_content">내용</option>
 			
 		</select> 
-		<input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
-		<!-- <button type="submit">keyword검색</button> -->
-		   <a href="houseSearch?search=${search}&amp;keyword=${keyword}">검색</a>
+		 <div id="serch">
+		<input type="text" name="keyword" placeholder="검색어를 입력하세요" value="${search}" id="searchId">
 		
+		  <%--  <a href="houseSearch?search=${search}&amp;keyword=${keyword}">검색</a> --%>
+		</div>
 		<p>
 	</form>
 
