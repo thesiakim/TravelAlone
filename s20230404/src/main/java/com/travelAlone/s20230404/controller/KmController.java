@@ -23,6 +23,7 @@ import com.travelAlone.s20230404.vaildator.km.CheckEmailValidator;
 import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
@@ -235,7 +236,7 @@ public class KmController {
      * 2023-04-26 조경민
      * 설명 : 마이페이지 회원정보 변경
      * */
-    @PostMapping("api/v1/mypage")
+    @PostMapping("/api/v1/mypage/member-info")
     @ResponseBody
     public String mypageMemberInfoUpdate(@RequestBody Member member, @LoginUser MemberJpa memberJpa){
 
@@ -252,8 +253,86 @@ public class KmController {
      * 2023-04-26 조경민
      * 설명 : 마이페이지 프로필 사진 수정
      * */
+    @PostMapping("/api/v1/mypage/profile")
+    public String mypageMemberProfileUpdate(List<MultipartFile> pictureFile, @LoginUser MemberJpa memberJpa) throws Exception {
+
+        Member member = new Member();
+        member.of(memberJpa);
+
+        mypageService.memberProfileUpdate(pictureFile, member);
+
+        return "/mypage";
+    }
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 마이페이지 프로필 사진 기본으로 변경
+     * */
+    @PostMapping("/api/v1/mypage/profile/normal")
+    public String mypageMemberProfileReset(@LoginUser MemberJpa memberJpa){
+
+        Member member = new Member();
+        member.of(memberJpa);
+
+        mypageService.memberProfileReset(member);
+        return "/mypage";
+    }
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 회원 탈퇴
+     * */
+    @DeleteMapping("/api/v1/mypage/withdrawal")
+    public String mypageMemberWithdrawal(@ModelAttribute String password, @LoginUser MemberJpa memberJpa, Model model){
+
+        if (passwordEncoder.matches(password,memberJpa.getPassword())){
+            mypageService.memberWithdrawal(memberJpa.getId());
+
+            return "redirect:/logout";
+        }else {
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            return "memberWithDrawal";
+        }
+
+    }
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 작성 리뷰(종류별) 가져오기
+     * category는 주소창으로, page는 쿼리스트링으로
+     * category : {travel, house, restaurant}
+     * */
+    @GetMapping("/mypage/review/{category}")
+    public String mypageReview(@PathVariable(required = false) String category,
+                               @RequestParam(required = false) Integer page,
+                               @LoginUser MemberJpa memberJpa,
+                               Model model){
+        if (category == null){
+            category = "travel";
+        }
+
+        if (page == null){
+            page = 1;
+        }
+        List<MypageReviewResponseDto> responseDtos =
+                mypageService.mypageReviewShow(new MypageReviewRequestDto(memberJpa.getId(), category, page));
+
+        model.addAttribute(경"category", category);
+        model.addAttribute("page", page);
+        model.addAttribute("responseDtos", responseDtos);
+
+        return "mypage-review";
+    }
 
 
-
+    // 관리자 페이지----------------------------------------------------------------
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 관리자 페이지 회원 목록 조회
+     * */
+//    @GetMapping("/admin")
+//    public String adminMain(){
+//
+//    }
 
 }

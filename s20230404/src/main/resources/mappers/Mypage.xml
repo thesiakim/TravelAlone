@@ -43,6 +43,54 @@
 			]]>
 		</update>
 
+		<update id="mypageMemberProfileUpdate" parameterType="Member" >
+			<![CDATA[
+			UPDATE MEMBER
+			SET M_IMG_CONTEXT = #{m_img_context},
+				M_IMG_ORIGINAL_FILE = #{m_img_original_file}
+				M_IMG_STORED_FILE = #{m_img_stored_file}
+				M_COMMON_IMAGESTYPE = #{m_common_imagesType}
+			WHERE MEMBER_ID = #{member_id}
+			]]>
+		</update>
+
+		<delete id="mypageMemberWithdrawal">
+			DELETE FROM MEMBER
+			WHERE MEMBER_ID = #{id}
+		</delete>
+
+		<select id="mypageReviewShowhouse" resultType="MypageReviewResponseDto" parameterType="MypageReviewRequestDto" >
+		<![CDATA[
+		SELECT *
+		FROM	(	Select *
+					from HOU_REV
+					where member_id = #{memberId}
+					Order by create_date desc	)
+		WHERE ROWNUM BETWEEN 10*(#{page}-1)+1 AND 10*#{page}
+		]]>
+		</select>
+
+		<select id="mypageReviewShowrestaurant" resultType="MypageReviewResponseDto" parameterType="MypageReviewRequestDto" >
+		<![CDATA[
+		SELECT *
+		FROM	(	Select *
+					 from RES_REV
+					 where member_id = #{memberId}
+					 Order by create_date desc	)
+		WHERE ROWNUM BETWEEN 10*(#{page}-1)+1 AND 10*#{page}
+		]]>
+		</select>
+
+		<select id="mypageReviewShowtravel" resultType="MypageReviewResponseDto" parameterType="MypageReviewRequestDto" >
+		<![CDATA[
+		SELECT *
+		FROM	(	Select *
+					 from TRA_REV
+					 where member_id = #{memberId}
+					 Order by create_date desc	)
+		WHERE ROWNUM BETWEEN 10*(#{page}-1)+1 AND 10*#{page}
+		]]>
+		</select>
 		
 		
 		

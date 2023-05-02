@@ -6,6 +6,7 @@ var main = {
         });
 
     },
+
     BoardSave : function () {
         var data = {
             b_title: $('#title').val(),
@@ -40,4 +41,5 @@ var main = {
     },
 
 }
+
 main.init();

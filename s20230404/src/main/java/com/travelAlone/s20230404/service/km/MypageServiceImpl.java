@@ -1,12 +1,18 @@
 package com.travelAlone.s20230404.service.km;
 
 import com.travelAlone.s20230404.dao.km.MypageDao;
+import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Member;
-import com.travelAlone.s20230404.model.dto.km.MypageMemberInfoUpdateRequestDto;
 import com.travelAlone.s20230404.model.dto.km.MypageResponseDto;
 
+import com.travelAlone.s20230404.model.dto.km.MypageReviewRequestDto;
+import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
+import com.travelAlone.s20230404.service.jh.UploadHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * 2023-04-26 조경민
@@ -17,6 +23,7 @@ import org.springframework.stereotype.Service;
 public class MypageServiceImpl implements MypageService{
 
     private final MypageDao mypageDao;
+    private final UploadHandler uploadHandler;
 
     /**
      * 2023-04-26 조경민
@@ -46,6 +53,61 @@ public class MypageServiceImpl implements MypageService{
 
 
         return mypageDao.memberInfoUpdate(member);
+    }
+
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 마이페이지 회원 사진 변경
+     * */
+    @Override
+    public int memberProfileUpdate(List<MultipartFile> pictureFile, Member member) throws Exception {
+        // 이미지 저장
+        BodImg bodImg = uploadHandler.parseFileInfo(pictureFile, member.getMember_id()).get(0);
+
+        // 기존 이미지 삭제
+        uploadHandler.delete(member.getM_img_stored_file());
+
+        // DB 변경
+        member.updateProfile(bodImg.getImg_context(), bodImg.getImg_original_file(), bodImg.getImg_stored_file(),bodImg.getCommon_imagesType());
+
+        return mypageDao.memberProfileUpdate(member);
+    }
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 프로필 사진을 기본 이미지로 변경한다
+     * */
+    @Override
+    public int memberProfileReset(Member member) {
+        // 기존 이미지 삭제
+        uploadHandler.delete(member.getM_img_stored_file());
+
+        // 기본 이미지 저장
+        member.updateProfile("normal","img300","userPicture","src/main/resources/static/img/user-picture.png");
+
+        // DB 변경
+        return mypageDao.memberProfileUpdate(member);
+
+    }
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 마이페이지 내 회원탈퇴
+     * */
+    @Override
+    public int memberWithdrawal(long id) {
+        return mypageDao.memberWithdrawal(id);
+    }
+
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 마이페이지 내가쓴 리뷰 화면 보여주기
+     * */
+    @Override
+    public List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto) {
+
+        return mypageDao.mypageReviewShow(requestDto);
     }
 
 
