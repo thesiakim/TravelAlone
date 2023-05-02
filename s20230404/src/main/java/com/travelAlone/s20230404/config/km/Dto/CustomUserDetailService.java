@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 public class CustomUserDetailService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-    private final HttpSession httpSession;
 
     /**
      * 2023-04-18 조경민

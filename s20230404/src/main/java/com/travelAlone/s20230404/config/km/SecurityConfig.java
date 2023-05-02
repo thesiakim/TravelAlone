@@ -49,6 +49,7 @@ public class SecurityConfig {
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests() // URL별 권한 관리 시작
+                    .antMatchers("/mypage").hasAnyAuthority(Role.rol100.getKey())
                     .anyRequest().permitAll() // 모든 사이트는 모든 사용자 허가
                 .and() // 일반 로그인 설정
                     .formLogin()

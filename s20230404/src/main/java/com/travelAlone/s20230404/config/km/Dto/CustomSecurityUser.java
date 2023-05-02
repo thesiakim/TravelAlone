@@ -1,6 +1,7 @@
 package com.travelAlone.s20230404.config.km.Dto;
 
 import com.travelAlone.s20230404.domain.km.MemberJpa;
+import com.travelAlone.s20230404.domain.km.Role;
 import lombok.Getter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,9 +21,10 @@ public class CustomSecurityUser extends User implements Serializable {
     private MemberJpa memberJpa;
 
     public CustomSecurityUser(MemberJpa memberJpa){
-        super(memberJpa.getEmail(), memberJpa.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_USER")));
+        super(memberJpa.getEmail(), memberJpa.getPassword(),
+                List.of(new SimpleGrantedAuthority(memberJpa.getRoleKey())));
+
         this.memberJpa = memberJpa;
     }
-
 
 }

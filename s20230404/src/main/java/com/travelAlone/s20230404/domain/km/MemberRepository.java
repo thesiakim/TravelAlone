@@ -27,4 +27,10 @@ public interface MemberRepository extends JpaRepository<MemberJpa, Long> {
 
     @Query("SELECT p FROM MemberJpa p WHERE p.name = :name AND p.email = :email AND p.phone = :phone")
     Optional<MemberJpa> findMemberIdByEmailNamePhone(@Param("name") String name,@Param("email") String email,@Param("phone") String phone);
+
+    @Query("SELECT p FROM MemberJpa p ORDER BY p.createdDate DESC")
+    List<MemberJpa> findAllDesc();
+
+    @Query("SELECT p FROM MemberJpa p WHERE p.email LIKE %:search% ORDER BY p.createdDate DESC")
+    List<MemberJpa> findSearchAndAllDesc(@Param("search") String search);
 }

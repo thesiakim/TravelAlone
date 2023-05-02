@@ -10,6 +10,7 @@ import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
 import com.travelAlone.s20230404.service.km.MypageService;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,7 +60,7 @@ public class KmController {
     public String goJoin(Model model){
         model.addAttribute("memberDto", new MemberFormDto());
 
-        return "km/join";
+        return "th/join";
     }
 
     /**
@@ -82,7 +83,7 @@ public class KmController {
             }
 
             // 회원가입 페이지로 다시 리턴
-            return "km/join";
+            return "th/join";
 
         }
 
@@ -100,7 +101,7 @@ public class KmController {
     @GetMapping("/login")
     public String goLogin(){
 
-        return "km/login";
+        return "th/login";
     }
 
     /**
@@ -110,7 +111,7 @@ public class KmController {
     @GetMapping("/login/error")
     public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요.");
-        return "km/login";
+        return "th/login";
     }
 
 
@@ -166,7 +167,7 @@ public class KmController {
      *      전달값 : String email, String name , String phone
      *      반환값 : Long id, String email, String name, String phone ,아이디 존재 여부
      * */
-    @PostMapping("api/v1/password")
+    @GetMapping("/password/info")
     public String findPassword(@ModelAttribute MemberFindPasswordRequestDto requestDto, Model model){
 
         // 해당하는 member id 를 찾아온다
@@ -196,7 +197,7 @@ public class KmController {
 
         memberService.checkMemberAndChangePassword(id, requestDto, passwordEncoder);
 
-        return "km/login";
+        return "th/login";
     }
 
     //마이페이지 Controller (MyBatis 사용)---------------------------------------------------------------
@@ -235,13 +236,12 @@ public class KmController {
      * 2023-04-26 조경민
      * 설명 : 마이페이지 회원정보 변경
      * */
-    @PostMapping("/api/v1/mypage/member-info")
+    @PostMapping("/api/v1/mypage/info")
     @ResponseBody
     public String mypageMemberInfoUpdate(@RequestBody Member member, @LoginUser MemberJpa memberJpa){
 
         member.setMember_id(memberJpa.getId());
 
-        System.out.println("member = " + member);
 
         mypageService.memberInfoUpdate(member);
 
@@ -322,6 +322,51 @@ public class KmController {
 
         return "mypage-review";
     }
+
+
+
+    // 관리자 페이지----------------------------------------------------------------
+    /**
+     * 2023-05-01 조경민
+     * 설명 : 관리자 페이지 회원 목록 조회, 쿼리 스트링을 이용한 검색기능 추가
+     * */
+    @GetMapping("/admin")
+    public String adminMain(@RequestParam(value = "search", required = false) String search, Model model){
+
+        if (search==null){
+            // search 값이 null이면 전체 조회
+            model.addAttribute("members",memberService.adminMemberListShow());
+        }else {
+            // search값 존재하면 검색어 조회
+            model.addAttribute("members",memberService.adminMemberSearchAndListShow(search));
+        }
+
+        return "admin-main";
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 관리자 페이지 회원 권한 변경
+     * */
+    @PatchMapping("/api/v1/admin/role")
+    @ResponseBody
+    public Long adminRoleChange(@RequestBody AdminMemberRoleRequestDto requestDto){
+
+        // 회원 권한 변경 후 아이디 반환
+        return memberService.adminMemberRoleChange(requestDto);
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 관리자 회원 정보 변경
+     * */
+    @PatchMapping("/api/v1/admin/info")
+    @ResponseBody
+    public Long adminInfoChange(@RequestBody AdminMemberInfoChangeRequestDto requestDto){
+
+        return memberService.adminMemberinfoChange(requestDto);
+    }
+
 
 
 }
