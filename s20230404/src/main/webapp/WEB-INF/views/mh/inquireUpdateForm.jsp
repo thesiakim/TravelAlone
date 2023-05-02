@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
 	function deleteImage(g_writing_id, img_id, p_index) {
 	 	alert("g_writing_id:"   + g_writing_id);

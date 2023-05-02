@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="header.jsp"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%--     <% String role = request.getUserPrincipal().; %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,40 @@
 <title>Insert title here</title>
 
 </head>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script   type="text/javascript">
+function detail(gid,passwd) {
+
+	 var goodURL = "inquireDetail?gid=" + gid;  //이곳에 인증이 되었을때 이동할 페이지  입력
+
+
+alert("비밀번호를 입력하셔야 합니다.");
+
+var password =  prompt("PASSWD 입력","");
+
+    if (password == null)  {
+        alert("비밀번호를 입력하세요");
+        location  = "/inquire"      
+       /*  history.back(); */
+    }
+    else  {
+        var  combo =  password
+        var  total =  combo.toLowerCase()
+
+	    if  (total == passwd)  {                // 비밀번호
+	        alert("인증완료");
+	        location  =  goodURL;
+	    }
+	    else  {
+	        alert("출입금지");
+	        location  = "/inquire"   
+	       /*  history.back(); */
+	    }
+	}
+	
+}	
+
+</script>
 <body>
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
@@ -81,10 +117,14 @@
 				<c:forEach items="${inquireList}" var="inquire">
 					<tr>
 						<td hidden>${inquire.g_writing_id}</td>
-						<td style="text-align: left;"> <a href="inquireDetail?gid=${inquire.g_writing_id}"> ${inquire.g_title}</a>
-
+						<td style="text-align: left;"> 
+						<sec:authorize access="hasRole('ROLE_rol200')">
+						<div> 롤 200인거 확인됨 </div>							
+						</sec:authorize>
+						<!-- 눌렀을때 비밀번호창나오게하기 -->
+						<a href="#" onclick="detail('${inquire.g_writing_id}', '${inquire.g_passwd}')">${inquire.g_title}</a>
 						</td>
-						<td>${inquire.member_id}</td>
+						<td>${inquire.m_nickname}</td>
 						<td> 
 							
 							<c:choose>

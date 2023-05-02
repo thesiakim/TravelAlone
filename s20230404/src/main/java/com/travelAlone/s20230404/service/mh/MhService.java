@@ -9,76 +9,50 @@ import com.travelAlone.s20230404.model.mh.Not_Img;
 import com.travelAlone.s20230404.model.mh.Notice;
 
 public interface MhService {
-	//공지사항
+//===============================공지사항=======================================
 	int 					totalNotice();
 	List<Notice> 			listNotice(Notice notice);
-	Notice 					detailNotice(int g_notice_id);
+	int 					seqNot(Notice notice);
 	int 					insertNotice(Notice notice);
+	int 					insertNotImg(Not_Img not_Img);
 	int 					updateNotice(Notice notice);
+	Notice 					detailNotice(int g_notice_id);
+	List<Not_Img> 			listNot_Img(Not_Img not_Img);
 	int 					deleteNotice(int g_notice_id);
+	int 					deleteNotImg(int g_notice_id);	
+	int 					deleteNotOneImg(int g_notice_id, int img_id);
 	List<Notice> 			listSearchNotice(Notice notice);
 	int 					conditionNoticeCount(Notice notice);
+					
 	
-	//자주묻는질문
+	
+//===============================자주묻는질문=======================================
 	List<Notice> 			listFaq(Notice notice);
 	
 	
-	//문의하기
+//===============================문의하기=======================================
 	int 					totalInquire();
 	List<Inquire> 			listInquire(Inquire inquire);
-	Inquire 				detailInquire(int gid);
+	int 					seqInq(Inquire inquire);
 	int 					insertInquire(Inquire inquire);
+	int 					insertInqImg(Inq_Img inq_Img);
+	Inquire 				detailInquire(int gid);
+	List<Inq_Img> 			listInq_Img(Inq_Img inq_Img);
 	int 					updateInquire(Inquire inquire);
 	int 					deleteInquire(int g_writing_id);	
+	int 					deleteInqImg(int g_writing_id);
+	int 					deleteInqOneImg(int g_writing_id, int img_id);
 	List<Inquire> 			listSearchInquire(Inquire inquire);
 	int 					conditionInquireCount(Inquire inquire);
 	
-	
-	
 	//답변하기
-	int replyInquire(Inquire inquire);
-	
-	
-	
-	
+	int 					replyInquire(Inquire inquire);
 	
 	//공통코드 호출 
 	List<CommonCode> 		getCommonCode();
-	//옵션별 count 갯수
-	int conditionOptionCount(String code);		
-	//옵션별 게시글 갯수
+	int 					conditionOptionCount(String code);		
 	List<Inquire> 			listFilterOptionInquire(Inquire inquire);
 	
-	//문의하기 이미지
-	int insertInqImg(Inq_Img inq_Img);
-	
-	//문의글 시퀀스가져오기
-	int seqInq(Inquire inquire);
-	int deleteInqImg(int g_writing_id);
-	List<Inq_Img> listInq_Img(Inq_Img inq_Img);
-	
-	
-	//공지사항 시퀀스 가져오기
-	int seqNot(Notice notice);
-	//공지사항이미지
-	int insertNotImg(Not_Img not_Img);
-	
-	List<Not_Img> listNot_Img(Not_Img not_Img);
-	int deleteNotImg(int g_notice_id);
-	
-	//문의사항 사진하나삭제
-	int deleteHouOneImg(int g_writing_id, int img_id);
-	
 	
 
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
 }

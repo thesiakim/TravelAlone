@@ -15,7 +15,7 @@
 
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="inquireWriteForm" method="post" name="frm"  enctype="multipart/form-data">
-		<table>
+		<table style="margin:auto;">
 			<tr>
 				<td> 제목 </td>
 				<td> <input type="text" name="g_title" size = "50"> </td>
@@ -40,12 +40,16 @@
 			</tr>
 			<tr>
 				<td> 비밀번호 </td>
-				<td> <input type="text" name="g_passwd" size = "50"> </td>
+			<!-- 	<td> <input type="text" name="g_passwd" size = "50"> </td> -->
+				
+				<td> <input type="text" name="g_passwd" size="50" pattern="[0-9]{4}" title="숫자 4자리만 입력하세요"
+				 placeholder="숫자 4자리 입력"
+				> </td>
 			</tr>
 								
 			<tr>
 				<td>내용</td>
-				<td><textarea name="g_content" rows="10"></textarea></td>
+				<td><textarea name="g_content" rows="10" cols="50"></textarea></td>
 			</tr>
 			
 			<tr>
@@ -65,4 +69,5 @@
 		</table>
 	</form>
 </body>
+<c:import url="footer.jsp"/>
 </html>

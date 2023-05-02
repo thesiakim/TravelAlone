@@ -38,8 +38,8 @@ public interface HouseService {
 	
 	
 	//이미지 업로드
-	int insertImg(Hou_Img hou_Img);
-	int seqHou(House house);
+	int 					insertImg(Hou_Img hou_Img);
+	int 					seqHou(House house);
 	
 	List<Hou_Img> listHou_Img(Hou_Img hou_Img);
 	int deleteHouImg(int house_id);
