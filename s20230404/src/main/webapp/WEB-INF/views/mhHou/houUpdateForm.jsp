@@ -137,20 +137,13 @@
 		 				 		   onclick="deleteImage(${houImg.house_id},${houImg.img_id}, ${status.index})">
 		 				 		   	사진삭제
 		 				 		</a>
-                             
-					
-						 	
-						 	</td>
-									
-					</c:forEach>
-				
-				 </td>
-			
-			
-				
-			</tr>
+                             											 	
+						 	</td>									
+					</c:forEach>				
+				 </td>		
+				</tr>
 
-		</table>
+			</table>
 					<input type="submit" value="확인">
 					<a href="javascript:window.history.back();">수정취소</a>
 	</form>

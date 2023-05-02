@@ -14,9 +14,9 @@
 
 <script type="text/javascript">
 	function deleteImage(g_writing_id, img_id, p_index) {
-	 	alert("g_writing_id:"   + g_writing_id);
-		alert("img_id:"	    + img_id);
-		alert("p_index:"	+ p_index); 
+	/*  	alert("g_writing_id:"   + g_writing_id);
+		alert("img_id:"	    + img_id); */
+		alert("p_index:"	+ p_index);  
 		
 		$.ajax({
 		    url: "<%=context%>/deleteInqImg",
@@ -47,7 +47,7 @@
 	</div>
 <h1>문의게시판 글수정</h1>
 
-	<form action="updateInquire" method="post">
+	<form action="updateInquire" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="g_writing_id" value="${inquire.g_writing_id }">
 		<table style="margin:auto;">
 			<tr>
@@ -62,28 +62,25 @@
 			
 			<tr>
 				<th>문의글 종류</th>
-				<td>
-				<%-- <input type="text" name="g_common_csboard"
-					required="required" value="${inquire.g_common_csboard }">
-					 --%>
-					 			<select name="g_common_csboard">
-					<option value="inq100">여행지문의</option>
-					<option value="inq200">숙소문의</option>
-					<option value="inq300">맛집문의</option>
-					<option value="inq400">기타문의</option>
-				</select>
-					
-					</td>
+				<td>	
+					<select name="g_common_csboard">
+						<option value="inq100">여행지문의</option>
+						<option value="inq200">숙소문의</option>
+						<option value="inq300">맛집문의</option>
+						<option value="inq400">기타문의</option>
+					</select>					
+				</td>
 			</tr>
 			<tr>
 				<th>패스워드</th>
-				<td><input type="text" name="g_passwd"
-					required="required" value="${inquire.g_passwd }"></td>
+				<td>
+				<input type="text" name="g_passwd"	required="required" value="${inquire.g_passwd }">
+				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><input type="text" name="g_content"
-					id="g_content" value="${inquire.g_content }">
+				<td>
+					<input type="text" name="g_content"	id="g_content" value="${inquire.g_content }">
 				</td>
 			</tr>
 
@@ -95,15 +92,12 @@
 			<tr>
 				<td hidden>번호</td>													
 				<td>
-				<br>
-				 
-				<img alt="사진추가 " src="/images/inquireUpload/${savedName}">
-				<input type="file" name="file1" multiple="multiple"> <p>
-				</td>
-				
-				
-				<td>
-				
+					<br>
+					 
+					<img alt="사진추가 " src="/images/inquireUpload/${savedName}">
+					<input type="file" name="file1" multiple="multiple"> <p>
+				</td>								
+				<td>				
 						<c:forEach items="${imgInqList}" var="inqImg" varStatus="status">
 					         <input type="hidden" name="house_id" value="${inqImg.g_writing_id}">
 							<td hidden>${inqImg.img_id}</td>
@@ -111,28 +105,20 @@
 								<c:url value='/display' var='url'>
 									<c:param name='file' value='${inqImg.img_stored_file}'/>
 								</c:url>
-				                     <img alt="#" src="${url}"  width="500" height="300">
-								
-								
+				                     <img alt="#" src="${url}"  width="100" height="100">
+																
 						 		<br>
 		 				 		<a href="#" 
 		 				 		   class="button" 
 		 				 		   onclick="deleteImage(${inqImg.g_writing_id},${inqImg.img_id}, ${status.index})">
 		 				 		   	사진삭제
 		 				 		</a>
-                             
-					
-						 	
+                             											 	
 						 	</td>
 									
-					</c:forEach>
-				
-				 </td>
-			
-			
-				
+						</c:forEach>				
+				 </td>										
 			</tr>
-
 		</table>
 				<input type="submit" value="확인">
 				<a href="javascript:window.history.back();">수정취소</a>

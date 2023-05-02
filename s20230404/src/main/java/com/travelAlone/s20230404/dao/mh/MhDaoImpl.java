@@ -185,10 +185,25 @@ public int deleteNotImg(int g_notice_id) {
 	
 @Override
 public int deleteNotOneImg(int g_notice_id, int img_id) {
-	// TODO Auto-generated method stub
-	return 0;
-}	
+	Not_Img not_Img = new Not_Img();
+	not_Img.setG_notice_id(g_notice_id);
+	not_Img.setImg_id(img_id);
 	
+	log.info("NoticeDaoImpl deleteNotOneImg start");
+	int result = 0;
+	log.info("NoticeDaoImpl deleteNotOneImg g_notice_id->"+ g_notice_id);
+	log.info("NoticeDaoImpl deleteNotOneImg img_id->"+ img_id);
+	try {
+		result = session.delete("deleteNotOneImg",not_Img );
+	} catch (Exception e) {
+		log.info("NoticeDaoImpl delete Exception->"+ e.getMessage());
+	}
+	
+	
+	return result;
+}	
+
+
 	
 @Override
 public List<Notice> noticeSearchList(Notice notice) {
