@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.Warning;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
+import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.jh.JhService;
 
 import lombok.RequiredArgsConstructor;
@@ -151,6 +153,37 @@ public class JhController {
        model.addAttribute("b_common_board", board.getB_common_board());
       return "forward:/detailBoard";
    }
+   
+   // 마이페이지 커뮤니티
+   @RequestMapping(value = "myPageCommunityList") 
+   public String myPageCommunityList(@LoginUser MemberJpa memberJpa, Board board, String currentPage, Model model) {
+       log.info("jhController myPageCommunityList start");
+       log.info("jhController myPageCommunityList currentPage는 "+ currentPage);
+       log.info("jhController myPageCommunityList orderList는" + board.getOrderList());
+       log.info("memberJpa.getId() -> " + memberJpa.getId());
+       // Board table 전체 count
+       int myPageCommunityListCnt = js.myPageCommunityListCnt(memberJpa.getId());
+       log.info("jhController myPageCommunityList boardAllCnt는 "+ myPageCommunityListCnt);
+      
+       // Paging 작업
+       Paging page = new Paging(myPageCommunityListCnt, currentPage);    
+      
+       // Board에 추가 setting
+       board.setStart(page.getStart());
+       board.setEnd(page.getEnd());
+       board.setMember_id(memberJpa.getId());
+       
+       List<Board> myPageCommunityList = js.myPageCommunityList(board);
+      
+       log.info("jhController myPageCommunityList.size()는 "+ myPageCommunityList.size());
+      
+       model.addAttribute("myPageCommunityListCnt" ,myPageCommunityListCnt);
+       model.addAttribute("myPageCommunityList", myPageCommunityList);
+       model.addAttribute("page", page);
+       return "ro/myPageCommunityList";
+   }
+	      
+   
 }
    
 

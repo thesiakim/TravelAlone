@@ -112,6 +112,8 @@
          	</c:forEach>
       	</table>
    	</div>
+   		<a href="myPageCommunityList">마이페이지</a>
+   	
    	<c:if test="${page.startPage > page.pageBlock }">
       	<a href="listBoard?currentPage=${page.startPage - page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[이전]</a>
    	</c:if>
