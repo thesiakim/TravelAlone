@@ -46,7 +46,7 @@
          <% } else { %>
              <li><a href="/listBoard?b_common_board=bor500">모집게시판</a></li>
          <% } %>
-      </ul> 
+      </ul>
    </div>
 </body>
 </html>

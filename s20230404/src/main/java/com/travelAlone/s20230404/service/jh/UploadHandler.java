@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
+@Component
 public class UploadHandler {
 
     /**

@@ -8,7 +8,6 @@ import com.travelAlone.s20230404.model.dto.km.ScoreCount;
 import com.travelAlone.s20230404.model.dto.km.WritingCount;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Repository;
 
 import org.apache.ibatis.session.SqlSession;

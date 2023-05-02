@@ -56,7 +56,7 @@ public class RoController {
       model.addAttribute("boardAllCnt" ,boardAllCnt);
       model.addAttribute("listAllBoard", listAllBoard);
       model.addAttribute("page", page);
-      
+      model.addAttribute("user_id", memberJpa.getId());
       
       return "ro/boardAllListForm";
    }
@@ -86,6 +86,7 @@ public class RoController {
       model.addAttribute("boardCnt" ,boardCnt);
       model.addAttribute("listBoard", listBoard);
       model.addAttribute("page", page);
+      model.addAttribute("user_id", memberJpa.getId());
       
       return "ro/boardListForm";
       }
@@ -172,7 +173,7 @@ public class RoController {
       
       model.addAttribute("board_id", board.getBoard_id());
       model.addAttribute("b_common_board", board.getB_common_board());
-
+      
       int insertResult = rs.insertReBoard(board);
       
       String resultForm = "";

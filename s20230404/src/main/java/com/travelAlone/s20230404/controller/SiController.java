@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Travel;
@@ -166,7 +168,7 @@ public class SiController {
 	
 	//메인 페이지에서 인기 명소/숙소/맛집 보여주기
 	@GetMapping(value = {"/", "/index"})
-	public String popular(Model model) {
+	public String popular(@LoginUser MemberJpa memberJpa, Model model) {
 		
 		//인기 명소
 		List<Travel> popularTravel = siService.getPopularTravel();
@@ -180,7 +182,9 @@ public class SiController {
 		model.addAttribute("popularTravel", popularTravel);
 		model.addAttribute("popularRes", popularRes);
 		model.addAttribute("popularHouse", popularHouse);
-		
+		if (memberJpa != null){
+			model.addAttribute("user_id", memberJpa.getId());
+		}
 		return "index";
 	}
 	
