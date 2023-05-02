@@ -12,7 +12,6 @@ import lombok.ToString;
 @ToString
 public class Inquire {
 
-
 	private int 			g_writing_id;
 	private int 			member_id;
 	private String			g_common_csboard;
@@ -33,9 +32,10 @@ public class Inquire {
 	
 	
 	//조회용 코드 
-		private String code;
+	private String code;
 
-		
+	// member조인용
+	private String m_nickname;		
 
 	
 	

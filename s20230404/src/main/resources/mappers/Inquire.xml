@@ -18,19 +18,22 @@
 				(
 				        SELECT rownum rn , a.*
 				        FROM
-				                   (select  G_WRITING_ID
-											,MEMBER_ID											
-											,G_TITLE
-											,G_CONTENT
-											,CREATE_DATE
-											,MODIFIED_DATE
-											,G_PASSWD
-											,G_VIEW_CNT
-											,G_REPLY_YN
-											,G_REPLY_CONTENT
-											
-									  from  G_WRITING order by G_WRITING_ID desc) a
-			)   
+				                   (select                                    
+                                            g.G_WRITING_ID
+											,g.MEMBER_ID											
+											,g.G_TITLE
+											,g.G_CONTENT
+											,g.CREATE_DATE
+											,g.MODIFIED_DATE
+											,g.G_PASSWD
+											,g.G_VIEW_CNT
+											,g.G_REPLY_YN
+											,g.G_REPLY_CONTENT	
+                                            ,m.m_nickname
+										    from  G_WRITING g, Member m
+										    Where  g.member_id = m.member_id
+										     order by G_WRITING_ID desc) a
+											)   
 		 		WHERE  rn >= #{start} 
 		 		and    rn <= #{end} 
 		 	 ]]>	
