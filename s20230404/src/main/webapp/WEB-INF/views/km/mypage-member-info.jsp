@@ -17,13 +17,15 @@
 
 		$.ajax({
 			type: "POST",
-			url: "/api/v1/mypage",
-			dataType: "json",
+			url: "/api/v1/mypage/info",
+			dataType: "text",
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(data),
 		})
-				.done(function () {
-					alert("수정되었습니다.");
+				.done(function (responseText) {
+					alert(responseText+"! 수정되었습니다.");
+					window.close(); // 현재 창 닫기
+					window.opener.location.reload(); // 부모 창 새로 고치기
 				})
 				.fail(function (error) {
 					alert(JSON.stringify(error));

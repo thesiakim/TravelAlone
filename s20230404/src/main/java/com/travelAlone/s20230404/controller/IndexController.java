@@ -49,8 +49,6 @@ public class IndexController {
     @GetMapping("/display")
     public ResponseEntity<Resource> GetProfileImage(@RequestParam("file") String fileName) {
 
-        System.out.println("fileName = " + fileName);
-
         String absolutePath = new File("").getAbsolutePath() + File.separator+ File.separator;
         Resource resource = new FileSystemResource(absolutePath + fileName);
         if(!resource.exists())

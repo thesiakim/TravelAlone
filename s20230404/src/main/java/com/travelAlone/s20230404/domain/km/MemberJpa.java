@@ -140,4 +140,8 @@ public class MemberJpa extends BaseTimeEntity{
         this.imgStoredFile = imgStoredFile;
         this.imagesType = imagesType;
     }
+
+    public String getRoleKey(){
+        return this.role.getKey();
+    }
 }

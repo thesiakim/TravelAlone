@@ -236,13 +236,12 @@ public class KmController {
      * 2023-04-26 조경민
      * 설명 : 마이페이지 회원정보 변경
      * */
-    @PostMapping("/api/v1/mypage/member-info")
+    @PostMapping("/api/v1/mypage/info")
     @ResponseBody
     public String mypageMemberInfoUpdate(@RequestBody Member member, @LoginUser MemberJpa memberJpa){
 
         member.setMember_id(memberJpa.getId());
 
-        System.out.println("member = " + member);
 
         mypageService.memberInfoUpdate(member);
 
