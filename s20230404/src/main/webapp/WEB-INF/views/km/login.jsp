@@ -44,7 +44,7 @@
 				<td style="width: 80px;"><button type="submit" class="btn btn-outline-dark">로그인</button></td>
 				<td style="width: 80px;"><button type="button" class="btn btn-outline-dark" onclick="location.href='/join'">회원가입</button></td>
 				<td></td>
-			</tr>
+			</tr> 
 		</table>
 	</form>
 </body>

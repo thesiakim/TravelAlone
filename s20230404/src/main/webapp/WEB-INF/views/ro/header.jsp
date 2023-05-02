@@ -21,9 +21,6 @@
 		</div> 
 		<div class="headerLogin">
 		  <a href="join">회원가입</a>
-		  <c:if test="">
-		  	<a href="myPageCommunityList">마이페이지</a>
-		  </c:if>
 		</div>
 		
 	  </div>
