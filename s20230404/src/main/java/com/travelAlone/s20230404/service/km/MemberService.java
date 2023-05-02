@@ -3,10 +3,7 @@ package com.travelAlone.s20230404.service.km;
 
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.domain.km.MemberRepository;
-import com.travelAlone.s20230404.model.dto.km.MemberFindAndChangePasswordRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MemberFindIdRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MemberFindPasswordRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MemberFormDto;
+import com.travelAlone.s20230404.model.dto.km.*;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -159,5 +153,73 @@ public class MemberService{
         }
 
         return member.getId();
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 관리자 페이지 메인화면 회원 리스트 조회
+     * */
+    @Transactional(readOnly = true)
+    public List<AdminMemberResponseDto> adminMemberListShow() {
+
+        // 멤버 리스트를 조회해와서 AdminMemberResponseDto로 변환 후 반환
+        return memberRepository.findAllDesc().stream()
+                .map(memberJpa -> new AdminMemberResponseDto(memberJpa))
+                .collect(Collectors.toList());
+
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 관리자 페이지 검색 회원 리스트 조회
+     * */
+    @Transactional(readOnly = true)
+    public List<AdminMemberResponseDto> adminMemberSearchAndListShow(String search) {
+
+        return memberRepository.findSearchAndAllDesc(search).stream()
+                .map(memberJpa -> new AdminMemberResponseDto(memberJpa))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 관리자 페이지 회원 권한 변경
+     * */
+    @Transactional
+    public Long adminMemberRoleChange(AdminMemberRoleRequestDto requestDto) {
+
+        // 해당 아이디 member 조회
+        MemberJpa memberJpa = memberRepository.findById(requestDto.getId())
+                .orElseThrow(() -> new IllegalStateException("해당 회원이 존재하지 않습니다. : " + requestDto.getId()));
+
+        // member 권한 변경
+        memberJpa.updateRole(requestDto.getRole());
+
+
+        return memberJpa.getId();
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 관리자 페이지 회원 정보 변경
+     * */
+    @Transactional
+    public Long adminMemberinfoChange(AdminMemberInfoChangeRequestDto requestDto) {
+        // 해당 아이디 member 조회
+        MemberJpa memberJpa = memberRepository.findById(requestDto.getId())
+                .orElseThrow(() -> new IllegalStateException("해당 회원이 존재하지 않습니다. : " + requestDto.getId()));
+
+        // member 정보 변경
+        memberJpa.updateInfo(requestDto.getNickname(),
+                requestDto.getName(),
+                requestDto.getGender(),
+                requestDto.getPhone(),
+                requestDto.getImgContext(),
+                requestDto.getImgOriginalFile(),
+                requestDto.getImgStoredFile(),
+                requestDto.getImagesType());
+
+        return memberJpa.getId();
+
     }
 }

@@ -72,11 +72,6 @@ public class MemberJpa extends BaseTimeEntity{
 
     }
 
-
-    public void updateProfilePicture(){
-
-    }
-
     /**
      * 2023-04-20 조경민
      * 설명 : 닉네임을 변경한다
@@ -110,4 +105,39 @@ public class MemberJpa extends BaseTimeEntity{
         this.password = password;
     }
 
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 권한을 변경한다
+     * */
+    public void updateRole(String role){
+        if (role.equals("ban")){
+            this.role = Role.rol300;
+        }else if (role.equals("admin")){
+            this.role = Role.rol200;
+        }else{
+            this.role = Role.rol100;
+        }
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 회원정보 변경
+     * */
+    public void updateInfo(String nickname,
+                           String name,
+                           String gender,
+                           String phone,
+                           String imgContext,
+                           String imgOriginalFile,
+                           String imgStoredFile,
+                           String imagesType) {
+        this.nickname = nickname;
+        this.name = name;
+        this.gender = gender;
+        this.phone = phone;
+        this.imgContext = imgContext;
+        this.imgOriginalFile = imgOriginalFile;
+        this.imgStoredFile = imgStoredFile;
+        this.imagesType = imagesType;
+    }
 }

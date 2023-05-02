@@ -167,7 +167,7 @@ public class KmController {
      *      전달값 : String email, String name , String phone
      *      반환값 : Long id, String email, String name, String phone ,아이디 존재 여부
      * */
-    @PostMapping("api/v1/password")
+    @GetMapping("/password/info")
     public String findPassword(@ModelAttribute MemberFindPasswordRequestDto requestDto, Model model){
 
         // 해당하는 member id 를 찾아온다
@@ -317,7 +317,7 @@ public class KmController {
         List<MypageReviewResponseDto> responseDtos =
                 mypageService.mypageReviewShow(new MypageReviewRequestDto(memberJpa.getId(), category, page));
 
-        model.addAttribute(경"category", category);
+        model.addAttribute("category", category);
         model.addAttribute("page", page);
         model.addAttribute("responseDtos", responseDtos);
 
@@ -325,14 +325,49 @@ public class KmController {
     }
 
 
+
     // 관리자 페이지----------------------------------------------------------------
     /**
      * 2023-05-01 조경민
-     * 설명 : 관리자 페이지 회원 목록 조회
+     * 설명 : 관리자 페이지 회원 목록 조회, 쿼리 스트링을 이용한 검색기능 추가
      * */
-//    @GetMapping("/admin")
-//    public String adminMain(){
-//
-//    }
+    @GetMapping("/admin")
+    public String adminMain(@RequestParam(value = "search", required = false) String search, Model model){
+
+        if (search==null){
+            // search 값이 null이면 전체 조회
+            model.addAttribute("members",memberService.adminMemberListShow());
+        }else {
+            // search값 존재하면 검색어 조회
+            model.addAttribute("members",memberService.adminMemberSearchAndListShow(search));
+        }
+
+        return "admin-main";
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 관리자 페이지 회원 권한 변경
+     * */
+    @PatchMapping("/api/v1/admin/role")
+    @ResponseBody
+    public Long adminRoleChange(@RequestBody AdminMemberRoleRequestDto requestDto){
+
+        // 회원 권한 변경 후 아이디 반환
+        return memberService.adminMemberRoleChange(requestDto);
+    }
+
+    /**
+     * 2023-05-02 조경민
+     * 설명 : 관리자 회원 정보 변경
+     * */
+    @PatchMapping("/api/v1/admin/info")
+    @ResponseBody
+    public Long adminInfoChange(@RequestBody AdminMemberInfoChangeRequestDto requestDto){
+
+        return memberService.adminMemberinfoChange(requestDto);
+    }
+
+
 
 }

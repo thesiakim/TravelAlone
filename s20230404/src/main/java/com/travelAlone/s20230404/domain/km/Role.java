@@ -7,6 +7,6 @@ package com.travelAlone.s20230404.domain.km;
  * */
 public enum Role {
 
-    // User Admin, User
+    // User, Admin, Ban
     rol100, rol200, rol300
 }

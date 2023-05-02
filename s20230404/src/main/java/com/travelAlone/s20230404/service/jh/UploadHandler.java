@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
-@Component
 public class UploadHandler {
 
     /**
@@ -114,7 +113,7 @@ public class UploadHandler {
     /**
      * 실제 파일 삭제
      * */
-    public void delete(String storedFileName) {
+    public static void delete(String storedFileName) {
         String absolutePath = new File("").getAbsolutePath() + File.separator+File.separator;
 
         try{

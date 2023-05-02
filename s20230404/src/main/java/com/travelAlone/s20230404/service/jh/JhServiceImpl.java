@@ -47,8 +47,10 @@ public class JhServiceImpl implements JhService {
 
 		long boardId = jd.insertBoard(requestDto.toBoard());
 
+		// 실제 파일 저장
 		List<BodImg> bodImgs = UploadHandler.parseFileInfo(files, boardId);
 
+		// 받아온 데이터를 DB에 저장
 		insertResult = jd.insertBodImg(bodImgs);
 
 		log.info("jhServiceImpl insertBoard insertResult는 "+ insertResult);
