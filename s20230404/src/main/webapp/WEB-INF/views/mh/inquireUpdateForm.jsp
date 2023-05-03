@@ -45,24 +45,31 @@
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
 	</div>
-<h1>문의게시판 글수정</h1>
-
+	<div>
+		<h1>고객센터</h1>
+			
+			<div >
+				 <a href="notice">공지사항 </a>
+				  <a href="faq" style=" padding-left:50px;">자주 묻는 질문 </a>
+				  <a href="inquire" style=" padding-left:50px;">문의하기</a>
+			</div>			
+						
+	</div>
+	<hr>
 	<form action="updateInquire" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="g_writing_id" value="${inquire.g_writing_id }">
 		<table style="margin:auto;">
-			<tr>
-				<th>글아이디</th>
-				<td>${inquire.g_writing_id }</td>
-			</tr>
+			
 			<tr>
 				<th>제목</th>
 				<td><input type="text" name="g_title"
-					required="required" value="${inquire.g_title }"></td>
+					required="required" value="${inquire.g_title }"
+					style="width: 700px;"></td>
 			</tr>
 			
 			<tr>
 				<th>문의글 종류</th>
-				<td>	
+				<td style="text-align: left;">	
 					<select name="g_common_csboard">
 						<option value="inq100">여행지문의</option>
 						<option value="inq200">숙소문의</option>
@@ -73,14 +80,18 @@
 			</tr>
 			<tr>
 				<th>패스워드</th>
-				<td>
-				<input type="text" name="g_passwd"	required="required" value="${inquire.g_passwd }">
+				<td style="text-align: left;">
+				<input type="text" name="g_passwd" size="10"	required="required" 
+				 placeholder="숫자 4자리 입력"
+				value="${inquire.g_passwd }">
 				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td>
-					<input type="text" name="g_content"	id="g_content" value="${inquire.g_content }">
+				<td>					
+				<textarea 	rows="10" cols="100" name="g_content" id="g_content">
+				${inquire.g_content }</textarea>
+				
 				</td>
 			</tr>
 
@@ -124,4 +135,5 @@
 				<a href="javascript:window.history.back();">수정취소</a>
 	</form>
 </body>
+<c:import url="footer.jsp"/>
 </html>

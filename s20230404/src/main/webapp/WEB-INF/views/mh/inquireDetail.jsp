@@ -12,14 +12,24 @@
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 
-	<h1>문의글 조회</h1>
-	
+ 	<div>
+		<h1>고객센터</h1>
+			
+			<div >
+				 <a href="notice">공지사항 </a>
+				  <a href="faq" style=" padding-left:50px;">자주 묻는 질문 </a>
+				  <a href="inquire" style=" padding-left:50px;">문의하기</a>
+			</div>			
+						
+	</div>
+	<hr>
+
 	
 	<table  style="margin:auto;">
-		<tr>
+	<%-- 	<tr>
 			<th>글번호</th>
 			<td>${inquire.g_writing_id}</td>
-		</tr>
+		</tr> --%>
 		<tr>
 			<th>제목</th>
 			<td>${inquire.g_title}</td>
@@ -27,22 +37,22 @@
 		
 		<tr>
 			<th>작성자</th>
-			<td>${inquire.member_id}</td>
+			<td>${inquire.m_nickname}</td>
 		</tr>
 		<tr>
-			<th>내용</th>
-			<td>${inquire.g_content}</td>
+			<th></th>
+			<td colspan="3" height="400px">${inquire.g_content}</td>
 		</tr>
-		<tr>
+<%-- 		<tr>
 			<th>답변여부</th>
 			<td>${inquire.g_reply_yn}</td>
-		</tr>
+		</tr> --%>
 	</table>
 	
 		<table  style="margin:auto;"">
 			<tr>
 				<td hidden>번호</td>													
-				<td>사진</td>
+			
 				
 			</tr>
 			<c:forEach items="${imgInqList}" var="inqImg">
@@ -72,7 +82,7 @@
 			<td colspan="2">
 	
 			<a href="inquire">목록</a>
-	            <c:if test="${user_id == content.member_id }">
+	       <%--      <c:if test="${user_id == content.member_id }">
 	                       <td colspan="3">
 	                          <div class="button-container">
 	                       
@@ -81,11 +91,11 @@
 	                          </div>
 	                       </td>
 	                </c:if>
+			 --%>
 			
 			
-			<%-- 
 			<a href="inquireUpdateForm?g_writing_id=${inquire.g_writing_id}">수정</a>
-			<a href="deleteInquire?g_writing_id=${inquire.g_writing_id}">삭제</a> --%>
+			<a href="deleteInquire?g_writing_id=${inquire.g_writing_id}">삭제</a> 
 			<a href="inquireReplyForm?g_writing_id=${inquire.g_writing_id}">답변하기</a>
 			</td>
 		</tr>
@@ -114,8 +124,18 @@
 		</tr>
 		
 		<tr>
-			<th>답변내용</th>
-			<td>${inquire.g_reply_content}</td>
+	<%-- 		<th>
+			<c:choose>
+			<c:when test="${inquire.g_reply_yn eq '1'.charAt(0)}">
+				<c:out value="답변내용"/>
+			</c:when>
+			<c:otherwise>
+				<c:out value="  "/>
+			</c:otherwise>
+		</c:choose>
+			
+			</th> --%>
+			<td colspan="3" width="500px" height="200px">${inquire.g_reply_content}</td>
 		</tr>
 	
 	</table>

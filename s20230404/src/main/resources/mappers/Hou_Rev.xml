@@ -7,12 +7,17 @@
 	<!-- 리뷰목록 가져오기 -->
 <select id="houRevList" parameterType="Hou_Rev" resultType="Hou_Rev" >
     		<![CDATA[
-			SELECT							  
-		            REVIEW_ID ,HOUSE_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
-		            ,CREATE_DATE ,MODIFIED_DATE
-			 FROM    HOU_REV
-			 WHERE    HOUSE_ID =    #{HOUSE_ID}   
-			                      					 		
+				 
+			 SELECT							  
+				       hr. *
+				       ,m.m_nickname
+			 FROM    HOU_REV hr,  Member m
+			 WHERE    
+			 HOUSE_ID =   #{HOUSE_ID}  
+			 and
+			  hr.member_id = m.member_id
+			
+						 			 			                      					 		
 		 	 ]]>	
 			
 		</select>
@@ -24,7 +29,7 @@
 			  (REVIEW_ID ,			HOUSE_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
 		            ,CREATE_DATE ,MODIFIED_DATE )
 		  	values
-		  	  (REVIEW_ID_SEQ.nextval,#{house_id}	,#{member_id}, #{r_content}, #{r_score}
+		  	  (REVIEW_ID_SEQ.nextval,#{house_id}	,#{member_id, jdbcType=NUMERIC}, #{r_content}, #{r_score}
 		  	  ,sysdate, sysdate	)        
 				
 		</insert>

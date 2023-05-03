@@ -301,8 +301,9 @@ public int seqInquire(Inquire inquire) {
 @Override
 public int insertInquire(Inquire inquire) {
 	int result = 0;
-	log.info("mhDaoImpl insert Start... " );
+	log.info("InquireDaoImpl insert Start... " );
 	try {
+		
 		result = session.insert("insertInquire",inquire);
 	} catch (Exception e) {
 		log.info("mhDaoImpl insert Exception->" + e.getMessage());

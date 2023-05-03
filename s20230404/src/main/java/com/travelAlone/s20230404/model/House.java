@@ -44,7 +44,12 @@ public class House {
 	public String getFormattedCreateDate() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 	    return create_date.format(formatter);
+	    	    
 	  }
+	
+	
+	// member조인용
+		private String m_nickname;
 
 	
 	

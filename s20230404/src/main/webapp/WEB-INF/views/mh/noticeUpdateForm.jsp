@@ -44,28 +44,30 @@
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
 	</div>
-	<h1>공지사항 글수정</h1>
-
+	<div>
+		<h1>고객센터</h1>
+			
+			<div >
+				 <a href="notice">공지사항 </a>
+				  <a href="faq" style=" padding-left:50px;">자주 묻는 질문 </a>
+				  <a href="inquire" style=" padding-left:50px;">문의하기</a>
+			</div>			
+						
+	</div>
+	<hr>
 	<form action="updateNotice" method="post"  enctype="multipart/form-data">
 		<input type="hidden" name="g_notice_id" value="${notice.g_notice_id }">
 		<table style="margin:auto;">
-			<tr>
-				<th>글아이디</th>
-				<td>${notice.g_notice_id }</td>
-			</tr>
+
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="g_notice_title"
-					required="required" value="${notice.g_notice_title }"></td>
+				<td ><input type="text" name="g_notice_title"
+					required="required" value="${notice.g_notice_title }"
+					style="width: 700px;"></td>
 			</tr>
+
 			<tr>
-				<th>회원ID</th>
-				<td><input type="text" name="member_id" required="required"
-					value="${notice.member_id }"></td>
-			</tr>
-			<tr>
-				<th>게시판종류</th>
-				<td>
+				<th>게시판종류</th>				
 				<td style="text-align: left;">
 					<select name="g_common_csboard">
 					<option value="not100">공지사항</option>
@@ -75,8 +77,9 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><input type="text" name="g_notice_content"
-					id="g_notice_content" value="${notice.g_notice_content }">
+				<td>				
+				<textarea 	rows="10" cols="100" name="g_notice_content" id="g_notice_content">
+				${notice.g_notice_content}</textarea>	
 				</td>
 			</tr>
 
@@ -98,13 +101,15 @@
 			<td>
 			
 					<c:forEach items="${imgNotList}" var="notImg" varStatus="status">
-				         <input type="text" name="g_notice_id" value="${notImg.g_notice_id}">
+				        
+				         <input type="hidden" name="g_notice_id" value="${notImg.g_notice_id}">
+				         
 						<td hidden>${notImg.img_id}</td>
 					 	<td  id="delImage${status.index}">
 							<c:url value='/display' var='url'>
 								<c:param name='file' value='${notImg.img_stored_file}'/>
 							</c:url>
-			                     <img alt="#" src="${url}"  width="500" height="300">
+			                     <img alt="#" src="${url}"  width="100" height="100">
 							
 							
 					 		<br>

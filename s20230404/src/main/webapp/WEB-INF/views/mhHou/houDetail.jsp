@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 </head>
 <body>
 <div id="img_benner">
@@ -21,8 +23,8 @@
 			<td>사진</td>
 			
 		</tr>
+		<tr> 
 		<c:forEach items="${imgHouList}" var="houImg">
-		<!-- 	<tr> -->
 				<td hidden>${houImg.img_id}</td>
 			 	<td >
 			
@@ -35,7 +37,7 @@
 			 	</td>
 								
 		</c:forEach>
-		
+		</tr>
 </table>
 	 
 	 
@@ -43,37 +45,37 @@
 	 
 	<table style="margin:auto;">
 				
-		<tr><th>숙소명</th>			<td>${house.h_name}</td></tr>
-		<tr><th>숙소주소</th>			<td>${house.h_address}</td></tr>
-		<tr><th>객실 가격</th>			<td>${house.h_room}</td></tr>
-		<tr><th>체크인 체크아웃시간</th>	<td>${house.h_checkinout}</td></tr>
-		<tr><th>문의전화</th>			<td>${house.h_call}</td></tr>
-		<tr><th>조식여부</th>			<td>${house.h_eat}</td></tr>
-		<tr><th>주차장여부</th>		<td>${house.h_parking}</td></tr>
-		<tr><th>비고</th>				<td>${house.h_content}</td></tr>
+		<tr><th>숙소명</th>			<td style=" padding-left:50px;">${house.h_name}</td></tr>
+		<tr><th>숙소주소</th>			<td style=" padding-left:50px;">${house.h_address}</td></tr>
+		<tr><th>객실 가격</th>			<td style=" padding-left:50px;">${house.h_room}</td></tr>
+		<tr><th>체크인 체크아웃시간</th>	<td style=" padding-left:50px;">${house.h_checkinout}</td></tr>
+		<tr><th>문의전화</th>			<td style=" padding-left:50px;">${house.h_call}</td></tr>
+		<tr><th>조식여부</th>			<td style=" padding-left:50px;">${house.h_eat}</td></tr>
+		<tr><th>주차장여부</th>		<td style=" padding-left:50px;">${house.h_parking}</td></tr>
+		<tr><th>비고</th>				<td style=" padding-left:50px;">${house.h_content}</td></tr>
 		<tr> <th hidden> ${house.house_id} </th>  </tr>
 		
 
-		<tr><td colspan="2">
-		<!--     <input type="button" value="목록" 
-				onclick="location.href='hou'"> -->
-				
-				<a href="hou" class="button">목록</a>
-				<a href="houUpdateForm?house_id=${house.house_id}" class="button">수정</a>
-				<a href="deleteHouse?house_id=${house.house_id}" class="button">삭제</a>
-			
+		<tr>
+		
+	
 
 		</tr>
 	</table>
 
-
 </div>
-	
+		<hr>
+		<a href="hou" class="button">목록</a>
+		<a href="houUpdateForm?house_id=${house.house_id}" class="button">수정</a>
+		<a href="deleteHouse?house_id=${house.house_id}" class="button">삭제</a>
+			
+
+		<hr>
 		<h3>리뷰		</h3>
 	<table style="margin:auto;">
 				<tr>
 					<td>리뷰번호</td>													
-					<td>아이디</td>
+					<td  style=" padding-left:30px;">작성자</td>
 					<td>내용</td>
 					<td>평점</td>
 					<td>작성일</td>
@@ -84,27 +86,23 @@
 					<c:forEach items="${houRevList}" var="houRev">
 					<tr>
 						<td>${houRev.review_id}</td>
-					 	<td>${houRev.member_id}</td>
+					 	<td>${houRev.m_nickname}</td>
 					 	<td>${houRev.r_content}</td>
 					 	<td>${houRev.r_score}</td>
 					 	<td>${houRev.create_date}</td>
-					 <td><a href="houRevUpdateForm?house_id=${houRev.house_id}&review_id=${houRev.review_id}">수정</a></td>
-					 	<td>
-					 <%-- 	<a href="deleteHouRev?review_id=${review_id}">삭제</a> --%>
-					 	
-
+					 <td  style=" padding-left:30px;" ><a href="houRevUpdateForm?house_id=${houRev.house_id}&review_id=${houRev.review_id}">수정</a></td>
+					 	<td style=" padding-left:30px;">
 					 	 <a href="deleteHouRev?review_id=${houRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
 					 	 </td>
 						
 											
 					</tr>
 				</c:forEach>
-				<tr>
-					<td colspan="5"><a href="houRevWriteForm?house_id=${house.house_id}">리뷰작성</a></td>
-				</tr>
 			</table>
 	
-	
+				
+				<a  style=" padding-left:600px;" href="houRevWriteForm?house_id=${house.house_id}">리뷰작성</a>
+			
 	
 	
 </body>

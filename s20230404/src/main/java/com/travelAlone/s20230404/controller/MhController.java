@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +47,7 @@ public class MhController {
 
 //공지사항 목록보기
 @RequestMapping(value = "notice")
-public String notice(Notice notice, String currentPage, Model model) {
+public String notice(Notice notice,String currentPage, Model model) {
 	log.info("NoticeController Start notice");
 	int totalNotice = mh.totalNotice();		
 	
@@ -88,19 +89,19 @@ public String noticeDetail(int gid , Model model, Not_Img not_Img ) {
 	
 //공지사항 글작성 페이지 이동
 @GetMapping(value = "noticeWriteForm")
-//public String noticeWriteForm(@LoginUser MemberJpa memberJpa, Notice notice, Model model) {
-	public String noticeWriteForm( Notice notice, Model model) {
+public String noticeWriteForm(@LoginUser MemberJpa memberJpa, Notice notice, Model model) {
+
 	  
-	//if(memberJpa != null) {
+	if(memberJpa != null) {
 	log.info("NoticeController  noticeWriteForm Start");	
-	// log.info("NoticeController noticeWriteForm memberJpa.getId()는 "+ memberJpa.getId());
-  //   model.addAttribute("user_id", memberJpa.getId());
+	 log.info("NoticeController noticeWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+    model.addAttribute("user_id", memberJpa.getId());
 	return "mh/noticeWriteForm";
 	
-	// }	
-	//else {
-    //	  return  "th/login";
-     //}		 	
+	 }	
+	else {
+   	  return  "km/login";
+     }		 	
 	
 	
 }
@@ -108,15 +109,25 @@ public String noticeDetail(int gid , Model model, Not_Img not_Img ) {
 
 //공지사항 글작성
 @PostMapping(value = "noticeWriteForm")
-public String noticeWrite(Notice notice, Model model, HttpServletRequest request,   List<MultipartFile>  file1
+public String noticeWrite(@LoginUser MemberJpa memberJpa,
+		Notice notice, Model model, HttpServletRequest request,   List<MultipartFile>  file1
 		,Not_Img not_Img) throws Exception {
 	log.info("NoticeController  noticeWrite Start...");
+	
+	  if (memberJpa == null){
+	         throw new Exception("로그인 해주세요!");
+	      }
+	
 	
 	//공지사항 시퀀스가져오기
 	int noticeSeq = mh.seqNot(notice);
 	log.info("NoticeController noticeWrite noticeSeq->" + noticeSeq );
 	
 	notice.setG_notice_id(noticeSeq);
+	log.info("NoticeController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
+	
+	
+	notice.setMember_id(memberJpa.getId());
 	int insertResult = mh.insertNotice(notice);
 	log.info("NoticeController noticeWrite insertResult->"+insertResult );
 	
@@ -355,26 +366,47 @@ public String inquireDetail(int gid , Model model, Inq_Img inq_Img ) {
 		
 //문의게시판 글작성 페이지이동
 @GetMapping(value = "inquireWriteForm")
-public String inquireWriteForm(Inquire inquire,Model model) {
+public String inquireWriteForm(@LoginUser MemberJpa memberJpa, 
+		Inquire inquire,Model model) {
 	log.info("InquireController inquireWriteForm Start... ");
-	return "mh/inquireWriteForm";
+	
+	 if(memberJpa != null) {
+         log.info("InquireController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
+         model.addAttribute("user_id", memberJpa.getId());
+		 
+		return "mh/inquireWriteForm";
+
+      }else {
+    	  return "km/login";
+      }
+	
+	
 }
 		
 	
 		
 //문의게시판 글작성
 @PostMapping(value = "inquireWriteForm")
-public String  inquireWrite(HttpServletRequest request,   List<MultipartFile>  file1, Inq_Img inq_Img,
+public String  inquireWrite(
+		@LoginUser MemberJpa memberJpa,
+		HttpServletRequest request,   List<MultipartFile>  file1, Inq_Img inq_Img,
 		Inquire inquire, Model model) throws Exception {
 
 	log.info("InquireController  inquireWrite Start");
+	  if (memberJpa == null){
+	         throw new Exception("로그인 해주세요!");
+	      }
+	
+	
 	int inquireSeq = mh.seqInq(inquire);
 	log.info("InquireController inqWrite inquireSeq->" + inquireSeq );
+
+	inquire.setG_writing_id(inquireSeq);	
+	log.info("InquireController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
 	
-	
-	inquire.setG_writing_id(inquireSeq);									
+	inquire.setMember_id(memberJpa.getId());
 	int insertResult = mh.insertInquire(inquire);
-	log.info("InquireController  inquireWrite insertResult0> " + insertResult);
+	log.info("InquireController  inquireWrite insertResult> " + insertResult);
 	
 																			
 	

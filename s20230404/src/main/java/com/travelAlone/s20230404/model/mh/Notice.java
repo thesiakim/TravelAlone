@@ -12,7 +12,7 @@ import lombok.ToString;
 public class Notice {
 	
 	private int 				g_notice_id; 
-	private int 				member_id;
+	private long 				member_id;
 	private String 				g_common_csboard;
 	private String 				g_notice_title;
 	private String 				g_notice_content;

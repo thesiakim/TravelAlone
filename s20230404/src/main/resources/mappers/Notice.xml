@@ -56,9 +56,9 @@
 <!-- 공지사항 게시글작성하기 -->
 <insert id="insertNotice" parameterType="Notice">
 	 insert into G_NOTICE 
-	 (G_NOTICE_ID,	 MEMBER_ID, G_COMMON_CSBOARD, G_NOTICE_TITLE, G_NOTICE_CONTENT, CREATE_DATE, MODIFIED_DATE)
+	 (G_NOTICE_ID,	 MEMBER_ID, 			G_COMMON_CSBOARD, G_NOTICE_TITLE, G_NOTICE_CONTENT, CREATE_DATE, MODIFIED_DATE)
 	 values 
-	 (#{ g_notice_id}, '2',  #{g_common_csboard} , 	#{g_notice_title}, #{g_notice_content}, sysdate, sysdate ) 				
+	 (#{ g_notice_id}, #{member_id, jdbcType=NUMERIC},  #{g_common_csboard} , 	#{g_notice_title}, #{g_notice_content}, sysdate, sysdate ) 				
 </insert>
 		
 		
@@ -67,7 +67,6 @@
 		 UPDATE G_NOTICE 
 		 SET 
 		  G_NOTICE_TITLE   = #{g_notice_title},
-		  MEMBER_ID 	   = #{member_id}, 
 		  G_COMMON_CSBOARD = #{g_common_csboard},
 		  G_NOTICE_CONTENT = #{g_notice_content} 
 					    

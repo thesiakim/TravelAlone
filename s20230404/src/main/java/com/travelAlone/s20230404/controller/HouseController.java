@@ -304,7 +304,10 @@ private final HouseService mh;
 			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
 			model.addAttribute("boardList",commonCode);
 			
-			
+			//지역 코드도 가져와볼까나
+			List<CommonCode> commonLocCode = mh.getCommonLocCode();
+			log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
+			model.addAttribute("boardLocList",commonLocCode);
 			
 			
 			int totalHouse = mh.conditionOptionCount(code);
@@ -334,6 +337,12 @@ private final HouseService mh;
 		public String locCodeFilter(@RequestParam(name = "code") 
 		String code, House house, String currentPage, Model model) {
 			log.info("HouseController locCodeFilter Start" );
+			
+			
+			//숙소코드
+			List<CommonCode> commonCode = mh.getCommonCode();
+			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+			model.addAttribute("boardList",commonCode);
 			
 			//지역 코드도 가져와볼까나
 			List<CommonCode> commonLocCode = mh.getCommonLocCode();
@@ -378,7 +387,7 @@ private final HouseService mh;
 			
 			
 			  }else {
-		    	  return  "th/login";
+		    	  return  "km/login";
 		      }	
 			
 			
@@ -391,10 +400,22 @@ private final HouseService mh;
 		
 		//리뷰작성
 		@PostMapping(value = "houRevWriteForm")
-		public String houRevWrite(Hou_Rev hou_Rev, Model model) {
+		public String houRevWrite(@LoginUser MemberJpa memberJpa,
+				Hou_Rev hou_Rev, Model model) throws Exception {
 			log.info("HouseController  houRevWrite Start...");
+			
+			  if (memberJpa == null){
+			         throw new Exception("로그인 해주세요!");
+			      }
+			
+			  log.info("HouseController writeFormHouRev memberJpa.getId()는 "+ memberJpa.getId());
+			  hou_Rev.setMember_id( memberJpa.getId());
+			  
+			  
 			int insertResult = mh.insertHouRev(hou_Rev);
 			log.info("HouseController houRevWrite insertResult->"+insertResult );
+			
+			
 			if(insertResult >0) {
 				return "redirect:houDetail?hid="+hou_Rev.getHouse_id();
 			}

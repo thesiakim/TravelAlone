@@ -17,10 +17,10 @@
 	
 	<input type="hidden" name="house_id" value="${hou_Rev.house_id }">
 		<table style="margin:auto;">
-			<tr>
+			<!-- <tr>
 				<td> 아이디</td>
 				<td> <input type="text" name="member_id" size = "50"> </td>
-			</tr>
+			</tr> -->
 				<tr>
 				<td> 내용</td>
 				<td> <input type="text" name="r_content" size = "50"> </td>
