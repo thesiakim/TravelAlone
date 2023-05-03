@@ -10,7 +10,7 @@
 								, img_original_file
 								, img_stored_file
 								)
-		VALUES (				#{res_id},
+		VALUES (				#{restaurant_id},
 								Res_Img_SEQ.nextval,						 		
 		   						#{img_original_file	, jdbcType=VARCHAR},
 		    					#{img_stored_file}
@@ -18,18 +18,18 @@
 	</insert>
 
 <!-- 이미지 목록가져오기 -->
-	<select id="resImgList" parameterType="Res_Img" resultType="Res_Img" >
+	<select id="skResImgList" parameterType="Res_Img" resultType="Res_Img" >
 			select IMG_ID
 					,IMG_STORED_FILE
 					,IMG_ORIGINAL_FILE
 			from  Res_Img
-			WHERE res_id = #{res_id}
+			WHERE restaurant_id = #{restaurant_id}
 			order by IMG_ID desc
 		</select>
 
 <!-- 이미지 목록삭제하기 -->
 	<delete id="deleteResImg" parameterType="int">
-		delete from Res_Img where RESTAURNAT_ID = #{res_id}
+		delete from Res_Img where RESTAURANT_ID = #{restaurant_id}
 	</delete>
 
 

@@ -19,7 +19,7 @@
 		<c:forEach items="${boardList}" var="list">
 					<td>
 							<!-- 컨트롤러로 보내는거 -->
-						<a href="resFilter?code=${list.code}">${list.value}</a>									
+						<a href="restaurantCodeFilter?code=${list.code}">${list.value}</a>									
 					</td>
 		</c:forEach>																
 			   <c:set var="num" value="${page.total-page.start+1 }"></c:set>
@@ -28,14 +28,14 @@
 	
 	
 <!-- 검색 -->
-	<form action="resSearch">
+	<form action="restaurantSearch">
 		<select name="search">
 			<option value="s_title">제목</option>
 			<option value="s_content">내용</option>
 			
 		</select>
 		 <input type="text" name="keyword" placeholder="keyword을 입력하세요" value="${search}">
-		<a href="resSearch?search=${search}&amp;keyword=${keyword}"> keyword검색</a>
+		<a href="restaurantSearch?search=${search}&amp;keyword=${keyword}"> 검색</a>
 		<p>
 	</form>
 
@@ -63,27 +63,27 @@
 
 
 						</tr>
-				<c:forEach items="${resList}" var="res">
+				<c:forEach items="${restaurantList}" var="restaurant">
 					<tr>
-						<td hidden>${res.restaurant_id}</td>
-					 	<td>${res.r_common_loc}</td>
-						<td > <a href="resDetail?rid=${res.restaurant_id}">${res.r_name}</a></td>
+						<td hidden>${restaurant.restaurant_id}</td>
+					 	<td>${restaurant.r_common_loc}</td>
+						<td > <a href="resDetail?rid=${restaurant.restaurant_id}">${restaurant.r_name}</a></td>
 					<%-- 	<td>${restaurant.r_avgscore}</td> --%>
 						<td>
 							<c:choose>
-								<c:when test="${res.r_avgscore eq '1'}">
+								<c:when test="${restaurant.r_avgscore eq '1'}">
 									<c:out value="★☆☆☆☆"/>
 								</c:when>
-								<c:when test="${res.r_avgscore eq '2'}">
+								<c:when test="${restaurant.r_avgscore eq '2'}">
 									<c:out value="★★☆☆☆"/>
 								</c:when>
-								<c:when test="${res.r_avgscore eq '3'}">
+								<c:when test="${restaurant.r_avgscore eq '3'}">
 									<c:out value="★★★☆☆"/>
 								</c:when>
-								<c:when test="${res.r_avgscore eq '4'}">
+								<c:when test="${restaurant.r_avgscore eq '4'}">
 									<c:out value="★★★★☆"/>
 								</c:when>
-								<c:when test="${res.r_avgscore eq '5'}">
+								<c:when test="${restaurant.r_avgscore eq '5'}">
 									<c:out value="★★★★★"/>
 								</c:when>
 								<c:otherwise>
@@ -91,7 +91,7 @@
 								</c:otherwise>
 							</c:choose>
 						</td>
-						<td>${res.r_revcount}</td>
+						<td>${restaurant.r_revcount}</td>
 		</c:forEach>
 		
 	</table>

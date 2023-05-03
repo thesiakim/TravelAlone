@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -17,12 +17,13 @@
 			<tr>
 				<td > 맛집 종류</td>
 				<td style="text-align: left;"> 
-				<select name="r_common_res">
+				<select name="r_common_restaurant">
 					<option value="res100">한식</option>
 					<option value="res200">중식</option>
 					<option value="res300">일식</option>
-					<option value="res400">카페</option>
-					<option value="res500">기타</option>									
+					<option value="res400">양식</option>
+					<option value="res500">카페</option>									
+					<option value="res600">기타</option>									
 				</select>
 												
 				</td>																					
@@ -58,7 +59,7 @@
 			</tr>
 				<tr>
 				<td>소개글</td>
-				<td><textarea name="r_content" rows="10"></textarea></td>
+				<td><textarea name="r_content" rows="10" cols="50"></textarea></td>
 			</tr>
 			
 			<tr>
@@ -86,7 +87,7 @@
 			
 			<tr>
 				<td> 
- 				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/ResUpload/${savedName}">
+ 				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/restaurantUpload/${savedName}">
 						<input type="file" name="file1" multiple="multiple"> <p>						
 				</td>						
 			</tr>				
@@ -99,4 +100,4 @@
 	</form>
 </body>
 <c:import url="footer.jsp"/>
-</html> --%>
+</html>

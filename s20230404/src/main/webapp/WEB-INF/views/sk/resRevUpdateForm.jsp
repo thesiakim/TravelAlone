@@ -9,9 +9,9 @@
 <body>
 <h1>맛집 리뷰 수정	</h1>
 	<c:if test="${msg!=null}">${msg}</c:if>
-	<form action="updateResRev" method="post" name="frm">
+	<form action="updateRestaurantRev" method="post" name="frm">
 	<input type="hidden" id="review_id" name="review_id">
-	<input type="hidden" id="res_id" name="res_id">
+	<input type="hidden" id="restaurant_id" name="restaurant_id">
 		<table>
 	
 			<tr>
@@ -41,7 +41,7 @@
 	const url = new URL(window.location.href);
 	const urlParam = url.searchParams;
 	review_id.setAttribute("value",urlParam.get('review_id'));
-	res_id.setAttribute("value",urlParam.get('res_id'));
+	restaurant_id.setAttribute("value",urlParam.get('restaurant_id'));
 	
 </script>
 

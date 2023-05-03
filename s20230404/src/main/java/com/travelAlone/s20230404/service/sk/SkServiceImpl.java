@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.sk.SkDao;
 import com.travelAlone.s20230404.model.CommonCode;
-import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Res_Img;
 import com.travelAlone.s20230404.model.Res_Rev;
+import com.travelAlone.s20230404.model.Res;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,68 +20,68 @@ public class SkServiceImpl implements SkService {
 	private final SkDao sk;
 
 	@Override
-	public int totalRes() {
+	public int totalRestaurant() {
 		log.info("SkServiceImpl start totalRes");
-		int totResCnt = sk.totalRes();
-		log.info("SkServiceImpl totalRes totResCnt->" + totResCnt);
-		return totResCnt;
+		int totRestaurantCnt = sk.totalRestaurant();
+		log.info("SkServiceImpl totalRes totResCnt->" + totRestaurantCnt);
+		return totRestaurantCnt;
 	}
 
 	@Override
-	public List<Res> listRes(Res res) {
-		log.debug("SkServiceImpl start listRes");
-		List<Res> resList = sk.selectResList(res);
-		log.debug("SkServiceImpl End listRes");
+	public List<Res> listRestaurant(Res restaurant) {
+		log.debug("SkServiceImpl start listRestaurant");
+		List<Res> resList = sk.selectRestaurantList(restaurant);
+		log.debug("SkServiceImpl End listRestaurant");
 		return resList;
 	}
 
 	@Override
-	public Res detailRes(int rid) {
+	public Res detailRestaurant(int rid) {
 		log.info("SkServiceImpl detail");
-		Res res = null;
-		res = sk.detailRes(rid);
-		return res;
+		Res restaurant = null;
+		restaurant = sk.detailRestaurant(rid);
+		return restaurant;
 	}
 
 	@Override
-	public int insertRes(Res res) {
+	public int insertRes(Res restaurant) {
 		int result = 0;
 		log.info("SkServiceImpl insert start");
-		result = sk.insertRes(res);
+		result = sk.insertRes(restaurant);
 		return result;
 	}
 
 	@Override
-	public int updateRes(Res res) {
+	public int updateRestaurant(Res restaurant) {
 		log.info("SkServiceImpl update");
 		int updateCount = 0;
-		updateCount = sk.updateRes(res);
+		updateCount = sk.updateRestaurant(restaurant);
 		return updateCount;
 	}
 
 	@Override
-	public int deleteRes(int res_id) {
+	public int deleteRestaurant(int restaurant_id) {
 		int result = 0;
 		log.info("SkServiceImpl delete Start");
-		result = sk.deleteRes(res_id);		
+		result = sk.deleteRestaurant(restaurant_id);		
 		return result;
 	}
 
 	@Override
-	public int conditionResCount(Res res) {
-		log.info("SkServiceImpl conditionResCount start");
-		int conditionResCount = sk.condResCnt(res);
-		log.info("SkServiceImpl conditionResCount conditionResCnt" + conditionResCount);	
-		return conditionResCount;
+	public int conditionRestaurantCount(Res restaurant) {
+		log.info("SkServiceImpl conditionRestaurantCount start");
+		int conditionRestaurantCount = sk.condRestaurantCnt(restaurant);
+		log.info("SkServiceImpl conditionRestaurantCount conditionRestaurantCnt" + conditionRestaurantCount);	
+		return conditionRestaurantCount;
 	}
 
 	@Override
-	public List<Res> listSearchRes(Res res) {
-		List<Res> resSearchList = null;
-		log.info("SkServiceImpl listSearchRes start");
-		resSearchList = sk.resSearchList(res);
-		log.info("SkServiceImpl listSearchRes inquireResList.size()"+resSearchList.size());
-		return resSearchList;
+	public List<Res> listSearchRestaurant(Res restaurant) {
+		List<Res> restaurantSearchList = null;
+		log.info("SkServiceImpl listSearchRestaurant start");
+		restaurantSearchList = sk.restaurantSearchList(restaurant);
+		log.info("SkServiceImpl listSearchRestaurant inquireRestaurantList.size()"+restaurantSearchList.size());
+		return restaurantSearchList;
 	}
 
 	// 공통 맛집 코드 리스트
@@ -93,20 +93,20 @@ public class SkServiceImpl implements SkService {
 
 	// 맛집 종류 갯수
 	@Override
-	public int resFilter(String code) {
+	public int conditionOptionCount(String code) {
 		log.info("SkServiceImpl conditionOptionCount Start");
-		int conditionInquireCnt = sk.resFilter(code);
+		int conditionInquireCnt = sk.condOptionInqCnt(code);
 		log.info("SkServiceImpl conditionOptionCount conditionInquireCnt" + conditionInquireCnt);
 		return conditionInquireCnt;
 	}
 
 	@Override
-	public List<Res> optResList(Res res) {
-		List<Res> resOptionFilterList = null;
-		log.info("SkServiceImpl listFilterOptionRes Start");
-		resOptionFilterList = sk.optResList(res);
-		log.info("SkServiceImpl listFilterOptionRes resOptionFilterList.size()" + resOptionFilterList.size());
-		return resOptionFilterList;
+	public List<Res> listFilterOptionRestaurant(Res restaurant) {
+		List<Res> restaurantOptionFilterList = null;
+		log.info("SkServiceImpl listFilterOptionRestaurant Start");
+		restaurantOptionFilterList = sk.skOptionRestaurantList(restaurant);
+		log.info("SkServiceImpl listFilterOptionRes resOptionFilterList.size()" + restaurantOptionFilterList.size());
+		return restaurantOptionFilterList;
 	}
 
 	// 지역 코드 가져오기
@@ -125,10 +125,10 @@ public class SkServiceImpl implements SkService {
 	}
 
 	@Override
-	public List<Res> listFilterOptionLoc(Res res) {
+	public List<Res> listFilterOptionLoc(Res restaurant) {
 		List<Res> locOptionFilterList = null;
 		log.info("SkServiceImpl listFilterOptionLoc start");
-		locOptionFilterList = sk.optionLocList(res);
+		locOptionFilterList = sk.skOptionLocList(restaurant);
 		log.info("SkServiceImpl listFilterOptionLoc locOptionFilterList.size()"+locOptionFilterList.size());
 		return locOptionFilterList;
 	}
@@ -151,10 +151,10 @@ public class SkServiceImpl implements SkService {
 	}
 
 	@Override
-	public int updateResRev(Res_Rev res_Rev) {
+	public int updateRestaurantRev(Res_Rev res_Rev) {
 		log.info("SkServiceImpl update");
 		int updateCount = 0;
-		updateCount = sk.updateResRev(res_Rev);
+		updateCount = sk.updateRestaurantRev(res_Rev);
 		return updateCount;
 	}
 
@@ -162,7 +162,7 @@ public class SkServiceImpl implements SkService {
 	public int deleteResRev(int review_id) {
 		int result = 0;
 		log.info("SkServiceImpl delete Start");
-		result = sk.deleteResRev(review_id);
+		result = sk.deleteRestaurantRev(review_id);
 		return result;
 	}
 
@@ -175,10 +175,10 @@ public class SkServiceImpl implements SkService {
 	}
 
 	@Override
-	public int seqRes(Res res) {
+	public int seqRes(Res restaurant) {
 		int result = 0;
 		log.info("SkServiceImpl seqRes Start..." );
-		result = sk.seqRes(res);
+		result = sk.seqRestaurant(restaurant);
 		return result;
 	}
 
@@ -190,10 +190,10 @@ public class SkServiceImpl implements SkService {
 	}
 
 	@Override
-	public int deleteResImg(int res_id) {
+	public int deleteResImg(int restaurant_id) {
 		int result = 0;
 		log.info("SkServiceImpl deleteResImg Start");
-		result = sk.deleteResImg(res_id);		
+		result = sk.deleteResImg(restaurant_id);		
 		return result;
 	}
 }
