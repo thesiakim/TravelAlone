@@ -107,4 +107,14 @@ public class MypageDaoImpl implements MypageDao{
     }
 
 
+    /**
+     * 2023-05-03 조경민
+     * 설명 : 멤버 정보 불러오기
+     * */
+    @Override
+    public Member memberInfo(long memberId) {
+        return session.selectOne("memberInfo", memberId);
+    }
+
+
 }

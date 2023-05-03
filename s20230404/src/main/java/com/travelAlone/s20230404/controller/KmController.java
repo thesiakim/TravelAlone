@@ -12,9 +12,6 @@ import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
 import com.travelAlone.s20230404.service.km.MypageService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -213,9 +210,9 @@ public class KmController {
     @GetMapping("/mypage")
     public String mypageMain(@Login2User SessionUser sessionUser, Model model){
 
-        System.out.println("sessionUser = " + sessionUser);
         MypageResponseDto responseDto = mypageService.mypageMain(sessionUser.getId());
         responseDto.addMemberInfo(sessionUser);
+
 
         model.addAttribute("response", responseDto);
 
@@ -246,9 +243,6 @@ public class KmController {
     public String mypageMemberInfoUpdate(@RequestBody Member member, @LoginUser MemberJpa memberJpa){
 
         member.setMember_id(memberJpa.getId());
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
 
         mypageService.memberInfoUpdate(member);
 

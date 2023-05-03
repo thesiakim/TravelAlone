@@ -91,6 +91,14 @@
 		WHERE ROWNUM BETWEEN 10*(#{page}-1)+1 AND 10*#{page}
 		]]>
 		</select>
+
+		<select id="memberInfo" resultType="Member">
+		<![CDATA[
+		SELECT 	*
+		FROM	MEMBER
+		WHERE 	MEMBER_ID = #{member_id}
+		]]>
+		</select>
 		
 		
 		
