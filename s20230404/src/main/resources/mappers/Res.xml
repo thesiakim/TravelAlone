@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.travelAlone.s20230404.resMapper">
+<mapper namespace="com.travelAlone.s20230404.RestaurantMapper">
 
 <!-- 맛집정보글 갯수세기 -->
-<select id="resTotal" resultType="int">
+<select id="skRestaurantTotal" resultType="int">
 	select Count(*) FROM RESTAURANT
 </select>
 
 <!-- 맛집 목록가져오기 -->
-		<select id="resList" parameterType="Res" resultType="Res" >
+		<select id="skRestaurantList" parameterType="Res" resultType="Res" >
     		<![CDATA[
 				SELECT *
 				FROM
@@ -47,26 +47,29 @@
 		</select>
 		
 <!-- 맛집 정보글가져오기 -->
-		<select id="resSelOne" resultType="Res">		
+		<select id="skRestaurantSelOne" resultType="Res">		
 		  SELECT	RESTAURANT_ID, R_NAME, R_CONTENT, R_ADDRESS, R_HOUR, R_CALL, R_PARKING,
 					R_MENU, R_COMMON_RESTAURANT, R_COMMON_LOC, CREATE_DATE, MODIFIED_DATE	 
 		 FROM  RESTAURANT  WHERE RESTAURANT_ID = #{RESTAURANT_ID}
 		</select>
 
-
+<!-- 맛집 정보글 시퀀스가져오기 -->		
+		<select id="skSeqRestaurant"  parameterType="Res" resultType="int">
+			select RESTAURANT_ID_SEQ.nextval from dual
+		</select>
 
 <!-- 맛집 정보글작성하기 -->
-		<insert id="insertRes" parameterType="Res">
+		<insert id="insertRestaurant" parameterType="Res">
 			 insert into RESTAURANT
 			 (RESTAURANT_ID, R_NAME, R_CONTENT, R_ADDRESS, R_HOUR, R_CALL, R_PARKING,
 					R_MENU, R_COMMON_RESTAURANT, R_COMMON_LOC, CREATE_DATE, MODIFIED_DATE)
 			 values 
-			 (retaurant_id, #{r_name}, #{r_content}, #{r_address}, #{r_hour}, #{r_call} ,
+			 (#{restaurant_id}, #{r_name}, #{r_content}, #{r_address}, #{r_hour}, #{r_call} ,
 			  #{r_parking}, #{r_menu}, #{r_common_restaurant}, #{r_common_loc},  sysdate, sysdate ) 				
 		</insert>
 
 <!-- 맛집 정보글수정하기 -->
-		<update id="resUpdate" parameterType="Res">
+		<update id="skRestaurantUpdate" parameterType="Res">
 		 UPDATE RESTAURANT
 		 SET 
 		  R_COMMON_RESTAURANT    = #{r_common_restaurant},
@@ -84,12 +87,12 @@
 		</update>
 
 <!--  맛집 정보글삭제하기 -->
-		<delete id="deleteRes" parameterType="int">
+		<delete id="deleteRestaurant" parameterType="int">
 			delete from RESTAURANT where RESTAURANT_ID = #{restaurant_id}
 		</delete>
 
 <!-- 맛집 검색 횟수 -->
-		<select id="condResCnt" parameterType="Res" resultType="int">
+		<select id="condRestaurantCnt" parameterType="Res" resultType="int">
 			select Count(*) FROM RESTAURANT
 			where
 			<choose>
@@ -103,7 +106,7 @@
 		</select>
 		
 <!-- 맛집 검색 결과 -->
-		  <select id="resSearchList" parameterType="Res"  resultType="Res" >
+		  <select id="skrestaurantSearchList" parameterType="Res"  resultType="Res" >
 		SELECT *
 		FROM
 		(
@@ -126,12 +129,12 @@
 		
 
 <!-- 조회된 맛집 종류 데이터 갯수 세기 -->  
-		<select id="resFilter" resultType="int">
+		<select id="condOptionRestaurantCnt" resultType="int">
 			select Count(*) FROM RESTAURANT where R_COMMON_RESTAURANT = #{code}
 		</select>
 		
-<!-- 조회된 숙소종류데이터 리스트 --> 				
-		<select id="optResList" parameterType="Res" resultType="Res" >
+<!-- 조회된 맛집 종류데이터 리스트 --> 				
+		<select id="skOptionRestaurantList" parameterType="Res" resultType="Res" >
 		 		SELECT *
 				FROM
 				(
@@ -150,7 +153,7 @@
 			select Count(*) FROM RESTAURANT where R_COMMON_LOC = #{code}
 		</select>		
 <!-- 조회된 지역데이터 리스트 --> 				
-		<select id="optionLocList" parameterType="Res" resultType="Res" >
+		<select id="skOptionLocList" parameterType="Res" resultType="Res" >
 		 		SELECT *
 				FROM
 				(

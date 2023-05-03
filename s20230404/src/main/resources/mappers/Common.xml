@@ -24,7 +24,7 @@
 				bcd = 'hou'
 		</select>
 		
-		<select id="resCommonCode" parameterType="Common" resultType="Common" >
+		<select id="restaurantCommonCode" parameterType="Common" resultType="Common" >
 			select 
 				bcd||mcd as code,  
 				word as value

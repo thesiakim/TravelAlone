@@ -25,7 +25,7 @@
 			<tr>
 				<td hidden>${resImg.img_id}</td>
 			 	<td >
-		<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/ResUpload/${resImg.img_stored_file}" width="500" height="300"> 
+		<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/restaurantUpload/${resImg.img_stored_file}" width="500" height="300"> 
 			 	
 			 	</td>
 								
@@ -51,7 +51,7 @@
 			
 			<a href="res" class="button">목록</a>	
 			<a href="resUpdateForm?restaurant_id=${restaurant.restaurant_id}" class="button">수정</a>
-			<a href="deleteRes?restaurant_id=${restaurant.restaurant_id}" class="button">삭제</a>
+			<a href="deleteRestaurant?restaurant_id=${restaurant.restaurant_id}" class="button">삭제</a>
 			
 			<%-- <input type="button" value="수정" 
 				onclick="location.href='resUpdateForm?restaurant_id=${restaurant.restaurant_id}'">
@@ -79,7 +79,7 @@
 					 	<td>${resRev.r_content}</td>
 					 	<td>${resRev.r_score}</td>
 					 	<td>${resRev.create_date}</td>
-					 <td><a href="resRevUpdateForm?res_id=${resRev.restaurant_id}&review_id=${resRev.review_id}">수정</a></td>
+					 <td><a href="resRevUpdateForm?restaurant_id=${resRev.restaurant_id}&review_id=${resRev.review_id}">수정</a></td>
 					 	<td>
 					 	
 
@@ -90,7 +90,7 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="5"><a href="resRevWriteForm?res_id=${restaurant.restaurant_id}">리뷰작성</a></td>
+					<td colspan="5"><a href="resRevWriteForm?restaurant_id=${restaurant.restaurant_id}">리뷰작성</a></td>
 				</tr>
 			</table>
 	

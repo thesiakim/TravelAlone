@@ -13,9 +13,10 @@
 
 <h1>맛집 리뷰 작성	</h1>
 	<c:if test="${msg!=null}">${msg}</c:if>
-	<form action="ResRevWriteForm" method="post" name="frm">
+	<form action="resRevWriteForm" method="post" name="frm">
 	
 	<input type="hidden" name="restaurant_id" value="${res_Rev.restaurant_id }">
+		<table style="margin:auto;">
 		<table>
 			<tr>
 				<td> 아이디</td>
@@ -48,4 +49,5 @@
 	</form>
 
 </body>
+<c:import url="footer.jsp"/>
 </html>

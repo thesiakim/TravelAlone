@@ -7,9 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.CommonCode;
-import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Res_Img;
 import com.travelAlone.s20230404.model.Res_Rev;
+import com.travelAlone.s20230404.model.Res;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,55 +23,55 @@ public class SkDaoImpl implements SkDao {
 	
 	// 맛집 정보글 갯수 조회
 	@Override
-	public int totalRes() {
-		int totResCount = 0;
+	public int totalRestaurant() {
+		int totRestaurantCount = 0;
 		log.info("SkDaoImpl Start total");
 		try {
-			totResCount = session.selectOne("resTotal");
-			log.info("SkDaoImpl totalRes totresCount->" + totResCount);
+			totRestaurantCount = session.selectOne("skRestaurantTotal");
+			log.info("SkDaoImpl totalRestaurant totRestaurantCount->" + totRestaurantCount);
 		} catch (Exception e) {
-			log.info("SkDaoImpl totalRes Exception" + e.getMessage());
+			log.info("SkDaoImpl totalRestaurant Exception" + e.getMessage());
 		}
-		return totResCount;
+		return totRestaurantCount;
 	}
 
 	// 맛집 정보글 리스트 조회
 	@Override
-	public List<Res> selectResList(Res res){
-		List<Res>resList = new ArrayList<Res>();
+	public List<Res> selectRestaurantList(Res restaurant){
+		List<Res> restaurantList = new ArrayList<Res>();
 		
 	try {
-		log.info("SkDaoImpl selectResList SkresList start");
-		resList = session.selectList("resList", res);
-		log.info("SkDaoImpl selectResList SkResList End");
+		log.info("SkDaoImpl selectRestaurantList SkRestaurantList start");
+		restaurantList = session.selectList("skRestaurantList", restaurant);
+		log.info("SkDaoImpl selectRestaurantList SkRestaurantList End");
 	} catch (Exception e) {
-		log.info("SkDaoImpl SkResList Exception" + e.getMessage());
+		log.info("SkDaoImpl SkRestaurantList Exception" + e.getMessage());
 	}
-		return resList;
+		return restaurantList;
 	}
 
 	// 맛집 정보글 상세페이지
 	@Override
-	public Res detailRes(int rid) {
+	public Res detailRestaurant(int rid) {
 		log.info("SkDaoImpl detail start");
-		Res res = new Res();
+		Res restaurant = new Res();
 		try {
-			res = session.selectOne("resSelOne", rid);
+			restaurant = session.selectOne("skRestaurantSelOne", rid);
 			
-			log.info("SkDaoImpl detail res.getR_name"+res.getR_name());
+			log.info("SkDaoImpl detail restaurant.getR_name"+restaurant.getR_name());
 		} catch (Exception e) {
-			log.info("SkDaoImpl SkResSelOne Exception" + e.getMessage());
+			log.info("SkDaoImpl SkRestaurantSelOne Exception" + e.getMessage());
 		}
-		return res;
+		return restaurant;
 	}
 	
 	// 맛집 정보글 작성
 	@Override
-	public int insertRes(Res res) {
+	public int insertRes(Res restaurant) {
 		int result = 0;
 		log.info("SkDaoImpl insert Start");
 		try {
-			result = session.insert("insertRes",res);
+			result = session.insert("insertRestaurant",restaurant);
 		} catch (Exception e) {
 			log.info("SkDaoImpl insert Exception" + e.getMessage());
 		}
@@ -81,13 +81,13 @@ public class SkDaoImpl implements SkDao {
 	
 	// 맛집 정보글 수정
 	@Override
-	public int updateRes(Res res) {
-		log.info("SkDaoImpl updateRes  start");
+	public int updateRestaurant(Res restaurant) {
+		log.info("SkDaoImpl updateRestaurant  start");
 		int updateCount= 0;
 		try {
-			updateCount = session.update("resUpdate",res);
+			updateCount = session.update("skRestaurantUpdate",restaurant);
 		} catch (Exception e) {
-			log.info("SkDaoImpl updateRes Exception->"+e.getMessage());
+			log.info("SkDaoImpl updateRestaurant Exception->"+e.getMessage());
 		}		
 		
 		return updateCount;
@@ -95,12 +95,12 @@ public class SkDaoImpl implements SkDao {
 
 	// 맛집 정보글 삭제
 	@Override
-	public int deleteRes(int res_id) {
+	public int deleteRestaurant(int restaurant_id) {
 		log.info("SkDaoImpl delete start");
 		int result = 0;
-		log.info("SkDaoImpl delete res_id->"+ res_id);
+		log.info("SkDaoImpl delete restaurant_id->"+ restaurant_id);
 		try {
-			result = session.delete("deleteRes",res_id);
+			result = session.delete("deleteRestaurant",restaurant_id);
 			log.info("SkDaoImpl delete result->"+ result);
 		} catch (Exception e) {
 			log.info("SkDaoImpl delete Exception->"+ e.getMessage());
@@ -111,47 +111,47 @@ public class SkDaoImpl implements SkDao {
 	
 	// 맛집 검색 횟수
 	@Override
-	public int condResCnt(Res res) {
-		int conditionResCount = 0;
+	public int condRestaurantCnt(Res restaurant) {
+		int conditionRestaurantCount = 0;
 		log.info("SkDaoImpl Start total");
 		try {
-			conditionResCount = session.selectOne("condResCnt", res);
-			log.info("SkDaoImpl conditionInquireCount->"+conditionResCount);
+			conditionRestaurantCount = session.selectOne("condRestaurantCnt", restaurant);
+			log.info("SkDaoImpl conditionInquireCount->"+conditionRestaurantCount);
 		} catch (Exception e) {
 			log.info("SkDaoImpl Exception"+e.getMessage());
 		}
-		return conditionResCount;
+		return conditionRestaurantCount;
 	}
 
 	// 맛집 검색 결과
 	@Override
-	public List<Res> resSearchList(Res res) {
-		List<Res> resSearchList = null;
-		log.info("SkDaoImpl resSearchList start");
+	public List<Res> restaurantSearchList(Res restaurant) {
+		List<Res> restaurantSearchList = null;
+		log.info("SkDaoImpl restaurantSearchList start");
 		try {
-			resSearchList = session.selectList("resSearchList", res);
+			restaurantSearchList = session.selectList("skrestaurantSearchList", restaurant);
 		} catch (Exception e) {
 			log.info("SkDaoImpl resSearchList Exception " + e.getMessage());
 		}
-		return resSearchList;
+		return restaurantSearchList;
 	}
 
 	// 맛집 필터 구분
 	@Override
 	public List<CommonCode> getCommonCode() {
 		log.info("getCommonCode 호출부");
-		List<CommonCode> result = session.selectList("resCommonCode");
+		List<CommonCode> result = session.selectList("restaurantCommonCode");
 		log.info("getCommonCode data {},{}",result.get(0).getCode(),result.get(0).getValue());
 		return result;
 	} 
 
 	// 맛집 필터 갯수
 	@Override
-	public int resFilter(String code) {
+	public int condOptionInqCnt(String code) {
 		int count = 0;
 		log.info("SkDaoImpl start total");
 		try {
-			count = session.selectOne("resFilter",code);
+			count = session.selectOne("condOptionRestaurantCnt",code);
 			log.info("SkDaoImpl condOptionInquireCnt->"+count);
 		} catch (Exception e) {
 			log.info("SkDaoImpl Exception"+e.getMessage());
@@ -161,15 +161,15 @@ public class SkDaoImpl implements SkDao {
 
 	// 맛집 필터
 	@Override
-	public List<Res> optResList(Res res) {
-		List<Res> resFilterList = null;
-		log.info("SkDaoImpl resFilterList start");
+	public List<Res> skOptionRestaurantList(Res restaurant) {
+		List<Res> restaurantFilterList = null;
+		log.info("SkDaoImpl restaurantFilterList start");
 		try {
-			resFilterList = session.selectList("optResList",res);
+			restaurantFilterList = session.selectList("skOptionRestaurantList",restaurant);
 		} catch (Exception e) {
 			log.info("SkDaoImpl resFilterList Exception" + e.getMessage());
 		}
-		return resFilterList;
+		return restaurantFilterList;
 	}
 
 	// 지역 코드 가져오기
@@ -182,11 +182,11 @@ public class SkDaoImpl implements SkDao {
 	}
 
 	@Override
-	public List<Res> optionLocList(Res res) {
+	public List<Res> skOptionLocList(Res restaurant) {
 		List<Res> locFilterList = null;
 		log.info("SkDaoImpl locFilterList start");
 		try {
-			locFilterList = session.selectList("optionLocList",res);
+			locFilterList = session.selectList("skOptionLocList",restaurant);
 		} catch (Exception e) {
 			log.info("SkDaoImpl locFilterList Exception" + e.getMessage());
 		}
@@ -225,7 +225,7 @@ public class SkDaoImpl implements SkDao {
 		int result = 0;
 		log.info("SkDaoImpl insert Start");
 		try {
-			result = session.insert("insertResRev",res_Rev);
+			result = session.insert("insertRestaurantRev",res_Rev);
 		} catch (Exception e) {
 			log.info("SkDaoImpl insert Exception"+e.getMessage());
 		}
@@ -233,11 +233,11 @@ public class SkDaoImpl implements SkDao {
 	}
 
 	@Override
-	public int updateResRev(Res_Rev res_Rev) {
+	public int updateRestaurantRev(Res_Rev res_Rev) {
 		log.info("SkDaoImpl updateRes start");
 		int updateCount=0;
 		try {
-			updateCount = session.update("resRevUpdate", res_Rev);
+			updateCount = session.update("skRestaurantRevUpdate", res_Rev);
 		} catch (Exception e) {
 			log.info("SkDaoImpl updateResRev Exception->"+e.getMessage());
 		}
@@ -245,7 +245,7 @@ public class SkDaoImpl implements SkDao {
 	}
 
 	@Override
-	public int deleteResRev(int review_id) {
+	public int deleteRestaurantRev(int review_id) {
 		log.info("SkDaoImpl delete start");
 		int result = 0;
 		log.info("SkDaoImpl delete review_id->"+review_id);
@@ -274,13 +274,13 @@ public class SkDaoImpl implements SkDao {
 	}
 
 	@Override
-	public int seqRes(Res res) {
+	public int seqRestaurant(Res restaurant) {
 		int result = 0;
-		log.info("SkDaoImpl seqRes Start");
+		log.info("SkDaoImpl seqRestaurant Start");
 		try {
-			result = session.selectOne("SeqRes",res);
+			result = session.selectOne("skSeqRestaurant",restaurant);
 		} catch (Exception e) {
-			log.info("SkDaoImpl SeqRes Exception->"+e.getMessage());
+			log.info("SkDaoImpl skSeqRestaurant Exception->"+e.getMessage());
 		}
 		return result;
 	}
@@ -290,7 +290,7 @@ public class SkDaoImpl implements SkDao {
 		List<Res_Img> resImgList = new ArrayList<Res_Img>();
 		try {
 			log.info("SkDaoImpl selectResImgList resImgList Start");
-			resImgList = session.selectList("resImgList" , res_Img);
+			resImgList = session.selectList("skResImgList" , res_Img);
 		} catch (Exception e) {
 			log.info("ImgImpl selectImgList Exception " +e.getMessage());
 		}
@@ -299,12 +299,12 @@ public class SkDaoImpl implements SkDao {
 	}
 
 	@Override
-	public int deleteResImg(int res_id) {
+	public int deleteResImg(int restaurant_id) {
 		log.info("SkDaoImpl deleteResImg start");
 		int result = 0;
-		log.info("SkDaoImpl deleteResImg res_id->"+ res_id);
+		log.info("SkDaoImpl deleteResImg res_id->"+ restaurant_id);
 		try {
-			result = session.delete("deleteResImg",res_id );
+			result = session.delete("deleteResImg",restaurant_id );
 		} catch (Exception e) {
 			log.info("SkDaoImpl delete Exception->"+ e.getMessage());
 		}
