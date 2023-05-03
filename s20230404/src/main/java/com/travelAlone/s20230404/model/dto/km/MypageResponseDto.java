@@ -1,5 +1,6 @@
 package com.travelAlone.s20230404.model.dto.km;
 
+import com.travelAlone.s20230404.config.km.SessionUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Interest;
 import lombok.*;
@@ -39,14 +40,14 @@ public class MypageResponseDto {
      * 2023-04-26 조경민
      * 회원 기본정보를 MemberJpa를 받아 가져온다
      * */
-    public void addMemberInfo(MemberJpa memberJpa) {
-        this.id = memberJpa.getId();
-        this.storedImgName = memberJpa.getImgStoredFile();
-        this.email = memberJpa.getEmail();
-        this.name = memberJpa.getName();
-        this.nickName = memberJpa.getNickname();
-        this.gender = memberJpa.getGender();
-        this.phone = memberJpa.getPhone();
+    public void addMemberInfo(SessionUser sessionUser) {
+        this.id = sessionUser.getId();
+        this.storedImgName = sessionUser.getImgStoredFile();
+        this.email = sessionUser.getEmail();
+        this.name = sessionUser.getName();
+        this.nickName = sessionUser.getNickname();
+        this.gender = sessionUser.getGender();
+        this.phone = sessionUser.getPhone();
     }
 
 

@@ -1,5 +1,6 @@
 package com.travelAlone.s20230404.service.km;
 
+import com.travelAlone.s20230404.config.km.SessionUser;
 import com.travelAlone.s20230404.dao.km.MypageDao;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Member;
@@ -10,8 +11,10 @@ import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
 import com.travelAlone.s20230404.service.jh.UploadHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -23,6 +26,7 @@ import java.util.List;
 public class MypageServiceImpl implements MypageService{
 
     private final MypageDao mypageDao;
+    private final HttpSession httpSession;
 
     /**
      * 2023-04-26 조경민
@@ -49,9 +53,15 @@ public class MypageServiceImpl implements MypageService{
      * */
     @Override
     public int memberInfoUpdate(Member member) {
+        // 회원정보 업데이트
+        int updateResult = mypageDao.memberInfoUpdate(member);
 
+        // 세션 회원정보 업데이트
+        if (!memberInfoRefresh(member.getMember_id())){
+            throw new IllegalArgumentException("회원정보가 세션에 정상적으로 저장되지 않았습니다. id : " + member.getMember_id());
+        }
 
-        return mypageDao.memberInfoUpdate(member);
+        return updateResult;
     }
 
 
@@ -74,8 +84,14 @@ public class MypageServiceImpl implements MypageService{
 
         // DB 이미지 정보 변경
         member.updateProfile(bodImg.getImg_context(), bodImg.getImg_original_file(), bodImg.getImg_stored_file(),bodImg.getCommon_imagesType());
+        int updateResult = mypageDao.memberProfileUpdate(member);
 
-        return mypageDao.memberProfileUpdate(member);
+        // 세션 정보 변경
+        if (!memberInfoRefresh(member.getMember_id())){
+            throw new IllegalArgumentException("회원정보가 세션에 정상적으로 저장되지 않았습니다. id : " + member.getMember_id());
+        }
+
+        return updateResult;
     }
 
     /**
@@ -89,9 +105,15 @@ public class MypageServiceImpl implements MypageService{
 
         // 기본 이미지 저장
         member.updateProfile("normal","userPicture","src/main/resources/static/img/user-picture.png","img300");
+        int updateResult = mypageDao.memberProfileUpdate(member);
+
+        // 세션 정보 변경
+        if (!memberInfoRefresh(member.getMember_id())){
+            throw new IllegalArgumentException("회원정보가 세션에 정상적으로 저장되지 않았습니다. id : " + member.getMember_id());
+        }
 
         // DB 변경
-        return mypageDao.memberProfileUpdate(member);
+        return updateResult;
 
     }
 
@@ -112,6 +134,28 @@ public class MypageServiceImpl implements MypageService{
     public List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto) {
 
         return mypageDao.mypageReviewShow(requestDto);
+    }
+
+    /**
+     * 2023-05-03 조경민
+     * 설명 : 마이페이지 내 회원정보 수정 후 세션에 갱신하여 저장
+     * */
+    @Override
+    @Transactional
+    public boolean memberInfoRefresh(long memberId) {
+
+        Member member = mypageDao.memberInfo(memberId);
+
+        if (member ==null){
+
+            return false;
+
+        }else {
+
+            httpSession.setAttribute("user", new SessionUser(member));
+
+            return true;
+        }
     }
 
 

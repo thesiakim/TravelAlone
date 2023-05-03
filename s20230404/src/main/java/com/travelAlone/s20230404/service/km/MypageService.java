@@ -21,4 +21,6 @@ public interface MypageService {
     int memberWithdrawal(long id);
 
     List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto);
+
+    boolean memberInfoRefresh(long memberId);
 }

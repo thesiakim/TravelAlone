@@ -5,12 +5,13 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.travelAlone.s20230404.config.km.Login2User;
 import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.config.km.SessionUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
 import com.travelAlone.s20230404.service.km.MypageService;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -207,10 +208,11 @@ public class KmController {
      * 설명 : 마이페이지 정보 불러오기
      * */
     @GetMapping("/mypage")
-    public String mypageMain(@LoginUser MemberJpa memberJpa, Model model){
+    public String mypageMain(@Login2User SessionUser sessionUser, Model model){
 
-        MypageResponseDto responseDto = mypageService.mypageMain(memberJpa.getId());
-        responseDto.addMemberInfo(memberJpa);
+        MypageResponseDto responseDto = mypageService.mypageMain(sessionUser.getId());
+        responseDto.addMemberInfo(sessionUser);
+
 
         model.addAttribute("response", responseDto);
 
@@ -241,7 +243,6 @@ public class KmController {
     public String mypageMemberInfoUpdate(@RequestBody Member member, @LoginUser MemberJpa memberJpa){
 
         member.setMember_id(memberJpa.getId());
-
 
         mypageService.memberInfoUpdate(member);
 

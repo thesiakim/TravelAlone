@@ -6,6 +6,7 @@ import lombok.Getter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 

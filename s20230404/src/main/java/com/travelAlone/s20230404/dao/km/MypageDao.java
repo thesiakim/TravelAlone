@@ -22,4 +22,7 @@ public interface MypageDao {
     int memberWithdrawal(long id);
 
     List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto);
+
+    Member memberInfo(long memberId);
+
 }
