@@ -41,6 +41,9 @@ public class SecurityConfig {
      *
      * 2023-04-18 조경민
      * 설명 : 46~52번째 줄 로그인, 로그아웃 설정 추가
+     *
+     * 2023-05-02 조경민
+     * 설명 : 55번째 줄 hasAnyRole-> hasAnyAuthority 변경
      * */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -61,6 +64,8 @@ public class SecurityConfig {
                     .logout()
                     .logoutSuccessUrl("/");
 
+
+
         return http.build();
     }
 
@@ -73,4 +78,6 @@ public class SecurityConfig {
 //    public WebSecurityCustomizer webSecurityCustomizer() {
 //        return (web) -> web.ignoring().antMatchers("/assets/**", "/h2-console/**","/api/hello2"));
 //    }
+
+
 }

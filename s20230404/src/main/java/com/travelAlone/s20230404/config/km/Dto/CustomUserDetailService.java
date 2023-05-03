@@ -1,5 +1,6 @@
 package com.travelAlone.s20230404.config.km.Dto;
 
+import com.travelAlone.s20230404.config.km.SessionUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.domain.km.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 public class CustomUserDetailService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+    private final HttpSession httpSession;
 
     /**
      * 2023-04-18 조경민
@@ -28,6 +30,8 @@ public class CustomUserDetailService implements UserDetailsService {
         if (memberJpa == null) {
             throw new UsernameNotFoundException(email);
         }
+
+        httpSession.setAttribute("user", new SessionUser(memberJpa));
 
         return new CustomSecurityUser(memberJpa);
 
