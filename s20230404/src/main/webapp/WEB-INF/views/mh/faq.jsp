@@ -6,10 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link href="/css/list.css" rel="stylesheet" type="text/css">
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	
+	
+	
+	
 </head>
 	<link href="css/main.css" rel="stylesheet" type="text/css">
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+
 <script type="text/javascript"> 
 $(document).ready(function() {
 	  $(".accordion").click(function(event) {
@@ -41,6 +50,11 @@ document.getElementById('category').addEventListener('keyup', function(event) {
  	}
 	});
 </script>
+
+<style>
+	th, td { border-bottom: 2px solid rgb(64, 64, 64); }
+</style>
+
 <body>
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
@@ -55,9 +69,9 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 		<h1>고객센터</h1>
 			
 			<div >
-				 <a href="notice">공지사항</a>
-				  <a href="faq">자주 묻는 질문</a>
-				  <a href="inquire">문의하기</a>
+				 <a href="notice">공지사항 </a>
+				  <a href="faq" style=" padding-left:50px;">자주 묻는 질문 </a>
+				  <a href="inquire" style=" padding-left:50px;">문의하기</a>
 			</div>			
 						
 		</div>
@@ -83,22 +97,19 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 		
 		<hr>
 		<!-- 찐본문 -->
+		
+		
+	<div id="list" >	
 		<table style="margin:auto;">
 				<tr>
 					<td hidden>번호</td>
-					<td>제목</td>
-					<td>날짜</td>
+					<td style=" padding-left:180px;">제목</td>
+					<td style=" padding-left:50px;">작성일</td>
 				</tr>
 				<c:forEach items="${noticeList}" var="notice">
 					<tr>
 						<td hidden>${notice.g_notice_id}</td>
-						<%-- <td style="text-align: left;">
-						
-						<a href="noticeDetail?gid=${notice.g_notice_id}">${notice.g_notice_title}</a>
-						</td> --%>
-						
-						
-						
+
 						<td style="text-align: left;">
 						
 						
@@ -112,14 +123,15 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 						
 						
 						
-						<td>${notice.create_date}</td>
+						<td style=" padding-left:40px;">${notice.create_date}</td>
 					</tr>
 				</c:forEach>
-				<tr>
-					<td colspan="5"><a href="noticeWriteForm">글작성</a></td>
-				</tr>
-			</table>
-
+		</table>
+	</div>
+<hr>
+				
+					<a style=" padding-left:600px;" href="noticeWriteForm">글작성</a> <br>
+				
 
 	<c:if test="${page.startPage > page.pageBlock }">
 		<a href="notice?currentPage=${page.startPage-page.pageBlock}">[이전]</a>

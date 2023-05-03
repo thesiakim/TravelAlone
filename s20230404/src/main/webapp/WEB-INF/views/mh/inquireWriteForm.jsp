@@ -11,7 +11,22 @@
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
 	</div>
-<h2>문의하기 글작성</h2>
+	
+	
+	
+ 	<div>
+		<h1>고객센터</h1>
+			
+			<div >
+				 <a href="notice">공지사항 </a>
+				  <a href="faq" style=" padding-left:50px;">자주 묻는 질문 </a>
+				  <a href="inquire" style=" padding-left:50px;">문의하기</a>
+			</div>			
+						
+		</div>
+
+	<hr>
+	
 
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="inquireWriteForm" method="post" name="frm"  enctype="multipart/form-data">
@@ -22,9 +37,8 @@
 			</tr>
 			<tr>
 				<td> 문의글 종류 </td>
-				<td> 
-				
-<!-- 		<input type="text" name="g_common_csboard" size = "50">  -->
+				<td style="text-align: left;"> 
+
 				<select name="g_common_csboard">
 					<option value="inq100">여행지문의</option>
 					<option value="inq200">숙소문의</option>
@@ -34,15 +48,11 @@
 				
 				</td>
 			</tr>
-			<tr>
-				<td> 작성자 </td>
-				<td> <input type="text" name="member_id" size = "50"> </td>
-			</tr>
+
 			<tr>
 				<td> 비밀번호 </td>
-			<!-- 	<td> <input type="text" name="g_passwd" size = "50"> </td> -->
 				
-				<td> <input type="text" name="g_passwd" size="50" pattern="[0-9]{4}" title="숫자 4자리만 입력하세요"
+				<td style="text-align: left;"> <input type="text" name="g_passwd" size="10" pattern="[0-9]{4}" title="숫자 4자리만 입력하세요"
 				 placeholder="숫자 4자리 입력"
 				> </td>
 			</tr>

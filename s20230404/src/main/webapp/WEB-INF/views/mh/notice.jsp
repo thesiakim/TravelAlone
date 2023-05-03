@@ -4,9 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+	<link href="/css/list.css" rel="stylesheet" type="text/css">
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
 	document.getElementById('searchId').addEventListener('keyup', function(event) {
@@ -26,6 +28,13 @@
      	}
  	});
 </script>
+
+<style>
+	th, td { border-bottom: 2px solid rgb(64, 64, 64); }
+</style>
+
+
+
 </head>
 	<link href="css/main.css" rel="stylesheet" type="text/css">
 <body>
@@ -40,9 +49,9 @@
 		<h1>고객센터</h1>
 			
 			<div >
-				 <a href="notice">공지사항</a>
-				  <a href="faq">자주 묻는 질문</a>
-				  <a href="inquire">문의하기</a>
+				 <a href="notice">공지사항 </a>
+				  <a href="faq" style=" padding-left:50px;">자주 묻는 질문 </a>
+				  <a href="inquire" style=" padding-left:50px;">문의하기</a>
 			</div>			
 						
 	</div>
@@ -65,27 +74,27 @@
 		
 	<hr>		
 <!-- 공지글테이블  공지글테이블 공지글테이블 공지글테이블 공지글테이블 -->
-
-	<table style="margin:auto;">
+<div id="list" >
+	<table style="margin:auto;"  >
 		<tr>
 			<td hidden>번호</td>
-			<td >제목</td>
-			<td>작성일</td>
+			<td style=" padding-left:180px;" >제목</td>
+			<td style=" padding-left:50px;">작성일</td>
 		</tr>
 		
 		<c:forEach items="${noticeList}" var="notice">
 			<tr>
 				<td hidden>${notice.g_notice_id}</td>
 			<td style="text-align: left;"> <a href="noticeDetail?gid=${notice.g_notice_id}">${notice.g_notice_title}</a></td>
-				<td>${notice.create_date}</td>
+				<td style=" padding-left:40px;">${notice.create_date}</td>
 			</tr>
 		</c:forEach>
 		
 	</table>
-	
+</div>	
 	<hr>
 
-		<a style="text-align: right;" href="noticeWriteForm">글작성</a>
+		<a  style=" padding-left:600px;" href="noticeWriteForm">글작성</a>
 	
 
 <!-- 페이징 처리 페이징 처리  페이징 처리  페이징 처리   -->

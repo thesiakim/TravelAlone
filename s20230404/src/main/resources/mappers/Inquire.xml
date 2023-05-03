@@ -43,8 +43,14 @@
 
 <!-- 문의사항 게시글가져오기 -->
 		<select id="mhInquireSelOne"  resultType="Inquire">		
-		  SELECT G_WRITING_ID , G_TITLE,  MEMBER_ID, G_CONTENT ,G_REPLY_YN,G_REPLY_CONTENT,G_REPLY_YN,G_REPLY_CONTENT
-		  FROM  G_WRITING  WHERE G_WRITING_ID = #{G_WRITING_ID}   
+		  SELECT 
+		  
+		  g.* ,   m.m_nickname
+		  
+		  FROM G_WRITING g, Member m
+		    WHERE G_WRITING_ID = #{G_WRITING_ID} 
+		     and
+             g.member_id = m.member_id  
 		</select>
 		
 <!-- 문의글 시퀀스가져오기 -->		
@@ -57,10 +63,10 @@
 <!-- 문의사항 게시글작성하기 -->
 		<insert id="insertInquire" parameterType="Inquire">
 			 insert into G_WRITING 
-			 ( G_WRITING_ID , 			MEMBER_ID	, G_COMMON_CSBOARD	 , G_TITLE	, G_CONTENT	
+			 ( G_WRITING_ID , 			MEMBER_ID				, G_COMMON_CSBOARD	 , G_TITLE	, G_CONTENT	
 			 , G_PASSWD	, G_VIEW_CNT , G_REPLY_YN , G_REPLY_CONTENT		,CREATE_DATE , MODIFIED_DATE)
 			 values
-			  (#{g_writing_id}, #{member_id}, #{g_common_csboard} , #{g_title}, #{g_content}, 
+			  (#{g_writing_id}, #{member_id, jdbcType=NUMERIC}, #{g_common_csboard} , #{g_title}, #{g_content}, 
 			 #{g_passwd},	 0,				 0			,'' ,	sysdate, sysdate ) 				
 		</insert>
 
