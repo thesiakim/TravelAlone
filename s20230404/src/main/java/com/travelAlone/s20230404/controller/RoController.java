@@ -56,7 +56,9 @@ public class RoController {
       model.addAttribute("boardAllCnt" ,boardAllCnt);
       model.addAttribute("listAllBoard", listAllBoard);
       model.addAttribute("page", page);
-      model.addAttribute("user_id", memberJpa.getId());
+      if (memberJpa != null){
+			model.addAttribute("user_id", memberJpa.getId());
+		}
       
       return "ro/boardAllListForm";
    }
@@ -86,7 +88,9 @@ public class RoController {
       model.addAttribute("boardCnt" ,boardCnt);
       model.addAttribute("listBoard", listBoard);
       model.addAttribute("page", page);
-      model.addAttribute("user_id", memberJpa.getId());
+      if (memberJpa != null){
+			model.addAttribute("user_id", memberJpa.getId());
+		}
       
       return "ro/boardListForm";
       }

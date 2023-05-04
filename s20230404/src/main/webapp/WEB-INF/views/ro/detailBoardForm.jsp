@@ -117,6 +117,9 @@
 									<input type="button" value="삭제" onclick="delReConfirm(${content.b_re_step } , ${content.b_re_level })">
                           		</td>
 		                    </c:if>
+		                    <c:if test="${user_id != content.member_id }">
+                      			<td style="width: 50px;"></td>
+                    		</c:if>
 		                    <c:if test="${user_id == content.member_id }">
                      			<td><input type="button" value="수정" onclick="showUpdate(this)"></td>
 		                    </c:if>

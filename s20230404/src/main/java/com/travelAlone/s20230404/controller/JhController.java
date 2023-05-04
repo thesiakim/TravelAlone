@@ -181,6 +181,7 @@ public class JhController {
        model.addAttribute("myPageCommunityListCnt" ,myPageCommunityListCnt);
        model.addAttribute("myPageCommunityList", myPageCommunityList);
        model.addAttribute("page", page);
+       model.addAttribute("user_id", memberJpa.getId());
        return "ro/myPageCommunityList";
    }
 	      
