@@ -11,7 +11,7 @@
 								, img_original_file
 								, img_stored_file
 								)
-		VALUES (				(SELECT MAX(travel_id) FROM Travel),
+		VALUES (				#{travel_id},
 								Tra_Img_SEQ.nextval,						 		
 		   						#{img_original_file	, jdbcType=VARCHAR},
 		    					#{img_stored_file}
@@ -20,7 +20,9 @@
 
 	<!-- 이미지 목록가져오기 -->
 	<select id="traImgList" parameterType="Tra_Img" resultType="Tra_Img" >
-			select 	 IMG_ID
+			select 	 
+					 TRAVEL_ID
+					,IMG_ID
 					,IMG_STORED_FILE
 					,IMG_ORIGINAL_FILE
 			from  Tra_Img
@@ -28,19 +30,17 @@
 			order by IMG_ID desc
 		</select>
 	
-	<!-- 이미지 수정하기 -->	
-<update id="traImgUpdate" parameterType="Tra_Img">
-UPDATE tra_img
-SET img_original_file = #{img_original_file},
-    img_stored_file = #{img_stored_file}
-WHERE travel_id = #{travel_id}
-</update>
-
 	<!-- 이미지 목록삭제하기 -->
 	<delete id="traImgDelete" parameterType="int">
 		delete from Tra_Img where TRAVEL_ID = #{travel_id}
 	</delete>
 
+	<!-- 이미지 한개 삭제하기 -->
+	<delete id="traOneImgDelete" parameterType="Hou_Img">
+		delete from Tra_Img 
+		where IMG_ID = #{img_id}
+		and   TRAVEL_ID = #{travel_id}
+	</delete>
 
 
 </mapper>

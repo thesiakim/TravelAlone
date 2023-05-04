@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<html>
 <head>
     <title>Insert title here</title>
     <meta charset="UTF-8">
@@ -44,7 +45,7 @@
               	<li><a href="houseCodeFilter?code=hou500">게스트 하우스</a></li>
 			  </ul>
 			</li>
-		<li><a href="#">맛집</a>
+		<li><a href="res">맛집</a>
 		  <ul>
 			<li><a href="#">한 식</a></li>
 			<li><a href="#">중 식</a></li>

@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
@@ -47,17 +50,17 @@ public class TravelController {
 		travel.setStart(page.getStart());
 		travel.setEnd(page.getEnd());
 		
-		
+		//boardList
 		//여기에 게시판 코드 불러오는 코드 작성
-		List<CommonCode> commonCode = sm.getCommonCode();
-		log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
-		model.addAttribute("boardList",commonCode);
+		List<CommonCode> traCommonCode = sm.traCommonCode();
+		log.info("traCommonCode data : {}, {}",traCommonCode.get(0).getCode(),traCommonCode.get(0).getValue());
+		model.addAttribute("traCommonCode",traCommonCode);
 		
-		
+		//boardLocList
 		//지역 코드 가져오기
-		List<CommonCode> commonLocCode = sm.getCommonLocCode();
-		log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
-		model.addAttribute("boardLocList",commonLocCode);
+		List<CommonCode> traCommonLocCode = sm.traCommonLocCode();
+		log.info("commonLocCode data : {}, {}",traCommonLocCode.get(0).getCode(),traCommonLocCode.get(0).getValue());
+		model.addAttribute("traCommonLocCode",traCommonLocCode);
 		
 		
 		
@@ -99,11 +102,18 @@ public class TravelController {
 	
 	//정보글작성  페이지 이동
 	@GetMapping(value = "traWriteForm")
-	public String traWriteForm(Travel travel, Model model) {
-		log.info("smController  traWriteForm Start..." );
-		return "smTra/traWriteForm";
+	public String traWriteForm(@LoginUser MemberJpa memberJpa,Travel travel, Model model) {
+		log.info("TravelController  traWriteForm Start..." );
+		  if(memberJpa != null) {
+		         log.info("TravelController traWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+		         model.addAttribute("user_id", memberJpa.getId());
+		        
+		         return "smTra/traWriteForm";
+		  
+		  }else {
+	    	  return  "km/login";
+	      }		 	
 	}
-	
 	
 	//정보글작성
 		@PostMapping(value = "traWriteForm")
@@ -122,7 +132,8 @@ public class TravelController {
 			
 			//3. 가져온 시퀀스 세팅하여 img insert
 			//이미지 넣기
-			String img_context = request.getSession().getServletContext().getRealPath("/traUpload/");
+			String img_context = "images"+File.separator+"traUpload" + File.separator;
+			//String img_context = request.getSession().getServletContext().getRealPath("/traUpload/");
 			log.info("IMG POST Start");
 			//for문으로 여러파일 넣기
 			for (MultipartFile multipartFile : file1) {
@@ -160,21 +171,27 @@ public class TravelController {
 			}
 			 String img_stored_file = uid.toString() + "_" + originalName;
 			 log.info("img_stored_file ->" + img_stored_file);
-			 File target = new File(img_context, img_stored_file);
+			 File target = new File(img_stored_file);
 			 
 			 FileCopyUtils.copy(fileData,target);
-			
-			
-			return img_stored_file;
+			 return img_stored_file;
 		}
 		
 
 		//정보글수정 페이지이동
 		@GetMapping(value = "traUpdateForm")
-		public String traUpdateForm(int travel_id, Model model) {
+		public String traUpdateForm(int travel_id, Model model, Tra_Img tra_Img) {
 			log.info("TravelController Start updateForm...");
 			Travel travel = sm.traDetail(travel_id);			
 			log.info("smController traUpdateForm travel->" + travel);			
+		
+			//사진 리스트
+			log.info("Tra_Img Start");
+			tra_Img.setTravel_id(travel_id);
+			List<Tra_Img> traImgList = sm.traImgList(tra_Img);
+			log.info("TravelController  traImgList.size()=>"+ traImgList.size());
+			model.addAttribute("traImgList", traImgList);
+			
 			model.addAttribute("travel", travel);	
 			return "smTra/traUpdateForm";
 		}
@@ -182,10 +199,32 @@ public class TravelController {
 		
 		//정보글수정 처리
 		@PostMapping(value = "traUpdate")
-		public String traUpdate(Travel travel , Model model) {
+		public String traUpdate(Travel travel , Model model,
+				HttpServletRequest request,  List<MultipartFile> file1, Tra_Img tra_Img
+				) throws Exception {
+				
+			//이미지삽입
+			String img_context = "images"+File.separator+"traUpload" + File.separator;
+			log.info("IMG POST Start");
+			
+			for (MultipartFile multipartFile : file1) {
+			log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+			String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
+			// Service --> DB IMG CRUD
+			tra_Img.setImg_original_file(multipartFile.getOriginalFilename());
+			tra_Img.setImg_stored_file(img_stored_file);
+
+
+			int traImgInsertResult = sm.traImgInsert(tra_Img);
+			log.info("TravelController traImgInsert traImgInsertResult->"+ traImgInsertResult);
+		}
+			
+			
 			log.info("TravelController Start update");
 			int updateCount = sm.traUpdate(travel);
 			log.info("TravelController traUpdate updateCount ->" + updateCount);
+			
+			
 			
 			model.addAttribute("uptCnt",updateCount);   // Test Controller간 Data 전달
 			model.addAttribute("kk3","Message Test");   // Test Controller간 Data 전달
@@ -196,10 +235,22 @@ public class TravelController {
 		//정보 글 삭제
 		@RequestMapping(value = "traDelete")
 		public String traDelete(int travel_id, Model model) {
-			log.info("TravelController Start delete... t_id :" +travel_id);
-			int result2 = sm.traDelete(travel_id);
+			log.info("TravelController Start delete... travel_id :" +travel_id);
+			int result2 = sm.traImgDelete(travel_id);
 			int result = sm.traDelete(travel_id);			
 			return "redirect:tra";
+		}
+		
+
+		//정보글 수정시 사진만 삭제
+		@ResponseBody
+		@RequestMapping(value = "deleteTraImg")
+		public String deleteTraImg(int travel_id, int img_id, Model model) {
+			log.info("TravelController Start delete travel_id :" + travel_id);
+			log.info("TravelController Start delete img_id :" + img_id);
+			int result = sm.traOneImgDelete(travel_id, img_id);
+			String resultStr = Integer.toString(result);
+			return resultStr;
 		}
 		
 		//여행지검색
@@ -233,10 +284,17 @@ public class TravelController {
 		String code, Travel travel, String currentPage, Model model  ) {
 			log.info("TravelController traFilter Start" );
 			
+			//boardList
 			//여행지코드
-			List<CommonCode> commonCode = sm.getCommonCode();
-			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
-			model.addAttribute("boardList",commonCode);
+			List<CommonCode> traCommonCode = sm.traCommonCode();
+			log.info("traCommonCode data : {}, {}",traCommonCode.get(0).getCode(),traCommonCode.get(0).getValue());
+			model.addAttribute("traCommonCode",traCommonCode);
+			
+			//boardLocList
+			//지역 코드
+			List<CommonCode> traCommonLocCode = sm.traCommonLocCode();
+			log.info("traCommonLocCode data : {}, {}",traCommonLocCode.get(0).getCode(),traCommonLocCode.get(0).getValue());
+			model.addAttribute("traCommonLocCode",traCommonLocCode);
 			
 			int traTotal = sm.traFilter(code);
 			log.info("TravelController traFilter traTotal =>" + traTotal);
@@ -266,10 +324,11 @@ public class TravelController {
 		String code, Travel travel, String currentPage, Model model) {
 			log.info("TravelController traLocFilter Start" );
 			
+			//boardLocList
 			//지역 코드 가져오기
-			List<CommonCode> commonLocCode = sm.getCommonLocCode();
-			log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
-			model.addAttribute("boardLocList",commonLocCode);
+			List<CommonCode> traCommonLocCode = sm.traCommonLocCode();
+			log.info("traCommonLocCode data : {}, {}",traCommonLocCode.get(0).getCode(),traCommonLocCode.get(0).getValue());
+			model.addAttribute("traCommonLocCode",traCommonLocCode);
 			
 			
 			int totalLoc = sm.traLocFilter(code);
@@ -295,19 +354,45 @@ public class TravelController {
 		
 		//정보 리뷰작성  페이지 이동
 		@GetMapping(value = "traRevWriteForm")
-		public String traRevWriteForm (Tra_Rev tra_Rev, Model model) {
+		public String traRevWriteForm (@LoginUser MemberJpa memberJpa,Tra_Rev tra_Rev, Model model) {
 			log.info("TravelController  traRevWriteForm Start..." );	
+		
+			
+			  if(memberJpa != null) {
+			
+			log.info("TravelController traRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+			model.addAttribute("user_id", memberJpa.getId());
 			model.addAttribute("tra_rev", tra_Rev);
+			
 			return "smTra/traRevWriteForm";
+			
+			
+			  }else {
+		    	  return  "km/login";
+		      }	
+			
+			
 		}
 		
 		//리뷰작성
 		@PostMapping(value = "traRevWriteForm")
-		public String traRevWrite(Tra_Rev tra_Rev, Model model) {
+		public String traRevWrite(@LoginUser MemberJpa memberJpa,
+				Tra_Rev tra_Rev, Model model) throws Exception {
 			log.info("TravelController  traRevWrite Start...");
-			int insertResult = sm.traRevInsert(tra_Rev);
-			log.info("TravelController traRevWrite insertResult->"+insertResult );
-			if(insertResult >0) {
+			
+			  if (memberJpa == null){
+			         throw new Exception("로그인 해주세요!");
+			      }
+			
+			  log.info("TravelController writeFormTraRev memberJpa.getId()는 "+ memberJpa.getId());
+			  tra_Rev.setMember_id( memberJpa.getId());
+			  
+			  
+			int traRevInsertResult = sm.traRevInsert(tra_Rev);
+			log.info("TravelController traRevInsert Result->"+traRevInsertResult );
+			
+			
+			if(traRevInsertResult >0) {
 				return "redirect:traDetail?tid="+tra_Rev.getTravel_id();
 			}
 			else {				
@@ -317,13 +402,6 @@ public class TravelController {
 			
 		}
 		//리뷰글수정 페이지이동
-//		@GetMapping(value = "traRevUpdateForm")
-//		public String traRevUpdateForm(@RequestParam("review_id") Optional<Integer>  review_id, Model model) {
-//			log.info("TravelController  traRevUpdateForm Start..." );
-//				
-//			return "smTra/traRevUpdateForm";
-//		}
-		
 		@GetMapping(value = "traRevUpdateForm")
 		public String traRevUpdateForm(@RequestParam("review_id") Optional<Integer> review_id,
 		                               @RequestParam(value = "travel_id", required = true) long travel_id,
@@ -342,7 +420,8 @@ public class TravelController {
 		@PostMapping(value = "traRevUpdate")
 		public String traRevUpdate(@RequestParam("review_id") int review_id, Tra_Rev tra_Rev, Model model) {
 		    log.info("TravelController Start update");
-			int updateCount = sm.traRevUpdate(tra_Rev);
+			
+		    int updateCount = sm.traRevUpdate(tra_Rev);
 			log.info("TravelController traRevUpdate updateCount ->" + updateCount);
 			
 			model.addAttribute("uptCnt",updateCount);   //
@@ -354,7 +433,7 @@ public class TravelController {
 		//리뷰글 삭제
 		@RequestMapping(value = "traRevDelete")
 		public String traRevDelete(int review_id, Model model) {
-			log.info("TravelController Start delete... r_id :" + review_id);
+			log.info("TravelController Start delete... review_id :" + review_id);
 			int result = sm.traRevDelete(review_id);
 			return "redirect:tra";
 		}

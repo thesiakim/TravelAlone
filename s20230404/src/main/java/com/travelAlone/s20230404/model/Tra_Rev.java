@@ -17,10 +17,12 @@ public class Tra_Rev {
 	private int	 				r_score;
 	private LocalDateTime 	 	create_date;
     private LocalDateTime 	 	modified_date;
-	}
+	
 
+//member조인용
+	private String m_nickname;
 
-
+}
 
 //REVIEW_ID		NUMBER					리뷰ID
 //TRAVEL_ID		NUMBER					여행지ID
