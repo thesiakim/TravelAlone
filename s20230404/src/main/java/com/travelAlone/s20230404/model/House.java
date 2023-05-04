@@ -47,6 +47,7 @@ public class House {
 	    	    
 	  }
 	
+	private String img_stored_file;
 	
 	// member조인용
 		private String m_nickname;

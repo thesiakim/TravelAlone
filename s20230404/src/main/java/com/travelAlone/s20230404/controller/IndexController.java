@@ -1,7 +1,5 @@
 package com.travelAlone.s20230404.controller;
 
-import com.travelAlone.s20230404.config.km.LoginUser;
-import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Travel;
@@ -22,6 +20,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
