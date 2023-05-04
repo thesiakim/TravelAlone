@@ -68,7 +68,7 @@
    }
    
    #reply input[type="text"] {
-      width: 770px;          height: 90px;
+      width: 900px;          height: 90px;
        padding: 0 5px;       font-size: 15px; 
        margin:0 3px 16px;       box-sizing: border-box;
        border-radius: 10px;    background-color: #F8F8F8;
