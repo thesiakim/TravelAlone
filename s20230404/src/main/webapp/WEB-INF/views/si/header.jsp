@@ -32,9 +32,10 @@
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
-  <div id="header">
-	<div class="container">
-	  <div id="container-left clearfix">
+
+	<header>
+		<div class="container">
+	  	<div id="container-left clearfix">
 		<div class="logo">
 		  <a href="/"><img src="img/gosunee.png"></a>
 		</div>
@@ -105,8 +106,9 @@
 			<input type="text" name="searchName" value="${keyword }" id="searchId">
 	  	</div>
 	  </form>
-	  
 	</div>
-  </div> 
+	</header>
+
+
 </body>
 </html>

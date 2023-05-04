@@ -45,6 +45,9 @@ public class House {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 	    return create_date.format(formatter);
 	  }
+	
+	//조회용
+	private String img_stored_file;
 
 	
 	

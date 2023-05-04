@@ -154,6 +154,7 @@
 	#serch > input::placeholder{ color: #5F9EA0; }
 	
 	#serch > input:focus{ outline: 0px solid #205E61; }
+
 	 
 	 /* 메인 페이지 이미지 */
   	.swiper-container {

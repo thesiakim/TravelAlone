@@ -18,8 +18,10 @@ import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.si.SiDao;
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
+import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.ResultList;
 import com.travelAlone.s20230404.model.si.Search;
@@ -37,34 +39,34 @@ public class SiServiceImpl implements SiService {
 	
 	//검색 시 선택한 카테고리에 따라 DB 데이터에  검색 키워드가 존재하는지 조회
 	@Override
-	public ResultList search(String keyword, String category) {
+	public ResultList search(String keyword, String category, Travel travel, House house, Res res, Board board) {
 		
 		logger.info("siServiceImpl search start");
 		ResultList resultList = new ResultList();
 		
 		  //카테고리가 전체인 경우
 		  if(category.equals("category_total")) {
-			  resultList.setTravelList(siDao.travelSearch(keyword));
-			  resultList.setHouseList(siDao.houseSearch(keyword));
-			  resultList.setRestaurantList(siDao.resSearch(keyword));
-			  resultList.setBoardList(siDao.boardSearch(keyword));
+		
+			  resultList.setTravelList(siDao.travelSearch(travel));
+			  resultList.setHouseList(siDao.houseSearch(house));
+			  resultList.setRestaurantList(siDao.resSearch(res));
+			  resultList.setBoardList(siDao.boardSearch(board));
 		  
 		  //카테고리가 여행지인 경우	  
 		  } else if(category.equals("category_travel")) {
-			  resultList.setTravelList(siDao.travelSearch(keyword));
+			  resultList.setTravelList(siDao.travelSearch(travel));
 		  
 		  //카테고리가 숙소인 경우			  
 		  } else if(category.equals("category_house")) {
-			  resultList.setHouseList(siDao.houseSearch(keyword));
+			  resultList.setHouseList(siDao.houseSearch(house));
 		  
 		  //카테고리가 맛집인 경우	  
 		  } else if(category.equals("category_res")) {
-			  resultList.setRestaurantList(siDao.resSearch(keyword));
+			  resultList.setRestaurantList(siDao.resSearch(res));
 		  
 		  //카테고리가 커뮤니티인 경우		  
 		  } else if(category.equals("category_comm")) {
-			  logger.info("siServiceImpl에서 category_comm인 경우 search");
-			  resultList.setBoardList(siDao.boardSearch(keyword));
+			  resultList.setBoardList(siDao.boardSearch(board));
 	      }
 		  
 		 return resultList;
@@ -148,29 +150,45 @@ public class SiServiceImpl implements SiService {
 	//인기 명소 구하기
 	@Override
 	public List<Travel> getPopularTravel() {
-		System.out.println("SiServiceImpl getPopularTravel Start");
 		return siDao.getPopularTravel();
 	}
 
 
+	//인기 맛집 구하기
 	@Override
 	public List<Res> getPopularRes() {
 		return siDao.getPopularRes();
 	}
 
-
+    //인기 숙소 구하기
 	@Override
 	public List<House> getPopularHouse() {
 		return siDao.getPopularHouse();
 	}
 
+	//여행지 검색 결과 개수 조회
+	@Override
+	public int getTravelCount(Travel travel) {
+		return siDao.getTravelCount(travel);
+	}
 
-	
+
+	//숙소 검색 결과 개수 조회
+	@Override
+	public int getHouseCount(House house) {
+		return siDao.getHouseCount(house);
+	}
 
 
-	
-		
-	
-	
+	@Override
+	public int getResCount(Res res) {
+		return siDao.getResCount(res);
+	}
 
+
+	@Override
+	public int getBoardCount(Board board) {
+		return siDao.getBoardCount(board);
+	}
+	
 }
