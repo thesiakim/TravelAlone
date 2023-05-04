@@ -56,7 +56,7 @@
 
 <!-- 여행지종류 -->
 			<div >  																						
-				<c:forEach items="${boardList}" var="list">
+				<c:forEach items="${traCommonCode}" var="list">
 							<td>
 									<!-- 컨트롤러로 보내는거 -->
 								<a href="traFilter?code=${list.code}">${list.value}</a>									
@@ -66,34 +66,30 @@
 			</div>				
 	
 	<!-- 검색 -->
-			<form action="traSearch">
-				<select name="search">
-					<option value="all">전체</option>
-					<option value="tra102">서울</option>
-					<option value="tra132">인천</option>
-					<option value="tra131">경기</option>
-					<option value="tra133">강원</option>
-					<option value="tra142">대전</option>
-					<option value="tra141">충남</option>
-					<option value="tra143">충북</option>
-					<option value="tra151">부산</option>
-					<option value="tra152">울산</option>
-					<option value="tra153">대구</option>
-					<option value="tra155">경남</option>
-					<option value="tra154">경북</option>
-					<option value="tra162">광주</option>
-					<option value="tra161">전남</option>
-					<option value="tra163">전북</option>
-					<option value="tra164">제주</option>
-				</select>	
-					<div id="serch">
-			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
-	  	</div>
-				
-				
-			</form>
+		<form action="traSearch">
+		<select id="category" name="search">
+			<option value="s_title">제목</option>
+			<option value="s_content">내용</option>
+			
+		</select> 
+		 <div id="serch">
+		<input type="text" name="keyword" placeholder="검색어를 입력하세요" value="${search}" id="searchId">
 		
-			<c:set var="num" value="${page.total-page.start+1 }"></c:set>
+		  <%--  <a href="houseSearch?search=${search}&amp;keyword=${keyword}">검색</a> --%>
+		</div>
+		<p>
+	</form>
+
+	<c:set var="num" value="${page.total-page.start+1 }"></c:set>
+	
+<!-- 지역 종류 지역 종류  지역 종류  지역 종류  지역 종류  지역 종류  -->
+	<c:forEach items="${traCommonLocCode}" var="list">
+		<td>
+			<!-- 컨트롤러로 보내는거 -->
+			<a href="traLocFilter?code=${list.code}">${list.value}</a> 
+				
+		</td>
+	</c:forEach>	
 		 <hr>
 		 	
 	

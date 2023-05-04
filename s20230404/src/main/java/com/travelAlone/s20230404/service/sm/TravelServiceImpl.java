@@ -86,8 +86,8 @@ public class TravelServiceImpl implements TravelService {
 
 	//공통여행지코드 리스트
 	@Override
-	public List<CommonCode> getCommonCode() {
-		List<CommonCode> result = sm.getCommonCode();		
+	public List<CommonCode> traCommonCode() {
+		List<CommonCode> result = sm.traCommonCode();		
 		return result;
 	}
 		//여행지종류갯수
@@ -114,19 +114,10 @@ public class TravelServiceImpl implements TravelService {
 	
 	//지역 코드가져오기
 	@Override
-	public List<CommonCode> getCommonLocCode() {
-		List<CommonCode> result = sm.getCommonLocCode();
+	public List<CommonCode> traCommonLocCode() {
+		List<CommonCode> result = sm.traCommonLocCode();
 		return result;
 	}
-
-	@Override
-	public int traLocFilter(String code) {
-		log.info("TravelServiceImpl  traLocFilter Start" );
-		int traLocFilter = sm.traLocFilter(code);
-		log.info("TravelServiceImpl  traLocFilter" + traLocFilter);	
-		return traLocFilter;
-	}
-
 
 	@Override
 	public List<Travel> traLocList(Travel travel) {
@@ -136,6 +127,17 @@ public class TravelServiceImpl implements TravelService {
 		log.info("TravelServiceImpl traLocList traLocList.size()"+ traLocList.size());			
 		return traLocList;
 	}
+	
+	@Override
+	public int traLocFilter(String code) {
+		log.info("TravelServiceImpl  traLocFilter Start" );
+		int traLocFilter = sm.traLocFilter(code);
+		log.info("TravelServiceImpl  traLocFilter" + traLocFilter);	
+		return traLocFilter;
+	}
+
+
+
 	
 	
 	//==========리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰====================================
@@ -201,5 +203,13 @@ public class TravelServiceImpl implements TravelService {
 		result = sm.traImgDelete(travel_id);		
 		return result;
 	}	
+	
+	@Override
+	public int traOneImgDelete(int travel_id,int img_id) {
+		int result = 0;
+		log.info("TravelServiceImpl traOneImgDelet Start");
+		result = sm.traOneImgDelete(travel_id,img_id);		
+		return result;
+	}
 }
 

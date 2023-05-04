@@ -34,22 +34,22 @@
 				<td> 여행지지역</td>
 				<td style="text-align: left;">
 					<select name="t_common_loc">
-						<option value="tra102">서울</option>
-						<option value="tra132">인천</option>
-						<option value="tra131">경기</option>
-						<option value="tra133">강원</option>
-						<option value="tra142">대전</option>
-						<option value="tra141">충남</option>
-						<option value="tra143">충북</option>
-						<option value="tra151">부산</option>
-						<option value="tra152">울산</option>
-						<option value="tra153">대구</option>
-						<option value="tra155">경남</option>
-						<option value="tra154">경북</option>
-						<option value="tra162">광주</option>
-						<option value="tra161">전남</option>
-						<option value="tra163">전북</option>
-						<option value="tra164">제주</option>								
+						<option value="loc102">서울</option>
+						<option value="loc132">인천</option>
+						<option value="loc131">경기</option>
+						<option value="loc133">강원</option>
+						<option value="loc142">대전</option>
+						<option value="loc141">충남</option>
+						<option value="loc143">충북</option>
+						<option value="loc151">부산</option>
+						<option value="loc152">울산</option>
+						<option value="loc153">대구</option>
+						<option value="loc155">경남</option>
+						<option value="loc154">경북</option>
+						<option value="loc162">광주</option>
+						<option value="loc161">전남</option>
+						<option value="loc163">전북</option>
+						<option value="loc164">제주</option>								
 					</select>									
 				 </td>				
 			</tr>
@@ -88,10 +88,14 @@
 				
 			
 			<tr>
-				<td>첨부파일</td>
-				<td><input type="file" name="file1" multiple="multiple"> <img alt="UpLoad Image" src="${pageContext.request.contextPath}/traUpload/${savedName}"></td>
+				<td> 
+				   <img alt="사진추가 " src="/images/traUpload/${savedName}">
+						<input type="file" name="file1" multiple="multiple"> <p>						
+				</td>						
 			</tr>			
+				
 								
+		
 			<tr >
 				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
 				<a href="tra">목록보기</a></td>

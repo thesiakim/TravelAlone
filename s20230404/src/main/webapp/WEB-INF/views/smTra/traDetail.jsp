@@ -11,9 +11,6 @@
    	<script defer src="/js/detailBoardWarning.js"></script>
    	<script defer src="/js/detailBoardRe.js"></script>
 	<script defer src="/js/detailBoardLoginChk.js"></script>
-   	<c:import url="header.jsp"/>
-   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
-   	<link href="css/main.css" rel="stylesheet" type="text/css">
    	<link href="/css/list.css" rel="stylesheet" type="text/css">
    	
 </head>
@@ -29,14 +26,18 @@
 <table style="margin:left;">
 		<tr>
 			<td hidden>번호</td>													
-			<td>사진</td>
+			<td>여행지 대표 사진</td>
 			
 		</tr>
 		<c:forEach items="${traImgList}" var="traImg">
 			<tr>
 				<td hidden>${traImg.img_id}</td>
 			 	<td >
-		<img  alt="UpLoad Image" src="${pageContext.request.contextPath}/traUpload/${traImg.img_stored_file}" width="500" height="300"> 
+			 	
+				<c:url value='/display' var='url'>
+					<c:param name='file' value='${traImg.img_stored_file}'/>
+				</c:url>
+                     <img alt="#" src="${url}"  width="500" height="300">
 			 	
 			 	</td>
 								
@@ -55,20 +56,21 @@
 		
 
 		<tr><td colspan="2">
-	<!-- 	    <input type="button" value="목록" 
-				onclick="location.href='tra'"> -->
-				<a href="tra" class="button">목록</a>
-				<a href="traUpdateForm?travel_id=${travel.travel_id}" class="button">수정</a>
-				<a href="traDelete?travel_id=${travel.travel_id}" class="button">삭제</a>
 		</tr>
 	</table>
 	
 </div>	
+		<hr>
+		<a href="tra" class="button">목록</a>
+		<a href="traUpdateForm?travel_id=${travel.travel_id}" class="button">수정</a>
+		<a href="traDelete?travel_id=${travel.travel_id}" class="button">삭제</a>
+		
+		<hr>
 		<h3>리뷰		</h3>
 	<table style="margin:auto;">
 				<tr>
 					<td>리뷰번호</td>													
-					<td>아이디</td>
+					<td  style=" padding-left:30px;">작성자</td>
 					<td>내용</td>
 					<td>평점</td>
 					<td>작성일</td>
@@ -78,15 +80,12 @@
 					<c:forEach items="${traRevList}" var="traRev">
 					<tr>
 						<td>${traRev.review_id}</td>
-					 	<td>${traRev.member_id}</td>
+					 	<td>${traRev.m_nickname}</td>
 					 	<td>${traRev.r_content}</td>
 					 	<td>${traRev.r_score}</td>
 					 	<td>${traRev.create_date}</td>
-					 <td><a href="traRevUpdateForm?travel_id=${traRev.travel_id}&review_id=${traRev.review_id}">수정</a></td>
-					 	<td>
-					 <%-- 	<a href="traRevDelete?review_id=${review_id}">삭제</a> --%>
-					 	
-
+					  <td  style=" padding-left:30px;" ><a href="traRevUpdateForm?travel_id=${traRev.travel_id}&review_id=${traRev.review_id}">수정</a></td>
+					 	<td style=" padding-left:30px;">
 					 	 <a href="traRevDelete?review_id=${traRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
 					 	 </td>
 						
@@ -94,10 +93,10 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="5"><a href="traRevWriteForm?travel_id=${travel.travel_id}">리뷰작성</a></td>
+					
 				</tr>
 			</table>
-	
+				<br><br><a  style=" padding-left:600px;" href="traRevWriteForm?travel_id=${travel.travel_id}">리뷰작성</a>
 	
 	
 	

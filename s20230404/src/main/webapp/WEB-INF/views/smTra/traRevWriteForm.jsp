@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="img_banner">
+	<div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 
@@ -17,19 +17,11 @@
 	
 	<input type="hidden" name="travel_id" value="${tra_Rev.travel_id }">
 		<table style="margin:auto;">
-			<tr>
-				<td> 아이디</td>
-				<td> <input type="text" name="member_id" size = "50"> </td>
-			</tr>
 				<tr>
 				<td> 내용</td>
 				<td> <input type="text" name="r_content" size = "50"> </td>
 			</tr>
 		
-		<!-- 	<tr>
-				<td> 평점</td>
-				<td> <input type="text" name="r_score" size = "50"> </td>
-			</tr> -->
 			<tr>
 				<td>평점</td>
 				<td>

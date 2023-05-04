@@ -144,10 +144,10 @@ public class TravelDaoImpl implements TravelDao {
 	
 	//여행지필터구분
 	@Override
-	public List<CommonCode> getCommonCode() {
-		log.info("getCommonCode 호출부 .......");
+	public List<CommonCode> traCommonCode() {
+		log.info("traCommonCode 호출부 .......");
 		List<CommonCode> result = session.selectList("traCommonCode");
-		log.info("getCommonCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
+		log.info("traCommonCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
 		return result;
 	}
 
@@ -182,11 +182,25 @@ public class TravelDaoImpl implements TravelDao {
 
 	//지역코드가져오기
 	@Override
-	public List<CommonCode> getCommonLocCode() {
-		log.info("getCommonLocCode 호출부 .......");
-		List<CommonCode> result = session.selectList("locCommonCode");
-		log.info("getCommonLocCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
+	public List<CommonCode> traCommonLocCode() {
+		log.info("traCommonLocCode 호출부 .......");
+		List<CommonCode> result = session.selectList("traCommonLocCode");
+		log.info("traCommonLocCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
 		return result;
+	}
+	
+	@Override
+	public List<Travel> traLocList(Travel travel) {
+		List<Travel> traLocList = null;
+		log.info("TravelDaoImpl traLocList start");
+		try {
+			traLocList = session.selectList("traLocList",travel);
+			
+		} catch (Exception e) {
+			log.info("TravelDaoImpl traLocList Exception " + e.getMessage());
+		}
+		
+		return traLocList;
 	}
 	
 	@Override
@@ -203,19 +217,7 @@ public class TravelDaoImpl implements TravelDao {
 		return count;
 	}
 	
-	@Override
-	public List<Travel> traLocList(Travel travel) {
-		List<Travel> traLocList = null;
-		log.info("TravelDaoImpl traLocList start");
-		try {
-			traLocList = session.selectList("traLocList",travel);
-			
-		} catch (Exception e) {
-			log.info("TravelDaoImpl traLocList Exception " + e.getMessage());
-		}
-		
-		return traLocList;
-	}
+	
 
 
 	
@@ -321,21 +323,6 @@ public class TravelDaoImpl implements TravelDao {
 			return traImgList;
 		}
 
-		
-		@Override
-		public int traImgUpdate(Tra_Img tra_Img) {
-			log.info("TravelDaoImpl traImgUpdate  start");
-			int updateCount= 0;
-			try {
-				updateCount = session.update("traImgUpdate",tra_Img);
-			} catch (Exception e) {
-				log.info("TravelDaoImpl traImgUpdate Exception->"+e.getMessage());
-			}		
-			
-			return updateCount;
-		}
-
-		
 
 		@Override
 		public int traImgDelete(int travel_id) {
@@ -350,5 +337,27 @@ public class TravelDaoImpl implements TravelDao {
 			
 			return result;
 		}
-}
+		
+		@Override
+		public int traOneImgDelete(int travel_id, int img_id) {
+			Tra_Img tra_Img =new Tra_Img();
+			tra_Img.setTravel_id(travel_id);
+			tra_Img.setImg_id(img_id);
+			
+			
+//			log.info("TravelDaoImpl traOneImgDelete start");
+			int result = 0;
+			log.info("TravelDaoImpl traOneImgDelete travel_id->"+ travel_id);
+			log.info("TravelDaoImpl traOneImgDelete img_id->"+ img_id);
+			try {
+				result = session.delete("traOneImgDelete",tra_Img );
+			} catch (Exception e) {
+				log.info("TravelDaoImpl delete Exception->"+ e.getMessage());
+			}
+			return result;
+		}
 
+
+	
+	
+}

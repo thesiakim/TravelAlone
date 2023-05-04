@@ -7,12 +7,11 @@
 	<!-- 리뷰목록 가져오기 -->
 <select id="traRevList" parameterType="Tra_Rev" resultType="Tra_Rev" >
     		<![CDATA[
-			SELECT							  
-		            REVIEW_ID ,TRAVEL_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
-		            ,CREATE_DATE ,MODIFIED_DATE
-			 FROM    TRA_REV
+			SELECT		tr. *
+				       ,m.m_nickname
+			 FROM     TRA_REV tr, Member m
 			 WHERE    TRAVEL_ID =    #{TRAVEL_ID}   
-			                      					 		
+			 AND	  tr.member_id = m.member_id                    					 		
 		 	 ]]>	
 			
 		</select>
@@ -24,8 +23,8 @@
 			  (REVIEW_ID ,			TRAVEL_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
 		            ,CREATE_DATE ,MODIFIED_DATE )
 		  	values
-		  	  (REVIEW_ID_SEQ.nextval,#{travel_id}	,#{member_id}, #{r_content}, #{r_score}
-		  	  ,sysdate, sysdate	)        
+		  	  (REVIEW_ID_SEQ.nextval,#{travel_id}	,#{member_id}, #{r_content}, #{r_score},
+		  	   sysdate, sysdate	)        
 				
 		</insert>
 

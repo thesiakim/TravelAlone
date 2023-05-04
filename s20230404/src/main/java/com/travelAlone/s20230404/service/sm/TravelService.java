@@ -22,13 +22,13 @@ public interface TravelService {
 	List<Travel>			traSearchList(Travel travel);
 	
 	//공통코드 활용(여행지종류)
-	List<CommonCode> 		getCommonCode();
+	List<CommonCode> 		traCommonCode();
 	int 					traFilter(String code);
 	List<Travel> 			traOptList(Travel travel);
 	
 	
 	//공통코드 활용(지역종류)
-	List<CommonCode> 		getCommonLocCode();	
+	List<CommonCode> 		traCommonLocCode();	
 	int 					traLocFilter(String code);
 	List<Travel> 			traLocList(Travel travel);
 	
@@ -45,4 +45,5 @@ public interface TravelService {
 	int 					traSeq(Travel travel);
 	List<Tra_Img> 			traImgList(Tra_Img tra_Img);
 	int 					traImgDelete(int travel_id);
+	int 					traOneImgDelete(int travel_id, int img_id);
 }
