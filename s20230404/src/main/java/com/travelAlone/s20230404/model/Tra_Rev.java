@@ -1,7 +1,6 @@
 package com.travelAlone.s20230404.model;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,8 +14,8 @@ public class Tra_Rev {
 	private  long 				member_id;
 	private String 				r_content;
 	private int	 				r_score;
-	private LocalDateTime 	 	create_date;
-    private LocalDateTime 	 	modified_date;
+	private LocalDate 	 	create_date;
+    private LocalDate 	 	modified_date;
 	
 
 //member조인용

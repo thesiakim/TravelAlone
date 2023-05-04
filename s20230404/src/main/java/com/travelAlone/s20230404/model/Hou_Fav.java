@@ -11,11 +11,11 @@ import lombok.ToString;
 @ToString
 public class Hou_Fav {
 
-	private  long 				member_id;
-	private  long 				house_id;
-	private LocalDate 	 	create_date;
-    private LocalDate	 	modified_date;
-	private		int				isfavHou;
+	private     long 				member_id;
+	private     long 				house_id;
+	private     LocalDate 	 		create_date;
+    private     LocalDate	 		modified_date;
+	private		int					isfavHou;
 }
 
 

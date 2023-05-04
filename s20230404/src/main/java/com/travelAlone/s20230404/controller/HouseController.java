@@ -162,6 +162,7 @@ private final HouseService mh;
 			for (MultipartFile multipartFile : file1) {
 				log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
 				String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
+				
 				// Service --> DB IMG CRUD
 				hou_Img.setImg_original_file(multipartFile.getOriginalFilename());
 				hou_Img.setImg_stored_file(img_stored_file);
@@ -526,62 +527,7 @@ private final HouseService mh;
 			return  "mhHou/hou";
 		}
 
-		// 추천버튼 인용해볼까
-//		   @RequestMapping(value = "/houFav")
-//		   public String like(Board board, Model model, HttpServletRequest request, HttpServletResponse response) {
-//
-//		       log.info("jhController boardlike start");
-//		       int updateCount = 0;
-//		       int updateMinus = 0;
-//		       String cookieKey = "boardlike" + board.getBoard_id();
-//		       String result = "forward:/detailBoard";
-//
-//		       // 쿠키에서 해당 게시물이 추천된 적이 있는지 검사합니다.
-//		       Cookie[] cookies = request.getCookies();
-//		       boolean boardLikeChk = false;
-//		       if (cookies != null) {
-//		           for (Cookie cookie : cookies) {
-//		               if (cookie.getName().equals(cookieKey)) {
-//		                   // 이미 추천한 경우, 처리할 내용을 작성합니다.
-//		                  // 추천되어있는 쿠키 삭제
-//		                  // 해당 쿠키 값을 비우기
-//		                  // cookie.setValue("");
-//		                  // 쿠키의 유효시간을 0으로 설정 -> 해당 쿠키를 브라우저에게 삭제하도록 지시하는 것
-//		                  cookie.setMaxAge(0);
-//		                  response.addCookie(cookie);
-//		                   
-//		                   String message = "추천 취소합니다.";
-//		                   model.addAttribute("message", message);
-//		                   boardLikeChk = true;
-//		                   break;
-//		               }
-//		           }
-//		       }
-//		       
-//		       if (!boardLikeChk) {
-//		          // 추천 1증가
-//		           updateCount = js.updateCount(board);
-//		           log.info("jhController like result ->" + updateCount);
-//		           model.addAttribute("updateCount", updateCount);
-//
-//		           // 쿠키에 해당 게시물이 추천된 것을 기록합니다.
-//		           Cookie cookie = new Cookie(cookieKey, "true");
-//		           cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
-//		           response.addCookie(cookie);
-//		           
-//		       } else {
-//		          // 추천 1감소
-//		          updateMinus = js.updateMinus(board);
-//		          log.info("jhController like updateMinus ->" + updateMinus);
-//		           model.addAttribute("updateMinus", updateMinus);
-//		       }
-//		       
-//		       log.info("jhController like board_id ->" + board.getBoard_id());
-//		       model.addAttribute("board_id", board.getBoard_id());
-//		       model.addAttribute("b_common_board", board.getB_common_board());
-//
-//		       return result;
-//		   }
+
 		
 		
 		

@@ -40,10 +40,13 @@
 		</update>
 
 <!--  여행지 리뷰글 글삭제하기 -->
-		<delete id="traRevDelete" parameterType="int">
+		<delete id="deleteTraRev" parameterType="int">
 			delete from TRA_REV where REVIEW_ID = #{review_id}
 		</delete>
-
-
+		
+<!--  여행지 리뷰글 글다삭제하기 -->
+		<delete id="deleteTraRevAll"  parameterType="int">
+		 DELETE     from TRA_REV   WHERE TRAVEL_ID = #{travel_id}
+		</delete>
 
 </mapper>
