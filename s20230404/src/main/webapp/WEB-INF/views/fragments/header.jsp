@@ -8,10 +8,10 @@
     <meta charset="UTF-8">
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
     <!-- 헤더 -->
 </head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <body>
   <div id="header">
 	<div class="container">
@@ -20,25 +20,25 @@
 		  <a href="/"><img src="img/gosunee.png"></a>
 		</div>
 		<div class="headerLogin">
-		  <a href="loginPage.html">로그인</a>
+		  <a href="login">로그인</a>
 		</div> 
 		<div class="headerLogin">
-		  <a href="">회원가입</a>
+		  <a href="join">회원가입</a>
 		</div> 
 	  </div>
 	</div>
 	<div class="headerForm">
 	  <div class="headerBenner">
 		<ul>
-			<li><a href="tra">여행지</a>
-			  <ul>
-				<li><a href="traFilter?code=tra100">관 광</a></li>
-                <li><a href="traFilter?code=tra200">자 연</a></li>
-                <li><a href="traFilter?code=tra300">레 저</a></li>
-                <li><a href="traFilter?code=tra400">쇼 핑</a></li>
-			  </ul>
-            </li>
-		   <li><a href="hou">숙소</a>
+		<li><a href="tra">여행지</a>
+		  <ul>
+			<li><a href="traFilter?code=tra100">관 광</a></li>
+               <li><a href="traFilter?code=tra200">자 연</a></li>
+               <li><a href="traFilter?code=tra300">레 저</a></li>
+               <li><a href="traFilter?code=tra400">쇼 핑</a></li>
+		  </ul>
+        </li>
+	    <li><a href="hou">숙소</a>
       		  <ul>
               	<li><a href="houseCodeFilter?code=hou100">호 텔</a></li>
               	<li><a href="houseCodeFilter?code=hou200">모 텔</a></li>

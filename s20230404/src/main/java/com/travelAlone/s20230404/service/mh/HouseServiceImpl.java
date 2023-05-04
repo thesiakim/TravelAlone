@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.dao.mh.HouseDao;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Fav;
 import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
@@ -211,12 +212,32 @@ public class HouseServiceImpl implements HouseService {
 		result = mh.deleteHouOneImg(house_id,img_id);		
 		return result;
 	}
-
 	
-	
+	//숙소 즐겨찾기
+	@Override
+	public int insertHouFav(Hou_Fav hou_Fav) {
+		int result = 0;
+		log.info("HouseServiceImpl insert Start");
+		result = mh.insertHouFav(hou_Fav);
+		return result;
+	}
+
+	//숙소 즐겨찾기 해제
+	@Override
+	public int deleteHouFav(Hou_Fav hou_Fav) {
+		int result = 0;
+		log.info("HouseServiceImpl delete Start");
+		result = mh.deleteHouFav(hou_Fav);
+		return result;
+	}
+	@Override
+	public int isHou_Fav(Hou_Fav hou_Fav) {
+		log.info("HouseServiceImpl isHou_Fav Start");
+		int houseFavList = mh.selectHouFav(hou_Fav);				
+		return houseFavList;
+	}
 
 
-	
 	
 	
 	

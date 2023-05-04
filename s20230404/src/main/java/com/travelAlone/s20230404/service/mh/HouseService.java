@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Fav;
 import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
@@ -13,11 +14,16 @@ public interface HouseService {
 	int 					totalHouse();
 	List<House> 			listHouse(House house);
 	House 					detailHouse(int hid);
+	List<Hou_Img> 			listHou_Img(Hou_Img hou_Img);
+	int 					seqHou(House house);
 	int 					insertHou(House house);
+	int 					insertImg(Hou_Img hou_Img);
 	int			 			updateHouse(House house);
 	int 					deleteHouse(int house_id);
+	int 					deleteHouImg(int house_id);
+	int 					deleteHouOneImg(int house_id,int img_id );
 	int 					conditionHouseCount(House house);
-	List<House>				 listSearchHouse(House house);
+	List<House>				listSearchHouse(House house);
 	
 	//공통코드 활용(숙소종류)
 	List<CommonCode> 		getCommonCode();
@@ -37,14 +43,15 @@ public interface HouseService {
 	int 					deleteHouRev(int review_id);
 	
 	
-	//이미지 업로드
-	int 					insertImg(Hou_Img hou_Img);
-	int 					seqHou(House house);
+
+	//즐겨찾기
+	int 					insertHouFav(Hou_Fav hou_Fav);
+	int 					deleteHouFav(Hou_Fav hou_Fav);
 	
-	List<Hou_Img> listHou_Img(Hou_Img hou_Img);
-	int deleteHouImg(int house_id);
-	//사진 하나만 지우기
-	int deleteHouOneImg(int house_id,int img_id );
+	int 					isHou_Fav(Hou_Fav hou_Fav);
+	
+	
+	
 	
 	
 	

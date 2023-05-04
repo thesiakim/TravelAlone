@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Fav;
 import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
@@ -76,7 +77,8 @@ private final HouseService mh;
 	
 	//숙소   정보글조회
 	@GetMapping(value = "houDetail")
-	public String houseDetail(int hid , Model model , Hou_Img hou_Img ) {
+	public String houseDetail(@LoginUser MemberJpa memberJpa,
+			int hid , Model model , Hou_Img hou_Img ,Hou_Fav hou_Fav) {
 		log.info("HouseController Start houseDetail");
 		log.info("HouseController houseDetail house_id->"+ hid );
 		//숙소정보 서비스
@@ -88,6 +90,23 @@ private final HouseService mh;
 		List<Hou_Img> listImg = mh.listHou_Img(hou_Img);
 		log.info("HouseController  listImg.size()=>"+ listImg.size());
 		model.addAttribute("imgHouList", listImg);
+		
+		//즐겨찾기테이블 넣기
+		log.info("isHou_Fav Start");		
+		log.info("isHou_Fav hid"+ hid);		
+		log.info("isHou_Fav memberJpa.getId()-> " + memberJpa.getId());		
+		hou_Fav.setHouse_id(hid);
+		hou_Fav.setMember_id(memberJpa.getId());
+		
+		//변수추가
+		int isfavHou = 0;
+		hou_Fav.setIsfavHou(isfavHou);
+		
+		int favResult = mh.isHou_Fav(hou_Fav);
+		log.info("HouseController favResult=>{}", favResult);
+		
+		model.addAttribute("isfavHou", favResult);
+		
 		
 		//리뷰리스트
 		List<Hou_Rev> listHouRev = mh.listHouRev(hid);
@@ -251,6 +270,7 @@ private final HouseService mh;
 		public String deleteHouse(int house_id, Model model) {
 			log.info("HouseController Start delete house_id :" +house_id);
 			int result2 = mh.deleteHouImg(house_id);
+			int result3 = mh.deleteHouRev(house_id);
 			int result = mh.deleteHouse(house_id);	
 			return "redirect:hou";
 		}
@@ -380,6 +400,7 @@ private final HouseService mh;
 			  if(memberJpa != null) {
 			
 			log.info("HouseController houRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+			 log.info("HouseController houFav hou_Rev.getHouse_id()는 "+ hou_Rev.getHouse_id());
 			model.addAttribute("user_id", memberJpa.getId());
 			model.addAttribute("hou_rev", hou_Rev);
 			
@@ -464,11 +485,104 @@ private final HouseService mh;
 		}
 		
 		
+		//즐겨찾기 추가
+		@ResponseBody
+		@RequestMapping(value = "insertHouFav")
+		public String houFav(@LoginUser MemberJpa memberJpa,
+				Hou_Fav hou_Fav, Model model) throws Exception {
+			log.info("HouseController  houFav Start");
+			if (memberJpa == null){
+		         throw new Exception("로그인 해주세요!");
+		      }
+			 log.info("HouseController houFav memberJpa.getId()는 "+ memberJpa.getId());
+			 log.info("HouseController houFav hou_Fav.getHouse_id()는 "+ hou_Fav.getHouse_id());
+			hou_Fav.setMember_id(memberJpa.getId());
+			hou_Fav.setHouse_id(hou_Fav.getHouse_id());
+			
+			
+			int insertResult = mh.insertHouFav(hou_Fav);
+			log.info("HouseController houFav insertResult->"+insertResult );
+		
+			
+			return "mhHou/hou";
+		}
 		
 
-		
-		
+		//즐겨찾기 해제
+		@RequestMapping(value = "deleteHouFav")
+		public String deleteHouFav(@LoginUser MemberJpa memberJpa,Hou_Fav hou_Fav, Model model) throws Exception {
+			log.info("HouseController  deleteHouFav Start");
+			if (memberJpa == null){
+		         throw new Exception("로그인 해주세요!");
+		      }
+			hou_Fav.setMember_id(memberJpa.getId());
+			log.info("HouseController houFav memberJpa.getId()는 "+ memberJpa.getId());
+			log.info("HouseController Start delete house_id :" + hou_Fav.getHouse_id());
+			
+			hou_Fav.setMember_id(memberJpa.getId());
+			hou_Fav.setHouse_id(hou_Fav.getHouse_id());
+			
+			int result = mh.deleteHouFav(hou_Fav);
+			return  "mhHou/hou";
+		}
 
+		// 추천버튼 인용해볼까
+//		   @RequestMapping(value = "/houFav")
+//		   public String like(Board board, Model model, HttpServletRequest request, HttpServletResponse response) {
+//
+//		       log.info("jhController boardlike start");
+//		       int updateCount = 0;
+//		       int updateMinus = 0;
+//		       String cookieKey = "boardlike" + board.getBoard_id();
+//		       String result = "forward:/detailBoard";
+//
+//		       // 쿠키에서 해당 게시물이 추천된 적이 있는지 검사합니다.
+//		       Cookie[] cookies = request.getCookies();
+//		       boolean boardLikeChk = false;
+//		       if (cookies != null) {
+//		           for (Cookie cookie : cookies) {
+//		               if (cookie.getName().equals(cookieKey)) {
+//		                   // 이미 추천한 경우, 처리할 내용을 작성합니다.
+//		                  // 추천되어있는 쿠키 삭제
+//		                  // 해당 쿠키 값을 비우기
+//		                  // cookie.setValue("");
+//		                  // 쿠키의 유효시간을 0으로 설정 -> 해당 쿠키를 브라우저에게 삭제하도록 지시하는 것
+//		                  cookie.setMaxAge(0);
+//		                  response.addCookie(cookie);
+//		                   
+//		                   String message = "추천 취소합니다.";
+//		                   model.addAttribute("message", message);
+//		                   boardLikeChk = true;
+//		                   break;
+//		               }
+//		           }
+//		       }
+//		       
+//		       if (!boardLikeChk) {
+//		          // 추천 1증가
+//		           updateCount = js.updateCount(board);
+//		           log.info("jhController like result ->" + updateCount);
+//		           model.addAttribute("updateCount", updateCount);
+//
+//		           // 쿠키에 해당 게시물이 추천된 것을 기록합니다.
+//		           Cookie cookie = new Cookie(cookieKey, "true");
+//		           cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
+//		           response.addCookie(cookie);
+//		           
+//		       } else {
+//		          // 추천 1감소
+//		          updateMinus = js.updateMinus(board);
+//		          log.info("jhController like updateMinus ->" + updateMinus);
+//		           model.addAttribute("updateMinus", updateMinus);
+//		       }
+//		       
+//		       log.info("jhController like board_id ->" + board.getBoard_id());
+//		       model.addAttribute("board_id", board.getBoard_id());
+//		       model.addAttribute("b_common_board", board.getB_common_board());
+//
+//		       return result;
+//		   }
+		
 		
 		
 		

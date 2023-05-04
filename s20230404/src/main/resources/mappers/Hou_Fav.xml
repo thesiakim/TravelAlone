@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.travelAlone.s20230404.Hou_FavMapper">
+<!-- 즐겨찾기 등록하기 -->
+
+	<insert id="insertHouFav" parameterType="Hou_Fav">
+			 INSERT INTO Hou_Fav (
+			 MEMBER_ID
+            ,HOUSE_ID
+           , CREATE_DATE
+           , MODIFIED_DATE)           
+			 VALUES 
+			 (  #{member_id, jdbcType=NUMERIC}, #{house_id}, sysdate,    sysdate        ) 
+	</insert>
+
+	<!--  즐겨찾기 해제 -->
+		<delete id="deleteHouFav" parameterType="Hou_Fav">
+			 DELETE     Hou_Fav
+			 WHERE  HOUSE_ID = #{house_id}
+			 AND  member_id =  #{member_id, jdbcType=NUMERIC}
+		</delete>
+<!-- 즐겨찾기 목록 -->		
+	<select id="isHou_Fav" parameterType ="Hou_Fav" resultType="int">		
+	 SELECT	count(*)
+	 FROM  HOU_FAV  
+	 WHERE HOUSE_ID =   #{house_id}
+	 AND   MEMBER_ID =  #{member_id}
+
+	</select>
+
+</mapper>
