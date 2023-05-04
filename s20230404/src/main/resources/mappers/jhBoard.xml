@@ -4,11 +4,18 @@
 
 <mapper namespace="com.travelAlone.s20230404.jhBoardMapper">
 	
-	<!-- 추천 수 sql  -->
+	<!-- 추천 수 증가  -->
     <update id="jhLike" parameterType="Board">
     	UPDATE 	board
     	SET		b_like_cnt = b_like_cnt + 1
     	WHERE	board_id = #{board_id}
+    </update>
+    
+    <!-- 중복 추천시 추천수 감소 -->
+    <update id="jhLikeCancel" parameterType="Board">
+		UPDATE    board
+		SET      b_like_cnt = b_like_cnt - 1
+		WHERE   board_id = #{board_id}
     </update>
     
     <!-- 대댓글 sql (1. 댓글사이 가르기) -->
@@ -62,12 +69,6 @@
 						 ORDER BY	b.create_date DESC ) a  
 				) 
 		WHERE rn BETWEEN #{start} AND #{end} 
-	</select>
-	
-	<select id="memberIdChk" parameterType="Long">
-		SELECT	*
-		FROM	member
-		WHERE	member_id = #{member_id}
 	</select>
     
 </mapper>

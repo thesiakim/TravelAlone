@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.Board;
-import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Warning;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +33,20 @@ public class JhDaoImpl implements JhDao {
 		
 		return updateCount;
 	}
+	
+	// 추천 취소 버튼
+	@Override
+	public int updateMinus(Board board) {
+		log.info("jhDaoImpl updateMinus Start");
+		int updateMinus = 0;
+		try {
+			updateMinus = session.update("jhLikeCancel", board);
+			log.info("jhDaoImpl updateMinus -> "+ updateMinus);
+		} catch (Exception e) {
+			log.info("jhDaoImpl updateMinus Exception->" + e.getMessage());
+		}
+		return updateMinus;
+	}
 
 	// 신고 버튼
 	@Override
@@ -47,47 +60,6 @@ public class JhDaoImpl implements JhDao {
 			log.info("jhDaoImpl reportMember Exception -> " + e.getMessage());
 		}
 		return reportMember;
-	}
-	
-	// 게시글 작성
-	@Override
-	public long insertBoard(Board board) {
-		long createBoardId = 0L;
-
-		log.info("jhDaoImpl insertBoard start");
-		
-		try {
-			int roBoardInsertResult = session.insert("roBoardInsert", board);
-
-			createBoardId = board.getBoard_id();
-
-			log.info("jhDaoImpl insertBoard createBoardId는 "+ createBoardId);
-
-		} catch (Exception e) {
-
-			log.info("jhDaoImpl insertBoard e.getMessage는 "+ e.getMessage());
-
-		}
-		return createBoardId;
-	}
-	
-	// 이미지 삽입
-	@Override
-	public int insertBodImg(List<BodImg> bodImgs) {
-		int insertResult = 0;
-		log.info("jhDaoImpl insertBoardImg start");
-		for (BodImg img : bodImgs) {
-			try {
-				session.insert("roBoardImgInsert", img);
-				log.info("jhDaoImpl insertBodImg insertResult는 "+ insertResult);
-				
-				
-				insertResult++;
-			} catch (Exception e) {
-				log.info("jhDaoImpl insertBodImg e.getMessage는 "+ e.getMessage());
-			}
-		}
-		return insertResult;
 	}
 	
 	// 대댓글 작성
