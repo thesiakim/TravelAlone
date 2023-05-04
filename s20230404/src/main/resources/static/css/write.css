@@ -37,10 +37,10 @@
 		transition: ease 0.5s;
 	}
 	
+	/* 글 작성 작성,취소 버튼 */
 	#writeFormSubmit {
 		text-align: center;
 	}
-	
 	#writeFormSubmit > input {
 		width: 50px;			border-radius: 7px;
 	    height: 25px;			box-sizing: border-box;
@@ -48,12 +48,25 @@
 	    color:white;
 	    border:  #205E61; 		background-color: #205E61;
 	}
-	
 	#writeFormSubmit > input:hover {
 		color: #205E61;
 		background-color:  white;
 		transition: ease 0.5s;
 	}
-	
+	#updateFormSubmit {
+		text-align: center;
+	}
+	#updateFormSubmit > input {
+		width: 50px;			border-radius: 7px;
+	    height: 25px;			box-sizing: border-box;
+	    font-size: 15px;  		font-weight:bolder;
+	    color:white;
+	    border:  #205E61; 		background-color: #205E61;
+	}
+	#updateFormSubmit > input:hover  {
+		color: #205E61;
+		background-color:  white;
+		transition: ease 0.5s;
+	}
 	
 	

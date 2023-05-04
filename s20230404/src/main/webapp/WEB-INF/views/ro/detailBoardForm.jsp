@@ -43,9 +43,12 @@
 							<td colspan="3">
 								<div class="button-container">
 									<form action="updateBoardForm" method="post">
-										<input type="hidden" name="board_id" value="${board_id }">
-										<input type="submit" value="수정">
-									</form>
+	                                   <input type="hidden" name="board_id" value="${board_id }">
+	                                   <input type="hidden" name="member_id" value="${content.member_id }">
+	                                   <input type="hidden" name="b_title" value="${content.b_title}">
+	                                   <input type="hidden" name="b_content" value="${content.b_content}">
+	                                   <input type="submit" value="수정">
+                                	</form>
 									
 		                            <input type="button" id="del_board" value="삭제" onclick="delConfirm(${board_id })" >
 								</div>

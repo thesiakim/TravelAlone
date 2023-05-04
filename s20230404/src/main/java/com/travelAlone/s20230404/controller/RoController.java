@@ -99,7 +99,7 @@ public class RoController {
       }
 
    
-// 게시판 게시물 페이지 이동
+   // 게시판 게시물 페이지 이동
    @RequestMapping(value = "detailBoard")
    public String detailBoard(@LoginUser MemberJpa memberJpa, Board board, Model model, HttpServletRequest request, HttpServletResponse response) {
        log.info("roController detailBoard 시작");
@@ -149,6 +149,25 @@ public class RoController {
 
        result = "ro/detailBoardForm";
        return result;
+   }
+   
+   // 게시물 작성 페이지 이동
+   @RequestMapping(value = "writeBoardForm")
+   public String writeFormBoard(@LoginUser MemberJpa memberJpa, Board board, Model model) {
+	   log.info("roController writeFormBoard 시작");
+      
+	   String resultForm = "";
+      
+	   if(memberJpa != null) {
+		   log.info("roController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
+		   model.addAttribute("user_id", memberJpa.getId());
+		   model.addAttribute("b_common_board", board.getB_common_board());
+		   resultForm = "ro/writeBoardForm";
+
+	   }else {
+    	  resultForm = "km/login";
+	   }
+	   return resultForm;
    }
    
    // 게시물 작성
