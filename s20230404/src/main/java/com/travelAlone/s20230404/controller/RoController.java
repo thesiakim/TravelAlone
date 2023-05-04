@@ -8,15 +8,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Board;
-
+import com.travelAlone.s20230404.model.BodImg;
+import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.ro.RoService;
 
@@ -31,7 +35,7 @@ public class RoController {
    private final RoService      rs;
    
    
-// 전체 게시판 이동
+   // 전체 게시판 이동
    @RequestMapping(value = "listAllBoard")
    public String listBoardAll(@LoginUser MemberJpa memberJpa, Board board, String currentPage, Model model) {
       log.info("roController listBoardAll 시작");
@@ -74,7 +78,6 @@ public class RoController {
       log.info("roController boardList boardCnt는 "+ boardCnt);
       
       // Paging 작업
-      
       Paging page = new Paging(boardCnt, currentPage);
       
       // Board에 추가 setting
@@ -96,7 +99,7 @@ public class RoController {
       }
 
    
-   // 게시판 글 보는 폼 이동
+// 게시판 게시물 페이지 이동
    @RequestMapping(value = "detailBoard")
    public String detailBoard(@LoginUser MemberJpa memberJpa, Board board, Model model, HttpServletRequest request, HttpServletResponse response) {
        log.info("roController detailBoard 시작");
@@ -114,7 +117,7 @@ public class RoController {
                if (cookie.getName().equals(cookieKey)) {
                    // 쿠키에 해당 게시물을 이미 조회한 경우, 조회수 증가하지 않음
 
-            	   boardViewChk = true;
+                  boardViewChk = true;
 
                    break;
                }
@@ -131,7 +134,7 @@ public class RoController {
        model.addAttribute("board_id", board.getBoard_id());
        model.addAttribute("b_common_board", board.getB_common_board());
 
-       List<Board> listBoardS = rs.detailBoard((int) board.getBoard_id());
+       List<Board> listBoardS = rs.detailBoard(board.getBoard_id());
 
        log.info("roController detailBoard listBoardC.size()는 "+ listBoardS.size());
 
@@ -148,25 +151,24 @@ public class RoController {
        return result;
    }
    
-   // 게시물 작성폼 이동
-   @RequestMapping(value = "writeBoardForm")
-   public String writeFormBoard(@LoginUser MemberJpa memberJpa, Board board, Model model) {
-      log.info("roController writeFormBoard 시작");
-      
-      String resultForm = "";
-      
-      if(memberJpa != null) {
-         log.info("roController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
-         model.addAttribute("user_id", memberJpa.getId());
-         model.addAttribute("b_common_board", board.getB_common_board());
-         resultForm = "ro/writeBoardForm";
+   // 게시물 작성
+   @PostMapping(value = "writeBoard")
+   @ResponseBody
+   public String writeBoard(@RequestPart(value = "key") BoardWriteRequestDto requestDto,
+                      @RequestPart(value = "file", required = false) List<MultipartFile> files,
+                      @LoginUser MemberJpa memberJpa,
+                      Model model) throws Exception {
+	   log.info("roController writeBoard start");
 
-      }else {
-         resultForm = "km/login";
-      }
-      return resultForm;
+	   if (memberJpa == null){
+		   throw new Exception("로그인 해주세요!");
+	   }
+	   requestDto.addMemberId(memberJpa.getId());
       
-   }
+	   int insertResult = rs.insertBoard(requestDto,files);
+	   log.info("roController writeBoard insertResult는 "+ insertResult);
+	   return ""+insertResult;
+	}
    
    // 게시물 댓글 작성
    @PostMapping(value = "writeBoardRe")
@@ -194,58 +196,93 @@ public class RoController {
       return resultForm;
    }
 
-   @RequestMapping(value = "updateBoardForm", method = RequestMethod.POST)
-   public String updateFormBoard(@LoginUser MemberJpa memberJpa, int board_id, Model model) {
-      log.info("roController updateBoardForm 시작");
+	// 게시물 수정 페이지 이동
+	@RequestMapping(value = "updateBoardForm", method = RequestMethod.POST)
+	public String updateFormBoard(Board board, Model model) {
+		log.info("roController updateBoardForm 시작");
       
-      List<Board> listBoardS = rs.detailBoard(board_id);
+		// 게시물에 있는 이미지 list 갖고 오기
+		List<BodImg> listBoardImgs = rs.listImgBoard(board.getBoard_id());
+		System.out.println("RoController updateBoardForm listBoardImgs.size()->"+listBoardImgs.size());
       
-      model.addAttribute("listBoardS", listBoardS);
+		model.addAttribute("board", board);
+		model.addAttribute("listBoardImgs", listBoardImgs);
       
-      return "ro/updateBoardForm";
-   }
+		return "ro/updateBoardForm";
+	}
+   
+	// 게시물 수정
+	@PostMapping(value = "updateBoard")
+	@ResponseBody
+	public String updateBoard(
+                        // formData에 들어 있는 boardData, imgFiled을 각각 parameter값으로 받기 위해 RequestPart사용
+                        @RequestPart(value = "boardData", required = false) Board board,
+                        @RequestPart(value = "imgFile", required = false) List<MultipartFile> imgFiles,
+                        Model model
+                        ) {
+		log.info("roController updateBoard 시작");
+      
+		int updateResult = rs.updateBoard(board, imgFiles);
+		log.info("roController updateBoard updateResult"+ updateResult);
+      
+		return ""+ updateResult;
+	}
    
    
-   @ResponseBody
-   @PostMapping(value = "deleteBoard")
-   public String deleteBoard(long board_id, Model model) {
+	// 게시물 삭제
+	@ResponseBody
+	@PostMapping(value = "deleteBoard")
+	public String deleteBoard(long board_id, Model model) {
 
-      log.info("roController deleteBoard 시작");
-      log.info("roController deleteBoard board_id는 "+ board_id);
-      
-      int delResult = rs.deleteBoard(board_id);
-      String delResultStr = Integer.toString(delResult);
-      log.info("roController deleteBoard delResultStr는 "+ delResultStr);
-      
-      return delResultStr;
-   }
+		log.info("roController deleteBoard 시작");
+		log.info("roController deleteBoard board_id는 "+ board_id);
+	      
+		int delResult = rs.deleteBoard(board_id);
+		String delResultStr = Integer.toString(delResult);
+		log.info("roController deleteBoard delResultStr는 "+ delResultStr);
+	      
+		return delResultStr;
+	}
    
-   @ResponseBody
-   @PostMapping(value = "deleteBoardRe")
-   public String deleteReBoard(Board board, Model model) {   
+	// 게시물 댓글 삭제
+	@ResponseBody
+	@PostMapping(value = "deleteBoardRe")
+	public String deleteReBoard(Board board, Model model) {   
 
-      String successStatus = "1";
-      log.info("roController deleteReBoard 시작");
-      log.info("roController deleteReBoard board.b_re_step는 "+ board.getB_re_step());
-      
-      rs.deleteReBoard(board);
-      log.info("deleteReBoard successStatus ->"+successStatus);
-      return successStatus;
-   }
-   
+		String successStatus = "1";
+		log.info("roController deleteReBoard 시작");
+		log.info("roController deleteReBoard board.b_re_step는 "+ board.getB_re_step());
+	      
+		rs.deleteReBoard(board);
+		log.info("deleteReBoard successStatus ->"+successStatus);
+		return successStatus;
+	}
 
-   @ResponseBody
-   @PostMapping(value = "UpdateBoardRe")
-   public String updateReBoard(Board board, Model model) {
-	   log.info("roController updateReBoard 시작");
-	   
-	   int updateCount = rs.updateReBoard(board);
-	   log.info("roController updateReBoard updateCount는 "+ updateCount);
-	   String updateResult = Integer.toString(updateCount);
-	   
-	   return updateResult;
-   }
-   
-   
+	// 게시물 댓글 수정
+	@ResponseBody
+	@PostMapping(value = "UpdateBoardRe")
+	public String updateReBoard(Board board, Model model) {
+		log.info("roController updateReBoard 시작");
+	      
+		int updateCount = rs.updateReBoard(board);
+		log.info("roController updateReBoard updateCount는 "+ updateCount);
+		String updateResult = Integer.toString(updateCount);
+	      
+		return updateResult;
+	}
+	
+	// 게시물 이미지 삭제
+	@ResponseBody
+	@RequestMapping("/deleteBoardImg")
+	public String deleteImgBoard(BodImg bodImg) {
+		log.info("roController deleteImgBoard 시작");
+	      
+		int deleteCount = rs.deleteImgBoard(bodImg);
+		log.info("roController deleteImgBoard deleteResult는 "+ deleteCount);
+	      
+		String deleteResult = Integer.toString(deleteCount);
+	      
+		return deleteResult;
+	}
 
 }

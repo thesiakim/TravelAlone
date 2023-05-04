@@ -79,14 +79,36 @@
       Where rn between #{start} and #{end}
       
       
-   </select>
+	</select>
    
-   <select id="roBoardCount" parameterType="Board" resultType="int">
-      Select   Count(*)
-      From   Board
-      Where   b_re_level = 0
-      and      b_common_board = #{b_common_board}
-   </select>
+	<select id="roBoardCount" parameterType="Board" resultType="int">
+		Select   Count(*)
+		From      Board b,  Member m
+		Where      b.b_re_level = 0
+		and      b.member_id = m.member_id
+		and      b.b_common_board = #{b_common_board}
+		<choose>
+			<when test="listCategory == 'lc_total'">
+			and (
+                 b.b_title like '%' || #{keyWord} || '%' or
+                 b.b_content like '%' || #{keyWord} || '%' or
+                  m.m_nickname like '%' || #{keyWord} || '%'
+                 )
+			</when>
+          	<when test="listCategory == 'lc_title'">
+             and b.b_title like '%' || #{keyWord} || '%'
+          	</when>
+         	<when test="listCategory == 'lc_content'">
+             and b.b_content like '%' || #{keyWord} || '%'
+          	</when>
+          	<when test="listCategory == 'lc_writer'">
+             and m.m_nickname like '%' || #{keyWord} || '%'
+          	</when>
+          	<otherwise>
+          
+			</otherwise>
+		</choose>
+	</select>
    
    <select id="roBoardList" parameterType="Board" resultType="Board">
       Select *
@@ -97,6 +119,27 @@
                   Where   b.b_re_level = 0
                   and      b.member_id = m.member_id
                   and      b.b_common_board = #{b_common_board}
+                  <choose>
+                     <when test="listCategory == 'lc_total'">
+                        and (
+                            b.b_title like '%' || #{keyWord} || '%' or
+                            b.b_content like '%' || #{keyWord} || '%' or
+                             m.m_nickname like '%' || #{keyWord} || '%'
+                            )
+                     </when>
+                     <when test="listCategory == 'lc_title'">
+                        and b.b_title like '%' || #{keyWord} || '%'
+                     </when>
+                     <when test="listCategory == 'lc_content'">
+                        and b.b_content like '%' || #{keyWord} || '%'
+                     </when>
+                     <when test="listCategory == 'lc_writer'">
+                        and m.m_nickname like '%' || #{keyWord} || '%'
+                     </when>
+                     <otherwise>
+                     
+                     </otherwise>
+                  </choose>
                   <choose>
                      <when test="orderList == 'view'">
                         order by b.b_view_cnt desc
@@ -119,7 +162,7 @@
       Where   board_id = #{board_id}
    </update>
    
-   <select id="roBoardSelList" parameterType="int" resultType="Board">
+   <select id="roBoardSelList" parameterType="long" resultType="Board">
       Select	b.*, m.m_nickname
       From		Board b, Member m
       Where		b.b_ref = #{board_id}
@@ -169,7 +212,7 @@
         </choose>
    </delete>
    
-   <select id="roBoardDeleteRe" parameterType="Board" statementType="CALLABLE">
+    <select id="roBoardDeleteRe" parameterType="Board" statementType="CALLABLE">
       {
          call boardDelRe(
              #{b_ref,      mode=IN,   jdbcType=INTEGER}
@@ -180,10 +223,18 @@
    </select>
    
    <update id="roBoardUpdateRe" parameterType="Board">
-   		Update	board
-   		Set		b_content = #{b_content},
-   				modified_date = sysdate
-   		Where	board_id = #{board_id}
+         Update   board
+         Set      b_content = #{b_content},
+               modified_date = sysdate
+         Where   board_id = #{board_id}
+   </update>
+   
+   <update id="roBoardUpdate" parameterType="Board">
+         Update   board
+         Set      b_title = #{b_title},
+               b_content = #{b_content},
+               modified_date = sysdate
+         Where   board_id = #{board_id}      
    </update>
    
 </mapper>

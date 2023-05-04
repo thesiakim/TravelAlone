@@ -69,4 +69,19 @@
 		width: 15px;         
 		height: 15px;         
 	}
+	/* 구분선 */
+	hr {
+		height: 7px; 		border-radius: 4px;
+		width: 400px; 		border: 0px;
+		background-color: #5F9EA0; 
+	}
+	
+	button {
+		width: 80px;         border-radius: 7px;
+		height: 32px;         box-sizing: border-box;
+		font-size: 15px;        font-weight:bolder;
+		color:white;
+		border:  #205E61;       background-color: #205E61;
+	
+	}
    
