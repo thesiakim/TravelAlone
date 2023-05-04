@@ -14,8 +14,8 @@ public class Hou_Rev {
 	private  long 				member_id;
 	private String 				r_content;
 	private int	 				r_score;
-	private LocalDate 	 	create_date;
-    private LocalDate	 	modified_date;
+	private LocalDate 	 		create_date;
+    private LocalDate	 		modified_date;
     
     
 	// member조인용

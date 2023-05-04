@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Fav;
 import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
@@ -358,6 +359,50 @@ public class HouseDaoImpl implements HouseDao {
 			return result;
 		}
 
+		//즐겨찾기
+		@Override
+		public int insertHouFav(Hou_Fav hou_Fav) {
+			int result = 0;
+			log.info("HouseDaoImpl insertHouFav Start");
+			try {
+				result = session.insert("insertHouFav",hou_Fav);
+			} catch (Exception e) {
+				log.info("HouseDaoImpl insert Exception" + e.getMessage());
+				
+			}
+			return result;
+		}
+
+		//즐겨찾기 해제
+		@Override
+		public int deleteHouFav(Hou_Fav hou_Fav) {
+			int result = 0;
+			log.info("HouseDaoImpl deleteHouFav Start");
+			try {
+				result = session.delete("deleteHouFav",hou_Fav);
+			} catch (Exception e) {
+				log.info("HouseDaoImpl delete Exception" + e.getMessage());
+				
+			}
+			return result;
+		}
+
+
+		@Override
+		public int selectHouFav(Hou_Fav hou_Fav) {
+			log.info("HouseDaoImpl selectHouFav start..");
+			int houFav = 0;
+			log.info("data check hou : {}, mem : {}",hou_Fav.getHouse_id(),hou_Fav.getMember_id());
+			try {
+				houFav = session.selectOne("isHou_Fav",hou_Fav);
+			} catch (Exception e) {
+				log.info("HouseDaoImpl isHou_Fav Exception " +e.getMessage());
+			}
+			
+			return houFav;
+		}
+
+		
 
 	
 	
