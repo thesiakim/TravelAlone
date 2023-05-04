@@ -37,7 +37,7 @@
 		<a href="/"><img src="/img/gosunee.png"></a>
 	</div>
 	
-	<form action="api/v1/join" role="form" method="post">
+	<form action="http://localhost:4040/api/v1/join" role="form" method="post">
 		<table>
 			<tr class="form-group py-2">
 				<td><label for="email">이메일 아이디</label></td>

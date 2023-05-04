@@ -25,6 +25,7 @@ import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,17 +52,16 @@ public class KmController {
     }
 
 
-
-
     /**
      * 2023-04-17 조경민
      * 설명 : 회원가입창 이동
      * */
     @GetMapping("/join")
-    public String goJoin(Model model){
-        model.addAttribute("memberDto", new MemberFormDto());
+    public String goJoin(@ModelAttribute MemberFormDto requestDto, Model model){
 
-        return "th/join";
+        model.addAttribute("memberDto", requestDto);
+
+        return "km/join";
     }
 
     /**
@@ -74,7 +74,6 @@ public class KmController {
             // 회원가입 실패시 입력 데이터값 유지
             model.addAttribute("memberDto", requestDto);
 
-
             // 유효성 통과 못한 필드와 메세지 핸들링
             Map<String, String> validatorResult = memberService.validateHandling(errors);
 
@@ -83,8 +82,9 @@ public class KmController {
                 model.addAttribute(key, validatorResult.get(key));
             }
 
-            // 회원가입 페이지로 다시 리턴
-            return "th/join";
+            // 회원가입 요청처리 화면 보여주기
+            return "km/join";
+
 
         }
 
@@ -102,7 +102,7 @@ public class KmController {
     @GetMapping("/login")
     public String goLogin(){
 
-        return "th/login";
+        return "km/login";
     }
 
     /**
@@ -112,7 +112,7 @@ public class KmController {
     @GetMapping("/login/error")
     public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요.");
-        return "th/login";
+        return "km/login";
     }
 
 
@@ -198,7 +198,7 @@ public class KmController {
 
         memberService.checkMemberAndChangePassword(id, requestDto, passwordEncoder);
 
-        return "th/login";
+        return "km/login";
     }
 
     //마이페이지 Controller (MyBatis 사용)---------------------------------------------------------------
@@ -250,18 +250,31 @@ public class KmController {
     }
 
     /**
+     * 2023-05-04 조경민
+     * 설명 : 마이페이지 프로필 변경창 이동
+     * */
+    @GetMapping("/mypage/profile")
+    public String mypageProfileProfile(@Login2User SessionUser sessionUser, Model model){
+
+        model.addAttribute("storedImgName", sessionUser.getImgStoredFile());
+
+        return "km/mypage-member-profile";
+    }
+
+    /**
      * 2023-04-26 조경민
      * 설명 : 마이페이지 프로필 사진 수정
      * */
     @PostMapping("/api/v1/mypage/profile")
-    public String mypageMemberProfileUpdate(List<MultipartFile> pictureFile, @LoginUser MemberJpa memberJpa) throws Exception {
+    @ResponseBody
+    public String mypageMemberProfileUpdate(@RequestBody List<MultipartFile> file, @LoginUser MemberJpa memberJpa) throws Exception {
 
         Member member = new Member();
         member.of(memberJpa);
 
-        mypageService.memberProfileUpdate(pictureFile, member);
+        mypageService.memberProfileUpdate(file, member);
 
-        return "/mypage";
+        return "성공";
     }
 
     /**
@@ -269,13 +282,25 @@ public class KmController {
      * 설명 : 마이페이지 프로필 사진 기본으로 변경
      * */
     @PostMapping("/api/v1/mypage/profile/normal")
+    @ResponseBody
     public String mypageMemberProfileReset(@LoginUser MemberJpa memberJpa){
 
         Member member = new Member();
         member.of(memberJpa);
 
         mypageService.memberProfileReset(member);
-        return "/mypage";
+        return "성공";
+    }
+
+    /**
+     * 2023-05-03 조경민
+     * 설명 : 회원 탈퇴 창 이동
+     * */
+    @GetMapping("/mypage/withdrawal")
+    public String mypageMemberWithdrawal(@LoginUser MemberJpa memberJpa, Model model){
+        model.addAttribute("memberId", memberJpa.getEmail());
+
+        return "km/mypage-member-withdrawal";
     }
 
     /**
@@ -283,15 +308,20 @@ public class KmController {
      * 설명 : 회원 탈퇴
      * */
     @DeleteMapping("/api/v1/mypage/withdrawal")
-    public String mypageMemberWithdrawal(@ModelAttribute String password, @LoginUser MemberJpa memberJpa, Model model){
+    @ResponseBody
+    public String mypageMemberWithdrawal(@RequestBody MypageMemberWithdrawalRequestDto requestDto, @LoginUser MemberJpa memberJpa, Model model){
+        System.out.println("password = " + requestDto.getPassword());
+        System.out.println("requestDto.getMemberEmail() = " + requestDto.getMemberEmail());
 
-        if (passwordEncoder.matches(password,memberJpa.getPassword())){
+        if (passwordEncoder.matches(requestDto.getPassword(),memberJpa.getPassword()) &&
+                requestDto.getMemberEmail().equals(memberJpa.getEmail())){
+
             mypageService.memberWithdrawal(memberJpa.getId());
 
-            return "redirect:/logout";
+            return memberJpa.getEmail();
         }else {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-            return "memberWithDrawal";
+            throw new IllegalArgumentException("회원정보가 일치하지 않습니다.");
         }
 
     }
@@ -321,7 +351,7 @@ public class KmController {
         model.addAttribute("page", page);
         model.addAttribute("responseDtos", responseDtos);
 
-        return "mypage-review";
+        return "km/mypage-review";
     }
 
 
