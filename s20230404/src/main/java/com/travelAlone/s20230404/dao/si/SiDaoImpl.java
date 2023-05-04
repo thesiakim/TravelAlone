@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
+import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.TimeDTO;
 import com.travelAlone.s20230404.model.si.Search;
@@ -27,21 +29,22 @@ public class SiDaoImpl implements SiDao {
 	
 	//Travel 테이블에 검색 키워드가 있는지 조회
 	@Override
-	public List<Travel> travelSearch(String keyword) {
+	public List<Travel> travelSearch(Travel travel) {
 		logger.info("siDaoImpl travelSearch start");
 		List<Travel> travelList = null;
 		
 		try {
 			//Travel 테이블에 검색 키워드가 있는지 조회한 뒤 결과를 List<Travel>로 반환
-			travelList = session.selectList("siTravelSearch", keyword);
+			travelList = session.selectList("siTravelSearch", travel);
+			System.out.println("siDaoImpl travelList : " + travelList);
 			
 			//Travel 테이블에 검색 키워드가 존재한다면 해당 키워드에 대해  t_count ++
 			if(!travelList.isEmpty()) {
-				session.update("siTravelUpdate", keyword);
+				session.update("siTravelUpdate", travel);
 			}
 			
 		} catch(Exception e) {
-			logger.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
+			logger.info("siDaoImpl travelSearch e.getMessage() : " + e.getMessage());
 		}
 		return travelList;
 	}
@@ -49,15 +52,15 @@ public class SiDaoImpl implements SiDao {
 	
 	//House 테이블에 검색 키워드가 있는지 조회
 	@Override
-	public List<House> houseSearch(String keyword) {
+	public List<House> houseSearch(House house) {
 		logger.info("siDaoImpl houseSearch start");
 		List<House> houseList = null;
 		
 		try {
-			houseList = session.selectList("siHouseSearch", keyword);
+			houseList = session.selectList("siHouseSearch", house);
 			
 			if(!houseList.isEmpty()) {
-				session.update("siHouseUpdate", keyword);
+				session.update("siHouseUpdate", house);
 			}
 			
 		} catch(Exception e) {
@@ -70,15 +73,15 @@ public class SiDaoImpl implements SiDao {
 
 	//Restaurant 테이블에 검색 키워드가 있는지 조회
 	@Override
-	public List<Res> resSearch(String keyword) {
+	public List<Res> resSearch(Res res) {
 		logger.info("siDaoImpl resSearch start");
 		List<Res> resList = null;
 		
 		try {
-			resList = session.selectList("siResSearch", keyword);	
+			resList = session.selectList("siResSearch", res);	
 			
 			if(!resList.isEmpty()) {
-				session.update("siResUpdate", keyword);
+				session.update("siResUpdate", res);
 			}
 			
 		} catch(Exception e) {
@@ -90,15 +93,15 @@ public class SiDaoImpl implements SiDao {
 
 	//Board 테이블에 검색 키워드가 있는지 조회
 	@Override
-	public List<Board> boardSearch(String keyword) {
+	public List<Board> boardSearch(Board board) {
 		logger.info("siDaoImpl boardSearch start");
 		List<Board> boardList = null;
 		
 		try {
-			boardList = session.selectList("siBoardSearch", keyword);			
+			boardList = session.selectList("siBoardSearch", board);			
 			
 		} catch(Exception e) {
-			logger.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
+			logger.info("siDaoImpl boardSearch e.getMessage() : " + e.getMessage());
 		}
 		
 		return boardList;
@@ -184,6 +187,7 @@ public class SiDaoImpl implements SiDao {
 		logger.info("siDaoImpl getPopularTravel Start ");
 		List<Travel> popularTravel = null;
 		try {
+			System.out.println("siDaoImpl getPopularTravel selectList start");
 			popularTravel = session.selectList("sigetPopularT");
 		} catch(Exception e) {
 			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
@@ -192,10 +196,12 @@ public class SiDaoImpl implements SiDao {
 	}
 
 
+	//인기 맛집 구하기
 	@Override
 	public List<Res> getPopularRes() {
 		List<Res> popularRes = null;
 		try {
+			System.out.println("siDaoImpl getPopularRes selectList start");
 			popularRes = session.selectList("sigetPopularR");
 		} catch(Exception e) {
 			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
@@ -203,11 +209,13 @@ public class SiDaoImpl implements SiDao {
 		return popularRes;
 	}
 
-
+	//인기 숙소 구하기
 	@Override
 	public List<House> getPopularHouse() {
+		System.out.println("SiDaoImpl getPopularHouse Start");
 		List<House> popularHouse = null;
 		try {
+			System.out.println("siDaoImpl getPopularHouse selectList start");
 			popularHouse = session.selectList("sigetPopularH");
 		} catch(Exception e) {
 			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
@@ -216,8 +224,59 @@ public class SiDaoImpl implements SiDao {
 	}
 
 
-	
+	@Override
+	public int getTravelCount(Travel travel) {
+		int travelListCount = 0;
+		
+		try {
+			travelListCount = session.selectOne("SiGetTravelCount", travel);
+		} catch(Exception e) {
+			log.info("siDaoImpl getTravelCount e.getMessage() : " + e.getMessage());
+		}
+		return travelListCount;
+	}
 
 
-	
+	@Override
+	public int getHouseCount(House house) {
+		int houseListCount = 0;
+		
+		try {
+			houseListCount = session.selectOne("SiGetHouseCount", house);
+		} catch(Exception e) {
+			log.info("siDaoImpl getHouseCount e.getMessage() : " + e.getMessage());
+		}
+		return houseListCount;
+		
+	}
+
+
+	@Override
+	public int getResCount(Res res) {
+		int resListCount = 0;
+		
+		try {
+			resListCount = session.selectOne("SiGetResCount", res);
+		} catch(Exception e) {
+			log.info("siDaoImpl getResCount e.getMessage() : " + e.getMessage());
+		}
+		return resListCount;
+		
+	}
+
+
+	@Override
+	public int getBoardCount(Board board) {
+		int boardListCount = 0;
+		
+		try {
+			boardListCount = session.selectOne("SiGetBoardCount", board);
+		} catch(Exception e) {
+			log.info("siDaoImpl getBoardCount e.getMessage() : " + e.getMessage());
+		}
+		return boardListCount;
+		
+	}
+
+
 }

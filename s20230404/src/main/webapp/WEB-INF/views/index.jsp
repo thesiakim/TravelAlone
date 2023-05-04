@@ -178,8 +178,11 @@
 		  <div class="swiper-wrapper">
 		  	<c:forEach var="travel" items="${popularTravel}">
             	<div class="swiper-slide">
-                	<a href="/traDetail?tid=${travel.travel_id}">
-                	<img src="images1.png" alt="<c:out value='${travel.t_name}'/>"></a>
+                	<a href="/TraDetail?tid=${travel.travel_id}">
+                	<c:url value="/display" var="url">
+                		<c:param name="file" value="${travel.img_stored_file }"></c:param>
+                	</c:url>
+                	<img src="${url }" alt="#"></a>
                 </div>
             </c:forEach>
 		  </div>
@@ -220,7 +223,10 @@
 		  	<c:forEach var="house" items="${popularHouse}">
             	<div class="swiper-slide">
                 	<a href="/houDetail?hid=${house.house_id}">
-                	<img src="images1.png" alt="<c:out value='${house.h_name}'/>"></a>
+                	<c:url value="/display" var="url">
+                		<c:param name="file" value="${house.img_stored_file }"></c:param>
+                	</c:url>
+                	<img src="${url }" alt="#"></a>
                 </div>
             </c:forEach>
 		  </div>
@@ -261,7 +267,10 @@
 		  	<c:forEach var="res" items="${popularRes}">
             	<div class="swiper-slide">
                 	<a href="/resDetail?rid=${res.restaurant_id}">
-                	<img src="images1.png" alt="<c:out value='${res.r_name}'/>"></a>
+                	<c:url value="/display" var="url">
+                		<c:param name="file" value="${res.img_stored_file }"></c:param>
+                	</c:url>
+                	<img src="${url }" alt="#"></a>
                 </div>
             </c:forEach>
 		  </div>

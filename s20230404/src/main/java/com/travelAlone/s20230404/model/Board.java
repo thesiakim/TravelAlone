@@ -50,7 +50,7 @@ public class Board {
 	}
 	
 	//전체 검색 결과 페이지용 create_date 날짜 형식 변경
-	public String getFormattedCreateDate_search() {
+	public String getFormattedCreateDateSearch() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 		return create_date.format(formatter);
 		  }

@@ -18,7 +18,7 @@
 	
 	
 	<!-- Travel 테이블의 t_name에 키워드가 존재하는 경우 t_count++ -->
-	<update id="siTravelUpdate" parameterType="java.lang.String">
+	<update id="siTravelUpdate" parameterType="Travel">
 		update Travel
 		set t_count = t_count + 1
 		where t_name LIKE '%' || #{keyword} || '%'
@@ -26,7 +26,7 @@
 	
 	
 	<!-- House 테이블의 h_name에 키워드가 존재하는 경우 h_count++ -->
-	<update id="siHouseUpdate" parameterType="java.lang.String">
+	<update id="siHouseUpdate" parameterType="House">
 		update House
 		set h_count = h_count + 1
 		where h_name LIKE '%' || #{keyword} || '%'
@@ -42,34 +42,94 @@
 	
 	
 	<!-- Travel 테이블에 키워드가 존재하는지 조회 -->
-	<select id="siTravelSearch" parameterType="java.lang.String" resultType="Travel">
+	<select id="siTravelSearch" parameterType="Travel" resultType="Travel">
 		SELECT *
-  		FROM Travel
-  		WHERE t_name LIKE '%' || #{keyword} || '%' OR t_content LIKE '%' || #{keyword} || '%' OR t_address LIKE '%' || #{keyword} || '%'
+		FROM (
+		       SELECT t.travel_id, t.t_name, t.t_content, t.t_address, i.img_stored_file,
+		       		  ROW_NUMBER() OVER (ORDER BY t.travel_id) AS row_num
+		       FROM Travel t
+		             LEFT JOIN (
+		                        SELECT Tra_Img.*
+		                        FROM (
+		                              SELECT travel_id, MAX(img_id) AS max_img_id
+		                               FROM Tra_Img
+		                               GROUP BY travel_id
+		                              ) max_img
+		             INNER JOIN tra_img
+		             ON max_img.travel_id = tra_img.travel_id
+		             AND max_img.max_img_id = tra_img.img_id
+		                         ) i ON t.travel_id = i.travel_id
+		  WHERE     t.t_name LIKE '%' || #{keyword} || '%'
+		      OR t.t_content LIKE '%' || #{keyword} || '%'
+		      OR t.t_address LIKE '%' || #{keyword} || '%'
+		)
+		WHERE row_num BETWEEN #{start} AND #{end}
 	</select>
 	
 	
 	<!-- House 테이블에 키워드가 존재하는지 조회 -->
-	<select id="siHouseSearch" parameterType="java.lang.String" resultType="House">
-  		SELECT *
-  		FROM House
-  		WHERE h_name LIKE '%' || #{keyword} || '%' OR h_content LIKE '%' || #{keyword} || '%' OR h_address LIKE '%' || #{keyword} || '%'
+	<select id="siHouseSearch" parameterType="House" resultType="House">
+	  	SELECT *
+		FROM (
+		       SELECT h.house_id, h.h_name, h.h_content, h.h_address, i.img_stored_file,
+		       		  ROW_NUMBER() OVER (ORDER BY h.house_id) AS row_num
+		       FROM House h
+		             LEFT JOIN (
+		                        SELECT Hou_Img.*
+		                        FROM (
+		                              SELECT house_id, MAX(img_id) AS max_img_id
+		                               FROM Hou_Img
+		                               GROUP BY house_id
+		                              ) max_img
+		             INNER JOIN Hou_Img
+		             ON max_img.house_id = Hou_Img.house_id
+		             AND max_img.max_img_id = Hou_Img.img_id
+		                         ) i ON h.house_id = i.house_id
+		  WHERE     h.h_name LIKE '%' || #{keyword} || '%'
+		      OR h.h_content LIKE '%' || #{keyword} || '%'
+		      OR h.h_address LIKE '%' || #{keyword} || '%'
+		)
+		WHERE row_num BETWEEN #{start} AND #{end}
 	</select>
 	
 	
 	<!-- Restaurant 테이블에 키워드가 존재하는지 조회 -->
-	<select id="siResSearch" parameterType="java.lang.String" resultType="Res">
+	<select id="siResSearch" parameterType="Res" resultType="Res">
   		SELECT *
-  		FROM Restaurant
-  		WHERE r_name LIKE '%' || #{keyword} || '%' OR r_content LIKE '%' || #{keyword} || '%' OR r_address LIKE '%' || #{keyword} || '%' OR r_menu LIKE '%' || #{keyword} || '%'
+		FROM (
+		       SELECT r.restaurant_id, r.r_name, r.r_content, r.r_address, r.r_menu, i.img_stored_file,
+		       		  ROW_NUMBER() OVER (ORDER BY r.restaurant_id) AS row_num
+		       FROM Restaurant r
+		             LEFT JOIN (
+		                        SELECT Res_Img.*
+		                        FROM (
+		                              SELECT restaurant_id, MAX(img_id) AS max_img_id
+		                               FROM Res_Img
+		                               GROUP BY restaurant_id
+		                              ) max_img
+		             INNER JOIN Res_Img
+		             ON max_img.restaurant_id = Res_Img.restaurant_id
+		             AND max_img.max_img_id = Res_Img.img_id
+		                         ) i ON r.restaurant_id = i.restaurant_id
+		  WHERE     r.r_name LIKE '%' || #{keyword} || '%'
+		      OR r.r_content LIKE '%' || #{keyword} || '%'
+		      OR r.r_address LIKE '%' || #{keyword} || '%'
+		      OR r.r_menu LIKE '%' || #{keyword} || '%'
+		)
+		WHERE row_num BETWEEN #{start} AND #{end}
 	</select>
 	
 	
 	<!-- Board 테이블에 키워드가 존재하는지 조회 -->
-	<select id="siBoardSearch" parameterType="java.lang.String" resultType="Board">
-  		SELECT *
-  		FROM Board
-  		WHERE b_title LIKE '%' || #{keyword} || '%' OR b_content LIKE '%' || #{keyword} || '%'
+	<select id="siBoardSearch" parameterType="Board" resultType="Board">
+  		SELECT board_id, b_title, b_content, create_date
+		FROM (
+		      SELECT ROW_NUMBER() OVER (ORDER BY b_title) AS rn, b_title, b_content, board_id, create_date
+		      FROM board
+		      WHERE b_title LIKE '%' || #{keyWord} || '%'
+		       OR b_content LIKE '%' || #{keyWord} || '%'
+		      )
+		WHERE rn BETWEEN #{start} AND #{end}
 	</select>
 	
 	
@@ -142,41 +202,94 @@
 	<!-- 검색 횟수를 기준으로 인기 명소 구하기  -->
 	<select id="sigetPopularT" resultType="Travel">
 		<![CDATA[
-			SELECT *
-            FROM (
-                  SELECT *
-                  FROM Travel
-                  ORDER BY t_count DESC
-                 )
-            WHERE ROWNUM <= 6
+		 	SELECT travel.travel_id, max(tra_Img.img_stored_file) img_stored_file     
+		 	FROM   
+		        (
+				 SELECT *
+		         FROM (
+		               SELECT *
+		               FROM Travel
+		               ORDER BY t_count DESC NULLS LAST
+		               )
+		         WHERE ROWNUM <= 6        
+		        )  Travel, Tra_Img
+		 	WHERE travel.travel_id = Tra_Img.travel_id
+		 	group by travel.travel_id
 		]]>
 	</select>
 	
 	<!-- 검색 횟수를 기준으로 인기 숙소 구하기  -->
 	<select id="sigetPopularH" resultType="House">
 		<![CDATA[
-			SELECT *
-            FROM (
-                  SELECT *
-                  FROM House
-                  ORDER BY h_count DESC
-                 )
-            WHERE ROWNUM <= 6
+		 	SELECT house.house_id , max(hou_Img.img_stored_file) img_stored_file     
+		 	FROM   
+		        (
+				 SELECT *
+		         FROM (
+		               SELECT *
+		               FROM House
+		               ORDER BY h_count DESC NULLS LAST
+		               )
+		         WHERE ROWNUM <= 6        
+		        )  House, Hou_Img
+		 	WHERE house.house_id = hou_Img.house_id
+		 	group by house.house_id
 		]]>
 	</select>
 	
 	<!-- 검색 횟수를 기준으로 인기 맛집 구하기  -->
 	<select id="sigetPopularR" resultType="Res">
 		<![CDATA[
-			SELECT *
-            FROM (
-                  SELECT *
-                  FROM Restaurant
-                  ORDER BY r_count DESC
-                 )
-            WHERE ROWNUM <= 6
+		 	SELECT restaurant.restaurant_id , max(Res_Img.img_stored_file) img_stored_file     
+		 	FROM   
+		        (
+				 SELECT *
+		         FROM (
+		               SELECT *
+		               FROM Restaurant
+		               ORDER BY r_count DESC NULLS LAST
+		               )
+		         WHERE ROWNUM <= 6        
+		        )  Restaurant, Res_Img
+		 	WHERE restaurant.restaurant_id = Res_Img.restaurant_id
+		 	group by restaurant.restaurant_id
 		]]>
 	</select>
+	
+	
+	<!-- 여행지 검색 개수 구하기 -->
+	<select id="SiGetTravelCount" parameterType="Travel" resultType="int">
+		SELECT COUNT(*) FROM Travel
+		WHERE t_name    LIKE '%' || #{keyword} || '%' OR
+              t_content LIKE '%' || #{keyword} || '%' OR
+              t_address LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<!-- 숙소 검색 개수 구하기 -->
+	<select id="SiGetHouseCount" parameterType="House" resultType="int">
+		SELECT COUNT(*) FROM House
+		WHERE h_name    LIKE '%' || #{keyword} || '%' OR
+              h_content LIKE '%' || #{keyword} || '%' OR
+              h_address LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<!-- 맛집 검색 개수 구하기 -->
+	<select id="SiGetResCount" parameterType="Res" resultType="int">
+		SELECT COUNT(*) FROM Restaurant
+		WHERE r_name    LIKE '%' || #{keyword} || '%' OR
+              r_content LIKE '%' || #{keyword} || '%' OR
+              r_address LIKE '%' || #{keyword} || '%' OR
+              r_menu    LIKE '%' || #{keyword} || '%' 
+	</select>
+	
+	<!-- 커뮤니티 검색 개수 구하기 -->
+	<select id="SiGetBoardCount" parameterType="Board" resultType="int">
+		SELECT COUNT(*) FROM Board
+		WHERE b_title   LIKE '%' || #{keyWord} || '%' OR
+              b_content LIKE '%' || #{keyWord} || '%' 
+	</select>
+	
+	
 	
 	
 </mapper>
