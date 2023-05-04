@@ -36,7 +36,7 @@
 	<c:import url="boardHeader.jsp"/>
 	<form action="listBoard">
 		<!-- 검색창 -->
-		<select name="listCategory">
+		<select id="category" name="listCategory">
 			<option value="lc_total">전체</option>
 			<option value="lc_title">제목</option>
 			<option value="lc_content">내용</option>
