@@ -47,9 +47,9 @@
 			<![CDATA[
 			UPDATE MEMBER
 			SET M_IMG_CONTEXT = #{m_img_context},
-				M_IMG_ORIGINAL_FILE = #{m_img_original_file}
-				M_IMG_STORED_FILE = #{m_img_stored_file}
-				M_COMMON_IMAGESTYPE = #{m_common_imagesType}
+				M_IMG_ORIGINAL_FILE = #{m_img_original_file},
+				M_IMG_STORED_FILE = #{m_img_stored_file},
+				M_COMMON_IMAGESTYPE = #{m_common_imagestype}
 			WHERE MEMBER_ID = #{member_id}
 			]]>
 		</update>
