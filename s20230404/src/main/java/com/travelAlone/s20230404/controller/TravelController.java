@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Hou_Fav;
+import com.travelAlone.s20230404.model.Tra_Fav;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
@@ -53,8 +55,8 @@ public class TravelController {
 		//boardList
 		//여기에 게시판 코드 불러오는 코드 작성
 		List<CommonCode> traCommonCode = sm.traCommonCode();
-		log.info("traCommonCode data : {}, {}",traCommonCode.get(0).getCode(),traCommonCode.get(0).getValue());
-		model.addAttribute("traCommonCode",traCommonCode);
+		log.info("boardTraList data : {}, {}",traCommonCode.get(0).getCode(),traCommonCode.get(0).getValue());
+		model.addAttribute("boardTraList",traCommonCode);
 		
 		//boardLocList
 		//지역 코드 가져오기
@@ -90,6 +92,22 @@ public class TravelController {
 		log.info("TravelController  listImg.size()=>"+ listImg.size());
 		model.addAttribute("traImgList", listImg);
 
+		
+		//즐겨찾기테이블 넣기
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//리뷰리스트
 		List<Tra_Rev> traRevList = sm.traRevList(tid);
 		log.info("TravelController list traRevList.size()=>"+ traRevList.size());
@@ -133,12 +151,14 @@ public class TravelController {
 			//3. 가져온 시퀀스 세팅하여 img insert
 			//이미지 넣기
 			String img_context = "images"+File.separator+"traUpload" + File.separator;
-			//String img_context = request.getSession().getServletContext().getRealPath("/traUpload/");
+			
 			log.info("IMG POST Start");
 			//for문으로 여러파일 넣기
+			
 			for (MultipartFile multipartFile : file1) {
 				log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(), img_context);
 				String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
+				
 				// Service --> DB IMG CRUD
 				tra_Img.setImg_original_file(multipartFile.getOriginalFilename());
 				tra_Img.setImg_stored_file(img_stored_file);
@@ -169,7 +189,7 @@ public class TravelController {
 				log.info("업로드용 폴더 생성" + img_context ); 
 				
 			}
-			 String img_stored_file = uid.toString() + "_" + originalName;
+			 String img_stored_file = img_context + uid.toString() + "_" + originalName;
 			 log.info("img_stored_file ->" + img_stored_file);
 			 File target = new File(img_stored_file);
 			 
@@ -237,6 +257,7 @@ public class TravelController {
 		public String traDelete(int travel_id, Model model) {
 			log.info("TravelController Start delete... travel_id :" +travel_id);
 			int result2 = sm.traImgDelete(travel_id);
+			int result3 = sm.traRevDelAll(travel_id);
 			int result = sm.traDelete(travel_id);			
 			return "redirect:tra";
 		}
@@ -279,16 +300,16 @@ public class TravelController {
 		}
 		
 		//여행지종류 구분 필터
-		@GetMapping(value = "traFilter")
+		@GetMapping(value = "traCodeFilter")
 		public String traCodeFilter(@RequestParam(name = "code") 
 		String code, Travel travel, String currentPage, Model model  ) {
-			log.info("TravelController traFilter Start" );
+			log.info("TravelController traCodeFilter Start" );
 			
 			//boardList
 			//여행지코드
 			List<CommonCode> traCommonCode = sm.traCommonCode();
-			log.info("traCommonCode data : {}, {}",traCommonCode.get(0).getCode(),traCommonCode.get(0).getValue());
-			model.addAttribute("traCommonCode",traCommonCode);
+			log.info("boardTraList data : {}, {}",traCommonCode.get(0).getCode(),traCommonCode.get(0).getValue());
+			model.addAttribute("boardTraList",traCommonCode);
 			
 			//boardLocList
 			//지역 코드
@@ -309,7 +330,7 @@ public class TravelController {
 			List<Travel> traOptList = sm.traOptList(travel);
 			log.info("TravelController  traOptList.size()=>" + traOptList.size());
 			model.addAttribute("traTotal", traTotal);
-			model.addAttribute("traOptList", traOptList);
+			model.addAttribute("traList", traOptList);
 			model.addAttribute("page", page);
 			model.addAttribute("search", travel.getKeyword());
 									
@@ -323,6 +344,14 @@ public class TravelController {
 		public String traLocFilter(@RequestParam(name = "code") 
 		String code, Travel travel, String currentPage, Model model) {
 			log.info("TravelController traLocFilter Start" );
+			
+			
+			//여행지코드
+			List<CommonCode> traCommonCode = sm.traCommonCode();
+			log.info("boardTraList data : {}, {}",traCommonCode.get(0).getCode(),traCommonCode.get(0).getValue());
+			model.addAttribute("boardTraList",traCommonCode);
+			
+			
 			
 			//boardLocList
 			//지역 코드 가져오기
@@ -344,7 +373,7 @@ public class TravelController {
 			List<Travel> traLocList = sm.traLocList(travel);
 			log.info("TravelController  traLocList.size()=>" + traLocList.size());
 			model.addAttribute("totalLoc", totalLoc);
-			model.addAttribute("traLocList", traLocList);
+			model.addAttribute("traList", traLocList);
 			model.addAttribute("page", page);
 			model.addAttribute("search", travel.getKeyword());
 			
@@ -437,6 +466,52 @@ public class TravelController {
 			int result = sm.traRevDelete(review_id);
 			return "redirect:tra";
 		}
+		
+		
+		
+		//즐겨찾기 추가
+		@ResponseBody
+		@RequestMapping(value = "insertTraFav")
+		public String traFav(@LoginUser MemberJpa memberJpa,
+				Tra_Fav tra_Fav, Model model) throws Exception {
+			log.info("TravelController  tra_Fav Start");
+			if (memberJpa == null){
+		         throw new Exception("로그인 해주세요!");
+		      }
+			 log.info("TravelController tra_Fav memberJpa.getId()는 "+ memberJpa.getId());
+			 log.info("TravelController tra_Fav tra_Fav.getTravel_id()는 "+ tra_Fav.getTravel_id());
+			tra_Fav.setMember_id(memberJpa.getId());
+			tra_Fav.setTravel_id(tra_Fav.getTravel_id());
+			
+			
+			
+			int insertResult = sm.insertTraFav(tra_Fav);
+			log.info("TravelController tra_Fav insertResult->"+insertResult );
+		
+			
+			return "smTra/tra";
+		}
+		
+		//즐겨찾기 해제
+		@RequestMapping(value = "deleteTraFav")
+		public String deleteTraFav(@LoginUser MemberJpa memberJpa,Tra_Fav tra_Fav, Model model) throws Exception {
+			log.info("TravelController  deleteTraFav Start");
+			if (memberJpa == null){
+		         throw new Exception("로그인 해주세요!");
+		      }
+			tra_Fav.setMember_id(memberJpa.getId());
+			log.info("TravelController traFav memberJpa.getId()는 "+ memberJpa.getId());
+			log.info("TravelController Start delete getTravel_id :" + tra_Fav.getTravel_id());
+			
+			tra_Fav.setMember_id(memberJpa.getId());
+			tra_Fav.setTravel_id(tra_Fav.getTravel_id());
+			
+			int result = sm.deleteTraFav(tra_Fav);
+			return  "smTra/tra";
+		}
+		
+		
+		
 
 		
 }

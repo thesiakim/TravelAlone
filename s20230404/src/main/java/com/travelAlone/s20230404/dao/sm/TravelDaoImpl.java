@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Tra_Fav;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
@@ -270,7 +271,7 @@ public class TravelDaoImpl implements TravelDao {
 		int result = 0;
 		log.info("TravelDaoImpl delete review_id->"+ review_id);
 		try {
-			result = session.delete("traRevDelete",review_id);
+			result = session.delete("deleteTraRev",review_id);
 			log.info("TravelDaoImpl delete result->"+ result);
 		} catch (Exception e) {
 			log.info("TravelDaoImpl delete Exception->"+ e.getMessage());
@@ -280,6 +281,24 @@ public class TravelDaoImpl implements TravelDao {
 		return result;
 	}
 
+	@Override
+	public int traRevDelAll(int travel_id) {
+		log.info("TravelDaoImpl traRevDelAll start..");
+		int result = 0;
+		log.info("TravelDaoImpl traRevDelAll travel_id->"+ travel_id);
+		try {
+			result = session.delete("deleteTraRevAll",travel_id);
+			log.info("TravelDaoImpl traRevDelAll result->"+ result);
+		} catch (Exception e) {
+			log.info("TravelDaoImpl delete Exception->"+ e.getMessage());
+		}
+		
+		
+		return result;
+	}
+
+	
+	
 
 	//이미지 디비삽입
 		@Override
@@ -345,7 +364,7 @@ public class TravelDaoImpl implements TravelDao {
 			tra_Img.setImg_id(img_id);
 			
 			
-//			log.info("TravelDaoImpl traOneImgDelete start");
+			log.info("TravelDaoImpl traOneImgDelete start");
 			int result = 0;
 			log.info("TravelDaoImpl traOneImgDelete travel_id->"+ travel_id);
 			log.info("TravelDaoImpl traOneImgDelete img_id->"+ img_id);
@@ -354,6 +373,34 @@ public class TravelDaoImpl implements TravelDao {
 			} catch (Exception e) {
 				log.info("TravelDaoImpl delete Exception->"+ e.getMessage());
 			}
+			return result;
+		}
+
+		//즐겨찾기
+		@Override
+		public int insertTraFav(Tra_Fav tra_Fav) {
+			int result = 0;
+			log.info("TravelDaoImpl insertTraFav Start");
+			try {
+				result = session.insert("insertTraFav",tra_Fav);
+			} catch (Exception e) {
+				log.info("TravelDaoImpl insert Exception" + e.getMessage());
+			}
+			
+			return result;
+		}
+
+
+		@Override
+		public int deleteTraFav(Tra_Fav tra_Fav) {
+			int result = 0;
+			log.info("TravelDaoImpl deleteTraFav Start");
+			try {
+				result = session.delete("deleteTraFav",tra_Fav);
+			} catch (Exception e) {
+				log.info("TravelDaoImpl delete Exception" + e.getMessage());
+			}
+			
 			return result;
 		}
 

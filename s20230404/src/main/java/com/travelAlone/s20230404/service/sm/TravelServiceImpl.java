@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.sm.TravelDao;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Tra_Fav;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
@@ -173,6 +174,14 @@ public class TravelServiceImpl implements TravelService {
 		result = sm.traRevDelete(review_id);		
 		return result;
 	}
+	
+	@Override
+	public int traRevDelAll(int travel_id) {
+		int result = 0;
+		log.info("TravelServiceImpl traRevDelAll Start");
+		result =sm.traRevDelAll(travel_id);
+		return result;
+	}
 
 	//이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드 이미지 업로드
 	@Override
@@ -211,5 +220,26 @@ public class TravelServiceImpl implements TravelService {
 		result = sm.traOneImgDelete(travel_id,img_id);		
 		return result;
 	}
+	
+	@Override
+	public int insertTraFav(Tra_Fav tra_Fav) {
+		int result = 0;
+		log.info("TravelServiceImpl insert Start");
+		result = sm.insertTraFav(tra_Fav);
+		return result;
+	}
+	//즐겨찾기 해제
+	@Override
+	public int deleteTraFav(Tra_Fav tra_Fav) {
+		int result = 0;
+		log.info("TravelServiceImpl delete Start");
+		result = sm.deleteTraFav(tra_Fav);						
+		return result;
+	}
+	
+	
+	
+	
+
 }
 

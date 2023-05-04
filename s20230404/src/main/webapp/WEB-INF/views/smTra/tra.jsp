@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="header.jsp"%>
+     <%@ include file="../fragments/header.jsp"%>
 <!DOCTYPE html>
 <html>
 
@@ -56,10 +56,10 @@
 
 <!-- 여행지종류 -->
 			<div >  																						
-				<c:forEach items="${traCommonCode}" var="list">
+				<c:forEach items="${boardTraList}" var="list">
 							<td>
 									<!-- 컨트롤러로 보내는거 -->
-								<a href="traFilter?code=${list.code}">${list.value}</a>									
+								<a href="traCodeFilter?code=${list.code}">${list.value}</a>									
 							</td>
 				</c:forEach>																
 					   <c:set var="num" value="${page.total-page.start+1 }"></c:set>
@@ -234,7 +234,7 @@
 			},
 		  });
 		</script>
-
+	</div>
 		<hr>
 
 	<!-- 여행지리스트 테이블 -->

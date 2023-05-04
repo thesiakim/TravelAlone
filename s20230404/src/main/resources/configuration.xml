@@ -18,6 +18,7 @@
 		<typeAlias alias="Travel" type="com.travelAlone.s20230404.model.Travel"/>
 		<typeAlias alias="Tra_Img" type="com.travelAlone.s20230404.model.Tra_Img"/>
 		<typeAlias alias="Tra_Rev" type="com.travelAlone.s20230404.model.Tra_Rev"/>
+		<typeAlias alias="Tra_Fav" type="com.travelAlone.s20230404.model.Tra_Fav"/>
 		<typeAlias alias="Res" type="com.travelAlone.s20230404.model.Res"/>
 		<typeAlias alias="Res_Img" type="com.travelAlone.s20230404.model.Res_Img"/>
 		<typeAlias alias="Res_Rev" type="com.travelAlone.s20230404.model.Res_Rev"/>

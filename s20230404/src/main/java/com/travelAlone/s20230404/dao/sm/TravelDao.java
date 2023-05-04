@@ -5,6 +5,7 @@ import java.util.List;
 import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.House;
+import com.travelAlone.s20230404.model.Tra_Fav;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
@@ -37,6 +38,7 @@ public interface TravelDao {
 	int 					traRevInsert(Tra_Rev tra_Rev);
 	int 					traRevUpdate(Tra_Rev tra_Rev);
 	int 					traRevDelete(int review_id);
+	int 					traRevDelAll(int travel_id);
 
 	//이미지 삽입
 	int 					traImgInsert(Tra_Img tra_Img);
@@ -44,8 +46,10 @@ public interface TravelDao {
 	List<Tra_Img> 			traImgList(Tra_Img tra_Img);
 	int 					traImgDelete(int travel_id);
 	int 					traOneImgDelete(int travel_id, int img_id);
+	int 					insertTraFav(Tra_Fav tra_Fav);
+	int 					deleteTraFav(Tra_Fav tra_Fav);
 	
-	
+
 
 	
 }
