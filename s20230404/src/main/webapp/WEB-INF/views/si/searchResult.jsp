@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
@@ -189,6 +189,10 @@
   text-align: left; /* 왼쪽 정렬로 지정 */
 }
 
+
+.row div {
+        line-height: 2.5em;
+    }	 
 	 
 </style>
 
@@ -305,26 +309,55 @@
 			    <div class="travel-result">
 			    	<ul><c:if test="${not empty resultList.getTravelList()}">
 			    	<h1>여행지</h1>
-			    	<c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-			        	<c:if test="${status.index < 5}">
-			            	<a href="/traDetail?tid=${travel.travel_id}">
-                			<c:url value="/display" var="url">
-                				<c:param name="file" value="${travel.img_stored_file }"></c:param>
-                			</c:url>
-                			<img src="${url }" alt="#" width="300" height="200"></a>
-                		
-                			<tr>
-			                	<td><c:out value="${travel.t_name}" /></td>
-			                	<c:set var="content" value="${fn:substring(travel.t_content, 0, 10)}"/>
-			                		<c:if test="${fn:length(travel.t_content) > 10}">
-			                    		<c:set var="content" value="${content }..."/>
-			             			</c:if>
-			                	<td><c:out value="${content }"></c:out></td>
-			            	</tr>
-			            <c:if test="${not status.last }"><br/></c:if>
-			        	</c:if>
-			    	</c:forEach>
-			  
+			    	<br>
+			    	
+		  <div class="row" style=" padding-left:300px;">
+				   
+				        <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+				            <c:if test="${status.index < 5}">
+				                <div class="col-md-3">
+				                    <a href="/traDetail?tid=${travel.travel_id}">
+				                        <c:url value="/display" var="url">
+				                            <c:param name="file" value="${travel.img_stored_file}"></c:param>
+				                        </c:url>
+				                        <img src="${url}" alt="#" width="300" height="200">
+				                    </a>
+				                    <br>
+				                    <c:out value="${travel.t_name}" />
+				                </div>
+				                <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+				            </c:if>
+				        </c:forEach>
+				  
+				</div>
+
+
+			    	
+			    	
+			    	
+			    	
+			    	
+			    <%-- 	<div class="row">
+					    <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+					        <c:if test="${status.index < 5}">
+					            <div class="col-md-4">
+					                <a href="/traDetail?tid=${travel.travel_id}">
+					                    <c:url value="/display" var="url" >
+					                        <c:param name="file" value="${travel.img_stored_file }"></c:param>
+					                    </c:url>
+					                    <img src="${url }" alt="#" width="300" height="200">
+					                </a>
+					                <br>
+					                <c:out value="${travel.t_name}" />
+					               
+					            </div>
+					            <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+					        </c:if>
+					    </c:forEach>
+					</div> --%>
+			    	
+
+			
 			        <c:if test="${fn:length(resultList.travelList) > 5}">
 			        	<a href="search?searchName=${keyword }&amp;category=category_travel">더보기</a>
 			        </c:if>
