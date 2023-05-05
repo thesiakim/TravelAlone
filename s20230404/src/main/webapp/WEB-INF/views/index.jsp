@@ -178,7 +178,7 @@
 		  <div class="swiper-wrapper">
 		  	<c:forEach var="travel" items="${popularTravel}">
             	<div class="swiper-slide">
-                	<a href="/TraDetail?tid=${travel.travel_id}">
+                	<a href="/traDetail?tid=${travel.travel_id}">
                 	<c:url value="/display" var="url">
                 		<c:param name="file" value="${travel.img_stored_file }"></c:param>
                 	</c:url>
