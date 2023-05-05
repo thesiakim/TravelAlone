@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
@@ -311,7 +311,76 @@
 			    	<h1>여행지</h1>
 			    	<br>
 			    	
-		  <div class="row" style=" padding-left:300px;">
+		
+	<div style="display: flex; flex-wrap: wrap; ">
+			  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+			    <c:if test="${status.index < 5}">
+			      <div style="width: 25%; margin-bottom: 20px;">
+			        <a href="/traDetail?tid=${travel.travel_id}">
+			          <c:url value="/display" var="url">
+			            <c:param name="file" value="${travel.img_stored_file}"></c:param>
+			          </c:url>
+			          <img src="${url}" alt="#" style="width: 250px; height: auto;">
+			        </a>
+			        <br>
+			        <c:out value="${travel.t_name}" />
+			       <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+			      </div>
+			    </c:if>
+			  </c:forEach>
+			</div>	
+		
+		
+		
+			    	
+<%-- 16:57	<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+			  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+			    <c:if test="${status.index < 5}">
+			      <div style="width: 30.33%; padding: 10px; margin-bottom: 20px;">
+			        <a href="/traDetail?tid=${travel.travel_id}">
+			          <c:url value="/display" var="url">
+			            <c:param name="file" value="${travel.img_stored_file}"></c:param>
+			          </c:url>
+			          <img src="${url}" alt="#" style="width: 50%;">
+			        </a>
+			        <br>
+			        <c:out value="${travel.t_name}" />
+			      </div>
+			    </c:if>
+			  </c:forEach>
+			</div> --%>
+			    	
+			    	
+			    	
+			    	
+			    	
+			    	
+			    	
+			    	
+			    	
+			    	
+	<%-- 		    	
+		<div style="display: flex; flex-wrap: wrap;">
+			  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+			    <c:if test="${status.index < 5}">
+			      <div style="width: 30.33%; padding: 10px;">
+			        <a href="/traDetail?tid=${travel.travel_id}">
+			          <c:url value="/display" var="url">
+			            <c:param name="file" value="${travel.img_stored_file}"></c:param>
+			          </c:url>
+			          <img src="${url}" alt="#" style="width: 50%;">
+			        </a>
+			        <br>
+			        <c:out value="${travel.t_name}" />
+			      </div>
+			    </c:if>
+			  </c:forEach>
+			</div> --%>
+
+  	
+			    	
+			    	
+	<%-- 2번쨰	  <div class="row" style=" padding-left:300px;">
 				   
 				        <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
 				            <c:if test="${status.index < 5}">
@@ -329,7 +398,7 @@
 				            </c:if>
 				        </c:forEach>
 				  
-				</div>
+				</div> --%>
 
 
 			    	
