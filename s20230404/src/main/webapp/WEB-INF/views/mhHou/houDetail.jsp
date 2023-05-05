@@ -20,7 +20,7 @@
 	        	alert( "즐겨찾기가 추가되었습니다." );
 	        	window.location.reload();
 	        },error:function(e){  
-	        	alert("다시 시도해주세요.");
+	        	alert("로그인이 필요합니다.");
 	        	console.log(e.responseText);
 	        }  
 	    });  
@@ -35,7 +35,7 @@
 	        	alert( "즐겨찾기가 해제되었습니다." );
 	        	window.location.reload();
 	        },error:function(e){  
-	            alert("다시 시도해주세요.");
+	            alert("로그인이 필요합니다.");
 	            console.log(e.responseText);
 	        }  
 	    });  

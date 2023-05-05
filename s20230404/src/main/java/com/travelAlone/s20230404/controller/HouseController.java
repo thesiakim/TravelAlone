@@ -94,17 +94,19 @@ private final HouseService mh;
 		//즐겨찾기테이블 넣기
 		log.info("isHou_Fav Start");		
 		log.info("isHou_Fav hid"+ hid);		
-		log.info("isHou_Fav memberJpa.getId()-> " + memberJpa.getId());		
-		hou_Fav.setHouse_id(hid);
-		hou_Fav.setMember_id(memberJpa.getId());
 		
 		//변수추가
 		int isfavHou = 0;
-		hou_Fav.setIsfavHou(isfavHou);
-		
-		int favResult = mh.isHou_Fav(hou_Fav);
-		log.info("HouseController favResult=>{}", favResult);
-		
+		int favResult = 0;
+		if (memberJpa != null) {
+			log.info("isHou_Fav memberJpa.getId()-> " + memberJpa.getId());		
+			hou_Fav.setHouse_id(hid);
+			hou_Fav.setMember_id(memberJpa.getId());
+			hou_Fav.setIsfavHou(isfavHou);
+			favResult = mh.isHou_Fav(hou_Fav);
+			log.info("HouseController favResult=>{}", favResult);
+									
+		 }
 		model.addAttribute("isfavHou", favResult);
 		
 		
