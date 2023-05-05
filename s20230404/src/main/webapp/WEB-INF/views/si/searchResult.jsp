@@ -197,7 +197,7 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-	  
+
 	<section>
 	
 	
@@ -301,13 +301,13 @@
 	  <c:if test="${category eq 'category_total'}">
 	  
 		  <article id="search-content-total">
-			    <!-- 여행지 검색 결과 리스트 -->
+			     <!-- 여행지 검색 결과 리스트 -->
 			    <div class="travel-result">
 			    	<ul><c:if test="${not empty resultList.getTravelList()}">
 			    	<h1>여행지</h1>
 			    	<c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
 			        	<c:if test="${status.index < 5}">
-			            	<a href="/TraDetail?tid=${travel.travel_id}">
+			            	<a href="/traDetail?tid=${travel.travel_id}">
                 			<c:url value="/display" var="url">
                 				<c:param name="file" value="${travel.img_stored_file }"></c:param>
                 			</c:url>
@@ -364,7 +364,7 @@
 				<!-- 맛집 검색 결과 리스트 -->
 				<div class="res-result">
 			    	<ul><c:if test="${not empty resultList.getRestaurantList()}">
-			    	<h1>숙소</h1>
+			    	<h1>맛집</h1>
 			    	<c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
 			        	<c:if test="${status.index < 5}">
 			            	<a href="/resDetail?rid=${res.restaurant_id}">
@@ -398,7 +398,7 @@
 				    	<c:forEach items="${resultList.boardList}" var="board" varStatus="status">
 				        	<c:if test="${status.index < 5}">
 				            	<tr>
-				                	<td><c:out value="${board.b_title}" /></td>
+				                	<td><a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board}"><c:out value="${board.b_title}" /></a></td>
 				                	<td>${board.formattedCreateDateSearch }</td>
 				                	<c:set var="content" value="${fn:substring(board.b_content, 0, 10)}"/>
 				                	<c:if test="${fn:length(board.b_content) > 10}">
@@ -466,10 +466,10 @@
 	  <c:if test="${category eq 'category_house'}">
 	  
 		  <article id="search-content-house">
-			    <!-- 여행지 검색 결과 리스트 -->
+			    <!-- 숙소 검색 결과 리스트 -->
 			    <div class="onlyhouse-result">
 			    	<ul><c:if test="${not empty resultList.getHouseList()}">
-			    	<h1>여행지</h1>
+			    	<h1>숙소</h1>
 			    	<c:forEach items="${resultList.houseList}" var="house" varStatus="status">
 			        	<c:if test="${status.index < 12}">
 			            	<a href="/houDetail?hid=${house.house_id}">
@@ -510,10 +510,10 @@
 	  <c:if test="${category eq 'category_res'}">
 	  
 		  <article id="search-content-res">
-			    <!-- 여행지 검색 결과 리스트 -->
+			    <!-- 맛집 검색 결과 리스트 -->
 			    <div class="onlyres-result">
 			    	<ul><c:if test="${not empty resultList.getRestaurantList()}">
-			    	<h1>여행지</h1>
+			    	<h1>맛집</h1>
 			    	<c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
 			        	<c:if test="${status.index < 12}">
 			            	<a href="/resDetail?rid=${res.restaurant_id}">
@@ -550,13 +550,47 @@
 	  </article>
 	  </c:if>
 	  
+	  
 	  <!-- 카테고리를 커뮤니티로 설정하고 검색한 경우 -->
 	  <c:if test="${category eq 'category_comm'}">
 	  
-		  
+		  <article id="search-content-board">
+			    <!-- 커뮤니티 검색 결과 리스트 -->
+			    <div class="onlyboard-result">
+			    	<ul><c:if test="${not empty resultList.getBoardList()}">
+			    	<h1>커뮤니티</h1>
+			    	<c:forEach items="${resultList.boardList}" var="board" varStatus="status">
+			        	<c:if test="${status.index < 12}">
+			            	<tr>
+				                <td><a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board}"><c:out value="${board.b_title}" /></a></td>
+				                <td>${board.formattedCreateDateSearch }</td>
+				                <c:set var="content" value="${fn:substring(board.b_content, 0, 10)}"/>
+				                <c:if test="${fn:length(board.b_content) > 10}">
+				                    <c:set var="content" value="${content }..."/>
+				                </c:if>
+				                <td><c:out value="${content }"></c:out></td>
+				            </tr>
+				            	<c:if test="${not status.last }"><br/></c:if>
+			        	</c:if>
+			    	</c:forEach>
+
+			       <div>
+						<c:if test="${paging.startPage > paging.pageBlock }">
+							<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
+						</c:if>
+						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+							<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
+						</c:forEach>
+						<c:if test="${paging.endPage < paging.totalPage }">
+							<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
+						</c:if>
+					</div> 
+				</c:if></ul>
+				</div>
+	  </article>
 	  </c:if>
 		
-
+	</section>
 	
 	
 	  
