@@ -8,18 +8,36 @@
 	<insert id="roBoardImgInsert" parameterType="BodImg">
 		INSERT INTO BOD_IMG (board_id, img_id, img_context, img_original_file, img_stored_file, common_imagesType, create_date, modified_date)
 		VALUES (#{board_id}, bod_img_seq.nextval, #{img_context}, #{img_original_file}, #{img_stored_file}, #{common_imagesType}, sysdate, sysdate)
-	</insert>
+   </insert>
 	
 	<delete id="roBoardImgDelete" parameterType="long">
 		Delete	From Bod_Img
 		Where	board_id = #{board_id}
-	</delete>
+   </delete>
+   
+   <delete id="roBoardImgDeleteOne" parameterType="BodImg">
+		Delete	From Bod_Img
+		Where	board_id = #{board_id}
+		And		img_id = #{img_id}
+   </delete>
 	
-	<select id="detailBoardImg" parameterType="int" resultType="String">
+	<select id="detailBoardImg" parameterType="long" resultType="String">
 		SELECT	img_stored_file
 		FROM	Bod_Img
-		WHERE	board_id = #{board_id}
-	</select>
+		WHERE   board_id = #{board_id}
+   </select>
+   
+   <select id="oneBoardImg" parameterType="BodImg" resultType="String">
+		SELECT	img_stored_file
+		FROM	Bod_Img
+		WHERE   board_id = #{board_id}
+		And		img_id = #{img_id}
+   </select>
 	
+	<select id="listBoardImg" parameterType="long" resultType="BodImg">
+		SELECT	*
+		FROM	Bod_Img
+		WHERE	board_id = #{board_id}
+   </select>
 	
 </mapper>

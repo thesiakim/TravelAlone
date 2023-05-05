@@ -43,43 +43,43 @@
 	<input type="hidden" name="b_common_board" id="common_board" value="${board.b_common_board }">
 		<table>
 			<tr>
-				<td colspan="2">
+				<td colspan="5">
 					<input type="text" id="title" name="b_title" required="required" value="${board.b_title }">
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<td colspan="5">
 					<textarea id="content" name="b_content" required="required">${board.b_content }</textarea>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td style="width: 80px;">
 					<label for="title">첨부파일</label>
 				</td>
-	            <td>
+	            <td style="width: 320px;"colspan="4">
 					<form enctype="multipart/form-data" id="ImgMulForm">
 						<input type="file" multiple="multiple" accept="image/*" class="multipleImage" id="imgFiles" value=""/>
 					</form>
 	            </td>
 			</tr>
 			<tr>
-	            <td>
-					<h1>KKK</h1>
-					<c:forEach items="${listBoardImgs }" var="boardImg" varStatus="status">
-						<td id="delBoardImage${status.index }">
-							<!-- /display 경로를 가지는 URL이 생성되어 url이라는 변수에 저장 -->
-							<c:url value="/display" var="url">
-								<c:param name="file" value="${boardImg.img_stored_file }"/>
-							</c:url>
-							<img alt="imege 없음" src="${url }" width="10%" height="10%">
-							<br>
-							<input type="button" onclick="deleteBoardImage(${boardImg.board_id}, ${boardImg.img_id}, ${status.index })" value="삭제">
-						</td>   
-					</c:forEach>
-	            </td>
+				<td style="width: 80px;">
+					원래 이미지
+				</td>
+				<c:forEach items="${listBoardImgs }" var="boardImg" varStatus="status">
+					<td id="delBoardImage${status.index }" style="width:20px;">
+						<!-- /display 경로를 가지는 URL이 생성되어 url이라는 변수에 저장 -->
+						<c:url value="/display" var="url">
+							<c:param name="file" value="${boardImg.img_stored_file }"/>
+						</c:url>
+						<img alt="imege 없음" src="${url }" width="20%" height="20%">
+						<br>
+						<input type="button" onclick="deleteBoardImage(${boardImg.board_id}, ${boardImg.img_id}, ${status.index })" value="삭제">
+					</td>   
+				</c:forEach>
 			</tr>
 			<tr>
-				<td colspan="2" id="updateFormSubmit">
+				<td colspan="5" id="updateFormSubmit">
 					<input type="submit" id="btn-update" value="수정">
 					<input type="reset" value="취소">         
 				</td>

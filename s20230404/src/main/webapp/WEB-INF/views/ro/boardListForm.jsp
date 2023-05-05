@@ -83,8 +83,8 @@
 		
 		
 		<form action="writeBoardForm" method="post" onsubmit="return chkId();">
-	         <input type="hidden" name="b_common_board" value="${board.b_common_board }">
-	         <button type="submit" style="margin-left: 664px; margin-bottom: 10px">글 쓰기</button>
+			<input type="hidden" name="b_common_board" value="${board.b_common_board }">
+			<button type="submit" style="margin-left: 664px; margin-bottom: 10px">글 쓰기</button>
 		</form>
    
 	<c:set var="num" value="${page.total - page.start + 1 }"></c:set>
