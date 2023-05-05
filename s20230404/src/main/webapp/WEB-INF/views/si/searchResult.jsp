@@ -164,6 +164,7 @@
 	.popular-container #tab-3:checked ~ .content #content-3,
 	.popular-container #tab-4:checked ~ .content #content-4 {
 	  display: block;
+
 	  
 	}
 	
@@ -299,7 +300,7 @@
 	</c:if>
 	</article>
 	
-	
+<div id="mh"  style="display:flex; justify-content:center;">
 	  <!-- 검색 결과 존재 -->
 	  <!-- 카테고리를 전체로 설정하고 검색한 경우 -->
 	  <c:if test="${category eq 'category_total'}">
@@ -330,101 +331,6 @@
 			  </c:forEach>
 			</div>	
 		
-		
-		
-			    	
-<%-- 16:57	<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-			  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-			    <c:if test="${status.index < 5}">
-			      <div style="width: 30.33%; padding: 10px; margin-bottom: 20px;">
-			        <a href="/traDetail?tid=${travel.travel_id}">
-			          <c:url value="/display" var="url">
-			            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-			          </c:url>
-			          <img src="${url}" alt="#" style="width: 50%;">
-			        </a>
-			        <br>
-			        <c:out value="${travel.t_name}" />
-			      </div>
-			    </c:if>
-			  </c:forEach>
-			</div> --%>
-			    	
-			    	
-			    	
-			    	
-			    	
-			    	
-			    	
-			    	
-			    	
-			    	
-	<%-- 		    	
-		<div style="display: flex; flex-wrap: wrap;">
-			  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-			    <c:if test="${status.index < 5}">
-			      <div style="width: 30.33%; padding: 10px;">
-			        <a href="/traDetail?tid=${travel.travel_id}">
-			          <c:url value="/display" var="url">
-			            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-			          </c:url>
-			          <img src="${url}" alt="#" style="width: 50%;">
-			        </a>
-			        <br>
-			        <c:out value="${travel.t_name}" />
-			      </div>
-			    </c:if>
-			  </c:forEach>
-			</div> --%>
-
-  	
-			    	
-			    	
-	<%-- 2번쨰	  <div class="row" style=" padding-left:300px;">
-				   
-				        <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-				            <c:if test="${status.index < 5}">
-				                <div class="col-md-3">
-				                    <a href="/traDetail?tid=${travel.travel_id}">
-				                        <c:url value="/display" var="url">
-				                            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-				                        </c:url>
-				                        <img src="${url}" alt="#" width="300" height="200">
-				                    </a>
-				                    <br>
-				                    <c:out value="${travel.t_name}" />
-				                </div>
-				                <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
-				            </c:if>
-				        </c:forEach>
-				  
-				</div> --%>
-
-
-			    	
-			    	
-			    	
-			    	
-			    	
-			    <%-- 	<div class="row">
-					    <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-					        <c:if test="${status.index < 5}">
-					            <div class="col-md-4">
-					                <a href="/traDetail?tid=${travel.travel_id}">
-					                    <c:url value="/display" var="url" >
-					                        <c:param name="file" value="${travel.img_stored_file }"></c:param>
-					                    </c:url>
-					                    <img src="${url }" alt="#" width="300" height="200">
-					                </a>
-					                <br>
-					                <c:out value="${travel.t_name}" />
-					               
-					            </div>
-					            <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
-					        </c:if>
-					    </c:forEach>
-					</div> --%>
-			    	
 
 			
 			        <c:if test="${fn:length(resultList.travelList) > 5}">
@@ -519,6 +425,59 @@
 		  </article>
 	  </c:if> <!-- 카테고리를 전체로 설정하고 검색한 경우 끝 -->
 	  
+	  
+	 
+	 
+	 	   <!-- 인기 검색어  -->
+		<div class="popular-container">
+		<h5>인기 검색어</h5>
+	
+		  <input id="tab-1" type="radio" name="tabs" checked>
+		  <label for="tab-1">일간</label>
+		
+		  <input id="tab-2" type="radio" name="tabs">
+		  <label for="tab-2">주간</label>
+		
+		  <input id="tab-3" type="radio" name="tabs">
+		  <label for="tab-3">월간</label>
+		
+		  <div class="content" style="width: 50px">
+		    <div id="content-1"  >
+		      <ul>
+				 <c:forEach var="daily" items="${dailyPopularKeywords}">
+					<li ><a href="/search?category=category_total&amp;searchName=${daily}">
+						<c:out value="${daily}"  /></a>
+					</li>
+				</c:forEach>
+		      </ul>  
+		    </div>
+		
+		    <div id="content-2">
+		      <ul>
+				 <c:forEach var="weekly" items="${weeklyPopularKeywords}">
+					<li><a href="/search?category=category_total&amp;searchName=${weekly}">
+						<c:out value="${weekly}" /></a>
+					</li>
+				 </c:forEach>
+		      </ul>   
+		    </div>
+		
+		    <div id="content-3">
+		      <ul>
+				 <c:forEach var="monthly" items="${monthlyPopularKeywords}">
+					<li><a href="/search?category=category_total&amp;searchName=${monthly}">
+						<c:out value="${monthly}" /></a>
+					</li>
+				 </c:forEach>
+		      </ul>
+		    </div>
+		  </div>
+		</div> 
+	  
+	  
+	  <!-- 여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구
+	  여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구 -->
+	</div>
 	  
 	  <!-- 카테고리를 여행지로 설정하고 검색한 경우 -->
 	  <c:if test="${category eq 'category_travel'}">
@@ -694,53 +653,9 @@
 	  
 	  
 	  
-	  
-	   <!-- 인기 검색어  -->
-		<h1>인기 검색어</h1>
-		<div class="popular-container">
 	
-		  <input id="tab-1" type="radio" name="tabs" checked>
-		  <label for="tab-1">일간</label>
-		
-		  <input id="tab-2" type="radio" name="tabs">
-		  <label for="tab-2">주간</label>
-		
-		  <input id="tab-3" type="radio" name="tabs">
-		  <label for="tab-3">월간</label>
-		
-		  <div class="content">
-		    <div id="content-1">
-		      <ul>
-				 <c:forEach var="daily" items="${dailyPopularKeywords}">
-					<li><a href="/search?category=category_total&amp;searchName=${daily}">
-						<c:out value="${daily}"  /></a>
-					</li>
-				</c:forEach>
-		      </ul>  
-		    </div>
-		
-		    <div id="content-2">
-		      <ul>
-				 <c:forEach var="weekly" items="${weeklyPopularKeywords}">
-					<li><a href="/search?category=category_total&amp;searchName=${weekly}">
-						<c:out value="${weekly}" /></a>
-					</li>
-				 </c:forEach>
-		      </ul>   
-		    </div>
-		
-		    <div id="content-3">
-		      <ul>
-				 <c:forEach var="monthly" items="${monthlyPopularKeywords}">
-					<li><a href="/search?category=category_total&amp;searchName=${monthly}">
-						<c:out value="${monthly}" /></a>
-					</li>
-				 </c:forEach>
-		      </ul>
-		    </div>
-		  </div>
-		</div>
-			
+
+	 		
 	</section>
 	
 	
