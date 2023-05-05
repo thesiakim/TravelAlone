@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
 	document.getElementById('searchId').addEventListener('keyup', function(event) {
@@ -128,8 +129,10 @@
 	  	</div>
 	  </form>
 	  
-	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+	  <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+	  <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
 	  <script>
 	  	/* 자동 완성 */
 		  $(function(){
@@ -163,7 +166,7 @@
 			      $autocompleteResults.hide();
 			    }
 			  });
-			});
+			}); 
 	  </script>
 	  
 	  

@@ -115,84 +115,84 @@
 	
 	/* 인기 검색어  */
 	 	
-.popular-container {
-  margin-bottom: 20px;
-  margin-top: 10px;
-  min-width: 320px; 
-  max-width: 500px;
-  
-}
-.popular-container p {
-  margin: 0 0 20px; 
-  line-height: 1.5;
-  font-weight: 300;
-}
-.popular-container .content {
-  background: #fff; 
-  color: #373737;
-   backface-visibility: hidden;
-  overflow: hidden;
- 
-}
-.popular-container .content > div {
-  display: none;
-  padding: 20px 25px 5px;
-}
-.popular-container input {
-  display: none;
-}
-.popular-container label {
-  display: inline-block; 
-  padding: 15px 25px; 
-  font-weight: 600; 
-  text-align: center;
-  border-bottom: 1px solid transparent;
-  transition: all .3s ease-out 0.1s;
-}
-.popular-container label:hover {
-  color: #fff; 
-  cursor: pointer;
-}
-.popular-container input:checked + label {
-  background: #ffffff;
-  color: #1FAB89;
-  border-bottom: 1px solid;
-}
-
-.popular-container #tab-1:checked ~ .content #content-1,
-.popular-container #tab-2:checked ~ .content #content-2,
-.popular-container #tab-3:checked ~ .content #content-3,
-.popular-container #tab-4:checked ~ .content #content-4 {
-  display: block;
-  
-}
-
-@media screen and (max-width: 400px) { label {padding: 15px 10px;} }
-
-@keyframes inUp {
-  0%{
-    opacity: 0;
-    transform: translateY(100px)
-  }
-    90%{
-    transform: translateY(-10px)
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0)
-  }
-}
-
-.content li a {
-  color: #333333;
-  font-size: 14px; /* 글자 크기를 14px로 지정 */
-  text-align: left; /* 왼쪽 정렬로 지정 */
-}
-
-
-.row div {
-        line-height: 2.5em;
-    }	 
+	.popular-container {
+	  margin-bottom: 20px;
+	  margin-top: 10px;
+	  min-width: 320px; 
+	  max-width: 500px;
+	  
+	}
+	.popular-container p {
+	  margin: 0 0 20px; 
+	  line-height: 1.5;
+	  font-weight: 300;
+	}
+	.popular-container .content {
+	  background: #fff; 
+	  color: #373737;
+	   backface-visibility: hidden;
+	  overflow: hidden;
+	 
+	}
+	.popular-container .content > div {
+	  display: none;
+	  padding: 20px 25px 5px;
+	}
+	.popular-container input {
+	  display: none;
+	}
+	.popular-container label {
+	  display: inline-block; 
+	  padding: 15px 25px; 
+	  font-weight: 600; 
+	  text-align: center;
+	  border-bottom: 1px solid transparent;
+	  transition: all .3s ease-out 0.1s;
+	}
+	.popular-container label:hover {
+	  color: #fff; 
+	  cursor: pointer;
+	}
+	.popular-container input:checked + label {
+	  background: #ffffff;
+	  color: #1FAB89;
+	  border-bottom: 1px solid;
+	}
+	
+	.popular-container #tab-1:checked ~ .content #content-1,
+	.popular-container #tab-2:checked ~ .content #content-2,
+	.popular-container #tab-3:checked ~ .content #content-3,
+	.popular-container #tab-4:checked ~ .content #content-4 {
+	  display: block;
+	  
+	}
+	
+	@media screen and (max-width: 400px) { label {padding: 15px 10px;} }
+	
+	@keyframes inUp {
+	  0%{
+	    opacity: 0;
+	    transform: translateY(100px)
+	  }
+	    90%{
+	    transform: translateY(-10px)
+	  }
+	  100% {
+	    opacity: 1;
+	    transform: translateY(0)
+	  }
+	}
+	
+	.content li a {
+	  color: #333333;
+	  font-size: 14px; /* 글자 크기를 14px로 지정 */
+	  text-align: left; /* 왼쪽 정렬로 지정 */
+	}
+	
+	
+	.row div {
+	        line-height: 2.5em;
+	    }	 
 	 
 </style>
 
@@ -691,7 +691,56 @@
 				</div>
 	  </article>
 	  </c:if>
+	  
+	  
+	  
+	  
+	   <!-- 인기 검색어  -->
+		<h1>인기 검색어</h1>
+		<div class="popular-container">
+	
+		  <input id="tab-1" type="radio" name="tabs" checked>
+		  <label for="tab-1">일간</label>
 		
+		  <input id="tab-2" type="radio" name="tabs">
+		  <label for="tab-2">주간</label>
+		
+		  <input id="tab-3" type="radio" name="tabs">
+		  <label for="tab-3">월간</label>
+		
+		  <div class="content">
+		    <div id="content-1">
+		      <ul>
+				 <c:forEach var="daily" items="${dailyPopularKeywords}">
+					<li><a href="/search?category=category_total&amp;searchName=${daily}">
+						<c:out value="${daily}"  /></a>
+					</li>
+				</c:forEach>
+		      </ul>  
+		    </div>
+		
+		    <div id="content-2">
+		      <ul>
+				 <c:forEach var="weekly" items="${weeklyPopularKeywords}">
+					<li><a href="/search?category=category_total&amp;searchName=${weekly}">
+						<c:out value="${weekly}" /></a>
+					</li>
+				 </c:forEach>
+		      </ul>   
+		    </div>
+		
+		    <div id="content-3">
+		      <ul>
+				 <c:forEach var="monthly" items="${monthlyPopularKeywords}">
+					<li><a href="/search?category=category_total&amp;searchName=${monthly}">
+						<c:out value="${monthly}" /></a>
+					</li>
+				 </c:forEach>
+		      </ul>
+		    </div>
+		  </div>
+		</div>
+			
 	</section>
 	
 	
