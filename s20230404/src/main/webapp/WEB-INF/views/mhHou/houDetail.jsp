@@ -43,41 +43,10 @@
 	
 //int isfavHou = 0;
 //버튼 요소를 가져옵니다.
-const btn = document.getElementById("insert-delete-houFav");
+/* const btn = document.getElementById("insert-delete-houFav");
 
-// 클릭 횟수를 저장할 변수를 선언합니다.
-let clickCount = 0;
-// 버튼 클릭 시 실행할 함수를 정의합니다.
-/* btn.addEventListener("click", function(member_id,house_id) {
-  // AJAX 요청을 생성합니다.
-  const xhr = new XMLHttpRequest();
 
-  // 요청이 완료되면 실행될 함수를 정의합니다.
-  xhr.onreadystatechange = function(member_id,house_id) {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log(xhr.responseText);
-    }
-  };
-
-  // 클릭 횟수에 따라 실행할 요청을 결정합니다.
-  if (clickCount % 2 === 0) {
-    // insert 요청을 생성합니다.
-    xhr.open("POST", "/insertHouFav", true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify({data: "insert"}));
-    btn.innerHTML = "즐겨찾기해제";
-  } else {
-    // delete 요청을 생성합니다.
-    xhr.open("POST", "/deleteHouFav", true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify({data: "delete"}));
-    btn.innerHTML = "즐겨찾기";
-  }
-
-  // 클릭 횟수를 증가합니다.
-  clickCount++;
-}); */
-
+let clickCount = 0; */
 
 
 
@@ -142,18 +111,7 @@ let clickCount = 0;
 				<c:otherwise></c:otherwise>
 			</c:choose>
 		</div>
-		<%-- <form action="insertHouFav?house_id=${house.house_id}" method="post" >
-		<input type="submit" value="즐겨찾기">
-		</form> 
-		<form action="deleteHouFav?house_id=${house.house_id}" method="post" >
-		<input type="submit" value="즐겨찾기해제">
-		</form>  --%>
-		
-  <%-- <c:forEach items="${favHouList}" var="houFav"  varStatus="status">
-			<a href="#"  class="button" 
-		 		   onclick="insert-delete-houFav(${houFav.member_id},${houFav.house_id}, ${status.index})">
-		 	아작스즐겨찾기</a>	
- </c:forEach> --%>
+
   
  
 		<hr>

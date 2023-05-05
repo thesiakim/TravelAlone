@@ -78,7 +78,8 @@ public class TravelController {
 	
 	//여행지  정보글조회
 	@GetMapping(value = "traDetail")
-	public String traDetail(int tid , Model model, Tra_Img tra_Img ) {
+	public String traDetail(@LoginUser MemberJpa memberJpa,
+			int tid , Model model, Tra_Img tra_Img,Tra_Fav tra_Fav) {
 		log.info("smController Start traDetail");
 		log.info("smController traDetail travel_id->"+ tid );
 		
@@ -94,19 +95,22 @@ public class TravelController {
 
 		
 		//즐겨찾기테이블 넣기
+		log.info("isTra_Fav Start");
+		log.info("isTra_Fav tid"+ tid);		
+		log.info("isTra_Fav memberJpa.getId()-> " + memberJpa.getId());		
+		tra_Fav.setTravel_id(tid);
+		tra_Fav.setMember_id(memberJpa.getId());
 		
+		//변수추가
+		int isfavTra  = 0;
+		tra_Fav.setIsfavTra(isfavTra);
 		
+		int favResult = sm.isTra_Fav(tra_Fav);
+		log.info("TravelController favResult=>{}", favResult);
 		
+		model.addAttribute("isfavTra", favResult);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
 		
 		//리뷰리스트
 		List<Tra_Rev> traRevList = sm.traRevList(tid);

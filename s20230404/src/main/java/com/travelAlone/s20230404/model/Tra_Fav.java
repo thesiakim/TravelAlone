@@ -15,7 +15,7 @@ public class Tra_Fav {
 	private  long 				travel_id;
 	private LocalDate 	 	create_date;
     private LocalDate	 	modified_date;
-	private		int				isfavHou;
+	private		int				isfavTra;
 	
 	
 }

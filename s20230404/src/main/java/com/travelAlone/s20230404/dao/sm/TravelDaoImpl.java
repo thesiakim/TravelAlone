@@ -405,6 +405,22 @@ public class TravelDaoImpl implements TravelDao {
 		}
 
 
+		@Override
+		public int selectTraFav(Tra_Fav tra_Fav) {
+			log.info("TravelDaoImpl selectTraFav start..");
+			int traFav = 0;
+			log.info("data check tra : {}, mem : {}",tra_Fav.getTravel_id(),tra_Fav.getMember_id());
+			try {
+				traFav = session.selectOne("isTra_Fav",tra_Fav);
+			} catch (Exception e) {
+				log.info("TravelDaoImpl isTra_Fav Exception " +e.getMessage());
+			}
+			
+			
+			return traFav;
+		}
+
+
 	
 	
 }

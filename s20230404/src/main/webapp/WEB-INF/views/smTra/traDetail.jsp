@@ -14,6 +14,50 @@
    	<link href="/css/list.css" rel="stylesheet" type="text/css">
    	
 </head>
+
+<script type="text/javascript">
+function insert_fav(){
+	$.ajax({      
+        type:"POST",  
+        url: "insertTraFav",     
+        data: { travel_id : ${travel.travel_id}	  },     
+        success:function(args){   
+        	alert( "즐겨찾기가 추가되었습니다." );
+        	window.location.reload();
+        },error:function(e){  
+        	alert("다시 시도해주세요.");
+        	console.log(e.responseText);
+        }  
+    });  
+}
+
+function delete_fav(){
+	$.ajax({      
+	  	url: "deleteTraFav",
+	  	method: "POST",
+	  	data: { travel_id :  ${travel.travel_id} },
+        success:function(args){   
+        	alert( "즐겨찾기가 해제되었습니다." );
+        	window.location.reload();
+        },error:function(e){  
+            alert("다시 시도해주세요.");
+            console.log(e.responseText);
+        }  
+    });  
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
 <body>
 
 <div id="img_benner">
@@ -61,10 +105,21 @@
 	
 </div>	
 		<hr>
+		
+		<div>
 		<a href="tra" class="button">목록</a>
 		<a href="traUpdateForm?travel_id=${travel.travel_id}" class="button">수정</a>
 		<a href="traDelete?travel_id=${travel.travel_id}" class="button">삭제</a>
-		
+		<c:choose>
+				<c:when test="${isfavTra eq '0'}">
+					<a href="" onclick="insert_fav()">즐겨찾기</a>
+				</c:when>
+				<c:when test="${isfavTra eq '1'}">
+					<a href="" onclick="delete_fav()">즐겨찾기 해제</a>
+				</c:when>
+				<c:otherwise></c:otherwise>
+			</c:choose>
+		</div>
 		<hr>
 		<h3>리뷰		</h3>
 	<table style="margin:auto;">

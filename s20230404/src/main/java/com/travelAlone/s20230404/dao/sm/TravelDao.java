@@ -48,8 +48,10 @@ public interface TravelDao {
 	int 					traOneImgDelete(int travel_id, int img_id);
 	int 					insertTraFav(Tra_Fav tra_Fav);
 	int 					deleteTraFav(Tra_Fav tra_Fav);
+	int 					selectTraFav(Tra_Fav tra_Fav);
 	
 
+	
 
 	
 }

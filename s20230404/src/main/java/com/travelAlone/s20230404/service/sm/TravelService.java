@@ -52,6 +52,8 @@ public interface TravelService {
 	//즐겨찾기
 	int 					insertTraFav(Tra_Fav tra_Fav);
 	int 					deleteTraFav(Tra_Fav tra_Fav);
+	int 					isTra_Fav(Tra_Fav tra_Fav);
+	
 	
 	
 }

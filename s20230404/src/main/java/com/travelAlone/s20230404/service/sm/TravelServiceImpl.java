@@ -236,6 +236,12 @@ public class TravelServiceImpl implements TravelService {
 		result = sm.deleteTraFav(tra_Fav);						
 		return result;
 	}
+	@Override
+	public int isTra_Fav(Tra_Fav tra_Fav) {
+		log.info("TravelServiceImpl isTra_Fav Start");
+		int traFavList = sm.selectTraFav(tra_Fav);
+		return traFavList;
+	}
 	
 	
 	
