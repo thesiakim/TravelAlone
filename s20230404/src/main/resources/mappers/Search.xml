@@ -10,7 +10,7 @@
   		USING dual
   		ON (s_keyword = #{keyword, jdbcType=VARCHAR})
   		WHEN MATCHED THEN
-    		UPDATE SET s_count = s_count + 1
+    		UPDATE SET s_count = s_count + 1, modified_date = sysdate
   		WHEN NOT MATCHED THEN
     	INSERT (search_id, s_keyword, s_count, create_date, modified_date)
     	VALUES (search_id_seq.nextval, #{keyword, jdbcType=VARCHAR}, 1, sysdate, sysdate)
@@ -140,7 +140,7 @@
             FROM (
                   SELECT *
                   FROM Search
-                  WHERE create_date BETWEEN 
+                  WHERE modified_date BETWEEN 
                         TO_DATE(#{startOfToday , jdbcType=VARCHAR}, 'YYYY-MM-DD HH24:MI:SS') AND 
                         TO_DATE(#{endOfToday   , jdbcType=VARCHAR}, 'YYYY-MM-DD HH24:MI:SS')
 	              ORDER BY s_count DESC,
@@ -289,7 +289,44 @@
               b_content LIKE '%' || #{keyWord} || '%' 
 	</select>
 	
+	<!-- 회원의 최근 검색어 개수 구하기 -->
+	<select id="siRecentCount" parameterType="RecentSearch" resultType="int">
+		SELECT COUNT(*) FROM RecentSearch
+		WHERE member_id = ${member_id}
+	</select>
 	
+	<!-- 회원의 최근 검색어 중 가장 오래된 검색어 삭제 -->
+	<delete id="siDeleteRecent" parameterType="RecentSearch">
+		DELETE FROM RecentSearch
+        WHERE (member_id, create_date) IN 
+              (SELECT member_id, MIN(create_date)
+               FROM RecentSearch
+               WHERE member_id = #{member_id}
+               GROUP BY member_id
+               )
+	</delete>
+	
+	<!-- 회원이 새로 검색한 검색어 저장 -->
+	<insert id="siInsertRecent" parameterType="RecentSearch">
+		INSERT INTO RecentSearch (RECENT_ID, MEMBER_ID, SEARCH_TERM, CREATE_DATE)
+		                  VALUES (RECENTSEARCCH_ID_SEQ.nextval, #{member_id}, #{search_term}, sysdate)
+	</insert>
+	
+	<!-- 회원이 검색한 검색어가 테이블에 존재하는지 확인 -->
+	<select id="siFindRecent" parameterType="RecentSearch" resultType="int">
+		SELECT COUNT(*)
+		FROM RecentSearch
+		WHERE member_id = #{member_id} AND search_term = #{search_term}
+		
+	</select>
+	
+	<!-- 회원의 최근 검색어 목록 구하기 -->
+	<select id="siRecentList" parameterType="RecentSearch" resultType="RecentSearch">
+		SELECT * 
+		FROM RecentSearch
+		WHERE member_id = #{member_id}
+		ORDER BY create_date ASC
+	</select>
 	
 	
 </mapper>

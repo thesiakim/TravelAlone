@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Travel;
+import com.travelAlone.s20230404.model.si.RecentSearch;
 import com.travelAlone.s20230404.model.si.ResultList;
 import com.travelAlone.s20230404.service.si.SiServiceJpa;
 import com.travelAlone.s20230404.service.Paging;
@@ -34,6 +37,7 @@ public class SiController {
 	@GetMapping(value = "search")
 	public String search(@RequestParam("searchName") String keyword, 
 			             @RequestParam("category") String category, 
+			             @LoginUser MemberJpa memberJpa,
 			             String currentPage, Model model) {
 		
 		log.info("siController search start");
@@ -188,6 +192,14 @@ public class SiController {
 		
 		//월별 인기 검색어 구하기
 		List<String> monthlyPopularKeywords = siService.getMonthlyPopularSearches();
+		
+		//최근 검색어 저장하기
+		if(memberJpa != null) {
+			RecentSearch recentSearch = new RecentSearch(memberJpa.getId(), keyword);
+			List<RecentSearch> recentSearchList = siService.getRecentSearchList(recentSearch);
+			model.addAttribute("recentSearchList", recentSearchList);
+		}
+
 		
 		model.addAttribute("paging", paging);
 		model.addAttribute("category", category);

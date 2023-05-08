@@ -14,6 +14,7 @@ import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.TimeDTO;
+import com.travelAlone.s20230404.model.si.RecentSearch;
 import com.travelAlone.s20230404.model.si.Search;
 
 import lombok.RequiredArgsConstructor;
@@ -223,7 +224,8 @@ public class SiDaoImpl implements SiDao {
 		return popularHouse;
 	}
 
-
+	
+	//여행지 검색 결과 수
 	@Override
 	public int getTravelCount(Travel travel) {
 		int travelListCount = 0;
@@ -236,7 +238,8 @@ public class SiDaoImpl implements SiDao {
 		return travelListCount;
 	}
 
-
+	
+	//숙소 검색 결과 수
 	@Override
 	public int getHouseCount(House house) {
 		int houseListCount = 0;
@@ -251,6 +254,7 @@ public class SiDaoImpl implements SiDao {
 	}
 
 
+	//맛집 검색 결과 수
 	@Override
 	public int getResCount(Res res) {
 		int resListCount = 0;
@@ -265,6 +269,7 @@ public class SiDaoImpl implements SiDao {
 	}
 
 
+	//커뮤니티 검색 결과 수
 	@Override
 	public int getBoardCount(Board board) {
 		int boardListCount = 0;
@@ -276,6 +281,69 @@ public class SiDaoImpl implements SiDao {
 		}
 		return boardListCount;
 		
+	}
+
+
+	//최근 검색어 수
+	@Override
+	public int countRecentSearch(RecentSearch recentSearch) {
+		int recentCount = 0;
+		try {
+			recentCount = session.selectOne("siRecentCount", recentSearch);
+		} catch(Exception e) {
+			log.info("siDaoImpl countRecentSearch e.getMessage() : " + e.getMessage());
+		}
+		return recentCount;
+	}
+
+
+	//최근 검색어 중 가장 오래된 검색어 삭제
+	@Override
+	public void deleteRecentSearch(RecentSearch recentSearch) {
+		try {
+			session.delete("siDeleteRecent", recentSearch);
+		} catch(Exception e) {
+			log.info("siDaoImpl deleteRecentSearch e.getMessage() : " + e.getMessage());
+		}
+		
+	}
+
+
+	//최근 검색어 저장
+	@Override
+	public void insertRecentSearch(RecentSearch recentSearch) {
+		try {
+			session.insert("siInsertRecent", recentSearch);
+		} catch(Exception e) {
+			log.info("siDaoImpl insertRecent e.getMessage() : " + e.getMessage());
+		}
+		
+	}
+
+
+	//검색어가 테이블에 존재하는지 확인
+	@Override
+	public int findRecentSearch(RecentSearch recentSearch) {
+		int findRecentSearch = 0;
+		try {
+			findRecentSearch = session.selectOne("siFindRecent", recentSearch);
+		} catch(Exception e) {
+			log.info("siDaoImpl findRecentSearch e.getMessage() : " + e.getMessage());
+		}
+		return findRecentSearch;
+	}
+	
+	
+	//최근 검색어 목록 반환
+	@Override
+	public List<RecentSearch> getRecentSearchList(RecentSearch recentSearch) {
+		List<RecentSearch> recentSearchList = null;
+		try {
+			recentSearchList = session.selectList("siRecentList", recentSearch);
+		} catch(Exception e) {
+			log.info("siDaoImpl getRecentSearchList e.getMessage() : " + e.getMessage());
+		}
+		return recentSearchList;
 	}
 
 
