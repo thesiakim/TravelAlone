@@ -30,7 +30,7 @@
 </style>
 
 </head>
-	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
 	<link href="/css/list.css" rel="stylesheet" type="text/css">
 <body>
 	<c:import url="boardHeader.jsp"/>

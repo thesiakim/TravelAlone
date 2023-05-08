@@ -125,16 +125,21 @@ public class MemberJpa extends BaseTimeEntity{
      * */
     public void updateInfo(String nickname,
                            String name,
-                           String gender,
-                           String phone,
-                           String imgContext,
+                           String phone) {
+        this.nickname = nickname;
+        this.name = name;
+        this.phone = phone;
+
+    }
+
+    /**
+     * 2023-05-06 조경민
+     * 설명 : 회원 프로필 사진 변경
+     * */
+    public void updateProfile(String imgContext,
                            String imgOriginalFile,
                            String imgStoredFile,
                            String imagesType) {
-        this.nickname = nickname;
-        this.name = name;
-        this.gender = gender;
-        this.phone = phone;
         this.imgContext = imgContext;
         this.imgOriginalFile = imgOriginalFile;
         this.imgStoredFile = imgStoredFile;

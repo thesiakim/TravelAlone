@@ -3,14 +3,19 @@ package com.travelAlone.s20230404.service.km;
 
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.domain.km.MemberRepository;
+import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.dto.km.*;
 
+import com.travelAlone.s20230404.service.jh.UploadHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -160,12 +165,11 @@ public class MemberService{
      * 설명 : 관리자 페이지 메인화면 회원 리스트 조회
      * */
     @Transactional(readOnly = true)
-    public List<AdminMemberResponseDto> adminMemberListShow() {
+    public Page<AdminMemberResponseDto> adminMemberListShow(Pageable pageable) {
 
         // 멤버 리스트를 조회해와서 AdminMemberResponseDto로 변환 후 반환
-        return memberRepository.findAllDesc().stream()
-                .map(memberJpa -> new AdminMemberResponseDto(memberJpa))
-                .collect(Collectors.toList());
+        return memberRepository.findAllDesc(pageable)
+                .map(memberJpa -> new AdminMemberResponseDto(memberJpa));
 
     }
 
@@ -174,11 +178,10 @@ public class MemberService{
      * 설명 : 관리자 페이지 검색 회원 리스트 조회
      * */
     @Transactional(readOnly = true)
-    public List<AdminMemberResponseDto> adminMemberSearchAndListShow(String search) {
+    public Page<AdminMemberResponseDto> adminMemberSearchAndListShow(String search, Pageable pageable) {
 
-        return memberRepository.findSearchAndAllDesc(search).stream()
-                .map(memberJpa -> new AdminMemberResponseDto(memberJpa))
-                .collect(Collectors.toList());
+        return memberRepository.findSearchAndAllDesc(search, pageable)
+                .map(memberJpa -> new AdminMemberResponseDto(memberJpa));
     }
 
     /**
@@ -204,22 +207,64 @@ public class MemberService{
      * 설명 : 관리자 페이지 회원 정보 변경
      * */
     @Transactional
-    public Long adminMemberinfoChange(AdminMemberInfoChangeRequestDto requestDto) {
+    public Long adminMemberinfoChange(List<MultipartFile> file, AdminMemberInfoDto requestDto) throws Exception {
         // 해당 아이디 member 조회
         MemberJpa memberJpa = memberRepository.findById(requestDto.getId())
                 .orElseThrow(() -> new IllegalStateException("해당 회원이 존재하지 않습니다. : " + requestDto.getId()));
 
+        // 기본이미지로 변경인지 확인
+        if (requestDto.getChecked()){
+            // 기본이미지 변경
+            memberJpa.updateProfile("normal",
+                    "userPicture",
+                    "src/main/resources/static/img/user-picture.png",
+                    "img300");
+
+        }else {
+            // 기본 이미지 변경이 아닐경우
+            // 사진 파일 변경
+            if (file!= null || file.size() >0){
+                // 핸들러 재사용, 추후 member 전용 핸들러 제작 고려할 것(의존성 고려)
+                BodImg savedFile = UploadHandler.parseFileInfo(file, requestDto.getId()).get(0);
+
+                // 기존에 저장된 파일 삭제 처리(기본이미지일 경우 삭제하지 않음)
+                if (!memberJpa.getImgStoredFile().equals("src/main/resources/static/img/user-picture.png")){
+                    //기본 이미지가 아닐 경우 실제 이미지 파일 삭제
+                    UploadHandler.delete(memberJpa.getImgStoredFile());
+
+                }
+
+                // 사진 변경
+                memberJpa.updateProfile(savedFile.getImg_context(),
+                        savedFile.getImg_original_file(),
+                        savedFile.getImg_stored_file(),
+                        savedFile.getCommon_imagesType());
+
+            }
+        }
+
         // member 정보 변경
         memberJpa.updateInfo(requestDto.getNickname(),
                 requestDto.getName(),
-                requestDto.getGender(),
-                requestDto.getPhone(),
-                requestDto.getImgContext(),
-                requestDto.getImgOriginalFile(),
-                requestDto.getImgStoredFile(),
-                requestDto.getImagesType());
+                requestDto.getPhone());
 
         return memberJpa.getId();
+
+    }
+
+    /**
+     * 2023-05-05 조경민
+     * 설명 : 멤버 id를 받아 멤버 정보를 불러온다
+     * */
+    @Transactional(readOnly = true)
+    public AdminMemberInfoDto adminMemberInfoById(Long id) {
+
+        //멤버 id를 받아 해당 멤버 정보를 불러온다
+        MemberJpa memberJpa = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("해당 회원이 존재하지 않습니다. : " + id));
+
+        // Dto 반환
+        return new AdminMemberInfoDto(memberJpa);
 
     }
 }

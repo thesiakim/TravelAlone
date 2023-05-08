@@ -8,31 +8,8 @@
 <script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <link href="/css/list.css" rel="stylesheet" type="text/css">
 <link href="/css/login.css" rel="stylesheet" type="text/css">
-<script defer>
-	function saveButton() {
-		var data = {
-			m_email: $("#m_email").val(),
-			m_nickname: $("#m_nickname").val(),
-			m_name: $("#m_name").val(),
-			m_phone: $("#m_phone").val()
-		};
-
-		$.ajax({
-			type: "POST",
-			url: "/api/v1/mypage",
-			dataType: "json",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify(data),
-		})
-		.done(function () {
-			alert("수정되었습니다.");
-		})
-		.fail(function (error) {
-			alert(JSON.stringify(error));
-		});
-
-	};
-</script>
+<script defer src="/js/mypageMemberInfo.js"></script>
+<script defer src="/js/mypage-info-update.js"></script>
 </head>
 <body>
 	<h1>회원 정보 수정</h1>

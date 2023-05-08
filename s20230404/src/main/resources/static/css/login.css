@@ -51,14 +51,14 @@
 	}
 	
    /* 회원가입 버튼 */
-	button[type="button"] {
+	button {
 		width: 80px;         border-radius: 7px;
 		height: 32px;         box-sizing: border-box;
 		font-size: 15px;        font-weight:bolder;
 		color:white;
 		border:  #205E61;       background-color: #205E61;
 	}
-	button[type="button"]:hover {
+	button:hover {
 		color: #205E61;
 		background-color:  white;
 		transition: ease 0.5s;
@@ -84,4 +84,5 @@
 		border:  #205E61;       background-color: #205E61;
 	
 	}
+   
    

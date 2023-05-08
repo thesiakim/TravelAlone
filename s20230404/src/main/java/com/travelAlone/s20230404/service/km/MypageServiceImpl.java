@@ -100,8 +100,13 @@ public class MypageServiceImpl implements MypageService{
      * */
     @Override
     public int memberProfileReset(Member member) {
+
         // 기존 이미지 삭제
-        UploadHandler.delete(member.getM_img_stored_file());
+        if (!member.getM_img_stored_file().equals("src/main/resources/static/img/user-picture.png")){
+            //기본 이미지가 아닐 경우 실제 이미지 파일 삭제
+            UploadHandler.delete(member.getM_img_stored_file());
+
+        }
 
         // 기본 이미지 저장
         member.updateProfile("normal","userPicture","src/main/resources/static/img/user-picture.png","img300");

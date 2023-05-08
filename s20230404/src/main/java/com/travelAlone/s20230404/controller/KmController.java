@@ -12,6 +12,9 @@ import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
 import com.travelAlone.s20230404.service.km.MypageService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,15 +54,14 @@ public class KmController {
     }
 
 
-
-
     /**
      * 2023-04-17 조경민
      * 설명 : 회원가입창 이동
      * */
     @GetMapping("/join")
-    public String goJoin(Model model){
-        model.addAttribute("memberDto", new MemberFormDto());
+    public String goJoin(@ModelAttribute MemberFormDto requestDto, Model model){
+
+        model.addAttribute("memberDto", requestDto);
 
         return "km/join";
     }
@@ -74,7 +76,6 @@ public class KmController {
             // 회원가입 실패시 입력 데이터값 유지
             model.addAttribute("memberDto", requestDto);
 
-
             // 유효성 통과 못한 필드와 메세지 핸들링
             Map<String, String> validatorResult = memberService.validateHandling(errors);
 
@@ -83,8 +84,9 @@ public class KmController {
                 model.addAttribute(key, validatorResult.get(key));
             }
 
-            // 회원가입 페이지로 다시 리턴
+            // 회원가입 요청처리 화면 보여주기
             return "km/join";
+
 
         }
 
@@ -250,18 +252,31 @@ public class KmController {
     }
 
     /**
+     * 2023-05-04 조경민
+     * 설명 : 마이페이지 프로필 변경창 이동
+     * */
+    @GetMapping("/mypage/profile")
+    public String mypageProfileProfile(@Login2User SessionUser sessionUser, Model model){
+
+        model.addAttribute("storedImgName", sessionUser.getImgStoredFile());
+
+        return "km/mypage-member-profile";
+    }
+
+    /**
      * 2023-04-26 조경민
      * 설명 : 마이페이지 프로필 사진 수정
      * */
     @PostMapping("/api/v1/mypage/profile")
-    public String mypageMemberProfileUpdate(List<MultipartFile> pictureFile, @LoginUser MemberJpa memberJpa) throws Exception {
+    @ResponseBody
+    public String mypageMemberProfileUpdate(@RequestBody List<MultipartFile> file, @LoginUser MemberJpa memberJpa) throws Exception {
 
         Member member = new Member();
         member.of(memberJpa);
 
-        mypageService.memberProfileUpdate(pictureFile, member);
+        mypageService.memberProfileUpdate(file, member);
 
-        return "/mypage";
+        return "성공";
     }
 
     /**
@@ -269,13 +284,25 @@ public class KmController {
      * 설명 : 마이페이지 프로필 사진 기본으로 변경
      * */
     @PostMapping("/api/v1/mypage/profile/normal")
+    @ResponseBody
     public String mypageMemberProfileReset(@LoginUser MemberJpa memberJpa){
 
         Member member = new Member();
         member.of(memberJpa);
 
         mypageService.memberProfileReset(member);
-        return "/mypage";
+        return "성공";
+    }
+
+    /**
+     * 2023-05-03 조경민
+     * 설명 : 회원 탈퇴 창 이동
+     * */
+    @GetMapping("/mypage/withdrawal")
+    public String mypageMemberWithdrawal(@LoginUser MemberJpa memberJpa, Model model){
+        model.addAttribute("memberId", memberJpa.getEmail());
+
+        return "km/mypage-member-withdrawal";
     }
 
     /**
@@ -283,15 +310,18 @@ public class KmController {
      * 설명 : 회원 탈퇴
      * */
     @DeleteMapping("/api/v1/mypage/withdrawal")
-    public String mypageMemberWithdrawal(@ModelAttribute String password, @LoginUser MemberJpa memberJpa, Model model){
+    @ResponseBody
+    public String mypageMemberWithdrawal(@RequestBody MypageMemberWithdrawalRequestDto requestDto, @LoginUser MemberJpa memberJpa, Model model){
 
-        if (passwordEncoder.matches(password,memberJpa.getPassword())){
+        if (passwordEncoder.matches(requestDto.getPassword(),memberJpa.getPassword()) &&
+                requestDto.getMemberEmail().equals(memberJpa.getEmail())){
+
             mypageService.memberWithdrawal(memberJpa.getId());
 
-            return "redirect:/logout";
+            return memberJpa.getEmail();
         }else {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-            return "memberWithDrawal";
+            throw new IllegalArgumentException("회원정보가 일치하지 않습니다.");
         }
 
     }
@@ -302,8 +332,8 @@ public class KmController {
      * category는 주소창으로, page는 쿼리스트링으로
      * category : {travel, house, restaurant}
      * */
-    @GetMapping("/mypage/review/{category}")
-    public String mypageReview(@PathVariable(required = false) String category,
+    @GetMapping("/mypage/review")
+    public String mypageReview(@RequestParam(required = false) String category,
                                @RequestParam(required = false) Integer page,
                                @LoginUser MemberJpa memberJpa,
                                Model model){
@@ -321,29 +351,58 @@ public class KmController {
         model.addAttribute("page", page);
         model.addAttribute("responseDtos", responseDtos);
 
-        return "mypage-review";
+        return "km/mypage-review";
     }
 
+    /**
+     * 2023-05-06 조경민
+     * 설명 : 마이페이지 내 문의내역 이동
+     */
+    @GetMapping("mypage/g-writing")
+    public String mypageGWriting() {
 
+        return "km/mypage-g-writing";
+    }
 
     // 관리자 페이지----------------------------------------------------------------
     /**
      * 2023-05-01 조경민
-     * 설명 : 관리자 페이지 회원 목록 조회, 쿼리 스트링을 이용한 검색기능 추가
+     * 설명 : 관리자 페이지 회원 목록 조회, 쿼리 스트링을 이용한 검색기능 추가, Jpa Pageable 이용하여 페이징 처리(page = 0부터 시작)
+     *
+     * @pageableDefault : 페이지에 출력되는 데이터 사이즈 설정(default = 10, 보여주기위해 입력)
+     * Pageable : Jpa에서 제공하는 페이징 인터페이스로 레포지토리 쿼리에 인수로 전해주면 Page 객체를 반환
      * */
     @GetMapping("/admin")
-    public String adminMain(@RequestParam(value = "search", required = false) String search, Model model){
+    public String adminMain(@RequestParam(value = "search", required = false) String search,
+                            @PageableDefault(size = 10) Pageable pageable,
+                            Model model){
+        // 현재 페이지 담기
+        model.addAttribute("currentPage", pageable.getPageNumber());
 
         if (search==null){
             // search 값이 null이면 전체 조회
-            model.addAttribute("members",memberService.adminMemberListShow());
+            Page<AdminMemberResponseDto> responseDtos = memberService.adminMemberListShow(pageable);
+
+
+            // 페이지 전체 갯수 담기
+            model.addAttribute("totalPage", responseDtos.getTotalPages());
+
+            // 해당 페이지 멤버 정보 담기
+            model.addAttribute("members",responseDtos.getContent());
         }else {
             // search값 존재하면 검색어 조회
-            model.addAttribute("members",memberService.adminMemberSearchAndListShow(search));
+            Page<AdminMemberResponseDto> responseDtos = memberService.adminMemberSearchAndListShow(search, pageable);
+
+            // 페이지 전체 갯수 담기
+            model.addAttribute("totalPage", responseDtos.getTotalPages());
+
+            // 해당 페이지 멤버정보 담기
+            model.addAttribute("members", responseDtos.getContent());
         }
 
-        return "admin-main";
+        return "km/admin-main";
     }
+
 
     /**
      * 2023-05-02 조경민
@@ -353,8 +412,22 @@ public class KmController {
     @ResponseBody
     public Long adminRoleChange(@RequestBody AdminMemberRoleRequestDto requestDto){
 
+        System.out.println("requestDto = " + requestDto.getRole());
+        System.out.println("requestDto.getId() = " + requestDto.getId());
         // 회원 권한 변경 후 아이디 반환
         return memberService.adminMemberRoleChange(requestDto);
+    }
+
+    /**
+     * 2023-05-05 조경민
+     * 설명 : 관리자 페이지 회원 정보 변경창 이동
+     * */
+    @GetMapping("/admin/info/{id}")
+    public String adminInfo(@PathVariable Long id, Model model){
+
+        model.addAttribute("member", memberService.adminMemberInfoById(id));
+
+        return "km/admin-info";
     }
 
     /**
@@ -363,9 +436,10 @@ public class KmController {
      * */
     @PatchMapping("/api/v1/admin/info")
     @ResponseBody
-    public Long adminInfoChange(@RequestBody AdminMemberInfoChangeRequestDto requestDto){
+    public Long adminInfoChange(@RequestPart(value = "file", required = false) List<MultipartFile> file,
+                                @RequestPart(value = "key") AdminMemberInfoDto requestDto) throws Exception {
 
-        return memberService.adminMemberinfoChange(requestDto);
+        return memberService.adminMemberinfoChange(file,requestDto);
     }
 
 

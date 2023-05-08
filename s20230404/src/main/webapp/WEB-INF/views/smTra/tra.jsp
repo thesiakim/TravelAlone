@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/css/list.css" rel="stylesheet" type="text/css">
  <style>
 .swiper-container {
 	width:1200px;
@@ -24,6 +25,9 @@
 }
 .swiper-slide img {
 	box-shadow:0 0 5px #555;
+}
+th, td { 
+	border-bottom: 2px solid rgb(64, 64, 64); 
 }
   </style>
 <script type="text/javascript">
@@ -52,54 +56,170 @@
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 	
-<h1><a href="tra">여행지</a></h1>
+<h1><a href="tra"><img src="img/Tra.png" alt="여행지" width=250px height=250px></a></h1>
 
 <!-- 여행지종류 -->
-			<div >  																						
-				<c:forEach items="${boardList}" var="list">
-							<td>
-									<!-- 컨트롤러로 보내는거 -->
-								<a href="traFilter?code=${list.code}">${list.value}</a>									
-							</td>
-				</c:forEach>																
-					   <c:set var="num" value="${page.total-page.start+1 }"></c:set>
-			</div>				
-	
+<div style="display: inline-block; width: 700px; text-align: center;">
+<c:forEach items="${traCommonCode}" var="list" varStatus="status">
+  <!-- 컨트롤러로 보내는거 -->
+  <a href="traFilter?code=${list.code}">
+    <font size="5">${list.value}</font>
+  </a>
+  <c:if test="${not status.last}">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </c:if>
+</c:forEach>
+</div>			
+	<br>
+	<br>
 	<!-- 검색 -->
-			<form action="traSearch">
-				<select name="search">
-					<option value="all">전체</option>
-					<option value="tra102">서울</option>
-					<option value="tra132">인천</option>
-					<option value="tra131">경기</option>
-					<option value="tra133">강원</option>
-					<option value="tra142">대전</option>
-					<option value="tra141">충남</option>
-					<option value="tra143">충북</option>
-					<option value="tra151">부산</option>
-					<option value="tra152">울산</option>
-					<option value="tra153">대구</option>
-					<option value="tra155">경남</option>
-					<option value="tra154">경북</option>
-					<option value="tra162">광주</option>
-					<option value="tra161">전남</option>
-					<option value="tra163">전북</option>
-					<option value="tra164">제주</option>
-				</select>	
-					<div id="serch">
-			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
-	  	</div>
-				
-				
-			</form>
+		<form action="traSearch">
+		<select id="category" name="search">
+			<option value="s_title">제목</option>
+			<option value="s_content">내용</option>
+			
+		</select> 
+		 <div id="serch">
+		<input type="text" name="keyword" placeholder="검색어를 입력하세요" value="${search}" id="searchId">
 		
-			<c:set var="num" value="${page.total-page.start+1 }"></c:set>
-		 <hr>
-		 	
+		  <%--  <a href="houseSearch?search=${search}&amp;keyword=${keyword}">검색</a> --%>
+		</div>
+		<p>
+	</form>
+
+	<c:set var="num" value="${page.total-page.start+1 }"></c:set>
+	<br>
+<!-- 지역 종류 지역 종류  지역 종류  지역 종류  지역 종류  지역 종류  -->
+<div style="display: inline-block; width: 712px; text-align: center;">
+	<c:forEach items="${traCommonLocCode}" var="list">
+		<!-- 컨트롤러로 보내는거 -->
+		<a href="traLocFilter?code=${list.code}">
+		  <font size="4">${list.value}</font>
+		</a> 
+ <c:if test="${not status.last}">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </c:if>
+</c:forEach>
+</div>
+	<br><br>	
+	<hr>
+	<br>
+			 	
 	
+
+	<!-- 국내 인기 여행지  -->
+		<div id="session2">
+		  <h3>국내 인기 여행지</h3><br>    
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+		<!-- 클래스명은 변경하면 안 됨 -->
+		<div class="swiper-container">
+		  <div class="swiper-wrapper">
+			<div class="swiper-slide"><img src="image1.png" alt="이미지 1"></div>
+			<div class="swiper-slide"><img src="image2.jpg" alt="이미지 2"></div>
+			<div class="swiper-slide"><img src="image3.jpg" alt="이미지 3"></div>
+			<div class="swiper-slide"><img src="image4.jpg" alt="이미지 4"></div>
+			<div class="swiper-slide"><img src="image5.jpg" alt="이미지 5"></div>
+			<div class="swiper-slide"><img src="image6.jpg" alt="이미지 6"></div>
+		  </div>
+	  
+		  <!-- 네비게이션 -->
+		  <div class="swiper-button-next"></div> <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+		  <div class="swiper-button-prev"></div> <!-- 이전 버튼 -->
+		  <!-- 페이징 -->
+		  <div class="swiper-pagination"></div>
+		</div>
+		<script>
+		  new Swiper('.swiper-container', {
+			slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
+			spaceBetween : 20, // 슬라이드간 간격
+			slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+			// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+			// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+			loopFillGroupWithBlank : true,
+			loop : true, // 무한 반복
+			pagination : { // 페이징
+			  el : '.swiper-pagination',
+			  clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+			},
+			navigation : { // 네비게이션
+			  nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+			  prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+			},
+		  });
+		</script>
+		<br><br>
+		<hr>
+		<br>
+		
+
+	<!-- 여행지리스트 테이블 -->
+		  <h3>국내 전체 여행지 </h3><br>
+		  <a href="traWriteForm"><button type="submit" style="margin-left: 664px; margin-bottom: 10px">글 쓰기</button></a>
+	<div>
+		<table style="margin:auto;">
+			<tr>
+				<td hidden>번호</td>													
+				<td width="140px;">지역</td>
+				<td width="300px;">숙소명</td>
+				<td width="140px;">평점</td>
+				<td width="60px;">리뷰수</td>			
+			</tr>
+		<c:forEach items="${traList}" var="travel">
+			<tr>
+				<td hidden>${travel.travel_id}</td>
+			 	<td>${travel.t_common_loc}</td>
+				<td><a href="traDetail?tid=${travel.travel_id}">${travel.t_name}</a></td>
+				<td>
+					<c:choose>
+						<c:when test="${travel.t_avgscore eq '1'}">
+							<c:out value="★☆☆☆☆"/>
+						</c:when>
+						<c:when test="${travel.t_avgscore eq '2'}">
+							<c:out value="★★☆☆☆"/>
+						</c:when>
+						<c:when test="${travel.t_avgscore eq '3'}">
+							<c:out value="★★★☆☆"/>
+						</c:when>
+						<c:when test="${travel.t_avgscore eq '4'}">
+							<c:out value="★★★★☆"/>
+						</c:when>
+						<c:when test="${travel.t_avgscore eq '5'}">
+							<c:out value="★★★★★"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="☆☆☆☆☆"/>
+						</c:otherwise>
+					</c:choose>												
+				</td>																				
+				<td>${travel.t_revcount}</td>	
+			</tr>						
+		</c:forEach>
+		
+		</table>
+		<br><br>
+	</div>
+<!-- 페이징 처리 페이징 처리  페이징 처리  페이징 처리   -->
+
+ <div>
+	<c:if test="${page.startPage > page.pageBlock }">
+		<a href="tra?currentPage=${page.startPage-page.pageBlock}">[이전]</a>
+	</c:if>
+	<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+		<a
+			href="tra?currentPage=${i}">[${i}]</a>
+	</c:forEach>
+	<c:if test="${page.endPage < page.totalPage }">
+		<a
+			href="tra?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
+	</c:if>
+</div> 
+<br><br>
+<hr>
+	<br>
 	<!-- 이 달의 축제 -->
 	  <div id="session1">
-		<h2>이달의 축제</h2>
+		<h3>이달의 축제</h3><br>
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 		<!-- 클래스명은 변경하면 안 됨 -->
@@ -195,115 +315,8 @@
 			},
 		  });
 		</script>
+		<br><br>
 		<hr>	
-	
-	<!-- 국내 인기 여행지  -->
-		<div id="session2">
-		  <h3>국내 인기 여행지</h3>    
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-		<!-- 클래스명은 변경하면 안 됨 -->
-		<div class="swiper-container">
-		  <div class="swiper-wrapper">
-			<div class="swiper-slide"><img src="image1.png" alt="이미지 1"></div>
-			<div class="swiper-slide"><img src="image2.jpg" alt="이미지 2"></div>
-			<div class="swiper-slide"><img src="image3.jpg" alt="이미지 3"></div>
-			<div class="swiper-slide"><img src="image4.jpg" alt="이미지 4"></div>
-			<div class="swiper-slide"><img src="image5.jpg" alt="이미지 5"></div>
-			<div class="swiper-slide"><img src="image6.jpg" alt="이미지 6"></div>
-		  </div>
-	  
-		  <!-- 네비게이션 -->
-		  <div class="swiper-button-next"></div> <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-		  <div class="swiper-button-prev"></div> <!-- 이전 버튼 -->
-		  <!-- 페이징 -->
-		  <div class="swiper-pagination"></div>
-		</div>
-		<script>
-		  new Swiper('.swiper-container', {
-			slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
-			spaceBetween : 20, // 슬라이드간 간격
-			slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
-			// 그룹수가 맞지 않을 경우 빈칸으로 메우기
-			// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-			loopFillGroupWithBlank : true,
-			loop : true, // 무한 반복
-			pagination : { // 페이징
-			  el : '.swiper-pagination',
-			  clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-			},
-			navigation : { // 네비게이션
-			  nextEl : '.swiper-button-next', // 다음 버튼 클래스명
-			  prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
-			},
-		  });
-		</script>
-
-		<hr>
-
-	<!-- 여행지리스트 테이블 -->
-		  <h3>국내 전체 여행지 </h3>
-		<table style="margin:auto;">
-		<tr>
-			<td hidden>번호</td>													
-			<td>지역</td>
-			<td>숙소명</td>
-			<td>평점</td>
-			<td>리뷰수</td>			
-		</tr>
-		<c:forEach items="${traList}" var="travel">
-			<tr>
-				<td hidden>${travel.travel_id}</td>
-			 	<td>${travel.t_common_loc}</td>
-				<td > <a href="traDetail?tid=${travel.travel_id}">${travel.t_name}</a></td>
-				<td>
-					<c:choose>
-						<c:when test="${travel.t_avgscore eq '1'}">
-							<c:out value="★☆☆☆☆"/>
-						</c:when>
-						<c:when test="${travel.t_avgscore eq '2'}">
-							<c:out value="★★☆☆☆"/>
-						</c:when>
-						<c:when test="${travel.t_avgscore eq '3'}">
-							<c:out value="★★★☆☆"/>
-						</c:when>
-						<c:when test="${travel.t_avgscore eq '4'}">
-							<c:out value="★★★★☆"/>
-						</c:when>
-						<c:when test="${travel.t_avgscore eq '5'}">
-							<c:out value="★★★★★"/>
-						</c:when>
-						<c:otherwise>
-							<c:out value="☆☆☆☆☆"/>
-						</c:otherwise>
-					</c:choose>												
-				</td>																				
-				<td>${travel.t_revcount}</td>							
-		</c:forEach>
-		
-	</table>
-	<hr>
-
-		<a style="text-align: right;" href="traWriteForm">글작성</a>
-<!-- 페이징 처리 페이징 처리  페이징 처리  페이징 처리   -->
-
- <div>
-	<c:if test="${page.startPage > page.pageBlock }">
-		<a href="tra?currentPage=${page.startPage-page.pageBlock}">[이전]</a>
-	</c:if>
-	<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-		<a
-			href="tra?currentPage=${i}">[${i}]</a>
-	</c:forEach>
-	<c:if test="${page.endPage < page.totalPage }">
-		<a
-			href="tra?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
-	</c:if>
-</div> 
-
-
-
-
 
 
 </body>

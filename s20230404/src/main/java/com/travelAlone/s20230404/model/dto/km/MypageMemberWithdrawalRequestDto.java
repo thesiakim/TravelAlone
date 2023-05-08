@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class AdminMemberRoleRequestDto {
+public class MypageMemberWithdrawalRequestDto {
+    private String memberEmail;
+    private String password;
 
-    private Long id;
-    private String role;
 }
