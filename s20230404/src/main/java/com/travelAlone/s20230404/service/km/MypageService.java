@@ -4,6 +4,8 @@ import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.MypageResponseDto;
 import com.travelAlone.s20230404.model.dto.km.MypageReviewRequestDto;
 import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
+import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -23,4 +25,6 @@ public interface MypageService {
     List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto);
 
     boolean memberInfoRefresh(long memberId);
+
+    UserPageResponseDto userPage(long member_id);
 }

@@ -21,7 +21,6 @@
 		border-radius:12px;	border: 2px solid  #205E61;
 		color: #205E61;  	background-color: #F8F8F8;
 		font-weight: bolder;
-		
 	}
 	
 	/* 입력창 기본 글자 색 */
@@ -75,14 +74,10 @@
 		width: 400px; 		border: 0px;
 		background-color: #5F9EA0; 
 	}
-	
-	button {
-		width: 80px;         border-radius: 7px;
-		height: 32px;         box-sizing: border-box;
-		font-size: 15px;        font-weight:bolder;
-		color:white;
-		border:  #205E61;       background-color: #205E61;
-	
+	#file {
+		font-family: 'Roboto', sans-serif; 
+		border-radius: 0;	border: 0;
+		color: #205E61;  	
+		background-color: white;
+		font-weight: bolder;
 	}
-   
-   

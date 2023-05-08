@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Warning;
 
 public interface JhService {
@@ -14,4 +15,5 @@ public interface JhService {
 	int 			insertReLevel(Board board);
 	List<Board> 	myPageCommunityList(Board board);
 	int 			myPageCommunityListCnt(long memberId);
+	List<Member> 	userPage(long member_id);
 }

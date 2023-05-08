@@ -2,11 +2,6 @@ server:         # 같은 server에서 port번호로 구별 -> port번호 : 물�
   port: 4040
 # Oracle Connect
 spring:
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML5
-    view-names: th/*
   # File Size   파일업로드 할때 파일 크기
   servlet:
     multipart:

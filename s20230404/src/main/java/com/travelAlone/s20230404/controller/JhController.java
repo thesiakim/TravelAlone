@@ -7,13 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Warning;
+import com.travelAlone.s20230404.model.dto.km.MypageResponseDto;
+import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.jh.JhService;
+import com.travelAlone.s20230404.service.km.MypageService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +32,7 @@ public class JhController {
 
    
    private final JhService      js;
+   private final MypageService 	mypageService;
    
 // 추천 버튼
    @RequestMapping(value = "/boardlike")
@@ -171,6 +179,15 @@ public class JhController {
        model.addAttribute("user_id", memberJpa.getId());
        return "ro/myPageCommunityList";
    }
-	      
    
+   // 닉네임 클릭 시 마이페이지 보기
+   @GetMapping(value = "/userpage")
+   public String userPage(@RequestParam(value = "id") long member_id, Model model) {
+	   log.info("jhController userpage start");
+	   log.info("jhController userpage member_id -> " + member_id);
+	   UserPageResponseDto userPageResponseDto = mypageService.userPage(member_id);
+	   
+       model.addAttribute("response", userPageResponseDto);
+	   return "km/userpage";
+   }
 }

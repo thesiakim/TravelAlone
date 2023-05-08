@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.jh.JhDao;
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Warning;
 
 @Service
@@ -77,6 +78,18 @@ public class JhServiceImpl implements JhService {
 		      
 		return myPageCommunityList;
 	}
+	
+	// 유저 마이페이지 
+	@Override
+	public List<Member> userPage(long member_id) {
+		List<Member> userPage = null;
+		log.info("jhServiceImpl userPage start");
+		
+		userPage = jd.userPage(member_id);
+		return userPage;
+	}
+
+	
 	
 
 }

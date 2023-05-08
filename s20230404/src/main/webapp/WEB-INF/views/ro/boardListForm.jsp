@@ -11,20 +11,7 @@
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/js/detailBoardLoginChk.js"></script>
-<script type="text/javascript">
-	function imgOnclickCheck() {
-        var checked = $('#imgOnlyCheckbox').is(':checked');
-		if(checked) {
-			 $(".img_stored_file_no").css("display", "none");
-		} else {
-			$(".img_stored_file_no").css("display", "");
-		}
-	}
-</script>
-<script type="text/javascript">
-	function getOrderList() { location.href= "/listBoard"; }
-</script>
-
+<script defer src="/js/userPage.js"></script>
 <style>
 	th, td { border-bottom: 2px solid rgb(64, 64, 64); }
 </style>
@@ -104,7 +91,9 @@
 							<td style="width: 300px;">
 								<a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board }">${board.b_title }</a>
 							</td>
-							<td style="width: 100px;">${board.m_nickname }</td>
+							<td style="width: 100px;">
+								<a onclick="openUserPage(${board.member_id})">${board.m_nickname }</a>
+							</td>
 							<td style="width: 200px;">${board.getFormattedCreateDate() }</td>
 							<td style="width: 50px;">${board.b_like_cnt }</td>
 							<td style="width: 30px;">${board.b_view_cnt }</td>
