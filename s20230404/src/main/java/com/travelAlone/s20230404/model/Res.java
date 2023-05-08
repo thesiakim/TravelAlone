@@ -43,8 +43,13 @@ public class Res {
 			    return create_date.format(formatter);
 			  }
 		
+
 		//조회용
 		private String img_stored_file;
+
+		// member 조인
+		private String m_nickname;
+}
 
 	   
  //RESTAURANT_ID		NUMBER					맛집ID
@@ -59,4 +64,3 @@ public class Res {
  //R_COMMON_LOC			VARCHAR2(20 BYTE)		맛집 지역
  //CREATE_DATE			DATE					생성일
  //MODIFIED_DATE		DATE					수정일
-}

@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.travelAlone.s20230404.dao.sk.SkDao;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Res;
+import com.travelAlone.s20230404.model.Res_Fav;
 import com.travelAlone.s20230404.model.Res_Img;
 import com.travelAlone.s20230404.model.Res_Rev;
-import com.travelAlone.s20230404.model.Res;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -195,5 +196,38 @@ public class SkServiceImpl implements SkService {
 		log.info("SkServiceImpl deleteResImg Start");
 		result = sk.deleteResImg(restaurant_id);		
 		return result;
+	}
+
+	@Override
+	public int deleteResOneImg(int restaurant_id, int img_id) {
+		int result = 0;
+		log.info("SkServiceImpl deleteResOneImg Start");
+		result = sk.deleteResOneImg(restaurant_id,img_id);		
+		return result;
+	}
+
+	// 맛집 즐겨찾기
+	@Override
+	public int insertResFav(Res_Fav res_Fav) {
+		int result = 0;
+		log.info("SkServiceImpl insert Start");
+		result = sk.insertResFav(res_Fav);
+		return result;
+	}
+
+	// 맛집 즐겨찾기 삭제
+	@Override
+	public int deleteResFav(Res_Fav res_Fav) {
+		int result = 0;
+		log.info("SkServiceImpl delete Start");
+		result = sk.deleteResFav(res_Fav);
+		return result;
+	}
+
+	@Override
+	public int isRes_Fav(Res_Fav res_Fav) {
+		log.info("SkServiceImpl isRes_Fav Start");
+		int restaurantFavList = sk.selectResFav(res_Fav);				
+		return restaurantFavList;
 	}
 }

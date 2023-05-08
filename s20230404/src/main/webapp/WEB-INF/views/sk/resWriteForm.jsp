@@ -86,9 +86,9 @@
 			</tr>
 			
 			<tr>
-				<td> 
- 				   UpLoad Image : <img alt="UpLoad Image" src="${pageContext.request.contextPath}/restaurantUpload/${savedName}">
-						<input type="file" name="file1" multiple="multiple"> <p>						
+				<td>
+				<img alt="사진추가 " src="/images/restaurantUpload/${savedName}"> 
+					<input type="file" name="file1" multiple="multiple"> <p>						
 				</td>						
 			</tr>				
 		

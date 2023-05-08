@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.travelAlone.s20230404.Res_FavMapper">
+<!-- 즐겨찾기 등록하기 -->
+
+	<insert id="insertResFav" parameterType="Res_Fav">
+			 INSERT INTO Res_Fav (
+			 MEMBER_ID
+            ,RESTAURANT_ID
+           , CREATE_DATE
+           , MODIFIED_DATE)           
+			 VALUES 
+			 (  #{member_id, jdbcType=NUMERIC}, #{restaurant_id}, sysdate,    sysdate        ) 
+	</insert>
+
+	<!--  즐겨찾기 해제 -->
+		<delete id="deleteResFav" parameterType="Res_Fav">
+			 DELETE     Res_Fav
+			 WHERE  RESTAURANT_ID = #{restaurant_id}
+			 AND  member_id =  #{member_id, jdbcType=NUMERIC}
+		</delete>
+<!-- 즐겨찾기 목록 -->		
+	<select id="isRes_Fav" parameterType ="Res_Fav" resultType="int">		
+	 SELECT	count(*)
+	 FROM  RES_FAV  
+	 WHERE RESTAURANT_ID =   #{restaurant_id}
+	 AND   MEMBER_ID =  #{member_id}
+
+	</select>
+
+</mapper>

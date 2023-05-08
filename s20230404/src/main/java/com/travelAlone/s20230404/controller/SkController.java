@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Res;
+import com.travelAlone.s20230404.model.Res_Fav;
 import com.travelAlone.s20230404.model.Res_Img;
 import com.travelAlone.s20230404.model.Res_Rev;
-import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.sk.SkService;
 
@@ -36,7 +40,7 @@ public class SkController {
 	// ===================================맛집===================================
 
 	// 맛집 메인
-	@RequestMapping(value = "res")
+	@RequestMapping("res")
 	public String notice(Res restaurant, String currentPage, Model model) {
 		log.info("SkController Start restaurant");
 		int totalRestaurant = sk.totalRestaurant();
@@ -49,7 +53,7 @@ public class SkController {
 		// 게시판 코드
 		List<CommonCode> commonCode = sk.getCommonCode();
 		log.info("boardList data : {}, {}", commonCode.get(0).getCode(), commonCode.get(0).getValue());
-		model.addAttribute("boardList,commonCode");
+		model.addAttribute("boardList",commonCode);
 
 		// 지역코드
 		List<CommonCode> commonLocCode = sk.getCommonLocCode();
@@ -68,7 +72,8 @@ public class SkController {
 
 	// 맛집 정보글
 	@GetMapping("resDetail")
-	public String restaurantDetail(int rid, Model model, Res_Img res_Img) {
+	public String restaurantDetail(@LoginUser MemberJpa memberJpa,
+			int rid, Model model, Res_Img res_Img, Res_Fav res_Fav) {
 		log.info("SkController Start restaurantDetail");
 		log.info("SkController restaurantDetail restaurant_id->" + rid);
 		// 맛집 정보 서비스
@@ -81,6 +86,22 @@ public class SkController {
 		log.info("SkController  listImg.size()=>" + listImg.size());
 		model.addAttribute("imgResList", listImg);
 
+		//즐겨찾기테이블 넣기
+		log.info("isRes_Fav Start");		
+		log.info("isRes_Fav rid"+ rid);		
+		log.info("isRes_Fav memberJpa.getId()-> " + memberJpa.getId());		
+		res_Fav.setRestaurant_id(rid);
+		res_Fav.setMember_id(memberJpa.getId());
+		
+		//변수추가
+		int isfavRes = 0;
+		res_Fav.setIsfavRes(isfavRes);
+		
+		int favResult = sk.isRes_Fav(res_Fav);
+		log.info("SkController favResult=>{}", favResult);
+		
+		model.addAttribute("isfavRes", favResult);
+		
 		// 리뷰 리스트
 		List<Res_Rev> listResRev = sk.listResRev(rid);
 		log.info("SkController list listResRev.size()=>" + listResRev.size());
@@ -93,9 +114,17 @@ public class SkController {
 
 	// 정보글 작성 페이지
 	@GetMapping(value = "resWriteForm")
-	public String resWriteForm(Res restaurant, Model model) {
-		log.info("SkController  resWriteForm Start");
-		return "sk/resWriteForm";
+	public String resWriteForm(@LoginUser MemberJpa memberJpa,Res restaurant, Model model) {
+		log.info("SkController  resWriteForm Start..." );
+		  if(memberJpa != null) {
+		         log.info("SkController resWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+		         model.addAttribute("user_id", memberJpa.getId());
+		        
+		         return "sk/resWriteForm";
+
+		      }else {
+		    	  return  "km/login";
+		      }
 	}
 
 	// 정보글작성
@@ -115,7 +144,7 @@ public class SkController {
 
 		// 3. 가져온 시퀀스 세팅하여 img insert
 		// 이미지 넣기
-		String img_context = request.getSession().getServletContext().getRealPath("/restaurantUpload/");
+		String img_context = "images"+File.separator+"restaurantUpload" + File.separator;
 		log.info("IMG POST Start");
 		for (MultipartFile multipartFile : file1) {
 			log.info("originalName: {}, img_context : {}", multipartFile.getOriginalFilename(), img_context);
@@ -131,13 +160,12 @@ public class SkController {
 		}
 
 		if (insertResult > 0) {
-			return "redirect:res";
-		} else {
-			model.addAttribute("msg", "입력 실패 확인해 보세요");
-			return "forward:sk/resWriteForm";
-		}
-
-	}
+			return "redirect:res";}
+		else {
+			model.addAttribute("msg","입력 실패 확인해 보세요");
+			return "forward:skRes/resWriteForm";
+		}			
+	}	
 
 	private String uploadFile(String originalName, byte[] fileData, String img_context) throws Exception {
 		UUID uid = UUID.randomUUID();
@@ -151,28 +179,57 @@ public class SkController {
 			log.info("업로드용 폴더 생성" + img_context);
 
 		}
-		String img_stored_file = uid.toString() + "_" + originalName;
+		String img_stored_file = img_context + uid.toString() + "_" + originalName;
 		log.info("img_stored_file ->" + img_stored_file);
-		File target = new File(img_context, img_stored_file);
+		File target = new File(img_stored_file);
 
 		FileCopyUtils.copy(fileData, target);
 
 		return img_stored_file;
+		
 	}
 
 	// 맛집 정보글 수정 페이지
 	@GetMapping(value = "resUpdateForm")
-	public String restaurantUpdateForm(int restaurant_id, Model model) {
+	public String restaurantUpdateForm(int restaurant_id, Model model, Res_Img res_Img) {
 		log.info("SkController Start updateForm");
 		Res restaurant = sk.detailRestaurant(restaurant_id);
 		log.info("SkController updateFormRes restaurant->" + restaurant);
-		model.addAttribute("restaurant", restaurant);
+	
+	//사진 리스트
+		log.info("Res_Img Start");
+		res_Img.setRestaurant_id(restaurant_id);
+		List<Res_Img> listImg = sk.listRes_Img(res_Img);
+		log.info("SkController  listImg.size()=>"+ listImg.size());
+		model.addAttribute("imgResList", listImg);
+		
+		
+		model.addAttribute("restaurant", restaurant);	
 		return "sk/resUpdateForm";
 	}
+	
 
 	// 맛집 정보글 수정 처리
 	@PostMapping(value = "updateRestaurant")
-	public String updateNotice(Res restaurant, Model model) {
+	public String updateNotice(Res restaurant , Model model,
+			HttpServletRequest request,  List<MultipartFile> file1, Res_Img res_Img
+			) throws Exception {
+	
+		//이미지삽입
+		String img_context = "images"+File.separator+"restaurantUpload" + File.separator;
+		log.info("IMG POST Start");
+		
+		for (MultipartFile multipartFile : file1) {
+		log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+		String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
+		// Service --> DB IMG CRUD
+		res_Img.setImg_original_file(multipartFile.getOriginalFilename());
+		res_Img.setImg_stored_file(img_stored_file);
+
+
+		int insertImgResult = sk.insertImg(res_Img);
+		log.info("SkController insertImg insertImgResult->"+ insertImgResult);
+	}
 		log.info("SkController Start update");
 		int updateCount = sk.updateRestaurant(restaurant);
 		log.info("SkController updateRes updateCount ->" + updateCount);
@@ -188,10 +245,22 @@ public class SkController {
 	public String deleteRestaurant(int restaurant_id, Model model) {
 		log.info("SkController Start delete restaurant_id :" + restaurant_id);
 		int result2 = sk.deleteResImg(restaurant_id);
+		int result3 = sk.deleteResRev(restaurant_id);
 		int result = sk.deleteRestaurant(restaurant_id);
 		return "redirect:res";
 	}
 
+	//정보글 수정시 사진만 삭제
+	@ResponseBody
+	@RequestMapping(value = "deleteResImg")
+	public String deleteResImg(int restaurant_id, int img_id, Model model) {
+		log.info("SkController Start delete restaurant_id :" + restaurant_id);
+		log.info("SkController Start delete img_id :" + img_id);
+		int result = sk.deleteResOneImg(restaurant_id,img_id);
+		String resultStr = Integer.toString(result);
+		return resultStr;
+	}
+	
 	// 맛집 검색
 	@RequestMapping(value = "restaurantSearch")
 	public String restaurantSearch(Res restaurant, String currentPage, Model model) {
@@ -228,6 +297,11 @@ public class SkController {
 		log.info("boardList data : {}, {}", commonCode.get(0).getCode(), commonCode.get(0).getValue());
 		model.addAttribute("boardList", commonCode);
 
+		// 지역 코드
+		List<CommonCode> commonLocCode = sk.getCommonLocCode();
+		log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
+		model.addAttribute("boardLocList",commonLocCode);
+		
 		int totalRestaurant = sk.conditionOptionCount(code);
 		log.info("SkController restaurantCodeFilter totalRestaurant =>" + totalRestaurant);
 
@@ -253,6 +327,11 @@ public class SkController {
 	String code, Res restaurant, String currentPage, Model model) {
 		log.info("SkController locCodeFilter Start");
 
+		// 맛집 코드
+		List<CommonCode> commonCode = sk.getCommonCode();
+		log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+		model.addAttribute("boardList",commonCode);
+		
 		// 지역 코드
 		List<CommonCode> commonLocCode = sk.getCommonLocCode();
 		log.info("boardLocList data : {}, {}", commonLocCode.get(0).getCode(), commonLocCode.get(0).getValue());
@@ -281,25 +360,48 @@ public class SkController {
 
 	// 리뷰 작성 페이지
 	@GetMapping(value = "resRevWriteForm")
-	public String resRevWriteForm(Res_Rev res_Rev, Model model) {
-		log.info("SkController resRevWriteForm Start");
-		model.addAttribute("res_rev", res_Rev);
-		return "sk/resRevWriteForm";
+	public String resRevWriteForm(@LoginUser MemberJpa memberJpa,Res_Rev res_Rev, Model model) {
+			log.info("SkController  resRevWriteForm Start" );	
+		
+			 if(memberJpa != null) {
+			
+			log.info("SkController resRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+			log.info("SkController resFav res_Rev.getRestaurant_id()는 "+ res_Rev.getRestaurant_id());
+			model.addAttribute("user_id", memberJpa.getId());
+			model.addAttribute("res_rev", res_Rev);
+			
+			return "sk/resRevWriteForm";
+			}else {
+			 		return  "km/login";
+	      }	
 	}
 
 	// 리뷰 작성
 	@PostMapping(value = "resRevWriteForm")
-	public String resRevWrite(Res_Rev res_Rev, Model model) {
-		log.info("SkController resRevWrite Start");
+	public String resRevWrite(@LoginUser MemberJpa memberJpa,
+			Res_Rev res_Rev, Model model) throws Exception {
+		log.info("SkController  resRevWrite Start...");
+		
+		  if (memberJpa == null){
+		         throw new Exception("로그인 해주세요!");
+		      }
+		
+		  log.info("SkController writeFormResRev memberJpa.getId()는 "+ memberJpa.getId());
+		  res_Rev.setMember_id( memberJpa.getId());
+		  
+		  
 		int insertResult = sk.insertResRev(res_Rev);
-		log.info("SkController resRevWrite insertResult->" + insertResult);
-		if (insertResult > 0) {
-			return "redirect:resDetail?rid=" + res_Rev.getRestaurant_id();
-		} else {
-			model.addAttribute("msg", "입력 실패 확인해 보세요");
+		log.info("SkController resRevWrite insertResult->"+insertResult );
+		
+		
+		if(insertResult >0) {
+			return "redirect:resDetail?rid="+res_Rev.getRestaurant_id();
+		}
+		else {				
+			model.addAttribute("msg","입력 실패 확인해 보세요");
 			return "forward:sk/resRevWriteForm";
 		}
-
+		
 	}
 
 	// 리뷰 수정 페이지 이동
@@ -332,5 +434,44 @@ public class SkController {
 		log.info("SkController Start delete... n_id : " + review_id);
 		int result = sk.deleteResRev(review_id);
 		return "redirect:res";
+	}
+	//즐겨찾기 추가
+	@ResponseBody
+	@RequestMapping(value = "insertResFav")
+	public String resFav(@LoginUser MemberJpa memberJpa,
+			Res_Fav res_Fav, Model model) throws Exception {
+		log.info("SkController  resFav Start");
+		if (memberJpa == null){
+	         throw new Exception("로그인 해주세요!");
+	      }
+		 log.info("SkController resFav memberJpa.getId()는 "+ memberJpa.getId());
+		 log.info("SkController resFav res_Fav.getRestaurant_id()는 "+ res_Fav.getRestaurant_id());
+		res_Fav.setMember_id(memberJpa.getId());
+		res_Fav.setRestaurant_id(res_Fav.getRestaurant_id());
+		
+		int insertResult = sk.insertResFav(res_Fav);
+		log.info("SkController resFav insertResult->"+insertResult );
+	
+		
+		return "sk/res";
+	}
+	
+
+	//즐겨찾기 해제
+	@RequestMapping(value = "deleteResFav")
+	public String deleteResFav(@LoginUser MemberJpa memberJpa,Res_Fav res_Fav, Model model) throws Exception {
+		log.info("SkController  deleteResFav Start");
+		if (memberJpa == null){
+	         throw new Exception("로그인 해주세요!");
+	      }
+		res_Fav.setMember_id(memberJpa.getId());
+		log.info("SkController resFav memberJpa.getId()는 "+ memberJpa.getId());
+		log.info("SkController Start delete restaurant_id :" + res_Fav.getRestaurant_id());
+		
+		res_Fav.setMember_id(memberJpa.getId());
+		res_Fav.setRestaurant_id(res_Fav.getRestaurant_id());
+		
+		int result = sk.deleteResFav(res_Fav);
+		return  "sk/res";
 	}
 }

@@ -22,6 +22,7 @@
 		<typeAlias alias="Res" type="com.travelAlone.s20230404.model.Res"/>
 		<typeAlias alias="Res_Img" type="com.travelAlone.s20230404.model.Res_Img"/>
 		<typeAlias alias="Res_Rev" type="com.travelAlone.s20230404.model.Res_Rev"/>
+		<typeAlias alias="Res_Fav" type="com.travelAlone.s20230404.model.Res_Fav"/>
 		<typeAlias alias="Board" type="com.travelAlone.s20230404.model.Board"/>
 		<typeAlias alias="BodImg" type="com.travelAlone.s20230404.model.BodImg"/>
 		<typeAlias alias="Common" type="com.travelAlone.s20230404.model.CommonCode"/>

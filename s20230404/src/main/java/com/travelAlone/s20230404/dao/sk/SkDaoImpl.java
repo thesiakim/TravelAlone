@@ -7,9 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.CommonCode;
+import com.travelAlone.s20230404.model.Res;
+import com.travelAlone.s20230404.model.Res_Fav;
 import com.travelAlone.s20230404.model.Res_Img;
 import com.travelAlone.s20230404.model.Res_Rev;
-import com.travelAlone.s20230404.model.Res;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -310,5 +311,66 @@ public class SkDaoImpl implements SkDao {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public int deleteResOneImg(int restaurant_id, int img_id) {
+		Res_Img res_Img = new Res_Img();
+		res_Img.setRestaurant_id(restaurant_id);
+		res_Img.setImg_id(img_id);
+		
+		
+		log.info("SkDaoImpl deleteResOneImg start");
+		int result = 0;
+		log.info("SkDaoImpl deleteResImg restaurant_id->"+ restaurant_id);
+		log.info("SkDaoImpl deleteResImg img_id->"+ img_id);
+		try {
+			result = session.delete("deleteResOneImg",res_Img );
+		} catch (Exception e) {
+			log.info("SkDaoImpl delete Exception->"+ e.getMessage());
+		}
+		return result;
+	}
+
+	// 즐겨찾기
+	@Override
+	public int insertResFav(Res_Fav res_Fav) {
+		int result = 0;
+		log.info("SkDaoImpl insertResFav Start");
+		try {
+			result = session.insert("insertResFav",res_Fav);
+		} catch (Exception e) {
+			log.info("SkDaoImpl insert Exception" + e.getMessage());
+			
+		}
+		return result;
+	}
+
+	// 즐겨찾기 삭제
+	@Override
+	public int deleteResFav(Res_Fav res_Fav) {
+		int result = 0;
+		log.info("SkDaoImpl deleteResFav Start");
+		try {
+			result = session.delete("deleteResFav",res_Fav);
+		} catch (Exception e) {
+			log.info("SkDaoImpl delete Exception" + e.getMessage());
+			
+		}
+		return result;
+	}
+
+	@Override
+	public int selectResFav(Res_Fav res_Fav) {
+		log.info("SkDaoImpl selectResFav start");
+		int resFav = 0;
+		log.info("data check res : {}, mem : {}",res_Fav.getRestaurant_id(),res_Fav.getMember_id());
+		try {
+			resFav = session.selectOne("isRes_Fav",res_Fav);
+		} catch (Exception e) {
+			log.info("SkDaoImpl isRes_Fav Exception " +e.getMessage());
+		}
+		
+		return resFav;
 	}
 }

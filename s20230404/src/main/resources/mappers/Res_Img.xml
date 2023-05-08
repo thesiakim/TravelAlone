@@ -19,7 +19,8 @@
 
 <!-- 이미지 목록가져오기 -->
 	<select id="skResImgList" parameterType="Res_Img" resultType="Res_Img" >
-			select IMG_ID
+			select 	RESTAURANT_ID
+					,IMG_ID
 					,IMG_STORED_FILE
 					,IMG_ORIGINAL_FILE
 			from  Res_Img
@@ -32,6 +33,12 @@
 		delete from Res_Img where RESTAURANT_ID = #{restaurant_id}
 	</delete>
 
+<!-- 이미지 한개 삭제하기 -->
+	<delete id="deleteResOneImg" parameterType="Res_Img">
+		delete from Res_Img 
+		where IMG_ID = #{img_id}
+		and   RESTAURANT_ID = #{restaurant_id}
+	</delete>
 
 
 </mapper>

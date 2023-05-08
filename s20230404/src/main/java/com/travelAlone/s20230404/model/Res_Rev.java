@@ -17,6 +17,9 @@ public class Res_Rev {
 	private int	 				r_score;
 	private LocalDateTime 	 	create_date;
     private LocalDateTime 	 	modified_date;
+    
+    // member 조인
+    private String m_nickname;
 }
 
 

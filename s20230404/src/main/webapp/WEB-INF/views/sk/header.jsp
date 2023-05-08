@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<html>
 <head>
     <title>Insert title here</title>
     <meta charset="UTF-8">
@@ -9,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 헤더 -->
 </head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <body>
   <div id="header">
 	<div class="container">
@@ -46,12 +49,12 @@
 			</li>
 		<li><a href="res">맛집</a>
 		  <ul>
-			<li><a href="#">한 식</a></li>
-			<li><a href="#">중 식</a></li>
-			<li><a href="#">일 식</a></li>
-			<li><a href="#">양 식</a></li>
-			<li><a href="#">카 페</a></li>
-			<li><a href="#">기 타</a></li>
+			<li><a href="restaurantCodeFilter?code=res100">한 식</a></li>
+			<li><a href="restaurantCodeFilter?code=res200">중 식</a></li>
+			<li><a href="restaurantCodeFilter?code=res300">일 식</a></li>
+			<li><a href="restaurantCodeFilter?code=res400">양 식</a></li>
+			<li><a href="restaurantCodeFilter?code=res500">카 페</a></li>
+			<li><a href="restaurantCodeFilter?code=res600">기 타</a></li>
           </ul>
 		</li>
 		<li><a href="/listAllBoard">커뮤니티</a>
