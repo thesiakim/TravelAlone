@@ -71,4 +71,10 @@
 		WHERE rn BETWEEN #{start} AND #{end} 
 	</select>
     
+    <!-- 유저 페이지 -->
+    <select id="userPage" parameterType="long" resultType="Member">
+    	SELECT	*
+    	FROM	member
+    	WHERE	member_id = #{member_id}
+    </select>
 </mapper>

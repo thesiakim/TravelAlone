@@ -57,10 +57,10 @@
 </div>
 	<table>
 		<tr>
-			<td colspan="2" width="700px;">
+			<td colspan="2" width="600px;">
 				<h1>기본 회원 정보</h1>
 			</td>
-			<td colspan="2" width="700px;">
+			<td colspan="2" width="600px;">
 				<h1>활동 내역</h1>
 			</td>
 		</tr>

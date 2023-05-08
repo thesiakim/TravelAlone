@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Warning;
 
 import lombok.RequiredArgsConstructor;
@@ -144,6 +145,20 @@ public class JhDaoImpl implements JhDao {
 			log.info("jhDaoImpl myPageCommunityList e.getMessage() -> "+ e.getMessage());
 		}
 		return myPageCommunityList;
+	}
+	
+	// 유저 마이페이지
+	@Override
+	public List<Member> userPage(long member_id) {
+		List<Member> userPage = null;
+		log.info("jhDaoImpl userPage start");
+		try {
+			userPage = session.selectList("userPage", member_id);
+			log.info("jhDaoImpl userPage.size() -> " + userPage.size());
+		} catch (Exception e) {
+			log.info("jhDaoImpl userPage e.getMessage() -> " + e.getMessage());
+		}
+		return userPage;
 	}
 
 	
