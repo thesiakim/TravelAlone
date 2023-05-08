@@ -140,12 +140,35 @@
 				(
 				        SELECT rownum rn , a.*
 				        FROM
-				                   (select * from RESTAURANT 
+				                   (select 
+				                    RESTAURANT_ID ,
+									R_NAME,
+									R_CONTENT,
+									R_ADDRESS,
+									R_HOUR,
+									R_CALL,
+									R_MENU,
+									R_PARKING,
+									R_COMMON_RESTAURANT,
+									(SELECT COUNT(*) FROM res_rev WHERE restaurant_id = RESTAURANT.RESTAURANT_ID) AS R_RevCount ,
+									TRUNC((SELECT AVG(R_SCORE) FROM res_rev WHERE restaurant_id = RESTAURANT.RESTAURANT_ID), 0) AS R_AvgScore,
+									CREATE_DATE ,
+									MODIFIED_DATE , 
+		                   			(select word 
+										from(select 
+										        bcd||mcd as code, 
+										        word 
+										    from
+										        common
+										    where bcd='loc') b
+										    where code = R_COMMON_LOC)as R_COMMON_LOC				                   
+				                   
+				                   from RESTAURANT
 								     where R_COMMON_RESTAURANT = #{code}        
 				                    order by restaurant_id desc) a
 				 )   
-		 		WHERE  rn BETWEEN #{start} and #{end} 
-			
+		 		WHERE  rn BETWEEN #{start} and #{end}
+		 		
 		</select>
 
 <!-- 조회된 지역 데이터 갯수 세기 -->  
@@ -157,11 +180,32 @@
 		 		SELECT *
 				FROM
 				(
-				        SELECT rownum rn , a.*
-				        FROM
-				                   (select * from RESTAURANT 
-								     where R_COMMON_LOC = #{code}        
-				                    order by restaurant_id desc) a
+				  SELECT rownum rn , a.*
+				  FROM
+				        (select RESTAURANT_ID ,
+									R_NAME,
+									R_CONTENT,
+									R_ADDRESS,
+									R_HOUR,
+									R_CALL,
+									R_MENU,
+									R_PARKING,
+									R_COMMON_RESTAURANT,
+									(SELECT COUNT(*) FROM res_rev WHERE restaurant_id = RESTAURANT.RESTAURANT_ID) AS R_RevCount ,
+									TRUNC((SELECT AVG(R_SCORE) FROM res_rev WHERE restaurant_id = RESTAURANT.RESTAURANT_ID), 0) AS R_AvgScore,
+									CREATE_DATE ,
+									MODIFIED_DATE , 
+		                   			(select word 
+										from(select 
+										        bcd||mcd as code, 
+										        word 
+										    from
+										        common
+										    where bcd='loc') b
+										    where code = R_COMMON_LOC)as R_COMMON_LOC
+		                   from RESTAURANT
+						     where R_COMMON_LOC = #{code}        
+		                    order by restaurant_id desc) a
 				 )   
 		 		WHERE  rn BETWEEN #{start} and #{end} 
 			

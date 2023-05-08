@@ -42,7 +42,10 @@ public class Res {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 			    return create_date.format(formatter);
 			  }
-
+		
+		// member 조인
+		private String m_nickname;
+}
 	   
  //RESTAURANT_ID		NUMBER					맛집ID
  //R_NAME				VARCHAR2(50 BYTE)		맛집이름
@@ -56,4 +59,3 @@ public class Res {
  //R_COMMON_LOC			VARCHAR2(20 BYTE)		맛집 지역
  //CREATE_DATE			DATE					생성일
  //MODIFIED_DATE		DATE					수정일
-}

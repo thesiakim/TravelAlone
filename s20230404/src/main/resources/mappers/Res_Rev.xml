@@ -8,10 +8,13 @@
 <select id="resRevList" parameterType="Res_Rev" resultType="Res_Rev" >
     		<![CDATA[
 			SELECT							  
-		            REVIEW_ID ,RESTAURANT_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
-		            ,CREATE_DATE ,MODIFIED_DATE
-			 FROM    RES_REV
-			 WHERE    RESTAURANT_ID =    #{RESTAURANT_ID}   
+				       hr. *
+				       ,m.m_nickname
+			 FROM    RES_REV hr,  Member m
+			 WHERE    
+			 RESTAURANT_ID =   #{RESTAURANT_ID}  
+			 and
+			  hr.member_id = m.member_id   
 			                      					 		
 		 	 ]]>	
 			
