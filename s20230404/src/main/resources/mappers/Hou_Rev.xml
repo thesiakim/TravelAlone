@@ -29,7 +29,7 @@
 			  (REVIEW_ID ,			HOUSE_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
 		            ,CREATE_DATE ,MODIFIED_DATE )
 		  	values
-		  	  (HOU_REV_SEQ.nextval,#{house_id}	,#{member_id, jdbcType=NUMERIC}, #{r_content}, #{r_score}
+		  	  (REVIEW_ID_SEQ.nextval,#{house_id}	,#{member_id, jdbcType=NUMERIC}, #{r_content}, #{r_score}
 		  	  ,sysdate, sysdate	)        
 				
 		</insert>
@@ -45,15 +45,10 @@
 		
 		</update>
 
-<!-- 숙소리뷰 글삭제하기 -->
+<!--  문의사항 글삭제하기 -->
 		<delete id="deleteHouRev" parameterType="int">
 			delete from HOU_REV where REVIEW_ID = #{review_id}
 		</delete>
-		
-<!--  숙소 리뷰글 글다삭제하기 -->
-		<delete id="deleteHouRevAll"  parameterType="int">
-		 DELETE     from HOU_REV   WHERE HOUSE_ID = #{house_id}
-		</delete>		
 
 
 

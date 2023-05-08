@@ -7,21 +7,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link href="/css/list.css" rel="stylesheet" type="text/css">	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+	<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+	<script defer src="/js/picture.js"></script>
 <body>
 	<div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
 	</div>
-
-<h1>숙소리뷰 작성	</h1>
+<h3><img src="../logo/Review.png" alt="리뷰" width=250px height=250px></h3>
+<h3>글 작성</h3>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="houRevWriteForm" method="post" name="frm">
 	
 	<input type="hidden" name="house_id" value="${hou_Rev.house_id }">
 		<table style="margin:auto;">
-			<!-- <tr>
-				<td> 아이디</td>
-				<td> <input type="text" name="member_id" size = "50"> </td>
-			</tr> -->
 				<tr>
 				<td> 내용</td>
 				<td> <input type="text" name="r_content" size = "50"> </td>
@@ -30,23 +30,21 @@
 			<tr>
 				<td> 평점</td>
 				<td>
-				    <label><input type="radio" name="r_score" value="0" <c:if test="${tra_Rev.r_score == 0}">checked</c:if>> 0</label>
-				    <label><input type="radio" name="r_score" value="1" <c:if test="${tra_Rev.r_score == 1}">checked</c:if>> 1</label>
-				    <label><input type="radio" name="r_score" value="2" <c:if test="${tra_Rev.r_score == 2}">checked</c:if>> 2</label>
-				    <label><input type="radio" name="r_score" value="3" <c:if test="${tra_Rev.r_score == 3}">checked</c:if>> 3</label>
-				    <label><input type="radio" name="r_score" value="4" <c:if test="${tra_Rev.r_score == 4}">checked</c:if>> 4</label>
-				    <label><input type="radio" name="r_score" value="5" <c:if test="${tra_Rev.r_score == 5}">checked</c:if>> 5</label>
+				    <label><input type="radio" name="r_score" value="0" <c:if test="${hou_Rev.r_score == 0}">checked</c:if>> 0</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <label><input type="radio" name="r_score" value="1" <c:if test="${hou_Rev.r_score == 1}">checked</c:if>> 1</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <label><input type="radio" name="r_score" value="2" <c:if test="${hou_Rev.r_score == 2}">checked</c:if>> 2</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <label><input type="radio" name="r_score" value="3" <c:if test="${hou_Rev.r_score == 3}">checked</c:if>> 3</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <label><input type="radio" name="r_score" value="4" <c:if test="${hou_Rev.r_score == 4}">checked</c:if>> 4</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <label><input type="radio" name="r_score" value="5" <c:if test="${hou_Rev.r_score == 5}">checked</c:if>> 5</label>
 				</td>
 			</tr>
 			
-								
-		
-			<tr >
-				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
-				<a href="javascript:window.history.back();">취소하기</a>
-				<%-- <a href="houDetail?hid=${house.house_id}">이전화면</a></td> --%>
-			</tr>
-		</table>
+				</table>
+		<hr>					
+				<div style="text-align:center;">
+					<button type="submit">확인</button>
+					<a href="hou">목록 보기</a><br>
+					</div>
 	</form>
 
 </body>

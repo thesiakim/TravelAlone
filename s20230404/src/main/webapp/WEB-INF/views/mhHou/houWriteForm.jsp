@@ -7,16 +7,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link href="/css/list.css" rel="stylesheet" type="text/css">	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+	<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+	<script defer src="/js/picture.js"></script>
 <body>
 <div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
 	</div>
-<h1>숙소글 작성	</h1>
+<h3><img src="../logo/Hou.png" alt="숙소" width=250px height=250px></h3>
+<h3>글 쓰기</h3>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="houWriteForm" method="post" name="frm" enctype="multipart/form-data">
 		<table style="margin:auto;">
 			<tr>
-				<td > 숙소종류</td>
+				<td >숙소 종류</td>
 				<td style="text-align: left;"> 
 				<select name="h_common_house">
 					<option value="hou100">호텔</option>
@@ -30,7 +35,7 @@
 				
 			</tr>
 			<tr>
-				<td> 숙소지역</td>	
+				<td>숙소 지역</td>	
 				<td style="text-align: left;">
 					<select name="h_common_loc">
 						<option value="loc102">서울</option>
@@ -53,20 +58,20 @@
 				 </td>															
 		    </tr>		
 			<tr>
-				<td> 숙소명</td>
+				<td>숙소명</td>
 				<td> <input type="text" name="h_name" size = "50"> </td>
 			</tr>
 				<tr>
-				<td>소개글</td>
+				<td>숙소 정보</td>
 				<td><textarea name="h_content" rows="10" cols="50"></textarea></td>
 			</tr>
 			
 			<tr>
-				<td> 숙소주소 </td>
+				<td>숙소 주소</td>
 				<td> <input type="text" name="h_address" size = "50"> </td>
 			</tr>
 			<tr>
-				<td> 객실가격 </td>
+				<td>객실 가격</td>
 				<td> <input type="text" name="h_room" size = "50"> </td>
 			</tr>
 			<tr>
@@ -75,37 +80,41 @@
 			</tr>
 			
 			<tr>
-				<td>문의전화 </td>
+				<td>문의 전화</td>
 				<td> <input type="text" name="h_call" size = "50"> </td>
 			</tr>
 			
 			
 			<tr>
-				<td>조식여부 </td>
+				<td>조식 여부</td>
 				<td> <input type="text" name="h_eat" size = "50"> </td>
 			</tr>
 			
 			<tr>
-				<td>주차장여부 </td>
+				<td>주차장 여부 </td>
 				<td> <input type="text" name="h_parking" size = "50"> </td>
 			</tr>
 				
 			<tr>
-				<td> 
-				   <img alt="사진추가 " src="/images/houseUpload/${savedName}">
-						<input type="file" name="file1" multiple="multiple"> <p>						
-				</td>						
-			</tr>			
-				
-								
-		
-			<tr >
-				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
-				<a href="hou">목록보기</a></td>
+			</table><br><br><hr>
+			<br><br>
+			<table style="margin:auto;">
+			<tr><font size=5>사진 첨부</font> </tr><br>
+							<br><font size=4><img alt="사진 추가하기" src="/images/houseUpload/${savedName}"><br>
+				<input type="file" name="file1" multiple="multiple">
+							
+				 </td>	<br><br>
+			<tr>
 			</tr>
-		</table>
-	</form>
 
+			</table><br><br><br>
+			<hr><br><br>
+				<div style="text-align:center;">
+					<button type="submit">확인</button>
+					<a href="hou">목록 보기</a>
+					</div>
+	</form>
+	
 
 
 </body>
