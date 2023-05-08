@@ -457,7 +457,7 @@ public class SkController {
 	}
 	
 
-	//즐겨찾기 해제
+	//즐겨찾기 해제   0508 10:53
 	@RequestMapping(value = "deleteResFav")
 	public String deleteResFav(@LoginUser MemberJpa memberJpa,Res_Fav res_Fav, Model model) throws Exception {
 		log.info("SkController  deleteResFav Start");
