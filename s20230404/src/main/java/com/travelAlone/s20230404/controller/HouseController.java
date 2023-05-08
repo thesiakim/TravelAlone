@@ -273,7 +273,7 @@ private final HouseService mh;
 		public String deleteHouse(int house_id, Model model) {
 			log.info("HouseController Start delete house_id :" +house_id);
 			int result2 = mh.deleteHouImg(house_id);
-			int result3 = mh.deleteHouRev(house_id);
+			int result3 = mh.deleteHouRevAll(house_id);
 			int result = mh.deleteHouse(house_id);	
 			return "redirect:hou";
 		}

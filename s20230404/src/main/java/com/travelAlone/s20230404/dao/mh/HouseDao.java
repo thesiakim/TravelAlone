@@ -40,12 +40,14 @@ public interface HouseDao {
 	int 					insertHouRev(Hou_Rev hou_Rev);
 	int 					updateHouseRev(Hou_Rev hou_Rev);
 	int 					deleteHouseRev(int review_id);
+	int 					houRevDelAll(int house_id);
 	
 	
 	//즐겨찾기
 	int 					insertHouFav(Hou_Fav hou_Fav);
 	int 					deleteHouFav(Hou_Fav hou_Fav);
 	int 					selectHouFav(Hou_Fav hou_Fav);
+	
 	
 	
 	

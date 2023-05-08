@@ -31,6 +31,7 @@ public interface SkService {
 	int					insertResRev(Res_Rev res_Rev);
 	int					updateRestaurantRev(Res_Rev res_Rev);
 	int					deleteResRev(int review_id);
+	int 				deleteResRevAll(int restaurant_id);
 	
 	int					insertImg(Res_Img res_Img);
 	int					seqRes(Res restaurant);
@@ -43,4 +44,5 @@ public interface SkService {
 	int 				insertResFav(Res_Fav res_Fav);
 	int 				deleteResFav(Res_Fav res_Fav);	
 	int 				isRes_Fav(Res_Fav res_Fav);
+	
 }

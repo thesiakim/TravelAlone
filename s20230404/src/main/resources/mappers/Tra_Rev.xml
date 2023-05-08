@@ -23,7 +23,7 @@
 			  (REVIEW_ID ,			TRAVEL_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
 		            ,CREATE_DATE ,MODIFIED_DATE )
 		  	values
-		  	  (REVIEW_ID_SEQ.nextval,#{travel_id}	,#{member_id}, #{r_content}, #{r_score},
+		  	  (TRA_REV_SEQ.nextval,#{travel_id}	,#{member_id}, #{r_content}, #{r_score},
 		  	   sysdate, sysdate	)        
 				
 		</insert>

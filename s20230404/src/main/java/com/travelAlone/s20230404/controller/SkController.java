@@ -88,18 +88,20 @@ public class SkController {
 
 		//즐겨찾기테이블 넣기
 		log.info("isRes_Fav Start");		
-		log.info("isRes_Fav rid"+ rid);		
-		log.info("isRes_Fav memberJpa.getId()-> " + memberJpa.getId());		
-		res_Fav.setRestaurant_id(rid);
-		res_Fav.setMember_id(memberJpa.getId());
+		log.info("isRes_Fav rid"+ rid);	
+		
 		
 		//변수추가
 		int isfavRes = 0;
-		res_Fav.setIsfavRes(isfavRes);
-		
-		int favResult = sk.isRes_Fav(res_Fav);
-		log.info("SkController favResult=>{}", favResult);
-		
+		int favResult = 0;
+		if (memberJpa != null) {
+			log.info("isRes_Fav memberJpa.getId()-> " + memberJpa.getId());		
+			res_Fav.setRestaurant_id(rid);
+			res_Fav.setMember_id(memberJpa.getId());							
+			res_Fav.setIsfavRes(isfavRes);								
+			favResult = sk.isRes_Fav(res_Fav);
+			log.info("SkController favResult=>{}", favResult);
+		}
 		model.addAttribute("isfavRes", favResult);
 		
 		// 리뷰 리스트
@@ -245,7 +247,7 @@ public class SkController {
 	public String deleteRestaurant(int restaurant_id, Model model) {
 		log.info("SkController Start delete restaurant_id :" + restaurant_id);
 		int result2 = sk.deleteResImg(restaurant_id);
-		int result3 = sk.deleteResRev(restaurant_id);
+		int result3 = sk.deleteResRevAll(restaurant_id);
 		int result = sk.deleteRestaurant(restaurant_id);
 		return "redirect:res";
 	}

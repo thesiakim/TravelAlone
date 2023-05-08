@@ -236,6 +236,13 @@ public class HouseServiceImpl implements HouseService {
 		int houseFavList = mh.selectHouFav(hou_Fav);				
 		return houseFavList;
 	}
+	@Override
+	public int deleteHouRevAll(int house_id) {
+		int result = 0;
+		log.info("HouseServiceImpl deleteHouRevAll Start");
+		result = mh.houRevDelAll(house_id);
+		return result;
+	}
 
 
 	

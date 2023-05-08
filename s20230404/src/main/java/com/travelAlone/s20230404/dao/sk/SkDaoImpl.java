@@ -373,4 +373,20 @@ public class SkDaoImpl implements SkDao {
 		
 		return resFav;
 	}
+
+	@Override
+	public int resRevDelAll(int restaurant_id) {
+		log.info("SkDaoImpl resRevDelAll start..");
+		int result = 0;
+		try {
+			result = session.delete("deleteResRevAll" ,restaurant_id);
+			log.info("SkDaoImpl deleteResRevAll result->"+ result);
+			
+		} catch (Exception e) {
+			log.info("SkDaoImpl delete Exception->"+ e.getMessage());
+		}
+		
+		return result;
+	}
+	
 }

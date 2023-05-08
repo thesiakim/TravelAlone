@@ -43,9 +43,11 @@ public interface SkDao {
 	List<Res_Img> 			selectResImgList(Res_Img res_Img);
 	int 					deleteResImg(int restaurant_id);
 	int						deleteResOneImg(int restaurant_id,int img_id);
+	int 					resRevDelAll(int restaurant_id);
 
 	//즐겨찾기
 	int 					insertResFav(Res_Fav res_Fav);
 	int 					deleteResFav(Res_Fav res_Fav);
 	int 					selectResFav(Res_Fav res_Fav);
+	
 }

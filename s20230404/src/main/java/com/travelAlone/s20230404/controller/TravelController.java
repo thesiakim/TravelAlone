@@ -97,17 +97,20 @@ public class TravelController {
 		//즐겨찾기테이블 넣기
 		log.info("isTra_Fav Start");
 		log.info("isTra_Fav tid"+ tid);		
-		log.info("isTra_Fav memberJpa.getId()-> " + memberJpa.getId());		
-		tra_Fav.setTravel_id(tid);
-		tra_Fav.setMember_id(memberJpa.getId());
+		
 		
 		//변수추가
 		int isfavTra  = 0;
-		tra_Fav.setIsfavTra(isfavTra);
-		
-		int favResult = sm.isTra_Fav(tra_Fav);
+		int favResult = 0;
+		if (memberJpa != null) {				
+		log.info("isTra_Fav memberJpa.getId()-> " + memberJpa.getId());			
+		tra_Fav.setTravel_id(tid);
+		tra_Fav.setMember_id(memberJpa.getId());
+		tra_Fav.setIsfavTra(isfavTra);		
+		favResult = sm.isTra_Fav(tra_Fav);
 		log.info("TravelController favResult=>{}", favResult);
 		
+		}
 		model.addAttribute("isfavTra", favResult);
 		
 			

@@ -230,4 +230,12 @@ public class SkServiceImpl implements SkService {
 		int restaurantFavList = sk.selectResFav(res_Fav);				
 		return restaurantFavList;
 	}
+
+	@Override
+	public int deleteResRevAll(int restaurant_id) {
+		int result = 0;
+		log.info("SkServiceImpl deleteResRevAll Start");
+		result = sk.resRevDelAll(restaurant_id);
+		return result;
+	}
 }

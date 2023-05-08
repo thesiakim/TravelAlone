@@ -48,6 +48,12 @@
 			delete from RES_REV where REVIEW_ID = #{review_id}
 		</delete>
 
+<!--  맛집 리뷰글 글다삭제하기 -->
+		<delete id="deleteResRevAll"  parameterType="int">
+		 DELETE     from RES_REV   WHERE RESTAURANT_ID = #{restaurant_id}
+		</delete>	
+
+
 
 
 </mapper>

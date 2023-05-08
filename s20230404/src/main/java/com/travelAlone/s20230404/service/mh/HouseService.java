@@ -22,6 +22,7 @@ public interface HouseService {
 	int 					deleteHouse(int house_id);
 	int 					deleteHouImg(int house_id);
 	int 					deleteHouOneImg(int house_id,int img_id );
+	int 					deleteHouRevAll(int house_id);
 	int 					conditionHouseCount(House house);
 	List<House>				listSearchHouse(House house);
 	
@@ -46,9 +47,9 @@ public interface HouseService {
 
 	//즐겨찾기
 	int 					insertHouFav(Hou_Fav hou_Fav);
-	int 					deleteHouFav(Hou_Fav hou_Fav);
-	
+	int 					deleteHouFav(Hou_Fav hou_Fav);	
 	int 					isHou_Fav(Hou_Fav hou_Fav);
+	
 	
 	
 	

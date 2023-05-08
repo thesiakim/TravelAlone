@@ -402,6 +402,23 @@ public class HouseDaoImpl implements HouseDao {
 			return houFav;
 		}
 
+
+		@Override
+		public int houRevDelAll(int house_id) {
+			log.info("HouseDaoImpl houRevDelAll start..");
+			int result = 0;
+			log.info("HouseDaoImpl houRevDelAll house_id->"+ house_id);
+			try {
+				result = session.delete("deleteHouRevAll" ,house_id);
+				log.info("HouseDaoImpl houRevDelAll result->"+ result);
+			} catch (Exception e) {
+				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());				
+			}
+									
+			return result;
+		}
+
+		
 		
 
 	
