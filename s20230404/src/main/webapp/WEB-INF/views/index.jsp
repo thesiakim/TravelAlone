@@ -5,10 +5,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
 
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
@@ -124,49 +130,31 @@
 	  	<div id="serch">
 			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
 	  	</div>
-	  	<div id="search-autocomplete">
-	  		<ul id="autocomplete-results"></ul>
-	  	</div>
 	  </form>
 	  
-	  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-	  <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-	  <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
 
 	  <script>
 	  	/* 자동 완성 */
-		  $(function(){
-			  var $searchId = $("#searchId");
-			  var $autocompleteResults = $("#autocomplete-results");
-	
-			  $searchId.autocomplete({
-			    source: function(request, response){
-			      $.ajax({
-			        url: "/autocomplete",
-			        dataType: "json",
-			        data:{
-			          keyword: request.term,
-			          category: $("#category").val()
-			        },
-			        success: function(data){
-			          $autocompleteResults.empty();
-			          $.each(data, function(index, value) {
-			            $autocompleteResults.append("<li>" + value + "</li>");
-			          });
-			          $autocompleteResults.show();
-			        }
-			      });
-			    },
-			    minLength: 1
-			  });
-	
-			  //검색창에서 키보드를 떼는 순간마다 자동완성 결과 숨김
-			  $searchId.on("keyup", function() {
-			    if ($searchId.val() === '') {
-			      $autocompleteResults.hide();
-			    }
-			  });
-			}); 
+	  	$(function(){
+	  		$("#searchId").autocomplete({
+	  			source: function(request, response){
+	  				$.ajax({
+	  					url: "/autocomplete",
+	  					dataType: "json",
+	  					data:{
+	  						keyword: request.term,
+	  						category: $("#category").val()
+	  					},
+	  					success: function(data){
+	  						response(data);
+	  					}
+	  				});
+	  			},
+	  			minLength: 1
+	  		});
+	  	});
+
 	  </script>
 	  
 	  

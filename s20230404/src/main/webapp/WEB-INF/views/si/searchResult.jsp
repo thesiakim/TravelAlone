@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,198 +15,22 @@
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 
 
-<style type="text/css">
+<script type="text/javascript">
+  function scrollToElement(id) {
+    var element = document.getElementById(id);
+    element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  }
 
-	/* 결과 안내 문장의 폰트 크기 조정  */
-	h2 {
-	  font-size: 80%;
-	  font-family: 'IBM Plex Sans KR', sans-serif;
-	}
-	
-	/* 결과 테이블 테두리 조정 */
-	#search-table {
-		border-collapse: collapse;
-		font-family: 'IBM Plex Sans KR', sans-serif;
-		
-	}
-	
-	#search-table tr:not(:first-of-type) {
-		border-top: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
-	}
-	
-	#search-table tr:not(:first-of-type) td:first-of-type,
-	#search-table tr:not(:first-of-type) td:nth-of-type(2) {
-		border-left: 1px solid #ddd;
-	}
-	
-	#search-table tr:not(:first-of-type) td:last-of-type {
-		border-right: 1px solid #ddd;
-	}
-	
-	/* 결과 테이블 두 번째 tr 크기 조정 */
-	#search-table tr:nth-child(2) {
-		height: 70px;
-	}
-	
-	/* 결과 테이블 두 번째 tr의 padding 조정 */
-	#search-table tr:not(:first-of-type) {
-		border-top: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
-	}
-	
-	#search-table tr:not(:first-of-type) td:first-of-type,
-	#search-table tr:not(:first-of-type) td:nth-of-type(2) {
-		border-left: 1px solid #ddd;
-	}
-	
-	#search-table tr:not(:first-of-type) td:last-of-type {
-		border-right: 1px solid #ddd;
-	}
-	
-	#search-table tr:nth-of-type(2) td {
-		padding: 20px;
-	}
-	
-	/* 검색 결과 padding */
-	#search-table tr:nth-of-type(2) td:first-of-type {
-  		padding: 20.5px;
-	}
-	 	 
-	/* 통합 검색 글씨 */
-	#search-table tr:first-child td:first-child {
-		font-size: 22px;
-		color: #333333;
-		font-family: 'IBM Plex Sans KR', sans-serif;
-	}
-	
-	/* 총 ㅇㅇ건 */
-	#search-td:last-of-type {
-		font-size: 14px;
-    	color: #666666;
-    	font-family: 'IBM Plex Sans KR', sans-serif;
-	}
-	
-	/* 검색 결과 없는 경우 안내문 */
-	#no-search-result li {
-		margin-left: 50;
-		font-size: 16px; 
-		color: #474747;
-		text-align: left;
-	}
-	
-	#no-search-result {
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	}
-
-	ul.no-search-list li {
-  		margin-bottom: 5px;
-	}
+</script>
 
 
-
-	
-	
-	
-	/* #search-table td {
-		list-style-image: url("../img/list.png");
-	} */
-	
-	/* 인기 검색어  */
-	 	
-	.popular-container {
-	  margin-bottom: 20px;
-	  margin-top: 10px;
-	  min-width: 320px; 
-	  max-width: 500px;
-	  
-	}
-	.popular-container p {
-	  margin: 0 0 20px; 
-	  line-height: 1.5;
-	  font-weight: 300;
-	}
-	.popular-container .content {
-	  background: #fff; 
-	  color: #373737;
-	   backface-visibility: hidden;
-	  overflow: hidden;
-	 
-	}
-	.popular-container .content > div {
-	  display: none;
-	  padding: 20px 25px 5px;
-	}
-	.popular-container input {
-	  display: none;
-	}
-	.popular-container label {
-	  display: inline-block; 
-	  padding: 15px 25px; 
-	  font-weight: 600; 
-	  text-align: center;
-	  border-bottom: 1px solid transparent;
-	  transition: all .3s ease-out 0.1s;
-	}
-	.popular-container label:hover {
-	  color: #fff; 
-	  cursor: pointer;
-	}
-	.popular-container input:checked + label {
-	  background: #ffffff;
-	  color: #1FAB89;
-	  border-bottom: 1px solid;
-	}
-	
-	.popular-container #tab-1:checked ~ .content #content-1,
-	.popular-container #tab-2:checked ~ .content #content-2,
-	.popular-container #tab-3:checked ~ .content #content-3,
-	.popular-container #tab-4:checked ~ .content #content-4 {
-	  display: block;
-
-	  
-	}
-	
-	@media screen and (max-width: 400px) { label {padding: 15px 10px;} }
-	
-	@keyframes inUp {
-	  0%{
-	    opacity: 0;
-	    transform: translateY(100px)
-	  }
-	    90%{
-	    transform: translateY(-10px)
-	  }
-	  100% {
-	    opacity: 1;
-	    transform: translateY(0)
-	  }
-	}
-	
-	.content li a {
-	  color: #333333;
-	  font-size: 14px; /* 글자 크기를 14px로 지정 */
-	  text-align: left; /* 왼쪽 정렬로 지정 */
-	}
-	
-	
-	.row div {
-	        line-height: 2.5em;
-	    }	 
-	 
-</style>
-
-
- <link href="/css/list.css" rel="stylesheet" type="text/css">
+<link href="/css/list.css" rel="stylesheet" type="text/css">
+<link href="/css/search.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <%@include file="header.jsp" %>
 
 	<section>
-	
-	
 	<!-- 검색 결과 박스 -->
 	<article id="container-search">
 		<h2>검색어 <span style="color: rgb(31,171,137)">"<c:out value="${keyword}" />"</span>에 대해 <span style="color: rgb(31,171,137)">총 <c:out value="${count}" />건</span>의 결과를 찾았습니다.</h2>
@@ -225,7 +50,7 @@
 								<c:if test="${not empty resultList.getTravelList()}">
 									<c:choose>
 									    <c:when test="${category eq 'category_total'}">
-									               여행지 (${travelCount})
+									               <a href="#travel-places" onclick="scrollToElement('travel-places')">여행지(${travelCount})</a>
 									    </c:when>
 									    <c:when test="${category eq 'category_travel'}">
 									               여행지 (${count})
@@ -240,7 +65,7 @@
 								<c:if test="${not empty resultList.getHouseList()}">
 		 							<c:choose>
 									    <c:when test="${category eq 'category_total'}">
-									               숙소 (${houseCount})
+									    	 <a href="#house-places" onclick="scrollToElement('house-places')">숙소 (${houseCount})</a>
 									    </c:when>
 									    <c:when test="${category eq 'category_house'}">
 									               숙소 (${count})
@@ -255,7 +80,7 @@
 								<c:if test="${not empty resultList.getRestaurantList()}">
 		 							<c:choose>
 									    <c:when test="${category eq 'category_total'}">
-									               맛집 (${resCount})
+									    	<a href="#res-places" onclick="scrollToElement('res-places')">맛집 (${resCount})</a>
 									    </c:when>
 									    <c:when test="${category eq 'category_res'}">
 									               맛집 (${count})
@@ -270,7 +95,7 @@
 								<c:if test="${not empty resultList.getBoardList()}">
 		 							<c:choose>
 									    <c:when test="${category eq 'category_total'}">
-									               커뮤니티 (${boardCount})
+									    	<a href="#board-places" onclick="scrollToElement('board-places')">커뮤니티 (${boardCount})</a>
 									    </c:when>
 									    <c:when test="${category eq 'category_comm'}">
 									               커뮤니티 (${count})
@@ -281,7 +106,7 @@
 							    	<input type="hidden">
 							  	</c:if>
 							</td>
-							<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+							<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 						</tr>
 		 		</table>	
 				</div>
@@ -299,227 +124,188 @@
 			</ul>
 	</c:if>
 	</article>
-	
-<div id="mh"  style="display:flex; justify-content:center;">
-	  <!-- 검색 결과 존재 -->
-	  <!-- 카테고리를 전체로 설정하고 검색한 경우 -->
-	  <c:if test="${category eq 'category_total'}">
-	  
-		  <article id="search-content-total">
-			     <!-- 여행지 검색 결과 리스트 -->
-			    <div class="travel-result">
-			    	<ul><c:if test="${not empty resultList.getTravelList()}">
-			    	<h1>여행지</h1>
-			    	<br>
-			    	
-		
-	<div style="display: flex; flex-wrap: wrap; ">
-			  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-			    <c:if test="${status.index < 5}">
-			      <div style="width: 25%; margin-bottom: 20px;">
-			        <a href="/traDetail?tid=${travel.travel_id}">
-			          <c:url value="/display" var="url">
-			            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-			          </c:url>
-			          <img src="${url}" alt="#" style="width: 250px; height: auto;">
-			        </a>
-			        <br>
-			        <c:out value="${travel.t_name}" />
-			       <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
-			      </div>
-			    </c:if>
-			  </c:forEach>
-			</div>	
-		
 
-			
-			        <c:if test="${fn:length(resultList.travelList) > 5}">
-			        	<a href="search?searchName=${keyword }&amp;category=category_travel">더보기</a>
-			        </c:if>
-				</c:if></ul>
-				</div>
+
+
+	<!-- 검색 결과 존재 -->
+	<div class="mh"  style="display:flex; justify-content:center;">
+		  <!-- 카테고리를 전체로 설정하고 검색한 경우 -->
+		  <c:if test="${category eq 'category_total'}">
+			  <article id="search-content-total">
+				    <!-- 여행지 검색 결과 리스트 -->
+				    <div class="travel-result">
+				    	<ul><c:if test="${not empty resultList.getTravelList()}">
+				    	<hr id="line" >
+				    	<h1 id="travel-places" class="title">여행지</h1>
+				    	<br>
+						<div style="display: flex; flex-wrap: wrap; ">
+								  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+								    <c:if test="${status.index < 7}">
+								      <div style="width: 25%; margin-bottom: 20px;">
+								        <a href="/traDetail?tid=${travel.travel_id}">
+								          <c:url value="/display" var="url">
+								            <c:param name="file" value="${travel.img_stored_file}"></c:param>
+								          </c:url>
+								          <img src="${url}" alt="#" style="width: 250px; height: auto;">
+								        </a>
+								        <br>
+								        <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
+								       <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+								      </div>
+								    </c:if>
+								  </c:forEach>
+								</div>	
+							     <c:if test="${fn:length(resultList.travelList) > 7}">
+							        <a href="search?searchName=${keyword }&amp;category=category_travel"><button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button></a>
+							     </c:if>
+				    	</c:if></ul>
+				    </div>
+				
+				<hr id="line" >
 				
 				<!-- 숙소 검색 결과 리스트 -->
 				<div class="house-result">
-			    	<ul><c:if test="${not empty resultList.getHouseList()}">
-			    	<h1>숙소</h1>
-			    	<c:forEach items="${resultList.houseList}" var="house" varStatus="status">
-			        	<c:if test="${status.index < 5}">
-			            	<a href="/houDetail?hid=${house.house_id}">
-                			<c:url value="/display" var="url">
-                				<c:param name="file" value="${house.img_stored_file }"></c:param>
-                			</c:url>
-                			<img src="${url }" alt="#" width="300" height="200"></a>
-                		
-                			<tr>
-			                	<td><c:out value="${house.h_name}" /></td>
-			                	<c:set var="content" value="${fn:substring(house.h_content, 0, 10)}"/>
-			                		<c:if test="${fn:length(house.h_content) > 10}">
-			                    		<c:set var="content" value="${content }..."/>
-			             			</c:if>
-			                	<td><c:out value="${content }"></c:out></td>
-			            	</tr>
-			            <c:if test="${not status.last }"><br/></c:if>
-			        	</c:if>
-			    	</c:forEach>
-			  
-			        <c:if test="${fn:length(resultList.houseList) > 5}">
-			        	<a href="search?searchName=${keyword }&amp;category=category_house">더보기</a>
-			        </c:if>
-				</c:if></ul>
+			      <ul>
+			    	<c:if test="${not empty resultList.getHouseList()}">
+				    	<h1 id="house-places" class="title">숙소</h1>
+				    	<br>
+				    	<div style="display: flex; flex-wrap: wrap; ">
+								  <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
+								    <c:if test="${status.index < 7}">
+								      <div style="width: 25%; margin-bottom: 20px;">
+								        <a href="/houDetail?hid=${house.house_id}">
+								          <c:url value="/display" var="url">
+								            <c:param name="file" value="${house.img_stored_file }"></c:param>
+								          </c:url>
+								          <img src="${url }" alt="#" width="250px" height="auto"></a>
+	                			<br>
+	                			<a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
+				                	<c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+								      </div>
+								    </c:if>
+								  </c:forEach>
+				  </div>
+				        <c:if test="${fn:length(resultList.houseList) > 7}">
+				        	<a href="search?searchName=${keyword }&amp;category=category_house"><button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button></a>
+				        </c:if>
+					</c:if>
+			  	  </ul>
 				</div>
+				
+				<hr id="line" >
 				
 				<!-- 맛집 검색 결과 리스트 -->
 				<div class="res-result">
 			    	<ul><c:if test="${not empty resultList.getRestaurantList()}">
-			    	<h1>맛집</h1>
-			    	<c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
-			        	<c:if test="${status.index < 5}">
-			            	<a href="/resDetail?rid=${res.restaurant_id}">
-                			<c:url value="/display" var="url">
-                				<c:param name="file" value="${res.img_stored_file }"></c:param>
-                			</c:url>
-                			<img src="${url }" alt="#" width="300" height="200"></a>
-                		
-                			<tr>
-			                	<td><c:out value="${res.r_name}" /></td>
-			                	<c:set var="content" value="${fn:substring(res.r_content, 0, 10)}"/>
-			                		<c:if test="${fn:length(res.r_content) > 10}">
-			                    		<c:set var="content" value="${content }..."/>
-			             			</c:if>
-			                	<td><c:out value="${content }"></c:out></td>
-			            	</tr>
-			            <c:if test="${not status.last }"><br/></c:if>
-			        	</c:if>
-			    	</c:forEach>
-			  
-			        <c:if test="${fn:length(resultList.restaurantList) > 5}">
-			        	<a href="search?searchName=${keyword }&amp;category=category_res">더보기</a>
+			    	<h1 id="res-places" class="title">맛집</h1>
+			    	<br>
+			    	<div style="display: flex; flex-wrap: wrap; ">
+								  <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
+								    <c:if test="${status.index < 7}">
+								      <div style="width: 25%; margin-bottom: 20px;">
+								        <a href="/resDetail?rid=${res.restaurant_id}">
+								          <c:url value="/display" var="url">
+								            <c:param name="file" value="${res.img_stored_file }"></c:param>
+								          </c:url>
+								          <img src="${url }" alt="#" width="250px" height="auto"></a>
+                		<br>
+                			<a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
+			                <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+								      </div>
+								    </c:if>
+								  </c:forEach>
+			  </div>
+			        <c:if test="${fn:length(resultList.restaurantList) > 7}">
+			        	<a href="search?searchName=${keyword }&amp;category=category_res"><button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button></a>
 			        </c:if>
 				</c:if></ul>
 				</div>
 				
+				<hr id="line" >
+				
 				<!-- 커뮤니티 검색 결과 리스트 -->
-				<div class="board-result">
-					<ul><c:if test="${not empty resultList.getBoardList()}">
-			    	<h1>커뮤니티</h1>
-				    	<c:forEach items="${resultList.boardList}" var="board" varStatus="status">
-				        	<c:if test="${status.index < 5}">
-				            	<tr>
-				                	<td><a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board}"><c:out value="${board.b_title}" /></a></td>
-				                	<td>${board.formattedCreateDateSearch }</td>
-				                	<c:set var="content" value="${fn:substring(board.b_content, 0, 10)}"/>
-				                	<c:if test="${fn:length(board.b_content) > 10}">
-				                    	<c:set var="content" value="${content }..."/>
-				                	</c:if>
-				                	<td><c:out value="${content }"></c:out></td>
-				            	</tr>
-				            	<c:if test="${not status.last }"><br/></c:if>
-				        	</c:if>
-				    	</c:forEach>
-				        	<c:if test="${fn:length(resultList.boardList) > 5}">
-				            	<a href="search?searchName=${keyword }&amp;category=category_comm">더보기</a>
-				        	</c:if>
-					</c:if></ul>
-			  	</div>
+				<c:if test="${not empty resultList.getBoardList()}">
+			    	<table style="padding-left: 10%; text-align: top;">
+			    		<tr>
+			      			<td colspan="3">
+			        			<h1 id="board-places" style="margin-left: 520px; font-size: 24px; color: #404040; font-family: 'IBM Plex Sans KR', sans-serif;">커뮤니티</h1>
+			      			</td>
+			    		</tr>
+			    		<c:forEach items="${resultList.boardList}" var="board" varStatus="status">
+			     			 <c:if test="${status.index < 10}">
+			        		 	<tr style="padding-bottom: 20px;">
+			          	        	<td style="padding-left: 50px;">
+			            		    	<a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
+			            			    <br>
+			                            <c:out value="${board.b_content }" />
+			                           <%--  <c:choose>
+										  <c:when test="${fn:length(board.b_content) < 50}">
+										    <c:out value="${board.b_content}" />
+										  </c:when>
+										  <c:otherwise>
+										    <c:out value="${fn:substring(board.b_content, 0, 60)}" />...
+										  </c:otherwise>
+										</c:choose> --%>
+			                            
+			                            <hr id="line" >
+			          	        	</td>
+			         			    <td style="padding-left: 50px;">${board.formattedCreateDateSearch }
+						            </td>
+			        		 	</tr>
+			     			 <c:if test="${not status.last }">
+			        		</c:if>
+			     			 </c:if>
+			    		</c:forEach>
+			    	</table>
+			  <c:if test="${fn:length(resultList.boardList) > 9}">
+			    <a href="search?searchName=${keyword }&amp;category=category_comm">
+			      <button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button>
+			    </a>
+			  </c:if>
+			</c:if>
 		  </article>
-	  </c:if> <!-- 카테고리를 전체로 설정하고 검색한 경우 끝 -->
-	  
-	  
-	 
-	 
-	 	   <!-- 인기 검색어  -->
-		<div class="popular-container">
-		<h5>인기 검색어</h5>
-	
-		  <input id="tab-1" type="radio" name="tabs" checked>
-		  <label for="tab-1">일간</label>
-		
-		  <input id="tab-2" type="radio" name="tabs">
-		  <label for="tab-2">주간</label>
-		
-		  <input id="tab-3" type="radio" name="tabs">
-		  <label for="tab-3">월간</label>
-		
-		  <div class="content" style="width: 50px">
-		    <div id="content-1"  >
-		      <ul>
-				 <c:forEach var="daily" items="${dailyPopularKeywords}">
-					<li ><a href="/search?category=category_total&amp;searchName=${daily}">
-						<c:out value="${daily}"  /></a>
-					</li>
-				</c:forEach>
-		      </ul>  
-		    </div>
-		
-		    <div id="content-2">
-		      <ul>
-				 <c:forEach var="weekly" items="${weeklyPopularKeywords}">
-					<li><a href="/search?category=category_total&amp;searchName=${weekly}">
-						<c:out value="${weekly}" /></a>
-					</li>
-				 </c:forEach>
-		      </ul>   
-		    </div>
-		
-		    <div id="content-3">
-		      <ul>
-				 <c:forEach var="monthly" items="${monthlyPopularKeywords}">
-					<li><a href="/search?category=category_total&amp;searchName=${monthly}">
-						<c:out value="${monthly}" /></a>
-					</li>
-				 </c:forEach>
-		      </ul>
-		    </div>
-		  </div>
-		</div> 
-	  
-	  
-	  <!-- 여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구
-	  여기야 친구여기야 친구여기야 친구여기야 친구여기야 친구 -->
-	</div>
-	  
-	  <!-- 카테고리를 여행지로 설정하고 검색한 경우 -->
+	  </c:if> 
+	 		
+	  <!-- 카테고리를 전체로 설정하고 검색한 경우 끝 -->
+
+	   <!-- 카테고리를 여행지로 설정하고 검색한 경우 -->
 	  <c:if test="${category eq 'category_travel'}">
 	  
 		  <article id="search-content-travel">
 			    <!-- 여행지 검색 결과 리스트 -->
 			    <div class="onlytravel-result">
-			    	<ul><c:if test="${not empty resultList.getTravelList()}">
-			    	<h1>여행지</h1>
-			    	<c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-			        	<c:if test="${status.index < 12}">
-			            	<a href="/TraDetail?tid=${travel.travel_id}">
-                			<c:url value="/display" var="url">
-                				<c:param name="file" value="${travel.img_stored_file }"></c:param>
-                			</c:url>
-                			<img src="${url }" alt="#" width="300" height="200"></a>
-                		
-                			<tr>
-			                	<td><c:out value="${travel.t_name}" /></td>
-			                	<c:set var="content" value="${fn:substring(travel.t_content, 0, 10)}"/>
-			                		<c:if test="${fn:length(travel.t_content) > 10}">
-			                    		<c:set var="content" value="${content }..."/>
-			             			</c:if>
-			                	<td><c:out value="${content }"></c:out></td>
-			            	</tr>
-			            <c:if test="${not status.last }"><br/></c:if>
-			        	</c:if>
-			    	</c:forEach>
-
-			       <div>
-						<c:if test="${paging.startPage > paging.pageBlock }">
-							<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
-						</c:if>
-						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-							<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
-						</c:forEach>
-						<c:if test="${paging.endPage < paging.totalPage }">
-							<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
-						</c:if>
-					</div> 
-				</c:if></ul>
-				</div>
+				    	<ul><c:if test="${not empty resultList.getTravelList()}">
+				    	<br>
+						<div style="display: flex; flex-wrap: wrap; ">
+								  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+								    <c:if test="${status.index < 12}">
+								      <div style="width: 25%; margin-bottom: 20px;">
+								        <a href="/traDetail?tid=${travel.travel_id}">
+								          <c:url value="/display" var="url">
+								            <c:param name="file" value="${travel.img_stored_file}"></c:param>
+								          </c:url>
+								          <img src="${url}" alt="#" style="width: 250px; height: auto;">
+								        </a>
+								        <br>
+								        <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
+								       <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+								      </div>
+								    </c:if>
+								  </c:forEach>
+								</div>	
+								<div>
+							    	<c:if test="${paging.startPage > paging.pageBlock }">
+										<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
+								 	</c:if>
+									<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+										<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
+									</c:forEach>
+									<c:if test="${paging.endPage < paging.totalPage }">
+										<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
+									</c:if>
+								</div>
+				    	</c:if></ul>
+			    </div>
 	  </article>
 	  </c:if>
 	  
@@ -530,40 +316,37 @@
 			    <!-- 숙소 검색 결과 리스트 -->
 			    <div class="onlyhouse-result">
 			    	<ul><c:if test="${not empty resultList.getHouseList()}">
-			    	<h1>숙소</h1>
+			    	<br>
+						<div style="display: flex; flex-wrap: wrap; ">
 			    	<c:forEach items="${resultList.houseList}" var="house" varStatus="status">
 			        	<c:if test="${status.index < 12}">
+			        	  <div style="width: 25%; margin-bottom: 20px;">
 			            	<a href="/houDetail?hid=${house.house_id}">
                 			<c:url value="/display" var="url">
                 				<c:param name="file" value="${house.img_stored_file }"></c:param>
                 			</c:url>
-                			<img src="${url }" alt="#" width="300" height="200"></a>
-                		
-                			<tr>
-			                	<td><c:out value="${house.h_name}" /></td>
-			                	<c:set var="content" value="${fn:substring(house.h_content, 0, 10)}"/>
-			                		<c:if test="${fn:length(house.h_content) > 10}">
-			                    		<c:set var="content" value="${content }..."/>
-			             			</c:if>
-			                	<td><c:out value="${content }"></c:out></td>
-			            	</tr>
-			            <c:if test="${not status.last }"><br/></c:if>
-			        	</c:if>
-			    	</c:forEach>
-
-			       <div>
-						<c:if test="${paging.startPage > paging.pageBlock }">
-							<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
-						</c:if>
-						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-							<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
-						</c:forEach>
-						<c:if test="${paging.endPage < paging.totalPage }">
-							<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
-						</c:if>
-					</div> 
-				</c:if></ul>
-				</div>
+                			<img src="${url}" alt="#" style="width: 250px; height: auto;">
+                			</a>
+                			<br>
+			                	<a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
+			                	<c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+			                	 </div>
+								    </c:if>
+								  </c:forEach>
+								</div>	
+								<div>
+							    	<c:if test="${paging.startPage > paging.pageBlock }">
+										<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
+								 	</c:if>
+									<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+										<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
+									</c:forEach>
+									<c:if test="${paging.endPage < paging.totalPage }">
+										<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
+									</c:if>
+								</div>
+				    	</c:if></ul>
+			    </div>
 	  </article>
 	  </c:if>
 	  
@@ -574,40 +357,37 @@
 			    <!-- 맛집 검색 결과 리스트 -->
 			    <div class="onlyres-result">
 			    	<ul><c:if test="${not empty resultList.getRestaurantList()}">
-			    	<h1>맛집</h1>
+			    	<br>
+						<div style="display: flex; flex-wrap: wrap; ">
 			    	<c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
 			        	<c:if test="${status.index < 12}">
+			        	  <div style="width: 25%; margin-bottom: 20px;">
 			            	<a href="/resDetail?rid=${res.restaurant_id}">
                 			<c:url value="/display" var="url">
                 				<c:param name="file" value="${res.img_stored_file }"></c:param>
                 			</c:url>
-                			<img src="${url }" alt="#" width="300" height="200"></a>
-                		
-                			<tr>
-			                	<td><c:out value="${res.r_name}" /></td>
-			                	<c:set var="content" value="${fn:substring(res.r_content, 0, 10)}"/>
-			                		<c:if test="${fn:length(res.r_content) > 10}">
-			                    		<c:set var="content" value="${content }..."/>
-			             			</c:if>
-			                	<td><c:out value="${content }"></c:out></td>
-			            	</tr>
-			            <c:if test="${not status.last }"><br/></c:if>
-			        	</c:if>
-			    	</c:forEach>
-
-			       <div>
-						<c:if test="${paging.startPage > paging.pageBlock }">
-							<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
-						</c:if>
-						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-							<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
-						</c:forEach>
-						<c:if test="${paging.endPage < paging.totalPage }">
-							<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
-						</c:if>
-					</div> 
-				</c:if></ul>
-				</div>
+                			<img src="${url}" alt="#" style="width: 250px; height: auto;">
+                		    </a>
+							<br>
+                			<a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
+			                	<c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+								      </div>
+								    </c:if>
+								  </c:forEach>
+								</div>	
+								<div>
+							    	<c:if test="${paging.startPage > paging.pageBlock }">
+										<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
+								 	</c:if>
+									<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+										<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
+									</c:forEach>
+									<c:if test="${paging.endPage < paging.totalPage }">
+										<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
+									</c:if>
+								</div>
+				    	</c:if></ul>
+			    </div>
 	  </article>
 	  </c:if>
 	  
@@ -615,50 +395,124 @@
 	  <!-- 카테고리를 커뮤니티로 설정하고 검색한 경우 -->
 	  <c:if test="${category eq 'category_comm'}">
 	  
-		  <article id="search-content-board">
-			    <!-- 커뮤니티 검색 결과 리스트 -->
-			    <div class="onlyboard-result">
-			    	<ul><c:if test="${not empty resultList.getBoardList()}">
-			    	<h1>커뮤니티</h1>
-			    	<c:forEach items="${resultList.boardList}" var="board" varStatus="status">
-			        	<c:if test="${status.index < 12}">
-			            	<tr>
-				                <td><a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board}"><c:out value="${board.b_title}" /></a></td>
-				                <td>${board.formattedCreateDateSearch }</td>
-				                <c:set var="content" value="${fn:substring(board.b_content, 0, 10)}"/>
-				                <c:if test="${fn:length(board.b_content) > 10}">
-				                    <c:set var="content" value="${content }..."/>
-				                </c:if>
-				                <td><c:out value="${content }"></c:out></td>
-				            </tr>
-				            	<c:if test="${not status.last }"><br/></c:if>
-			        	</c:if>
-			    	</c:forEach>
-
-			       <div>
-						<c:if test="${paging.startPage > paging.pageBlock }">
-							<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
+	  <article id="search-content-board">
+	  		<!-- 커뮤니티 검색 결과 리스트 -->
+				  <c:if test="${not empty resultList.getBoardList()}">
+						    	<table style="padding-left: 10%; text-align: top;">
+						    		<tr>
+						      			<td colspan="3">
+						      			</td>
+						    		</tr>
+						    		<c:forEach items="${resultList.boardList}" var="board" varStatus="status">
+						     			 <c:if test="${status.index < 12}">
+						        		 	<tr style="padding-bottom: 20px;">
+						          	        	<td style="padding-left: 50px;">
+						            		    	<a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
+						            			    <br>
+						                            <c:out value="${board.b_content }" />
+						                           <%--  <c:choose>
+													  <c:when test="${fn:length(board.b_content) < 50}">
+													    <c:out value="${board.b_content}" />
+													  </c:when>
+													  <c:otherwise>
+													    <c:out value="${fn:substring(board.b_content, 0, 60)}" />...
+													  </c:otherwise>
+													</c:choose> --%>
+						                            
+						                            <hr id="line" >
+						          	        	</td>
+						         			    <td style="padding-left: 50px;">${board.formattedCreateDateSearch }
+									            </td>
+						        		 	</tr>
+						     			 <c:if test="${not status.last }">
+						        		</c:if>
+						     			 </c:if>
+						    		</c:forEach>
+						    	</table>
+						    	<div>
+							    	<c:if test="${paging.startPage > paging.pageBlock }">
+										<a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
+								 	</c:if>
+									<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+										<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
+									</c:forEach>
+									<c:if test="${paging.endPage < paging.totalPage }">
+										<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
+									</c:if>
+								</div>
+						  
 						</c:if>
-						<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-							<a href="search?currentPage=${i}&amp;category=${category}&amp;searchName=${keyword }">[${i}]</a>
+		  </article>
+	  </c:if> 
+	  
+	  
+	  
+	  
+	  
+	  
+	
+	
+	<!-- 인기 검색어 -->  
+	<article id="word" style="display:flex; flex-direction:column; align-items:center;">
+		<article id="popular-container">
+			<h1>인기 검색어</h1>
+			<input id="tab-1" type="radio" name="tabs" checked>
+			<label for="tab-1">일간</label>
+			
+			<input id="tab-2" type="radio" name="tabs">
+			<label for="tab-2">주간</label>
+			
+			<input id="tab-3" type="radio" name="tabs">
+			<label for="tab-3">월간</label>
+			
+			<div class="content">
+				<div id="content-1">
+					<ul>
+						<c:forEach var="daily" items="${dailyPopularKeywords}">
+							<li><a href="/search?category=category_total&amp;searchName=${daily}">
+								<c:out value="${daily}"  /></a>
+							</li>
 						</c:forEach>
-						<c:if test="${paging.endPage < paging.totalPage }">
-							<a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
-						</c:if>
-					</div> 
-				</c:if></ul>
+					</ul>  
 				</div>
-	  </article>
-	  </c:if>
-	  
-	  
-	  
+			
+				<div id="content-2">
+					<ul>
+						<c:forEach var="weekly" items="${weeklyPopularKeywords}">
+							<li><a href="/search?category=category_total&amp;searchName=${weekly}">
+								<c:out value="${weekly}" /></a>
+							</li>
+						</c:forEach>
+					</ul>   
+				</div>
+			
+				<div id="content-3">
+					<ul>
+						<c:forEach var="monthly" items="${monthlyPopularKeywords}">
+							<li><a href="/search?category=category_total&amp;searchName=${monthly}">
+								<c:out value="${monthly}" /></a>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+		</article>
 	
-
-	 		
+	
+	<!-- 최근 검색어 -->
+	<article id="recent-container">
+		<h1>최근 검색어</h1>
+		<c:forEach var="recentSearchList" items="${recentSearchList}">
+			<li>
+				<c:out value="${recentSearchList.search_term}" /></a>
+			</li>
+		</c:forEach>
+	</article>
+</article>
+	 
+	</div>
 	</section>
-	
-	
+
 	  
 	<hr>
 <c:import url="footer.jsp"/>

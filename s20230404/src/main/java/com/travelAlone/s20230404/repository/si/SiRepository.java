@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.domain.si.HouseJPA;
@@ -79,6 +80,8 @@ public class SiRepository {
 		
 		return res;
 	}
+
+	
 	
 	
 

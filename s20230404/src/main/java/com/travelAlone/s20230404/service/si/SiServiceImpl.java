@@ -23,6 +23,7 @@ import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Travel;
+import com.travelAlone.s20230404.model.si.RecentSearch;
 import com.travelAlone.s20230404.model.si.ResultList;
 import com.travelAlone.s20230404.model.si.Search;
 
@@ -180,15 +181,33 @@ public class SiServiceImpl implements SiService {
 	}
 
 
+	//맛집 검색 결과 개수 조회
 	@Override
 	public int getResCount(Res res) {
 		return siDao.getResCount(res);
 	}
 
 
+	//커뮤니티 검색 결과 개수 조회
 	@Override
 	public int getBoardCount(Board board) {
 		return siDao.getBoardCount(board);
+	}
+
+
+	//최근 검색어 목록 조회
+	@Override
+	public List<RecentSearch> getRecentSearchList(RecentSearch recentSearch) {
+		int recentCount = siDao.countRecentSearch(recentSearch);
+		if(recentCount >= 10) {
+			siDao.deleteRecentSearch(recentSearch);
+		}
+		
+		int findRecentSearch = siDao.findRecentSearch(recentSearch);
+		if(findRecentSearch == 0) siDao.insertRecentSearch(recentSearch);
+		
+		return siDao.getRecentSearchList(recentSearch);
+		
 	}
 	
 }
