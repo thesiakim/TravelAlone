@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 public class AdminMemberRoleRequestDto {
 
     private Long id;
-    private String Role;
+    private String role;
 }

@@ -1,5 +1,7 @@
 package com.travelAlone.s20230404.domain.km;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,8 +31,10 @@ public interface MemberRepository extends JpaRepository<MemberJpa, Long> {
     Optional<MemberJpa> findMemberIdByEmailNamePhone(@Param("name") String name,@Param("email") String email,@Param("phone") String phone);
 
     @Query("SELECT p FROM MemberJpa p ORDER BY p.createdDate DESC")
-    List<MemberJpa> findAllDesc();
+    Page<MemberJpa> findAllDesc(Pageable pageable);
 
     @Query("SELECT p FROM MemberJpa p WHERE p.email LIKE %:search% ORDER BY p.createdDate DESC")
-    List<MemberJpa> findSearchAndAllDesc(@Param("search") String search);
+    Page<MemberJpa> findSearchAndAllDesc(@Param("search") String search, Pageable pageable);
+
+
 }

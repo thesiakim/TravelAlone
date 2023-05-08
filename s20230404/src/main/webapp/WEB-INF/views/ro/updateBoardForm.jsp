@@ -67,12 +67,12 @@
 					원래 이미지
 				</td>
 				<c:forEach items="${listBoardImgs }" var="boardImg" varStatus="status">
-					<td id="delBoardImage${status.index }" style="width:20px;">
+					<td id="delBoardImage${status.index }" style="width:10px;">
 						<!-- /display 경로를 가지는 URL이 생성되어 url이라는 변수에 저장 -->
 						<c:url value="/display" var="url">
 							<c:param name="file" value="${boardImg.img_stored_file }"/>
 						</c:url>
-						<img alt="imege 없음" src="${url }" width="20%" height="20%">
+						<img alt="imege 없음" src="${url}" width="25%" height="25%">
 						<br>
 						<input type="button" onclick="deleteBoardImage(${boardImg.board_id}, ${boardImg.img_id}, ${status.index })" value="삭제">
 					</td>   
