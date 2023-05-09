@@ -8,10 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div id="img_benner">
-		<img src="img/restaurant-picture.png" alt="배너">
+<link href="/css/list.css" rel="stylesheet" type="text/css">	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+	<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+	<script defer src="/js/picture.js"></script>
+<body>
+<div id="img_banner">
+		<img src="img/main-picture.png" alt="배너">
 	</div>
-<h1>맛집글 작성	</h1>
+<h3><img src="../logo/Res.png" alt="여행지" width=250px height=250px></h3>
+	
+<h3>맛집글 작성	</h3>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="resWriteForm" method="post" name="frm" enctype="multipart/form-data">
 		<table style="margin:auto;">
@@ -87,18 +94,26 @@
 			</tr>
 			
 			<tr>
-				<td>
-				<img alt="사진추가 " src="/images/restaurantUpload/${savedName}"> 
-					<input type="file" name="file1" multiple="multiple"> <p>						
-				</td>						
-			</tr>				
-		
-			<tr >
-				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
-				<a href="res">목록보기</a></td>
+			</table><br><br><hr>
+			<br><br>	
+			<table style="margin:auto;">
+			<tr><font size=5>사진 첨부</font> </tr><br>
+			<br><font size=4><img alt="사진추가 " src="/images/restaurantUpload/${savedName}"> <br>
+					<input type="file" name="file1" multiple="multiple">						
+				</td>	<br><br>
+			<tr>
 			</tr>
-		</table>
+
+			</table><br><br><br>
+			<hr><br><br>
+				<div style="text-align:center;">
+					<button type="submit">확인</button>
+					<a href="res">목록 보기</a>
+					</div>
 	</form>
+
+
+
 </body>
 <c:import url="footer.jsp"/>
 </html>

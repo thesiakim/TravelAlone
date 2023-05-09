@@ -10,9 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/css/list.css" rel="stylesheet" type="text/css">
 </head>
-
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
 
 <script type="text/javascript">
 	function deleteImage(restaurant_id, img_id, p_index) {		
@@ -39,20 +40,48 @@
 <div id="img_benner">
 		<img src="img/restaurant-picture.png" alt="배너">
 	</div>
-	<h1>맛집글 업데이트	</h1>
-	<form action="updateRestaurant" method="post" enctype="multipart/form-data">>
+		<h3><img src="../logo/Res.png" alt="여행지" width=250px height=250px></h3>
+	<br><h3>글 수정	</h3><br>
+	<form action="updateRestaurant" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="restaurant_id" value="${restaurant.restaurant_id }">
+		<hr>
 		<table style="margin:auto;">
-		
+			<br><br>
 			<tr>
 				<td> 맛집종류</td>
-				<td> <input type="text" name="r_common_restaurant"
-					required="required" value="${restaurant.r_common_restaurant }"> </td>
+				<td style="text-align: left;"> 
+				<select name="t_common_travel">
+					<option value="res100">한식</option>
+					<option value="res200">중식</option>
+					<option value="res300">일식</option>
+					<option value="res400">양식</option>								
+					<option value="res500">카페</option>								
+					<option value="res600">기타</option>								
+				</select>								
+				</td>																						
 			</tr>
 			<tr>
 				<td> 맛집지역</td>
-				<td> <input type="text" name="r_common_loc" 
-					required="required" value="${restaurant.r_common_loc }"> </td>
+				<td style="text-align: left;">
+					<select name="r_common_loc">
+						<option value="loc102">서울</option>
+						<option value="loc132">인천</option>
+						<option value="loc131">경기</option>
+						<option value="loc133">강원</option>
+						<option value="loc142">대전</option>
+						<option value="loc141">충남</option>
+						<option value="loc143">충북</option>
+						<option value="loc151">부산</option>
+						<option value="loc152">울산</option>
+						<option value="loc153">대구</option>
+						<option value="loc155">경남</option>
+						<option value="loc154">경북</option>
+						<option value="loc162">광주</option>
+						<option value="loc161">전남</option>
+						<option value="loc163">전북</option>
+						<option value="loc164">제주</option>								
+					</select>									
+				 </td>				
 			</tr>
 		
 			<tr>
@@ -95,20 +124,21 @@
 			</tr>
 								
 		
-			</table>
-		<table style="margin:auto;">
-			<tr> 사진 변경</tr>
-			<tr>
-				<td hidden>번호</td>													
-				<td>
-				<br>
+					</table><br><br><hr>
+			<br><br>	
+			<table style="margin:auto;">
+			<tr><font size=5>사진 변경</font> </tr><br>
 				 
-				<img alt="사진추가 " src="/images/restaurantUpload/${savedName}">
+				<br><font size=4><img alt="사진추가 " src="/images/restaurantUpload/${savedName}"><br>
 				<input type="file" name="file1" multiple="multiple"> <p>
-				</td>
 				
+			 </td>	<br><br>
+						<tr>
+							<td hidden>번호</td>													
+							<td>
+							<p>
 				
-				<td>
+							<td>
 				
 						<c:forEach items="${imgResList}" var="resImg" varStatus="status">
 					         <input type="text" name="restaurant_id" value="${resImg.restaurant_id}">
@@ -117,7 +147,7 @@
 								<c:url value='/display' var='url'>
 									<c:param name='file' value='${resImg.img_stored_file}'/>
 								</c:url>
-				                     <img alt="#" src="${url}"  width="500" height="300">
+				                     <img alt="#" src="${url}"  width="100" height="100">
 								
 								
 						 		<br>
@@ -132,9 +162,12 @@
 				 </td>		
 				</tr>
 
-			</table>
-					<input type="submit" value="확인">
-					<a href="javascript:window.history.back();">수정취소</a>
+			</table><br><br><br>
+			<hr><br><br>
+					<div style="text-align:center;">
+					<button type="submit">확인</button>
+					<a href="javascript:window.history.back();"><button type="submit">취소</button></a>
+					</div>
 	</form>
 	
 	
