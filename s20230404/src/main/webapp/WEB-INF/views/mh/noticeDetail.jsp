@@ -60,10 +60,16 @@
 </table>
 <hr>
 
-			<a href="notice">목록</a> <a
-				href="noticeUpdateForm?g_notice_id=${notice.g_notice_id}">수정</a> <a
-				href="deleteNotice?g_notice_id=${notice.g_notice_id}">삭제</a>
+			<a href="notice">목록</a>
+			
 	
+	
+		<c:if test="${user_role == 'rol200' }">
+			<a href="noticeUpdateForm?g_notice_id=${notice.g_notice_id}">수정</a> 
+			<a	href="deleteNotice?g_notice_id=${notice.g_notice_id} "  onclick="return confirm('정말로 삭제하시겠습니까?')" >삭제</a>
+		 </c:if>
+		 
+		 
 </body>
 	<c:import url="footer.jsp"/>
 </html>

@@ -193,8 +193,9 @@
 		
 	</table>
 	<hr>
-
+		<c:if test="${user_role == 'rol200' }">
 		<a style="text-align: right;" href="houWriteForm">글작성</a>
+		</c:if>
 <!-- 페이징 처리 페이징 처리  페이징 처리  페이징 처리   -->
 
  <div>

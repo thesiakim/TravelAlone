@@ -47,7 +47,7 @@ public class MhController {
 
 //공지사항 목록보기
 @RequestMapping(value = "notice")
-public String notice(Notice notice,String currentPage, Model model) {
+public String notice(@LoginUser MemberJpa memberJpa,	Notice notice,String currentPage, Model model) {
 	log.info("NoticeController Start notice");
 	int totalNotice = mh.totalNotice();		
 	
@@ -58,7 +58,13 @@ public String notice(Notice notice,String currentPage, Model model) {
 	
 	List<Notice> listNotice = mh.listNotice(notice);
 	log.info("NoticeController list listNotice.size()=>" + listNotice.size());
-	
+	  if (memberJpa != null) {
+			 log.info("NoticeController notice memberJpa.getId()는 "+ memberJpa.getId()); 
+			 log.info("NoticeController notice memberJpa.getId()는 "+ memberJpa.getRole()); 
+			 model.addAttribute("user_id", memberJpa.getId());
+			 model.addAttribute("user_role", memberJpa.getRole());
+			 
+			  }
 	model.addAttribute("totalNotice", totalNotice);
 	model.addAttribute("noticeList", listNotice);
 	model.addAttribute("page", page);
@@ -68,7 +74,8 @@ public String notice(Notice notice,String currentPage, Model model) {
 
 //공지사항   게시글조회
 @GetMapping(value = "noticeDetail")
-public String noticeDetail(int gid , Model model, Not_Img not_Img ) {
+public String noticeDetail(@LoginUser MemberJpa memberJpa, 
+		int gid , Model model, Not_Img not_Img ) {
 	log.info("NoticeController Start noticeDetail");
 	log.info("NoticeController noticeDetail g_notice_id->"+ gid );
 	
@@ -81,7 +88,16 @@ public String noticeDetail(int gid , Model model, Not_Img not_Img ) {
 	
 	
 	model.addAttribute("imgNotList", listImg);		
-	model.addAttribute("notice", notice);		
+	model.addAttribute("notice", notice);
+	  if (memberJpa != null) {
+	 log.info("NoticeController noticeDetail memberJpa.getId()는 "+ memberJpa.getId()); 
+	 log.info("NoticeController noticeDetail memberJpa.getRole()는 "+ memberJpa.getRole()); 
+	 model.addAttribute("user_id", memberJpa.getId());
+	 model.addAttribute("user_role", memberJpa.getRole());
+	 
+	  }
+		
+	
 	return "mh/noticeDetail";
 }
 	
@@ -343,7 +359,8 @@ public String inquire( Inquire inquire, String currentPage, Model model) {
 
 //문의게시판  게시글조회
 @GetMapping(value = "inquireDetail")
-public String inquireDetail(int gid , Model model, Inq_Img inq_Img ) {
+public String inquireDetail(@LoginUser MemberJpa memberJpa,  
+		int gid , Model model, Inq_Img inq_Img ) {
 	log.info("InquireController Start inquireDetail..." );
 	log.info("InquireController Start inquireDetail g_notice_id"+ gid  );
 	//문의글  보기
@@ -354,10 +371,17 @@ public String inquireDetail(int gid , Model model, Inq_Img inq_Img ) {
 	inq_Img.setG_writing_id(gid);
 	List<Inq_Img> listImg = mh.listInq_Img(inq_Img);
 	log.info("InquireController  listImg.size()=>"+ listImg.size());
-	model.addAttribute("imgInqList", listImg);
+	model.addAttribute("imgInqList", listImg);		
+	model.addAttribute("inquire", inquire);	
+	
+	  if (memberJpa != null) {
+			 log.info("InquireController inquireDetail memberJpa.getId()는 "+ memberJpa.getId()); 
+			 log.info("InquireController inquireDetail memberJpa.getRole()는 "+ memberJpa.getRole()); 
+			 model.addAttribute("user_id", memberJpa.getId());
+			 model.addAttribute("user_role", memberJpa.getRole());
+			  }
 	
 	
-	model.addAttribute("inquire", inquire);			
 
 	return "mh/inquireDetail";
 }

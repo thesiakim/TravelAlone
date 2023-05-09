@@ -41,7 +41,7 @@ public class SkController {
 
 	// 맛집 메인
 	@RequestMapping("res")
-	public String notice(Res restaurant, String currentPage, Model model) {
+	public String restaurant(@LoginUser MemberJpa memberJpa ,Res restaurant, String currentPage, Model model) {
 		log.info("SkController Start restaurant");
 		int totalRestaurant = sk.totalRestaurant();
 
@@ -64,6 +64,15 @@ public class SkController {
 		List<Res> listRestaurant = sk.listRestaurant(restaurant);
 		log.info("SkController list listRestaurant.size()=>" + listRestaurant.size());
 
+		  if (memberJpa != null) {
+				 log.info("SkController restaurant memberJpa.getId()는 "+ memberJpa.getId()); 
+				 log.info("SkController restaurant memberJpa.getId()는 "+ memberJpa.getRole()); 
+				 model.addAttribute("user_id", memberJpa.getId());
+				 model.addAttribute("user_role", memberJpa.getRole());
+				 
+				  }
+		
+		
 		model.addAttribute("totalRestaurant", totalRestaurant);
 		model.addAttribute("restaurantList", listRestaurant);
 		model.addAttribute("page", page);
@@ -96,11 +105,14 @@ public class SkController {
 		int favResult = 0;
 		if (memberJpa != null) {
 			log.info("isRes_Fav memberJpa.getId()-> " + memberJpa.getId());		
+			log.info("isRes_Fav memberJpa.getRole()-> " + memberJpa.getRole());		
 			res_Fav.setRestaurant_id(rid);
 			res_Fav.setMember_id(memberJpa.getId());							
 			res_Fav.setIsfavRes(isfavRes);								
 			favResult = sk.isRes_Fav(res_Fav);
 			log.info("SkController favResult=>{}", favResult);
+			model.addAttribute("user_id", memberJpa.getId());	
+			model.addAttribute("user_role", memberJpa.getRole());
 		}
 		model.addAttribute("isfavRes", favResult);
 		

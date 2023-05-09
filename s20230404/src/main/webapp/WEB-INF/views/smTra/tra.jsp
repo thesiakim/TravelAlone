@@ -155,7 +155,9 @@ th, td {
 
 	<!-- 여행지리스트 테이블 -->
 		  <h3>국내 전체 여행지 </h3><br>
+		  <c:if test="${user_role == 'rol200' }">
 		  <a href="traWriteForm"><button type="submit" style="margin-left: 664px; margin-bottom: 10px">글 쓰기</button></a>
+		  </c:if>
 	<div>
 		<table style="margin:auto;">
 			<tr>

@@ -108,8 +108,11 @@ function delete_fav(){
 		
 		<div>
 		<a href="tra" class="button">목록</a>
+			<c:if test="${user_role == 'rol200' }">
 		<a href="traUpdateForm?travel_id=${travel.travel_id}" class="button">수정</a>
-		<a href="traDelete?travel_id=${travel.travel_id}" class="button">삭제</a>
+		<a href="traDelete?travel_id=${travel.travel_id}" onclick="return confirm('정말로 삭제하시겠습니까?')" class="button">삭제</a>
+			</c:if>
+		
 		<c:choose>
 				<c:when test="${isfavTra eq '0'}">
 					<a href="" onclick="insert_fav()">즐겨찾기</a>
@@ -139,9 +142,16 @@ function delete_fav(){
 					 	<td>${traRev.r_content}</td>
 					 	<td>${traRev.r_score}</td>
 					 	<td>${traRev.create_date}</td>
-					  <td  style=" padding-left:30px;" ><a href="traRevUpdateForm?travel_id=${traRev.travel_id}&review_id=${traRev.review_id}">수정</a></td>
+					 	
+						<td  style=" padding-left:30px;" >
+						 	<c:if test="${user_id == traRev.member_id }">
+						 		 <a href="traRevUpdateForm?travel_id=${traRev.travel_id}&review_id=${traRev.review_id}">수정</a>
+						 	</c:if>
+						</td>
 					 	<td style=" padding-left:30px;">
+					 		<c:if test="${user_id == traRev.member_id }">
 					 	 <a href="traRevDelete?review_id=${traRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+					 		</c:if>
 					 	 </td>
 						
 											

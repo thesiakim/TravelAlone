@@ -90,8 +90,12 @@
 		<hr>
 		<div>
 			<a href="res" class="button">목록</a>	
+			
+				<c:if test="${user_role == 'rol200' }">
 			<a href="resUpdateForm?restaurant_id=${restaurant.restaurant_id}" class="button">수정</a>
-			<a href="deleteRestaurant?restaurant_id=${restaurant.restaurant_id}" class="button">삭제</a>
+			<a href="deleteRestaurant?restaurant_id=${restaurant.restaurant_id}" onclick="return confirm('정말로 삭제하시겠습니까?')" class="button">삭제</a>
+				</c:if>
+			
 			<c:choose>
 				<c:when test="${isfavRes eq '0'}">
 					<a href="" onclick="insert_fav()">즐겨찾기</a>
@@ -122,10 +126,17 @@
 					 	<td>${resRev.r_content}</td>
 					 	<td>${resRev.r_score}</td>
 					 	<td>${resRev.create_date}</td>
-					 	<td  style=" padding-left:30px;" ><a href="resRevUpdateForm?restaurant_id=${resRev.restaurant_id}&review_id=${resRev.review_id}">수정</a></td>
+					 	
+					 	<td  style=" padding-left:30px;" >
+					 		<c:if test="${user_id == resRev.member_id }">
+					 	<a href="resRevUpdateForm?restaurant_id=${resRev.restaurant_id}&review_id=${resRev.review_id}">수정</a>
+					 		 	</c:if>
+					 	</td>
+					 	
 					 	<td style=" padding-left:30px;">
-
+								<c:if test="${user_id == resRev.member_id }">
 					 	 <a href="deleteResRev?review_id=${resRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+					 			</c:if>
 					 	 </td>
 						
 											

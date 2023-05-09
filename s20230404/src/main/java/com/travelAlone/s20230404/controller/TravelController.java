@@ -43,8 +43,8 @@ public class TravelController {
 	// ===================여행지===================
 	//여행지메인 보기
 	@RequestMapping(value = "tra")
-	public String notice(Travel travel , String currentPage, Model model) {
-		log.info("smController Start travel...");
+	public String travel(@LoginUser MemberJpa memberJpa,   Travel travel , String currentPage, Model model) {
+		log.info("TravelController Start travel...");
 		int traTotal = sm.traTotal();		
 		
 		//페이징
@@ -70,6 +70,17 @@ public class TravelController {
 		List<Travel> traList = sm.traList(travel);
 		log.info("smController list traList.size()=>"+ traList.size());
 				
+		  if (memberJpa != null) {
+				 log.info("TravelController travel memberJpa.getId()는 "+ memberJpa.getId()); 
+				 log.info("TravelController travel memberJpa.getId()는 "+ memberJpa.getRole()); 
+				 model.addAttribute("user_id", memberJpa.getId());
+				 model.addAttribute("user_role", memberJpa.getRole());
+				 
+				  }
+		
+		
+		
+		
 		model.addAttribute("traTotal", traTotal);
 		model.addAttribute("traList", traList);
 		model.addAttribute("page", page);
@@ -104,11 +115,14 @@ public class TravelController {
 		int favResult = 0;
 		if (memberJpa != null) {				
 		log.info("isTra_Fav memberJpa.getId()-> " + memberJpa.getId());			
+		log.info("isTra_Fav memberJpa.getRole-> " + memberJpa.getRole());			
 		tra_Fav.setTravel_id(tid);
 		tra_Fav.setMember_id(memberJpa.getId());
 		tra_Fav.setIsfavTra(isfavTra);		
 		favResult = sm.isTra_Fav(tra_Fav);
 		log.info("TravelController favResult=>{}", favResult);
+		 model.addAttribute("user_id", memberJpa.getId());	
+		 model.addAttribute("user_role", memberJpa.getRole());
 		
 		}
 		model.addAttribute("isfavTra", favResult);

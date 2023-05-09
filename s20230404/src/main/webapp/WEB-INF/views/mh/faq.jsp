@@ -129,9 +129,9 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 		</table>
 	</div>
 <hr>
-				
+					<c:if test="${user_role == 'rol200' }">
 					<a style=" padding-left:600px;" href="noticeWriteForm">글작성</a> <br>
-				
+					</c:if>
 
 	<c:if test="${page.startPage > page.pageBlock }">
 		<a href="notice?currentPage=${page.startPage-page.pageBlock}">[이전]</a>

@@ -82,21 +82,17 @@
 			<td colspan="2">
 	
 			<a href="inquire">목록</a>
-	       <%--      <c:if test="${user_id == content.member_id }">
-	                       <td colspan="3">
-	                          <div class="button-container">
-	                       
-	                       	<a href="inquireUpdateForm?g_writing_id=${inquire.g_writing_id}">수정</a>
-	                         <a href="deleteInquire?g_writing_id=${inquire.g_writing_id}">삭제</a>
-	                          </div>
-	                       </td>
-	                </c:if>
-			 --%>
+
 			
-			
+		<c:if test="${user_id == inquire.member_id }">
 			<a href="inquireUpdateForm?g_writing_id=${inquire.g_writing_id}">수정</a>
-			<a href="deleteInquire?g_writing_id=${inquire.g_writing_id}">삭제</a> 
+			<a href="deleteInquire?g_writing_id=${inquire.g_writing_id}"  onclick="return confirm('정말로 삭제하시겠습니까?')" >삭제</a>
+		</c:if>
+			 
+			 
+			 <c:if test="${user_role == 'rol200' }">
 			<a href="inquireReplyForm?g_writing_id=${inquire.g_writing_id}">답변하기</a>
+				</c:if>
 			</td>
 		</tr>
 	</table>

@@ -99,8 +99,11 @@ let clickCount = 0; */
 		<hr>
 		<div>
 			<a href="hou" class="button">목록</a>
+				<c:if test="${user_role == 'rol200' }">
 			<a href="houUpdateForm?house_id=${house.house_id}" class="button">수정</a>
-			<a href="deleteHouse?house_id=${house.house_id}" class="button">삭제</a>
+			<a href="deleteHouse?house_id=${house.house_id}" onclick="return confirm('정말로 삭제하시겠습니까?')" class="button">삭제</a>
+				</c:if>
+			
 			<c:choose>
 				<c:when test="${isfavHou eq '0'}">
 					<a href="" onclick="insert_fav()">즐겨찾기</a>
@@ -134,10 +137,19 @@ let clickCount = 0; */
 					 	<td>${houRev.r_content}</td>
 					 	<td>${houRev.r_score}</td>
 					 	<td>${houRev.create_date}</td>
-					 <td  style=" padding-left:30px;" ><a href="houRevUpdateForm?house_id=${houRev.house_id}&review_id=${houRev.review_id}">수정</a></td>
-					 	<td style=" padding-left:30px;">
-					 	 <a href="deleteHouRev?review_id=${houRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
-					 	 </td>
+						 <td  style=" padding-left:30px;" >
+						 	<c:if test="${user_id == houRev.member_id }">
+						 <a href="houRevUpdateForm?house_id=${houRev.house_id}&review_id=${houRev.review_id}">수정</a>
+						 	</c:if>
+						 </td>
+						 	
+						 <td style=" padding-left:30px;">
+						 
+						 	<c:if test="${user_id == houRev.member_id }">
+						 	 <a href="deleteHouRev?review_id=${houRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+							</c:if>
+						
+						 </td>
 						
 											
 					</tr>
