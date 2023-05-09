@@ -9,7 +9,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
 
+
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  text-align: center; /* 이미지 중앙에 배치 */
+}
+
+.image-text {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 텍스트 중앙에 배치 */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 24px; /* 크기 조절 */
+  padding: 10px;
+  margin: 0;
+  height: 40px; 
+  width: 480px;
+}
+
+
+
+
+
+
+
+
+</style>
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
 	document.getElementById('searchId').addEventListener('keyup', function(event) {
@@ -185,7 +216,15 @@
                 	<c:url value="/display" var="url">
                 		<c:param name="file" value="${travel.img_stored_file }"></c:param>
                 	</c:url>
-                	<img src="${url }" alt="#"></a>
+                	
+               <%--  	<img src="${url }" alt="#"> --%>
+               		    <div class="image-container">
+					      <img src="${url }" alt="${travel.t_name}" width="500" height="300">
+					      <p class="image-text">${travel.t_name}</p>
+					    </div>
+               
+               
+                	</a>
                 </div>
             </c:forEach>
 		  </div>
@@ -223,15 +262,22 @@
 		<!-- 클래스명은 변경하면 안 됨 -->
 		<div class="swiper-container">
 		  <div class="swiper-wrapper">
-		  	<c:forEach var="house" items="${popularHouse}">
-            	<div class="swiper-slide">
-                	<a href="/houDetail?hid=${house.house_id}">
-                	<c:url value="/display" var="url">
-                		<c:param name="file" value="${house.img_stored_file }"></c:param>
-                	</c:url>
-                	<img src="${url }" alt="#"></a>
-                </div>
-            </c:forEach>
+		  
+		    <c:forEach var="house" items="${popularHouse}">
+			     <div class="swiper-slide">
+					  <a href="/houDetail?hid=${house.house_id}">
+					    <c:url value="/display" var="url">
+					      <c:param name="file" value="${house.img_stored_file }"></c:param>
+					    </c:url>
+					    <div class="image-container">
+					      <img src="${url }" alt="${house.h_name}" width="500" height="300">
+					      <p class="image-text">${house.h_name}</p>
+					    </div>
+					  </a>
+					</div>
+			    </c:forEach>
+		  
+		  
 		  </div>
 		  <!-- 네비게이션 -->
 		  <div class="swiper-button-next"></div> <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
@@ -273,7 +319,14 @@
                 	<c:url value="/display" var="url">
                 		<c:param name="file" value="${res.img_stored_file }"></c:param>
                 	</c:url>
-                	<img src="${url }" alt="#"></a>
+                	<%-- <img src="${url }" alt="#"> --%>
+                	  <div class="image-container">
+					      <img src="${url }" alt="${res.r_name}" width="500" height="300">
+					      <p class="image-text">${res.r_name}</p>
+					    </div>
+                	
+                	
+                	</a>
                 </div>
             </c:forEach>
 		  </div>
