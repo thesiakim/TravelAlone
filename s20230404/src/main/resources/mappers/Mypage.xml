@@ -99,9 +99,11 @@
 		WHERE 	MEMBER_ID = #{member_id}
 		]]>
 		</select>
-		
-		
-		
-		
-		
+
+		<select id="kmTotalInquire" resultType="int">
+			select Count(*)
+			FROM G_WRITING
+			WHERE MEMBER_ID = #{id}
+		</select>
+
 </mapper>
