@@ -8,7 +8,7 @@ import com.travelAlone.s20230404.model.dto.km.MypageResponseDto;
 
 import com.travelAlone.s20230404.model.dto.km.MypageReviewRequestDto;
 import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
-import com.travelAlone.s20230404.model.mh.Inquire;
+import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
 import com.travelAlone.s20230404.service.jh.UploadHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

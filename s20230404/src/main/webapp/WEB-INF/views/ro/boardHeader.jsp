@@ -13,7 +13,7 @@
       <img src="img/community-picture.png" alt="배너">
    </div>
    
-   <img src="img/Com.png" alt="배너" style="width: 250px; height: 250px;">
+   <a href="listAllBoard"><img src="img/Com.png" alt="배너" style="width: 250px; height: 250px;"></a>
    
    <div id="comunity">
       <ul>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+         <%@ include file="../fragments/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +11,6 @@
 	<link href="/css/list.css" rel="stylesheet" type="text/css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-	<c:import url="header.jsp"/>
-	
 	<style>
 		th, td { border-bottom: 2px solid rgb(64, 64, 64); }
 	</style>
@@ -44,7 +43,7 @@
 							<a href="resDetail?rid=${resReview.restaurant_id}">${resReview.r_name}</a>
 							</td>
 							<td style="width: 250px;">${resReview.r_content}</td>
-							<td style="width: 130px;">
+							<td style="width: 130px; color: #ffd700;">
 								<c:choose>
 									<c:when test="${resReview.r_score eq '1'}">
 										<c:out value="★☆☆☆☆"/>
@@ -84,5 +83,5 @@
       	<a href="reviewPageRes?currentPage=${page.startPage + page.pageBlock }">[다음]</a>
    	</c:if>
 </body>
-	<c:import url="footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"/>
 </html>

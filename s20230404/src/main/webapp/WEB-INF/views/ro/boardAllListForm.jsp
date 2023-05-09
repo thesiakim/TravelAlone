@@ -2,16 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+     <%@ include file="../fragments/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<c:import url="header.jsp"/>
+<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/js/detailBoardLoginChk.js"></script>
+<script defer src="/js/userPage.js"></script>
 <script type="text/javascript">
 	function imgOnclickCheck() {
         var checked = $('#imgOnlyCheckbox').is(':checked');
@@ -85,7 +86,9 @@
 							<td style="width: 300px;">
 								<a href="detailBoard?board_id=${board.board_id}&b_common_board=${board.b_common_board}">${board.b_title }</a>
 							</td>
-							<td style="width: 100px;">${board.m_nickname }</td>
+							<td style="width: 100px;">
+								<a onclick="openUserPage(${board.member_id})">${board.m_nickname }</a>
+							</td>
 							<td style="width: 200px;">${board.getFormattedCreateDate() }</td>
 							<td style="width: 50px;">${board.b_like_cnt }</td>
 							<td style="width: 30px;">${board.b_view_cnt }</td>
@@ -107,5 +110,5 @@
 	</c:if>
    
 </body>
-	<c:import url="footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"/>
 </html>

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+     <%@ include file="../fragments/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<c:import url="header.jsp"/>
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/js/detailBoardLoginChk.js"></script>
@@ -114,5 +114,5 @@
 		<a href="listBoard?currentPage=${page.startPage + page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[다음]</a>
 	</c:if>
 </body>
-	<c:import url="footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"></c:import>
 </html>

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+     <%@ include file="../fragments/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<c:import url="header.jsp"/>
 </head>
 	<link href="/css/write.css" rel="stylesheet" type="text/css">
 <script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
@@ -50,5 +50,5 @@
 			</tr>
 	    </table>
 </body>
-	<c:import url="footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"/>
 </html>

@@ -18,8 +18,8 @@
 		<table>
 		<tr>
 			<td>
-			<img class="profile-pic"
-			src="/display?file=${storedImgName}" alt="#" />
+			<c:url value='/display' var='url'><c:param name='file' value='${storedImgName}'/></c:url>
+			<img class="profile-pic" alt="#" src="${url}" width="400px" height="400px">	
 			</td>
 		</tr>
 		
