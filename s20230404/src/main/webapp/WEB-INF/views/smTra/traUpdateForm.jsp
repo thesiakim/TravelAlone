@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-    <%@ include file="../fragments/header.jsp"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <%
 	String context = request.getContextPath();
@@ -8,9 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/css/list.css" rel="stylesheet" type="text/css">
 </head>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
 <script type="text/javascript">
 	function deleteImage(travel_id, img_id, p_index) {		
 		$.ajax({
@@ -37,27 +38,27 @@
 <div id="img_banner">
 		<img src="img/travel-picture.png" alt="배너">
 	</div>
-	<h1>여행지 글업데이트	</h1>
+		<h3><img src="../logo/Tra.png" alt="여행지" width=250px height=250px></h3>
+	<br><h3>글 수정	</h3><br>
 		<form action="traUpdate" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="travel_id" value="${travel.travel_id }">
 		<hr>
 		<table style="margin:auto;">
-											
+			<br><br>								
 			<tr>
-				<td> 여행지종류</td>
+				<td> 여행지 종류</td>
 				<td style="text-align: left;"> 
 				<select name="t_common_travel">
 					<option value="tra100">관광</option>
 					<option value="tra200">자연</option>
 					<option value="tra300">레저</option>
 					<option value="tra400">쇼핑</option>								
-				</select>
-												
-				</td>																					
-				
+				</select>								
+				</td>																						
 			</tr>
+			
 				<tr>
-				<td> 여행지지역</td>
+				<td> 여행지 지역</td>
 				<td style="text-align: left;">
 					<select name="t_common_loc">
 						<option value="loc102">서울</option>
@@ -86,7 +87,7 @@
 					required="required" value="${travel.t_name }"></td>
 			</tr>
 			<tr>
-				<th>여행지주소</th>
+				<th>여행지 주소</th>
 				<td><input type="text" name="t_address"
 					required="required" value="${travel.t_address }"></td>
 			</tr>
@@ -96,38 +97,38 @@
 					required="required" value="${travel.t_fee }"></td>
 			</tr>
 			<tr>
-				<th>운영시간</th>
+				<th>운영 시간</th>
 				<td><input type="text" name="t_hour"
 					required="required" value="${travel.t_hour }"></td>
 			</tr>
 			<tr>
-				<th>문의전화</th>
+				<th>문의 전화</th>
 				<td><input type="text" name="t_call"
 					required="required" value="${travel.t_call }"></td>
 			</tr>
 			<tr>
-				<th>주차장여부</th>
+				<th>주차장 여부</th>
 				<td><input type="text" name="t_parking"
 					required="required" value="${travel.t_parking }"></td>
 			</tr>
 			<tr>
-				<th>여행지정보</th>
+				<th>여행지 정보</th>
 				<td><input type="text" name="t_content"
 					required="required" value="${travel.t_content }"></td>
 			</tr>
-			</table><hr>	
+			</table><br><br><hr>
+			<br><br>	
 			<table style="margin:auto;">
-			<tr> 사진 변경</tr><p>
+			<tr><font size=5>사진 변경</font> </tr><br>
+				<br><font size=4><img alt="사진 추가하기" src="/images/traUpload/${savedName}"><br>
+				<input type="file" name="file1" multiple="multiple">
+							
+				 </td>	<br><br>
 			<tr>
 				<td hidden>번호</td>													
 				<td>
 				<p>
-				 
-				<img alt="사진추가 " src="/images/traUpload/${savedName}">
-				<input type="file" name="file1" multiple="multiple"> <p>
-				</td>
-				
-				
+	
 				<td>
 				
 						<c:forEach items="${traImgList}" var="traImg" varStatus="status">
@@ -137,21 +138,21 @@
 							    <c:url value='/display' var='url'>
 							        <c:param name='file' value='${traImg.img_stored_file}'/>
 							    </c:url>
-							    <img alt="#" src="${url}"  width="200" height="150">
+							    <img alt="#" src="${url}"  width="100" height="100">
 							    <br>
 							    <a href="#" class="button" onclick="deleteImage(${traImg.travel_id},${traImg.img_id}, ${status.index})">사진삭제</a>
-</td>									
-					</c:forEach>				
-				 </td>		
-				</tr>
+							</td>									
+					</c:forEach>	
+					<tr> 	
+					</tr>
 
-			</table>
-					<input type="submit" value="확인">
-					<a href="javascript:window.history.back();">수정취소</a>
+			</table><br><br><br>
+			<hr><br><br>
+					<div style="text-align:center;">
+					<button type="submit">확인</button>
+					<a href="javascript:window.history.back();"><button type="submit">취소</button></a>
+					</div>
 	</form>
-	
-	
-	
 </body>
 
 	<c:import url="footer.jsp"/>
