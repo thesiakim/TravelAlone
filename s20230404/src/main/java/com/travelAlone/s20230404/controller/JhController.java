@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.Board;
-import com.travelAlone.s20230404.model.Member;
+import com.travelAlone.s20230404.model.Hou_Rev;
+import com.travelAlone.s20230404.model.House;
+import com.travelAlone.s20230404.model.Res;
+import com.travelAlone.s20230404.model.Res_Rev;
+import com.travelAlone.s20230404.model.Tra_Rev;
+import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.Warning;
-import com.travelAlone.s20230404.model.dto.km.MypageResponseDto;
 import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.jh.JhService;
@@ -190,4 +194,71 @@ public class JhController {
        model.addAttribute("response", userPageResponseDto);
 	   return "km/userpage";
    }
+   
+   // 마이페이지 여행지 리뷰 페이지
+   @RequestMapping(value = "/reviewPageTra")
+   public String reviewPageTra(@LoginUser MemberJpa memberJpa, Tra_Rev traRev , String currentPage, Model model) {
+	   log.info("jhController reviewPageTra start");
+	   log.info("jhController reviewPageTra currentPage는 "+ currentPage);
+	   log.info("memberJpa.getId() -> " + memberJpa.getId());
+	   int totalReviewPageTra = js.totalReviewPageTra(memberJpa.getId());		
+	   //페이징
+	   Paging page = new Paging(totalReviewPageTra, currentPage);
+	   traRev.setStart(page.getStart());
+	   traRev.setEnd(page.getEnd());
+	   traRev.setMember_id(memberJpa.getId());
+	   //숙소리스트
+	   List<Travel> listReviewPageTra = js.listReviewPageTra(traRev);
+	   log.info("jhController listReviewPageTra.size()=>"+ listReviewPageTra.size());
+	   
+	   model.addAttribute("totalReviewPageTra", totalReviewPageTra);
+	   model.addAttribute("listReviewPageTra", listReviewPageTra);
+	   model.addAttribute("page", page);
+	   return "ro/reviewPageTra";
+   }
+   
+   // 마이페이지 숙소 리뷰 페이지
+   @RequestMapping(value = "/reviewPageHou")
+   public String reviewPageHou(@LoginUser MemberJpa memberJpa, Hou_Rev houRev , String currentPage, Model model ) {
+	   log.info("jhController reviewPageHou start");
+	   log.info("jhController reviewPageHou currentPage는 "+ currentPage);
+	   log.info("memberJpa.getId() -> " + memberJpa.getId());
+	   int totalReviewPageHou = js.totalReviewPageHou(memberJpa.getId());		
+	   //페이징
+	   Paging page = new Paging(totalReviewPageHou, currentPage);
+	   houRev.setStart(page.getStart());
+	   houRev.setEnd(page.getEnd());
+	   houRev.setMember_id(memberJpa.getId());
+	   //숙소리스트
+	   List<House> listReviewPageHou = js.listReviewPageHou(houRev);
+	   log.info("jhController llistReviewPageHou.size()=>"+ listReviewPageHou.size());
+	   
+	   model.addAttribute("totalReviewPageHou", totalReviewPageHou);
+	   model.addAttribute("listReviewPageHou", listReviewPageHou);
+	   model.addAttribute("page", page);
+	   return "ro/reviewPageHou";
+   }
+   
+   // 마이페이지 맛집 리뷰 페이지
+   @RequestMapping(value = "/reviewPageRes")
+   public String reviewPageRes(@LoginUser MemberJpa memberJpa, Res_Rev resRev , String currentPage, Model model ) {
+	   log.info("jhController reviewPageRes start");
+	   log.info("jhController reviewPageRes currentPage는 "+ currentPage);
+	   log.info("memberJpa.getId() -> " + memberJpa.getId());
+	   int totalReviewPageRes = js.totalReviewPageRes(memberJpa.getId());		
+	   //페이징
+	   Paging page = new Paging(totalReviewPageRes, currentPage);
+	   resRev.setStart(page.getStart());
+	   resRev.setEnd(page.getEnd());
+	   resRev.setMember_id(memberJpa.getId());
+	   //숙소리스트
+	   List<Res> listReviewPageRes = js.listReviewPageRes(resRev);
+	   log.info("jhController listReviewPageRes.size()=>"+ listReviewPageRes.size());
+	   
+	   model.addAttribute("totalReviewPageRes", totalReviewPageRes);
+	   model.addAttribute("listReviewPageRes", listReviewPageRes);
+	   model.addAttribute("page", page);
+	   return "ro/reviewPageRes";
+   }
+   
 }

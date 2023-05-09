@@ -28,7 +28,6 @@ import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -313,9 +312,6 @@ public class KmController {
     @DeleteMapping("/api/v1/mypage/withdrawal")
     @ResponseBody
     public String mypageMemberWithdrawal(@RequestBody MypageMemberWithdrawalRequestDto requestDto, @LoginUser MemberJpa memberJpa, Model model){
-
-        System.out.println("password = " + requestDto.getPassword());
-        System.out.println("requestDto.getMemberEmail() = " + requestDto.getMemberEmail());
 
         if (passwordEncoder.matches(requestDto.getPassword(),memberJpa.getPassword()) &&
                 requestDto.getMemberEmail().equals(memberJpa.getEmail())){
