@@ -93,9 +93,9 @@
 	</table>
 </div>	
 	<hr>
-
+		<c:if test="${user_role == 'rol200' }">
 		<a  style=" padding-left:600px;" href="noticeWriteForm">글작성</a>
-	
+		</c:if>
 
 <!-- 페이징 처리 페이징 처리  페이징 처리  페이징 처리   -->
 

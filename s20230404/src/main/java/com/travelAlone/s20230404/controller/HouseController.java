@@ -42,8 +42,8 @@ private final HouseService mh;
 	// ===================숙소===================
 	//숙소 메인 보기
 	@RequestMapping(value = "hou")
-	public String notice(House house , String currentPage, Model model) {
-		log.info("mhController2 Start house...");
+	public String house(@LoginUser MemberJpa memberJpa, House house , String currentPage, Model model) {
+		log.info("HouseController Start house");
 		int totalHouse = mh.totalHouse();		
 		
 		//페이징
@@ -67,8 +67,18 @@ private final HouseService mh;
 		
 		//숙소리스트
 		List<House> listHouse = mh.listHouse(house);
-		log.info("mhController2 list listHouse.size()=>"+ listHouse.size());
-				
+		log.info("HouseController list listHouse.size()=>"+ listHouse.size());
+		
+		  if (memberJpa != null) {
+				 log.info("HouseController house memberJpa.getId()는 "+ memberJpa.getId()); 
+				 log.info("HouseController house memberJpa.getId()는 "+ memberJpa.getRole()); 
+				 model.addAttribute("user_id", memberJpa.getId());
+				 model.addAttribute("user_role", memberJpa.getRole());
+				 
+				  }
+		
+		
+		
 		model.addAttribute("totalHouse", totalHouse);
 		model.addAttribute("houseList", listHouse);
 		model.addAttribute("page", page);
@@ -100,11 +110,14 @@ private final HouseService mh;
 		int favResult = 0;
 		if (memberJpa != null) {
 			log.info("isHou_Fav memberJpa.getId()-> " + memberJpa.getId());		
+			log.info("isHou_Fav memberJpa.getRole()-> " + memberJpa.getRole());		
 			hou_Fav.setHouse_id(hid);
 			hou_Fav.setMember_id(memberJpa.getId());
 			hou_Fav.setIsfavHou(isfavHou);
 			favResult = mh.isHou_Fav(hou_Fav);
 			log.info("HouseController favResult=>{}", favResult);
+			 model.addAttribute("user_id", memberJpa.getId());	
+			 model.addAttribute("user_role", memberJpa.getRole());
 									
 		 }
 		model.addAttribute("isfavHou", favResult);
@@ -131,7 +144,7 @@ private final HouseService mh;
 		         return "mhHou/houWriteForm";
 
 		      }else {
-		    	  return  "th/login";
+		    	  return  "km/login";
 		      }		 		
 	
 	}
