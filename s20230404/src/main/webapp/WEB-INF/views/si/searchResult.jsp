@@ -23,9 +23,11 @@
 
 </script>
 
-
 <link href="/css/list.css" rel="stylesheet" type="text/css">
 <link href="/css/search.css" rel="stylesheet" type="text/css">
+
+
+
 </head>
 <body>
 <%@include file="header.jsp" %>
@@ -46,7 +48,7 @@
 						<tr id="search-tr">
 							<td id="search-td" style="background-color: #BCEAD5; padding: 20px; color: #F6F6F6;">검색 결과</td>
 						
-							<td id="search-td">
+							<td id="search-td" style=" padding-left:80px;">
 								<c:if test="${not empty resultList.getTravelList()}">
 									<c:choose>
 									    <c:when test="${category eq 'category_total'}">
@@ -61,7 +63,7 @@
 		    						<input type="hidden">
 		  						</c:if>
 		 					</td>
-							<td id="search-td">
+							<td id="search-td" style=" padding-left:80px;">
 								<c:if test="${not empty resultList.getHouseList()}">
 		 							<c:choose>
 									    <c:when test="${category eq 'category_total'}">
@@ -76,7 +78,7 @@
 							    	<input type="hidden">
 							  	</c:if>
 							</td>
-							<td id="search-td">
+							<td id="search-td" style=" padding-left:80px;">
 								<c:if test="${not empty resultList.getRestaurantList()}">
 		 							<c:choose>
 									    <c:when test="${category eq 'category_total'}">
@@ -91,7 +93,7 @@
 							    	<input type="hidden">
 							  	</c:if>
 							</td>
-							<td id="search-td">
+							<td id="search-td" style=" padding-left:80px;">
 								<c:if test="${not empty resultList.getBoardList()}">
 		 							<c:choose>
 									    <c:when test="${category eq 'category_total'}">
@@ -131,6 +133,9 @@
 	<div class="mh"  style="display:flex; justify-content:center;">
 		  <!-- 카테고리를 전체로 설정하고 검색한 경우 -->
 		  <c:if test="${category eq 'category_total'}">
+		  
+		   
+		   <!--여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트   -->
 			  <article id="search-content-total">
 				    <!-- 여행지 검색 결과 리스트 -->
 				    <div class="travel-result">
@@ -141,7 +146,7 @@
 						<div style="display: flex; flex-wrap: wrap; ">
 								  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
 								    <c:if test="${status.index < 7}">
-								      <div style="width: 25%; margin-bottom: 20px;">
+								      <div style="width: 25%; margin-bottom: 20px;" id="each-name">
 								        <a href="/traDetail?tid=${travel.travel_id}">
 								          <c:url value="/display" var="url">
 								            <c:param name="file" value="${travel.img_stored_file}"></c:param>
@@ -149,7 +154,9 @@
 								          <img src="${url}" alt="#" style="width: 250px; height: auto;">
 								        </a>
 								        <br>
-								        <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
+								        <div id="each-name"> 
+								       		 <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
+								      	</div>
 								       <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
 								      </div>
 								    </c:if>
@@ -164,6 +171,8 @@
 				<hr id="line" >
 				
 				<!-- 숙소 검색 결과 리스트 -->
+	
+				
 				<div class="house-result">
 			      <ul>
 			    	<c:if test="${not empty resultList.getHouseList()}">
@@ -172,14 +181,16 @@
 				    	<div style="display: flex; flex-wrap: wrap; ">
 								  <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
 								    <c:if test="${status.index < 7}">
-								      <div style="width: 25%; margin-bottom: 20px;">
+								      <div style="width: 25%; margin-bottom: 20px;" id="each-name">
 								        <a href="/houDetail?hid=${house.house_id}">
 								          <c:url value="/display" var="url">
 								            <c:param name="file" value="${house.img_stored_file }"></c:param>
 								          </c:url>
 								          <img src="${url }" alt="#" width="250px" height="auto"></a>
 	                			<br>
-	                			<a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
+	                			<div id="each-name">
+	                				<a href="/houDetail?hid=${house.house_id}"><c:out value="${house.h_name}" /></a>
+	                			</div>
 				                	<c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
 								      </div>
 								    </c:if>
@@ -202,14 +213,19 @@
 			    	<div style="display: flex; flex-wrap: wrap; ">
 								  <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
 								    <c:if test="${status.index < 7}">
-								      <div style="width: 25%; margin-bottom: 20px;">
-								        <a href="/resDetail?rid=${res.restaurant_id}">
+								      <div style="width: 25%; margin-bottom: 20px;" id="each-name">
+								    
+								       		 <a href="/resDetail?rid=${res.restaurant_id}">
+								       
 								          <c:url value="/display" var="url">
 								            <c:param name="file" value="${res.img_stored_file }"></c:param>
 								          </c:url>
 								          <img src="${url }" alt="#" width="250px" height="auto"></a>
                 		<br>
+                		  	<div id="each-name"> 
                 			<a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
+                			</div>
+                			
 			                <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
 								      </div>
 								    </c:if>
@@ -271,9 +287,9 @@
 	   <!-- 카테고리를 여행지로 설정하고 검색한 경우 -->
 	  <c:if test="${category eq 'category_travel'}">
 	  
-		  <article id="search-content-travel">
+		  <article id="search-content-travel" >
 			    <!-- 여행지 검색 결과 리스트 -->
-			    <div class="onlytravel-result">
+			    <div  class="onlytravel-result">
 				    	<ul><c:if test="${not empty resultList.getTravelList()}">
 				    	<br>
 						<div style="display: flex; flex-wrap: wrap; ">
@@ -448,12 +464,12 @@
 	  
 	  
 	  
-	  
+<!-- 	<article id="search-content-total" style=" padding-right:500px;"> </article>   -->
 	  
 	
-	
+<!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 -->	
 	<!-- 인기 검색어 -->  
-	<article id="word" style="display:flex; flex-direction:column; align-items:center;">
+		<article id="word" style="display:flex; flex-direction:column; align-items:center; 	">
 		<article id="popular-container">
 			<h1>인기 검색어</h1>
 			<input id="tab-1" type="radio" name="tabs" checked>
@@ -496,19 +512,26 @@
 					</ul>
 				</div>
 			</div>
+			
+			
+			
 		</article>
 	
-	
+		<br>
 	<!-- 최근 검색어 -->
-	<article id="recent-container">
-		<h1>최근 검색어</h1>
-		<c:forEach var="recentSearchList" items="${recentSearchList}">
-			<li>
-				<c:out value="${recentSearchList.search_term}" /></a>
-			</li>
-		</c:forEach>
+		<article id="recent-container">
+			<h1>최근 검색어</h1>
+			  <ul>
+			<c:forEach var="recentSearchList" items="${recentSearchList}">
+				<li>
+				
+					<c:out value="${recentSearchList.search_term}" />
+				</li>
+			</c:forEach>
+			</ul>
+		</article>
+		
 	</article>
-</article>
 	 
 	</div>
 	</section>

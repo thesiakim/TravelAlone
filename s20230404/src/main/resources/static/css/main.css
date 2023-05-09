@@ -24,6 +24,10 @@
 	
 	/* 방문한 링크 색깔 */
 	a:visited { color: #5F9EA0; }
+	
+	#each-name > a {
+    color: black;
+}
 		
 	/* 구분선 */
 	hr {

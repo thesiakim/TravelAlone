@@ -97,7 +97,6 @@
 
 	
 	
-	
 	/* #search-table td {
 		list-style-image: url("../img/list.png");
 	} */
@@ -161,15 +160,46 @@
 	}
 	
 	
+  #word article {
+    display: block;
+    
+
+ 
+  }	
+  
+  	#popular-container {
+	position: fixed;
+	top: 50%;
+	right: 10px;
+	/* border: 5px solid #1FAB89; */
+    padding: 10px;
+    height: auto;
+    border-radius: 10px;
+
+	}
+	
+	
 	#popular-container .content li a {
 	  color: #333333;
 	  font-size: 14px;
 	  text-align: left;
+	  
+
 	}
 	
 	
-  #word article {
+
+  
+  #recent-container  {
     display: block;
+     position: fixed;
+	  top: 80%;
+	  right: 10px;
+	  /*  border: 5px solid #1FAB89; */
+  	padding: 10px;
+  	width: 324px;
+  	height: auto;
+  	border-radius: 10px;
   }
 
 	
