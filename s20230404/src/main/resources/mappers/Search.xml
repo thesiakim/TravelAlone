@@ -202,7 +202,8 @@
 	<!-- 검색 횟수를 기준으로 인기 명소 구하기  -->
 	<select id="sigetPopularT" resultType="Travel">
 		<![CDATA[
-		 	SELECT travel.travel_id, max(tra_Img.img_stored_file) img_stored_file     
+		 	SELECT travel.travel_id, travel.t_name
+		 	,max(tra_Img.img_stored_file) img_stored_file     
 		 	FROM   
 		        (
 				 SELECT *
@@ -214,14 +215,15 @@
 		         WHERE ROWNUM <= 6        
 		        )  Travel, Tra_Img
 		 	WHERE travel.travel_id = Tra_Img.travel_id
-		 	group by travel.travel_id
+		 	group by travel.travel_id,travel.t_name
 		]]>
 	</select>
 	
 	<!-- 검색 횟수를 기준으로 인기 숙소 구하기  -->
 	<select id="sigetPopularH" resultType="House">
 		<![CDATA[
-		 	SELECT house.house_id , max(hou_Img.img_stored_file) img_stored_file     
+		 	SELECT house.house_id, house.h_name
+		 	 , max(hou_Img.img_stored_file) img_stored_file     
 		 	FROM   
 		        (
 				 SELECT *
@@ -233,14 +235,15 @@
 		         WHERE ROWNUM <= 6        
 		        )  House, Hou_Img
 		 	WHERE house.house_id = hou_Img.house_id
-		 	group by house.house_id
+		 	group by house.house_id, house.h_name
 		]]>
 	</select>
 	
 	<!-- 검색 횟수를 기준으로 인기 맛집 구하기  -->
 	<select id="sigetPopularR" resultType="Res">
 		<![CDATA[
-		 	SELECT restaurant.restaurant_id , max(Res_Img.img_stored_file) img_stored_file     
+		 	SELECT restaurant.restaurant_id , restaurant.r_name
+		 	, max(Res_Img.img_stored_file) img_stored_file     
 		 	FROM   
 		        (
 				 SELECT *
@@ -252,7 +255,7 @@
 		         WHERE ROWNUM <= 6        
 		        )  Restaurant, Res_Img
 		 	WHERE restaurant.restaurant_id = Res_Img.restaurant_id
-		 	group by restaurant.restaurant_id
+		 	group by restaurant.restaurant_id,restaurant.r_name
 		]]>
 	</select>
 	
