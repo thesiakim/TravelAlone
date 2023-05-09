@@ -31,13 +31,15 @@
 	<link href="/css/main.css" rel="stylesheet" type="text/css">
 	<link href="/css/list.css" rel="stylesheet" type="text/css">
 <body>
-   	<c:import url="boardHeader.jsp"/>
 	
+	<div id="img_benner">
+      <img src="img/community-picture.png" alt="배너">
+   </div>
+   <h1>작성한 글</h1>
 	<hr>
-	
 		<h3>커뮤니티 - 마이 페이지</h3>
 
-		<h5> ${m_nickname} 커뮤니티 활동 내역</h5>
+		<h5>작성한 커뮤니티 글 내역</h5>
   
 	<c:set var="num" value="${page.total - page.start + 1 }"></c:set>
    

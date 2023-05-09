@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/restaurant-picture.png" alt="배너">
 	</div>
 
 <h1>맛집 리뷰 작성	</h1>

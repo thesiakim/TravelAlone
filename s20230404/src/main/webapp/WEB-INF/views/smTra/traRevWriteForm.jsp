@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/travel-picture.png" alt="배너">
 	</div>
 
 <h1>여행지 리뷰 작성	</h1>

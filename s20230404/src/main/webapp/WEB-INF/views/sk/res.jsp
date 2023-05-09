@@ -51,7 +51,7 @@
 
 <body>
 <div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/restaurant-picture.png" alt="배너">
 	</div>	
 
 <!-- 맛집종류 -->
@@ -148,7 +148,7 @@
 						<td hidden>${restaurant.restaurant_id}</td>
 					 	<td>${restaurant.r_common_loc}</td>
 						<td style=" padding-left:50px;"> <a href="resDetail?rid=${restaurant.restaurant_id}">${restaurant.r_name}</a></td>
-						<td>
+						<td style="color: #ffd700;">
 							<c:choose>
 								<c:when test="${restaurant.r_avgscore eq '1'}">
 									<c:out value="★☆☆☆☆"/>

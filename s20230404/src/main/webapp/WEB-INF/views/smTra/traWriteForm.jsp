@@ -11,7 +11,7 @@
 	<script defer src="/js/picture.js"></script>
 <body>
 <div id="img_banner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/travel-picture.png" alt="배너">
 	</div>
 <h1>여행지글 작성	</h1>
 	<c:if test="${msg!=null}">${msg}</c:if>

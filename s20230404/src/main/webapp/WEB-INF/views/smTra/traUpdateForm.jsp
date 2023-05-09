@@ -35,7 +35,7 @@
 </script>
 <body>
 <div id="img_banner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/travel-picture.png" alt="배너">
 	</div>
 	<h1>여행지 글업데이트	</h1>
 		<form action="traUpdate" method="post" enctype="multipart/form-data">

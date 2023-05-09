@@ -53,7 +53,7 @@ th, td {
 
 <body>
 <div id="img_banner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/travel-picture.png" alt="배너">
 	</div>
 	
 <h1><a href="tra"><img src="img/Tra.png" alt="여행지" width=250px height=250px></a></h1>
@@ -170,7 +170,7 @@ th, td {
 				<td hidden>${travel.travel_id}</td>
 			 	<td>${travel.t_common_loc}</td>
 				<td><a href="traDetail?tid=${travel.travel_id}">${travel.t_name}</a></td>
-				<td>
+				<td style="color: #ffd700;">
 					<c:choose>
 						<c:when test="${travel.t_avgscore eq '1'}">
 							<c:out value="★☆☆☆☆"/>

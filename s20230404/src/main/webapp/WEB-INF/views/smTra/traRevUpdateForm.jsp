@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/travel-picture.png" alt="배너">
 <h1>여행지리뷰 수정	</h1>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="traRevUpdate" method="post" name="frm">

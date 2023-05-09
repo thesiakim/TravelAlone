@@ -22,7 +22,7 @@
       <img src="img/community-picture.png" alt="배너">
    </div>
 	
-   	<h1>리 뷰</h1>
+   	<h1>작성한 리뷰</h1>
 	<br>
 	<a href="reviewPageTra" style="margin: 50px; color:#205E61;">여행지</a>
 	<a href="reviewPageHou" style="margin: 50px;">숙소</a>

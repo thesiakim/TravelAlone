@@ -71,7 +71,7 @@
 	}
 	
 	/* 화면크기가 1250이상일때만 메뉴 보여줌 */
-	@media screen and (min-width: 1600px) {
+	@media screen and (min-width: 1570px) {
 		.headerBenner > ul > li {
 			font-size: 27px; 	font-weight: bolder;
 		    width: 370px; 		display: inline-block;
@@ -79,7 +79,7 @@
 	}
 
 	/* 화면크기가 1250이하이면 배너 숨김 */
-	@media screen and (max-width: 1600px) {
+	@media screen and (max-width: 1570px) {
 		.headerBenner > ul > li { display: none; }
 	}
 

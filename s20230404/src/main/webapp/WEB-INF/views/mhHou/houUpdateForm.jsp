@@ -43,7 +43,7 @@
 </script>
 <body>
 <div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/house-picture.png" alt="배너">
 	</div>
 	<h1>숙소글 글업데이트	</h1>
 		<form action="updateHouse" method="post" enctype="multipart/form-data">

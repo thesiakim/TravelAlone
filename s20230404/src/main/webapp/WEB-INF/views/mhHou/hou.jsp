@@ -51,7 +51,7 @@
 
 <body>
 <div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/house-picture.png" alt="배너">
 	</div>
 	
 
@@ -166,7 +166,7 @@
 				<td hidden>${house.house_id}</td>
 			 	<td>${house.h_common_loc}</td>
 				<td style=" padding-left:50px;"> <a href="houDetail?hid=${house.house_id}">${house.h_name}</a></td>
-				<td>
+				<td style="color: #ffd700;">
 					<c:choose>
 						<c:when test="${house.h_avgscore eq '1'}">
 							<c:out value="★☆☆☆☆"/>

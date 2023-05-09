@@ -56,7 +56,7 @@ let clickCount = 0; */
 
 <body>
 	<div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/house-picture.png" alt="배너">
 	</div>
 	<h1>숙소글 상세		</h1>
 	

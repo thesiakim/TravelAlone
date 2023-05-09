@@ -37,7 +37,7 @@
 </script>
 <body>
 <div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/restaurant-picture.png" alt="배너">
 	</div>
 	<h1>맛집글 업데이트	</h1>
 	<form action="updateRestaurant" method="post" enctype="multipart/form-data">>
