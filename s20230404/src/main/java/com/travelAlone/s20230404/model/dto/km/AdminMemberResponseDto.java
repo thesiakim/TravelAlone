@@ -1,13 +1,8 @@
 package com.travelAlone.s20230404.model.dto.km;
 
 import com.travelAlone.s20230404.domain.km.MemberJpa;
-import com.travelAlone.s20230404.domain.km.Role;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
-
 
 @Getter
 @NoArgsConstructor

@@ -75,7 +75,7 @@
 			<td>닉네임</td>
 			<td>${response.nickName}</td>
 			
-			<td>내가 작성한 리뷰</td>
+			<td><a href="reviewPageTra">내가 작성한 리뷰</a></td>
 			<td>${response.reviewCount}</td>
 		</tr>
 		<tr>

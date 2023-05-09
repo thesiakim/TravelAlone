@@ -1,6 +1,6 @@
 package com.travelAlone.s20230404.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +15,20 @@ public class Res_Rev {
 	private  long 				member_id;
 	private String 				r_content;
 	private int	 				r_score;
-	private LocalDateTime 	 	create_date;
-    private LocalDateTime 	 	modified_date;
+	private LocalDate 	 		create_date;
+    private LocalDate	 		modified_date;
     
     // member 조인
     private String m_nickname;
+    
+    // 페이지조회용
+ 	private String search;   	private String keyword;
+ 	private String pageNum;  
+ 	//            1                           10
+ 	private int start; 		 	private int end;
+ 	// 리뷰 조인용
+ 	private String			r_name;
+    
 }
 
 

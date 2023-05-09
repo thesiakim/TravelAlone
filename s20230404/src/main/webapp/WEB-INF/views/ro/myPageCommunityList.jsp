@@ -44,7 +44,6 @@
    
 	<div>
       	<table>
-      	  	<!--  img_stored_file_yn  파일 유무 Check -->
          	<c:forEach var="board" items="${myPageCommunityList}">
 						<tr>
 							<td style="width: 300px;">

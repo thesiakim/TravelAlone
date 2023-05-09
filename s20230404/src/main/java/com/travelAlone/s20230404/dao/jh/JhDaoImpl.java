@@ -7,7 +7,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.Board;
+import com.travelAlone.s20230404.model.Hou_Rev;
+import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Member;
+import com.travelAlone.s20230404.model.Res;
+import com.travelAlone.s20230404.model.Res_Rev;
+import com.travelAlone.s20230404.model.Tra_Rev;
+import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.Warning;
 
 import lombok.RequiredArgsConstructor;
@@ -160,6 +166,89 @@ public class JhDaoImpl implements JhDao {
 		}
 		return userPage;
 	}
-
+		
+	// 마이페이지 여행지 리뷰 리스트
+	@Override
+	public List<Travel> listReviewPageTra(Tra_Rev traRev) {
+		List<Travel> listReviewPageTra = null;
+		log.info("jhDaoImpl listReviewPageTra start");
+		try {
+			listReviewPageTra = session.selectList("listReviewPageTra", traRev);
+			log.info("jhDaoImpl listReviewPageTra.size() -> " + listReviewPageTra.size());
+		} catch (Exception e) {
+			log.info("jhDaoImpl listReviewPageTra e.getMessage() -> " + e.getMessage());
+		}
+		return listReviewPageTra;
+	}
+	
+	// 마이페이지 여행지 리뷰 페이징
+	@Override
+	public int totalReviewPageTra(long member_id) {
+		int totalReviewPageTra = 0;
+		log.info("jhDaoImpl totalReviewPageTra start");
+		try {
+			totalReviewPageTra = session.selectOne("totalReviewPageTra", member_id);
+			log.info("jhDaoImpl totalReviewPageTra->" + totalReviewPageTra);
+		} catch (Exception e) {
+			log.info("mhDaoImpl2 totalReviewPageTra Exception " +e.getMessage());
+		}						
+		return totalReviewPageTra;
+	}
+	
+	// 마이페이지 숙소 리뷰 리스트
+	@Override
+	public List<House> listReviewPageHou(Hou_Rev houRev) {
+		List<House> listReviewPageHou = null;
+		log.info("jhDaoImpl listReviewPageHou start");
+		try {
+			listReviewPageHou = session.selectList("listReviewPageHou", houRev);
+			log.info("jhDaoImpl listReviewPageHou.size() -> " + listReviewPageHou.size());
+		} catch (Exception e) {
+			log.info("jhDaoImpl listReviewPageHou e.getMessage() -> " + e.getMessage());
+		}
+		return listReviewPageHou;
+	}
+	
+	// 마이페이지 숙소 리뷰 페이징
+	@Override
+	public int totalReviewPageHou(long member_id) {
+		int totalReviewPageHou = 0;
+		log.info("jhDaoImpl totalReviewPageHou start");
+		try {
+			totalReviewPageHou = session.selectOne("totalReviewPageHou", member_id);
+			log.info("jhDaoImpl totalReviewPageHou->" + totalReviewPageHou);
+		} catch (Exception e) {
+			log.info("mhDaoImpl2 totalReviewPageHou Exception " +e.getMessage());
+		}						
+		return totalReviewPageHou;
+	}
+	
+	// 마이페이지 맛집 리뷰 리스트
+	@Override
+	public List<Res> listReviewPageRes(Res_Rev resRev) {
+		List<Res> listReviewPageRes = null;
+		log.info("jhDaoImpl listReviewPageRes start");
+		try {
+			listReviewPageRes = session.selectList("listReviewPageRes", resRev);
+			log.info("jhDaoImpl listReviewPageRes.size() -> " + listReviewPageRes.size());
+		} catch (Exception e) {
+			log.info("jhDaoImpl listReviewPageRes e.getMessage() -> " + e.getMessage());
+		}
+		return listReviewPageRes;
+	}
+	
+	// 마이페이지 맛집 리뷰 페이징
+	@Override
+	public int totalReviewPageRes(long member_id) {
+		int totalReviewPageRes = 0;
+		log.info("jhDaoImpl totalReviewPageRes start");
+		try {
+			totalReviewPageRes = session.selectOne("totalReviewPageRes", member_id);
+			log.info("jhDaoImpl totalReviewPageRes->" + totalReviewPageRes);
+		} catch (Exception e) {
+			log.info("mhDaoImpl2 totalReviewPageRes Exception " +e.getMessage());
+		}						
+		return totalReviewPageRes;
+	}
 	
 }

@@ -25,4 +25,6 @@ public interface MypageService {
 
     boolean memberInfoRefresh(long memberId);
 
+    UserPageResponseDto userPage(long member_id);
 }
+
