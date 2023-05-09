@@ -8,7 +8,7 @@ import com.travelAlone.s20230404.model.dto.km.MypageResponseDto;
 
 import com.travelAlone.s20230404.model.dto.km.MypageReviewRequestDto;
 import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
-import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
+import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.service.jh.UploadHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,16 +35,13 @@ public class MypageServiceImpl implements MypageService{
      * */
     @Override
     public MypageResponseDto mypageMain(long memberId) {
-    	
-    	System.out.println("경민 마이페이지 메인 로딩");
-    	
+
         MypageResponseDto responseDto = new MypageResponseDto();
-        
-        
+
         responseDto.addInterest(mypageDao.interestList(memberId));
-        
+
         responseDto.addScoreCount(mypageDao.totalScore(memberId));
-        
+
         responseDto.addWritingCount(mypageDao.wirtingCount(memberId));
 
 
@@ -167,21 +164,6 @@ public class MypageServiceImpl implements MypageService{
         }
     }
 
-	@Override
-	public UserPageResponseDto userPage(long member_id) {
-		UserPageResponseDto userPageResponseDto = new UserPageResponseDto();
-		
-		// 관심사 불러오기
-		userPageResponseDto.addInterest(mypageDao.interestList(member_id));
-		// 받은 점수 불러오기
-		userPageResponseDto.addScoreCount(mypageDao.totalScore(member_id));
-		// 멤버정보 불러오기
-		userPageResponseDto.addMemberInfo(mypageDao.memberInfo(member_id));
-        
-        
-		
-		return userPageResponseDto;
-	}
 
 
 }

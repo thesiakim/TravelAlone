@@ -1,6 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +11,12 @@
 <title>Insert title here</title>
 	<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 	<script defer src="/js/mypage.js"></script>
+<c:import url="../fragments/header.jsp"></c:import>
 </head>
 <body>
 <div id="img_benner">
 	<img src="img/main-picture.png" alt="배너">
 </div>
-
 <div class="profile-block">
 	<div class="img-block">
 		<div>
@@ -45,7 +45,7 @@
 
 <div class="review-block">
 	<c:forEach var="scoreCount" items="${response.scoreCounts}">
-	<div class="container">
+	<div class="score-container">
 		<div class="bar-label">${scoreCount.word}</div>
 		<div class="bar-container">
 			<div class="bar" style="width: 70%">

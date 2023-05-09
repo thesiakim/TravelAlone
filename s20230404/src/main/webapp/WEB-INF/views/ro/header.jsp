@@ -17,7 +17,7 @@
 		  <a href="/"><img src="img/gosunee.png"></a>
 		</div>
 		<c:choose>
-	    	<c:when test="${empty user_id}">
+	    	<c:when test="${empty user}">
 		        <div class="headerLogin">
 		            <a href="/login">로그인</a>
 		        </div> 
@@ -59,12 +59,12 @@
 		</li>
 		<li><a href="/res">맛집</a>
 		  <ul>
-			<li><a href="#">한 식</a></li>
-			<li><a href="#">중 식</a></li>
-			<li><a href="#">일 식</a></li>
-			<li><a href="#">양 식</a></li>
-			<li><a href="#">카 페</a></li>
-			<li><a href="#">기 타</a></li>
+			  <li><a href="restaurantCodeFilter?code=res100">한 식</a></li>
+			  <li><a href="restaurantCodeFilter?code=res200">중 식</a></li>
+			  <li><a href="restaurantCodeFilter?code=res300">일 식</a></li>
+			  <li><a href="restaurantCodeFilter?code=res400">양 식</a></li>
+			  <li><a href="restaurantCodeFilter?code=res500">카 페</a></li>
+			  <li><a href="restaurantCodeFilter?code=res600">기 타</a></li>
           </ul>
 		</li>
 		<li><a href="/listAllBoard">커뮤니티</a>

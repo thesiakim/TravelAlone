@@ -1,6 +1,8 @@
 package com.travelAlone.s20230404.config.km;
 
+import com.travelAlone.s20230404.config.km.logout.CustomLogoutSuccessHandler;
 import com.travelAlone.s20230404.domain.km.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * 23-04-14 조경민
@@ -19,12 +22,19 @@ import org.springframework.security.web.SecurityFilterChain;
  * @EnableWebSecurity : WebSecurityConfigurerAdapter를 상속받는 클래스에 해당 어노테이션을 선언하면 SpringSecurityFilterChain이 자동으로 포함
  * filterChain() : http 보안 설정
  * PasswordEncoder : 비밀번호 BCryptPasswordEncoder 해시 함수를 이용하여 암호화처리함. 객체 생성해서 빈으로 관리
+ *
+ * 2023-05-09 조경민
+ * 로그인 성공 후 기존 페이지로 이동을 위한 AuthenticationSuccessHandler 설정 추가
  */
 
 //@EnableMethodSecurity(securedEnabled = true, prePostEnabled = true) //@Secured 어노테이션 활성화 , @preAuthorize @PostAuthorize 어노테이션 활성화
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
     /**
      * 2023-04-19 조경민
@@ -57,11 +67,12 @@ public class SecurityConfig {
                 .and() // 일반 로그인 설정
                     .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/")
+                    .successHandler(authenticationSuccessHandler)
                     .usernameParameter("email")
                     .failureUrl("/login/error")
                 .and()
                     .logout()
+//                    .logoutSuccessHandler(customLogoutSuccessHandler)
                     .logoutSuccessUrl("/");
 
 

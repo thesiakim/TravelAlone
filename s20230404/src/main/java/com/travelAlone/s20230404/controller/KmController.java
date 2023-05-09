@@ -3,14 +3,18 @@ package com.travelAlone.s20230404.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.travelAlone.s20230404.config.km.Login2User;
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.config.km.SessionUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
+import com.travelAlone.s20230404.model.mh.Inquire;
+import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.km.MypageService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -103,7 +107,14 @@ public class KmController {
      * 설명 : 로그인 페이지 이동
      * */
     @GetMapping("/login")
-    public String goLogin(){
+    public String goLogin(HttpServletRequest request){
+
+
+        // 이전 페이지로 되돌아가기 위한 Referer 헤더값을 세션의 prevPage attribute로 저장
+        String uri = request.getHeader("Referer");
+        if (uri != null && !uri.contains("/login")) {
+            request.getSession().setAttribute("prevPage", uri);
+        }
 
         return "km/login";
     }
@@ -214,8 +225,8 @@ public class KmController {
     public String mypageMain(@Login2User SessionUser sessionUser, Model model){
 
         MypageResponseDto responseDto = mypageService.mypageMain(sessionUser.getId());
-        responseDto.addMemberInfo(sessionUser);
 
+        responseDto.addMemberInfo(sessionUser);
 
         model.addAttribute("response", responseDto);
 
@@ -358,15 +369,8 @@ public class KmController {
         return "km/mypage-review";
     }
 
-    /**
-     * 2023-05-06 조경민
-     * 설명 : 마이페이지 내 문의내역 이동
-     */
-    @GetMapping("mypage/g-writing")
-    public String mypageGWriting() {
 
-        return "km/mypage-g-writing";
-    }
+
 
     // 관리자 페이지----------------------------------------------------------------
     /**
@@ -445,7 +449,6 @@ public class KmController {
 
         return memberService.adminMemberinfoChange(file,requestDto);
     }
-
 
 
 }

@@ -7,6 +7,7 @@ import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
 import com.travelAlone.s20230404.model.dto.km.ScoreCount;
 import com.travelAlone.s20230404.model.dto.km.WritingCount;
 
+import com.travelAlone.s20230404.model.mh.Inquire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -114,6 +115,8 @@ public class MypageDaoImpl implements MypageDao{
     public Member memberInfo(long memberId) {
         return session.selectOne("memberInfo", memberId);
     }
+
+
 
 
 }

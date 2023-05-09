@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html>
 <head>
     <title>Insert title here</title>
     <meta charset="UTF-8">
@@ -12,8 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 헤더 -->
 </head>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <body>
   <div id="header">
 	<div class="container">
@@ -21,42 +18,57 @@
 		<div class="logo">
 		  <a href="/"><img src="img/gosunee.png"></a>
 		</div>
-		<div class="headerLogin">
-		  <a href="login">로그인</a>
-		</div> 
-		<div class="headerLogin">
-		  <a href="join">회원가입</a>
-		</div> 
+		<c:choose>
+	    	<c:when test="${empty user}">
+		        <div class="headerLogin">
+		            <a href="/login">로그인</a>
+		        </div> 
+		        <div class="headerLogin">
+		            <a href="/join">회원가입</a>
+		        </div>
+				<div class="headerLogin">Join Us</div>
+		    </c:when>
+		    <c:otherwise>
+		        <div class="headerLogin">
+		            <a href="/mypage">마이페이지</a>
+		        </div> 
+		        <div class="headerLogin">
+		            <a href="/logout" onclick="logout()">로그아웃</a>
+		        </div>
+				<div class="headerLogin">${user.nickname}님 안녕하세요!</div>
+		    </c:otherwise>
+		</c:choose>
+		
 	  </div>
 	</div>
 	<div class="headerForm">
 	  <div class="headerBenner">
 		<ul>
-		<li><a href="tra">여행지</a>
+		<li><a href="/tra">여행지</a>
 		  <ul>
-			<li><a href="traFilter?code=tra100">관 광</a></li>
-               <li><a href="traFilter?code=tra200">자 연</a></li>
-               <li><a href="traFilter?code=tra300">레 저</a></li>
-               <li><a href="traFilter?code=tra400">쇼 핑</a></li>
+			<li><a href="/traFilter?code=tra100">관 광</a></li>
+			<li><a href="/traFilter?code=tra200">자 연</a></li>
+			<li><a href="/traFilter?code=tra300">레 저</a></li>
+			<li><a href="/traFilter?code=tra400">쇼 핑</a></li>
 		  </ul>
-        </li>
-	    <li><a href="hou">숙소</a>
-      		  <ul>
-              	<li><a href="houseCodeFilter?code=hou100">호 텔</a></li>
-              	<li><a href="houseCodeFilter?code=hou200">모 텔</a></li>
-              	<li><a href="houseCodeFilter?code=hou300">팬 션</a></li>
-              	<li><a href="houseCodeFilter?code=hou400">캠 핑</a></li>
-              	<li><a href="houseCodeFilter?code=hou500">게스트 하우스</a></li>
-			  </ul>
-			</li>
-		<li><a href="res">맛집</a>
+		</li>
+		<li><a href="/hou">숙소</a>
 		  <ul>
-			<li><a href="restaurantCodeFilter?code=res100">한 식</a></li>
-			<li><a href="restaurantCodeFilter?code=res200">중 식</a></li>
-			<li><a href="restaurantCodeFilter?code=res300">일 식</a></li>
-			<li><a href="restaurantCodeFilter?code=res400">양 식</a></li>
-			<li><a href="restaurantCodeFilter?code=res500">카 페</a></li>
-			<li><a href="restaurantCodeFilter?code=res600">기 타</a></li>
+			<li><a href="/houseCodeFilter?code=hou100">호 텔</a></li>
+          	<li><a href="/houseCodeFilter?code=hou200">모 텔</a></li>
+          	<li><a href="/houseCodeFilter?code=hou300">민 박 / 팬 션</a></li>
+          	<li><a href="/houseCodeFilter?code=hou400">캠 핑 / 글랭핑</a></li>
+          	<li><a href="/houseCodeFilter?code=hou500">게스트 하우스</a></li>
+          </ul>
+		</li>
+		<li><a href="/res">맛집</a>
+		  <ul>
+			  <li><a href="restaurantCodeFilter?code=res100">한 식</a></li>
+			  <li><a href="restaurantCodeFilter?code=res200">중 식</a></li>
+			  <li><a href="restaurantCodeFilter?code=res300">일 식</a></li>
+			  <li><a href="restaurantCodeFilter?code=res400">양 식</a></li>
+			  <li><a href="restaurantCodeFilter?code=res500">카 페</a></li>
+			  <li><a href="restaurantCodeFilter?code=res600">기 타</a></li>
           </ul>
 		</li>
 		<li><a href="/listAllBoard">커뮤니티</a>

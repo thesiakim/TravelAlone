@@ -51,7 +51,7 @@
     align-items: center;
 }
 
-.container {
+.score-container {
     display: flex;
     align-items: center;
     font-size: 14px;

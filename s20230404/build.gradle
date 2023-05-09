@@ -28,6 +28,7 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'javax.servlet:jstl'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
     implementation 'org.springframework.boot:spring-boot-devtools'
 
 	compileOnly 'org.projectlombok:lombok'
