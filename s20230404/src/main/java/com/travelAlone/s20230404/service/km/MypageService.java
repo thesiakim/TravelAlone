@@ -25,6 +25,6 @@ public interface MypageService {
     List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto);
 
     boolean memberInfoRefresh(long memberId);
-
+    // 누락 푸쉬
     UserPageResponseDto userPage(long member_id);
 }

@@ -166,7 +166,8 @@ public class MypageServiceImpl implements MypageService{
             return true;
         }
     }
-
+    
+    // 누락 푸쉬
 	@Override
 	public UserPageResponseDto userPage(long member_id) {
 		UserPageResponseDto userPageResponseDto = new UserPageResponseDto();
@@ -177,8 +178,6 @@ public class MypageServiceImpl implements MypageService{
 		userPageResponseDto.addScoreCount(mypageDao.totalScore(member_id));
 		// 멤버정보 불러오기
 		userPageResponseDto.addMemberInfo(mypageDao.memberInfo(member_id));
-        
-        
 		
 		return userPageResponseDto;
 	}
