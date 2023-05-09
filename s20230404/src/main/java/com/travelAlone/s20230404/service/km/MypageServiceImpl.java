@@ -163,7 +163,20 @@ public class MypageServiceImpl implements MypageService{
             return true;
         }
     }
-
-
+    
+    // 누락 푸쉬
+	@Override
+	public UserPageResponseDto userPage(long member_id) {
+		UserPageResponseDto userPageResponseDto = new UserPageResponseDto();
+		
+		// 관심사 불러오기
+		userPageResponseDto.addInterest(mypageDao.interestList(member_id));
+		// 받은 점수 불러오기
+		userPageResponseDto.addScoreCount(mypageDao.totalScore(member_id));
+		// 멤버정보 불러오기
+		userPageResponseDto.addMemberInfo(mypageDao.memberInfo(member_id));
+		
+		return userPageResponseDto;
+	}
 
 }
