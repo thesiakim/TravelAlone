@@ -252,18 +252,20 @@
 	}
 	
 	#recent-list li:before {
-  list-style-position: inside;
+  	  list-style-position: inside;
 	  content: "";
 	  display: inline-block;
 	  width: 20px;
 	  height: 20px;
 	  margin-right: 3px;
 	  background-image: url(../img/green.png);
-	  /* list-style-image: url(../img/checkk.png); */
+	  list-style-image: url(../img/checkk.png);
 	  background-repeat: no-repeat;
 	  background-position: center center;
-	  background-size: 13px;
+	  background-size: 13px; 이거잠깐 주석
 }
+
+
 	  
 
    
@@ -304,11 +306,13 @@
 	    font-family: 'IBM Plex Sans KR', sans-serif;
 	}
 
+	
+	.bod-result {
+	  width: 100%;
+	  height: auto;
+	}
+	
 
-.bod-result {
-  width: 100%;
-  height: auto;
-}
 
 
 
