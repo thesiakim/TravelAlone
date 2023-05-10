@@ -86,7 +86,7 @@
 			<td>전화번호</td>
 			<td>${response.phone}</td>
 			
-			<td>즐겨 찾기</td>
+			<td><a href="/mypage/favorite">즐겨 찾기</a></td>
 			<td>${response.favCount}</td>
 		</tr>
 		<tr>
