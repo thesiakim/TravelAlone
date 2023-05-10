@@ -312,7 +312,7 @@
 	<!-- 회원이 새로 검색한 검색어 저장 -->
 	<insert id="siInsertRecent" parameterType="RecentSearch">
 		INSERT INTO RecentSearch (RECENT_ID, MEMBER_ID, SEARCH_TERM, CREATE_DATE)
-		                  VALUES (RECENTSEARCCH_ID_SEQ.nextval, #{member_id}, #{search_term}, sysdate)
+		                  VALUES (RECENTSEARCH_ID_SEQ.nextval, #{member_id}, #{search_term}, sysdate)
 	</insert>
 	
 	<!-- 회원이 검색한 검색어가 테이블에 존재하는지 확인 -->

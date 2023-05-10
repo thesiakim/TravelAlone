@@ -14,6 +14,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -120,8 +121,9 @@ private final HouseService mh;
 			 model.addAttribute("user_role", memberJpa.getRole());
 									
 		 }
+		log.info("즐겨찾기 model로 보내기 전");
 		model.addAttribute("isfavHou", favResult);
-		
+		log.info("즐겨찾기 model로 보낸 후");
 		
 		//리뷰리스트
 		List<Hou_Rev> listHouRev = mh.listHouRev(hid);
@@ -503,7 +505,7 @@ private final HouseService mh;
 		
 		//즐겨찾기 추가
 		@ResponseBody
-		@RequestMapping(value = "insertHouFav")
+		@PostMapping("insertHouFav")
 		public String houFav(@LoginUser MemberJpa memberJpa,
 				Hou_Fav hou_Fav, Model model) throws Exception {
 			log.info("HouseController  houFav Start");

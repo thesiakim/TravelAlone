@@ -287,45 +287,47 @@
             <hr id="line" >
             
             <!-- 커뮤니티 검색 결과 리스트 -->
-            <c:if test="${not empty resultList.getBoardList()}">
-                <table style="padding-left: 10%; text-align: top;">
-                   <tr>
-                        <td colspan="3">
-                          <h1 id="board-places" style="margin-left: 520px; font-size: 24px; color: #404040; font-family: 'IBM Plex Sans KR', sans-serif;">커뮤니티</h1>
-                        </td>
-                   </tr>
-                   <c:forEach items="${resultList.boardList}" var="board" varStatus="status">
-                        <c:if test="${status.index < 10}">
-                           <tr style="padding-bottom: 20px;">
-                                 <td style="padding-left: 50px;">
-                                  <a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
-                                  <br>
-                                    <%--  <c:out value="${board.b_content }" /> --%>
-                                     <c:choose>
-                                <c:when test="${fn:length(board.b_content) < 50}">
-                                  <c:out value="${board.b_content}" />
-                                </c:when>
-                                <c:otherwise>
-                                  <c:out value="${fn:substring(board.b_content, 0, 60)}" />...
-                                </c:otherwise>
-                              </c:choose>
-                                     
-                                     <hr id="line" >
-                                 </td>
-                               <td style="padding-left: 50px;">${board.formattedCreateDateSearch }
-                              </td>
-                           </tr>
-                        <c:if test="${not status.last }">
-                       </c:if>
-                        </c:if>
-                   </c:forEach>
-                </table>
-           <c:if test="${fn:length(resultList.boardList) > 9}">
-             <a href="search?searchName=${keyword }&amp;category=category_comm">
-               <button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button>
-             </a>
-           </c:if>
-         </c:if>
+              <div class="bod-result"> 
+	            <c:if test="${not empty resultList.getBoardList()}">
+	                <table id ="bod-table"style=" text-align: top;">
+	                   <tr>
+	                        <td colspan="3">
+	                          <h1 id="board-places" style="margin-left: 520px; font-size: 24px; color: #404040; font-family: 'IBM Plex Sans KR', sans-serif;">커뮤니티</h1>
+	                        </td>
+	                   </tr>
+	                   <c:forEach items="${resultList.boardList}" var="board" varStatus="status">
+	                        <c:if test="${status.index < 10}">
+	                           <tr style="padding-bottom: 20px;">
+	                                 <td style="padding-left: 50px;">
+	                                  <a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
+	                                  <br>
+	                                     <c:choose>
+	                                <c:when test="${fn:length(board.b_content) < 50}">
+	                                  <c:out value="${board.b_content}" />
+	                                </c:when>
+	                                <c:otherwise>
+	                                  <c:out value="${fn:substring(board.b_content, 0, 60)}" />...
+	                                </c:otherwise>
+	                              </c:choose>
+	                                     
+	                                     <hr id="line" >
+	                                 </td>
+	                               <td style="padding-left: 50px;">${board.formattedCreateDateSearch }
+	                              </td>
+	                           </tr>
+	                        <c:if test="${not status.last }">
+	                       </c:if>
+	                        </c:if>
+	                   </c:forEach>
+	                </table>
+	           <c:if test="${fn:length(resultList.boardList) > 9}">
+	             <a href="search?searchName=${keyword }&amp;category=category_comm">
+	               <button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button>
+	             </a>
+	           </c:if>
+	         </c:if>
+         </div>
+         
         </article>
      </c:if> 
           
@@ -483,6 +485,7 @@
      
      <article id="search-content-board">
            <!-- 커뮤니티 검색 결과 리스트 -->
+           
               <c:if test="${not empty resultList.getBoardList()}">
                          <table style="padding-left: 10%; text-align: top;">
                             <tr>

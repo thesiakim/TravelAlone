@@ -35,16 +35,31 @@
 
 	<header>
 		<div class="container">
-	  	<div id="container-left clearfix">
+	  <div id="container-left clearfix">
 		<div class="logo">
 		  <a href="/"><img src="img/gosunee.png"></a>
 		</div>
-		<div class="headerLogin">
-		  <a href="login">로그인</a>
-		</div> 
-		<div class="headerLogin">
-		  <a href="">회원가입</a>
-		</div> 
+		<c:choose>
+	    	<c:when test="${empty user}">
+		        <div class="headerLogin">
+		            <a href="/login">로그인</a>
+		        </div> 
+		        <div class="headerLogin">
+		            <a href="/join">회원가입</a>
+		        </div>
+				<div class="headerLogin">Join Us</div>
+		    </c:when>
+		    <c:otherwise>
+		        <div class="headerLogin">
+		            <a href="/mypage">마이페이지</a>
+		        </div> 
+		        <div class="headerLogin">
+		            <a href="/logout" onclick="logout()">로그아웃</a>
+		        </div>
+				<div class="headerLogin">${user.nickname}님 안녕하세요!</div>
+		    </c:otherwise>
+		</c:choose>
+		
 	  </div>
 	</div>
 	<div class="headerForm">

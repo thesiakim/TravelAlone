@@ -6,11 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 
-
-</head>
-
-<script type="text/javascript">
+<script defer type="text/javascript">
 	function insert_fav(){
 		$.ajax({      
 	        type:"POST",  
@@ -18,7 +16,6 @@
 	        data: { house_id : ${house.house_id}	  },     
 	        success:function(args){   
 	        	alert( "즐겨찾기가 추가되었습니다." );
-	        	window.location.reload();
 	        },error:function(e){  
 	        	alert("로그인이 필요합니다.");
 	        	console.log(e.responseText);
@@ -52,6 +49,10 @@ let clickCount = 0; */
 
 
 </script>
+
+</head>
+
+
 
 
 <body>
@@ -103,7 +104,6 @@ let clickCount = 0; */
 			<a href="houUpdateForm?house_id=${house.house_id}" class="button">수정</a>
 			<a href="deleteHouse?house_id=${house.house_id}" onclick="return confirm('정말로 삭제하시겠습니까?')" class="button">삭제</a>
 				</c:if>
-			
 			<c:choose>
 				<c:when test="${isfavHou eq '0'}">
 					<a href="" onclick="insert_fav()">즐겨찾기</a>
