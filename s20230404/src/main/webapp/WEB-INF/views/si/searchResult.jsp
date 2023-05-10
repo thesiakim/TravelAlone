@@ -108,7 +108,7 @@
                             <input type="hidden">
                           </c:if>
                      </td>
-                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                     <td></td><td></td><td></td><td></td><td></td>
                   </tr>
              </table>   
             </div>
@@ -133,8 +133,7 @@
    <div class="mh"  style="display:flex; justify-content:center;">
         <!-- 카테고리를 전체로 설정하고 검색한 경우 -->
         <c:if test="${category eq 'category_total'}">
-        
-         
+
          <!--여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트   -->
            <article id="search-content-total">
                 <!-- 여행지 검색 결과 리스트 -->
@@ -143,102 +142,52 @@
                    <hr id="line" >
                    <h1 id="travel-places" class="title">여행지</h1>
                    <br>
-                  <%-- <div style="display: flex; flex-wrap: wrap; ">
-                          <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-                            <c:if test="${status.index < 7}">
-                              <div style="width: 25%; margin-bottom: 20px;" id="each-name">
-                                <a href="/traDetail?tid=${travel.travel_id}">
-                                  <c:url value="/display" var="url">
-                                    <c:param name="file" value="${travel.img_stored_file}"></c:param>
-                                  </c:url>
-                                  <img src="${url}" alt="#" style="width: 250px; height: auto;">
-                                </a>
-                                <br>
-                                <div id="each-name"> 
-                                      <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
-                                 </div>
-                               <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
-                              </div>
-                            </c:if>
-                          </c:forEach>
-                        </div>    --%>
-                        <!-- 여기부터 -->
-                       <%--  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-    <c:if test="${status.index < 7}">
-      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
-        <a href="/traDetail?tid=${travel.travel_id}">
-          <c:url value="/display" var="url">
-            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-          </c:url>
-          <img src="${url}" alt="#" style="width: 100%; height: auto;">
-        </a>
-        <br>
-        <div id="each-name"> 
-          <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
-        </div>
-      </div>
-    </c:if>
-  </c:forEach>
-</div>
- --%>
- 
- <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-    <c:if test="${status.index < 7}">
-      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
-        <a href="/traDetail?tid=${travel.travel_id}">
-          <c:url value="/display" var="url">
-            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-          </c:url>
-          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
-        </a>
-        <br>
-        <div id="each-name"> 
-          <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
-        </div>
-      </div>
-    </c:if>
-  </c:forEach>
-</div>
- 
-
-
-
-                        
-                        
-                        <!-- 여기까지 -->
+					 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+					  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+					    <c:if test="${status.index < 7}">
+					      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
+					        <a href="/traDetail?tid=${travel.travel_id}">
+					          <c:url value="/display" var="url">
+					            <c:param name="file" value="${travel.img_stored_file}"></c:param>
+					          </c:url>
+					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
+					        </a>
+					        <br>
+					        <div id="each-name"> 
+					          <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
+					        </div>
+					      </div>
+					    </c:if>
+					  </c:forEach>
+					</div>
                           <c:if test="${fn:length(resultList.travelList) > 7}">
                              <a href="search?searchName=${keyword }&amp;category=category_travel"><button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button></a>
                           </c:if>
-  
                    </c:if></ul>
                 </div>
             
-            <hr id="line" >
+        
             
             <!-- 숙소 검색 결과 리스트 -->
-   
-            
             <div class="house-result">
                <ul>
                 <c:if test="${not empty resultList.getHouseList()}">
+                <hr id="line" >
                    <h1 id="house-places" class="title">숙소</h1>
                    <br>
-                   <div style="display: flex; flex-wrap: wrap; ">
+                   <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
                           <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
                             <c:if test="${status.index < 7}">
-                              <div style="width: 25%; margin-bottom: 20px;" id="each-name">
+                              <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
                                 <a href="/houDetail?hid=${house.house_id}">
                                   <c:url value="/display" var="url">
                                     <c:param name="file" value="${house.img_stored_file }"></c:param>
                                   </c:url>
-                                  <img src="${url }" alt="#" width="250px" height="auto"></a>
+                                  <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
                             <br>
                             <div id="each-name">
-                               <a href="/houDetail?hid=${house.house_id}"><c:out value="${house.h_name}" /></a>
-                            </div>
-                               <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
+                               <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
+							</div>
                               </div>
                             </c:if>
                           </c:forEach>
@@ -250,30 +199,28 @@
                 </ul>
             </div>
             
-            <hr id="line" >
             
             <!-- 맛집 검색 결과 리스트 -->
             <div class="res-result">
                 <ul><c:if test="${not empty resultList.getRestaurantList()}">
+                <hr id="line" >
                 <h1 id="res-places" class="title">맛집</h1>
                 <br>
-                <div style="display: flex; flex-wrap: wrap; ">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
                           <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
                             <c:if test="${status.index < 7}">
-                              <div style="width: 25%; margin-bottom: 20px;" id="each-name">
+                              <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
                             
                                       <a href="/resDetail?rid=${res.restaurant_id}">
                                
                                   <c:url value="/display" var="url">
                                     <c:param name="file" value="${res.img_stored_file }"></c:param>
                                   </c:url>
-                                  <img src="${url }" alt="#" width="250px" height="auto"></a>
+                                  <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;"></a>
                       <br>
                            <div id="each-name"> 
                          <a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
                          </div>
-                         
-                         <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
                               </div>
                             </c:if>
                           </c:forEach>
@@ -284,11 +231,11 @@
             </c:if></ul>
             </div>
             
-            <hr id="line" >
             
             <!-- 커뮤니티 검색 결과 리스트 -->
               <div class="bod-result"> 
 	            <c:if test="${not empty resultList.getBoardList()}">
+	            <hr id="line" >
 	                <table id ="bod-table"style=" text-align: top;">
 	                   <tr>
 	                        <td colspan="3">
@@ -327,60 +274,44 @@
 	           </c:if>
 	         </c:if>
          </div>
-         
         </article>
      </c:if> 
-          
      <!-- 카테고리를 전체로 설정하고 검색한 경우 끝 -->
+
+
 
       <!-- 카테고리를 여행지로 설정하고 검색한 경우 -->
      <c:if test="${category eq 'category_travel'}">
      
         <article id="search-content-travel" >
              <!-- 여행지 검색 결과 리스트 -->
-             <div  class="onlytravel-result">
+             <div class="onlytravel-result">
                    <ul><c:if test="${not empty resultList.getTravelList()}">
                    <br>
-                  <%-- <div style="display: flex; flex-wrap: wrap; ">
-                          <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-                            <c:if test="${status.index < 12}">
-                              <div style="width: 25%; margin-bottom: 20px;">
-                                <a href="/traDetail?tid=${travel.travel_id}">
-                                  <c:url value="/display" var="url">
-                                    <c:param name="file" value="${travel.img_stored_file}"></c:param>
-                                  </c:url>
-                                  <img src="${url}" alt="#" style="width: 250px; height: auto;">
-                                </a>
-                                <br>
-                                <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
-                               <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
-                              </div>
-                            </c:if>
-                          </c:forEach>
-                        </div>  --%>
-                        
-                        <!-- 여기부터 -->
-                        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-    <c:if test="${status.index < 7}">
-      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
-        <a href="/traDetail?tid=${travel.travel_id}">
-          <c:url value="/display" var="url">
-            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-          </c:url>
-          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
-        </a>
-        <br>
-        <div id="each-name"> 
-          <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
-        </div>
-      </div>
-    </c:if>
-  </c:forEach>
-</div>
-                        
-                        <!-- 여기까지 -->
-                          
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+					  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+					    <c:if test="${status.index < 7}">
+					      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
+					        <a href="/traDetail?tid=${travel.travel_id}">
+					          <c:url value="/display" var="url">
+					            <c:param name="file" value="${travel.img_stored_file}"></c:param>
+					          </c:url>
+					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
+					        </a>
+					        <br>
+					        <div id="each-name"> 
+					          <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
+					        </div>
+					      </div>
+					    </c:if>
+					  </c:forEach>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                         <div>
                             <c:if test="${paging.startPage > paging.pageBlock }">
                               <a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
@@ -403,25 +334,32 @@
         <article id="search-content-house">
              <!-- 숙소 검색 결과 리스트 -->
              <div class="onlyhouse-result">
-                <ul><c:if test="${not empty resultList.getHouseList()}">
-                <br>
-                  <div style="display: flex; flex-wrap: wrap; ">
-                <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
-                    <c:if test="${status.index < 12}">
-                      <div style="width: 25%; margin-bottom: 20px;">
-                        <a href="/houDetail?hid=${house.house_id}">
-                         <c:url value="/display" var="url">
-                            <c:param name="file" value="${house.img_stored_file }"></c:param>
-                         </c:url>
-                         <img src="${url}" alt="#" style="width: 250px; height: auto;">
-                         </a>
-                         <br>
-                            <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
-                            <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
-                             </div>
-                            </c:if>
-                          </c:forEach>
-                        </div>   
+                   <ul><c:if test="${not empty resultList.getHouseList()}">
+                   <br>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+					  <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
+					    <c:if test="${status.index < 7}">
+					      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
+					        <a href="/houDetail?hid=${house.house_id}">
+					          <c:url value="/display" var="url">
+					            <c:param name="file" value="${house.img_stored_file}"></c:param>
+					          </c:url>
+					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
+					        </a>
+					        <br>
+					        <div id="each-name"> 
+					          <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
+					        </div>
+					      </div>
+					    </c:if>
+					  </c:forEach>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                         <div>
                             <c:if test="${paging.startPage > paging.pageBlock }">
                               <a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
@@ -444,25 +382,32 @@
         <article id="search-content-res">
              <!-- 맛집 검색 결과 리스트 -->
              <div class="onlyres-result">
-                <ul><c:if test="${not empty resultList.getRestaurantList()}">
-                <br>
-                  <div style="display: flex; flex-wrap: wrap; ">
-                <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
-                    <c:if test="${status.index < 12}">
-                      <div style="width: 25%; margin-bottom: 20px;">
-                        <a href="/resDetail?rid=${res.restaurant_id}">
-                         <c:url value="/display" var="url">
-                            <c:param name="file" value="${res.img_stored_file }"></c:param>
-                         </c:url>
-                         <img src="${url}" alt="#" style="width: 250px; height: auto;">
-                          </a>
-                     <br>
-                         <a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
-                            <c:if test="${status.index % 3 == 2}"><div class="clearfix"></div></c:if>
-                              </div>
-                            </c:if>
-                          </c:forEach>
-                        </div>   
+                   <ul><c:if test="${not empty resultList.getRestaurantList()}">
+                   <br>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+					  <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
+					    <c:if test="${status.index < 7}">
+					      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
+					        <a href="/resDetail?rid=${res.restaurant_id}">
+					          <c:url value="/display" var="url">
+					            <c:param name="file" value="${res.img_stored_file }"></c:param>
+					          </c:url>
+					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
+					        </a>
+					        <br>
+					        <div id="each-name"> 
+					          <a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
+					        </div>
+					      </div>
+					    </c:if>
+					  </c:forEach>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                         <div>
                             <c:if test="${paging.startPage > paging.pageBlock }">
                               <a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
@@ -534,10 +479,7 @@
         </article>
      </c:if> 
      
-     
-     
-     
-<!--    <article id="search-content-total" style=" padding-right:500px;"> </article>   -->
+
      
    
 <!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 -->   
@@ -586,27 +528,24 @@
                </ul>
             </div>
          </div>
-         
-         
-         
       </article>
-   
       <br>
-   <!-- 최근 검색어 -->
+      
+      
+      
+   	  <!-- 최근 검색어 -->
       <article id="recent-container">
       <div id="recent-title"><p style="color: white; font-size: 20px; font-weight: bold;">최근 검색어</p></div>
       <br>
            <ul id="recent-list">
          <c:forEach var="recentSearchList" items="${recentSearchList}">
-            <li>
-               <c:out value="${recentSearchList.search_term}" />
+            <li><a href="/search?category=category_total&amp;searchName=${recentSearchList.search_term}">
+               <c:out value="${recentSearchList.search_term}" /></a>
             </li>
          </c:forEach>
          </ul>
       </article>
-      
    </article>
-    
    </div>
    </section>
 

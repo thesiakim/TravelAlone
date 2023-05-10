@@ -290,12 +290,17 @@
    
    
    
-#search-content-total {
-  width: 80%; /* 적절한 크기로 지정 */
-}
+	#search-content-total {
+	  width: 80%; /* 적절한 크기로 지정 */
+	}
+	
+	#bod-table {
+	   float: left;
+	}
 
-#bod-table {
-   float: left;
-}
-
+	/* 최근 검색어 목록 */
+	#recent-list a {
+	    color: #333333;
+	    font-family: 'IBM Plex Sans KR', sans-serif;
+	}
   
