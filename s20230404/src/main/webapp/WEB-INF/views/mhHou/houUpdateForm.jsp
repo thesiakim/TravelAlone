@@ -37,9 +37,9 @@ function deleteImage(house_id, img_id, p_index) {
 </script>
 <body>
 <div id="img_benner">
-		<img src="img/house-picture.png" alt="배너">
+		<img src="img/main-picture.png" alt="배너">
 	</div>
-	<h3><img src="../logo/Hou.png" alt="숙소" width=250px height=250px></h3>
+	<h3><img src="img/Hou.png" alt="숙소" width=250px height=250px></h3>
 	<br><h3>글 수정	</h3><br>
 		<form action="updateHouse" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="house_id" value="${house.house_id }">

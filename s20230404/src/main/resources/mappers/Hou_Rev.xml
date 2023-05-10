@@ -45,7 +45,7 @@
 		
 		</update>
 
-<!--  문의사항 글삭제하기 -->
+<!-- 숙소 리뷰글삭제하기 -->
 		<delete id="deleteHouRev" parameterType="int">
 			delete from HOU_REV where REVIEW_ID = #{review_id}
 		</delete>
