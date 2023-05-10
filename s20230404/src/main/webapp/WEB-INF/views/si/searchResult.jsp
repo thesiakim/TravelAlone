@@ -281,37 +281,40 @@
                  <c:if test="${fn:length(resultList.restaurantList) > 7}">
                     <a href="search?searchName=${keyword }&amp;category=category_res"><button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button></a>
                  </c:if>
-            </c:if></ul>
+            </c:if>
+            </ul>
             </div>
             
             <hr id="line" >
             
             <!-- 커뮤니티 검색 결과 리스트 -->
-              <div class="bod-result"> 
+              <div class="bod-result"  > 
+              <ul>
 	            <c:if test="${not empty resultList.getBoardList()}">
-	                <table id ="bod-table"style=" text-align: top;">
+	                <table id ="bod-table"style=" text-align: top;    margin-left: 20%;">
 	                   <tr>
 	                        <td colspan="3">
-	                          <h1 id="board-places" style="margin-left: 520px; font-size: 24px; color: #404040; font-family: 'IBM Plex Sans KR', sans-serif;">커뮤니티</h1>
+	                          <h1 id="board-places" style="margin-left: 35%; font-size: 24px; color: #404040; font-family: 'IBM Plex Sans KR', sans-serif;">커뮤니티</h1>
 	                        </td>
 	                   </tr>
+	                   
 	                   <c:forEach items="${resultList.boardList}" var="board" varStatus="status">
 	                        <c:if test="${status.index < 10}">
 	                           <tr style="padding-bottom: 20px;">
-	                                 <td style="padding-left: 50px;">
-	                                  <a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
-	                                  <br>
-	                                     <c:choose>
-	                                <c:when test="${fn:length(board.b_content) < 50}">
-	                                  <c:out value="${board.b_content}" />
-	                                </c:when>
-	                                <c:otherwise>
-	                                  <c:out value="${fn:substring(board.b_content, 0, 60)}" />...
-	                                </c:otherwise>
-	                              </c:choose>
-	                                     
-	                                     <hr id="line" >
-	                                 </td>
+                                  <td style="padding-left: 50px;">
+                                  <a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
+                                  <br>
+                                     <c:choose>
+                                <c:when test="${fn:length(board.b_content) < 50}">
+                                  <c:out value="${board.b_content}" />
+                                </c:when>
+                                <c:otherwise>
+                                  <c:out value="${fn:substring(board.b_content, 0, 60)}" />...
+                                </c:otherwise>
+                              </c:choose>
+                                     
+                                     <hr id="line" >
+                                   </td>
 	                               <td style="padding-left: 50px;">${board.formattedCreateDateSearch }
 	                              </td>
 	                           </tr>
@@ -319,15 +322,30 @@
 	                       </c:if>
 	                        </c:if>
 	                   </c:forEach>
+	                   
+	                 
 	                </table>
-	           <c:if test="${fn:length(resultList.boardList) > 9}">
-	             <a href="search?searchName=${keyword }&amp;category=category_comm">
-	               <button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button>
-	             </a>
-	           </c:if>
 	         </c:if>
+	         
+		        <%--    <c:if test="${fn:length(resultList.boardList) > 9}">
+		             <a href="search?searchName=${keyword }&amp;category=category_comm">
+		               <button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button>
+		             </a>
+		           </c:if> --%>
+		          
+		           <c:if test="${fn:length(resultList.boardList) > 9}">
+		             <a href="search?searchName=${keyword }&amp;category=category_comm">
+		               <button type="submit" style="margin-left: 70%; margin-top: 20px;  ">더보기</button>
+		             </a>
+		           </c:if>
+	         
+	         </ul>
          </div>
-         
+      
+	                
+	                   
+	                  
+	                   
         </article>
      </c:if> 
           
