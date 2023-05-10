@@ -121,9 +121,9 @@ private final HouseService mh;
 			 model.addAttribute("user_role", memberJpa.getRole());
 									
 		 }
-		log.info("즐겨찾기 model로 보내기 전");
+		
 		model.addAttribute("isfavHou", favResult);
-		log.info("즐겨찾기 model로 보낸 후");
+		
 		
 		//리뷰리스트
 		List<Hou_Rev> listHouRev = mh.listHouRev(hid);
