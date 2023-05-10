@@ -2,13 +2,12 @@ package com.travelAlone.s20230404.dao.km;
 
 import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Member;
-import com.travelAlone.s20230404.model.dto.km.MypageReviewRequestDto;
-import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
-import com.travelAlone.s20230404.model.dto.km.ScoreCount;
-import com.travelAlone.s20230404.model.dto.km.WritingCount;
+import com.travelAlone.s20230404.model.dto.km.*;
 
 import com.travelAlone.s20230404.model.mh.Inquire;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,8 +15,9 @@ import org.apache.ibatis.session.SqlSession;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Slf4j
 @RequiredArgsConstructor
+@Repository
 public class MypageDaoImpl implements MypageDao{
 
     private final SqlSession session;
@@ -117,6 +117,71 @@ public class MypageDaoImpl implements MypageDao{
     }
 
 
+    //마이페이지 문의내역 리스트 개수 및 페이지확인
+    @Override
+    public int myPageInquireListCnt(Long memberId) {
+        int myPageInquireListCnt = 0;
+        log.info("mhDaoImpl myPageInquireListCnt start");
+
+        try {
+            myPageInquireListCnt = session.selectOne("mhMyInqListCnt", memberId);
+            log.info("mhDaoImpl myPageInquireListCnt -> "+ myPageInquireListCnt);
+        } catch (Exception e) {
+            log.info("mhDaoImpl myPageInquireListCnt Exception -> "+ e.getMessage());
+        }
+        return myPageInquireListCnt;
+    }
+
+    @Override
+    public int kmMypageFavoritesCountRes(Long id) {
+        return session.selectOne("kmMypageFavoritesCountRes",id);
+    }
+
+    @Override
+    public int kmMypageFavoritesCountHou(Long id) {
+        return session.selectOne("kmMypageFavoritesCountHou",id);
+    }
+
+    @Override
+    public int kmMypageFavoritesCountTra(Long id) {
+        return session.selectOne("kmMypageFavoritesCountTra",id);
+    }
+
+    @Override
+    public List<MypageFavoriteResponseDto> kmMypageFavoritesHou(Long id,int startNum) {
+
+
+        return session.selectList("kmMypageFavoritesHou", id, new RowBounds(startNum, 10));
+    }
+    @Override
+    public List<MypageFavoriteResponseDto> kmMypageFavoritesTra(Long id, int startNum) {
+
+        return session.selectList("kmMypageFavoritesTra", id, new RowBounds(startNum, 10));
+    }
+    @Override
+    public List<MypageFavoriteResponseDto> kmMypageFavoritesRes(Long id, int startNum) {
+
+
+        return session.selectList("kmMypageFavoritesRes", id, new RowBounds(startNum, 10));
+    }
+
+
+
+    //마이페이지 문의내역 리스트
+    @Override
+    public List<Inquire> myPageInquireList(Inquire inquire) {
+        List<Inquire> myPageInquireList = null;
+        log.info("mhDaoImpl myPageInquireList start");
+
+        try {
+            myPageInquireList = session.selectList("mhMyInqList", inquire);
+            log.info("mhDaoImpl myPageInquireList size -> "+ myPageInquireList.size());
+        } catch (Exception e) {
+            log.info("mhDaoImpl myPageInquireList e.getMessage() -> "+ e.getMessage());
+        }
+
+        return myPageInquireList;
+    }
 
 
 }

@@ -36,6 +36,7 @@
 		<typeAlias alias="Warning" type="com.travelAlone.s20230404.model.Warning"/>
 		<typeAlias alias="CondDTO" type="com.travelAlone.s20230404.model.si.TimeDTO"/>
 		<typeAlias alias="RecentSearch" type="com.travelAlone.s20230404.model.si.RecentSearch"/>
+		<typeAlias alias="MypageFavoriteResponseDto" type="com.travelAlone.s20230404.model.dto.km.MypageFavoriteResponseDto"/>
 	</typeAliases>
 </configuration>
 

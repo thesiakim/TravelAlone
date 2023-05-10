@@ -25,4 +25,19 @@ public interface MypageDao {
 
     Member memberInfo(long memberId);
 
+    List<MypageFavoriteResponseDto> kmMypageFavoritesHou(Long id, int startNum);
+
+    List<MypageFavoriteResponseDto> kmMypageFavoritesTra(Long id, int startNum);
+
+    List<MypageFavoriteResponseDto> kmMypageFavoritesRes(Long id, int startNum);
+
+    List<Inquire> myPageInquireList(Inquire inquire);
+
+    int myPageInquireListCnt(Long memberId);
+
+    int kmMypageFavoritesCountRes(Long id);
+
+    int kmMypageFavoritesCountHou(Long id);
+
+    int kmMypageFavoritesCountTra(Long id);
 }

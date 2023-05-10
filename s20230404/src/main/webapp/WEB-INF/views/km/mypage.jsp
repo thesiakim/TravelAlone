@@ -79,7 +79,7 @@
 			<td>이름</td>
 			<td>${response.name}</td>
 			
-			<td>문의 내역</td>
+			<td><a href="/mypage/inquire">문의 내역</a></td>
 			<td>${response.csCount}</td>
 		</tr>
 		<tr>

@@ -10,12 +10,15 @@ import com.travelAlone.s20230404.config.km.Login2User;
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.config.km.SessionUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
-import com.travelAlone.s20230404.model.CommonCode;
-import com.travelAlone.s20230404.model.Member;
+import com.travelAlone.s20230404.model.*;
 import com.travelAlone.s20230404.model.dto.km.*;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.km.MypageService;
+import com.travelAlone.s20230404.service.mh.HouseService;
+import com.travelAlone.s20230404.service.sk.SkService;
+import com.travelAlone.s20230404.service.sm.TravelService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -33,8 +36,9 @@ import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-@Controller
+@Slf4j
 @RequiredArgsConstructor
+@Controller
 public class KmController {
 
     private final MemberService memberService;
@@ -42,6 +46,9 @@ public class KmController {
     private final CheckNicknameValidator checkNicknameValidator;
     private final PasswordEncoder passwordEncoder;
     private final MypageService mypageService;
+    private final HouseService houseService;
+    private final SkService skService;
+    private final TravelService travelService;
 
 
     /**
@@ -365,7 +372,95 @@ public class KmController {
         return "km/mypage-review";
     }
 
+    // 마이페이지 문의내역 리스트
+    @GetMapping("/mypage/inquire")
+    public String myPageInquireList(@LoginUser MemberJpa memberJpa, Inquire inquire, String currentPage, Model model) {
 
+        int myPageInquireListCnt = mypageService.myPageInquireListCnt(memberJpa.getId());
+
+        // Paging 작업
+        Paging page = new Paging(myPageInquireListCnt, currentPage);
+
+        // inquire에 추가 setting
+        inquire.setStart(page.getStart());
+        inquire.setEnd(page.getEnd());
+        inquire.setMember_id(memberJpa.getId());
+
+        List<Inquire> myPageInquireList = mypageService.myPageInquireList(inquire);
+
+        model.addAttribute("myPageInquireListCnt", myPageInquireListCnt);
+        model.addAttribute("myPageInquireList", myPageInquireList);
+        model.addAttribute("page", page);
+        model.addAttribute("user_id", memberJpa.getId());
+
+        return "km/mypage-inquire";
+
+    }
+
+    /**
+     * 2023-05-09 조경민
+     * 설명 : 마이페이지 내 즐겨찾기 모음 화면 이동
+     * */
+    @GetMapping("/mypage/favorite")
+    public String mypageFavorites(@RequestParam(defaultValue = "tra") String category,
+                                  @RequestParam(defaultValue = "1") int page,
+                                  @Login2User SessionUser sessionUser,
+                                  Model model){
+        model.addAttribute("totalPage", mypageService.mypageFavoritesPageCount(sessionUser.getId(),category));
+
+        List<MypageFavoriteResponseDto> mypageFavoriteResponseDtos = mypageService.mypageFavorites(sessionUser.getId(), category, page);
+
+        model.addAttribute("favorites",mypageFavoriteResponseDtos);
+
+        System.out.println("mypageFavoriteResponseDtos = " + mypageFavoriteResponseDtos.size());
+
+        return "km/mypage-favorites";
+    }
+
+    /**
+     * 2023-05-10 조경민
+     * 설명 : 마이페이지 즐겨찾기 취소 혹은 재등록
+     * Dto를 만들지 않고 받기 위해 Map 사용
+     * */
+    @PatchMapping("/api/v1/mypage/favorite")
+    @ResponseBody
+    public String mypageFavoritesUpdate(@RequestBody Map<String, Object> info,
+                                        @Login2User SessionUser sessionUser){
+        long id = (long) info.get("id");
+        String category =(String) info.get("category");
+        boolean checked = (boolean) info.get("checked");
+
+        int result=0;
+        switch (category){
+            case "hou":
+                Hou_Fav hou_Fav = new Hou_Fav();
+                hou_Fav.setMember_id(sessionUser.getId());
+                hou_Fav.setHouse_id(id);
+
+                result = checked ? houseService.insertHouFav(hou_Fav) : houseService.deleteHouFav(hou_Fav);
+                break;
+            case "tra":
+                Tra_Fav tra_Fav = new Tra_Fav();
+                tra_Fav.setMember_id(sessionUser.getId());
+                tra_Fav.setTravel_id(id);
+
+                result = checked ? travelService.insertTraFav(tra_Fav) : travelService.deleteTraFav(tra_Fav);
+                break;
+            case "res":
+                Res_Fav res_Fav = new Res_Fav();
+                res_Fav.setMember_id(sessionUser.getId());
+                res_Fav.setRestaurant_id(id);
+
+                result = checked ? skService.insertResFav(res_Fav) : skService.deleteResFav(res_Fav);
+        }
+
+        if (result==0){
+            throw new IllegalArgumentException("즐겨찾기 수정 실패");
+        }else {
+            return "성공";
+        }
+
+    }
 
 
     // 관리자 페이지----------------------------------------------------------------
@@ -445,6 +540,8 @@ public class KmController {
 
         return memberService.adminMemberinfoChange(file,requestDto);
     }
+
+
 
 }
 

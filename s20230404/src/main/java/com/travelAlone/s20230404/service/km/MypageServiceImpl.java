@@ -4,13 +4,17 @@ import com.travelAlone.s20230404.config.km.SessionUser;
 import com.travelAlone.s20230404.dao.km.MypageDao;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.Member;
-import com.travelAlone.s20230404.model.dto.km.MypageResponseDto;
+import com.travelAlone.s20230404.model.dto.km.*;
 
 import com.travelAlone.s20230404.model.dto.km.MypageReviewRequestDto;
 import com.travelAlone.s20230404.model.dto.km.MypageReviewResponseDto;
 import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
+
+import com.travelAlone.s20230404.model.mh.Inquire;
+
 import com.travelAlone.s20230404.service.jh.UploadHandler;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,8 +26,9 @@ import java.util.List;
  * 2023-04-26 조경민
  * 설명 : 마이페이지 관련 serviceimpl
  * */
-@Service
+@Slf4j
 @RequiredArgsConstructor
+@Service
 public class MypageServiceImpl implements MypageService{
 
     private final MypageDao mypageDao;
@@ -178,5 +183,68 @@ public class MypageServiceImpl implements MypageService{
 		
 		return userPageResponseDto;
 	}
+
+    //마이페이지 문의내역 리스트 개수 및 페이지확인
+    @Override
+    public int myPageInquireListCnt(Long memberId) {
+        int myPageInquireListCnt = 0;
+        log.info("mhServiceImpl myPageInquireListCnt Start...");
+        myPageInquireListCnt = mypageDao.myPageInquireListCnt(memberId);
+        log.info("mhServiceImpl myPageInquireListCnt -> "+ myPageInquireListCnt);
+
+        return myPageInquireListCnt;
+    }
+
+    //마이페이지 문의내역 리스트
+    @Override
+    public List<Inquire> myPageInquireList(Inquire inquire) {
+        List<Inquire> myPageInquireList = null;
+        log.info("mhServiceImpl myPageInquireList Start...");
+        myPageInquireList = mypageDao.myPageInquireList(inquire);
+        log.info("mhServiceImpl myPageInquireList size -> "+ myPageInquireList.size());
+
+        return myPageInquireList;
+    }
+
+    /**
+     * 2023-05-10 조경민
+     * 설명 : 마이페이지 즐겨찾기 불러오기
+     * */
+    @Override
+    public List<MypageFavoriteResponseDto> mypageFavorites(Long id, String category, int page) {
+
+        // 페이징 처리를 위한 가져올 첫번째 게시글 번호 산출
+        int startNum = (page - 1) * 10;
+
+        // 리턴할 변수 선언
+        List<MypageFavoriteResponseDto> mypageFavoriteResponseDtos;
+
+        // 카테고리 별 매퍼 실행
+        if (category.equals("hou")){
+             mypageFavoriteResponseDtos = mypageDao.kmMypageFavoritesHou(id, startNum);
+        }else if(category.equals("res")){
+            mypageFavoriteResponseDtos = mypageDao.kmMypageFavoritesRes(id, startNum);
+        }else{
+            mypageFavoriteResponseDtos = mypageDao.kmMypageFavoritesTra(id, startNum);
+        }
+
+
+        // 리스트 리턴
+        return mypageFavoriteResponseDtos;
+    }
+
+    @Override
+    public int mypageFavoritesPageCount(Long id, String category) {
+        int totalCount;
+        if (category.equals("hou")){
+            totalCount = mypageDao.kmMypageFavoritesCountHou(id);
+        }else if(category.equals("res")){
+            totalCount = mypageDao.kmMypageFavoritesCountRes(id);
+        }else{
+            totalCount = mypageDao.kmMypageFavoritesCountTra(id);
+        }
+        return totalCount;
+    }
+
 
 }
