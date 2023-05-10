@@ -95,11 +95,9 @@
                 	<c:url value="/display" var="url">
                 		<c:param name="file" value="${travel.img_stored_file }"></c:param>
                 	</c:url>
-                	
-               <%--  	<img src="${url }" alt="#"> --%>
                		    <div class="image-container">
 					      <img src="${url }" alt="${travel.t_name}" width="500" height="300">
-					      <p class="image-text" >${travel.t_name}</p>
+					      <div class="image-text">${travel.t_name}</div>
 					    </div>
                 	</a>
                 </div>
@@ -130,6 +128,7 @@
 			},
 		  });
 		</script>
+		
 		<hr>
 		<!-- 인기 숙소  -->
 		<div id="session2">
@@ -148,7 +147,7 @@
 					    </c:url>
 					    <div class="image-container">
 					      <img src="${url }" alt="${house.h_name}" width="500" height="300">
-					      <p class="image-text">${house.h_name}</p>
+					      <div class="image-text">${house.h_name}</div>
 					    </div>
 					  </a>
 					</div>
@@ -199,7 +198,7 @@
                 	<%-- <img src="${url }" alt="#"> --%>
                 	  <div class="image-container">
 					      <img src="${url }" alt="${res.r_name}" width="500" height="300">
-					      <p class="image-text">${res.r_name}</p>
+					      <div class="image-text">${res.r_name}</div>
 					    </div>
                 	
                 	
