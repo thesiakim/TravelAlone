@@ -36,9 +36,9 @@
 </script>
 <body>
 <div id="img_banner">
-		<img src="img/travel-picture.png" alt="배너">
+		<img src="img/main-picture.png" alt="배너">
 	</div>
-		<h3><img src="../logo/Tra.png" alt="여행지" width=250px height=250px></h3>
+		<h3><img src="img/Tra.png" alt="여행지" width=250px height=250px></h3>
 	<br><h3>글 수정	</h3><br>
 		<form action="traUpdate" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="travel_id" value="${travel.travel_id }">

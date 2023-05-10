@@ -12,9 +12,9 @@
 	<script defer src="/js/picture.js"></script>
 <body>
 	<div id="img_benner">
-		<img src="img/travel-picture.png" alt="배너">
+		<img src="img/main-picture.png" alt="배너">
 	</div>
-<h3><img src="../logo/Review.png" alt="리뷰" width=250px height=250px></h3>
+<h3><img src="img/Review.png" alt="리뷰" width=250px height=250px></h3>
 <h3>글 작성</h3>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="traRevWriteForm" method="post" name="frm">

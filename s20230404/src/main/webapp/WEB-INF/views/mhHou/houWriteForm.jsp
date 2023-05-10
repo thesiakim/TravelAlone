@@ -13,9 +13,9 @@
 	<script defer src="/js/picture.js"></script>
 <body>
 <div id="img_benner">
-		<img src="img/house-picture.png" alt="배너">
+		<img src="img/main-picture.png" alt="배너">
 	</div>
-<h3><img src="../logo/Hou.png" alt="숙소" width=250px height=250px></h3>
+<h3><img src="img/Hou.png" alt="숙소" width=250px height=250px></h3>
 <h3>글 쓰기</h3>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="houWriteForm" method="post" name="frm" enctype="multipart/form-data">
