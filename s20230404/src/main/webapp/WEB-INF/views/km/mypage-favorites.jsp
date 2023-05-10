@@ -12,6 +12,39 @@
 		}
 
 	</style>
+	<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+	<script defer>
+		function favoriteCheck(event,id){
+
+			var checked = event.target.checked;
+
+			const params = new URLSearchParams(window.location.search);
+			let category = params.get('category'); // 카테고리 가져오기
+			if (category != null){
+				category = "";
+			}
+			var data = {
+				id : id,
+				category : category,
+				checked: checked
+			}
+
+			$.ajax({
+				type: "PATCH",
+				url: "/api/v1/mypage/favorite",
+				dataType: "text",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify(data),
+			})
+					.done(function (responseText) {
+						alert("수정되었습니다.");
+					})
+					.fail(function (error) {
+						alert(JSON.stringify(error));
+					});
+
+		}
+	</script>
 </head>
 <body>
 
@@ -34,6 +67,7 @@
 			<td>평점</td>
 			<td>리뷰수</td>
 			<td>등록일자</td>
+			<td>즐겨찾기 체크</td>
 		</tr>
 		<c:forEach items="${favorites}" var="favorite">
 			<tr>
@@ -68,6 +102,9 @@
 				</td>																				
 				<td>${favorite.reviewCount}</td>
 				<td>${favorite.modifiedDate}</td>
+				<td>
+					<input type="checkbox" class="favoriteCheckBox" id="favoriteCheckBox" onclick="favoriteCheck(event,${favorite.id})" checked>
+				</td>
 		</c:forEach>
 		
 	</table>
