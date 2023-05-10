@@ -24,6 +24,10 @@
 	
 	/* 방문한 링크 색깔 */
 	a:visited { color: #5F9EA0; }
+	
+	#each-name > a {
+    color: black;
+	}
 		
 	/* 구분선 */
 	hr {
@@ -227,38 +231,57 @@
 	  margin: 0;
 	}
 	
-	/* 자동완성 */
 	
-	#search-autocomplete {
-		position: relative;
-	}
-	#autocomplete-results {
-		position: absolute;
-		top: 30px;
-		left: 0;
-		background-color: white;
-		border: 1px solid #ccc;
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		max-height: 200px;
-		overflow-y: auto;
-		width: 100%;
-	}
-	#autocomplete-results li {
-		padding: 5px 10px;
-		cursor: pointer;
-	}
-	#autocomplete-results li:hover {
-		background-color: #f5f5f5;
-	}
-	
+	/* 자동 완성 */
 	.ui-autocomplete {
-   font-size: 14px; /* 원하는 글자 크기로 수정 */
-}
+	   font-size: 14px; 
+	   text-align: left;
+	   font-family: 'IBM Plex Sans KR', sans-serif;
+	   border-radius: 15px;
+	   color: #205E61;
+	   border: 3px solid #205E61;
+	}
+	
 
-.ui-menu-item {
-   width: 400px; /* 원하는 박스 크기로 수정 */
-}
+	/* 인기 명소, 숙소, 맛집 이미지 효과 */
+	.image-container img {
+	  /* filter: saturate(0.3) brightness(0.8);
+	  transition: all 0.3s ease-out; */
+	}
+	
+	.image-container {
+	  position: relative;
+	  display: inline-block;
+	  text-align: center; 
+	}
+	
+	.image-text {
+	  position: absolute;
+	  top: 10%;
+	  left: 50%;
+	  transform: translate(-50%, -50%); /* 텍스트 중앙에 배치 */
+	  background-color: rgba(0, 0, 0, 0);
+	  color: #fff;
+	  font-size: 24px; /* 크기 조절 */
+	  padding: 10px;
+	  margin: 0;
+	  height: 40px; 
+	  width: 480px;
+	}
+
+
+	.image-container:hover img {
+	  /* filter: none; */
+	  filter: saturate(0.3) brightness(0.8);
+	  transition: all 0.3s ease-out;
+	}
+	
+	.image-container:hover p {
+	  opacity: 0;
+	}
+
+
+
+
 
 	

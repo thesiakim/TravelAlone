@@ -1,200 +1,289 @@
 @charset "UTF-8";
 
-	/* 결과 안내 문장의 폰트 크기 조정  */
-	h2 {
-	  font-size: 80%;
-	  font-family: 'IBM Plex Sans KR', sans-serif;
-	}
-	
-	/* 결과 테이블 테두리 조정 */
-	#search-table {
-		border-collapse: collapse;
-		font-family: 'IBM Plex Sans KR', sans-serif;
-		
-	}
-	
-	#search-table tr:not(:first-of-type) {
-		border-top: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
-	}
-	
-	#search-table tr:not(:first-of-type) td:first-of-type,
-	#search-table tr:not(:first-of-type) td:nth-of-type(2) {
-		border-left: 1px solid #ddd;
-	}
-	
-	#search-table tr:not(:first-of-type) td:last-of-type {
-		border-right: 1px solid #ddd;
-	}
-	
-	/* 결과 테이블 두 번째 tr 크기 조정 */
-	#search-table tr:nth-child(2) {
-		height: 70px;
-	}
-	
-	/* 결과 테이블 두 번째 tr의 padding 조정 */
-	#search-table tr:not(:first-of-type) {
-		border-top: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
-	}
-	
-	#search-table tr:not(:first-of-type) td:first-of-type,
-	#search-table tr:not(:first-of-type) td:nth-of-type(2) {
-		border-left: 1px solid #ddd;
-	}
-	
-	#search-table tr:not(:first-of-type) td:last-of-type {
-		border-right: 1px solid #ddd;
-	}
-	
-	#search-table tr:nth-of-type(2) td {
-		padding: 20px;
-	}
-	
-	/* 검색 결과 padding */
-	#search-table tr:nth-of-type(2) td:first-of-type {
-  		padding: 20.5px;
-	}
-	 	 
-	/* 통합 검색 글씨 */
-	#search-table tr:first-child td:first-child {
-		font-size: 22px;
-		color: #333333;
-		font-family: 'IBM Plex Sans KR', sans-serif;
-	}
-	
-	#search-table a {
-  		color: #404040;
-	}
-	
-	
-	/* 총 ㅇㅇ건 */
-	#search-td:last-of-type {
-		font-size: 14px;
-    	color: #666666;
-    	font-family: 'IBM Plex Sans KR', sans-serif;
-	}
-	
-	/* 검색 결과 없는 경우 안내문 */
-	#no-search-result li {
-		margin-left: 50;
-		font-size: 16px; 
-		color: #474747;
-		text-align: left;
-	}
-	
-	#no-search-result {
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	}
+   /* 결과 안내 문장의 폰트 크기 조정  */
+   h2 {
+     font-size: 80%;
+     font-family: 'IBM Plex Sans KR', sans-serif;
+   }
+   
+   /* 결과 테이블 테두리 조정 */
+   #search-table {
+      border-collapse: collapse;
+      font-family: 'IBM Plex Sans KR', sans-serif;
+      
+   }
+   
+   #search-table tr:not(:first-of-type) {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+   }
+   
+   #search-table tr:not(:first-of-type) td:first-of-type,
+   #search-table tr:not(:first-of-type) td:nth-of-type(2) {
+      border-left: 1px solid #ddd;
+   }
+   
+   #search-table tr:not(:first-of-type) td:last-of-type {
+      border-right: 1px solid #ddd;
+   }
+   
+   /* 결과 테이블 두 번째 tr 크기 조정 */
+   #search-table tr:nth-child(2) {
+      height: 70px;
+   }
+   
+   /* 결과 테이블 두 번째 tr의 padding 조정 */
+   #search-table tr:not(:first-of-type) {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+   }
+   
+   #search-table tr:not(:first-of-type) td:first-of-type,
+   #search-table tr:not(:first-of-type) td:nth-of-type(2) {
+      border-left: 1px solid #ddd;
+   }
+   
+   #search-table tr:not(:first-of-type) td:last-of-type {
+      border-right: 1px solid #ddd;
+   }
+   
+   #search-table tr:nth-of-type(2) td {
+      padding: 20px;
+   }
+   
+   /* 검색 결과 padding */
+   #search-table tr:nth-of-type(2) td:first-of-type {
+        padding: 20.5px;
+   }
+        
+   /* 통합 검색 글씨 */
+   #search-table tr:first-child td:first-child {
+      font-size: 22px;
+      color: #333333;
+      font-family: 'IBM Plex Sans KR', sans-serif;
+   }
+   
+   #search-table a {
+        color: #404040;
+   }
+   
+   
+   /* 총 ㅇㅇ건 */
+   #search-td:last-of-type {
+      font-size: 14px;
+       color: #666666;
+       font-family: 'IBM Plex Sans KR', sans-serif;
+   }
+   
+   /* 검색 결과 없는 경우 안내문 */
+   #no-search-result li {
+      margin-left: 50;
+      font-size: 16px; 
+      color: #474747;
+      text-align: left;
+   }
+   
+   #no-search-result {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+   }
 
-	ul.no-search-list li {
-  		margin-bottom: 5px;
-	}
+   ul.no-search-list li {
+        margin-bottom: 5px;
+   }
 
 
-
-	
-	
-	
-	/* #search-table td {
-		list-style-image: url("../img/list.png");
-	} */
-	
-	/* 인기 검색어  */
-	 	
-	#popular-container {
-	  margin-bottom: 20px;
-	  margin-top: 10px;
-	  min-width: 320px; 
-	  max-width: 500px;
-	}
-	
-	#popular-container p {
-	  margin: 0 0 20px; 
-	  line-height: 1.5;
-	  font-weight: 300;
-	}
-	
-	#popular-container .content {
-	  background: #fff; 
-	  color: #373737;
-	  backface-visibility: hidden;
-	  overflow: hidden;
-	}
-	
-	#popular-container .content > div {
-	  display: none;
-	  padding: 20px 25px 5px;
-	}
-	
-	#popular-container input {
-	  display: none;
-	}
-	
-	#popular-container label {
-	  display: inline-block; 
-	  padding: 15px 25px; 
-	  font-weight: 600; 
-	  text-align: center;
-	  border-bottom: 1px solid transparent;
-	  transition: all .3s ease-out 0.1s;
-	}
-	
-	#popular-container label:hover {
-	  color: #fff; 
-	  cursor: pointer;
-	}
-	
-	#popular-container input:checked + label {
-	  background: #ffffff;
-	  color: #1FAB89;
-	  border-bottom: 1px solid;
-	}
-	
-	#popular-container #tab-1:checked ~ .content #content-1,
-	#popular-container #tab-2:checked ~ .content #content-2,
-	#popular-container #tab-3:checked ~ .content #content-3,
-	#popular-container #tab-4:checked ~ .content #content-4 {
-	  display: block;
-	}
-	
-	
-	#popular-container .content li a {
-	  color: #333333;
-	  font-size: 14px;
-	  text-align: left;
-	}
-	
-	
+   /* 인기 검색어  */
+       
+   #popular-container {
+     margin-bottom: 20px;
+     margin-top: 10px;
+     min-width: 320px; 
+     max-width: 500px;
+   }
+   
+   #popular-container p {
+     margin: 0 0 20px; 
+     line-height: 1.5;
+     font-weight: 300;
+   }
+   
+   #popular-container .content {
+     background: #fff; 
+     color: #373737;
+     backface-visibility: hidden;
+     overflow: hidden;
+   }
+   
+   #popular-container .content > div {
+     display: none;
+     padding: 20px 25px 5px;
+   }
+   
+   #popular-container input {
+     display: none;
+   }
+   
+   #popular-container label {
+     display: inline-block; 
+     padding: 15px 25px; 
+     font-weight: 600; 
+     text-align: center;
+     border-bottom: 1px solid transparent;
+     transition: all .3s ease-out 0.1s;
+   }
+   
+   #popular-container label:hover {
+     color: #fff; 
+     cursor: pointer;
+   }
+   
+   #popular-container input:checked + label {
+     background: #ffffff;
+     color: #1FAB89;
+     border-bottom: 1px solid;
+   }
+   
+   #popular-container #tab-1:checked ~ .content #content-1,
+   #popular-container #tab-2:checked ~ .content #content-2,
+   #popular-container #tab-3:checked ~ .content #content-3,
+   #popular-container #tab-4:checked ~ .content #content-4 {
+     display: block;
+   }
+   
+   
   #word article {
     display: block;
-  }
+    
 
-	
-	#line{
-			height:1px ; 		border-radius: 0;
-			width:95% ; 		border: 0px;
-			background-color: #EAEAEA;
-		}
-		
-		
-	/* 카테고리를 전체로 검색한 경우 각 항목의 제목 */
-	.title {
-		font-size: 24px;
-		color: #404040;
-		font-family: 'IBM Plex Sans KR', sans-serif;
+ 
+  }   
+  
+     #popular-container {
+   /* position: fixed; */  /* 이거 풀면 고정됨 */
+   top: 50%;
+   right: 10px;
+   /* border: 5px solid #1FAB89; */
+    padding: 10px;
+    height: auto;
+    border-radius: 10px;
+
+   }
+   
+   
+   #popular-container .content li a {
+     color: #333333;
+     font-size: 14px;
+     text-align: left;
+     
+
+   }
+   
+
+	 /* 인기 검색어 글자 디자인 */
+	#popular-title {
+	  background-color: #BCEAD5; /* 박스 배경색 */
+	  display: inline-block; /* 인라인 박스로 설정 */
+	  padding: 10px; /* 내부 여백 */
+	  border-radius: 5px; /* 박스 모서리 둥글게 */
+	}
+
+   
+   	  /* 인기 검색어 리스트 */
+	  #search-list li a:before {
+	  list-style-position: inside;
+	  content: "";
+	  display: inline-block;
+	  width: 20px;
+	  height: 20px;
+	  margin-right: 3px;
+	  background-image: url(../img/green.png);
+	  /* list-style-image: url(../img/checkk.png); */
+	  background-repeat: no-repeat;
+	  background-position: center center;
+	  background-size: 13px;
+	  
+	}
+   
+   
+
+  
+	  #recent-container  {
+	    display: block;
+	     /* position: fixed; */  /* 이거 풀면 고정됨 */
+	     top: 80%;
+	     right: 10px;
+	     /*  border: 5px solid #1FAB89; */
+	     padding: 10px;
+	     width: 324px;
+	     height: auto;
+	     border-radius: 10px;
+	  }
+	  
+	  
+	  /* 최근 검색어 글자 디자인 */
+	#recent-title {
+	  background-color: #BCEAD5; /* 박스 배경색 */
+	  display: inline-block; /* 인라인 박스로 설정 */
+	  padding: 10px; /* 내부 여백 */
+	  border-radius: 5px; /* 박스 모서리 둥글게 */
+	}
+	  
+	  
+  
+  	  /* 최근 검색어 리스트 */
+	  #recent-list li {
+	  font-size: 14px;
+	  margin-bottom: 10px;
+	  text-align: left;
+	  
 	}
 	
-	/* 카테고리를 전체로 검색한 경우 각 항목의 내용 */
-	.each-name {
-		font-size: 19px;
-		font-family: 'IBM Plex Sans KR', sans-serif;
-		color: #404040;
-	}
-	
-	
+	#recent-list li:before {
+  list-style-position: inside;
+	  content: "";
+	  display: inline-block;
+	  width: 20px;
+	  height: 20px;
+	  margin-right: 3px;
+	  background-image: url(../img/green.png);
+	  /* list-style-image: url(../img/checkk.png); */
+	  background-repeat: no-repeat;
+	  background-position: center center;
+	  background-size: 13px;
+}
+	  
+
+   
+   #line {
+         height:1px ;       border-radius: 0;
+         width:95% ;       border: 0px;
+         background-color: #EAEAEA;
+      }
+      
+      
+   /* 카테고리를 전체로 검색한 경우 각 항목의 제목 */
+   .title {
+      font-size: 24px;
+      color: #404040;
+      font-family: 'IBM Plex Sans KR', sans-serif;
+   }
+   
+   /* 카테고리를 전체로 검색한 경우 각 항목의 내용 */
+   .each-name {
+      font-size: 19px;
+      font-family: 'IBM Plex Sans KR', sans-serif;
+      color: #404040;
+   }
+   
+   
+   
 
 
-	   
+	  
+	  
+
+   
+
+  

@@ -105,7 +105,37 @@
 	  	<div id="serch">
 			<input type="text" name="searchName" value="${keyword }" id="searchId">
 	  	</div>
+	  	<div id="search-autocomplete">
+	  		<ul id="autocomplete-results"></ul>
+	  	</div>
 	  </form>
+	  
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+	  <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+	  <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+	  
+	  <script>
+	  	/* 자동 완성 */
+	  	$(function(){
+	  		$("#searchId").autocomplete({
+	  			source: function(request, response){
+	  				$.ajax({
+	  					url: "/autocomplete",
+	  					dataType: "json",
+	  					data:{
+	  						keyword: request.term,
+	  						category: $("#category").val()
+	  					},
+	  					success: function(data){
+	  						response(data);
+	  					}
+	  				});
+	  			},
+	  			minLength: 1
+	  		});
+	  	});
+
+	  </script>
 	</div>
 	</header>
 
