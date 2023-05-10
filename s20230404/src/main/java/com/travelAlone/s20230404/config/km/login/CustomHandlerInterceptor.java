@@ -23,16 +23,16 @@ public class CustomHandlerInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        System.out.println("request.getRequestURI() = " + request.getRequestURI());
+       
 
         if (user != null) {
             if (modelAndView != null){
                 modelAndView.addObject("user", user);
-                System.out.println("user = " + user.getEmail());
+                
             } else {
                 modelAndView = new ModelAndView();
                 modelAndView.addObject("user", user);
-                System.out.println("user 모델앤뷰 없을때 = " + user.getEmail());
+                
             }
         }
 
