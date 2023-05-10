@@ -19,20 +19,20 @@
 <body>
 	
 	<div id="img_benner">
-      <img src="img/community-picture.png" alt="배너">
-   </div>
+		<img src="img/community-picture.png" alt="배너">
+	</div>
+   	
+   	<h1><a href="mypage"><img src="img/myPage-picture.png" alt="마이페이지" width=250px height=250px></a></h1>
 	
    	<h1>리 뷰</h1>
 	<br>
 	<a href="reviewPageTra" style="margin: 50px;">여행지</a>
 	<a href="reviewPageHou" style="margin: 50px; color:#205E61;">숙소</a>
 	<a href="reviewPageRes" style="margin: 50px;">맛집</a>
-	<hr>
+	<hr><br>
 
-	<h3>리뷰 - 마이 페이지</h3>
-
-	<h5> ${m_nickname} 작성한 숙소 리뷰 내역</h5>
-	
+	<h3>작성한 숙소 리뷰 내역</h3>
+	<br>
 	<c:set var="num" value="${page.total - page.start + 1 }"></c:set>
 	
 	<div>

@@ -54,7 +54,7 @@
 		<img src="img/house-picture.png" alt="배너">
 	</div>
 	
-
+<h1><a href="hou"><img src="img/Hou.png" alt="숙소" width=250px height=250px></a></h1>
 
 <!-- 숙소종류 -->
 	<div >  																						

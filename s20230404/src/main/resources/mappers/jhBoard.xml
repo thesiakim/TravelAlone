@@ -138,7 +138,13 @@
 		WHERE	member_id = #{member_id}            
 	</select>
 	
-	
+	<select id="mypageTagUpdate" parameterType="long" resultType="interest">
+		<![CDATA[
+		SELECT 	i.interest_id, i.member_id, i.i_common_interest, i.create_date, i.modified_date, c.word
+		FROM 	interest i inner join common c on i.i_common_interest = concat(c.bcd, c.mcd)
+		WHERE 	i.member_id = #{member_id}
+		]]>
+	</select>	
 	
 	
 </mapper>

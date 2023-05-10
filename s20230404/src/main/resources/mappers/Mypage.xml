@@ -25,11 +25,13 @@
 		<select id="writingCountById" resultType="WritingCount" >
 			<![CDATA[
 			SELECT a.board_count, b.hou_review_count, c.res_review_count, d.tra_review_count,e.favorites_count,f.g_writing_count
-			FROM (SELECT COUNT(*) as board_count  FROM board WHERE member_id = #{memberId}) a ,
+			FROM (SELECT COUNT(*) as board_count  FROM board WHERE member_id = #{memberId} AND b_re_level = 0 ) a ,
 				 (SELECT COUNT(*) as hou_review_count FROM HOU_REV WHERE MEMBER_id = #{memberId}) b ,
 				 (SELECT COUNT(*) as res_review_count FROM res_REV WHERE MEMBER_id = #{memberId}) c ,
 				 (SELECT COUNT(*) as tra_review_count FROM tra_REV WHERE MEMBER_id = #{memberId}) d ,
-				 (SELECT COUNT(*) as favorites_count FROM favorites WHERE MEMBER_id = #{memberId}) e ,
+				 (SELECT (SELECT COUNT(*) FROM TRA_FAV c WHERE c.Member_id = #{memberId}) + 
+				 		 (SELECT COUNT(*) FROM res_FAV b WHERE b.Member_id = #{memberId}) + 
+				 		 (SELECT COUNT(*) FROM hou_FAV a WHERE a.Member_id = #{memberId}) as favorites_count from dual) e ,
 				 (SELECT COUNT(*) as g_writing_count FROM g_writing WHERE MEMBER_id = #{memberId}) f
 			]]>
 		</select>

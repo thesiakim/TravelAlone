@@ -41,7 +41,7 @@
     padding: 5px 10px;
     margin: 5px;
     border-radius: 20px;
-    background-color: green;
+    background-color: #5F9EA0;
     color: white;
     font-size: 14px;
 }
@@ -54,25 +54,26 @@
 .score-container {
     display: flex;
     align-items: center;
-    font-size: 14px;
-    width: 500px;
+    font-size: 16px;
+    width: 400px;
 }
 
 .bar-label {
-    margin-right: 10px;
     width: 200px;
-    text-align: right;
+    text-align: left;
+    font-weight: border;
 }
 
 .bar-container {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-left:15px;
 }
 
 .bar {
     height: 30px;
-    background-color: green;
+    background-color: #5F9EA0;
     margin-bottom: 5px;
     border-radius: 5px;
     position: relative;

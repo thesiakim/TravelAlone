@@ -62,7 +62,13 @@ public class MemberFormDto {
 
 
     public MemberJpa toEntity(PasswordEncoder passwordEncoder){
-
+    	String imgSrc;
+    	if(this.gender=="0") {
+    		imgSrc = "src/main/resources/static/img/user-picture.png";
+    	}else {
+    		imgSrc = "src/main/resources/static/img/user-picture.png";
+    	}
+    	
         return MemberJpa.builder().email(this.email)
                 .nickname(this.nickName)
                 .password(passwordEncoder.encode(this.password))
@@ -72,7 +78,7 @@ public class MemberFormDto {
                 .imgContext("normal")
                 .imagesType("img300")
                 .imgOriginalFile("userPicture")
-                .imgStoredFile("src/main/resources/static/img/user-picture.png")
+                .imgStoredFile(imgSrc)
                 .build();
     }
 

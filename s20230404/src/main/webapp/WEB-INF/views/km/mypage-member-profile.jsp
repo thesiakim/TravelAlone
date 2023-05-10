@@ -19,7 +19,7 @@
 		<tr>
 			<td>
 			<c:url value='/display' var='url'><c:param name='file' value='${storedImgName}'/></c:url>
-			<img class="profile-pic" alt="#" src="${url}" width="400px" height="400px">	
+			<img class="profile-pic" alt="#" src="${url}" width="300px" height="300px">	
 			</td>
 		</tr>
 		

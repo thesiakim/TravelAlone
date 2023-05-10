@@ -33,13 +33,16 @@
 <body>
 	
 	<div id="img_benner">
-      <img src="img/community-picture.png" alt="배너">
-   </div>
-   <h1>작성한 글</h1>
-	<hr>
-		<h3>커뮤니티 - 마이 페이지</h3>
-
-		<h5>작성한 커뮤니티 글 내역</h5>
+		<img src="img/community-picture.png" alt="배너">
+	</div>
+	
+	<h1><a href="mypage"><img src="img/myPage-picture.png" alt="마이페이지" width=250px height=250px></a></h1>
+   
+	<h1>작성한 글</h1>
+	<hr><br>
+	
+	<h3>작성한 커뮤니티 글 내역</h3>
+	<br>
   
 	<c:set var="num" value="${page.total - page.start + 1 }"></c:set>
    

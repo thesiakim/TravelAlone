@@ -258,11 +258,11 @@
 	}
 	
 	.ui-autocomplete {
-   font-size: 14px; /* 원하는 글자 크기로 수정 */
-}
+	   font-size: 14px; /* 원하는 글자 크기로 수정 */
+	}
 
-.ui-menu-item {
-   width: 400px; /* 원하는 박스 크기로 수정 */
-}
+	.ui-menu-item {
+	   width: 400px; /* 원하는 박스 크기로 수정 */
+	}
 
 	
