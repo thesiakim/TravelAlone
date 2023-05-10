@@ -167,7 +167,39 @@
 			
 		</select>
 
+	<!-- 마이페이지 문의내역 리스트 개수 -->
+	<select id="mhMyInqListCnt" parameterType="long" resultType="int">
+		SELECT   COUNT(*)
+		FROM   G_WRITING
+		WHERE   member_id = #{memberId}
+	</select>
 
+	<!-- 마이페이지 문의내역 리스트 -->
+	<select id="mhMyInqList" parameterType="Inquire" resultType="Inquire">
+		SELECT *
+		FROM
+			(
+				SELECT rownum rn , a.*
+				FROM
+					(select
+						 g.G_WRITING_ID
+						  ,g.MEMBER_ID
+						  ,g.G_TITLE
+						  ,g.G_CONTENT
+						  ,g.CREATE_DATE
+						  ,g.MODIFIED_DATE
+						  ,g.G_PASSWD
+						  ,g.G_VIEW_CNT
+						  ,g.G_REPLY_YN
+						  ,g.G_REPLY_CONTENT
+						  ,m.m_nickname
+					 from  G_WRITING g, Member m
+					 Where  g.member_id = m.member_id
+					   And     g.member_id = #{member_id}
+					 order by G_WRITING_ID desc) a
+			)
+		WHERE  rn BETWEEN #{start} AND #{end}
+	</select>
 
 
 

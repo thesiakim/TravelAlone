@@ -16,6 +16,7 @@ import com.travelAlone.s20230404.model.dto.km.*;
 import com.travelAlone.s20230404.model.mh.Inquire;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.km.MypageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -33,8 +34,9 @@ import com.travelAlone.s20230404.vaildator.km.CheckNicknameValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-@Controller
+@Slf4j
 @RequiredArgsConstructor
+@Controller
 public class KmController {
 
     private final MemberService memberService;
@@ -365,7 +367,50 @@ public class KmController {
         return "km/mypage-review";
     }
 
+    // 마이페이지 문의내역 리스트
+    @GetMapping("/mypage/inquire")
+    public String myPageInquireList(@LoginUser MemberJpa memberJpa, Inquire inquire, String currentPage, Model model) {
 
+        int myPageInquireListCnt = mypageService.myPageInquireListCnt(memberJpa.getId());
+
+        // Paging 작업
+        Paging page = new Paging(myPageInquireListCnt, currentPage);
+
+        // inquire에 추가 setting
+        inquire.setStart(page.getStart());
+        inquire.setEnd(page.getEnd());
+        inquire.setMember_id(memberJpa.getId());
+
+        List<Inquire> myPageInquireList = mypageService.myPageInquireList(inquire);
+
+        model.addAttribute("myPageInquireListCnt", myPageInquireListCnt);
+        model.addAttribute("myPageInquireList", myPageInquireList);
+        model.addAttribute("page", page);
+        model.addAttribute("user_id", memberJpa.getId());
+
+        return "km/mypage-inquire";
+
+    }
+
+    /**
+     * 2023-05-09 조경민
+     * 설명 : 마이페이지 내 즐겨찾기 모음 화면 이동
+     * */
+    @GetMapping("/mypage/favorite")
+    public String mypageFavorites(@RequestParam(defaultValue = "tra") String category,
+                                  @RequestParam(defaultValue = "1") int page,
+                                  @Login2User SessionUser sessionUser,
+                                  Model model){
+        model.addAttribute("totalPage", mypageService.mypageFavoritesPageCount(sessionUser.getId(),category));
+
+        List<MypageFavoriteResponseDto> mypageFavoriteResponseDtos = mypageService.mypageFavorites(sessionUser.getId(), category, page);
+
+        model.addAttribute("favorites",mypageFavoriteResponseDtos);
+
+        System.out.println("mypageFavoriteResponseDtos = " + mypageFavoriteResponseDtos.size());
+
+        return "km/mypage-favorites";
+    }
 
 
     // 관리자 페이지----------------------------------------------------------------
@@ -445,6 +490,8 @@ public class KmController {
 
         return memberService.adminMemberinfoChange(file,requestDto);
     }
+
+
 
 }
 

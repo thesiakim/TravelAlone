@@ -10,7 +10,7 @@
   <form>
 	<div id="container-left clearfix">
 	  <div class="footerForm">
-		<a href="notice">고객센터</a>
+		<a href="http://localhost:4040/notice">고객센터</a>
 	  </div>
 	  <div class="footerInfo">
 		<p>서울시 이대 중앙학원 501호</p><br>
