@@ -166,9 +166,9 @@
 	 /* 메인 페이지 이미지 */
   	.swiper-container {
         height:300px;
-        border:1px solid silver;
-        border-radius:1px;
-        box-shadow:0 0 10px #ccc inset;
+        /* border:1px solid silver; */
+        /* border-radius: 2px; */
+        /* box-shadow:0 0 10px #ccc inset; */
 	}
 	.swiper-slide {
 	   text-align:center;
@@ -246,43 +246,41 @@
 
 	/* 인기 명소, 숙소, 맛집 이미지 효과 */
 	.image-container img {
-	  /* filter: saturate(0.3) brightness(0.8);
-	  transition: all 0.3s ease-out; */
+	  align-self: center;
 	}
-	
-	.image-container {
-	  position: relative;
-	  display: inline-block;
-	  text-align: center; 
-	}
-	
-	.image-text {
-	  position: absolute;
-	  top: 10%;
-	  left: 50%;
-	  transform: translate(-50%, -50%); /* 텍스트 중앙에 배치 */
-	  background-color: rgba(0, 0, 0, 0);
-	  color: #fff;
-	  font-size: 24px; /* 크기 조절 */
-	  padding: 10px;
-	  margin: 0;
-	  height: 40px; 
-	  width: 480px;
-	}
-
+		
 
 	.image-container:hover img {
-	  /* filter: none; */
 	  filter: saturate(0.3) brightness(0.8);
 	  transition: all 0.3s ease-out;
 	}
 	
-	.image-container:hover p {
-	  opacity: 0;
+
+	.image-container {
+	  position: relative;
+	  width: 500px;
+	  height: 300px;
+	  /* 추가 */
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
 	}
-
-
-
+	.image-container img:hover + .image-text {
+	  opacity: 1;
+	}
+	
+	
+	.image-text {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  color: #fff;
+	  font-size: 1.2em;
+	  padding: 5px;
+	  opacity: 0;
+	  transition: opacity 0.5s ease;
+	}
 
 
 	
