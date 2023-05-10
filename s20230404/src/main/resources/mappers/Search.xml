@@ -124,7 +124,7 @@
 	<select id="siBoardSearch" parameterType="Board" resultType="Board">
   		SELECT board_id, b_title, b_content, b_common_board, create_date
 		FROM (
-		      SELECT ROW_NUMBER() OVER (ORDER BY b_title) AS rn, b_title, b_content, board_id, b_common_board, create_date
+		      SELECT ROW_NUMBER() OVER (ORDER BY create_date) AS rn, b_title, b_content, board_id, b_common_board, create_date
 		      FROM board
 		      WHERE b_title LIKE '%' || #{keyWord} || '%'
 		       OR b_content LIKE '%' || #{keyWord} || '%'

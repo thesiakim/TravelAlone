@@ -1,35 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <meta charset="UTF-8">
-<style type="text/css">
-
-
-
-.image-container {
-  position: relative;
-  display: inline-block;
-  text-align: center; /* 이미지 중앙에 배치 */
-}
-
-.image-text {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* 텍스트 중앙에 배치 */
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 24px; /* 크기 조절 */
-  padding: 10px;
-  margin: 0;
-  height: 40px; 
-  width: 480px;
-}
-
-</style>
 
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
@@ -69,49 +50,33 @@
 	  	<div id="serch">
 			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
 	  	</div>
-	  	<div id="search-autocomplete">
+	  	<!-- <div id="search-autocomplete">
 	  		<ul id="autocomplete-results"></ul>
-	  	</div>
+	  	</div> -->
 	  </form>
 	  
-	  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-	  <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-	  <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 
 	  <script>
 	  	/* 자동 완성 */
-		  $(function(){
-			  var $searchId = $("#searchId");
-			  var $autocompleteResults = $("#autocomplete-results");
-	
-			  $searchId.autocomplete({
-			    source: function(request, response){
-			      $.ajax({
-			        url: "/autocomplete",
-			        dataType: "json",
-			        data:{
-			          keyword: request.term,
-			          category: $("#category").val()
-			        },
-			        success: function(data){
-			          $autocompleteResults.empty();
-			          $.each(data, function(index, value) {
-			            $autocompleteResults.append("<li>" + value + "</li>");
-			          });
-			          $autocompleteResults.show();
-			        }
-			      });
-			    },
-			    minLength: 1
-			  });
-	
-			  //검색창에서 키보드를 떼는 순간마다 자동완성 결과 숨김
-			  $searchId.on("keyup", function() {
-			    if ($searchId.val() === '') {
-			      $autocompleteResults.hide();
-			    }
-			  });
-			}); 
+	  	$(function(){
+	  		$("#searchId").autocomplete({
+	  			source: function(request, response){
+	  				$.ajax({
+	  					url: "/autocomplete",
+	  					dataType: "json",
+	  					data:{
+	  						keyword: request.term,
+	  						category: $("#category").val()
+	  					},
+	  					success: function(data){
+	  						response(data);
+	  					}
+	  				});
+	  			},
+	  			minLength: 1
+	  		});
+	  	});
+
 	  </script>
 	  
 	  
@@ -134,10 +99,8 @@
                <%--  	<img src="${url }" alt="#"> --%>
                		    <div class="image-container">
 					      <img src="${url }" alt="${travel.t_name}" width="500" height="300">
-					      <p class="image-text">${travel.t_name}</p>
+					      <p class="image-text" >${travel.t_name}</p>
 					    </div>
-               
-               
                 	</a>
                 </div>
             </c:forEach>
