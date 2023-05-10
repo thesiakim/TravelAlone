@@ -119,13 +119,21 @@
    <!-- 검색 결과 없음 -->
    <article id="no-search-result">
       <c:if test="${empty resultList.getTravelList() and empty resultList.getHouseList() and empty resultList.getRestaurantList() and empty resultList.getBoardList()}">
+      <br>
+      <br>
          <ul class="no-search-list">
             <li>단어의 철자가 단어의 철자가 정확한지 확인해 주시기 바랍니다.</li>
                 <li>검색어의 단어 수를 줄이거나, 다른 검색어(유사어)로 검색해 보시기 바랍니다.</li>
                 <li>일반적으로 많이 사용하는 검색어로 다시 검색해 주시기 바랍니다.</li>
          </ul>
+         <br>
+         <div>
+         	<img src="../img/crying.png" alt="#" style="width: 100%; height: auto; max-width: 200px;"></a>
+         </div>
    </c:if>
    </article>
+   
+
 
 
 
@@ -150,7 +158,7 @@
 					          <c:url value="/display" var="url">
 					            <c:param name="file" value="${travel.img_stored_file}"></c:param>
 					          </c:url>
-					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
+					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;    max-height: 200px">
 					        </a>
 					        <br>
 					        <div id="each-name"> 
@@ -179,11 +187,11 @@
                           <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
                             <c:if test="${status.index < 7}">
                               <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
-                                <a href="/houDetail?hid=${house.house_id}">
+                                <a href="/houDetail?hid=${house.house_id}"></a>
                                   <c:url value="/display" var="url">
                                     <c:param name="file" value="${house.img_stored_file }"></c:param>
                                   </c:url>
-                                  <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
+                                  <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px; max-height: 200px">
                             <br>
                             <div id="each-name">
                                <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
@@ -216,7 +224,7 @@
                                   <c:url value="/display" var="url">
                                     <c:param name="file" value="${res.img_stored_file }"></c:param>
                                   </c:url>
-                                  <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;"></a>
+                                  <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;  max-height: 200px"></a>
                       <br>
                            <div id="each-name"> 
                          <a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
@@ -273,12 +281,6 @@
 	                 
 	                </table>
 	         </c:if>
-	         
-		        <%--    <c:if test="${fn:length(resultList.boardList) > 9}">
-		             <a href="search?searchName=${keyword }&amp;category=category_comm">
-		               <button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button>
-		             </a>
-		           </c:if> --%>
 		          
 		           <c:if test="${fn:length(resultList.boardList) > 9}">
 		             <a href="search?searchName=${keyword }&amp;category=category_comm">
@@ -547,7 +549,7 @@
       
       
       
-   	  <!-- 최근 검색어 -->
+   	  <!-- 최근 검색어 -->  	  
       <article id="recent-container">
       <div id="recent-title"><p style="color: white; font-size: 20px; font-weight: bold;">최근 검색어</p></div>
       <br>
@@ -561,6 +563,7 @@
       </article>
    </article>
    </div>
+   
    </section>
 
      
