@@ -181,92 +181,92 @@
    }
    
 
-    /* 인기 검색어 글자 디자인 */
-   #popular-title {
-    background-color: #BCEAD5; /* 박스 배경색 */
-     display: inline-block; /* 인라인 박스로 설정 */
-     padding: 8px; /* 내부 여백 */
-     border-radius: 5px; /* 박스 모서리 둥글게 */
-     height: 30px;
-     margin: 0px 0px;
-   }
-   
-   #popular-title > p {
-     margin: 0;
-   }
+	 /* 인기 검색어 글자 디자인 */
+	#popular-title {
+	 background-color: #BCEAD5; /* 박스 배경색 */
+	  display: inline-block; /* 인라인 박스로 설정 */
+	  padding: 8px; /* 내부 여백 */
+	  border-radius: 5px; /* 박스 모서리 둥글게 */
+	  height: 30px;
+	  margin: 0px 0px;
+	}
+	
+	#popular-title > p {
+	  margin: 0;
+	}
 
    
-        /* 인기 검색어 리스트 */
-     #search-list li a:before {
-     list-style-position: inside;
-     content: "";
-     display: inline-block;
-     width: 20px;
-     height: 20px;
-     margin-right: 3px;
-     background-image: url(../img/green.png);
-     /* list-style-image: url(../img/checkk.png); */
-     background-repeat: no-repeat;
-     background-position: center center;
-     background-size: 13px;
-     
-   }
+   	  /* 인기 검색어 리스트 */
+	  #search-list li a:before {
+	  list-style-position: inside;
+	  content: "";
+	  display: inline-block;
+	  width: 20px;
+	  height: 20px;
+	  margin-right: 3px;
+	  background-image: url(../img/green.png);
+	  /* list-style-image: url(../img/checkk.png); */
+	  background-repeat: no-repeat;
+	  background-position: center center;
+	  background-size: 13px;
+	  
+	}
    
    
 
   
-     #recent-container  {
-       display: block;
-        /* position: fixed; */  /* 이거 풀면 고정됨 */
-        top: 80%;
-        right: 10px;
-        /*  border: 5px solid #1FAB89; */
-        padding: 10px;
-        width: 324px;
-        height: 5px;
-        border-radius: 10px;
-     }
-     
-     
-     /* 최근 검색어 글자 디자인 */
-   #recent-title {
-    background-color: #BCEAD5; /* 박스 배경색 */
-     display: inline-block; /* 인라인 박스로 설정 */
-     padding: 8px; /* 내부 여백 */
-     border-radius: 5px; /* 박스 모서리 둥글게 */
-     height: 30px;
-     margin: 0px 0px;
-   }
-   #recent-title > p {
-     margin: 0;
-   }
-     
-     
+	  #recent-container  {
+	    display: block;
+	     /* position: fixed; */  /* 이거 풀면 고정됨 */
+	     top: 80%;
+	     right: 10px;
+	     /*  border: 5px solid #1FAB89; */
+	     padding: 10px;
+	     width: 324px;
+	     height: 5px;
+	     border-radius: 10px;
+	  }
+	  
+	  
+	  /* 최근 검색어 글자 디자인 */
+	#recent-title {
+	 background-color: #BCEAD5; /* 박스 배경색 */
+	  display: inline-block; /* 인라인 박스로 설정 */
+	  padding: 8px; /* 내부 여백 */
+	  border-radius: 5px; /* 박스 모서리 둥글게 */
+	  height: 30px;
+	  margin: 0px 0px;
+	}
+	#recent-title > p {
+	  margin: 0;
+	}
+	  
+	  
   
-       /* 최근 검색어 리스트 */
-     #recent-list li {
-     font-size: 14px;
-     margin-bottom: 10px;
-     text-align: left;
-     
-   }
-   
-   #recent-list li:before {
-       list-style-position: inside;
-     content: "";
-     display: inline-block;
-     width: 20px;
-     height: 20px;
-     margin-right: 3px;
-     background-image: url(../img/green.png);
-     list-style-image: url(../img/checkk.png);
-     background-repeat: no-repeat;
-     background-position: center center;
-     background-size: 13px; 이거잠깐 주석
+  	  /* 최근 검색어 리스트 */
+	  #recent-list li {
+	  font-size: 14px;
+	  margin-bottom: 10px;
+	  text-align: left;
+	  
+	}
+	
+	#recent-list li:before {
+  	  list-style-position: inside;
+	  content: "";
+	  display: inline-block;
+	  width: 20px;
+	  height: 20px;
+	  margin-right: 3px;
+	  background-image: url(../img/green.png);
+	  list-style-image: url(../img/checkk.png);
+	  background-repeat: no-repeat;
+	  background-position: center center;
+	  background-size: 13px; 이거잠깐 주석
 }
 
 
-     
+	  
 
    
    #line {
@@ -292,25 +292,32 @@
    
    
    
-   #search-content-total {
-     width: 80%; /* 적절한 크기로 지정 */
-   }
-   
-   #bod-table {
-      float: left;
-   }
+	#search-content-total {
+	  width: 80%; /* 적절한 크기로 지정 */
+	}
+	
+	#bod-table {
+	   float: left;
+	}
 
-   /* 최근 검색어 목록 */
-   #recent-list a {
-       color: #333333;
-       font-family: 'IBM Plex Sans KR', sans-serif;
-   }
+	/* 최근 검색어 목록 */
+	#recent-list a {
+	    color: #333333;
+	    font-family: 'IBM Plex Sans KR', sans-serif;
+	}
 
-   
-   .bod-result {
-     width: 100%;
-     height: auto;
-   }
+	
+	.bod-result {
+	  width: 100%;
+	  height: auto;
+	}
+	
+
+
+
+
+
+  
    
    
    #search-content-travel {

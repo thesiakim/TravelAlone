@@ -4,7 +4,6 @@
 <html>
 <head>
 
-<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
@@ -309,7 +308,7 @@
                    <br>
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
                  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-                   <c:if test="${status.index < 7}">
+                   <%-- <c:if test="${status.index < 9}"> --%>
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
                        <a href="/traDetail?tid=${travel.travel_id}">
                          <c:url value="/display" var="url">
@@ -322,7 +321,7 @@
                          <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
                        </div>
                      </div>
-                   </c:if>
+                  <%--  </c:if> --%>
                  </c:forEach>
                     </div>
                     <br>
@@ -357,7 +356,7 @@
                    <br>
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
                  <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
-                   <c:if test="${status.index < 7}">
+                   <%-- <c:if test="${status.index < 7}"> --%>
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
                        <a href="/houDetail?hid=${house.house_id}">
                          <c:url value="/display" var="url">
@@ -370,7 +369,7 @@
                          <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
                        </div>
                      </div>
-                   </c:if>
+                   <%-- </c:if> --%>
                  </c:forEach>
                     </div>
                     <br>
@@ -405,7 +404,7 @@
                    <br>
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
                  <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
-                   <c:if test="${status.index < 7}">
+                   <%-- <c:if test="${status.index < 7}"> --%>
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
                        <a href="/resDetail?rid=${res.restaurant_id}">
                          <c:url value="/display" var="url">
@@ -418,7 +417,7 @@
                          <a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
                        </div>
                      </div>
-                   </c:if>
+                   <%-- </c:if> --%>
                  </c:forEach>
                     </div>
                     <br>
@@ -457,7 +456,7 @@
                                  </td>
                             </tr>
                             <c:forEach items="${resultList.boardList}" var="board" varStatus="status">
-                                 <c:if test="${status.index < 12}">
+                                <%--  <c:if test="${status.index < 12}"> --%>
                                     <tr style="padding-bottom: 20px;">
                                           <td style="padding-left: 50px;">
                                            <a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
@@ -478,7 +477,7 @@
                                     </tr>
                                  <c:if test="${not status.last }">
                                 </c:if>
-                                 </c:if>
+                                 <%-- </c:if> --%>
                             </c:forEach>
                          </table>
                          <br>

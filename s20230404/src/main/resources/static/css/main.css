@@ -235,13 +235,14 @@
 	
 	/* 자동 완성 */
 	.ui-autocomplete {
-	   font-size: 14px; 
+	   font-size: 14px !important; 
 	   text-align: left;
-	   font-family: 'IBM Plex Sans KR', sans-serif;
+	   font-family: 'IBM Plex Sans KR', sans-serif !important;
 	   border-radius: 15px;
-	   color: #205E61;
+	   color: #205E61 !important;
 	   border: 3px solid #205E61;
 	}
+	
 	
 
 	/* 인기 명소, 숙소, 맛집 이미지 효과 */

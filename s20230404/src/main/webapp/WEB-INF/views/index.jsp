@@ -50,9 +50,6 @@
 	  	<div id="serch">
 			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
 	  	</div>
-	  	<!-- <div id="search-autocomplete">
-	  		<ul id="autocomplete-results"></ul>
-	  	</div> -->
 	  </form>
 	  
 

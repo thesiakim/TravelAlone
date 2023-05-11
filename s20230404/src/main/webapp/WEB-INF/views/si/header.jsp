@@ -5,9 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <head>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
  
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */
@@ -120,16 +121,13 @@
 	  	<div id="serch">
 			<input type="text" name="searchName" value="${keyword }" id="searchId">
 	  	</div>
-	  	<div id="search-autocomplete">
-	  		<ul id="autocomplete-results"></ul>
-	  	</div>
 	  </form>
 	  
 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 	  <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 	  <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 	  
-	  <script>
+	   <script>
 	  	/* 자동 완성 */
 	  	$(function(){
 	  		$("#searchId").autocomplete({
