@@ -20,8 +20,8 @@
 
 			const params = new URLSearchParams(window.location.search);
 			let category = params.get('category'); // 카테고리 가져오기
-			if (category != null){
-				category = "";
+			if (category == null){
+				category = "tra";
 			}
 			var data = {
 				id : id,
