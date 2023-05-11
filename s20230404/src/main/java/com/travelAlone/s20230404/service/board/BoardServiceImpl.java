@@ -288,7 +288,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Member> userPage(long member_id) {
 		List<Member> userPage = null;
-		log.info("jhServiceImpl userPage start");
+		log.info("BoardServiceImpl userPage start");
 		
 		userPage = bd.userPage(member_id);
 		return userPage;
@@ -298,18 +298,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Travel> listReviewPageTra(Tra_Rev traRev) {
 		List<Travel> listReviewPageTra = null;
-		log.info("jhServiceImpl listReviewPageTra start");
+		log.info("BoardServiceImpl listReviewPageTra start");
 		listReviewPageTra = bd.listReviewPageTra(traRev);
-		log.info("jhServiceImpl listReviewPageTra.size() -> " + listReviewPageTra.size());
+		log.info("BoardServiceImpl listReviewPageTra.size() -> " + listReviewPageTra.size());
 		return listReviewPageTra;
 	}
 	
 	// 마이페이지 여행지 리뷰 페이징
 	@Override
 	public int totalReviewPageTra(long memberId) {
-		log.info("jhServiceImpl totalReviewPageTra start");
+		log.info("BoardServiceImpl totalReviewPageTra start");
 		int totalReviewPageTra = bd.totalReviewPageTra(memberId);
-		log.info("jhServiceImpl  totalReviewPageTra -> " + totalReviewPageTra );		
+		log.info("BoardServiceImpl  totalReviewPageTra -> " + totalReviewPageTra );		
 		return totalReviewPageTra;
 	}
 	
@@ -317,18 +317,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<House> listReviewPageHou(Hou_Rev houRev) {
 		List<House> listReviewPageHou = null;
-		log.info("jhServiceImpl listReviewPageHou start");
+		log.info("BoardServiceImpl listReviewPageHou start");
 		listReviewPageHou = bd.listReviewPageHou(houRev);
-		log.info("jhServiceImpl listReviewPageHou.size() -> " + listReviewPageHou.size());
+		log.info("BoardServiceImpl listReviewPageHou.size() -> " + listReviewPageHou.size());
 		return listReviewPageHou;
 	}
 	
 	// 마이페이지 숙소 리뷰 페이징
 	@Override
 	public int totalReviewPageHou(long memberId) {
-		log.info("jhServiceImpl totalReviewPageHou start");
+		log.info("BoardServiceImpl totalReviewPageHou start");
 		int totalReviewPageHou = bd.totalReviewPageHou(memberId);
-		log.info("jhServiceImpl  totalReviewPageHou -> " + totalReviewPageHou );		
+		log.info("BoardServiceImpl  totalReviewPageHou -> " + totalReviewPageHou );		
 		return totalReviewPageHou;
 	}
 	
@@ -337,28 +337,28 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Res> listReviewPageRes(Res_Rev resRev) {
 		List<Res> listReviewPageRes = null;
-		log.info("jhServiceImpl listReviewPageRes start");
+		log.info("BoardServiceImpl listReviewPageRes start");
 		listReviewPageRes = bd.listReviewPageRes(resRev);
-		log.info("jhServiceImpl listReviewPageRes.size() -> " + listReviewPageRes.size());
+		log.info("BoardServiceImpl listReviewPageRes.size() -> " + listReviewPageRes.size());
 		return listReviewPageRes;
 	}
 	
 	// 마이페이지 맛집 리뷰 페이징
 	@Override
 	public int totalReviewPageRes(long memberId) {
-		log.info("jhServiceImpl totalReviewPageRes start");
+		log.info("BoardServiceImpl totalReviewPageRes start");
 		int totalReviewPageRes = bd.totalReviewPageRes(memberId);
-		log.info("jhServiceImpl  totalReviewPageRes -> " + totalReviewPageRes );		
+		log.info("BoardServiceImpl  totalReviewPageRes -> " + totalReviewPageRes );		
 		return totalReviewPageRes;
 	}
 	
 	// 태그 관심사 등록, 삭제
 	@Override
 	public List<Interest> mypageTagUpdate(Interest interest) {
-		log.info("jhServiceImpl mypageTagUpdate start");
+		log.info("BoardServiceImpl mypageTagUpdate start");
 		List<Interest> mypageTagUpdate = null;
 		mypageTagUpdate = bd.mypageTagUpdate(interest);
-		log.info("jhServiceImpl mypageTagUpdate.size() -> " + mypageTagUpdate.size());
+		log.info("BoardServiceImpl mypageTagUpdate.size() -> " + mypageTagUpdate.size());
 		return mypageTagUpdate;
 	}
 
