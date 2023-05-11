@@ -478,8 +478,8 @@ public class BoardController {
 	// 닉네임 클릭 시 마이페이지 보기
    @GetMapping(value = "/userpage")
    public String userPage(@RequestParam(value = "id") long member_id, Model model) {
-	   log.info("jhController userpage start");
-	   log.info("jhController userpage member_id -> " + member_id);
+	   log.info("BoardController userpage start");
+	   log.info("BoardController userpage member_id -> " + member_id);
 	   UserPageResponseDto userPageResponseDto = mypageService.userPage(member_id);
 	   
        model.addAttribute("response", userPageResponseDto);
@@ -489,8 +489,8 @@ public class BoardController {
    // 마이페이지 여행지 리뷰 페이지
    @RequestMapping(value = "/reviewPageTra")
    public String reviewPageTra(@LoginUser MemberJpa memberJpa, Tra_Rev traRev , String currentPage, Model model) {
-	   log.info("jhController reviewPageTra start");
-	   log.info("jhController reviewPageTra currentPage는 "+ currentPage);
+	   log.info("BoardController reviewPageTra start");
+	   log.info("BoardController reviewPageTra currentPage는 "+ currentPage);
 	   log.info("memberJpa.getId() -> " + memberJpa.getId());
 	   int totalReviewPageTra = bs.totalReviewPageTra(memberJpa.getId());		
 	   //페이징
@@ -500,7 +500,7 @@ public class BoardController {
 	   traRev.setMember_id(memberJpa.getId());
 	   //숙소리스트
 	   List<Travel> listReviewPageTra = bs.listReviewPageTra(traRev);
-	   log.info("jhController listReviewPageTra.size()=>"+ listReviewPageTra.size());
+	   log.info("BoardController listReviewPageTra.size()=>"+ listReviewPageTra.size());
 	   
 	   model.addAttribute("totalReviewPageTra", totalReviewPageTra);
 	   model.addAttribute("listReviewPageTra", listReviewPageTra);
@@ -511,8 +511,8 @@ public class BoardController {
    // 마이페이지 숙소 리뷰 페이지
    @RequestMapping(value = "/reviewPageHou")
    public String reviewPageHou(@LoginUser MemberJpa memberJpa, Hou_Rev houRev , String currentPage, Model model ) {
-	   log.info("jhController reviewPageHou start");
-	   log.info("jhController reviewPageHou currentPage는 "+ currentPage);
+	   log.info("BoardController reviewPageHou start");
+	   log.info("BoardController reviewPageHou currentPage는 "+ currentPage);
 	   log.info("memberJpa.getId() -> " + memberJpa.getId());
 	   int totalReviewPageHou = bs.totalReviewPageHou(memberJpa.getId());		
 	   //페이징
@@ -522,7 +522,7 @@ public class BoardController {
 	   houRev.setMember_id(memberJpa.getId());
 	   //숙소리스트
 	   List<House> listReviewPageHou = bs.listReviewPageHou(houRev);
-	   log.info("jhController llistReviewPageHou.size()=>"+ listReviewPageHou.size());
+	   log.info("BoardController llistReviewPageHou.size()=>"+ listReviewPageHou.size());
 	   
 	   model.addAttribute("totalReviewPageHou", totalReviewPageHou);
 	   model.addAttribute("listReviewPageHou", listReviewPageHou);
@@ -533,8 +533,8 @@ public class BoardController {
    // 마이페이지 맛집 리뷰 페이지
    @RequestMapping(value = "/reviewPageRes")
    public String reviewPageRes(@LoginUser MemberJpa memberJpa, Res_Rev resRev , String currentPage, Model model ) {
-	   log.info("jhController reviewPageRes start");
-	   log.info("jhController reviewPageRes currentPage는 "+ currentPage);
+	   log.info("BoardController reviewPageRes start");
+	   log.info("BoardController reviewPageRes currentPage는 "+ currentPage);
 	   log.info("memberJpa.getId() -> " + memberJpa.getId());
 	   int totalReviewPageRes = bs.totalReviewPageRes(memberJpa.getId());		
 	   //페이징
@@ -544,7 +544,7 @@ public class BoardController {
 	   resRev.setMember_id(memberJpa.getId());
 	   //숙소리스트
 	   List<Res> listReviewPageRes = bs.listReviewPageRes(resRev);
-	   log.info("jhController listReviewPageRes.size()=>"+ listReviewPageRes.size());
+	   log.info("BoardController listReviewPageRes.size()=>"+ listReviewPageRes.size());
 	   
 	   model.addAttribute("totalReviewPageRes", totalReviewPageRes);
 	   model.addAttribute("listReviewPageRes", listReviewPageRes);
@@ -555,7 +555,7 @@ public class BoardController {
    	// 태그 업데이트
 	@RequestMapping(value = "/mypage/tagUpdate")
 	public String mypageTagUpdate(@LoginUser MemberJpa memberJpa, Interest interest, Model model) {
-		log.info("jhController mypageTagUpdate start");
+		log.info("BoardController mypageTagUpdate start");
         model.addAttribute("name", memberJpa.getName());
         interest.setMember_id(memberJpa.getId());
         model.addAttribute("nickName", memberJpa.getNickname());

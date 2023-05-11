@@ -430,12 +430,12 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<Member> userPage(long member_id) {
 		List<Member> userPage = null;
-		log.info("jhDaoImpl userPage start");
+		log.info("BoardDaoImpl userPage start");
 		try {
 			userPage = session.selectList("userPage", member_id);
-			log.info("jhDaoImpl userPage.size() -> " + userPage.size());
+			log.info("BoardDaoImpl userPage.size() -> " + userPage.size());
 		} catch (Exception e) {
-			log.info("jhDaoImpl userPage e.getMessage() -> " + e.getMessage());
+			log.info("BoardDaoImpl userPage e.getMessage() -> " + e.getMessage());
 		}
 		return userPage;
 	}
@@ -444,12 +444,12 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<Travel> listReviewPageTra(Tra_Rev traRev) {
 		List<Travel> listReviewPageTra = null;
-		log.info("jhDaoImpl listReviewPageTra start");
+		log.info("BoardDaoImpl listReviewPageTra start");
 		try {
 			listReviewPageTra = session.selectList("listReviewPageTra", traRev);
-			log.info("jhDaoImpl listReviewPageTra.size() -> " + listReviewPageTra.size());
+			log.info("BoardDaoImpl listReviewPageTra.size() -> " + listReviewPageTra.size());
 		} catch (Exception e) {
-			log.info("jhDaoImpl listReviewPageTra e.getMessage() -> " + e.getMessage());
+			log.info("BoardDaoImpl listReviewPageTra e.getMessage() -> " + e.getMessage());
 		}
 		return listReviewPageTra;
 	}
@@ -458,12 +458,12 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int totalReviewPageTra(long member_id) {
 		int totalReviewPageTra = 0;
-		log.info("jhDaoImpl totalReviewPageTra start");
+		log.info("BoardDaoImpl totalReviewPageTra start");
 		try {
 			totalReviewPageTra = session.selectOne("totalReviewPageTra", member_id);
-			log.info("jhDaoImpl totalReviewPageTra->" + totalReviewPageTra);
+			log.info("BoardDaoImpl totalReviewPageTra->" + totalReviewPageTra);
 		} catch (Exception e) {
-			log.info("mhDaoImpl2 totalReviewPageTra Exception " +e.getMessage());
+			log.info("BoardDaoImpl totalReviewPageTra Exception " +e.getMessage());
 		}						
 		return totalReviewPageTra;
 	}
@@ -475,9 +475,9 @@ public class BoardDaoImpl implements BoardDao {
 		log.info("jhDaoImpl listReviewPageHou start");
 		try {
 			listReviewPageHou = session.selectList("listReviewPageHou", houRev);
-			log.info("jhDaoImpl listReviewPageHou.size() -> " + listReviewPageHou.size());
+			log.info("BoardDaoImpl listReviewPageHou.size() -> " + listReviewPageHou.size());
 		} catch (Exception e) {
-			log.info("jhDaoImpl listReviewPageHou e.getMessage() -> " + e.getMessage());
+			log.info("BoardDaoImpl listReviewPageHou e.getMessage() -> " + e.getMessage());
 		}
 		return listReviewPageHou;
 	}
@@ -489,9 +489,9 @@ public class BoardDaoImpl implements BoardDao {
 		log.info("jhDaoImpl totalReviewPageHou start");
 		try {
 			totalReviewPageHou = session.selectOne("totalReviewPageHou", member_id);
-			log.info("jhDaoImpl totalReviewPageHou->" + totalReviewPageHou);
+			log.info("BoardDaoImpl totalReviewPageHou->" + totalReviewPageHou);
 		} catch (Exception e) {
-			log.info("mhDaoImpl2 totalReviewPageHou Exception " +e.getMessage());
+			log.info("BoardDaoImpl totalReviewPageHou Exception " +e.getMessage());
 		}						
 		return totalReviewPageHou;
 	}
@@ -503,9 +503,9 @@ public class BoardDaoImpl implements BoardDao {
 		log.info("jhDaoImpl listReviewPageRes start");
 		try {
 			listReviewPageRes = session.selectList("listReviewPageRes", resRev);
-			log.info("jhDaoImpl listReviewPageRes.size() -> " + listReviewPageRes.size());
+			log.info("BoardDaoImpl listReviewPageRes.size() -> " + listReviewPageRes.size());
 		} catch (Exception e) {
-			log.info("jhDaoImpl listReviewPageRes e.getMessage() -> " + e.getMessage());
+			log.info("BoardDaoImpl listReviewPageRes e.getMessage() -> " + e.getMessage());
 		}
 		return listReviewPageRes;
 	}
@@ -514,12 +514,12 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int totalReviewPageRes(long member_id) {
 		int totalReviewPageRes = 0;
-		log.info("jhDaoImpl totalReviewPageRes start");
+		log.info("BoardDaoImpl totalReviewPageRes start");
 		try {
 			totalReviewPageRes = session.selectOne("totalReviewPageRes", member_id);
-			log.info("jhDaoImpl totalReviewPageRes->" + totalReviewPageRes);
+			log.info("BoardDaoImpl totalReviewPageRes->" + totalReviewPageRes);
 		} catch (Exception e) {
-			log.info("jhDaoImpl totalReviewPageRes Exception " +e.getMessage());
+			log.info("BoardDaoImpl totalReviewPageRes Exception " +e.getMessage());
 		}						
 		return totalReviewPageRes;
 	}
@@ -528,12 +528,12 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<Interest> mypageTagUpdate(Interest interest) {
 		List<Interest> mypageTagUpdate = null;
-		log.info("jhDaoImpl mypageTagUpdate start");
+		log.info("BoardDaoImpl mypageTagUpdate start");
 		try {
 			mypageTagUpdate = session.selectList("mypageTagUpdate", interest);
-			log.info("jhDaoImpl mypageTagUpdate.size()->" + mypageTagUpdate.size());
+			log.info("BoardDaoImpl mypageTagUpdate.size()->" + mypageTagUpdate.size());
 		} catch (Exception e) {
-			log.info("jhDaoImpl mypageTagUpdate Exception " +e.getMessage());
+			log.info("BoardDaoImpl mypageTagUpdate Exception " +e.getMessage());
 		}						
 		return mypageTagUpdate;
 	}
