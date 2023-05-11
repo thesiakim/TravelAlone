@@ -128,9 +128,12 @@
          </ul>
          <br>
          <div>
-         	<img src="../img/crying.png" alt="#" style="width: 100%; height: auto; max-width: 200px;"></a>
+            <img src="../img/crying.png" alt="#" style="width: 100%; height: auto; max-width: 200px;"></a>
          </div>
    </c:if>
+   
+   
+   
    </article>
    
 
@@ -150,24 +153,24 @@
                    <hr id="line" >
                    <h1 id="travel-places" class="title">여행지</h1>
                    <br>
-					 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-					  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-					    <c:if test="${status.index < 7}">
-					      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
-					        <a href="/traDetail?tid=${travel.travel_id}">
-					          <c:url value="/display" var="url">
-					            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-					          </c:url>
-					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;    max-height: 200px">
-					        </a>
-					        <br>
-					        <div id="each-name"> 
-					          <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
-					        </div>
-					      </div>
-					    </c:if>
-					  </c:forEach>
-					</div>
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+                 <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+                   <c:if test="${status.index < 7}">
+                     <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
+                       <a href="/traDetail?tid=${travel.travel_id}">
+                         <c:url value="/display" var="url">
+                           <c:param name="file" value="${travel.img_stored_file}"></c:param>
+                         </c:url>
+                         <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;    max-height: 200px">
+                       </a>
+                       <br>
+                       <div id="each-name"> 
+                         <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
+                       </div>
+                     </div>
+                   </c:if>
+                 </c:forEach>
+               </div>
                           <c:if test="${fn:length(resultList.travelList) > 7}">
                              <a href="search?searchName=${keyword }&amp;category=category_travel"><button type="submit" style="margin-left: auto; margin-right: -30cm; margin-bottom: 10px">더보기</button></a>
                           </c:if>
@@ -195,7 +198,7 @@
                             <br>
                             <div id="each-name">
                                <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
-							</div>
+                     </div>
                               </div>
                             </c:if>
                           </c:forEach>
@@ -244,18 +247,18 @@
             <!-- 커뮤니티 검색 결과 리스트 -->
               <div class="bod-result"  > 
               <ul>
-	            <c:if test="${not empty resultList.getBoardList()}">
-	            <hr id="line" >
-	                <table id ="bod-table"style=" text-align: top;    margin-left: 20%;">
-	                   <tr>
-	                        <td colspan="3">
-	                          <h1 id="board-places" style="margin-left: 35%; font-size: 24px; color: #404040; font-family: 'IBM Plex Sans KR', sans-serif;">커뮤니티</h1>
-	                        </td>
-	                   </tr>
-	                   
-	                   <c:forEach items="${resultList.boardList}" var="board" varStatus="status">
-	                        <c:if test="${status.index < 10}">
-	                           <tr style="padding-bottom: 20px;">
+               <c:if test="${not empty resultList.getBoardList()}">
+               <hr id="line" >
+                   <table id ="bod-table"style=" text-align: top;    margin-left: 20%;">
+                      <tr>
+                           <td colspan="3">
+                             <h1 id="board-places" style="margin-left: 35%; font-size: 24px; color: #404040; font-family: 'IBM Plex Sans KR', sans-serif;">커뮤니티</h1>
+                           </td>
+                      </tr>
+                      
+                      <c:forEach items="${resultList.boardList}" var="board" varStatus="status">
+                           <c:if test="${status.index < 10}">
+                              <tr style="padding-bottom: 20px;">
                                   <td style="padding-left: 50px;">
                                   <a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
                                   <br>
@@ -270,25 +273,25 @@
                                      
                                      <hr id="line" >
                                    </td>
-	                               <td style="padding-left: 50px;">${board.formattedCreateDateSearch }
-	                              </td>
-	                           </tr>
-	                        <c:if test="${not status.last }">
-	                       </c:if>
-	                        </c:if>
-	                   </c:forEach>
-	                   
-	                 
-	                </table>
-	         </c:if>
-		          
-		           <c:if test="${fn:length(resultList.boardList) > 9}">
-		             <a href="search?searchName=${keyword }&amp;category=category_comm">
-		               <button type="submit" style="margin-left: 70%; margin-top: 20px;  ">더보기</button>
-		             </a>
-		           </c:if>
-	         
-	         </ul>
+                                  <td style="padding-left: 50px;">${board.formattedCreateDateSearch }
+                                 </td>
+                              </tr>
+                           <c:if test="${not status.last }">
+                          </c:if>
+                           </c:if>
+                      </c:forEach>
+                      
+                    
+                   </table>
+            </c:if>
+                
+                 <c:if test="${fn:length(resultList.boardList) > 9}">
+                   <a href="search?searchName=${keyword }&amp;category=category_comm">
+                     <button type="submit" style="margin-left: 70%; margin-top: 20px;  ">더보기</button>
+                   </a>
+                 </c:if>
+            
+            </ul>
          </div>
         </article>
      </c:if> 
@@ -305,22 +308,22 @@
                    <ul><c:if test="${not empty resultList.getTravelList()}">
                    <br>
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-					  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
-					    <c:if test="${status.index < 7}">
-					      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
-					        <a href="/traDetail?tid=${travel.travel_id}">
-					          <c:url value="/display" var="url">
-					            <c:param name="file" value="${travel.img_stored_file}"></c:param>
-					          </c:url>
-					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
-					        </a>
-					        <br>
-					        <div id="each-name"> 
-					          <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
-					        </div>
-					      </div>
-					    </c:if>
-					  </c:forEach>
+                 <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
+                   <c:if test="${status.index < 7}">
+                     <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
+                       <a href="/traDetail?tid=${travel.travel_id}">
+                         <c:url value="/display" var="url">
+                           <c:param name="file" value="${travel.img_stored_file}"></c:param>
+                         </c:url>
+                         <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;    max-height: 200px">
+                       </a>
+                       <br>
+                       <div id="each-name"> 
+                         <a href="/traDetail?tid=${travel.travel_id}" class="each-name"><c:out value="${travel.t_name}" /></a>
+                       </div>
+                     </div>
+                   </c:if>
+                 </c:forEach>
                     </div>
                     <br>
                     <br>
@@ -353,22 +356,22 @@
                    <ul><c:if test="${not empty resultList.getHouseList()}">
                    <br>
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-					  <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
-					    <c:if test="${status.index < 7}">
-					      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
-					        <a href="/houDetail?hid=${house.house_id}">
-					          <c:url value="/display" var="url">
-					            <c:param name="file" value="${house.img_stored_file}"></c:param>
-					          </c:url>
-					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
-					        </a>
-					        <br>
-					        <div id="each-name"> 
-					          <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
-					        </div>
-					      </div>
-					    </c:if>
-					  </c:forEach>
+                 <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
+                   <c:if test="${status.index < 7}">
+                     <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
+                       <a href="/houDetail?hid=${house.house_id}">
+                         <c:url value="/display" var="url">
+                           <c:param name="file" value="${house.img_stored_file}"></c:param>
+                         </c:url>
+                         <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;    max-height: 200px">
+                       </a>
+                       <br>
+                       <div id="each-name"> 
+                         <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
+                       </div>
+                     </div>
+                   </c:if>
+                 </c:forEach>
                     </div>
                     <br>
                     <br>
@@ -401,22 +404,22 @@
                    <ul><c:if test="${not empty resultList.getRestaurantList()}">
                    <br>
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-					  <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
-					    <c:if test="${status.index < 7}">
-					      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
-					        <a href="/resDetail?rid=${res.restaurant_id}">
-					          <c:url value="/display" var="url">
-					            <c:param name="file" value="${res.img_stored_file }"></c:param>
-					          </c:url>
-					          <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;">
-					        </a>
-					        <br>
-					        <div id="each-name"> 
-					          <a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
-					        </div>
-					      </div>
-					    </c:if>
-					  </c:forEach>
+                 <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
+                   <c:if test="${status.index < 7}">
+                     <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
+                       <a href="/resDetail?rid=${res.restaurant_id}">
+                         <c:url value="/display" var="url">
+                           <c:param name="file" value="${res.img_stored_file }"></c:param>
+                         </c:url>
+                         <img src="${url}" alt="#" style="width: 100%; height: auto; max-width: 380px;    max-height: 200px">
+                       </a>
+                       <br>
+                       <div id="each-name"> 
+                         <a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
+                       </div>
+                     </div>
+                   </c:if>
+                 </c:forEach>
                     </div>
                     <br>
                     <br>
@@ -459,15 +462,14 @@
                                           <td style="padding-left: 50px;">
                                            <a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
                                            <br>
-                                              <c:out value="${board.b_content }" />
-                                             <%--  <c:choose>
+                                              <c:choose>
                                          <c:when test="${fn:length(board.b_content) < 50}">
                                            <c:out value="${board.b_content}" />
                                          </c:when>
                                          <c:otherwise>
                                            <c:out value="${fn:substring(board.b_content, 0, 60)}" />...
                                          </c:otherwise>
-                                       </c:choose> --%>
+                                       </c:choose>
                                               
                                               <hr id="line" >
                                           </td>
@@ -479,6 +481,12 @@
                                  </c:if>
                             </c:forEach>
                          </table>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
                          <div>
                             <c:if test="${paging.startPage > paging.pageBlock }">
                               <a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
@@ -489,8 +497,7 @@
                            <c:if test="${paging.endPage < paging.totalPage }">
                               <a href="search?currentPage=${page.startPage+page.pageBlock}&amp;category=${category}&amp;searchName=${keyword }">[다음]</a>
                            </c:if>
-                        </div>
-                    
+                        </div> 
                   </c:if>
         </article>
      </c:if> 
@@ -499,7 +506,8 @@
      
    
 <!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 -->   
-   <!-- 인기 검색어 -->  
+   <!-- 인기 검색어 --> 
+    <c:if test="${not empty resultList.getTravelList() or not empty resultList.getHouseList() or not empty resultList.getRestaurantList() or not empty resultList.getBoardList()}">
       <article id="word" style="display:flex; flex-direction:column; align-items:center;    ">
       <article id="popular-container">
          <div id="popular-title"><p style="color: white; font-size: 20px; font-weight: bold;">인기 검색어</p></div>
@@ -549,7 +557,8 @@
       
       
       
-   	  <!-- 최근 검색어 -->  	  
+        <!-- 최근 검색어 -->       
+        <c:if test="${not empty recentSearchList}">
       <article id="recent-container">
       <div id="recent-title"><p style="color: white; font-size: 20px; font-weight: bold;">최근 검색어</p></div>
       <br>
@@ -561,7 +570,11 @@
          </c:forEach>
          </ul>
       </article>
+      </c:if>
+      
    </article>
+   </c:if>
+   
    </div>
    
    </section>
