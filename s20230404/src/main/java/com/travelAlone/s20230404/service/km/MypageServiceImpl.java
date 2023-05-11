@@ -12,7 +12,7 @@ import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
 
 import com.travelAlone.s20230404.model.mh.Inquire;
 
-import com.travelAlone.s20230404.service.jh.UploadHandler;
+import com.travelAlone.s20230404.service.board.UploadHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

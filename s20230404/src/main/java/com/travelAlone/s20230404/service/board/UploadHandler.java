@@ -1,4 +1,4 @@
-package com.travelAlone.s20230404.service.jh;
+package com.travelAlone.s20230404.service.board;
 
 import com.travelAlone.s20230404.model.BodImg;
 import lombok.NoArgsConstructor;
@@ -20,10 +20,11 @@ import java.util.List;
 @NoArgsConstructor
 public class UploadHandler {
 
-    /**
+	/**
      * 설명 : 들어온 MultiPartFile을 저장하고 해당 목록을 반환
      * */
 
+	// 웹에서 받은 이미지 파일을 MultipartFile을 통해 byte로 받고 이미지파일형식으로 서버에 저장 (Http는 문자열 받기 때문에 이미지를 byte로 받아야함) (Http는 웹과 서버를 이어주는 통신 규약)
     public static List<BodImg> parseFileInfo(List<MultipartFile> multipartFiles, Long boardId) throws Exception{
         // 반환 파일 리스트
         List<BodImg> fileList = new ArrayList<>();
@@ -37,12 +38,13 @@ public class UploadHandler {
 
             //프로젝트 폴더에 저장하기 위해 절대경로 설정, File.separator는 경로구분자로 윈도우와 맥에서 구분자가 다른것을 해결하기 위해 사용
             String absolutePath = new File("").getAbsolutePath() + File.separator+File.separator;
-
+            System.out.println("찬규 확인용 absolutePath -> "+ absolutePath);
+            
             //경로 지정하고 그곳에 저장
             String path = "images" + File.separator + currentDate;
             File file = new File(path);
 
-            // 저장할 위치에 디렉토리가 존재하지 않으면
+            // 저장할 위치에 디렉토리가 존재하지 않으면 -> 디렉토리 생성
             if(!file.exists()) {
                 // mkdirs : 상위 디렉토리까지 생성, mkdir: 해당디렉토리만 생성
                 boolean wasSuccessful = file.mkdirs();
@@ -95,13 +97,17 @@ public class UploadHandler {
                 fileList.add(upload);
 
                 // 업로드한 파일 데이터를 지정한 파일에 저장
+                // 1. 저장할 file 객체 생성
                 file = new File(absolutePath + path + File.separator + newFileName);
+                // 2.  multipartFile 객체에 저장된 파일 데이터가 file 객체에 저장
                 multipartFile.transferTo(file);
 
                 // 파일 권한 설정
                 file.setWritable(true);
                 file.setReadable(true);
-
+                
+                
+                
             }
         }
 
@@ -115,7 +121,9 @@ public class UploadHandler {
      * */
     public static void delete(String storedFileName) {
         String absolutePath = new File("").getAbsolutePath() + File.separator+File.separator;
-
+        
+        System.out.println("UploadHandler delete absolutePath -> "+ absolutePath);
+        
         try{
             Path file = Paths.get(absolutePath+storedFileName);
             Files.deleteIfExists(file);

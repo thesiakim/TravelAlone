@@ -6,7 +6,7 @@ import com.travelAlone.s20230404.domain.km.MemberRepository;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.dto.km.*;
 
-import com.travelAlone.s20230404.service.jh.UploadHandler;
+import com.travelAlone.s20230404.service.board.UploadHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
