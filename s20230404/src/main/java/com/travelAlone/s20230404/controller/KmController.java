@@ -413,6 +413,10 @@ public class KmController {
         model.addAttribute("favorites",mypageFavoriteResponseDtos);
 
         System.out.println("mypageFavoriteResponseDtos = " + mypageFavoriteResponseDtos.size());
+        if (mypageFavoriteResponseDtos.size() != 0) {
+
+        System.out.println("mypageFavoriteResponseDtos.get(0).toString() = " + mypageFavoriteResponseDtos.get(0).toString());
+        }
 
         return "km/mypage-favorites";
     }
@@ -426,9 +430,15 @@ public class KmController {
     @ResponseBody
     public String mypageFavoritesUpdate(@RequestBody Map<String, Object> info,
                                         @Login2User SessionUser sessionUser){
-        long id = (long) info.get("id");
+        Long id = ((Integer) info.get("id")).longValue();
         String category =(String) info.get("category");
         boolean checked = (boolean) info.get("checked");
+
+        System.out.println("checked = " + checked);
+        System.out.println("id = " + id);
+        System.out.println("category = " + category);
+
+
 
         int result=0;
         switch (category){

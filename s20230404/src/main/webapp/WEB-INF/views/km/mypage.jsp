@@ -20,7 +20,7 @@
 <div class="profile-block">
 	<div class="img-block">
 		<div>
-		<c:url value='/display' var='url'><c:param name='file' value='${response.storedImgName}'/></c:url>
+		<c:url value="/display" var='url'><c:param name='file' value='${response.storedImgName}'/></c:url>
 			<img class="profile-pic" alt="#" src="${url}" width="400px" height="400px">	
 		</div>
 		<div class="button-block">

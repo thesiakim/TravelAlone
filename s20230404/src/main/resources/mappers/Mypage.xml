@@ -7,7 +7,7 @@
 		<select id="interestFindById" resultType="Interest" >
 			<![CDATA[
 			select i.interest_id, i.member_id, i.i_common_interest, i.create_date, i.modified_date, c.word
-			from interest i inner join common c on i.i_common_interest = concat(c.bcd, c.mcd)
+			from interest i inner join  c on i.i_common_interest = concat(c.bcd, c.mcd)
 			where i.member_id = #{memberId}
 			]]>
 		</select>
@@ -107,5 +107,84 @@
 			FROM G_WRITING
 			WHERE MEMBER_ID = #{id}
 		</select>
+
+		<select id="kmMypageFavoritesRes" resultType="MypageFavoriteResponseDto">
+		<![CDATA[
+		SELECT RF.RESTAURANT_ID AS id,
+			   R.R_NAME AS name, C.WORD AS loc,
+			   RF.MODIFIED_DATE AS modifiedDate,
+			   COUNT(RR.REVIEW_ID) AS reviewCount,
+			   AVG(RR.R_SCORE) AS score,
+			   (SELECT IMG_STORED_FILE FROM RES_IMG RI WHERE RI.RESTAURANT_ID = RF.RESTAURANT_ID AND ROWNUM = 1) AS thumbnail
+		FROM RES_FAV RF
+				 LEFT JOIN RES_REV RR ON RF.RESTAURANT_ID = RR.RESTAURANT_ID
+				 JOIN RESTAURANT R ON RF.RESTAURANT_ID = R.RESTAURANT_ID
+				 JOIN COMMON C on R.R_COMMON_LOC = concat(C.BCD, C.MCD)
+		WHERE RF.MEMBER_ID = #{id}
+		GROUP BY RF.RESTAURANT_ID,C.WORD, R.R_NAME, RF.MODIFIED_DATE
+		]]>
+		</select>
+
+	<select id="kmMypageFavoritesHou" resultType="MypageFavoriteResponseDto">
+	<![CDATA[
+		SELECT HF.HOUSE_ID AS id,
+			   H.H_NAME AS name,
+			   C.WORD AS loc,
+			   HF.MODIFIED_DATE AS modifiedDate,
+			   COUNT(HR.REVIEW_ID) AS reviewCount,
+			   AVG(HR.R_SCORE) AS score,
+			   (SELECT IMG_STORED_FILE FROM HOU_IMG HI WHERE HI.HOUSE_ID = HF.HOUSE_ID AND ROWNUM = 1) AS thumbnail
+		FROM HOU_FAV HF
+				 LEFT JOIN HOU_REV HR ON HF.HOUSE_ID = HR.HOUSE_ID
+				 JOIN HOUSE H ON HF.HOUSE_ID = H.HOUSE_ID
+				 JOIN COMMON C on H.H_COMMON_LOC = concat(C.BCD, C.MCD)
+		WHERE HF.MEMBER_ID = #{id}
+		GROUP BY HF.HOUSE_ID, C.WORD, H.H_NAME, HF.MODIFIED_DATE
+		]]>
+	</select>
+
+	<select id="kmMypageFavoritesTra" resultType="MypageFavoriteResponseDto">
+	<![CDATA[
+		SELECT TF.TRAVEL_ID AS id,
+			   T.T_NAME AS name,
+			   C.WORD AS loc,
+			   TF.MODIFIED_DATE AS modifiedDate,
+			   COUNT(TR.REVIEW_ID) AS reviewCount,
+			   TRUNC(AVG(TR.R_SCORE),0) AS score,
+			   (SELECT IMG_STORED_FILE FROM TRA_IMG TI WHERE TI.TRAVEL_ID = TF.TRAVEL_ID AND ROWNUM = 1) AS thumbnail
+		FROM TRA_FAV TF
+				 LEFT JOIN TRA_REV TR ON TF.TRAVEL_ID = TR.TRAVEL_ID
+				 JOIN TRAVEL T ON TF.TRAVEL_ID = T.TRAVEL_ID
+				 JOIN COMMON C on T.T_COMMON_LOC = concat(C.BCD, C.MCD)
+		WHERE TF.MEMBER_ID = #{id}
+		GROUP BY TF.TRAVEL_ID, C.WORD, T.T_NAME, TF.MODIFIED_DATE
+		]]>
+	</select>
+
+	<select id="kmMypageFavoritesCountTra" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM TRA_FAV
+		WHERE MEMBER_ID = #{id}
+		]]>
+	</select>
+
+	<select id="kmMypageFavoritesCountRes" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM RES_FAV
+		WHERE MEMBER_ID = #{id}
+		]]>
+	</select>
+
+	<select id="kmMypageFavoritesCountHou" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM HOU_FAV
+		WHERE MEMBER_ID = #{id}
+		]]>
+	</select>
+
+
 
 </mapper>
