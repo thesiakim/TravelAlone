@@ -74,10 +74,18 @@
 		width: 400px; 		border: 0px;
 		background-color: #5F9EA0; 
 	}
+	
 	#file {
 		font-family: 'Roboto', sans-serif; 
 		border-radius: 0;	border: 0;
 		color: #205E61;  	
 		background-color: white;
 		font-weight: bolder;
+	}
+	
+	#userTag {
+		width: 120px;		height: 40px;
+		border-radius: 7px;	font-weight:bolder;
+		font-size: 15px;	color:white;
+		background-color: #5F9EA0; 
 	}

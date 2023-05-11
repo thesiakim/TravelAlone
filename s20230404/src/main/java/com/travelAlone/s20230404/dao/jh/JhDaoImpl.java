@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
+import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Res_Rev;
@@ -246,9 +247,23 @@ public class JhDaoImpl implements JhDao {
 			totalReviewPageRes = session.selectOne("totalReviewPageRes", member_id);
 			log.info("jhDaoImpl totalReviewPageRes->" + totalReviewPageRes);
 		} catch (Exception e) {
-			log.info("mhDaoImpl2 totalReviewPageRes Exception " +e.getMessage());
+			log.info("jhDaoImpl totalReviewPageRes Exception " +e.getMessage());
 		}						
 		return totalReviewPageRes;
 	}
-	
+
+	// 태그 업데이트
+	@Override
+	public List<Interest> mypageTagUpdate(Interest interest) {
+		List<Interest> mypageTagUpdate = null;
+		log.info("jhDaoImpl mypageTagUpdate start");
+		try {
+			mypageTagUpdate = session.selectList("mypageTagUpdate", interest);
+			log.info("jhDaoImpl mypageTagUpdate.size()->" + mypageTagUpdate.size());
+		} catch (Exception e) {
+			log.info("jhDaoImpl mypageTagUpdate Exception " +e.getMessage());
+		}						
+		return mypageTagUpdate;
+	}
+
 }

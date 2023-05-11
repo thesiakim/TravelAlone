@@ -1,9 +1,9 @@
 @charset "UTF-8";
    
-   #comunity > ul{ text-align:center;      padding: 0; }
+   #comunity > ul{ text-align:center; padding:0; }
    
-   #comunity > ul > li{ display:inline-block;    margin:0 15px; 
-      padding: 0;}
+   #comunity > ul > li{ display:inline-block; margin:0 15px;  padding:0; }
+      
    table {
       text-align:center;      padding: 0;
       display:inline-block;    margin:0 15px; 
@@ -16,35 +16,24 @@
       position: relative;
    }
    
+   #list { font-size: 15px;   padding: 10px; }
    
-   #list {
-      font-size: 15px;   padding: 10px;
-   }
-   
-   h6{
-      color:red;
-   }
+   h6{ color:red; }
    
    #serch > input {
-       
-       padding: 20px;       
-       border-radius:25px;   margin: 16px;
-      color: #205E61;     font-weight: bolder;
-       box-sizing: border-box;
-       background-color: #F8F8F8;
-      font-family: 'Roboto', sans-serif; 
-      border: 3px solid  #205E61;
+		padding: 20px;      font-family: 'Roboto', sans-serif;
+		margin: 16px; 		background-color: #F8F8F8;
+		border-radius:25px; font-weight: bolder;
+		color: #205E61;     border: 3px solid  #205E61;
+		box-sizing: border-box;
    }
-   
-   
-   
-   
+
    .titleForm input[type="submit"] {
-      width: 50px;         border-radius: 7px;
-       height: 25px;         box-sizing: border-box;
-       font-size: 15px;        font-weight:bolder;
-       color:white;
-       border:  #205E61;       background-color: #205E61;
+		width: 50px;         border-radius: 7px;
+		height: 25px;         box-sizing: border-box;
+		font-size: 15px;        font-weight:bolder;
+		color:white;
+		border:  #205E61;       background-color: #205E61;
    }
    
    .titleForm input[type="submit"]:hover {
@@ -139,7 +128,7 @@
    }
    
    #replyForm > input[type="submit"] {
-      width: 80px;         height: 40px;   
+		width: 80px;         height: 40px;   
        font-size: 17px;        font-weight:bolder;
        padding: 0 5px;       box-sizing: border-box;
        margin:0 3px 16px;       border-radius: 10px;

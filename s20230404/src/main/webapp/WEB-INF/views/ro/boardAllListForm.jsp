@@ -51,7 +51,7 @@
 	</form>
 		<hr>
 		<form action="list" id="list">
-        	<h3> 커뮤니티 - 전체 게시판 </h3>
+        	<h2>전체 게시판</h2>
         	
         <input type="checkbox" id="imgOnlyCheckbox" onclick="imgOnclickCheck()">
 		<label for="imgOnlyCheckbox">이미지 첨부글만 보기</label>

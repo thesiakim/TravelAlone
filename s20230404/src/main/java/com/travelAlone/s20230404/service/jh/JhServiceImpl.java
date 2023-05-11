@@ -11,6 +11,7 @@ import com.travelAlone.s20230404.dao.jh.JhDao;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
+import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Res_Rev;
@@ -152,6 +153,15 @@ public class JhServiceImpl implements JhService {
 		log.info("jhServiceImpl  totalReviewPageRes -> " + totalReviewPageRes );		
 		return totalReviewPageRes;
 	}
-
+	
+	// 태그 관심사 등록, 삭제
+	@Override
+	public List<Interest> mypageTagUpdate(Interest interest) {
+		log.info("jhServiceImpl mypageTagUpdate start");
+		List<Interest> mypageTagUpdate = null;
+		mypageTagUpdate = jd.mypageTagUpdate(interest);
+		log.info("jhServiceImpl mypageTagUpdate.size() -> " + mypageTagUpdate.size());
+		return mypageTagUpdate;
+	}
 
 }

@@ -32,24 +32,29 @@
 
 	<div class="content-block">
 		<div class="nickname">${response.nickName}</div>
+		<br>
 		<div class="tags">
 			<c:forEach var="interest" items="${response.interests}">
 			<div class="tag">${interest.word}</div>
 			</c:forEach>
 		</div>
+		<br><br>		
+		
+		<button onclick="openTagWindow()" style="width: 90px; height: 35px;">태그 수정</button>
 	</div>
+	
 </div>
 
 <div class="review-block">
 	<c:forEach var="scoreCount" items="${response.scoreCounts}">
-	<div class="score-container">
-		<div class="bar-label">${scoreCount.word}</div>
-		<div class="bar-container">
-			<div class="bar" style="width: 70%">
-				<div class="bar-text">${scoreCount.count}</div>
+		<div class="score-container">
+			<div class="bar-label">${scoreCount.word}</div>
+			<div class="bar-container">
+				<div class="bar">
+					<div class="bar-text">${scoreCount.count}</div>
+				</div>
 			</div>
 		</div>
-	</div>
 	</c:forEach>
 </div>
 	<table>

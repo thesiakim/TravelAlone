@@ -38,19 +38,19 @@
 		<form action="list" id="list">
 			<c:choose>
 				<c:when test="${board.b_common_board == 'bor100'}">
-           			<h3> 커뮤니티 - 자유 게시판 </h3>
+           			<h2>자유 게시판</h2>
 	        	</c:when>
 				<c:when test="${board.b_common_board == 'bor200'}">
-					<h3> 커뮤니티 - 정보 게시판 </h3>
+					<h2>정보 게시판</h2>
 				</c:when>
 				<c:when test="${board.b_common_board == 'bor300'}">
-					<h3> 커뮤니티 - 질문 게시판 </h3>
+					<h2>질문 게시판</h2>
 				</c:when>
 				<c:when test="${board.b_common_board == 'bor400'}">
-					<h3> 커뮤니티 - 홍보 게시판 </h3>
+					<h2>홍보 게시판</h2>
 				</c:when>
 				<c:when test="${board.b_common_board == 'bor500'}">
-					<h3> 커뮤니티 - 모집 게시판 </h3>
+					<h2>모집 게시판</h2>
 				</c:when>
 			</c:choose>
 			

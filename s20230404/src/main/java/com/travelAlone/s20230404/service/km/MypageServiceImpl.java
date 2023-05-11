@@ -106,16 +106,25 @@ public class MypageServiceImpl implements MypageService{
      * */
     @Override
     public int memberProfileReset(Member member) {
-
+    	String gosunee = "src/main/resources/static/img/user-picture.png";
+    	String godoree = "src/main/resources/static/img/user-picture.png";
+    	
+    	
         // 기존 이미지 삭제
-        if (!member.getM_img_stored_file().equals("src/main/resources/static/img/user-picture.png")){
+        if (!member.getM_img_stored_file().equals(gosunee)||!member.getM_img_stored_file().equals(godoree)){
             //기본 이미지가 아닐 경우 실제 이미지 파일 삭제
             UploadHandler.delete(member.getM_img_stored_file());
 
         }
 
         // 기본 이미지 저장
-        member.updateProfile("normal","userPicture","src/main/resources/static/img/user-picture.png","img300");
+        if(member.getM_common_gender().equals("0")) {
+        	member.updateProfile("normal","userPicture",godoree,"img300");
+        }else {
+        	member.updateProfile("normal","userPicture",gosunee,"img300");
+        }
+        
+        
         int updateResult = mypageDao.memberProfileUpdate(member);
 
         // 세션 정보 변경
