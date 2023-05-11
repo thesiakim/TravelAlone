@@ -21,13 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.travelAlone.s20230404.config.km.LoginUser;
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.CommonCode;
-import com.travelAlone.s20230404.model.Hou_Fav;
 import com.travelAlone.s20230404.model.Tra_Fav;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 
 import com.travelAlone.s20230404.service.Paging;
+import com.travelAlone.s20230404.service.si.SiService;
 import com.travelAlone.s20230404.service.sm.TravelService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,6 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TravelController {
 
 	private final TravelService sm;
+	private final SiService SiService;
 	
 	// ===================여행지===================
 	//여행지메인 보기
@@ -64,7 +65,9 @@ public class TravelController {
 		log.info("commonLocCode data : {}, {}",traCommonLocCode.get(0).getCode(),traCommonLocCode.get(0).getValue());
 		model.addAttribute("traCommonLocCode",traCommonLocCode);
 		
-		
+		//popularTravel
+		List<Travel> popularTravel = SiService.getPopularTravel();
+		model.addAttribute("popularTravel", popularTravel);
 		
 		//여행지리스트
 		List<Travel> traList = sm.traList(travel);
@@ -531,8 +534,7 @@ public class TravelController {
 			return  "smTra/tra";
 		}
 		
-		
-		
+
 
 		
 }

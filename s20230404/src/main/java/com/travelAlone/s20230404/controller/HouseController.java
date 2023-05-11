@@ -14,7 +14,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,9 +25,9 @@ import com.travelAlone.s20230404.model.Hou_Fav;
 import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
-
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.mh.HouseService;
+import com.travelAlone.s20230404.service.si.SiService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HouseController {
 
 private final HouseService mh;
+private final SiService SiService;
 	
 	// ===================숙소===================
 	//숙소 메인 보기
@@ -64,7 +64,9 @@ private final HouseService mh;
 		log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
 		model.addAttribute("boardLocList",commonLocCode);
 		
-		
+		//popularHouse
+		List<House> popularHouse = SiService.getPopularHouse();    
+		model.addAttribute("popularHouse", popularHouse);
 		
 		//숙소리스트
 		List<House> listHouse = mh.listHouse(house);
