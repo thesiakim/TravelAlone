@@ -15,6 +15,7 @@
   text-align: center; /* 이미지 중앙에 배치 */
 }
 
+
 .image-text {
   position: absolute;
   top: 10%;
