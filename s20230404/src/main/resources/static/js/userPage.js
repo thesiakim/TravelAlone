@@ -14,3 +14,4 @@
     	var editUrl = "/userpage?id="+member_id;
 		var editWindow = window.open(editUrl, "edit_window", "width=550,height=650");
   	}
+	

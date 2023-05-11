@@ -14,6 +14,7 @@ import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Res_Rev;
+import com.travelAlone.s20230404.model.Score;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.Warning;
@@ -537,4 +538,19 @@ public class BoardDaoImpl implements BoardDao {
 		}						
 		return mypageTagUpdate;
 	}
+	
+	// 유저 페이지 점수 업데이트
+	@Override
+	public int userScoreUpdate(Score score) {
+		log.info("BoardDaoImpl userScoreUpdate Start");
+		int userScoreUpdate = 0;
+		try {
+			userScoreUpdate = session.update("userScoreUpdate",score);
+			log.info("BoardDaoImpl userScoreUpdate -> " + userScoreUpdate);
+		} catch (Exception e) {
+			log.info("BoardDaoImpl userScoreUpdate Exception->" + e.getMessage());
+		}
+		return userScoreUpdate;
+	}
+	
 }

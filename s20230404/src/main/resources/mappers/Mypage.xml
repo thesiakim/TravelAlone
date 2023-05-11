@@ -14,12 +14,14 @@
 
 		<select id="scoreCountById" resultType="ScoreCount" >
 			<![CDATA[
-			Select count(*) as count, c.word
-			from score s inner join common c
-			on s.s_common_spec = concat(c.bcd, c.mcd)
-			where s.member_id= #{memberId}
-			group by c.word
-		]]>
+			SELECT 	  NVL(COUNT(s.s_common_spec), 0) AS count, c.word
+			FROM 	  common c 
+			LEFT JOIN score s 
+			ON 		  s.s_common_spec = c.bcd || c.mcd 
+			AND 	  s.member_id = #{memberId}
+			WHERE 	  c.bcd like 'scr'
+			GROUP BY  c.word
+			]]>
 		</select>
 
 		<select id="writingCountById" resultType="WritingCount" >

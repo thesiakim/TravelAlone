@@ -13,6 +13,7 @@ import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Res_Rev;
+import com.travelAlone.s20230404.model.Score;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.Warning;
@@ -361,6 +362,15 @@ public class BoardServiceImpl implements BoardService {
 		log.info("jhServiceImpl mypageTagUpdate.size() -> " + mypageTagUpdate.size());
 		return mypageTagUpdate;
 	}
-
+	
+	// 유저 페이지 점수 업데이트
+	@Override
+	public int userScoreUpdate(Score score) {
+		log.info("jhServiceImpl userScoreUpdate start");
+		int userScoreUpdate = bd.userScoreUpdate(score);
+		log.info("jhServiceImpl userScoreUpdate -> " + userScoreUpdate);
+		return userScoreUpdate;
+	}
+	
 
 }
