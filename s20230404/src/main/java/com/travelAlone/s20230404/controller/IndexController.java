@@ -1,11 +1,14 @@
 package com.travelAlone.s20230404.controller;
 
+import com.travelAlone.s20230404.config.km.LoginUser;
+import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.service.si.SiService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class IndexController {
 
@@ -44,7 +48,12 @@ public class IndexController {
 			
 			//인기 맛집
 			List<Res> popularRes = siService.getPopularRes();
-					             
+					     
+			
+		
+			
+			
+			
 			model.addAttribute("popularTravel", popularTravel);
 			model.addAttribute("popularRes", popularRes);
 			model.addAttribute("popularHouse", popularHouse);

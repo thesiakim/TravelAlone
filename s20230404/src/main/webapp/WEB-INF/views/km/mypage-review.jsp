@@ -30,5 +30,5 @@
 <p>Modified Date: ${review.modified_date}</p>
 
 </body>
-<c:import url="footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"/>
 </html>

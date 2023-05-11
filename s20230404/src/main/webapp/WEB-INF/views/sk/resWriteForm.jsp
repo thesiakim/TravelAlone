@@ -115,5 +115,5 @@
 
 
 </body>
-<c:import url="footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"/>
 </html>

@@ -135,5 +135,5 @@
 				<a href="javascript:window.history.back();">수정취소</a>
 	</form>
 </body>
-<c:import url="footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"/>
 </html>

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +14,9 @@
   <form>
 	<div id="container-left clearfix">
 	  <div class="footerForm">
+		  <c:if test="${user.role == 'rol200' }">
+			 <a href="admin">관리자페이지</a>
+			    </c:if>
 		<a href="notice">고객센터</a>
 	  </div>
 	  <div class="footerInfo">

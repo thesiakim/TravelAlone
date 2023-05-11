@@ -235,6 +235,9 @@
 		<form>
 		  <div id="container-left clearfix">
 			<div class="footerForm">
+			  <c:if test="${user.role == 'rol200' }">
+			 <a href="admin">관리자페이지</a>
+			    </c:if>
 			  <a href="notice">고객센터</a>
 			</div>
 		  <div class="footerInfo">

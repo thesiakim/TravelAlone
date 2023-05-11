@@ -171,4 +171,5 @@
 	
 
 </body>
+	<c:import url="../fragments/footer.jsp"/>
 </html>
