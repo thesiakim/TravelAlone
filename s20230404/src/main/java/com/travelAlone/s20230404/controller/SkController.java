@@ -25,6 +25,7 @@ import com.travelAlone.s20230404.model.Res_Fav;
 import com.travelAlone.s20230404.model.Res_Img;
 import com.travelAlone.s20230404.model.Res_Rev;
 import com.travelAlone.s20230404.service.Paging;
+import com.travelAlone.s20230404.service.si.SiService;
 import com.travelAlone.s20230404.service.sk.SkService;
 
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SkController {
 
 	private final SkService sk;
+	private final SiService SiService;
 
 	// ===================================맛집===================================
 
@@ -60,6 +62,10 @@ public class SkController {
 		log.info("boardLocList data : {}, {}", commonLocCode.get(0).getCode(), commonLocCode.get(0));
 		model.addAttribute("boardLocList", commonLocCode);
 
+		//popularRes
+		List<Res> popularRes = SiService.getPopularRes();
+		model.addAttribute("popularRes", popularRes);
+		
 		// 맛집 목록
 		List<Res> listRestaurant = sk.listRestaurant(restaurant);
 		log.info("SkController list listRestaurant.size()=>" + listRestaurant.size());

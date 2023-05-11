@@ -81,9 +81,9 @@
 	  
 	  
 	  <hr>
-	  <!-- 인기명소 -->
+	  <!-- 인기 여행지 -->
 	  <div id="session1">
-		<h2>인기명소</h2>
+		<h2>인기 여행지</h2>
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 		<!-- 클래스명은 변경하면 안 됨 -->
@@ -132,7 +132,7 @@
 		<hr>
 		<!-- 인기 숙소  -->
 		<div id="session2">
-		  <h2>인기숙소</h2>      
+		  <h2>인기 숙소</h2>      
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 		<!-- 클래스명은 변경하면 안 됨 -->
@@ -181,9 +181,9 @@
 		  });
 		</script>
 		<hr>
-		<!-- 인기맛집 -->
+		<!-- 인기 맛집 -->
 		<div id="session3">
-		  <h2>인기맛집</h2>      
+		  <h2>인기 맛집</h2>      
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 		<!-- 클래스명은 변경하면 안 됨 -->
