@@ -130,9 +130,6 @@
             <img src="../img/crying.png" alt="#" style="width: 100%; height: auto; max-width: 200px;"></a>
          </div>
    </c:if>
-   
-   
-   
    </article>
    
 
