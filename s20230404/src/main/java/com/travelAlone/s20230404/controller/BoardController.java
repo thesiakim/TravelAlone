@@ -11,9 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +27,7 @@ import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Res_Rev;
+import com.travelAlone.s20230404.model.Score;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.Warning;
@@ -483,6 +481,7 @@ public class BoardController {
 	   UserPageResponseDto userPageResponseDto = mypageService.userPage(member_id);
 	   
        model.addAttribute("response", userPageResponseDto);
+       model.addAttribute("id", member_id);
 	   return "km/userpage";
    }
    
@@ -563,4 +562,41 @@ public class BoardController {
         model.addAttribute("mypageTagUpdate", mypageTagUpdate);
 		return "km/mypage-tagUpdate";
 	}
+	
+	// 유저 페이지 점수 업데이트
+	@RequestMapping(value = "/userScoreUpdate")
+	public String userScoreUpdate(@RequestParam(value = "id") long member_id, @LoginUser MemberJpa memberJpa, Score score, Model model, HttpServletRequest request, HttpServletResponse response) {
+		log.info("jhController userScoreUpdate start");
+		log.info("jhController userScoreUpdate member_id -> " + member_id);
+		log.info("jhController userScoreUpdate score.getS_common_spec() -> " + score.getS_common_spec());
+		int userScoreUpdate = 0;
+		String cookieKey = "userScoreUpdate" + member_id + score.getS_common_spec() + memberJpa.getId();
+		String result = "forward:/userpage?id="+member_id;
+		Cookie[] cookies = request.getCookies();
+		boolean userScoreUpdateChk = false;
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals(cookieKey)) {
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+					
+					String message = "이미 추천한 유저점수입니다.";
+					model.addAttribute("message", message);
+					userScoreUpdateChk = true;
+					break;
+				}
+			}
+		}
+		if (!userScoreUpdateChk) {
+			userScoreUpdate = bs.userScoreUpdate(score);
+			log.info("BoardController userScoreUpdate result ->" + userScoreUpdate);
+			model.addAttribute("userScoreUpdate", userScoreUpdate);
+			Cookie cookie = new Cookie(cookieKey, "true");
+			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
+			response.addCookie(cookie);
+		} 
+		return result;
+	}
+	
+	
 }

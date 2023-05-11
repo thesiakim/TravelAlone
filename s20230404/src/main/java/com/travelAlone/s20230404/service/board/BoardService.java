@@ -12,6 +12,7 @@ import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Res_Rev;
+import com.travelAlone.s20230404.model.Score;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.Warning;
@@ -46,5 +47,6 @@ public interface BoardService {
 	List<Res> 			listReviewPageRes(Res_Rev resRev);
 	int 				totalReviewPageRes(long memberId);
 	List<Interest> 		mypageTagUpdate(Interest interest);
+	int 				userScoreUpdate(Score score);
 
 }
