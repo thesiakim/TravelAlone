@@ -14,6 +14,9 @@ var main = {
             b_content: $('#content').val(),
             b_common_board : $('#common_board').val()
         };
+        
+        var boardId = $('#board_id').val();
+        var bCommonBoard = $('#common_board').val();
       
       // updateBoardForm에서 id="ImgMulForm" form태그의 타입인 multipart 형식을 formData에 적용 -> 사진 파일을 받기 위해
         var imgMulForm = $('#ImgMulForm')[0];
@@ -43,7 +46,7 @@ var main = {
         })
             .done(function () {
                 alert("글이 등록되었습니다.");
-                window.location.href = "/listAllBoard";
+                window.location.href = "/detailBoard?board_id="+boardId+"&b_common_board="+bCommonBoard;
             })
             .fail(function (error) {
                 alert(JSON.stringify(error));

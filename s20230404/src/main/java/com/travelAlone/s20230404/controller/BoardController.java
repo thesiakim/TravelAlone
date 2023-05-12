@@ -568,7 +568,7 @@ public class BoardController {
 	@RequestMapping(value = "/userScoreUpdate")
 	public String userScoreUpdate(long member_id, @LoginUser MemberJpa memberJpa, Score score, Model model, HttpServletRequest request, HttpServletResponse response) {
 //		log.info("BoardController userScoreUpdate start");
-		log.info("BoardController userScoreUpdate member_id -> " + member_id);
+//		log.info("BoardController userScoreUpdate member_id -> " + member_id);
 //		log.info("BoardController userScoreUpdate score.getS_common_spec() -> " + score.getS_common_spec());
 		int userScoreUpdate = 0;
 		String result = "redirect:/userpage?id="+member_id;
@@ -577,8 +577,6 @@ public class BoardController {
 		if(memberJpa == null || memberJpa.getId().equals(member_id)) {
 			return result;
 		}
-		
-		log.info("BoardController userScoreUpdate member_id -> " + member_id);
 		
 		String cookieKey = "userScoreUpdate" + member_id + score.getS_common_spec() + memberJpa.getId();
 		
