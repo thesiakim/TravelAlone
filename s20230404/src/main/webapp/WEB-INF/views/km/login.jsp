@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +9,8 @@
 <title>Insert title here</title>
 <!-- 사용자 스크립트 추가 -->
 </head>
-	<link href="/css/list.css" rel="stylesheet" type="text/css">
-	<link href="/css/login.css" rel="stylesheet" type="text/css">
+	<link href="<%=contextPath%>/css/list.css" rel="stylesheet" type="text/css">
+	<link href="<%=contextPath%>/css/login.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	//로그인 실패시 에러 메시지 출력
@@ -22,9 +23,9 @@
 </script>
 <body>
 	<div class="loginLogo">
-		<a href="/"><img src="/img/gosunee.png"></a>
+		<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/gosunee.png"></a>
 	</div>
-	<form role="form" method="post" action="/login">
+	<form role="form" method="post" action="<%=contextPath%>/login">
 		<table>
 			<tr class="form-group py-2">
 				<td style="width: 100px;"><label for="email">이메일 주소</label></td>
@@ -42,7 +43,7 @@
 			<tr class="py-3">
 				<td></td>
 				<td style="width: 80px;"><button type="submit" class="btn btn-outline-dark">로그인</button></td>
-				<td style="width: 80px;"><button type="button" class="btn btn-outline-dark" onclick="location.href='/join'">회원가입</button></td>
+				<td style="width: 80px;"><button type="button" class="btn btn-outline-dark" onclick="location.href='<%=contextPath%>/join'">회원가입</button></td>
 				<td></td>
 			</tr> 
 		</table>

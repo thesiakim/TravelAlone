@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
-  <%@ include file="../fragments/header.jsp"%>
+<%@ include file="../fragments/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="/css/list.css" rel="stylesheet" type="text/css">
-	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="<%=contextPath%>/css/list.css" rel="stylesheet" type="text/css">
+	<link href="<%=contextPath%>/css/main.css" rel="stylesheet" type="text/css">
 </head>
 
 <style>
@@ -16,11 +15,6 @@
 </style>
 
 <body>
-	<div id="img_benner" >	
-		<img src="../img/main-picture.png" alt="배너">
-	</div>
-
-
 	
 	<!-- 본문 -->
  	<form >
@@ -54,7 +48,7 @@
 					</sec:authorize> -->
 					<!-- 눌렀을때 비밀번호창나오게하기 -->
 					
-					<a href="http://localhost:4040/inquireDetail?gid=${inquire.g_writing_id }" onclick="detail('${inquire.g_writing_id}', '${inquire.g_passwd}')">${inquire.g_title}</a>
+					<a href="<%=contextPath%>/inquireDetail?gid=${inquire.g_writing_id }" onclick="detail('${inquire.g_writing_id}', '${inquire.g_passwd}')">${inquire.g_title}</a>
 					</td>
 					<td style=" padding-left:50px;">${inquire.m_nickname}</td>
 					<td style=" padding-left:50px;"> 
@@ -79,17 +73,17 @@
 	</div>
 	
 	<c:if test="${page.startPage > page.pageBlock }">
-		<a href="inquire?currentPage=${page.startPage-page.pageBlock}">[이전]</a>
+		<a href="<%=contextPath%>/inquire?currentPage=${page.startPage-page.pageBlock}">[이전]</a>
 	</c:if>
 	<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 		<a
-			href="inquire?currentPage=${i}">[${i}]</a>
+			href="<%=contextPath%>/inquire?currentPage=${i}">[${i}]</a>
 	</c:forEach>
 	<c:if test="${page.endPage < page.totalPage }">
 		<a
-			href="inquire?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
+			href="<%=contextPath%>/inquire?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
 	</c:if>
 	
 </body>
-		<c:import url="../fragments/footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"/>
 </html>

@@ -205,15 +205,6 @@
 		]]>
 	</select>
 
-<!--	<insert id="mypageInterestInsert" parameterType="MypageInterestUpdateRequestDto">-->
-<!--		Insert ALL-->
-<!--		INTO interest (INTEREST_ID, MEMBER_ID, I_COMMON_INTEREST, CREATE_DATE, MODIFIED_DATE)-->
-<!--		VALUES-->
-<!--		<foreach collection="savedTagIds" item="tagId" separator=",">-->
-<!--			 (INTEREST_ID_SEQ.NEXTVAL, #{id}, #{tagId}, SYSDATE, SYSDATE)-->
-<!--		</foreach>-->
-<!--	</insert>-->
-
 	<update id="mypageInterestInsert" parameterType="MypageInterestUpdateRequestDto">
 		INSERT INTO interest (INTEREST_ID, MEMBER_ID, I_COMMON_INTEREST, CREATE_DATE, MODIFIED_DATE)
 		select INTEREST_ID_SEQ.NEXTVAL AS interestId, A.*

@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/mypage.css">
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet" href="css/list.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/mypage.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/login.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/list.css">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script defer src="/js/userPage.js"></script>
+	<script defer src="<%=contextPath%>/js/userPage.js"></script>
 </head>
 <body>
 	<div class="profile-block">

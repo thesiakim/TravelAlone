@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="../fragments/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>회원 목록</title>
-	<link rel="stylesheet" href="css/mypage.css">
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
-	
+	<link rel="stylesheet" href="<%=contextPath%>/css/mypage.css">
 	<style>
 		.search-container{
 			display: flex;
@@ -57,6 +55,7 @@
 					role : $("#selectRole"+id).val()
 				}
 
+
 				$.ajax({
 					type: "PATCH",
 					url: "/api/v1/admin/role",
@@ -66,6 +65,7 @@
 				})
 						.done(function (responseText) {
 							alert("회원 ID :"+responseText+" 수정되었습니다.");
+							window.location.reload();
 						})
 						.fail(function (error) {
 							alert(JSON.stringify(error));
@@ -90,7 +90,7 @@
 <body>
 <h1 class="title">회원 목록</h1>
 <div class="search-container">
-	<form action="/admin" method="GET">
+	<form action="<%=contextPath%>/admin" method="GET">
 		<input type="text" name="search" placeholder="회원 이메일로 검색하세요" class="search-input" value="${param.search}">
 		<button type="submit" class="search-button">검색</button>
 	</form>
@@ -186,5 +186,5 @@
 	</c:choose>
 </div>
 </body>
-   	<c:import url="../fragments/footer.jsp"/>
+<c:import url="../fragments/footer.jsp"/>
 </html>
