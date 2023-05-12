@@ -52,13 +52,13 @@ public class BoardController {
 	// 전체 게시판 이동
 	@RequestMapping(value = "listAllBoard")
 	public String listBoardAll(@LoginUser MemberJpa memberJpa, @ModelAttribute Board board, String currentPage, Model model) {
-		log.info("BoardController listBoardAll 시작");
-		log.info("BoardController listBoardAll currentPage는 "+ currentPage);
-		log.info("BoardController listBoardAll orderList는" + board.getOrderList());
+//		log.info("BoardController listBoardAll 시작");
+//		log.info("BoardController listBoardAll currentPage는 "+ currentPage);
+//		log.info("BoardController listBoardAll orderList는" + board.getOrderList());
 	  
 		// Board table 전체 count
 		int boardAllCnt = bs.boardAllCnt();
-		log.info("BoardController listBoardAll boardAllCnt는 "+ boardAllCnt);
+//		log.info("BoardController listBoardAll boardAllCnt는 "+ boardAllCnt);
 		  
 		// Paging 작업
 		Paging page = new Paging(boardAllCnt, currentPage);      
@@ -69,7 +69,7 @@ public class BoardController {
 	  
 		List<Board> listAllBoard = bs.listAllBoard(board);
 		
-		log.info("BoardController listBoardAll listAllBoard.size()는 "+ listAllBoard.size());
+//		log.info("BoardController listBoardAll listAllBoard.size()는 "+ listAllBoard.size());
 		
 		model.addAttribute("board" ,board);
 		model.addAttribute("boardAllCnt" ,boardAllCnt);
@@ -87,11 +87,11 @@ public class BoardController {
 	@RequestMapping(value = "listBoard")
 	public String boardList(@LoginUser MemberJpa memberJpa, @ModelAttribute Board board, String currentPage, Model model) {
 		
-		log.info("BoardController boardList 시작");
-		log.info("BoardController boardList cuurentPage는 "+ currentPage);
+//		log.info("BoardController boardList 시작");
+//		log.info("BoardController boardList cuurentPage는 "+ currentPage);
 		
 		int boardCnt = bs.boardCnt(board);
-		log.info("BoardController boardList boardCnt는 "+ boardCnt);
+//		log.info("BoardController boardList boardCnt는 "+ boardCnt);
 		
 		// Paging 작업
 		Paging page = new Paging(boardCnt, currentPage);
@@ -102,7 +102,7 @@ public class BoardController {
 		
 		List<Board> listBoard = bs.listBoard(board);
 		
-		log.info("BoardController boardList listBoard.size()는 "+ listBoard.size());
+//		log.info("BoardController boardList listBoard.size()는 "+ listBoard.size());
 		
 		model.addAttribute("board" ,board);
 		model.addAttribute("boardCnt" ,boardCnt);
@@ -120,9 +120,9 @@ public class BoardController {
 	// 게시판 게시물 페이지 이동
 	@RequestMapping(value = "detailBoard")
 	public String detailBoard(@LoginUser MemberJpa memberJpa, @ModelAttribute Board board, Model model, HttpServletRequest request, HttpServletResponse response) {
-		log.info("BoardController detailBoard 시작");
-		log.info("BoardController detailBoard board_id는 "+ board.getBoard_id());
-		log.info("BoardController detailBoard b_common_board는 "+ board.getB_common_board());
+//		log.info("BoardController detailBoard 시작");
+//		log.info("BoardController detailBoard board_id는 "+ board.getBoard_id());
+//		log.info("BoardController detailBoard b_common_board는 "+ board.getB_common_board());
 		String result = "";
 		int viewCount = 0;
 		
@@ -155,13 +155,13 @@ public class BoardController {
 		
 		List<Board> listBoardS = bs.detailBoard(board.getBoard_id());
 		
-		log.info("BoardController detailBoard listBoardC.size()는 "+ listBoardS.size());
+//		log.info("BoardController detailBoard listBoardC.size()는 "+ listBoardS.size());
 		
 		model.addAttribute("viewCount", viewCount);
 		model.addAttribute("listBoardS", listBoardS);
 		
 		if (memberJpa != null) {
-			log.info("BoardController detailBoard memberJpa.getId()는 "+ memberJpa.getId());
+//			log.info("BoardController detailBoard memberJpa.getId()는 "+ memberJpa.getId());
 			model.addAttribute("user_id", memberJpa.getId());
 			result ="ro/detailBoardForm";
 		}
@@ -173,12 +173,12 @@ public class BoardController {
 	// 게시물 작성 페이지 이동
 	@RequestMapping(value = "writeBoardForm")
 	public String writeFormBoard(@LoginUser MemberJpa memberJpa, Board board, Model model) {
-		log.info("BoardController writeFormBoard 시작");
+//		log.info("BoardController writeFormBoard 시작");
 		
 		String resultForm = "";
 		
 		if(memberJpa != null) {
-			log.info("BoardController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
+//			log.info("BoardController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
 			model.addAttribute("user_id", memberJpa.getId());
 			model.addAttribute("b_common_board", board.getB_common_board());
 			resultForm = "ro/writeBoardForm";
@@ -196,7 +196,7 @@ public class BoardController {
 							 @RequestPart(value = "file", required = false) List<MultipartFile> files,
 							 @LoginUser MemberJpa memberJpa,
 							 Model model) throws Exception {
-		log.info("BoardController writeBoard start");
+//		log.info("BoardController writeBoard start");
 		
 		if (memberJpa == null){
 			throw new Exception("로그인 해주세요!");
@@ -204,16 +204,16 @@ public class BoardController {
 		requestDto.addMemberId(memberJpa.getId());
 		
 		int insertResult = bs.insertBoard(requestDto,files);
-		log.info("BoardController writeBoard insertResult는 "+ insertResult);
+//		log.info("BoardController writeBoard insertResult는 "+ insertResult);
 		return ""+insertResult;
 	}
 	   
 	// 게시물 댓글 작성
 	@PostMapping(value = "writeBoardRe")
 	public String writeReBoard(@LoginUser MemberJpa memberJpa, @ModelAttribute Board board, Model model) {
-		log.info("BoardController writeReBoard 시작");
-		log.info("BoardController writeReBoard board_id는 "+ board.getBoard_id());
-		log.info("BoardController writeReBoard b_common_board()는 "+ board.getB_common_board());
+//		log.info("BoardController writeReBoard 시작");
+//		log.info("BoardController writeReBoard board_id는 "+ board.getBoard_id());
+//		log.info("BoardController writeReBoard b_common_board()는 "+ board.getB_common_board());
 		
 		model.addAttribute("board_id", board.getBoard_id());
 		model.addAttribute("b_common_board", board.getB_common_board());
@@ -222,7 +222,7 @@ public class BoardController {
 		
 		String resultForm = "";
 		
-		log.info("BoardController writeReBoard insertResult는 "+ insertResult);
+//		log.info("BoardController writeReBoard insertResult는 "+ insertResult);
 		
 		if(insertResult > 0) {
 			resultForm = "redirect:detailBoard?board_id="+ board.getBoard_id() +"&b_common_board="+ board.getB_common_board();
@@ -237,10 +237,10 @@ public class BoardController {
 	// 게시물 대댓글 작성
 	@RequestMapping(value = "WriteBoardReLevel")
 	public String WriteBoardReLevel(@ModelAttribute Board board, Model model) {
-		log.info("BoardController WriteBoardReLevel start");
+//		log.info("BoardController WriteBoardReLevel start");
 		int insertReLevel = bs.insertReLevel(board);
 		
-		log.info("BoardController WriteBoardReLevel insertReLevel -> " + insertReLevel);
+//		log.info("BoardController WriteBoardReLevel insertReLevel -> " + insertReLevel);
 		model.addAttribute("insertReLevel", insertReLevel);
 		model.addAttribute("board_id", board.getBoard_id());
 		model.addAttribute("b_common_board", board.getB_common_board());
@@ -250,11 +250,11 @@ public class BoardController {
 	// 게시물 수정 페이지 이동
 	@RequestMapping(value = "updateBoardForm", method = RequestMethod.POST)
 	public String updateFormBoard(Board board, Model model) {
-		log.info("BoardController updateBoardForm 시작");
+//		log.info("BoardController updateBoardForm 시작");
 	  
 		// 게시물에 있는 이미지 list 갖고 오기
 		List<BodImg> listBoardImgs = bs.listImgBoard(board.getBoard_id());
-		log.info("BoardController updateBoardForm listBoardImgs.size()->"+listBoardImgs.size());
+//		log.info("BoardController updateBoardForm listBoardImgs.size()->"+listBoardImgs.size());
 	  
 		model.addAttribute("board", board);
 		model.addAttribute("listBoardImgs", listBoardImgs);
@@ -271,10 +271,10 @@ public class BoardController {
 							  @RequestPart(value = "imgFile", required = false) List<MultipartFile> imgFiles,
 							  Model model
 	                    	 ) {
-		log.info("BoardController updateBoard 시작");
+//		log.info("BoardController updateBoard 시작");
 	  
 		int updateResult = bs.updateBoard(board, imgFiles);
-		log.info("BoardController updateBoard updateResult"+ updateResult);
+//		log.info("BoardController updateBoard updateResult"+ updateResult);
 	  
 		return ""+ updateResult;
 	}
@@ -285,12 +285,12 @@ public class BoardController {
 	@PostMapping(value = "deleteBoard")
 	public String deleteBoard(long board_id, Model model) {
 	
-		log.info("BoardController deleteBoard 시작");
-		log.info("BoardController deleteBoard board_id는 "+ board_id);
+//		log.info("BoardController deleteBoard 시작");
+//		log.info("BoardController deleteBoard board_id는 "+ board_id);
 	      
 		int delResult = bs.deleteBoard(board_id);
 		String delResultStr = Integer.toString(delResult);
-		log.info("BoardController deleteBoard delResultStr는 "+ delResultStr);
+//		log.info("BoardController deleteBoard delResultStr는 "+ delResultStr);
 		      
 		return delResultStr;
 	}
@@ -301,11 +301,11 @@ public class BoardController {
 	public String deleteReBoard(Board board, Model model) {   
 	
 		String successStatus = "1";
-		log.info("BoardController deleteReBoard 시작");
-		log.info("BoardController deleteReBoard board.b_re_step는 "+ board.getB_re_step());
+//		log.info("BoardController deleteReBoard 시작");
+//		log.info("BoardController deleteReBoard board.b_re_step는 "+ board.getB_re_step());
 	      
 		bs.deleteReBoard(board);
-		log.info("deleteReBoard successStatus ->"+successStatus);
+//		log.info("deleteReBoard successStatus ->"+successStatus);
 		return successStatus;
 	}
 	
@@ -313,10 +313,10 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping(value = "UpdateBoardRe")
 	public String updateReBoard(Board board, Model model) {
-		log.info("BoardController updateReBoard 시작");
+//		log.info("BoardController updateReBoard 시작");
 	      
 		int updateCount = bs.updateReBoard(board);
-		log.info("BoardController updateReBoard updateCount는 "+ updateCount);
+//		log.info("BoardController updateReBoard updateCount는 "+ updateCount);
 		String updateResult = Integer.toString(updateCount);
 	      
 		return updateResult;
@@ -326,10 +326,10 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("/deleteBoardImg")
 	public String deleteImgBoard(BodImg bodImg) {
-		log.info("BoardController deleteImgBoard 시작");
+//		log.info("BoardController deleteImgBoard 시작");
 	      
 		int deleteCount = bs.deleteImgBoard(bodImg);
-		log.info("BoardController deleteImgBoard deleteResult는 "+ deleteCount);
+//		log.info("BoardController deleteImgBoard deleteResult는 "+ deleteCount);
 	      
 		String deleteResult = Integer.toString(deleteCount);
 	      
@@ -340,7 +340,7 @@ public class BoardController {
 	@RequestMapping(value = "/boardlike")
 	public String like(Board board, Model model, HttpServletRequest request, HttpServletResponse response) {
 		
-		log.info("BoardController boardlike start");
+//		log.info("BoardController boardlike start");
 		int updateCount = 0;
 		int updateMinus = 0;
 		String cookieKey = "boardlike" + board.getBoard_id();
@@ -371,7 +371,7 @@ public class BoardController {
 		if (!boardLikeChk) {
 			// 추천 1증가
 			updateCount = bs.updateCount(board);
-			log.info("BoardController like result ->" + updateCount);
+//			log.info("BoardController like result ->" + updateCount);
 			model.addAttribute("updateCount", updateCount);
 			
 			// 쿠키에 해당 게시물이 추천된 것을 기록합니다.
@@ -382,11 +382,11 @@ public class BoardController {
 		} else {
 			// 추천 1감소
 			updateMinus = bs.updateMinus(board);
-			log.info("BoardController like updateMinus ->" + updateMinus);
+//			log.info("BoardController like updateMinus ->" + updateMinus);
 			model.addAttribute("updateMinus", updateMinus);
 		}
 	       
-		log.info("BoardController like board_id ->" + board.getBoard_id());
+//		log.info("BoardController like board_id ->" + board.getBoard_id());
 		model.addAttribute("board_id", board.getBoard_id());
 		model.addAttribute("b_common_board", board.getB_common_board());
 		
@@ -398,7 +398,7 @@ public class BoardController {
 	@RequestMapping(value = "reportMember")
 	public String reportMember(Warning warning,Board board,Model model, HttpServletRequest request, HttpServletResponse response) {
 		
-		log.info("BoardController reportMember start");
+//		log.info("BoardController reportMember start");
 		String resultForm = "";
 		int reportMemberCnt = 0;
 	      
@@ -430,9 +430,9 @@ public class BoardController {
 			response.addCookie(cookie);
 		}
 		
-		log.info("BoardController reportMember reportMemberCnt -> " + reportMemberCnt);
-		log.info("BoardController reportMember member_id -> " + warning.getMember_id());   // 회원 ID
-		log.info("BoardController reportMember u_nickname -> " + warning.getU_nickname());   // 신고자 ID
+//		log.info("BoardController reportMember reportMemberCnt -> " + reportMemberCnt);
+//		log.info("BoardController reportMember member_id -> " + warning.getMember_id());   // 회원 ID
+//		log.info("BoardController reportMember u_nickname -> " + warning.getU_nickname());   // 신고자 ID
 		model.addAttribute("reportMemberCnt", reportMemberCnt);
 		model.addAttribute("board_id", board.getBoard_id());
 		model.addAttribute("b_common_board", board.getB_common_board());
@@ -445,13 +445,13 @@ public class BoardController {
 	// 마이페이지 커뮤니티
 	@RequestMapping(value = "myPageCommunityList") 
 	public String myPageCommunityList(@LoginUser MemberJpa memberJpa, Board board, String currentPage, Model model) {
-		log.info("BoardController myPageCommunityList start");
-		log.info("BoardController myPageCommunityList currentPage는 "+ currentPage);
-		log.info("BoardController myPageCommunityList orderList는" + board.getOrderList());
-		log.info("memberJpa.getId() -> " + memberJpa.getId());
+//		log.info("BoardController myPageCommunityList start");
+//		log.info("BoardController myPageCommunityList currentPage는 "+ currentPage);
+//		log.info("BoardController myPageCommunityList orderList는" + board.getOrderList());
+//		log.info("memberJpa.getId() -> " + memberJpa.getId());
 		// Board table 전체 count
 		int myPageCommunityListCnt = bs.myPageCommunityListCnt(memberJpa.getId());
-		log.info("BoardController myPageCommunityList boardAllCnt는 "+ myPageCommunityListCnt);
+//		log.info("BoardController myPageCommunityList boardAllCnt는 "+ myPageCommunityListCnt);
 		
 		// Paging 작업
 		Paging page = new Paging(myPageCommunityListCnt, currentPage);    
@@ -463,7 +463,7 @@ public class BoardController {
 		
 		List<Board> myPageCommunityList = bs.myPageCommunityList(board);
 		
-		log.info("BoardController myPageCommunityList.size()는 "+ myPageCommunityList.size());
+//		log.info("BoardController myPageCommunityList.size()는 "+ myPageCommunityList.size());
 		
 		model.addAttribute("myPageCommunityListCnt" ,myPageCommunityListCnt);
 		model.addAttribute("myPageCommunityList", myPageCommunityList);
@@ -477,8 +477,8 @@ public class BoardController {
 	// 닉네임 클릭 시 마이페이지 보기
    @GetMapping(value = "/userpage")
    public String userPage(@RequestParam(value = "id") long member_id, Model model) {
-	   log.info("BoardController userpage start");
-	   log.info("BoardController userpage member_id -> " + member_id);
+//	   log.info("BoardController userpage start");
+//	   log.info("BoardController userpage member_id -> " + member_id);
 	   UserPageResponseDto userPageResponseDto = mypageService.userPage(member_id);
 	   
        model.addAttribute("response", userPageResponseDto);
@@ -489,9 +489,9 @@ public class BoardController {
    // 마이페이지 여행지 리뷰 페이지
    @RequestMapping(value = "/reviewPageTra")
    public String reviewPageTra(@LoginUser MemberJpa memberJpa, Tra_Rev traRev , String currentPage, Model model) {
-	   log.info("BoardController reviewPageTra start");
-	   log.info("BoardController reviewPageTra currentPage는 "+ currentPage);
-	   log.info("memberJpa.getId() -> " + memberJpa.getId());
+//	   log.info("BoardController reviewPageTra start");
+//	   log.info("BoardController reviewPageTra currentPage는 "+ currentPage);
+//	   log.info("memberJpa.getId() -> " + memberJpa.getId());
 	   int totalReviewPageTra = bs.totalReviewPageTra(memberJpa.getId());		
 	   //페이징
 	   Paging page = new Paging(totalReviewPageTra, currentPage);
@@ -500,7 +500,7 @@ public class BoardController {
 	   traRev.setMember_id(memberJpa.getId());
 	   //숙소리스트
 	   List<Travel> listReviewPageTra = bs.listReviewPageTra(traRev);
-	   log.info("BoardController listReviewPageTra.size()=>"+ listReviewPageTra.size());
+//	   log.info("BoardController listReviewPageTra.size()=>"+ listReviewPageTra.size());
 	   
 	   model.addAttribute("totalReviewPageTra", totalReviewPageTra);
 	   model.addAttribute("listReviewPageTra", listReviewPageTra);
@@ -511,9 +511,9 @@ public class BoardController {
    // 마이페이지 숙소 리뷰 페이지
    @RequestMapping(value = "/reviewPageHou")
    public String reviewPageHou(@LoginUser MemberJpa memberJpa, Hou_Rev houRev , String currentPage, Model model ) {
-	   log.info("BoardController reviewPageHou start");
-	   log.info("BoardController reviewPageHou currentPage는 "+ currentPage);
-	   log.info("memberJpa.getId() -> " + memberJpa.getId());
+//	   log.info("BoardController reviewPageHou start");
+//	   log.info("BoardController reviewPageHou currentPage는 "+ currentPage);
+//	   log.info("memberJpa.getId() -> " + memberJpa.getId());
 	   int totalReviewPageHou = bs.totalReviewPageHou(memberJpa.getId());		
 	   //페이징
 	   Paging page = new Paging(totalReviewPageHou, currentPage);
@@ -522,7 +522,7 @@ public class BoardController {
 	   houRev.setMember_id(memberJpa.getId());
 	   //숙소리스트
 	   List<House> listReviewPageHou = bs.listReviewPageHou(houRev);
-	   log.info("BoardController llistReviewPageHou.size()=>"+ listReviewPageHou.size());
+//	   log.info("BoardController llistReviewPageHou.size()=>"+ listReviewPageHou.size());
 	   
 	   model.addAttribute("totalReviewPageHou", totalReviewPageHou);
 	   model.addAttribute("listReviewPageHou", listReviewPageHou);
@@ -533,9 +533,9 @@ public class BoardController {
    // 마이페이지 맛집 리뷰 페이지
    @RequestMapping(value = "/reviewPageRes")
    public String reviewPageRes(@LoginUser MemberJpa memberJpa, Res_Rev resRev , String currentPage, Model model ) {
-	   log.info("BoardController reviewPageRes start");
-	   log.info("BoardController reviewPageRes currentPage는 "+ currentPage);
-	   log.info("memberJpa.getId() -> " + memberJpa.getId());
+//	   log.info("BoardController reviewPageRes start");
+//	   log.info("BoardController reviewPageRes currentPage는 "+ currentPage);
+//	   log.info("memberJpa.getId() -> " + memberJpa.getId());
 	   int totalReviewPageRes = bs.totalReviewPageRes(memberJpa.getId());		
 	   //페이징
 	   Paging page = new Paging(totalReviewPageRes, currentPage);
@@ -544,7 +544,7 @@ public class BoardController {
 	   resRev.setMember_id(memberJpa.getId());
 	   //숙소리스트
 	   List<Res> listReviewPageRes = bs.listReviewPageRes(resRev);
-	   log.info("BoardController listReviewPageRes.size()=>"+ listReviewPageRes.size());
+//	   log.info("BoardController listReviewPageRes.size()=>"+ listReviewPageRes.size());
 	   
 	   model.addAttribute("totalReviewPageRes", totalReviewPageRes);
 	   model.addAttribute("listReviewPageRes", listReviewPageRes);
@@ -555,7 +555,7 @@ public class BoardController {
    	// 태그 업데이트
 	@RequestMapping(value = "/mypage/tagUpdate")
 	public String mypageTagUpdate(@LoginUser MemberJpa memberJpa, Interest interest, Model model) {
-		log.info("BoardController mypageTagUpdate start");
+//		log.info("BoardController mypageTagUpdate start");
         model.addAttribute("name", memberJpa.getName());
         interest.setMember_id(memberJpa.getId());
         model.addAttribute("nickName", memberJpa.getNickname());
@@ -567,24 +567,18 @@ public class BoardController {
 	// 유저 페이지 점수 업데이트
 	@RequestMapping(value = "/userScoreUpdate")
 	public String userScoreUpdate(long member_id, @LoginUser MemberJpa memberJpa, Score score, Model model, HttpServletRequest request, HttpServletResponse response) {
-		log.info("BoardController userScoreUpdate start");
-		log.info("BoardController userScoreUpdate member_id -> " + member_id);
-		log.info("BoardController userScoreUpdate score.getS_common_spec() -> " + score.getS_common_spec());
+//		log.info("BoardController userScoreUpdate start");
+//		log.info("BoardController userScoreUpdate member_id -> " + member_id);
+//		log.info("BoardController userScoreUpdate memberJpa id -> " + memberJpa.getId());
+//		log.info("BoardController userScoreUpdate score.getS_common_spec() -> " + score.getS_common_spec());
 		int userScoreUpdate = 0;
-		
-		log.info("BoardController score s_common_spec -> "+ score.getS_common_spec());
-		log.info("BoardController memberJpa id -> " + memberJpa.getId());
-		
-		log.info("BoardController 여긴 null이냐?1");
-		
-		
-		String cookieKey = "userScoreUpdate" + member_id + score.getS_common_spec() + memberJpa.getId();
-		
-		log.info("BoardController 여긴 null이냐?2");
-		
 		String result = "redirect:/userpage?id="+member_id;
 		
-		log.info("BoardController 여긴 null이냐?3");
+		if(memberJpa.getId() == member_id) {
+			return result;
+		}
+		
+		String cookieKey = "userScoreUpdate" + member_id + score.getS_common_spec() + memberJpa.getId();
 		
 		Cookie[] cookies = request.getCookies();
 		boolean userScoreUpdateChk = false;
@@ -606,7 +600,7 @@ public class BoardController {
 			score.setMember_id(member_id);
 			userScoreUpdate = bs.userScoreUpdate(score);
 			
-			log.info("BoardController userScoreUpdate result ->" + userScoreUpdate);
+//			log.info("BoardController userScoreUpdate result ->" + userScoreUpdate);
 			model.addAttribute("userScoreUpdate", userScoreUpdate);
 			Cookie cookie = new Cookie(cookieKey, "true");
 			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
