@@ -15,7 +15,8 @@
 	  <div class="footerInfo">
 		<p>서울시 이대 중앙학원 501호</p><br>
 		<p>모든 저작권은 중앙정보처리 회사에 있습니다</p><br>
-		<p>010-1234-5678</p>
+		<p>010-1234-5678</p><br>
+		<p>Special Thanks To LJK</p><br>
 	  </div>
 	</div>
   </form>

@@ -73,7 +73,7 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 
 
 <body>
-<div id="img_benner">
+	<div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 
