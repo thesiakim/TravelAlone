@@ -88,8 +88,8 @@
    </c:if>
    
    <c:choose>
-      <c:when test="${isfavTra eq '0'}">
-         <input type="button" value="즐겨찾기" onclick="insert_fav()" style="width: 75px;">
+      <c:when test="${isfavRes eq '0'}">
+         <input type="button" value="즐겨찾기 추가" onclick="insert_fav()" style="width: 110px;">
            </c:when>
            <c:when test="${isfavTra eq '1'}">
          <input type="button" value="즐겨찾기 해제" onclick="delete_fav()" style="width: 110px;">
@@ -201,13 +201,17 @@
     <label for="score_3" onclick="changeRating(3)" onmouseover="changeRating(3)"><c:if test="${res_Rev.r_score == 3}">checked</c:if>★</label>
     <label for="score_4" onclick="changeRating(4)" onmouseover="changeRating(4)"><c:if test="${res_Rev.r_score == 4}">checked</c:if>★</label>
     <label for="score_5" onclick="changeRating(5)" onmouseover="changeRating(5)"><c:if test="${res_Rev.r_score == 5}">checked</c:if>★</label>
-    <input type="hidden" name="r_score" id="score_input" value="${res_Rev.r_score == null ? 0 : res_Rev.r_score}">
+    <input type="hidden" name="r_score" id="score_input" value="0">
   </div>
-
-    <br>
-         <input type="submit" value="입력"> &nbsp;&nbsp; 
-      </div>
-   </form>
+</div>
+    <br><br>
+    <div style="text-align:center;">
+      <input type="submit" value="확인">
+      <a href="tra">목록 보기</a><br><br>
+      <hr>
+    </div>
+  </div>
+</form>
    <script>
 function clearInput(input) {
   input.value = "";

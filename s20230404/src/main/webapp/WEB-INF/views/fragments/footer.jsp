@@ -45,7 +45,7 @@
 	  
 		서울특별시 마포구 신촌로 176 501호<br>
 		02-123-4567<br>
-		Copyright ⓒ 2023 Nahonyeo All Rights Reserved.
+		Copyright ⓒ 2023 TravelAlone All Rights Reserved.
 
 		</div>
 		</div>
