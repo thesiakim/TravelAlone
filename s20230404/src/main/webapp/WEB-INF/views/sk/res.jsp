@@ -9,14 +9,13 @@
 <title>Insert title here</title>
 <link href="/css/list.css" rel="stylesheet" type="text/css">
 
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+
  <style>
 .swiper-container {
 	width:1600px;
 	height:530px;
 	padding:30px 0;
-/* 	border:5px solid silver;
-	border-radius:7px;
-	box-shadow:0 0 20px #ccc inset; */
 }
 .swiper-slide {
 	text-align:center;
@@ -54,13 +53,13 @@ th, td {
 
 <body>
 <div id="img_benner">
-		<img src="img/restaurant-picture.png" alt="배너">
+		<img src="img/main-picture.png" alt="배너">
 	</div>	
 	
 <h1><a href="res"><img src="img/Res.png" alt="맛집" width=250px height=250px></a></h1>
 
 <!-- 맛집종류 -->
-<div style="display: inline-block; width: 700px; text-align: center;">
+<div style="display: inline-block; width: 900px; text-align: center;">
 <c:forEach items="${boardList}" var="list" varStatus="status">
   <!-- 컨트롤러로 보내는거 -->
   <a href="restaurantCodeFilter?code=${list.code}">
@@ -162,7 +161,9 @@ th, td {
 <!-- 맛집리스트 테이블 -->
 
 <h3>국내 전체 맛집 </h3><br>
-       <a href="resWriteForm"><button type="submit" style="margin-left: 664px; margin-bottom: 10px">글 쓰기</button></a>
+         <c:if test="${user_role == 'rol200' }">
+       <a href="resWriteForm"><button type="submit" style="margin-left: 610px; margin-bottom: 10px">글 쓰기</button></a>
+	</c:if>
   <div>
      <table style="margin:auto;">
         <tr>
