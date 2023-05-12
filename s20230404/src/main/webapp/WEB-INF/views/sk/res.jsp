@@ -57,7 +57,7 @@ th, td {
 		<img src="img/main-picture.png" alt="배너">
 	</div>	
 	
-<h1><a href="res"><img src="../logo/Res.png" alt="맛집" width=250px height=250px></a></h1>
+<h1><a href="res"><img src="img/Res.png" alt="맛집" width=250px height=250px></a></h1>
 
 <!-- 맛집종류 -->
 <div style="display: inline-block; width: 900px; text-align: center;">

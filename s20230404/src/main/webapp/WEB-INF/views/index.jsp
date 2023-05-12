@@ -228,26 +228,12 @@
 		    },
 		  });
 		</script>
-		<hr>
-		<form>
-		  <div id="container-left clearfix">
-			<div class="footerForm">
-			  <c:if test="${user.role == 'rol200' }">
-			 <a href="admin">관리자페이지</a>
-			    </c:if>
-			  <a href="notice">고객센터</a>
-			</div>
-		  <div class="footerInfo">
-			<p>서울시 이대 중앙학원 501호</p><br>
-			<p>모든 저작권은 중앙정보처리 회사에 있습니다</p><br>
-			<p>010-1234-5678</p>
-		  </div>
-		</div>
-	  </form>
+		<hr>		
 	</div>
 		</div>
 	  </div>
 	</div>
   </div>
 </body>
+   	<c:import url="fragments/footer.jsp"/>
 </html>

@@ -577,5 +577,5 @@
 
      
    <hr>
-   <c:import url="../fragments/footer.jsp"/>
-</body
+   	<c:import url="../fragments/footer.jsp"/>
+</body>
