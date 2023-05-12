@@ -246,7 +246,7 @@
       <div class="swiper-slide">            
         <figure>
           <a href="https://www.chf.or.kr/chf">
-            <img src="img/fes1.jpg" alt="이미지 1" width=350px height=400px>
+            <img src="img/fes1.jpg" alt="이미지 1" width=310px height=400px>
           </a>
           <br>[서울] 창경궁 야연                  
           <br>5/2(화)~5/19(금)
@@ -255,7 +255,7 @@
       <div class="swiper-slide">
         <figure>
           <a href="https://www.xn--vk1b9fv8tlkdzuqf4h.com/">
-            <img src="img/fes2.jpg" alt="이미지 2" width=350px height=400px>
+            <img src="img/fes2.jpg" alt="이미지 2" width=310px height=400px>
           </a>   
           <br>[대전] 대청호 대덕물빛축제
           <br>4/7(금)~5/7(일)
@@ -264,7 +264,7 @@
       <div class="swiper-slide">
         <figure>
           <a href="https://www.herbisland.co.kr">
-            <img src="img/fes3.jpg" alt="이미지 3" width=350px height=400px>
+            <img src="img/fes3.jpg" alt="이미지 3" width=310px height=400px>
           </a>   
           <br>[경기 포천] 허브아일랜드 라벤더
           <br>4/22(토)~7/1(토)
@@ -273,7 +273,7 @@
       <div class="swiper-slide">
         <figure>
           <a href="http://bba48.or.kr">
-            <img src="img/fes4.jpg" alt="이미지 4" width=350px height=400px>
+            <img src="img/fes4.jpg" alt="이미지 4" width=310px height=400px>
           </a>   
           <br>[부산] 2567 부산연등축제
           <br>4/28(금)~5/14(일)
@@ -282,7 +282,7 @@
       <div class="swiper-slide">
         <figure>
           <a href="http://hwangmaefestival.com/">
-            <img src="img/fes5.png" alt="이미지 5" width=1100px height=400px>
+            <img src="img/fes5.png" alt="이미지 5" width=310px height=400px>
           </a>
           <br>[경남 합천] 황매산 철쭉제
           <br>4/29(토)~5/14(일)
@@ -291,7 +291,7 @@
       <div class="swiper-slide">
         <figure>
           <a href="https://www.hpftf.or.kr/">
-            <img src="img/fes6.png" alt="이미지 6" width=1100px height=400px>
+            <img src="img/fes6.png" alt="이미지 6" width=310px height=400px>
           </a>   
           <br>[전남 함평] 함평 나비 대축제
           <br>4/28(금)~5/7(일)
