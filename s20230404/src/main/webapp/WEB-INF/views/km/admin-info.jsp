@@ -6,7 +6,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- <link href="/css/login.css" rel="stylesheet" type="text/css"> -->
+
 <STYLE>
+
+
+	button {
+		width: 100px;         border-radius: 7px;
+		height: 40px;         box-sizing: border-box;
+		font-size: 15px;        font-weight:bolder;
+		color:white;
+		border:  #205E61;       background-color: #205E61;
+	}
+	button:hover {
+		color: #205E61;
+		background-color:  white;
+		transition: ease 0.5s;
+	}
+
+
+
 	.profile-block {
 		display: flex;
 		flex-direction: column;
@@ -31,6 +51,11 @@
 	}
 	.button-block {
 		text-align: center;
+		 color: #205E61;
+	  font-weight: bold;
+	  box-sizing: border-box;
+	  background-color: #F8F8F8;
+	  
 	}
 </STYLE>
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
@@ -139,8 +164,12 @@
 		<p><strong>생성일:</strong> ${member.modifiedDate}</p>
 
 		<div class="button-block">
+			<a>
 			<button id="saveButton" onclick="saveButton(${member.id})">수정</button>
+			</a>
+			<a>
 			<button id="cancelButton" onclick="window.close()">취소</button>
+			</a>
 		</div>
 	</div>
 </div>
