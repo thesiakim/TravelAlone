@@ -396,5 +396,6 @@
 		<!-- (score_id, member_id, s_common_spec, create_Date, modified_date)  -->
 		VALUES (SCORE_ID_SEQ.NEXTVAL, #{member_id}, #{s_common_spec}, sysdate, sysdate)
 	</insert>
-   
+   	
+   	
 </mapper>

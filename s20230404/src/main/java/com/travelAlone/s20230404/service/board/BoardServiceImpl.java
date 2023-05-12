@@ -366,9 +366,9 @@ public class BoardServiceImpl implements BoardService {
 	// 유저 페이지 점수 업데이트
 	@Override
 	public int userScoreUpdate(Score score) {
-		log.info("jhServiceImpl userScoreUpdate start");
+		log.info("BoardServiceImpl userScoreUpdate start");
 		int userScoreUpdate = bd.userScoreUpdate(score);
-		log.info("jhServiceImpl userScoreUpdate -> " + userScoreUpdate);
+		log.info("BoardServiceImpl userScoreUpdate -> " + userScoreUpdate);
 		return userScoreUpdate;
 	}
 	

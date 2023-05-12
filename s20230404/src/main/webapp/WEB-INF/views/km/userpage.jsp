@@ -28,19 +28,21 @@
 		</div>
 	</div>
 	
-	<form action="userScoreUpdate">
-		<div class="review-block">
-		<c:forEach var="scoreCount" items="${response.scoreCounts}">
-				<div class="container" >
-					<div class="bar-label">${scoreCount.word}</div>
-					<div class="bar-container">
-						<input type="hidden" name="id" value="${member_id}">
-						<input type="submit" style="width: 160px;" value="${scoreCount.count}">
-					</div>
+	<div class="review-block">
+	<c:forEach var="scoreCount" items="${response.scoreCounts}">
+		<form action="userScoreUpdate">
+			<div class="container" >
+				<div class="bar-label">${scoreCount.word}</div>
+				<div class="bar-container">
+					<input type="hidden" name="member_id" value="${member_id}">
+					<input type="hidden" name="s_common_spec" value="${scoreCount.s_common_spec}">
+					<input type="submit" style="width: 160px;" value="${scoreCount.count}">
 				</div>
-		</c:forEach>
-		</div>
-	</form>
+			</div>
+		</form>
+	</c:forEach>
+	</div>
+	
 	<table>
 		<tr>
 			<td colspan="2">

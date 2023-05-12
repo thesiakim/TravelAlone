@@ -4,27 +4,27 @@
 
 <mapper namespace="com.travelAlone.s20230404.CommonMapper">
 
-		<select id="interestFindById" resultType="Interest" >
+		<select id="interestFindById" parameterType="long" resultType="Interest" >
 			<![CDATA[
-			select i.interest_id, i.member_id, i.i_common_interest, i.create_date, i.modified_date, c.word
-			from interest i inner join  c on i.i_common_interest = concat(c.bcd, c.mcd)
-			where i.member_id = #{memberId}
+			select	i.interest_id, i.member_id, i.i_common_interest, i.create_date, i.modified_date, c.word
+			from	interest i inner join common c on i.i_common_interest = concat(c.bcd, c.mcd)
+			where	i.member_id = #{memberId}
 			]]>
 		</select>
 
-		<select id="scoreCountById" resultType="ScoreCount" >
+		<select id="scoreCountById" parameterType="long" resultType="ScoreCount" >
 			<![CDATA[
-			SELECT 	  NVL(COUNT(s.s_common_spec), 0) AS count, c.word
+			SELECT 	  NVL(COUNT(s.s_common_spec), 0) AS count, (c.bcd || c.mcd) as s_common_spec, c.word
 			FROM 	  common c 
 			LEFT JOIN score s 
 			ON 		  s.s_common_spec = c.bcd || c.mcd 
 			AND 	  s.member_id = #{memberId}
 			WHERE 	  c.bcd like 'scr'
-			GROUP BY  c.word
+			GROUP BY  (c.bcd || c.mcd), c.word
 			]]>
 		</select>
 
-		<select id="writingCountById" resultType="WritingCount" >
+		<select id="writingCountById" parameterType="long" resultType="WritingCount" >
 			<![CDATA[
 			SELECT a.board_count, b.hou_review_count, c.res_review_count, d.tra_review_count,e.favorites_count,f.g_writing_count
 			FROM (SELECT COUNT(*) as board_count  FROM board WHERE member_id = #{memberId} AND b_re_level = 0 ) a ,
@@ -96,11 +96,11 @@
 		]]>
 		</select>
 
-		<select id="memberInfo" resultType="Member">
+		<select id="memberInfo" parameterType="long" resultType="Member">
 		<![CDATA[
 		SELECT 	*
 		FROM	MEMBER
-		WHERE 	MEMBER_ID = #{member_id}
+		WHERE 	MEMBER_ID = #{memberId}
 		]]>
 		</select>
 

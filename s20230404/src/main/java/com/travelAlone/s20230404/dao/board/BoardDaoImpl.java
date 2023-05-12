@@ -473,7 +473,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<House> listReviewPageHou(Hou_Rev houRev) {
 		List<House> listReviewPageHou = null;
-		log.info("jhDaoImpl listReviewPageHou start");
+		log.info("BoardDaoImpl listReviewPageHou start");
 		try {
 			listReviewPageHou = session.selectList("listReviewPageHou", houRev);
 			log.info("BoardDaoImpl listReviewPageHou.size() -> " + listReviewPageHou.size());
@@ -487,7 +487,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int totalReviewPageHou(long member_id) {
 		int totalReviewPageHou = 0;
-		log.info("jhDaoImpl totalReviewPageHou start");
+		log.info("BoardDaoImpl totalReviewPageHou start");
 		try {
 			totalReviewPageHou = session.selectOne("totalReviewPageHou", member_id);
 			log.info("BoardDaoImpl totalReviewPageHou->" + totalReviewPageHou);
@@ -501,7 +501,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<Res> listReviewPageRes(Res_Rev resRev) {
 		List<Res> listReviewPageRes = null;
-		log.info("jhDaoImpl listReviewPageRes start");
+		log.info("BoardDaoImpl listReviewPageRes start");
 		try {
 			listReviewPageRes = session.selectList("listReviewPageRes", resRev);
 			log.info("BoardDaoImpl listReviewPageRes.size() -> " + listReviewPageRes.size());

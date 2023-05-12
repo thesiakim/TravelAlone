@@ -31,6 +31,7 @@ import com.travelAlone.s20230404.model.Score;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.Warning;
+import com.travelAlone.s20230404.model.dto.km.ScoreCount;
 import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 import com.travelAlone.s20230404.service.Paging;
@@ -481,7 +482,7 @@ public class BoardController {
 	   UserPageResponseDto userPageResponseDto = mypageService.userPage(member_id);
 	   
        model.addAttribute("response", userPageResponseDto);
-       model.addAttribute("id", member_id);
+       model.addAttribute("member_id", member_id);
 	   return "km/userpage";
    }
    
@@ -565,20 +566,33 @@ public class BoardController {
 	
 	// 유저 페이지 점수 업데이트
 	@RequestMapping(value = "/userScoreUpdate")
-	public String userScoreUpdate(@RequestParam(value = "id") long member_id, @LoginUser MemberJpa memberJpa, Score score, Model model, HttpServletRequest request, HttpServletResponse response) {
-		log.info("jhController userScoreUpdate start");
-		log.info("jhController userScoreUpdate member_id -> " + member_id);
-		log.info("jhController userScoreUpdate score.getS_common_spec() -> " + score.getS_common_spec());
+	public String userScoreUpdate(long member_id, @LoginUser MemberJpa memberJpa, Score score, Model model, HttpServletRequest request, HttpServletResponse response) {
+		log.info("BoardController userScoreUpdate start");
+		log.info("BoardController userScoreUpdate member_id -> " + member_id);
+		log.info("BoardController userScoreUpdate score.getS_common_spec() -> " + score.getS_common_spec());
 		int userScoreUpdate = 0;
+		
+		log.info("BoardController score s_common_spec -> "+ score.getS_common_spec());
+		log.info("BoardController memberJpa id -> " + memberJpa.getId());
+		
+		log.info("BoardController 여긴 null이냐?1");
+		
+		
 		String cookieKey = "userScoreUpdate" + member_id + score.getS_common_spec() + memberJpa.getId();
-		String result = "forward:/userpage?id="+member_id;
+		
+		log.info("BoardController 여긴 null이냐?2");
+		
+		String result = "redirect:/userpage?id="+member_id;
+		
+		log.info("BoardController 여긴 null이냐?3");
+		
 		Cookie[] cookies = request.getCookies();
 		boolean userScoreUpdateChk = false;
+		
+		
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals(cookieKey)) {
-					cookie.setMaxAge(0);
-					response.addCookie(cookie);
 					
 					String message = "이미 추천한 유저점수입니다.";
 					model.addAttribute("message", message);
@@ -588,7 +602,10 @@ public class BoardController {
 			}
 		}
 		if (!userScoreUpdateChk) {
+			
+			score.setMember_id(member_id);
 			userScoreUpdate = bs.userScoreUpdate(score);
+			
 			log.info("BoardController userScoreUpdate result ->" + userScoreUpdate);
 			model.addAttribute("userScoreUpdate", userScoreUpdate);
 			Cookie cookie = new Cookie(cookieKey, "true");
