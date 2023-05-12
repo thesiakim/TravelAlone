@@ -40,4 +40,8 @@ public interface MypageDao {
     int kmMypageFavoritesCountHou(Long id);
 
     int kmMypageFavoritesCountTra(Long id);
+
+    MypageTagResponseDto mypageInterest(Long id);
+
+    int mypageInterestUpdate(MypageInterestUpdateRequestDto requestDto);
 }

@@ -1,5 +1,6 @@
 package com.travelAlone.s20230404.dao.km;
 
+import com.travelAlone.s20230404.model.Common;
 import com.travelAlone.s20230404.model.Interest;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
@@ -145,6 +146,61 @@ public class MypageDaoImpl implements MypageDao{
     @Override
     public int kmMypageFavoritesCountTra(Long id) {
         return session.selectOne("kmMypageFavoritesCountTra",id);
+    }
+
+    @Override
+    public MypageTagResponseDto mypageInterest(Long id) {
+
+        List<Common> interestsCommon = session.selectList("mypageInterestAll");
+
+        List<Interest> interestsById = session.selectList("mypageInterestById", id);
+
+        // Common에 보유여부 넣어주기
+        for (Common common : interestsCommon){
+            for (Interest interest : interestsById){
+                // 합한 코드
+                String commonCode = common.getBcd() + common.getMcd();
+
+                // 코드가 맞다면 saved 설정
+                if (commonCode.equals(interest.getI_common_interest())){
+                    common.setSavedChecked(true);
+                }
+
+            }
+        }
+
+        return new MypageTagResponseDto(interestsCommon, interestsById);
+    }
+
+    @Override
+    public int mypageInterestUpdate(MypageInterestUpdateRequestDto requestDto) {
+        // 삭제할 리스트 선언
+        List<String> deleteList = new ArrayList<>();
+        int changeResult=0;
+
+        // 기존에 저장된 데이터를 가져옴
+        List<Interest> interestsById = session.selectList("mypageInterestById", requestDto.getId());
+
+        for (Interest interest : interestsById){
+            String code = interest.getI_common_interest();
+
+            // 삭제해야될 요소 추가
+            if (!requestDto.getSavedTagIds().remove(code)){
+                deleteList.add(code);
+            }
+        }
+
+        if (requestDto.getSavedTagIds().size() >0){
+        // 추가할 리스트 쿼리 실행
+        changeResult += session.insert("mypageInterestInsert", requestDto);
+        }
+        if (deleteList.size() >0){
+        // 삭제할 리스트 설정 후 쿼리 실행
+        requestDto.setSavedTagIds(deleteList);
+        changeResult += session.delete("mypageInterestDelete", requestDto);
+        }
+
+        return changeResult;
     }
 
     @Override

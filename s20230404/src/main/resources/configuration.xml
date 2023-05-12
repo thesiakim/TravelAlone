@@ -37,6 +37,8 @@
 		<typeAlias alias="CondDTO" type="com.travelAlone.s20230404.model.si.TimeDTO"/>
 		<typeAlias alias="RecentSearch" type="com.travelAlone.s20230404.model.si.RecentSearch"/>
 		<typeAlias alias="MypageFavoriteResponseDto" type="com.travelAlone.s20230404.model.dto.km.MypageFavoriteResponseDto"/>
+		<typeAlias alias="CommonInterest" type="com.travelAlone.s20230404.model.Common"/>
+		<typeAlias alias="MypageInterestUpdateRequestDto" type="com.travelAlone.s20230404.model.dto.km.MypageInterestUpdateRequestDto"/>
 	</typeAliases>
 </configuration>
 

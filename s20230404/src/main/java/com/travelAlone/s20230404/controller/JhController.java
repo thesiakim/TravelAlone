@@ -262,16 +262,6 @@ public class JhController {
 	   return "ro/reviewPageRes";
 	}
     
-   	// 태그 업데이트
-	@RequestMapping(value = "/mypage/tagUpdate")
-	public String mypageTagUpdate(@LoginUser MemberJpa memberJpa,Interest interest, Model model) {
-		log.info("jhController mypageTagUpdate start");
-        model.addAttribute("name", memberJpa.getName());
-        interest.setMember_id(memberJpa.getId());
-        model.addAttribute("nickName", memberJpa.getNickname());
-        List<Interest> mypageTagUpdate = js.mypageTagUpdate(interest);
-        model.addAttribute("mypageTagUpdate", mypageTagUpdate);
-		return "km/mypage-tagUpdate";
-	}
+
    
 }

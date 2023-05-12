@@ -32,5 +32,9 @@ public interface MypageService {
     List<MypageFavoriteResponseDto> mypageFavorites(Long id, String category, int page);
 
     int mypageFavoritesPageCount(Long id, String category);
+
+    MypageTagResponseDto mypageInterest(Long id);
+
+    int mypageInterestUpdate(MypageInterestUpdateRequestDto requestDto);
 }
 

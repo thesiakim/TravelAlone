@@ -7,7 +7,7 @@
 		<select id="interestFindById" resultType="Interest" >
 			<![CDATA[
 			select i.interest_id, i.member_id, i.i_common_interest, i.create_date, i.modified_date, c.word
-			from interest i inner join  c on i.i_common_interest = concat(c.bcd, c.mcd)
+			from interest i inner join Common c on i.i_common_interest = concat(c.bcd, c.mcd)
 			where i.member_id = #{memberId}
 			]]>
 		</select>
@@ -185,6 +185,55 @@
 		]]>
 	</select>
 
+	<select id="mypageInterestAll" resultType="CommonInterest">
+	<![CDATA[
+		SELECT *
+		FROM COMMON
+		WHERE BCD = 'int'
+		]]>
+	</select>
+
+	<select id="mypageInterestById" resultType="Interest">
+	<![CDATA[
+		SELECT I.INTEREST_ID AS INTEREST_ID,
+		       I.MEMBER_ID AS MEMBER_ID,
+		       I.I_COMMON_INTEREST AS I_COMMON_INTEREST,
+		       C.WORD AS WORD
+		FROM INTEREST I
+		LEFT JOIN COMMON C ON I.I_COMMON_INTEREST = CONCAT(C.BCD, C.MCD)
+		WHERE MEMBER_ID = #{id}
+		]]>
+	</select>
+
+<!--	<insert id="mypageInterestInsert" parameterType="MypageInterestUpdateRequestDto">-->
+<!--		Insert ALL-->
+<!--		INTO interest (INTEREST_ID, MEMBER_ID, I_COMMON_INTEREST, CREATE_DATE, MODIFIED_DATE)-->
+<!--		VALUES-->
+<!--		<foreach collection="savedTagIds" item="tagId" separator=",">-->
+<!--			 (INTEREST_ID_SEQ.NEXTVAL, #{id}, #{tagId}, SYSDATE, SYSDATE)-->
+<!--		</foreach>-->
+<!--	</insert>-->
+
+	<update id="mypageInterestInsert" parameterType="MypageInterestUpdateRequestDto">
+		INSERT INTO interest (INTEREST_ID, MEMBER_ID, I_COMMON_INTEREST, CREATE_DATE, MODIFIED_DATE)
+		select INTEREST_ID_SEQ.NEXTVAL AS interestId, A.*
+		from(
+		<foreach item="tagId" collection="savedTagIds" separator="UNION ALL ">
+			select #{id} as memberId, #{tagId} as iCommonInterest, SYSDATE as createDate, SYSDATE as modifiedDate
+			from dual
+		</foreach>
+		) A
+	</update>
+
+	<delete id="mypageInterestDelete" parameterType="MypageInterestUpdateRequestDto">
+		DELETE FROM interest
+		WHERE MEMBER_ID = #{id, jdbcType=NUMERIC}
+		AND I_COMMON_INTEREST IN
+		<foreach collection="savedTagIds" item="tagId" separator=","
+				 open="(" close=")">
+			#{tagId, jdbcType=VARCHAR}
+		</foreach>
+	</delete>
 
 
 </mapper>
