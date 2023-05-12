@@ -24,6 +24,7 @@ public class Travel {
     private String		   t_avgscore;
     private int            t_count;
 	
+    
     // 페이지조회용
     private String search;      private String keyword;
     private String pageNum;  
@@ -33,7 +34,7 @@ public class Travel {
 	//조회용 코드 
 	private String code;
 	
-	 // create_date 날짜 형식 변경
+	// create_date 날짜 형식 변경
  	public String getFormattedCreateDate() {
  		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
  	    return create_date.format(formatter);

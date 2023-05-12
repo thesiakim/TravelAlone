@@ -11,12 +11,12 @@
 
  <style>
 .swiper-container {
-	width:1200px;
-	height:600px;
+	width:1600px;
+	height:530px;
 	padding:30px 0;
-	border:5px solid silver;
+/* 	border:5px solid silver;
 	border-radius:7px;
-	box-shadow:0 0 20px #ccc inset;
+	box-shadow:0 0 20px #ccc inset; */
 }
 .swiper-slide {
 	text-align:center;
@@ -54,13 +54,13 @@ th, td {
 
 <body>
 <div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/restaurant-picture.png" alt="배너">
 	</div>	
 	
 <h1><a href="res"><img src="img/Res.png" alt="맛집" width=250px height=250px></a></h1>
 
 <!-- 맛집종류 -->
-<div style="display: inline-block; width: 900px; text-align: center;">
+<div style="display: inline-block; width: 700px; text-align: center;">
 <c:forEach items="${boardList}" var="list" varStatus="status">
   <!-- 컨트롤러로 보내는거 -->
   <a href="restaurantCodeFilter?code=${list.code}">
@@ -121,7 +121,7 @@ th, td {
                 	</c:url>
                 	<%-- <img src="${url }" alt="#"> --%>
                 	  <div class="image-container">
-					      <img src="${url }" alt="${res.r_name}" width="500" height="300">
+					      <img src="${url }" alt="${res.r_name}" width="420" height="300">
 					      <div class="image-text">${res.r_name}</div>
 					    </div>
                 	

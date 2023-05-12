@@ -49,7 +49,7 @@
 
 <body>
 <div id="img_benner">
-   <img src="img/main-picture.png" alt="배너">
+   <img src="img/restaurant-picture.png" alt="배너">
 </div>
    <h1><a href="res"><img src="img/res.png" alt="맛집" width=250px height=250px></a></h1>
    <!-- 맛집 종류 -->
@@ -76,7 +76,7 @@
       <tr><td>운영시간</td>         <td>${restaurant.r_hour}</td></tr>
          <tr><td>문의전화</td>         <td>${restaurant.r_call}</td></tr>
          <tr><td>주차장 여부</td>         <td>${restaurant.r_parking}</td></tr>
-         <tr><td>맛집 정보</td>      <td>${restaurant.r_content}</td></tr>
+         <tr><td>맛집 정보</td>      <td style="width: 380px;">${restaurant.r_content}</td></tr>
          <tr> <th hidden>          ${restaurant.restaurant_id} </th>  </tr>
       </tr>
    </table>
@@ -95,7 +95,7 @@
          <input type="button" value="즐겨찾기 해제" onclick="delete_fav()" style="width: 110px;">
            </c:when>
    </c:choose>
-   <br><br>
+   <br><br><hr><br><br>
    
    <!-- 클릭 시 팝업창에 띄울 원본 이미지 -->
    <h3>맛집 대표 이미지</h3><br>
@@ -193,7 +193,7 @@
       <div id="replyForm">
          <input type="text" name="r_content" size = "50" value="리뷰를 입력하세요" onfocus="clearInput(this)">
          <br>
-          <div class="star-rating"> 평점
+          <div class="star-rating">평점
        <div id="rating">
     <label for="score_0" onclick="changeRating(0)" onmouseover="changeRating(0)"><c:if test="${res_Rev.r_score == null || res_Rev.r_score == 0}"></c:if></label> 
     <label for="score_1" onclick="changeRating(1)" onmouseover="changeRating(1)"><c:if test="${res_Rev.r_score == 1}">checked</c:if>★</label>

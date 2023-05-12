@@ -55,5 +55,4 @@ public interface TravelService {
 	int 					isTra_Fav(Tra_Fav tra_Fav);
 	
 	
-	
 }
