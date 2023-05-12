@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="/css/list.css" rel="stylesheet" type="text/css">
-	<link href="/css/login.css" rel="stylesheet" type="text/css">
+	<link href="<%=contextPath%>/css/list.css" rel="stylesheet" type="text/css">
+	<link href="<%=contextPath%>/css/login.css" rel="stylesheet" type="text/css">
 <!-- 사용자 스크립트 추가 -->
 <script type="text/javascript">
 	//회원가입 실패시 에러 메시지 출력
@@ -34,10 +35,10 @@
 </head>
 <body>
 	<div class="loginLogo">
-		<a href="/"><img src="/img/gosunee.png"></a>
+		<a href="/"><img src="<%=contextPath%>/img/gosunee.png"></a>
 	</div>
 	
-	<form action="http://localhost:4040/api/v1/join" role="form" method="post">
+	<form action="<%=contextPath%>/api/v1/join" role="form" method="post">
 		<table>
 			<tr class="form-group py-2">
 				<td><label for="email">이메일 아이디</label></td>

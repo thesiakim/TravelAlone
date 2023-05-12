@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-	<link href="/css/list.css" rel="stylesheet" type="text/css">
-	<link href="/css/login.css" rel="stylesheet" type="text/css">
+	<link href="<%=contextPath%>/css/list.css" rel="stylesheet" type="text/css">
+	<link href="<%=contextPath%>/css/login.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 	<c:set var="errorMessage" value="${errorMessage}"/>
@@ -24,7 +25,7 @@
 	</c:if>
 <body>
 	<div class="loginLogo">
-		<a href="/"><img src="/img/gosunee.png"></a>
+		<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/gosunee.png"></a>
 	</div>
     <form role="form" method="post" action="${ctx}/login">
 		<table>
@@ -45,7 +46,7 @@
 			<tr class="py-3">
 				<td></td>
 				<td style="width: 80px;"><button type="submit" class="btn btn-outline-dark">로그인</button></td>
-				<td style="width: 80px;"><button type="button" class="btn btn-outline-dark" onclick="location.href='${ctx}/join''">회원가입</button></td>
+				<td style="width: 80px;"><button type="button" class="btn btn-outline-dark" onclick="location.href='<%=contextPath%>/join'">회원가입</button></td>
 				<td></td>
 			</tr>
 		</table>

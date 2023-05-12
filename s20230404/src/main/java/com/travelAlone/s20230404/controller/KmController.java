@@ -406,17 +406,13 @@ public class KmController {
                                   @RequestParam(defaultValue = "1") int page,
                                   @Login2User SessionUser sessionUser,
                                   Model model){
-        model.addAttribute("totalPage", mypageService.mypageFavoritesPageCount(sessionUser.getId(),category));
+        // 해당 카테고리 갯수를 가져오고 페이징 번호처리
+        int countFavorite = mypageService.mypageFavoritesPageCount(sessionUser.getId(), category);
+        model.addAttribute("totalPage", (countFavorite / 10) +1 );
 
+        // 즐겨찾기 가져오기
         List<MypageFavoriteResponseDto> mypageFavoriteResponseDtos = mypageService.mypageFavorites(sessionUser.getId(), category, page);
-
         model.addAttribute("favorites",mypageFavoriteResponseDtos);
-
-        System.out.println("mypageFavoriteResponseDtos = " + mypageFavoriteResponseDtos.size());
-        if (mypageFavoriteResponseDtos.size() != 0) {
-
-        System.out.println("mypageFavoriteResponseDtos.get(0).toString() = " + mypageFavoriteResponseDtos.get(0).toString());
-        }
 
         return "km/mypage-favorites";
     }

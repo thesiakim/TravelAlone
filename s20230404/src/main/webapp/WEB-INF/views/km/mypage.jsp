@@ -1,21 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/mypage.css">
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet" href="css/list.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/mypage.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/login.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/list.css">
 <title>Insert title here</title>
-	<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-	<script defer src="/js/mypage.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+	<script defer src="<%=contextPath%>/js/mypage.js"></script>
 <c:import url="../fragments/header.jsp"></c:import>
 </head>
 <body>
 <div id="img_benner">
-	<img src="img/main-picture.png" alt="배너">
+	<img src="<%=contextPath%>/img/main-picture.png" alt="배너">
 </div>
 <div class="profile-block">
 	<div class="img-block">
@@ -70,28 +71,28 @@
 			<td width="150px;">ID</td>
 			<td width="250px;">${response.email}</td>
 			
-			<td width="100px;"><a href="myPageCommunityList">내가 작성한 글</a></td>
+			<td width="100px;"><a href="<%=contextPath%>/myPageCommunityList">내가 작성한 글</a></td>
 			<td width="50px;">${response.writingCount}</td>
 		</tr>
 		<tr>
 			<td>닉네임</td>
 			<td>${response.nickName}</td>
 			
-			<td><a href="reviewPageTra">내가 작성한 리뷰</a></td>
+			<td><a href="<%=contextPath%>/reviewPageTra">내가 작성한 리뷰</a></td>
 			<td>${response.reviewCount}</td>
 		</tr>
 		<tr>
 			<td>이름</td>
 			<td>${response.name}</td>
 			
-			<td><a href="/mypage/inquire">문의 내역</a></td>
+			<td><a href="<%=contextPath%>/mypage/inquire">문의 내역</a></td>
 			<td>${response.csCount}</td>
 		</tr>
 		<tr>
 			<td>전화번호</td>
 			<td>${response.phone}</td>
 			
-			<td><a href="/mypage/favorite">즐겨 찾기</a></td>
+			<td><a href="<%=contextPath%>/mypage/favorite">즐겨 찾기</a></td>
 			<td>${response.favCount}</td>
 		</tr>
 		<tr>
@@ -107,5 +108,5 @@
 	</div>
 </body>
 
-	<c:import url="footer.jsp"/>
+	<c:import url="../fragments/footer.jsp"/>
 </html>

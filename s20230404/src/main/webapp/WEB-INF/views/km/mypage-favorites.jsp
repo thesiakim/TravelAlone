@@ -52,9 +52,9 @@
 		  <h2>즐겨찾기 </h2>
 		<table style="margin:auto;">
 			<tr>
-				<td><h3><a href="/mypage/favorite?category=tra">여행지</a></h3></td>
-				<td><h3><a href="/mypage/favorite?category=hou">숙소</a></h3></td>
-				<td><h3><a href="/mypage/favorite?category=res">맛집</a></h3></td>
+				<td><h3><a href="<%=contextPath%>/mypage/favorite?category=tra">여행지</a></h3></td>
+				<td><h3><a href="<%=contextPath%>/mypage/favorite?category=hou">숙소</a></h3></td>
+				<td><h3><a href="<%=contextPath%>/mypage/favorite?category=res">맛집</a></h3></td>
 			</tr>
 		</table>
 
@@ -69,15 +69,20 @@
 			<td>등록일자</td>
 			<td>즐겨찾기 체크</td>
 		</tr>
-		<c:forEach items="${favorites}" var="favorite">
+			<c:choose>
+				<c:when test="${empty favorites}">
+					<tr><td colspan="7"><h1>즐겨찾기가 없습니다.</h1></td></tr>
+				</c:when>
+				<c:otherwise>
+			<c:forEach items="${favorites}" var="favorite">
 			<tr>
 				<td hidden>${favorite.id}</td>
 				<td>
 					<c:url value='/display' var='url'><c:param name='file' value='${favorite.thumbnail}'/></c:url>
 					<img alt="#" src="${url}" width="100%" height="100%">
 				</td>
-			 	<td>${favorite.loc}</td>
-				<td > <a href="traDetail?tid=${favorite.id}">${favorite.name}</a></td>
+				<td>${favorite.loc}</td>
+				<td > <a href="<%=contextPath%>/traDetail?tid=${favorite.id}">${favorite.name}</a></td>
 				<td>
 					<c:choose>
 						<c:when test="${favorite.score eq '1'}">
@@ -98,14 +103,17 @@
 						<c:otherwise>
 							<c:out value="☆☆☆☆☆"/>
 						</c:otherwise>
-					</c:choose>												
-				</td>																				
+					</c:choose>
+				</td>
 				<td>${favorite.reviewCount}</td>
 				<td>${favorite.modifiedDate}</td>
 				<td>
 					<input type="checkbox" class="favoriteCheckBox" id="favoriteCheckBox" onclick="favoriteCheck(event,${favorite.id})" checked>
 				</td>
-		</c:forEach>
+				</c:forEach>
+				</c:otherwise>
+			</c:choose>
+
 		
 	</table>
 	<hr>
@@ -168,7 +176,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-	
+		<c:import url="../fragments/footer.jsp"/>
 
 </body>
 </html>

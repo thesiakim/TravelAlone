@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <head>
     <title>Insert title here</title>
     <meta charset="UTF-8">
-    <link href="http://localhost:4040/css/main.css" rel="stylesheet" type="text/css">
+    <link href="<%=contextPath%>/css/main.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 헤더 -->
 </head>
@@ -16,24 +17,24 @@
 	<div class="container">
 	  <div id="container-left clearfix">
 		<div class="logo">
-		  <a href="/"><img src="img/gosunee.png"></a>
+		  <a href="/"><img src="<%=contextPath%>/img/gosunee.png"></a>
 		</div>
 		<c:choose>
 	    	<c:when test="${empty user}">
 		        <div class="headerLogin">
-		            <a href="/login">로그인</a>
+		            <a href="<%=contextPath%>/login">로그인</a>
 		        </div> 
 		        <div class="headerLogin">
-		            <a href="/join">회원가입</a>
+		            <a href="<%=contextPath%>/join">회원가입</a>
 		        </div>
 				<div class="headerLogin">Join Us</div>
 		    </c:when>
 		    <c:otherwise>
 		        <div class="headerLogin">
-		            <a href="/mypage">마이페이지</a>
+		            <a href="<%=contextPath%>/mypage">마이페이지</a>
 		        </div> 
 		        <div class="headerLogin">
-		            <a href="/logout" onclick="logout()">로그아웃</a>
+		            <a href="<%=contextPath%>/logout" onclick="logout()">로그아웃</a>
 		        </div>
 				<div class="headerLogin">${user.nickname}님 안녕하세요!</div>
 		    </c:otherwise>
@@ -44,7 +45,7 @@
 	<div class="headerForm">
 	  <div class="headerBenner">
 		<ul>
-		<li><a href="/tra">여행지</a>
+		<li><a href="<%=contextPath%>/tra">여행지</a>
 		  <ul>
 			<li><a href="/traFilter?code=tra100">관 광</a></li>
 			<li><a href="/traFilter?code=tra200">자 연</a></li>
@@ -52,7 +53,7 @@
 			<li><a href="/traFilter?code=tra400">쇼 핑</a></li>
 		  </ul>
 		</li>
-		<li><a href="/hou">숙소</a>
+		<li><a href="<%=contextPath%>/hou">숙소</a>
 		  <ul>
 			<li><a href="/houseCodeFilter?code=hou100">호 텔</a></li>
           	<li><a href="/houseCodeFilter?code=hou200">모 텔</a></li>
@@ -61,7 +62,7 @@
           	<li><a href="/houseCodeFilter?code=hou500">게스트 하우스</a></li>
           </ul>
 		</li>
-		<li><a href="/res">맛집</a>
+		<li><a href="<%=contextPath%>/res">맛집</a>
 		  <ul>
 			  <li><a href="restaurantCodeFilter?code=res100">한 식</a></li>
 			  <li><a href="restaurantCodeFilter?code=res200">중 식</a></li>
@@ -71,7 +72,7 @@
 			  <li><a href="restaurantCodeFilter?code=res600">기 타</a></li>
           </ul>
 		</li>
-		<li><a href="/listAllBoard">커뮤니티</a>
+		<li><a href="<%=contextPath%>/listAllBoard">커뮤니티</a>
 		  <ul>
 			<li><a href="/listBoard?b_common_board=bor100">자 유</a></li>
 			<li><a href="/listBoard?b_common_board=bor200">정 보</a></li>

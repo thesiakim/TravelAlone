@@ -135,7 +135,7 @@ public class MypageDaoImpl implements MypageDao{
 
     @Override
     public int kmMypageFavoritesCountRes(Long id) {
-        return session.selectOne("kmMypageFavoritesCountRes",(long)id);
+        return session.selectOne("kmMypageFavoritesCountRes",id);
     }
 
     @Override

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
   <form>
 	<div id="container-left clearfix">
 	  <div class="footerForm">
-		<a href="notice">고객센터</a>
+		<a href="<%=contextPath%>/notice">고객센터</a>
 	  </div>
 	  <div class="footerInfo">
 		<p>서울시 이대 중앙학원 501호</p><br>

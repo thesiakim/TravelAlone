@@ -46,8 +46,8 @@ public class MypageResponseDto {
         this.email = sessionUser.getEmail();
         this.name = sessionUser.getName();
         this.nickName = sessionUser.getNickname();
-        this.gender = sessionUser.getGender();
         this.phone = sessionUser.getPhone();
+        this.gender = sessionUser.getGender().equals("0") ? "남자" : "여자";
     }
 
 

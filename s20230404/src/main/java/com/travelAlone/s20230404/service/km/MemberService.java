@@ -197,7 +197,7 @@ public class MemberService{
 
         // member 권한 변경
         memberJpa.updateRole(requestDto.getRole());
-
+        System.out.println("requestDto.getRole() = " + requestDto.getRole());
 
         return memberJpa.getId();
     }
