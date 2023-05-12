@@ -182,7 +182,9 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 
 	</div>
 					<hr>
+					
 					<a  style=" padding-left:600px;"  href="inquireWriteForm">글작성</a>
+					 
 					<br>
 	<c:if test="${page.startPage > page.pageBlock }">
 		<a href="inquire?currentPage=${page.startPage-page.pageBlock}">[이전]</a>

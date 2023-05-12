@@ -6,6 +6,8 @@
 	<meta charset="UTF-8">
 	<title>회원 목록</title>
 	<link rel="stylesheet" href="css/mypage.css">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+	
 	<style>
 		.search-container{
 			display: flex;
