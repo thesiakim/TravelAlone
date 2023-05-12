@@ -19,7 +19,7 @@ public class TimeCheckAspect {
 	        String methodName = joinPoint.getSignature().getName();
 	        String className = joinPoint.getTarget().getClass().getSimpleName();
 
-	        log.info("START Class, class : "+ className +" "+LocalDateTime.now());
+	        log.info("START Class, className : "+ className +" "+LocalDateTime.now());
 	        log.info("START Method, name : "+ methodName + " "+LocalDateTime.now());
 	        long start = System.currentTimeMillis();
 

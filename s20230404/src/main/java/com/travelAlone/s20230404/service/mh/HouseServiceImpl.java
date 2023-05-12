@@ -23,23 +23,23 @@ public class HouseServiceImpl implements HouseService {
 
 	@Override
 	public int totalHouse() {
-		log.info("HouseServiceImpl start totalHouse ");
+		//log.info("HouseServiceImpl start totalHouse ");
 		int totHouseCnt = mh.totalHouse();
-		log.info("HouseServiceImpl  totalHouse totHouseCnt->" + totHouseCnt );		
+		//log.info("HouseServiceImpl  totalHouse totHouseCnt->" + totHouseCnt );		
 		return totHouseCnt;
 	}
 	//숙소 리스트
 	@Override
 	public List<House> listHouse(House house) {
-		log.debug("HouseServiceImpl Start listHouse...");
+		//log.debug("HouseServiceImpl Start listHouse...");
 		List<House> houseList = mh.selectHouseList(house);
-		log.debug("HouseServiceImpl End listHouse...");
+		//log.debug("HouseServiceImpl End listHouse...");
 		return houseList;
 	}
 
 	@Override
 	public House detailHouse(int hid) {
-		log.info("HouseServiceImpl detail");
+		//log.info("HouseServiceImpl detail");
 		House house = null;
 		house = mh.detailHouse(hid);		
 		return house;
@@ -48,14 +48,14 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int insertHou(House house) {
 		int result = 0;
-		log.info("HouseServiceImpl insert Start...");
+		//log.info("HouseServiceImpl insert Start...");
 		result = mh.insertHou(house);
 		return result;
 	}
 
 	@Override
 	public int updateHouse(House house) {
-		log.info("HouseServiceImpl update");
+		//log.info("HouseServiceImpl update");
 		int updateCount = 0;
 		updateCount = mh.updateHouse(house);		
 		return updateCount;
@@ -64,25 +64,25 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int deleteHouse(int house_id) {
 		int result = 0;
-		log.info("HouseServiceImpl delete Start");
+		//log.info("HouseServiceImpl delete Start");
 		result = mh.deleteHouse(house_id);		
 		return result;
 	}
 
 	@Override
 	public int conditionHouseCount(House house) {
-		log.info("HouseServiceImpl  conditionHouseCount Start" );
+		//log.info("HouseServiceImpl  conditionHouseCount Start" );
 		int conditionHouseCnt = mh.condHouseCnt(house);
-		log.info("HouseServiceImpl  conditionHouseCount conditionHouseCnt" + conditionHouseCnt);						
+		//log.info("HouseServiceImpl  conditionHouseCount conditionHouseCnt" + conditionHouseCnt);						
 		return conditionHouseCnt;
 	}
 
 	@Override
 	public List<House> listSearchHouse(House house) {
 		List<House> houseSearchList = null;
-		log.info("HouseServiceImpl listSearchHouse Start...");
+		//log.info("HouseServiceImpl listSearchHouse Start...");
 		houseSearchList = mh.houseSearchList(house);
-		log.info("HouseServiceImpl listSearchHouse inquireHouseList.size()"+ houseSearchList.size());						
+		//log.info("HouseServiceImpl listSearchHouse inquireHouseList.size()"+ houseSearchList.size());						
 		return houseSearchList;
 	}
 
@@ -95,9 +95,9 @@ public class HouseServiceImpl implements HouseService {
 		//숙소종류갯수
 	@Override
 	public int conditionOptionCount(String code) {
-		log.info("HouseServiceImpl  conditionOptionCount Start" );
+		//log.info("HouseServiceImpl  conditionOptionCount Start" );
 		int conditionInquireCnt = mh.condOptionInqCnt(code);
-		log.info("HouseServiceImpl  conditionOptionCount conditionInquireCnt" + conditionInquireCnt);	
+		//log.info("HouseServiceImpl  conditionOptionCount conditionInquireCnt" + conditionInquireCnt);	
 		return conditionInquireCnt;
 	}
 
@@ -105,9 +105,9 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public List<House> listFilterOptionHouse(House house) {
 		List<House> houseOptionFilterList = null;
-		log.info("HouseServiceImpl listFilterOptionHouse Start...");
+		//log.info("HouseServiceImpl listFilterOptionHouse Start...");
 		houseOptionFilterList = mh.mhOptionHouseList(house);
-		log.info("HouseServiceImpl listFilterOptionHouse houseOptionFilterList.size()"+ houseOptionFilterList.size());		
+		//log.info("HouseServiceImpl listFilterOptionHouse houseOptionFilterList.size()"+ houseOptionFilterList.size());		
 		return houseOptionFilterList;
 	}
 
@@ -124,17 +124,17 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public List<House> listFilterOptionLoc(House house) {
 		List<House> locOptionFilterList = null;
-		log.info("HouseServiceImpl listFilterOptionLoc Start...");
+		//log.info("HouseServiceImpl listFilterOptionLoc Start...");
 		locOptionFilterList = mh.mhOptionLocList(house);
-		log.info("HouseServiceImpl listFilterOptionLoc locOptionFilterList.size()"+ locOptionFilterList.size());			
+		//log.info("HouseServiceImpl listFilterOptionLoc locOptionFilterList.size()"+ locOptionFilterList.size());			
 		return locOptionFilterList;
 	}
 
 	@Override
 	public int conditionOptionLocCount(String code) {
-		log.info("HouseServiceImpl  conditionOptionLocCount Start" );
+		//log.info("HouseServiceImpl  conditionOptionLocCount Start" );
 		int conditionLocCnt = mh.condOptionLocCnt(code);
-		log.info("HouseServiceImpl  conditionOptionLocCount conditionLocCnt" + conditionLocCnt);	
+		//log.info("HouseServiceImpl  conditionOptionLocCount conditionLocCnt" + conditionLocCnt);	
 		return conditionLocCnt;
 	}
 
@@ -142,17 +142,17 @@ public class HouseServiceImpl implements HouseService {
 	//==========리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰====================================
 	@Override
 	public List<Hou_Rev> listHouRev(int hid) {
-		log.debug("HouseServiceImpl Start listHouRev...");
+		//log.debug("HouseServiceImpl Start listHouRev...");
 		List<Hou_Rev> houRevList = mh.selectHouRevList(hid);
 		
-		log.debug("HouseServiceImpl End listHouRev...");
+		//log.debug("HouseServiceImpl End listHouRev...");
 		return houRevList;
 	}
 	//리뷰작성
 	@Override
 	public int insertHouRev(Hou_Rev hou_Rev) {
 		int result = 0;
-		log.info("HouseServiceImpl insert Start...");
+		//log.info("HouseServiceImpl insert Start...");
 		result = mh.insertHouRev(hou_Rev);
 		return result;
 	}
@@ -160,7 +160,7 @@ public class HouseServiceImpl implements HouseService {
 	
 	@Override
 	public int updateHouseRev(Hou_Rev hou_Rev) {
-		log.info("HouseServiceImpl update");
+		//log.info("HouseServiceImpl update");
 		int updateCount = 0;
 		updateCount = mh.updateHouseRev(hou_Rev);	
 		return updateCount;
@@ -168,7 +168,7 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int deleteHouRev(int review_id) {
 		int result = 0;
-		log.info("HouseServiceImpl delete Start");
+		//log.info("HouseServiceImpl delete Start");
 		result = mh.deleteHouseRev(review_id);		
 		return result;
 	}
@@ -179,7 +179,7 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int insertImg(Hou_Img hou_Img) {
 		int result = 0;
-		log.info("HouseServiceImpl insert Start..." );
+		//log.info("HouseServiceImpl insert Start..." );
 		result = mh.insertImg(hou_Img);
 		return result;
 		
@@ -187,20 +187,20 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int seqHou(House house) {
 		int result = 0;
-		log.info("HouseServiceImpl seqHou Start..." );
+		//log.info("HouseServiceImpl seqHou Start..." );
 		result = mh.seqHouse(house);
 		return result;
 	}
 	@Override
 	public List<Hou_Img> listHou_Img(Hou_Img hou_Img) {
-		log.info("HouseServiceImpl Start listHou_Img");
+		//log.info("HouseServiceImpl Start listHou_Img");
 		List<Hou_Img> houImgList = mh.selectHouImgList(hou_Img);						
 		return houImgList;
 	}
 	@Override
 	public int deleteHouImg(int house_id) {
 		int result = 0;
-		log.info("HouseServiceImpl deleteHouImg Start");
+		//log.info("HouseServiceImpl deleteHouImg Start");
 		result = mh.deleteHouImg(house_id);		
 		return result;
 	}
@@ -208,7 +208,7 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int deleteHouOneImg(int house_id,int img_id) {
 		int result = 0;
-		log.info("HouseServiceImpl deleteHouOneImg Start");
+		//log.info("HouseServiceImpl deleteHouOneImg Start");
 		result = mh.deleteHouOneImg(house_id,img_id);		
 		return result;
 	}
@@ -217,7 +217,7 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int insertHouFav(Hou_Fav hou_Fav) {
 		int result = 0;
-		log.info("HouseServiceImpl insert Start");
+		//log.info("HouseServiceImpl insert Start");
 		result = mh.insertHouFav(hou_Fav);
 		return result;
 	}
@@ -226,20 +226,20 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int deleteHouFav(Hou_Fav hou_Fav) {
 		int result = 0;
-		log.info("HouseServiceImpl delete Start");
+		//log.info("HouseServiceImpl delete Start");
 		result = mh.deleteHouFav(hou_Fav);
 		return result;
 	}
 	@Override
 	public int isHou_Fav(Hou_Fav hou_Fav) {
-		log.info("HouseServiceImpl isHou_Fav Start");
+		//log.info("HouseServiceImpl isHou_Fav Start");
 		int houseFavList = mh.selectHouFav(hou_Fav);				
 		return houseFavList;
 	}
 	@Override
 	public int deleteHouRevAll(int house_id) {
 		int result = 0;
-		log.info("HouseServiceImpl deleteHouRevAll Start");
+		//log.info("HouseServiceImpl deleteHouRevAll Start");
 		result = mh.houRevDelAll(house_id);
 		return result;
 	}

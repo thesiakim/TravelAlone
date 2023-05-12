@@ -44,7 +44,7 @@ private final SiService SiService;
 	//숙소 메인 보기
 	@RequestMapping(value = "hou")
 	public String house(@LoginUser MemberJpa memberJpa, House house , String currentPage, Model model) {
-		log.info("HouseController Start house");
+		//log.info("HouseController Start house");
 		int totalHouse = mh.totalHouse();		
 		
 		//페이징
@@ -55,13 +55,13 @@ private final SiService SiService;
 		
 		//여기에 게시판 코드 불러오는 코드 작성
 		List<CommonCode> commonCode = mh.getCommonCode();
-		log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+		//log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
 		model.addAttribute("boardList",commonCode);
 		
 		
 		//지역 코드도 가져와볼까나
 		List<CommonCode> commonLocCode = mh.getCommonLocCode();
-		log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
+		//log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
 		model.addAttribute("boardLocList",commonLocCode);
 		
 		//popularHouse
@@ -70,11 +70,11 @@ private final SiService SiService;
 		
 		//숙소리스트
 		List<House> listHouse = mh.listHouse(house);
-		log.info("HouseController list listHouse.size()=>"+ listHouse.size());
+		//log.info("HouseController list listHouse.size()=>"+ listHouse.size());
 		
 		  if (memberJpa != null) {
-				 log.info("HouseController house memberJpa.getId()는 "+ memberJpa.getId()); 
-				 log.info("HouseController house memberJpa.getId()는 "+ memberJpa.getRole()); 
+				 //log.info("HouseController house memberJpa.getId()는 "+ memberJpa.getId()); 
+				// log.info("HouseController house memberJpa.getId()는 "+ memberJpa.getRole()); 
 				 model.addAttribute("user_id", memberJpa.getId());
 				 model.addAttribute("user_role", memberJpa.getRole());
 				 
@@ -118,7 +118,7 @@ private final SiService SiService;
 			hou_Fav.setMember_id(memberJpa.getId());
 			hou_Fav.setIsfavHou(isfavHou);
 			favResult = mh.isHou_Fav(hou_Fav);
-			log.info("HouseController favResult=>{}", favResult);
+			//log.info("HouseController favResult=>{}", favResult);
 			 model.addAttribute("user_id", memberJpa.getId());	
 			 model.addAttribute("user_role", memberJpa.getRole());
 									
@@ -140,7 +140,7 @@ private final SiService SiService;
 	//정보글작성  페이지 이동
 	@GetMapping(value = "houWriteForm")
 	public String houWriteForm(@LoginUser MemberJpa memberJpa,House house, Model model) {
-		log.info("HouseController  houWriteForm Start..." );
+		//log.info("HouseController  houWriteForm Start..." );
 		  if(memberJpa != null) {
 		         log.info("HouseController houWriteForm memberJpa.getId()는 "+ memberJpa.getId());
 		         model.addAttribute("user_id", memberJpa.getId());
@@ -162,7 +162,7 @@ private final SiService SiService;
 			//1. 시퀀스 가져오기 
 			//숙소 시퀀스 가져오는 쿼리
 			int houseSeq = mh.seqHou(house);
-			log.info("HouseController houWrite houseSeq->" + houseSeq );
+			//log.info("HouseController houWrite houseSeq->" + houseSeq );
 			
 			//2. 가져온 시퀀스 세팅하여 house에 insert
 			house.setHouse_id(houseSeq);
@@ -175,7 +175,6 @@ private final SiService SiService;
 			//3. 가져온 시퀀스 세팅하여 img insert
 
 			String img_context = "images"+File.separator+"houseUpload" + File.separator;
-//			String img_context = request.getSession().getServletContext().getRealPath("/houseUpload/");
 			log.info("IMG POST Start");		
 			
 			for (MultipartFile multipartFile : file1) {
@@ -224,15 +223,15 @@ private final SiService SiService;
 		//정보글수정 페이지이동
 		@GetMapping(value = "houUpdateForm")
 		public String houseUpdateForm(int house_id, Model model,Hou_Img hou_Img) {
-			log.info("HouseController Start updateForm...");
+		//	log.info("HouseController Start updateForm...");
 			House house = mh.detailHouse(house_id);			
-			log.info("mhController updateFormHouse house->" + house);	
+			//log.info("mhController updateFormHouse house->" + house);	
 			
 			//사진 리스트
-			log.info("Hou_Img Start");
+			//log.info("Hou_Img Start");
 			hou_Img.setHouse_id(house_id);
 			List<Hou_Img> listImg = mh.listHou_Img(hou_Img);
-			log.info("HouseController  listImg.size()=>"+ listImg.size());
+			//log.info("HouseController  listImg.size()=>"+ listImg.size());
 			model.addAttribute("imgHouList", listImg);
 			
 			
@@ -255,10 +254,10 @@ private final SiService SiService;
 			
 			//이미지삽입
 			String img_context = "images"+File.separator+"houseUpload" + File.separator;
-			log.info("IMG POST Start");
+			//log.info("IMG POST Start");
 			
 			for (MultipartFile multipartFile : file1) {
-			log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+			//log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
 			String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
 			// Service --> DB IMG CRUD
 			hou_Img.setImg_original_file(multipartFile.getOriginalFilename());
@@ -266,13 +265,13 @@ private final SiService SiService;
 
 
 			int insertImgResult = mh.insertImg(hou_Img);
-			log.info("HouseController insertImg insertImgResult->"+ insertImgResult);
+			//log.info("HouseController insertImg insertImgResult->"+ insertImgResult);
 		}
 			
 			
-			log.info("HouseController Start update");
+			//log.info("HouseController Start update");
 			int updateCount = mh.updateHouse(house);
-			log.info("HouseController updateHouse updateCount ->" + updateCount);
+			//log.info("HouseController updateHouse updateCount ->" + updateCount);
 			
 			
 			
@@ -288,7 +287,7 @@ private final SiService SiService;
 		//정보 글 삭제
 		@RequestMapping(value = "deleteHouse")
 		public String deleteHouse(int house_id, Model model) {
-			log.info("HouseController Start delete house_id :" +house_id);
+			//log.info("HouseController Start delete house_id :" +house_id);
 			int result2 = mh.deleteHouImg(house_id);
 			int result3 = mh.deleteHouRevAll(house_id);
 			int result = mh.deleteHouse(house_id);	
@@ -300,8 +299,8 @@ private final SiService SiService;
 		@ResponseBody
 		@RequestMapping(value = "deleteHouImg")
 		public String deleteHouImg(int house_id, int img_id, Model model) {
-			log.info("HouseController Start delete house_id :" + house_id);
-			log.info("HouseController Start delete img_id :" + img_id);
+			//log.info("HouseController Start delete house_id :" + house_id);
+			//log.info("HouseController Start delete img_id :" + img_id);
 			int result = mh.deleteHouOneImg(house_id,img_id);
 			String resultStr = Integer.toString(result);
 			return resultStr;
@@ -311,10 +310,10 @@ private final SiService SiService;
 		//숙소 검색
 		@RequestMapping(value = "houseSearch")
 		public String houseSearch(House house, String currentPage, Model model) {
-			log.info("HouseController houseSearch Start ..." );
+			//log.info("HouseController houseSearch Start ..." );
 			
 			int totalHouse = mh.conditionHouseCount(house);
-			log.info("HouseController houseSearch totalInquire =>" + totalHouse);
+			//log.info("HouseController houseSearch totalInquire =>" + totalHouse);
 			// Paging 작업
 			Paging page = new Paging(totalHouse, currentPage);
 			
@@ -322,8 +321,7 @@ private final SiService SiService;
 			house.setEnd(page.getEnd());
 			
 			List<House> listSearchHouse = mh.listSearchHouse(house);
-			log.info("HouseController houseSearch listSearchHouse.size()=>" + 
-					listSearchHouse.size());
+			//log.info("HouseController houseSearch listSearchHouse.size()=>" + listSearchHouse.size());
 			
 			model.addAttribute("totalHouse", totalHouse);
 			model.addAttribute("houseList", listSearchHouse);
@@ -337,21 +335,21 @@ private final SiService SiService;
 		@GetMapping(value = "houseCodeFilter")
 		public String houseCodeFilter(@RequestParam(name = "code") 
 		String code, House house, String currentPage, Model model  ) {
-			log.info("HouseController houseCodeFilter Start" );
+			//log.info("HouseController houseCodeFilter Start" );
 			
 			//숙소코드
 			List<CommonCode> commonCode = mh.getCommonCode();
-			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+			//log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
 			model.addAttribute("boardList",commonCode);
 			
 			//지역 코드도 가져와볼까나
 			List<CommonCode> commonLocCode = mh.getCommonLocCode();
-			log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
+			//log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
 			model.addAttribute("boardLocList",commonLocCode);
 			
 			
 			int totalHouse = mh.conditionOptionCount(code);
-			log.info("HouseController houseCodeFilter totalHouse =>" + totalHouse);
+			//log.info("HouseController houseCodeFilter totalHouse =>" + totalHouse);
 			
 			
 			//페이징
@@ -361,7 +359,7 @@ private final SiService SiService;
 			house.setCode(code);
 			
 			List<House> listFilterHouse = mh.listFilterOptionHouse(house);
-			log.info("HouseController  listFilterHouse.size()=>" + listFilterHouse.size());
+			//log.info("HouseController  listFilterHouse.size()=>" + listFilterHouse.size());
 			model.addAttribute("totalHouse", totalHouse);
 			model.addAttribute("houseList", listFilterHouse);
 			model.addAttribute("page", page);
@@ -376,22 +374,22 @@ private final SiService SiService;
 		@GetMapping(value = "houLocCodeFilter")
 		public String locCodeFilter(@RequestParam(name = "code") 
 		String code, House house, String currentPage, Model model) {
-			log.info("HouseController locCodeFilter Start" );
+			//log.info("HouseController locCodeFilter Start" );
 			
 			
 			//숙소코드
 			List<CommonCode> commonCode = mh.getCommonCode();
-			log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+			//log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
 			model.addAttribute("boardList",commonCode);
 			
 			//지역 코드도 가져와볼까나
 			List<CommonCode> commonLocCode = mh.getCommonLocCode();
-			log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
+			//log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
 			model.addAttribute("boardLocList",commonLocCode);
 			
 			
 			int totalLoc = mh.conditionOptionLocCount(code);
-			log.info("HouseController locCodeFilter totalLoc =>" + totalLoc);
+			//log.info("HouseController locCodeFilter totalLoc =>" + totalLoc);
 			
 			
 			//페이징
@@ -401,7 +399,7 @@ private final SiService SiService;
 			house.setCode(code);
 			
 			List<House> listFilterLoc = mh.listFilterOptionLoc(house);
-			log.info("HouseController  listFilterLoc.size()=>" + listFilterLoc.size());
+			//log.info("HouseController  listFilterLoc.size()=>" + listFilterLoc.size());
 			model.addAttribute("totalLoc", totalLoc);
 			model.addAttribute("houseList", listFilterLoc);
 			model.addAttribute("page", page);
@@ -414,13 +412,13 @@ private final SiService SiService;
 		//정보 리뷰작성  페이지 이동
 		@GetMapping(value = "houRevWriteForm")
 		public String houRevWriteForm (@LoginUser MemberJpa memberJpa,Hou_Rev hou_Rev, Model model) {
-			log.info("HouseController  houRevWriteForm Start..." );	
+			//log.info("HouseController  houRevWriteForm Start..." );	
 		
 			
 			  if(memberJpa != null) {
 			
-			log.info("HouseController houRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
-			 log.info("HouseController houFav hou_Rev.getHouse_id()는 "+ hou_Rev.getHouse_id());
+			//log.info("HouseController houRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+			// log.info("HouseController houFav hou_Rev.getHouse_id()는 "+ hou_Rev.getHouse_id());
 			model.addAttribute("user_id", memberJpa.getId());
 			model.addAttribute("hou_rev", hou_Rev);
 			
@@ -443,18 +441,18 @@ private final SiService SiService;
 		@PostMapping(value = "houRevWriteForm")
 		public String houRevWrite(@LoginUser MemberJpa memberJpa,
 				Hou_Rev hou_Rev, Model model) throws Exception {
-			log.info("HouseController  houRevWrite Start...");
+			//log.info("HouseController  houRevWrite Start...");
 			
 			  if (memberJpa == null){
 			         throw new Exception("로그인 해주세요!");
 			      }
 			
-			  log.info("HouseController writeFormHouRev memberJpa.getId()는 "+ memberJpa.getId());
+			//  log.info("HouseController writeFormHouRev memberJpa.getId()는 "+ memberJpa.getId());
 			  hou_Rev.setMember_id( memberJpa.getId());
 			  
 			  
 			int insertResult = mh.insertHouRev(hou_Rev);
-			log.info("HouseController houRevWrite insertResult->"+insertResult );
+			//log.info("HouseController houRevWrite insertResult->"+insertResult );
 			
 			
 			if(insertResult >0) {
@@ -473,7 +471,7 @@ private final SiService SiService;
 		                               @RequestParam(value = "house_id", required = true) long house_id,
 		                               Model model) {
 			//Required request parameter 'review_id' for method parameter type long is not present
-			log.info("HouseController  houRevUpdateForm Start..." );
+			//log.info("HouseController  houRevUpdateForm Start..." );
 			
 			return "mhHou/houRevUpdateForm";
 		}
@@ -485,10 +483,10 @@ private final SiService SiService;
 		//리뷰글수정 처리
 		@PostMapping(value = "updateHouseRev")
 		public String updateHouseRev(@RequestParam("review_id") int review_id, Hou_Rev hou_Rev, Model model) {
-		    log.info("HouseController Start update");
+		   // log.info("HouseController Start update");
 
 			int updateCount = mh.updateHouseRev(hou_Rev);
-			log.info("HouseController updateHouseRev updateCount ->" + updateCount);
+			//log.info("HouseController updateHouseRev updateCount ->" + updateCount);
 			
 			model.addAttribute("uptCnt",updateCount);   //
 			model.addAttribute("kk3","Message Test");   // 
@@ -499,7 +497,7 @@ private final SiService SiService;
 		//리뷰글 삭제
 		@RequestMapping(value = "deleteHouRev")
 		public String deleteHouRev(int review_id, Model model) {
-			log.info("HouseController Start delete... n_id :" + review_id);
+			//log.info("HouseController Start delete... n_id :" + review_id);
 			int result = mh.deleteHouRev(review_id);
 			return "redirect:hou";
 		}
@@ -510,18 +508,18 @@ private final SiService SiService;
 		@PostMapping("insertHouFav")
 		public String houFav(@LoginUser MemberJpa memberJpa,
 				Hou_Fav hou_Fav, Model model) throws Exception {
-			log.info("HouseController  houFav Start");
+			//log.info("HouseController  houFav Start");
 			if (memberJpa == null){
 		         throw new Exception("로그인 해주세요!");
 		      }
-			 log.info("HouseController houFav memberJpa.getId()는 "+ memberJpa.getId());
-			 log.info("HouseController houFav hou_Fav.getHouse_id()는 "+ hou_Fav.getHouse_id());
+			// log.info("HouseController houFav memberJpa.getId()는 "+ memberJpa.getId());
+			// log.info("HouseController houFav hou_Fav.getHouse_id()는 "+ hou_Fav.getHouse_id());
 			hou_Fav.setMember_id(memberJpa.getId());
 			hou_Fav.setHouse_id(hou_Fav.getHouse_id());
 			
 			
 			int insertResult = mh.insertHouFav(hou_Fav);
-			log.info("HouseController houFav insertResult->"+insertResult );
+			//log.info("HouseController houFav insertResult->"+insertResult );
 		
 			
 			return "mhHou/hou";
@@ -531,13 +529,13 @@ private final SiService SiService;
 		//즐겨찾기 해제
 		@RequestMapping(value = "deleteHouFav")
 		public String deleteHouFav(@LoginUser MemberJpa memberJpa,Hou_Fav hou_Fav, Model model) throws Exception {
-			log.info("HouseController  deleteHouFav Start");
+			//log.info("HouseController  deleteHouFav Start");
 			if (memberJpa == null){
 		         throw new Exception("로그인 해주세요!");
 		      }
 			hou_Fav.setMember_id(memberJpa.getId());
-			log.info("HouseController houFav memberJpa.getId()는 "+ memberJpa.getId());
-			log.info("HouseController Start delete house_id :" + hou_Fav.getHouse_id());
+			//log.info("HouseController houFav memberJpa.getId()는 "+ memberJpa.getId());
+			//log.info("HouseController Start delete house_id :" + hou_Fav.getHouse_id());
 			
 			hou_Fav.setMember_id(memberJpa.getId());
 			hou_Fav.setHouse_id(hou_Fav.getHouse_id());

@@ -26,12 +26,12 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public int totalHouse() {
 		int totHouseCount = 0;
-		log.info("mhDaoImpl2 Start total...");
+		//log.info("HouseDaoImpl Start total...");
 		try {
 			totHouseCount = session.selectOne("mhHouseTotal");
-			log.info("mhDaoImpl2 totalHouse totHouseCount->" + totHouseCount);
+			//log.info("HouseDaoImpl totalHouse totHouseCount->" + totHouseCount);
 		} catch (Exception e) {
-			log.info("mhDaoImpl2 totalHouse Exception " +e.getMessage());
+			//log.info("HouseDaoImpl totalHouse Exception " +e.getMessage());
 		}						
 		return totHouseCount;
 	}
@@ -42,11 +42,11 @@ public class HouseDaoImpl implements HouseDao {
 		List<House> houseList = new ArrayList<House>();
 		
 	try {
-		log.info("mhDaoImpl2 selectHouseList mhHouseList Start...");					
+		//log.info("HouseDaoImpl selectHouseList mhHouseList Start...");					
 		houseList = session.selectList("mhHouseList",house);
-		log.info("mhDaoImpl2 selectHouseList mhHouseList End...");
+		//log.info("HouseDaoImpl selectHouseList mhHouseList End...");
 	} catch (Exception e) {
-		log.info("mhDaoImpl2 mhHouseList Exception " +e.getMessage());
+		//log.info("HouseDaoImpl mhHouseList Exception " +e.getMessage());
 	}
 		return houseList;
 	}
@@ -54,13 +54,13 @@ public class HouseDaoImpl implements HouseDao {
 	//정보글 자세히보기
 	@Override
 	public House detailHouse(int hid) {
-		log.info("mhDaoImpl2 detail start..");
+		//log.info("HouseDaoImpl detail start..");
 		House house = new House();
 		try {
 			house = session.selectOne("mhHouseSelOne", hid);
-			log.info("mhDaoImpl2 detail house.getH_name()->"+ house.getH_name());
+			//log.info("HouseDaoImpl detail house.getH_name()->"+ house.getH_name());
 		} catch (Exception e) {
-			log.info("mhDaoImpl2 mhHouseSelOne Exception " +e.getMessage());
+			//log.info("HouseDaoImpl mhHouseSelOne Exception " +e.getMessage());
 		}				
 		return house;
 	}
@@ -69,11 +69,11 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public int insertHou(House house) {
 		int result = 0;
-		log.info("HouseDaoImpl insert Start...");
+		//log.info("HouseDaoImpl insert Start...");
 		try {
 			result = session.insert("insertHouse",house);
 		} catch (Exception e) {
-			log.info("HouseDaoImpl insert Exception" + e.getMessage());
+			//log.info("HouseDaoImpl insert Exception" + e.getMessage());
 		}
 		
 		return result;
@@ -82,12 +82,12 @@ public class HouseDaoImpl implements HouseDao {
 
 	@Override
 	public int updateHouse(House house) {
-		log.info("HouseDaoImpl updateHouse  start");
+		//log.info("HouseDaoImpl updateHouse  start");
 		int updateCount= 0;
 		try {
 			updateCount = session.update("mhHouseUpdate",house);
 		} catch (Exception e) {
-			log.info("HouseDaoImpl updateHouse Exception->"+e.getMessage());
+			//log.info("HouseDaoImpl updateHouse Exception->"+e.getMessage());
 		}		
 		
 		return updateCount;
@@ -96,15 +96,15 @@ public class HouseDaoImpl implements HouseDao {
 
 	@Override
 	public int deleteHouse(int house_id) {
-		log.info("HouseDaoImpl delete start..");
+		//log.info("HouseDaoImpl delete start..");
 		int result = 0;
-		log.info("HouseDaoImpl delete house_id->"+ house_id);
+		//log.info("HouseDaoImpl delete house_id->"+ house_id);
 		try {
 			result = session.delete("deleteHouse",house_id);
 			//result = session.delete("deleteHouImg",house_id );
-			log.info("HouseDaoImpl delete result->"+ result);
+			//log.info("HouseDaoImpl delete result->"+ result);
 		} catch (Exception e) {
-			log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+			//log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
 		}
 		
 		return result;
@@ -115,12 +115,12 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public int condHouseCnt(House house) {
 		int conditionHouseCount = 0;
-		log.info("HouseDaoImpl Start total...");
+		//log.info("HouseDaoImpl Start total...");
 		try {
 			conditionHouseCount = session.selectOne("condHouseCnt",house);
-			log.info("HouseDaoImpl conditionInquireCount->"+conditionHouseCount);		
+			//log.info("HouseDaoImpl conditionInquireCount->"+conditionHouseCount);		
 		} catch (Exception e) {
-			log.info("HouseDaoImpl Exception"+ e.getMessage());
+			//log.info("HouseDaoImpl Exception"+ e.getMessage());
 		}			
 		return conditionHouseCount;
 	}
@@ -130,11 +130,11 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public List<House> houseSearchList(House house) {
 		List<House> houseSearchList = null;
-		log.info("HouseDaoImpl houseSearchList start");
+		//log.info("HouseDaoImpl houseSearchList start");
 		try {
 			houseSearchList = session.selectList("mhhouseSearchList", house);
 		} catch (Exception e) {
-			log.info("HouseDaoImpl houseSearchList Exception " + e.getMessage());
+			//log.info("HouseDaoImpl houseSearchList Exception " + e.getMessage());
 		}
 		
 		return houseSearchList;
@@ -147,9 +147,9 @@ public class HouseDaoImpl implements HouseDao {
 	//숙소필터구분
 	@Override
 	public List<CommonCode> getCommonCode() {
-		log.info("getCommonCode 호출부 .......");
+		//log.info("getCommonCode 호출부 .......");
 		List<CommonCode> result = session.selectList("houseCommonCode");
-		log.info("getCommonCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
+		//log.info("getCommonCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
 		return result;
 	}
 
@@ -157,12 +157,12 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public int condOptionInqCnt(String code) {
 		int count = 0;		
-		log.info("HouseDaoImpl Start total...");
+		//log.info("HouseDaoImpl Start total...");
 		try {
 			count = session.selectOne("condOptionHouseCnt",code);
-			log.info("HouseDaoImpl condOptionInquireCnt->"+count);		
+			//log.info("HouseDaoImpl condOptionInquireCnt->"+count);		
 		} catch (Exception e) {
-			log.info("HouseDaoImpl Exception"+ e.getMessage());
+			//log.info("HouseDaoImpl Exception"+ e.getMessage());
 		}			
 		return count;
 	}
@@ -171,12 +171,12 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public List<House> mhOptionHouseList(House house) {
 		List<House> houseFilterList = null;
-		log.info("HouseDaoImpl houseFilterList start");
+		//log.info("HouseDaoImpl houseFilterList start");
 		try {
 			houseFilterList = session.selectList("mhOptionHouseList",house);
 
 		} catch (Exception e) {
-			log.info("HouseDaoImpl houseFilterList Exception " + e.getMessage());
+			//log.info("HouseDaoImpl houseFilterList Exception " + e.getMessage());
 		}
 
 		return houseFilterList;
@@ -185,9 +185,9 @@ public class HouseDaoImpl implements HouseDao {
 	//지역코드가져오기
 	@Override
 	public List<CommonCode> getCommonLocCode() {
-		log.info("getCommonLocCode 호출부 .......");
+		//log.info("getCommonLocCode 호출부 .......");
 		List<CommonCode> result = session.selectList("locCommonCode");
-		log.info("getCommonLocCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
+		//log.info("getCommonLocCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
 		return result;
 	}
 
@@ -195,12 +195,12 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public List<House> mhOptionLocList(House house) {
 		List<House> locFilterList = null;
-		log.info("HouseDaoImpl locFilterList start");
+		//log.info("HouseDaoImpl locFilterList start");
 		try {
 			locFilterList = session.selectList("mhOptionLocList",house);
 			
 		} catch (Exception e) {
-			log.info("HouseDaoImpl locFilterList Exception " + e.getMessage());
+			//log.info("HouseDaoImpl locFilterList Exception " + e.getMessage());
 		}
 		
 		return locFilterList;
@@ -211,12 +211,12 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public int condOptionLocCnt(String code) {
 		int count = 0;
-		log.info("HouseDaoImpl Start total");
+		//log.info("HouseDaoImpl Start total");
 		try {
 			count = session.selectOne("condOptionLocCnt",code);
-			log.info("HouseDaoImpl condOptionLocCnt->"+count);		
+			//log.info("HouseDaoImpl condOptionLocCnt->"+count);		
 		} catch (Exception e) {
-			log.info("HouseDaoImpl Exception"+ e.getMessage());
+			//log.info("HouseDaoImpl Exception"+ e.getMessage());
 		}
 		
 		return count;
@@ -228,11 +228,11 @@ public class HouseDaoImpl implements HouseDao {
 	public List<Hou_Rev> selectHouRevList(int hid) {
 		List<Hou_Rev> houRevList = new ArrayList<Hou_Rev>();
 		try {
-			log.info("HouseDaoImpl selectHouRevList houRevList Start...");
+			//log.info("HouseDaoImpl selectHouRevList houRevList Start...");
 			houRevList = session.selectList("houRevList",hid);
-			log.info("HouseDaoImpl selectHouRevList houRevList End...");
+			//log.info("HouseDaoImpl selectHouRevList houRevList End...");
 		} catch (Exception e) {
-			log.info("HouseDaoImpl houRevList Exception " +e.getMessage());
+			//log.info("HouseDaoImpl houRevList Exception " +e.getMessage());
 		}				
 		return houRevList;
 	}
@@ -241,11 +241,11 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public int insertHouRev(Hou_Rev hou_Rev) {
 		int result = 0;
-		log.info("HouseDaoImpl insert Start...");
+		//log.info("HouseDaoImpl insert Start...");
 		try {
 			result = session.insert("insertHouseRev",hou_Rev);			
 		} catch (Exception e) {
-			log.info("HouseDaoImpl insert Exception" + e.getMessage());
+			//log.info("HouseDaoImpl insert Exception" + e.getMessage());
 		}
 		
 		return result;
@@ -254,12 +254,12 @@ public class HouseDaoImpl implements HouseDao {
 
 	@Override
 	public int updateHouseRev(Hou_Rev hou_Rev) {
-		log.info("HouseDaoImpl updateHouse  start");
+		//log.info("HouseDaoImpl updateHouse  start");
 		int updateCount= 0;
 		try {
 			updateCount = session.update("mhHouseRevUpdate" , hou_Rev);			
 		} catch (Exception e) {
-			log.info("HouseDaoImpl updateHouseRev Exception->"+e.getMessage());
+			//log.info("HouseDaoImpl updateHouseRev Exception->"+e.getMessage());
 		}
 		return updateCount;
 	}
@@ -267,14 +267,14 @@ public class HouseDaoImpl implements HouseDao {
 
 	@Override
 	public int deleteHouseRev(int review_id) {
-		log.info("HouseDaoImpl delete start..");
+		//log.info("HouseDaoImpl delete start..");
 		int result = 0;
-		log.info("HouseDaoImpl delete review_id->"+ review_id);
+		//log.info("HouseDaoImpl delete review_id->"+ review_id);
 		try {
 			result = session.delete("deleteHouRev",review_id);
-			log.info("HouseDaoImpl delete result->"+ result);
+			//log.info("HouseDaoImpl delete result->"+ result);
 		} catch (Exception e) {
-			log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+			//log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
 		}
 		
 		
@@ -286,13 +286,13 @@ public class HouseDaoImpl implements HouseDao {
 		@Override
 		public int insertImg(Hou_Img hou_Img) {
 			int result = 0;
-			log.info("HouseDaoImpl insert Start");
-			log.info("HouseDaoImpl insertImg hou_Img->"+ hou_Img);
+			//log.info("HouseDaoImpl insert Start");
+			//log.info("HouseDaoImpl insertImg hou_Img->"+ hou_Img);
 			
 			try {
 				result = session.insert("insertHouImg",hou_Img);
 			} catch (Exception e) {
-				log.info("HouseDaoImpl insert Exception->"+e.getMessage());
+				//log.info("HouseDaoImpl insert Exception->"+e.getMessage());
 			}				
 			return result;
 		}
@@ -301,11 +301,11 @@ public class HouseDaoImpl implements HouseDao {
 		@Override
 		public int seqHouse(House house) {
 			int result = 0;
-			log.info("HouseDaoImpl seqHouse Start");
+			//log.info("HouseDaoImpl seqHouse Start");
 			try {
 				result = session.selectOne("mhSeqHouse",house);
 			} catch (Exception e) {
-				log.info("HouseDaoImpl mhSeqHouse Exception->"+e.getMessage());
+				//log.info("HouseDaoImpl mhSeqHouse Exception->"+e.getMessage());
 			}
 			return result;
 		}
@@ -315,10 +315,10 @@ public class HouseDaoImpl implements HouseDao {
 		public List<Hou_Img> selectHouImgList(Hou_Img hou_Img) {
 			List<Hou_Img> houImgList = new ArrayList<Hou_Img>();
 			try {
-				log.info("HouseDaoImpl selectHouImgList houImgList Start");
+				//log.info("HouseDaoImpl selectHouImgList houImgList Start");
 				houImgList = session.selectList("mhHouImgList" , hou_Img);
 			} catch (Exception e) {
-				log.info("ImgImpl selectImgList Exception " +e.getMessage());
+				//log.info("ImgImpl selectImgList Exception " +e.getMessage());
 			}
 			
 			return houImgList;
@@ -327,13 +327,13 @@ public class HouseDaoImpl implements HouseDao {
 
 		@Override
 		public int deleteHouImg(int house_id) {
-			log.info("HouseDaoImpl deleteHouImg start");
+			//log.info("HouseDaoImpl deleteHouImg start");
 			int result = 0;
-			log.info("HouseDaoImpl deleteHouImg house_id->"+ house_id);
+			//log.info("HouseDaoImpl deleteHouImg house_id->"+ house_id);
 			try {
 				result = session.delete("deleteHouImg",house_id );
 			} catch (Exception e) {
-				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+				//log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
 			}
 			
 			return result;
@@ -347,14 +347,14 @@ public class HouseDaoImpl implements HouseDao {
 			hou_Img.setImg_id(img_id);
 			
 			
-			log.info("HouseDaoImpl deleteHouOneImg start");
+			//log.info("HouseDaoImpl deleteHouOneImg start");
 			int result = 0;
-			log.info("HouseDaoImpl deleteHouImg house_id->"+ house_id);
-			log.info("HouseDaoImpl deleteHouImg img_id->"+ img_id);
+			//log.info("HouseDaoImpl deleteHouImg house_id->"+ house_id);
+			//log.info("HouseDaoImpl deleteHouImg img_id->"+ img_id);
 			try {
 				result = session.delete("deleteHouOneImg",hou_Img );
 			} catch (Exception e) {
-				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
+			//	log.info("HouseDaoImpl delete Exception->"+ e.getMessage());
 			}
 			return result;
 		}
@@ -363,11 +363,11 @@ public class HouseDaoImpl implements HouseDao {
 		@Override
 		public int insertHouFav(Hou_Fav hou_Fav) {
 			int result = 0;
-			log.info("HouseDaoImpl insertHouFav Start");
+			//log.info("HouseDaoImpl insertHouFav Start");
 			try {
 				result = session.insert("insertHouFav",hou_Fav);
 			} catch (Exception e) {
-				log.info("HouseDaoImpl insert Exception" + e.getMessage());
+			//	log.info("HouseDaoImpl insert Exception" + e.getMessage());
 				
 			}
 			return result;
@@ -377,11 +377,11 @@ public class HouseDaoImpl implements HouseDao {
 		@Override
 		public int deleteHouFav(Hou_Fav hou_Fav) {
 			int result = 0;
-			log.info("HouseDaoImpl deleteHouFav Start");
+			//log.info("HouseDaoImpl deleteHouFav Start");
 			try {
 				result = session.delete("deleteHouFav",hou_Fav);
 			} catch (Exception e) {
-				log.info("HouseDaoImpl delete Exception" + e.getMessage());
+			//	log.info("HouseDaoImpl delete Exception" + e.getMessage());
 				
 			}
 			return result;
@@ -390,13 +390,13 @@ public class HouseDaoImpl implements HouseDao {
 
 		@Override
 		public int selectHouFav(Hou_Fav hou_Fav) {
-			log.info("HouseDaoImpl selectHouFav start..");
+			//log.info("HouseDaoImpl selectHouFav start..");
 			int houFav = 0;
-			log.info("data check hou : {}, mem : {}",hou_Fav.getHouse_id(),hou_Fav.getMember_id());
+			//log.info("data check hou : {}, mem : {}",hou_Fav.getHouse_id(),hou_Fav.getMember_id());
 			try {
 				houFav = session.selectOne("isHou_Fav",hou_Fav);
 			} catch (Exception e) {
-				log.info("HouseDaoImpl isHou_Fav Exception " +e.getMessage());
+				//log.info("HouseDaoImpl isHou_Fav Exception " +e.getMessage());
 			}
 			
 			return houFav;
@@ -405,14 +405,14 @@ public class HouseDaoImpl implements HouseDao {
 
 		@Override
 		public int houRevDelAll(int house_id) {
-			log.info("HouseDaoImpl houRevDelAll start..");
+			//log.info("HouseDaoImpl houRevDelAll start..");
 			int result = 0;
-			log.info("HouseDaoImpl houRevDelAll house_id->"+ house_id);
+			//log.info("HouseDaoImpl houRevDelAll house_id->"+ house_id);
 			try {
 				result = session.delete("deleteHouRevAll" ,house_id);
-				log.info("HouseDaoImpl houRevDelAll result->"+ result);
+			//	log.info("HouseDaoImpl houRevDelAll result->"+ result);
 			} catch (Exception e) {
-				log.info("HouseDaoImpl delete Exception->"+ e.getMessage());				
+				//log.info("HouseDaoImpl delete Exception->"+ e.getMessage());				
 			}
 									
 			return result;
