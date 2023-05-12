@@ -83,15 +83,15 @@
    <br><br>
    
    <c:if test="${user_role == 'rol200' }">
-      <a href="traUpdateForm?restaurant_id=${restaurant.restaurant_id}"><input type="submit" value="수정"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="traDelete?restaurant_id=${restaurant.restaurant_id}"><input type="submit" value="삭제"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="resUpdateForm?restaurant_id=${restaurant.restaurant_id}"><input type="submit" value="수정"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="resDelete?restaurant_id=${restaurant.restaurant_id}"><input type="submit" value="삭제"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    </c:if>
    
    <c:choose>
       <c:when test="${isfavRes eq '0'}">
          <input type="button" value="즐겨찾기 추가" onclick="insert_fav()" style="width: 110px;">
            </c:when>
-           <c:when test="${isfavTra eq '1'}">
+           <c:when test="${isfavRes eq '1'}">
          <input type="button" value="즐겨찾기 해제" onclick="delete_fav()" style="width: 110px;">
            </c:when>
    </c:choose>
