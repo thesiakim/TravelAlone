@@ -15,6 +15,7 @@
 	<script defer src="/js/detailBoardRe.js"></script>
 	<script defer src="/js/detailBoardLoginChk.js"></script>
 	<script defer src="/js/detailBoardUpdateChk.js"></script>
+	<script defer src="/js/userPage.js"></script>
 	<link href="css/main.css" rel="stylesheet" type="text/css">
 	<link href="/css/list.css" rel="stylesheet" type="text/css">
 </head>
@@ -36,7 +37,7 @@
 				<table>
 					<tr>
 						<td style="width: 360px; font-size: 25px;">${content.b_title}</td>
-						<td style="width: 100px; font-size: 16px;">${content.m_nickname}</td>
+						<td style="width: 100px; font-size: 16px;"><a onclick="openUserPage(${content.member_id})">${content.m_nickname}</a></td>
 						<td style="width:150px; font-size: 16px;">${content.getFormattedCreateDate()}</td>
 					</tr>
 					<tr>
@@ -110,7 +111,7 @@
 		<div id="reply" class="reply-form">
 		    <table>
                	<tr>
-                  	<td class="level-${content.b_re_level}" style="width: 100px;">${content.m_nickname}</td>
+                  	<td class="level-${content.b_re_level}" style="width: 100px;"><a onclick="openUserPage(${content.member_id})">${content.m_nickname}</a></td>
                     	<td style="width: 400px;">${content.b_content}</td>
                     	<td style="width: 180px;">${content.getFormattedCreateDate()}</td>
                  
