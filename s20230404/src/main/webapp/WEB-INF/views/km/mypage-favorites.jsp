@@ -91,7 +91,7 @@
 				<td hidden>${favorite.id}</td>
 				<td>
 					<c:url value='/display' var='url'><c:param name='file' value='${favorite.thumbnail}'/></c:url>
-					<img alt="#" src="${url}" width="100%" height="100%">
+					<img alt="#" src="${url}" width="100px" height="70px">
 				</td>
 				<td>${favorite.loc}</td>
 				<td > <a href="<%=contextPath%>/traDetail?tid=${favorite.id}">${favorite.name}</a></td>
