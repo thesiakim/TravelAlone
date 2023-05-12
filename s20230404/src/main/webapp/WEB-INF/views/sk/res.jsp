@@ -90,7 +90,7 @@ th, td {
    <c:set var="num" value="${page.total-page.start+1 }"></c:set>
    <br>
 <!-- 지역 종류 지역 종류  지역 종류  지역 종류  지역 종류  지역 종류  -->
-<div style="display: inline-block; width: 580px; text-align: center;">
+<div style="display: inline-block; width: 460px; text-align: center;">
    <c:forEach items="${boardLocList}" var="list">
       <!-- 컨트롤러로 보내는거 -->
       <a href="resLocCodeFilter?code=${list.code}">

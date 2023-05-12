@@ -91,7 +91,7 @@ th, td {
    <br>
    
 <!-- 지역 종류 지역 종류  지역 종류  지역 종류  지역 종류  지역 종류  -->
-<div style="display: inline-block; width: 580px; text-align: center;">
+<div style="display: inline-block; width: 460px; text-align: center;">
    <c:forEach items="${traCommonLocCode}" var="list">
       <!-- 컨트롤러로 보내는거 -->
       <a href="traLocFilter?code=${list.code}">

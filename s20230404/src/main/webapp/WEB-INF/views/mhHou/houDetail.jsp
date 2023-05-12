@@ -125,7 +125,7 @@
 <!-- 썸네일 이미지 표시할 테이블 -->         
 <table style="margin: 0 auto;">
   <tr>
-    <c:forEach items="${mhHouImgList}" var="houImg">
+    <c:forEach items="${imgHouList}" var="houImg">
       <td style="text-align: center;">
         <c:url value='/display' var='url'>
           <c:param name='file' value='${houImg.img_stored_file}'/>

@@ -580,7 +580,7 @@ public String inquireSearch(Inquire inquire, String currentPage, Model model) {
 	inquire.setEnd(page.getEnd());
 	
 	List<Inquire> listSearchInquire = mh.listSearchInquire(inquire);
-	//log.info("mhController InquireSearch listSearchInquire.size()=>" + listSearchInquire.size());
+	//log.info("InquireController InquireSearch listSearchInquire.size()=>" + listSearchInquire.size());
 	
 	model.addAttribute("totalInquire", totalInquire);
 	model.addAttribute("inquireList", listSearchInquire);
@@ -616,7 +616,7 @@ public String inquireFilter(@RequestParam(name = "code") String code,Inquire inq
 	
 	List<Inquire> listFilterInquire = mh.listFilterOptionInquire(inquire);
 	//메소드를 호출하여 조건에 맞는 데이터를 조회합니다. 이 데이터는 모델 객체에 추가되어 View에서 사용
-	//log.info("mhController  listFilterInquire.size()=>" + listFilterInquire.size());
+	//log.info("InquireController  listFilterInquire.size()=>" + listFilterInquire.size());
 	model.addAttribute("totalInquire", totalInquire);
 	model.addAttribute("inquireList", listFilterInquire);
 	model.addAttribute("page", page);
@@ -631,9 +631,9 @@ public String inquireFilter(@RequestParam(name = "code") String code,Inquire inq
 //문의게시판 답변 페이지이동
 @GetMapping(value = "inquireReplyForm")
 public String inquireReplyForm(int g_writing_id, Model model) {
-	//log.info("mhController inquireReplyForm Start... ");
+	//log.info("InquireController inquireReplyForm Start... ");
 	Inquire inquire = mh.detailInquire(g_writing_id);
-	//log.info("mhController inquireReplyForm inquire->"+inquire);	
+	//log.info("InquireController inquireReplyForm inquire->"+inquire);	
 	model.addAttribute("inquire", inquire);	
 	return "mh/inquireReplyForm";
 	
@@ -642,13 +642,13 @@ public String inquireReplyForm(int g_writing_id, Model model) {
 //문의게시판 글답변(업데이트) 
 @PostMapping(value = "replyInquire")
 public String replyInquire(Inquire inquire, Model model) {
-	//log.info("mhController Start reply...");
-	System.out.println("mhController reply" + inquire.getG_writing_id());
-	System.out.println("mhController reply" + inquire.getG_content());
-	System.out.println("mhController reply" + inquire.getG_reply_content());
+	//log.info("InquireController Start reply...");
+	//log.info("InquireController reply" + inquire.getG_writing_id());
+	//log.info("InquireController reply" + inquire.getG_content());
+	//log.info("InquireController reply" + inquire.getG_reply_content());
 	
 	int replyCount = mh.replyInquire(inquire);
-	log.info("mhController es.updateNotice updateCount-->"+ replyCount);
+	//log.info("InquireController es.updateNotice updateCount-->"+ replyCount);
 	model.addAttribute("repCnt", replyCount);
 	model.addAttribute("kk3"," Message Test");
 	return "forward:inquire";
@@ -663,17 +663,3 @@ public String replyInquire(Inquire inquire, Model model) {
 }
 
 
-
-/*
-//공지사항   게시글조회 (rest api 방식으로 작성)
-@GetMapping(value = "noticeDetail/{gid}")
-public String noticeDetail(@PathVariable int gid , Model model ) {
-	System.out.println("mhController Start noticeDetail..." );
-	System.out.println("mhController noticeDetail g_notice_id->"+ gid );
-	
-	Notice notice = mh.detailNotice(gid);
-	model.addAttribute("notice", notice);
-	
-	return "noticeDetail";
-}
-*/

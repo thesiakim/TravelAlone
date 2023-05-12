@@ -28,17 +28,13 @@ public class MhDaoImpl implements MhDao {
 @Override
 public int totalNotice() {
 	int totNoticeCount = 0;
-	System.out.println("mhDaoImpl Start total..." );
-
+	//log.info("NoticeDaoImpl Start total..." );
 	try {
 		totNoticeCount = session.selectOne("mhNoticeTotal");
-		System.out.println("mhDaoImpl totalNotice totNoticeCount->" +totNoticeCount);
-
+		//log.info("NoticeDaoImpl totalNotice totNoticeCount->" +totNoticeCount);
 	} catch (Exception e) {
-		System.out.println("mhDaoImpl totalNotice Exception->"+e.getMessage());
-	}
-	
-	
+		//log.info("NoticeDaoImpl totalNotice Exception->"+e.getMessage());
+	}		
 	return totNoticeCount;
 }
 
@@ -46,15 +42,14 @@ public int totalNotice() {
 //글목록
 @Override
 public List<Notice> selectNoticeList(Notice notice) {
-	List<Notice> noticeList = new ArrayList<Notice>(); 
-			
+	List<Notice> noticeList = new ArrayList<Notice>(); 			
 	try {
-		log.info("mhDaoImpl selectNoticeList mhNoticeList Start...");					
+		//log.info("NoticeDaoImpl selectNoticeList mhNoticeList Start...");					
 		noticeList = session.selectList("mhNoticeList",notice);
-		log.info("mhDaoImpl selectNoticeList mhNoticeList End...");
+		//log.info("NoticeDaoImpl selectNoticeList mhNoticeList End...");
 	} catch (Exception e) {
 		e.getStackTrace();
-		log.info("mhDaoImpl selectNoticeList mhNoticeList error...");
+		//log.info("NoticeDaoImpl selectNoticeList mhNoticeList error...");
 	}
 	
 	return noticeList;
@@ -63,11 +58,11 @@ public List<Notice> selectNoticeList(Notice notice) {
 @Override
 public int seqNotice(Notice notice) {
 	int result = 0;
-	log.info("NoticeDaoImpl seqNotice Start");
+	//log.info("NoticeDaoImpl seqNotice Start");
 	try {
 		result = session.selectOne("mhSeqNotice",notice);
 	} catch (Exception e) {
-		log.info("NoticeDaoImpl seqNotice Exception->"+e.getMessage());
+		//log.info("NoticeDaoImpl seqNotice Exception->"+e.getMessage());
 	}
 	return result;
 }
@@ -76,11 +71,11 @@ public int seqNotice(Notice notice) {
 	@Override
 	public int insertNotice(Notice notice) {
 		int result = 0;
-		System.out.println("mhDaoImpl insert Start..." );
+		//log.info("NoticeDaoImpl insert Start..." );
 		try {
 			result = session.insert("insertNotice",notice);
 		} catch (Exception e) {
-			System.out.println("mhDaoImpl insert Exception->"+e.getMessage());
+		//log.info("NoticeDaoImpl insert Exception->"+e.getMessage());
 		}		
 		return result;
 }
@@ -91,12 +86,12 @@ public int seqNotice(Notice notice) {
 @Override
 public int insertNotImg(Not_Img not_Img) {
 	int result = 0;
-	log.info("NoticeDaoImpl insert Start");
-	log.info("NoticeDaoImpl insertImg not_Img->"+ not_Img);
+	//log.info("NoticeDaoImpl insert Start");
+	//log.info("NoticeDaoImpl insertImg not_Img->"+ not_Img);
 	try {
 		result = session.insert("insertNotImg",not_Img);
 	} catch (Exception e) {
-		log.info("NoticeDaoImpl insert Exception->"+e.getMessage());
+    //log.info("NoticeDaoImpl insert Exception->"+e.getMessage());
 	}	
 	
 	return result;
@@ -105,12 +100,12 @@ public int insertNotImg(Not_Img not_Img) {
 	
 @Override
 public int updateNotice(Notice notice) {
-	System.out.println("mhDaoImpl updateNotice start..");
+	//log.info("NoticeDaoImpl updateNotice start..");
 	int updateCount= 0;
 	try {
 		updateCount = session.update("mhNoticeUpdate", notice);
 	} catch (Exception e) {
-		System.out.println("mhDaoImpl updateEmp Exception->" + e.getMessage());
+	//log.info("NoticeDaoImpl updateEmp Exception->" + e.getMessage());
 	}
 	return updateCount;
 }	
@@ -120,15 +115,15 @@ public int updateNotice(Notice notice) {
 //글자세히보기
 @Override
 public Notice detailNotice(int g_notice_id) {
-	System.out.println("mhDaoImpl detail start..");
+	//log.info("mhDaoImpl detail start..");
 	Notice notice = new Notice();
 	
 	try {
 		notice = session.selectOne("mhNoticeSelOne", g_notice_id);
-		System.out.println("mhDaoImpl detail notice.getG_notice_title()->"+ notice.getG_notice_title());
+		//log.info("NoticeDaoImpl detail notice.getG_notice_title()->"+ notice.getG_notice_title());
 
 	} catch (Exception e) {
-		System.out.println("mhDaoImpl detail Exception->"+e.getMessage());
+		//log.info("NoticeDaoImpl detail Exception->"+e.getMessage());
 	}
 	
 	return notice;
@@ -140,10 +135,10 @@ public Notice detailNotice(int g_notice_id) {
 public List<Not_Img> selectNotImgList(Not_Img not_Img) {
 	List<Not_Img> notImgList = new ArrayList<Not_Img>();
 	try {
-		log.info("NoticeDaoImpl selectNotImgList notImgList Start");
+		//log.info("NoticeDaoImpl selectNotImgList notImgList Start");
 		notImgList = session.selectList("mhNotImgList", not_Img);
 	} catch (Exception e) {
-		log.info("NoticeDaoImpl selectNotImgList Exception " + e.getMessage());
+		//log.info("NoticeDaoImpl selectNotImgList Exception " + e.getMessage());
 	}
 	
 	return notImgList;
@@ -152,15 +147,15 @@ public List<Not_Img> selectNotImgList(Not_Img not_Img) {
 
 @Override
 public int deleteNotice(int g_notice_id) {
-	System.out.println("mhDaoImpl delete start..");
+	//log.info("NoticeDaoImpl delete start..");
 	int result = 0;
-	System.out.println("mhDaoImpl delete g_notice_id->"+ g_notice_id);
+	//log.info("NoticeDaoImpl delete g_notice_id->"+ g_notice_id);
 	try {
 		result = session.delete("deleteNotice",g_notice_id);
-		System.out.println("mhDaoImpl delete result->"+ result);
+		//log.info("NoticeDaoImpl delete result->"+ result);
 		
 	} catch (Exception e) {
-		System.out.println("mhDaoImpl delete Exception->"+ e.getMessage());
+		//log.info("NoticeDaoImpl delete Exception->"+ e.getMessage());
 	}				
 	return result;
 }
@@ -169,13 +164,13 @@ public int deleteNotice(int g_notice_id) {
 	
 @Override
 public int deleteNotImg(int g_notice_id) {
-	log.info("NoticeDaoImpl deleteNotImg start");
+	//log.info("NoticeDaoImpl deleteNotImg start");
 	int result = 0;
-	log.info("NoticeDaoImpl deleteNotImg g_notice_id->"+ g_notice_id);
+	//log.info("NoticeDaoImpl deleteNotImg g_notice_id->"+ g_notice_id);
 	try {
 		result = session.delete("deleteNotImg",g_notice_id);
 	} catch (Exception e) {
-	 log.info("NoticeDaoImpl delete Exception->"+ e.getMessage());
+	// log.info("NoticeDaoImpl delete Exception->"+ e.getMessage());
 	}
 	
 	return result;
@@ -189,14 +184,14 @@ public int deleteNotOneImg(int g_notice_id, int img_id) {
 	not_Img.setG_notice_id(g_notice_id);
 	not_Img.setImg_id(img_id);
 	
-	log.info("NoticeDaoImpl deleteNotOneImg start");
+	//log.info("NoticeDaoImpl deleteNotOneImg start");
 	int result = 0;
-	log.info("NoticeDaoImpl deleteNotOneImg g_notice_id->"+ g_notice_id);
-	log.info("NoticeDaoImpl deleteNotOneImg img_id->"+ img_id);
+	//log.info("NoticeDaoImpl deleteNotOneImg g_notice_id->"+ g_notice_id);
+	//log.info("NoticeDaoImpl deleteNotOneImg img_id->"+ img_id);
 	try {
 		result = session.delete("deleteNotOneImg",not_Img );
 	} catch (Exception e) {
-		log.info("NoticeDaoImpl delete Exception->"+ e.getMessage());
+		//log.info("NoticeDaoImpl delete Exception->"+ e.getMessage());
 	}
 	
 	
@@ -208,11 +203,11 @@ public int deleteNotOneImg(int g_notice_id, int img_id) {
 @Override
 public List<Notice> noticeSearchList(Notice notice) {
 	List<Notice> noticeSearchList = null;
-	log.info("mhDaoImpl noticeSearchList start..");
+	//log.info("NoticeDaoImpl noticeSearchList start..");
 	try {
 		noticeSearchList = session.selectList("mhNoticeSearchList",notice);
 	} catch (Exception e) {
-		log.info("mhDaoImpl noticeSearchList Exception " + e.getMessage());
+		//log.info("NoticeDaoImpl noticeSearchList Exception " + e.getMessage());
 	}
 	
 	
@@ -223,13 +218,13 @@ public List<Notice> noticeSearchList(Notice notice) {
 @Override
 public int condNotice(Notice notice) {
 	int conditionNoticeCount = 0;
-	log.info("mhDaoImpl Start total...");
+	//log.info("NoticeDaoImpl Start total...");
 	try {
 		conditionNoticeCount = session.selectOne("condNoticeCnt",notice);
-		log.info("mhDaoImpl conditionNoticeCount->"+conditionNoticeCount);
+		//log.info("NoticeDaoImpl conditionNoticeCount->"+conditionNoticeCount);
 	
 	} catch (Exception e) {
-		log.info("mhDaoImpl Exception"+ e.getMessage());
+		//log.info("NoticeDaoImpl Exception"+ e.getMessage());
 	}
 	
 	return conditionNoticeCount;
@@ -239,12 +234,12 @@ public int condNotice(Notice notice) {
 	public List<Notice> selectFaqList(Notice notice) {
 		List<Notice> faqList = new ArrayList<Notice>(); 
 		try {
-			log.info("mhDaoImpl selectFaqList mhFaqList Start...");		
+			//log.info("NoticeDaoImpl selectFaqList mhFaqList Start...");		
 			faqList = session.selectList("mhFaqList",notice);
-			log.info("mhDaoImpl selectFaqList mhFaqList End...");
+			//log.info("NoticeDaoImpl selectFaqList mhFaqList End...");
 		} catch (Exception e) {
 			e.getStackTrace();
-			log.info("mhDaoImpl selectNoticeList selectFaqList error...");
+			//log.info("NoticeDaoImpl selectNoticeList selectFaqList error...");
 		}
 		
 		return faqList;
@@ -258,12 +253,12 @@ public int condNotice(Notice notice) {
 @Override
 public int totalInquire() {
 	int totalInquireCount = 0;
-	log.info("mhDaoImpl Start totalInq...");
+	//log.info("mhDaoImpl Start totalInq...");
 	try {
 		totalInquireCount = session.selectOne("mhInqTotal");
-		log.info("mhDaoImpl totalInquire totalInquireCount->" +totalInquireCount);
+		//log.info("mhDaoImpl totalInquire totalInquireCount->" +totalInquireCount);
 	} catch (Exception e) {
-		log.info("mhDaoImpl Exception"+e.getMessage());
+		//log.info("mhDaoImpl Exception"+e.getMessage());
 	}
 					
 	return totalInquireCount;
@@ -273,12 +268,12 @@ public int totalInquire() {
 public List<Inquire> selectInquireList(Inquire inquire) {
 	List<Inquire> inquireList = new ArrayList<Inquire>();
 	try {
-		log.info("mhDaoImpl selectInquireList mhInquireList Start...");
+		//log.info("InquireDaoImpl selectInquireList mhInquireList Start...");
 		inquireList = session.selectList("mhInquireList", inquire);
 	} catch (Exception e) {
 		e.getStackTrace();
-		log.error("{}",e.getMessage());
-		log.info("mhDaoImpl selectInquireList mhInquireList error...");
+	//	log.error("{}",e.getMessage());
+	//	log.info("InquireDaoImpl selectInquireList mhInquireList error...");
 	}
 	
 	
@@ -288,11 +283,11 @@ public List<Inquire> selectInquireList(Inquire inquire) {
 @Override
 public int seqInquire(Inquire inquire) {
 	int result = 0;
-	log.info("InquireDaoImpl seqInquire Start");
+	//log.info("InquireDaoImpl seqInquire Start");
 	try {
 		result = session.selectOne("mhSeqInquire",inquire);
 	} catch (Exception e) {
-		log.info("InquireDaoImpl mhSeqInquire Exception->"+e.getMessage());
+		//log.info("InquireDaoImpl mhSeqInquire Exception->"+e.getMessage());
 	}
 	return result;
 }
@@ -301,12 +296,12 @@ public int seqInquire(Inquire inquire) {
 @Override
 public int insertInquire(Inquire inquire) {
 	int result = 0;
-	log.info("InquireDaoImpl insert Start... " );
+	//log.info("InquireDaoImpl insert Start... " );
 	try {
 		
 		result = session.insert("insertInquire",inquire);
 	} catch (Exception e) {
-		log.info("mhDaoImpl insert Exception->" + e.getMessage());
+		//log.info("InquireDaoImpl insert Exception->" + e.getMessage());
 	}
 	return result;
 }
@@ -316,12 +311,12 @@ public int insertInquire(Inquire inquire) {
 @Override
 public int insertInqImg(Inq_Img inq_Img) {
 	int result = 0;
-	log.info("InquireImpl insert Start");
-	log.info("InquireImpl insertImg inq_Img->"+ inq_Img);
+	//log.info("InquireImpl insert Start");
+	//log.info("InquireImpl insertImg inq_Img->"+ inq_Img);
 	try {
 		result = session.insert("insertInqImg",inq_Img);
 	} catch (Exception e) {
-		log.info("InquireImpl insert Exception->"+e.getMessage());
+		//log.info("InquireImpl insert Exception->"+e.getMessage());
 	}				
 	return result;
 }
@@ -329,13 +324,13 @@ public int insertInqImg(Inq_Img inq_Img) {
 
 @Override
 public Inquire detailInquire(int g_writing_id) {
-	log.info("mhDaoImpl detail start..");
+	//log.info("InquireDaoImpl detail start..");
 	Inquire inquire = new Inquire();
 	try {
 		inquire = session.selectOne("mhInquireSelOne",g_writing_id );
-		log.info("mhDaoImpl detail inquire.getG_title()->"+ inquire.getG_title());			
+		//log.info("InquireDaoImpl detail inquire.getG_title()->"+ inquire.getG_title());			
 	} catch (Exception e) {
-		log.info("mhDaoImpl detail Exception->" + e.getMessage());
+		//log.info("InquireDaoImpl detail Exception->" + e.getMessage());
 	}
 	
 	return inquire;
@@ -345,10 +340,10 @@ public Inquire detailInquire(int g_writing_id) {
 public List<Inq_Img> selectInqImgList(Inq_Img inq_Img) {
 	List<Inq_Img> inqImgList = new ArrayList<Inq_Img>();
 	try {
-		log.info("InquireDaoImpl selectInqImgList inqImgList Start");
+		//log.info("InquireDaoImpl selectInqImgList inqImgList Start");
 		inqImgList = session.selectList("mhInqImgList", inq_Img);
 	} catch (Exception e) {
-		log.info("InquireDaoImpl selectInqImgList Exception " +e.getMessage());
+		//log.info("InquireDaoImpl selectInqImgList Exception " +e.getMessage());
 	}
 	
 	return inqImgList;
@@ -357,12 +352,12 @@ public List<Inq_Img> selectInqImgList(Inq_Img inq_Img) {
 
 @Override
 public int updateInquire(Inquire inquire) {
-	log.info("mhDaoImpl updateInquire start..");
+	//log.info("InquireDaoImpl updateInquire start..");
 	int updateCount = 0;
 	try {
 		updateCount = session.update("mhInquireUpdate", inquire);
 	} catch (Exception e) {
-	log.info("mhDaoImpl updateInquire Exception->" + e.getMessage());	
+	//log.info("InquireDaoImpl updateInquire Exception->" + e.getMessage());	
 	}
 	return updateCount;
 }
@@ -370,14 +365,14 @@ public int updateInquire(Inquire inquire) {
 
 @Override
 public int deleteInquire(int g_writing_id) {
-	log.info("mhDaoImpl delete start..");
+	//log.info("InquireDaoImpl delete start..");
 	int result = 0;
-	log.info("mhDaoImpl delete g_writing_id->"+ g_writing_id);
+	//log.info("InquireDaoImpl delete g_writing_id->"+ g_writing_id);
 	try {
 		result = session.delete("deleteInquire",g_writing_id);
-		log.info("mhDaoImpl delete result->"+ result);
+		//log.info("InquireDaoImpl delete result->"+ result);
 	} catch (Exception e) {
-		log.info("mhDaoImpl delete Exception->"+ e.getMessage());
+	//	log.info("InquireDaoImpl delete Exception->"+ e.getMessage());
 	}
 	
 	return result;
@@ -386,13 +381,13 @@ public int deleteInquire(int g_writing_id) {
 //문의사항 사진전체삭제
 	@Override
 	public int deleteInqImg(int g_writing_id) {
-		log.info("InquireDaoImpl deleteInqImg start");
+		//log.info("InquireDaoImpl deleteInqImg start");
 		int result = 0;
-		log.info("InquireDaoImpl deleteInqImg g_writing_id->"+ g_writing_id);
+		//log.info("InquireDaoImpl deleteInqImg g_writing_id->"+ g_writing_id);
 		try {
 			result = session.delete("deleteInqImg", g_writing_id);			
 		} catch (Exception e) {
-			log.info("InquireDaoImpl delete Exception->"+ e.getMessage());
+			//log.info("InquireDaoImpl delete Exception->"+ e.getMessage());
 		}		
 		return result;
 	}
@@ -405,14 +400,14 @@ public int deleteInqOneImg(int g_writing_id, int img_id) {
 	inq_Img.setG_writing_id(g_writing_id);
 	inq_Img.setImg_id(img_id);
 	
-	log.info("InquireDaoImpl deleteInqImg start");
+	//log.info("InquireDaoImpl deleteInqImg start");
 	int result = 0;
-	log.info("InquireDaoImpl deleteHouImg g_writing_id->"+ g_writing_id);
-	log.info("InquireDaoImpl deleteHouImg img_id->"+ img_id);
+	//log.info("InquireDaoImpl deleteHouImg g_writing_id->"+ g_writing_id);
+	//log.info("InquireDaoImpl deleteHouImg img_id->"+ img_id);
 	try {
 		result = session.delete("deleteInqOneImg",inq_Img );
 	} catch (Exception e) {
-		log.info("InquireDaoImpl delete Exception->"+ e.getMessage());
+		//log.info("InquireDaoImpl delete Exception->"+ e.getMessage());
 	}
 			
 	return result;
@@ -422,12 +417,12 @@ public int deleteInqOneImg(int g_writing_id, int img_id) {
 @Override
 public List<Inquire> inquireSearchList(Inquire inquire) {
 	List<Inquire> inquireSearchList = null;
-	log.info("mhDaoImpl inquireSearchList start..");
+	//log.info("InquireDaoImpl inquireSearchList start..");
 	
 	try {
 		inquireSearchList = session.selectList("mhinquireSearchList",inquire);
 } catch (Exception e) {
-	log.info("mhDaoImpl mhinquireSearchList Exception " + e.getMessage());
+	//log.info("InquireDaoImpl mhinquireSearchList Exception " + e.getMessage());
 }
 	
 	return inquireSearchList;
@@ -438,12 +433,12 @@ public List<Inquire> inquireSearchList(Inquire inquire) {
 @Override
 public int condInquireCnt(Inquire inquire) {
 	int conditionInquireCount = 0;
-	log.info("mhDaoImpl Start total...");
+	//log.info("InquireDaoImpl Start total...");
 	try {
 		conditionInquireCount = session.selectOne("condInquireCnt",inquire);
-		log.info("mhDaoImpl conditionInquireCount->"+conditionInquireCount);		
+		//log.info("InquireDaoImpl conditionInquireCount->"+conditionInquireCount);		
 	} catch (Exception e) {
-		log.info("mhDaoImpl Exception"+ e.getMessage());
+		//log.info("InquireDaoImpl Exception"+ e.getMessage());
 	}			
 	return conditionInquireCount;
 }
@@ -451,9 +446,9 @@ public int condInquireCnt(Inquire inquire) {
 //공통코드 호출부  여행지문의 숙소문의 맛집문의 같은거
 @Override
 public List<CommonCode> getCommonCode() {
-	log.info("getCommonCode 호출부 .......");
+	//log.info("getCommonCode 호출부 .......");
 	List<CommonCode> result = session.selectList("mhCommonCode");
-	log.info("getCommonCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
+	//log.info("getCommonCode data {},{} .......",result.get(0).getCode(),result.get(0).getValue());
 	
 	return  result;
 }
@@ -461,11 +456,11 @@ public List<CommonCode> getCommonCode() {
 @Override
 public List<Inquire> mhOptionInquireList(Inquire inquire) {
 	List<Inquire> inquireFilterList = null;
-	log.info("mhDaoImpl inquireFilterList start..");
+	//log.info("InquireDaoImpl inquireFilterList start..");
 	try {
 		inquireFilterList = session.selectList("mhOptionInquireList",inquire);
 	} catch (Exception e) {
-		log.info("mhDaoImpl mhTraInqFilterList Exception " + e.getMessage());
+		//log.info("InquireDaoImpl mhTraInqFilterList Exception " + e.getMessage());
 	}
 	return inquireFilterList;
 }
@@ -473,12 +468,12 @@ public List<Inquire> mhOptionInquireList(Inquire inquire) {
 @Override
 public int condOptionInqCnt(String code) {
 	int count = 0;		
-	log.info("mhDaoImpl Start total...");
+	//log.info("InquireDaoImpl Start total...");
 	try {
 		count = session.selectOne("condOptionInquireCnt",code);
-		log.info("mhDaoImpl condOptionInquireCnt->"+count);		
+		//log.info("InquireDaoImpl condOptionInquireCnt->"+count);		
 	} catch (Exception e) {
-		log.info("mhDaoImpl Exception"+ e.getMessage());
+		//log.info("InquireDaoImpl Exception"+ e.getMessage());
 	}			
 	return count;
 }
@@ -488,15 +483,15 @@ public int condOptionInqCnt(String code) {
 //답변하기
 @Override
 public int replyCount(Inquire inquire) {
-	log.info("mhDaoImpl replyInquire start..");
+	//log.info("InquireDaoImpl replyInquire start..");
 	int replyCount = 0;
-	System.out.println("mhDaoImpl reply" + inquire.getG_writing_id());
-	System.out.println("mhDaoImpl reply" + inquire.getG_content());
+	//log.info("InquireDaoImpl reply" + inquire.getG_writing_id());
+	//log.info("InquireDaoImpl reply" + inquire.getG_content());
 	
 	try {
 		replyCount = session.update("mhInquireReply", inquire);
 	} catch (Exception e) {
-		log.info("mhDaoImpl replyInquire Exception->" + e.getMessage());	
+		//log.info("InquireDaoImpl replyInquire Exception->" + e.getMessage());	
 	}				
 	return replyCount;
 }
@@ -504,22 +499,6 @@ public int replyCount(Inquire inquire) {
 	
 
 
-
-
-	
-
-	
-	
-	
-	
-
-
-
-
-
-
-
-	
 	
 
 }

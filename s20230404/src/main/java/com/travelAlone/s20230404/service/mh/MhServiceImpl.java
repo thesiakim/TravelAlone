@@ -24,17 +24,17 @@ public class MhServiceImpl implements MhService {
 
 @Override
 public int totalNotice() {
-	System.out.println("mhServiceImpl Start totalNotice..." );
+	//log.info("NoticeServiceImpl Start totalNotice" );
 	int totNoticeCnt = mh.totalNotice();
-	System.out.println("mhServiceImpl totalNotice totalNoticeCnt->" + totNoticeCnt);
+	//log.info("NoticeServiceImpl totalNotice totalNoticeCnt->" + totNoticeCnt);
 	return totNoticeCnt;
 }
 
 @Override
 public List<Notice> listNotice(Notice notice) {
-	log.debug("mhServiceImpl Start listNotice...");
+	//log.debug("NoticeServiceImpl Start listNotice...");
 	List<Notice> noticeList = mh.selectNoticeList(notice);
-	log.debug("mhServiceImpl End listNotice...");
+	//log.debug("NoticeServiceImpl End listNotice...");
 	
 	
 	return noticeList;
@@ -43,14 +43,14 @@ public List<Notice> listNotice(Notice notice) {
 @Override
 public int seqNot(Notice notice) {
 	int result = 0;
-	log.info("NoticeServiceImpl seqNot Start" );
+	//log.info("NoticeServiceImpl seqNot Start" );
 	result = mh.seqNotice(notice);
 	return result;
 }
 @Override
 public int insertNotice(Notice notice) {
 	int result = 0;
-	System.out.println("mhServiceImpl insert Start..." );
+	//log.info("NoticeServiceImpl insert Start..." );
 	result = mh.insertNotice(notice);	
 	return result;
 }
@@ -58,14 +58,14 @@ public int insertNotice(Notice notice) {
 @Override
 public int insertNotImg(Not_Img not_Img) {
 	int result = 0;
-	log.info("NoticeServiceImpl insert Start" );
+	//log.info("NoticeServiceImpl insert Start" );
 	result = mh.insertNotImg(not_Img);
 	return result;
 }
 
 @Override
 public int updateNotice(Notice notice) {
-	System.out.println("mhServiceImpl update ...");
+	//log.info("NoticeServiceImpl update ...");
 	int updateCount = 0;
 	updateCount = mh.updateNotice(notice);		
 	return updateCount;
@@ -74,7 +74,7 @@ public int updateNotice(Notice notice) {
 
 @Override
 public Notice detailNotice(int g_notice_id) {
-	System.out.println("mhServiceImpl detail ...");
+	//log.info("NoticeServiceImpl detail ...");
 	Notice notice = null; 
 	notice = mh.detailNotice(g_notice_id);
 	return notice;						
@@ -83,7 +83,7 @@ public Notice detailNotice(int g_notice_id) {
 //공지사항 사진리스트
 @Override
 public List<Not_Img> listNot_Img(Not_Img not_Img) {
-	log.info("NoticeServiceImpl Start listInq_Img");
+	//log.info("NoticeServiceImpl Start listInq_Img");
 	List<Not_Img> notImgList = mh.selectNotImgList(not_Img);
 	return notImgList;
 }
@@ -93,7 +93,7 @@ public List<Not_Img> listNot_Img(Not_Img not_Img) {
 @Override
 public int deleteNotice(int g_notice_id) {
 	int result = 0;
-	System.out.println("mhServiceImpl delete Start..." );
+	//log.info("NoticeServiceImpl delete Start..." );
 	result = mh.deleteNotice(g_notice_id);		
 	return result;
 }
@@ -102,7 +102,7 @@ public int deleteNotice(int g_notice_id) {
 @Override
 public int deleteNotImg(int g_notice_id) {
 	int result = 0;
-	log.info("NoticeServiceImpl deleteNotImg Start..." );		
+	//log.info("NoticeServiceImpl deleteNotImg Start..." );		
 	result = mh.deleteNotImg(g_notice_id);		
 	return result;
 }
@@ -111,7 +111,7 @@ public int deleteNotImg(int g_notice_id) {
 @Override
 public int deleteNotOneImg(int g_notice_id, int img_id) {
 	int result = 0;
-	log.info("NoticeServiceImpl deleteNotOneImg Start");
+	//log.info("NoticeServiceImpl deleteNotOneImg Start");
 	result = mh.deleteNotOneImg(g_notice_id,img_id);
 	return result;
 }
@@ -121,9 +121,9 @@ public int deleteNotOneImg(int g_notice_id, int img_id) {
 @Override
 public List<Notice> listSearchNotice(Notice notice) {
 	List<Notice> noticeSearchList = null;
-	log.info("mhServiceImpl listSearchNotice Start...");
+	//log.info("NoticeServiceImpl listSearchNotice Start...");
 	noticeSearchList = mh.noticeSearchList(notice);
-	log.info("mhServiceImpl listSearchNotice noticeSearchList.size()"+ noticeSearchList.size());
+	//log.info("NoticeServiceImpl listSearchNotice noticeSearchList.size()"+ noticeSearchList.size());
 				
 	return noticeSearchList;
 }
@@ -132,9 +132,9 @@ public List<Notice> listSearchNotice(Notice notice) {
 	
 @Override
 public int conditionNoticeCount(Notice notice) {
-	System.out.println("mhServiceImpl  conditionNoticeCount Start" );
+	//log.info("NoticeServiceImpl  conditionNoticeCount Start" );
 	int condNoticeCnt = mh.condNotice(notice);
-	System.out.println("EmpServiceImpl conditionEmpCount condNoticeCnt->" + condNoticeCnt);
+	//log.info("NoticeServiceImpl conditionEmpCount condNoticeCnt->" + condNoticeCnt);
 	return condNoticeCnt;
 }
 
@@ -143,9 +143,9 @@ public int conditionNoticeCount(Notice notice) {
 	
 @Override
 public List<Notice> listFaq(Notice notice) {
-	log.debug("mhServiceImpl Start listFaq...");
+	//log.debug("FaqServiceImpl Start listFaq...");
 	List<Notice> faqList = mh.selectFaqList(notice);
-	log.debug("mhServiceImpl End listFaq...");
+	//log.debug("FaqServiceImpl End listFaq...");
 	return faqList;
 }
 
@@ -155,15 +155,15 @@ public List<Notice> listFaq(Notice notice) {
 //=============================문의게시판========================================================
 @Override
 public int totalInquire() {
-	log.info("mhServiceImpl Start totalInquire...");
+	//log.info("InquireServiceImpl Start totalInquire...");
 	int totalInquireCnt = mh.totalInquire();
-	log.info("mhServiceImpl Start totalInquireCnt..."+ totalInquireCnt);
+	//log.info("InquireServiceImpl Start totalInquireCnt..."+ totalInquireCnt);
 	return totalInquireCnt;
 }
 
 @Override
 public List<Inquire> listInquire(Inquire inquire) {
-	log.info("mhServiceImpl Start listInquire...");
+	//log.info("InquireServiceImpl Start listInquire...");
 	List<Inquire> inquireList = mh.selectInquireList(inquire);		
 	return inquireList;
 }
@@ -172,7 +172,7 @@ public List<Inquire> listInquire(Inquire inquire) {
 @Override
 public int seqInq(Inquire inquire) {
 	int result = 0;
-	log.info("InquireServiceImpl seqInq Start" );
+	//log.info("InquireServiceImpl seqInq Start" );
 	result = mh.seqInquire(inquire);
 	return result;
 }
@@ -180,7 +180,7 @@ public int seqInq(Inquire inquire) {
 @Override
 public int insertInquire(Inquire inquire) {
 	int result = 0;
-	log.info("mhServiceImpl insert Start...");
+	//log.info("InquireServiceImpl insert Start...");
 	result = mh.insertInquire(inquire);		
 	return result;
 }
@@ -188,7 +188,7 @@ public int insertInquire(Inquire inquire) {
 @Override
 public int insertInqImg(Inq_Img inq_Img) {
 	int result = 0;
-	log.info("InquireServiceImpl insert Start" );
+	//log.info("InquireServiceImpl insert Start" );
 	result = mh.insertInqImg(inq_Img);
 	return result;
 }
@@ -196,7 +196,7 @@ public int insertInqImg(Inq_Img inq_Img) {
 
 @Override
 public Inquire detailInquire(int g_writing_id) {
-	log.info(("mhServiceImpl detail ..."));
+	//log.info(("InquireServiceImpl detail ..."));
 	Inquire inquire = null;
 	inquire = mh.detailInquire(g_writing_id);	
 	return inquire;
@@ -204,7 +204,7 @@ public Inquire detailInquire(int g_writing_id) {
 
 @Override
 public List<Inq_Img> listInq_Img(Inq_Img inq_Img) {
-	log.info("InquireServiceImpl Start listInq_Img");
+	//log.info("InquireServiceImpl Start listInq_Img");
 	List<Inq_Img> inqImgList = mh.selectInqImgList(inq_Img);
 	return inqImgList;
 }
@@ -212,7 +212,7 @@ public List<Inq_Img> listInq_Img(Inq_Img inq_Img) {
 
 @Override
 public int updateInquire(Inquire inquire) {
-	log.info("mhServiceImpl update ...");
+	//log.info("mhServiceImpl update ...");
 	int updateCount = 0;
 	updateCount = mh.updateInquire(inquire);		
 	return updateCount;
@@ -222,7 +222,7 @@ public int updateInquire(Inquire inquire) {
 @Override
 public int deleteInquire(int g_writing_id) {
 	int result = 0;
-	log.info("mhServiceImpl delete Start...");
+	//log.info("mhServiceImpl delete Start...");
 	result = mh.deleteInquire(g_writing_id);		
 	return result;
 }
@@ -231,7 +231,7 @@ public int deleteInquire(int g_writing_id) {
 @Override
 public int deleteInqImg(int g_writing_id) {
 	int result = 0;
-	log.info("InquireServiceImpl deleteInqImg Start");
+	//log.info("InquireServiceImpl deleteInqImg Start");
 	result = mh.deleteInqImg(g_writing_id);
 	return result;
 }
@@ -240,7 +240,7 @@ public int deleteInqImg(int g_writing_id) {
 @Override
 public int deleteInqOneImg(int g_writing_id, int img_id) {
 	int result = 0;
-	log.info("InquireServiceImpl deleteInqOneImg Start");
+	//log.info("InquireServiceImpl deleteInqOneImg Start");
 	result = mh.deleteInqOneImg(g_writing_id,img_id);
 	return result;
 }
@@ -249,9 +249,9 @@ public int deleteInqOneImg(int g_writing_id, int img_id) {
 @Override
 public List<Inquire> listSearchInquire(Inquire inquire) {
 	List<Inquire> inquireSearchList = null;
-	log.info("mhServiceImpl listSearchInquire Start...");
+	//log.info("InquireServiceImpl listSearchInquire Start...");
 	inquireSearchList = mh.inquireSearchList(inquire);
-	log.info("mhServiceImpl listSearchInquire inquireSearchList.size()"+ inquireSearchList.size());
+	//log.info("InquireServiceImpl listSearchInquire inquireSearchList.size()"+ inquireSearchList.size());
 			
 	return inquireSearchList;
 }
@@ -260,16 +260,16 @@ public List<Inquire> listSearchInquire(Inquire inquire) {
 	
 @Override
 public int conditionInquireCount(Inquire inquire) {
-	log.info("mhServiceImpl  conditionInquireCount Start" );
+	//log.info("InquireServiceImpl  conditionInquireCount Start" );
 	int conditionInquireCnt = mh.condInquireCnt(inquire);
-	log.info("mhServiceImpl  conditionInquireCount conditionInquireCnt" + conditionInquireCnt);		
+	//log.info("InquireServiceImpl  conditionInquireCount conditionInquireCnt" + conditionInquireCnt);		
 	return conditionInquireCnt;
 }
 
 //답변
 @Override
 public int replyInquire(Inquire inquire) {
-	log.info("mhServiceImpl reply ...");
+	//log.info("InquireServiceImpl reply ...");
 	int replyCount = 0;
 	replyCount = mh.replyCount(inquire);
 	return replyCount;
@@ -287,46 +287,22 @@ public List<CommonCode> getCommonCode() {
 //옵션별 갯수
 @Override   
 public int conditionOptionCount(String code) {
-	log.info("mhServiceImpl  conditionOptionCount Start" );
+	//log.info("InquireServiceImpl  conditionOptionCount Start" );
 	int conditionInquireCnt = mh.condOptionInqCnt(code);
-	log.info("mhServiceImpl  conditionOptionCount conditionInquireCnt" + conditionInquireCnt);		
+	//log.info("InquireServiceImpl  conditionOptionCount conditionInquireCnt" + conditionInquireCnt);		
 	return conditionInquireCnt;
 }
 //옵션별 리스트
 @Override
 public List<Inquire> listFilterOptionInquire(Inquire inquire) {
 	List<Inquire> inquireOptionFilterList = null;
-	log.info("mhServiceImpl listFilterOptionInquire Start...");
+	//log.info("InquireServiceImpl listFilterOptionInquire Start...");
 	inquireOptionFilterList = mh.mhOptionInquireList(inquire);
-	log.info("mhServiceImpl listFilterOptionInquire inquireTraFilterList.size()"+ inquireOptionFilterList.size());
+	//log.info("InquireServiceImpl listFilterOptionInquire inquireTraFilterList.size()"+ inquireOptionFilterList.size());
 	return inquireOptionFilterList;
 }
 
 			
-	
-
-
-	
-
-	
-
-
-
-
-
-	
-
-
-	
-
-	
-	
-	
-
-
-
-	
-
 
 
 
