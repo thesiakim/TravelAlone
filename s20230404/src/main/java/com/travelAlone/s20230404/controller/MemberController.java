@@ -122,7 +122,7 @@ public class MemberController {
     @GetMapping("/id")
     public String goFindId() {
 
-        return "find-id";
+        return "km/find-id";
     }
 
 
@@ -137,18 +137,17 @@ public class MemberController {
 
         // 이메일을 찾아온다
         List<String> findEmails = memberService.findEmailByNameAndPhone(requestDto);
-
         // 비어있다면 error 모델에 받아 다시 페이지에 출력
         if (findEmails == null || findEmails.isEmpty()){
             model.addAttribute("error", "조건에 맞는 아이디가 없습니다.");
-            return "find-id";
+            return "km/find-id";
         }
 
         // 모델에 담아준다
         model.addAttribute("email", findEmails);
 
         // 찾은 id 조회페이지로 이동
-        return "checking-id";
+        return "km/checking-id";
     }
 
     /**
@@ -158,7 +157,7 @@ public class MemberController {
     @GetMapping("/password")
     public String goFindPassword(){
 
-        return "find-password";
+        return "km/find-password";
     }
 
     /**
@@ -176,7 +175,7 @@ public class MemberController {
         if (memberId == null){
 
             //찾아온 memberId가 null이라면 다시 페이지 반환
-            return "find-password";
+            return "km/find-password";
 
         }else {
 
@@ -184,7 +183,7 @@ public class MemberController {
             model.addAttribute("info", requestDto);
             model.addAttribute("memberId", memberId);
 
-            return "change-password";
+            return "km/change-password";
         }
     }
 

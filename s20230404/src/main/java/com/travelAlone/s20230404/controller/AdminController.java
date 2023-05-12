@@ -43,7 +43,6 @@ public class AdminController {
             // search 값이 null이면 전체 조회
             Page<AdminMemberResponseDto> responseDtos = memberService.adminMemberListShow(pageable);
 
-
             // 페이지 전체 갯수 담기
             model.addAttribute("totalPage", responseDtos.getTotalPages());
 

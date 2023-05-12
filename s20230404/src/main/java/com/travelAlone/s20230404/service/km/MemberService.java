@@ -109,8 +109,6 @@ public class MemberService{
         return memberRepository.findEmailByNameAndPhone(requestDto.getName(), requestDto.getPhone())
                 .stream().map(member -> member.getEmail()).collect(Collectors.toList());
 
-
-
     }
 
 
@@ -159,6 +157,9 @@ public class MemberService{
 
         return member.getId();
     }
+
+
+    // 관리자 페이지----------------------------------------------------------------
 
     /**
      * 2023-05-02 조경민
