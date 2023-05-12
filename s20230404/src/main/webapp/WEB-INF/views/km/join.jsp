@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 	<link href="/css/list.css" rel="stylesheet" type="text/css">
 	<link href="/css/login.css" rel="stylesheet" type="text/css">
+	
 
 <!-- 이메일 인증 -->	
 <script type="text/javascript"> 
@@ -20,13 +21,14 @@
 	   $('#mail-Check-Btn').click(function() {
 	     var email = $('#email').val(); 
 	     console.log(email);
-
-	     $.ajax({
+	     alert('인증 번호를 전송 중입니다.');
+         $.ajax({
 	       type: 'POST', 
 	       url: '/checkEmail',
 	       data: {'email': email}, 
 	       dataType: 'json', 
 	       success: function(data) { 
+	    	 alert('인증 번호를 전송했습니다.')
 	         if (data.result == 'success') {
 	           $('.mail-check-input').prop('disabled', false); 
 	           isAuthComplete = true; // 인증 완료 저장 저장
@@ -55,10 +57,10 @@
 	         if (data.result == 'success') {
 	           $('.mail-check-input').prop('disabled', true); 
 	           $('#mail-Check-Btn').prop('disabled', true); 
-	           $('#mail-check-warn').text('인증이 완료되었습니다.'); 
+	           $('#mail-check-warn').text('인증이 완료되었습니다.').removeClass('error-msg'); 
 	         } else {
 	           $('.mail-check-input').val(''); 
-	           $('#mail-check-warn').text('인증번호가 일치하지 않습니다.'); 
+	           $('#mail-check-warn').text('인증번호가 일치하지 않습니다.').addClass('error-msg'); 
 	           
 	           alert('다시 인증해주세요');
 	         }
@@ -77,9 +79,9 @@
 
 </script>
 	
-<!-- 사용자 스크립트 추가 -->
+<!-- 비밀번호 확인 -->
 <script type="text/javascript">
-    // String 공백제거
+
 	String.prototype.trim = function() {
 	    return this.replace(/^\s+|\s+$/g,"");
 	}
@@ -87,26 +89,41 @@
 	//회원가입 실패시 에러 메시지 출력
 	$(document).ready(function(){
 		var errorMessage = [[${errorMessage}]].trim;
-		//alert('errorMessage typeof->'+typeof(errorMessage));
-		// var errorMessageLen = errorMessage.length;
-		// alert("errorMessageLen->"+errorMessageLen);
 		if(errorMessage != null || typeof errorMessage != "undefined"){
-			alert("Here->"+errorMessage);
+			alert(errorMessage);
 		}
 	});
-	function checkedPasswd(){
-		// 비밀번호 확인
-		var pswd1 = $(document).querySelector('#pwsd1').get(0).value;
-		var pswd2 = $(document).querySelector('#pwsd2').get(0).value;
-		console.log(pswd1 +'+'+ pswd2);
-		if (pswd1 != pswd2){
-			$(document).querySelector('#pswdMessage').style('display:');
-			$(document).querySelector('#pswdMessage').text = "비밀번호가 일치하지 않습니다.";
-		}else{
-			$(document).querySelector('#pswdMessage').style('display:none');
-		}
-	}
 	
+	//비밀번호 일치 여부 확인
+	function checkPass() {
+		const password = document.querySelector("#password").value;
+		const passwordCheck = document.querySelector("#password-check");
+
+		if (password === passwordCheck.value && passwordCheck.value !== '') {
+			alert("비밀번호가 일치합니다.");
+		      return true;
+		    } else {
+		      	alert("비밀번호가 일치하지 않습니다.");
+		      	passwordCheck.value = "";
+		      	return false;
+		    }
+		}
+	
+
+	//가입 버튼 클릭 시 비밀번호 일치 여부 확인
+	function checkPassword() {
+		const password = document.querySelector("#password").value;
+		const passwordCheck = document.querySelector("#password-check");
+
+		if (password === passwordCheck.value && passwordCheck.value !== '') {
+			alert("회원 가입이 완료되었습니다.");
+		      return true;
+		    } else {
+		      	alert("비밀번호가 일치하지 않습니다.");
+		      	passwordCheck.value = "";
+		      	return false;
+		    }
+		}
 	
 </script>
 </head>
@@ -115,7 +132,7 @@
 		<a href="/"><img src="/img/gosunee.png"></a>
 	</div>
 	
-	<form action="http://localhost:4040/api/v1/join" role="form" method="post">
+	<form action="http://localhost:4040/api/v1/join" role="form" method="post" onsubmit="return checkPassword();">
 		<table>
 			<tr class="form-group py-2">
 				<td><label for="email">이메일 아이디</label></td>
@@ -125,13 +142,10 @@
 			</tr>
 			<tr> 
 				<td>  </td>
-				<!-- 추가  -->
-				<td class="mail-check-box"><input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6"></td>
+				<td class="mail-check-box"><input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요" disabled="disabled" maxlength="6"></td>
 				<td>  </td>
 				<td><button type="button" class="btn btn-check" id="code-Check-Btn">인증하기</button></td>
-				<td><span id="mail-check-warn"></span>
-			
-			
+				<td><span id="mail-check-warn" class="success-msg"></span>
 			</tr>
 			
 			<c:if test="${not empty requestScope['org.springframework.validation.BindingResult.memberDto'] and requestScope['org.springframework.validation.BindingResult.memberDto'].hasFieldErrors('email')}">
@@ -158,6 +172,12 @@
 			<tr class="form-group py-2">
 				<td><label for="password">비밀번호</label></td>
 				<td colspan="2"><input type="password" id="password" name="password" class="form-control" placeholder="비밀번호를 입력해주세요 (필수)" value="${memberDto.password}"/></td>
+			</tr>
+			
+			<tr>
+				<td><label for="password">비밀번호 확인</label></td>
+				<td colspan="2"><input type="password" id="password-check" name="password-check" class="form-control" placeholder="비밀번호를  확인해주세요"/></td>
+				<td><button type="button" class="checkPass" onclick="checkPass()">확인</button></td>
 			</tr>
 			
 			
@@ -218,18 +238,13 @@
 				</tr>
 			</c:if>
 			
-			
 			<tr style="text-align:center" class="py-3">
 				<td></td>
 				<td style="width: 80px;">
-				<button type="submit" class="btn btn-outline-dark">가 입</button>
-				<button type="button" class="btn btn-outline-dark" onclick="history.back();">취 소</button>
-				
+					<button type="submit" class="btn btn-outline-dark">가 입</button>
+					<button type="button" class="btn btn-outline-dark" onclick="history.back();">취 소</button>
 				</td>
-				
-				
-				<td>
-				</td>
+                <td></td>
 			</tr>
     	</table>
 	</form>
