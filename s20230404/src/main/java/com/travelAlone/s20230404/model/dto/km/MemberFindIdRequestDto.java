@@ -1,11 +1,9 @@
 package com.travelAlone.s20230404.model.dto.km;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
 @NoArgsConstructor
+@Data
 public class MemberFindIdRequestDto {
 
     private String name;

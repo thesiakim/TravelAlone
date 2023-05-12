@@ -68,9 +68,7 @@ public class MypageDaoImpl implements MypageDao{
     @Override
     public int memberInfoUpdate(Member member) {
 
-        System.out.println("member = " + member);
         int mypageMemberInfoUpdate = session.update("mypageMemberInfoUpdate", member);
-        System.out.println("mypageMemberInfoUpdate = " + mypageMemberInfoUpdate);
         return mypageMemberInfoUpdate;
     }
 

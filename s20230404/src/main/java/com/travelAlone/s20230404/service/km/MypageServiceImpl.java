@@ -83,7 +83,8 @@ public class MypageServiceImpl implements MypageService{
         BodImg bodImg = UploadHandler.parseFileInfo(pictureFile, member.getMember_id()).get(0);
 
         // 기존 이미지 삭제
-        if (!member.getM_img_stored_file().equals("src/main/resources/static/img/user-picture.png")){
+        if (!member.getM_img_stored_file().equals("src/main/resources/static/img/gosunee.png")
+                ||!member.getM_img_stored_file().equals("src/main/resources/static/img/godoree.png")){
             //기본 이미지가 아닐 경우 실제 이미지 파일 삭제
             UploadHandler.delete(member.getM_img_stored_file());
 
@@ -107,8 +108,8 @@ public class MypageServiceImpl implements MypageService{
      * */
     @Override
     public int memberProfileReset(Member member) {
-    	String gosunee = "src/main/resources/static/img/user-picture.png";
-    	String godoree = "src/main/resources/static/img/user-picture.png";
+    	String gosunee = "src/main/resources/static/img/gosunee.png";
+    	String godoree = "src/main/resources/static/img/godoree.png";
     	
     	
         // 기존 이미지 삭제

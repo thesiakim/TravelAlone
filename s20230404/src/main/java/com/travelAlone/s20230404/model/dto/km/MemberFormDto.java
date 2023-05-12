@@ -64,9 +64,9 @@ public class MemberFormDto {
     public MemberJpa toEntity(PasswordEncoder passwordEncoder){
     	String imgSrc;
     	if(this.gender=="0") {
-    		imgSrc = "src/main/resources/static/img/user-picture.png";
+    		imgSrc = "src/main/resources/static/img/gosunee.png";
     	}else {
-    		imgSrc = "src/main/resources/static/img/user-picture.png";
+    		imgSrc = "src/main/resources/static/img/godoree.png";
     	}
     	
         return MemberJpa.builder().email(this.email)
