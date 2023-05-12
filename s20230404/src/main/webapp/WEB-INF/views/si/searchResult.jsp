@@ -149,7 +149,8 @@
                    <hr id="line" >
                    <h1 id="travel-places" class="title">여행지</h1>
                    <br>
-                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+           <!--      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;"> -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
                  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
                    <c:if test="${status.index < 7}">
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
@@ -303,7 +304,8 @@
              <div class="onlytravel-result">
                    <ul><c:if test="${not empty resultList.getTravelList()}">
                    <br>
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+                    <!-- <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;"> -->
+                   <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
                  <c:forEach items="${resultList.travelList}" var="travel" varStatus="status">
                    <%-- <c:if test="${status.index < 9}"> --%>
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
@@ -327,7 +329,7 @@
                     <br>
                     <br>
                     <br>
-                        <div>
+                        <div  style="text-align: center; margin-left: 300px;">
                             <c:if test="${paging.startPage > paging.pageBlock }">
                               <a href="search?searchName=${keyword }&amp;currentPage=${paging.startPage-paging.pageBlock}&amp;category=${category}&amp;">[이전]</a>
                             </c:if>
@@ -351,7 +353,8 @@
              <div class="onlyhouse-result">
                    <ul><c:if test="${not empty resultList.getHouseList()}">
                    <br>
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+                    <!-- <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;"> -->
+                   <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
                  <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
                    <%-- <c:if test="${status.index < 7}"> --%>
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
@@ -399,7 +402,8 @@
              <div class="onlyres-result">
                    <ul><c:if test="${not empty resultList.getRestaurantList()}">
                    <br>
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+                  <!--   <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;"> -->
+                   <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
                  <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
                    <%-- <c:if test="${status.index < 7}"> --%>
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">

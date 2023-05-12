@@ -11,9 +11,11 @@
 <style>
   #container-left {
     padding: 0 250px;
-    background-color: #F8F8F8;
+    /* background-color: #F8F8F8; */
+    background-color: #5F9EA0;
     font-size: 15px;
-    font-color : 205E61;
+   /*  font-color : 205E61; */
+    font-color : #FFFFFF;
   }
   
 </style>
@@ -28,25 +30,25 @@
  		 <div style="float: right;">  
  		<div style='font-size:20px;  font-weight: border;'>
  		<br>
- 		<a href="http://localhost:4040/service.html">서비스 약관</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="http://localhost:4040/personalData.html" style="margin-right: 75px;">개인정보 처리방침</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 		<a href="http://localhost:4040/service.html" style="color: white;" >서비스 약관</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="http://localhost:4040/personalData.html" style="margin-right: 75px; color: white;" >개인정보 처리방침</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<c:if test="${user.role == 'rol200' }">
-      <a href="admin" style="margin-left: 150px;">관리자페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="admin" style="margin-left: 150px; color: white;" >관리자페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </c:if>
-      <a href="notice">고객센터</a>
+      <a href="notice" style="color: white;">고객센터</a>
 	  </div>
 	  </div>
 	  </div>
 	  
 	  <div class="footerInfo">
 	  <div style="float: left;">
-	  <div style='font-size:12px; text-align: left; '>
+	  <div style='font-size:12px; color:white; text-align: left; '>
 	  <br>
 	  
 		서울특별시 마포구 신촌로 176 501호<br>
 		02-123-4567<br>
 		Copyright ⓒ 2023 TravelAlone All Rights Reserved.
-
+<br>	<p>Special Thanks To LJK</p><br>
 		</div>
 		</div>
 		</div>
@@ -60,8 +62,7 @@
 <br>
 <br>
 	  </div>
-	  </div>
-	  </div>
+	
   </form>
 </body>
 </html>
