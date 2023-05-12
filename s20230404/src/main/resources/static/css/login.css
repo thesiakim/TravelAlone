@@ -89,3 +89,17 @@
 		font-size: 15px;	color:white;
 		background-color: #5F9EA0; 
 	}
+	
+	/* 이메일 인증 안내 메시지  */
+	.success-msg, .error-msg {
+		  font-size: 14px;
+		  font-weight: bold;
+		}
+		
+	.success-msg {
+		  color: green;
+		}
+		
+	.error-msg {
+		  color: red;
+		}
