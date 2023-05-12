@@ -472,6 +472,36 @@ public class KmController {
 
     }
 
+    @GetMapping("/mypage/tag")
+    public String mypageTag(@Login2User SessionUser sessionUser,
+                            Model model){
+        MypageTagResponseDto mypageTagResponseDto = mypageService.mypageInterest(sessionUser.getId());
+        model.addAttribute("interests", mypageTagResponseDto);
+
+        for (Common c : mypageTagResponseDto.getCommonInterests()){
+        System.out.println("mypageTagResponseDto = " + c.toString());
+        }
+        for (Interest i : mypageTagResponseDto.getSavedInterests()) {
+            System.out.println("i.toString() = " + i.toString());
+
+        }
+
+        return "km/mypage-tag";
+    }
+
+    @PatchMapping("/api/v1/mypage/interest")
+    @ResponseBody
+    public String mypageInterest(@RequestBody MypageInterestUpdateRequestDto requestDto,
+                                 @Login2User SessionUser sessionUser,
+                                 Model model){
+
+        requestDto.setId(sessionUser.getId());
+
+        int insertResult = mypageService.mypageInterestUpdate(requestDto);
+
+        return String.valueOf(insertResult);
+    }
+
 
     // 관리자 페이지----------------------------------------------------------------
     /**

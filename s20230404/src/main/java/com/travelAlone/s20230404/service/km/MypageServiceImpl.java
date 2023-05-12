@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 2023-04-26 조경민
@@ -253,6 +254,23 @@ public class MypageServiceImpl implements MypageService{
             totalCount = mypageDao.kmMypageFavoritesCountTra(id);
         }
         return totalCount;
+    }
+
+    @Override
+    public MypageTagResponseDto mypageInterest(Long id) {
+
+        return mypageDao.mypageInterest(id);
+    }
+
+    @Override
+    public int mypageInterestUpdate(MypageInterestUpdateRequestDto requestDto) {
+
+        List<String> requestDtoMapping = requestDto.getSavedTagIds().stream()
+                .map(tagId -> "int" + tagId.substring(tagId.length() - 3)).collect(Collectors.toList());
+
+        requestDto.setSavedTagIds(requestDtoMapping);
+
+        return mypageDao.mypageInterestUpdate(requestDto);
     }
 
 

@@ -4,27 +4,25 @@
 
 <mapper namespace="com.travelAlone.s20230404.CommonMapper">
 
-		<select id="interestFindById" parameterType="long" resultType="Interest" >
+		<select id="interestFindById" resultType="Interest" >
 			<![CDATA[
-			select	i.interest_id, i.member_id, i.i_common_interest, i.create_date, i.modified_date, c.word
-			from	interest i inner join common c on i.i_common_interest = concat(c.bcd, c.mcd)
-			where	i.member_id = #{memberId}
+			select i.interest_id, i.member_id, i.i_common_interest, i.create_date, i.modified_date, c.word
+			from interest i inner join Common c on i.i_common_interest = concat(c.bcd, c.mcd)
+			where i.member_id = #{memberId}
 			]]>
 		</select>
 
-		<select id="scoreCountById" parameterType="long" resultType="ScoreCount" >
+		<select id="scoreCountById" resultType="ScoreCount" >
 			<![CDATA[
-			SELECT 	  NVL(COUNT(s.s_common_spec), 0) AS count, (c.bcd || c.mcd) as s_common_spec, c.word
-			FROM 	  common c 
-			LEFT JOIN score s 
-			ON 		  s.s_common_spec = c.bcd || c.mcd 
-			AND 	  s.member_id = #{memberId}
-			WHERE 	  c.bcd like 'scr'
-			GROUP BY  (c.bcd || c.mcd), c.word
-			]]>
+			Select count(*) as count, c.word
+			from score s inner join common c
+			on s.s_common_spec = concat(c.bcd, c.mcd)
+			where s.member_id= #{memberId}
+			group by c.word
+		]]>
 		</select>
 
-		<select id="writingCountById" parameterType="long" resultType="WritingCount" >
+		<select id="writingCountById" resultType="WritingCount" >
 			<![CDATA[
 			SELECT a.board_count, b.hou_review_count, c.res_review_count, d.tra_review_count,e.favorites_count,f.g_writing_count
 			FROM (SELECT COUNT(*) as board_count  FROM board WHERE member_id = #{memberId} AND b_re_level = 0 ) a ,
@@ -96,11 +94,11 @@
 		]]>
 		</select>
 
-		<select id="memberInfo" parameterType="long" resultType="Member">
+		<select id="memberInfo" resultType="Member">
 		<![CDATA[
 		SELECT 	*
 		FROM	MEMBER
-		WHERE 	MEMBER_ID = #{memberId}
+		WHERE 	MEMBER_ID = #{member_id}
 		]]>
 		</select>
 
@@ -187,6 +185,55 @@
 		]]>
 	</select>
 
+	<select id="mypageInterestAll" resultType="CommonInterest">
+	<![CDATA[
+		SELECT *
+		FROM COMMON
+		WHERE BCD = 'int'
+		]]>
+	</select>
+
+	<select id="mypageInterestById" resultType="Interest">
+	<![CDATA[
+		SELECT I.INTEREST_ID AS INTEREST_ID,
+		       I.MEMBER_ID AS MEMBER_ID,
+		       I.I_COMMON_INTEREST AS I_COMMON_INTEREST,
+		       C.WORD AS WORD
+		FROM INTEREST I
+		LEFT JOIN COMMON C ON I.I_COMMON_INTEREST = CONCAT(C.BCD, C.MCD)
+		WHERE MEMBER_ID = #{id}
+		]]>
+	</select>
+
+<!--	<insert id="mypageInterestInsert" parameterType="MypageInterestUpdateRequestDto">-->
+<!--		Insert ALL-->
+<!--		INTO interest (INTEREST_ID, MEMBER_ID, I_COMMON_INTEREST, CREATE_DATE, MODIFIED_DATE)-->
+<!--		VALUES-->
+<!--		<foreach collection="savedTagIds" item="tagId" separator=",">-->
+<!--			 (INTEREST_ID_SEQ.NEXTVAL, #{id}, #{tagId}, SYSDATE, SYSDATE)-->
+<!--		</foreach>-->
+<!--	</insert>-->
+
+	<update id="mypageInterestInsert" parameterType="MypageInterestUpdateRequestDto">
+		INSERT INTO interest (INTEREST_ID, MEMBER_ID, I_COMMON_INTEREST, CREATE_DATE, MODIFIED_DATE)
+		select INTEREST_ID_SEQ.NEXTVAL AS interestId, A.*
+		from(
+		<foreach item="tagId" collection="savedTagIds" separator="UNION ALL ">
+			select #{id} as memberId, #{tagId} as iCommonInterest, SYSDATE as createDate, SYSDATE as modifiedDate
+			from dual
+		</foreach>
+		) A
+	</update>
+
+	<delete id="mypageInterestDelete" parameterType="MypageInterestUpdateRequestDto">
+		DELETE FROM interest
+		WHERE MEMBER_ID = #{id, jdbcType=NUMERIC}
+		AND I_COMMON_INTEREST IN
+		<foreach collection="savedTagIds" item="tagId" separator=","
+				 open="(" close=")">
+			#{tagId, jdbcType=VARCHAR}
+		</foreach>
+	</delete>
 
 
 </mapper>
