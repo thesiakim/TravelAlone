@@ -52,9 +52,21 @@
 		  <h2>즐겨찾기 </h2>
 		<table style="margin:auto;">
 			<tr>
-				<td><h3><a href="<%=contextPath%>/mypage/favorite?category=tra">여행지</a></h3></td>
-				<td><h3><a href="<%=contextPath%>/mypage/favorite?category=hou">숙소</a></h3></td>
-				<td><h3><a href="<%=contextPath%>/mypage/favorite?category=res">맛집</a></h3></td>
+				<% if ("tra".equals(request.getParameter("category")) || request.getParameter("category") == null) { %>
+				    <td><a href="/mypage/favorite?category=tra" style="color:#205E61;">여행지</a></td>
+				<% } else { %>
+				    <td><a href="/mypage/favorite?category=tra">여행지</a></td>
+				<% } %>
+				<% if ("hou".equals(request.getParameter("category"))) { %>
+				    <td><a href="/mypage/favorite?category=hou" style="color:#205E61;">숙소</a></td>
+				<% } else { %>
+				    <td><a href="/mypage/favorite?category=hou">숙소</a></td>
+				<% } %>
+				<% if ("res".equals(request.getParameter("category"))) { %>
+				    <td><a href="/mypage/favorite?category=res" style="color:#205E61;">맛집</a></td>
+				<% } else { %>
+				    <td><a href="/mypage/favorite?category=res">맛집</a></td>
+				<% } %>
 			</tr>
 		</table>
 
