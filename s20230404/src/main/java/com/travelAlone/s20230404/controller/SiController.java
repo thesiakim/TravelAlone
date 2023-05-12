@@ -1,11 +1,17 @@
 package com.travelAlone.s20230404.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,6 +25,7 @@ import com.travelAlone.s20230404.model.si.RecentSearch;
 import com.travelAlone.s20230404.model.si.ResultList;
 import com.travelAlone.s20230404.service.si.SiServiceJpa;
 import com.travelAlone.s20230404.service.Paging;
+import com.travelAlone.s20230404.service.si.MailSendService;
 import com.travelAlone.s20230404.service.si.SiService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +38,7 @@ public class SiController {
 	
 	private final SiService siService;
 	private final SiServiceJpa siServiceJpa;
+	private final MailSendService mailService;
 	ResultList resultList;
 	
 	//검색창에 검색한 경우
@@ -252,7 +260,42 @@ public class SiController {
 		
 		} 
 	
+	
+	//회원 가입 시 인증을 위한 이메일 전송
+	@PostMapping("/checkEmail")
+	@ResponseBody
+	public Map<String, String> checkEmail(@RequestParam("email") String email) {
+		Map<String, String> resultMap = new HashMap<>();
+		String authCode = mailService.joinEmail(email);
+		if(authCode != null) {
+			resultMap.put("result", "success");
+			resultMap.put("authCode", authCode);
+		} else {
+			resultMap.put("result", "fail");
+		}
 		
+		return resultMap;
+	}
+	
+	
+	//회원 가입 시 인증코드 일치 여부 확인
+	@PostMapping("/checkAuthCode")
+	@ResponseBody
+	public Map<String, String> checkAuthCode(HttpServletRequest request, @RequestParam("authCode") String authCode) {
+		Map<String, String> result = new HashMap<String, String>();
+	    HttpSession session = request.getSession();
+
+	    String savedAuthCode = (String) session.getAttribute("authCode");
+	    
+	    if (savedAuthCode != null && savedAuthCode.equals(authCode)) {
+	      result.put("result", "success");
+	      session.removeAttribute("authCode");      
+	    } else {
+	      result.put("result", "fail");
+	    }
+	    return result;
+	  }
+	
 		
 }
 	
