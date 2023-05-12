@@ -9,14 +9,16 @@
     <title>Insert title here</title>
     <link href="/css/list.css" rel="stylesheet" type="text/css">
     
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+    
     <style>
         .swiper-container {
             width:1600px;
             height:530px;
             padding:30px 0;
-            /* border:5px solid silver;
+          /*   border:5px solid silver;
             border-radius:7px;
-            box-shadow:0 0 20px #ccc inset; */
+            box-shadow:0 0 20px #ccc inset;  */
         }
         .swiper-slide {
             text-align:center;
@@ -53,8 +55,11 @@
 
 
 <body>
-  <div id="img_benner">
+ <!--  <div id="img_benner">
     <img src="img/travel-picture.png" alt="배너" style="filter: grayscale(10%); opacity: 0.65;">
+  </div> -->
+  <div id="img_benner">
+    <img src="img/travel-picture.png" alt="배너" >
   </div>
   
   <h1>

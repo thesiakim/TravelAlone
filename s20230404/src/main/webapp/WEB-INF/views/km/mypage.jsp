@@ -15,9 +15,11 @@
 <c:import url="../fragments/header.jsp"></c:import>
 </head>
 <body>
+
 <div id="img_benner">
 	<img src="<%=contextPath%>/img/main-picture.png" alt="배너">
 </div>
+
 <div class="profile-block">
 	<div class="img-block">
 		<div>
@@ -106,6 +108,8 @@
 		<button onclick="openEditWindow()">수정</button>
 		<button onclick="openWithdrawalWindow()">회원탈퇴</button>
 	</div>
+	
+	<br><br><br><br><br><br>
 </body>
 
 	<c:import url="../fragments/footer.jsp"/>
