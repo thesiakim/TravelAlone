@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../fragments/header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -47,14 +48,30 @@
 	</script>
 </head>
 <body>
+		<!-- 이미지배너 -->
+		<div id="img_benner">
+		   <img src="img/community-picture.png" alt="배너">
+		</div>
 
 		<!-- 여행지리스트 테이블 -->
 		  <h2>즐겨찾기 </h2>
 		<table style="margin:auto;">
 			<tr>
-				<td><h3><a href="/mypage/favorite?category=tra">여행지</a></h3></td>
-				<td><h3><a href="/mypage/favorite?category=hou">숙소</a></h3></td>
-				<td><h3><a href="/mypage/favorite?category=res">맛집</a></h3></td>
+				<% if ("tra".equals(request.getParameter("category")) || request.getParameter("category") == null) { %>
+				    <td><h3><a href="/mypage/favorite?category=tra" style="color:#205E61;">여행지</a></h3></td>
+				<% } else { %>
+				    <td><h3><a href="/mypage/favorite?category=tra">여행지</a></h3></td>
+				<% } %>
+				<% if ("hou".equals(request.getParameter("category"))) { %>
+				    <td><h3><a href="/mypage/favorite?category=hou" style="color:#205E61;">숙소</a></h3></td>
+				<% } else { %>
+				    <td><h3><a href="/mypage/favorite?category=hou">숙소</a></h3></td>
+				<% } %>
+				<% if ("res".equals(request.getParameter("category"))) { %>
+				    <td><h3><a href="/mypage/favorite?category=res" style="color:#205E61;">맛집</a></h3></td>
+				<% } else { %>
+				    <td><h3><a href="/mypage/favorite?category=res">맛집</a></h3></td>
+				<% } %>
 			</tr>
 		</table>
 
