@@ -8,8 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="<%=contextPath%>/css/list.css" rel="stylesheet" type="text/css">
 	<link href="<%=contextPath%>/css/login.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
 <!-- 이메일 인증 -->	
 <script type="text/javascript"> 
  /* 회원가입 시 본인인증 요청 */
