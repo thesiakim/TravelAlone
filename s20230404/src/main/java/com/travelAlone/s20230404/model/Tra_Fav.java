@@ -17,5 +17,4 @@ public class Tra_Fav {
     private LocalDate	 	modified_date;
 	private		int				isfavTra;
 	
-	
 }

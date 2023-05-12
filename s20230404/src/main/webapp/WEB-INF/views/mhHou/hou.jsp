@@ -56,8 +56,8 @@ th, td {
 </head>
 
 <body>
-<div id="img_banner">
-      <img src="img/main-picture.png" alt="배너">
+<div id="img_benner">
+      <img src="img/house-picture.png" alt="배너">
    </div>
    
 <h1><a href="hou"><img src="img/Hou.png" alt="숙소" width=250px height=250px></a></h1>
@@ -124,7 +124,7 @@ th, td {
 				      <c:param name="file" value="${house.img_stored_file }"></c:param>
 				    </c:url>
 				    <div class="image-container">
-				      <img src="${url }" alt="${house.h_name}" width="500" height="300">
+				      <img src="${url }" alt="${house.h_name}" width="420" height="300">
 				      <div class="image-text">${house.h_name}</div>
 				    </div>
 				  </a>

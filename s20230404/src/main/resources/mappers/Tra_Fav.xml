@@ -4,29 +4,38 @@
 
 <mapper namespace="com.travelAlone.s20230404.Tra_FavMapper">
 
-		<insert id="insertTraFav" parameterType="Tra_Fav">
-			 INSERT INTO Tra_Fav (
-			 MEMBER_ID
-            ,TRAVEL_ID
-           , CREATE_DATE
-           , MODIFIED_DATE)           
-			 VALUES 
-			 (  #{member_id, jdbcType=NUMERIC}, #{travel_id}, sysdate,    sysdate        ) 
+
+	<!-- 여행 즐겨찾기 추가 -->
+	<insert id="insertTraFav" parameterType="Tra_Fav">
+		INSERT INTO Tra_Fav (
+			MEMBER_ID,
+			TRAVEL_ID,
+			CREATE_DATE,
+			MODIFIED_DATE
+		)
+		VALUES (
+			#{member_id, jdbcType=NUMERIC},
+			#{travel_id},
+			sysdate,
+			sysdate
+		) 
 	</insert>
 	
-	<!--  즐겨찾기 해제 -->
-		<delete id="deleteTraFav" parameterType="Tra_Fav">
-			 DELETE     Tra_Fav
-			 WHERE  TRAVEL_ID = #{travel_id}
-			 AND  member_id =  #{member_id, jdbcType=NUMERIC}
-		</delete>
-<!-- 즐겨찾기 목록 -->		
-	<select id="isTra_Fav" parameterType ="Tra_Fav" resultType="int">		
-	 SELECT	count(*)
-	 FROM  Tra_Fav  
-	 WHERE TRAVEL_ID =   #{travel_id}
-	 AND   MEMBER_ID =  #{member_id}
-
+	
+	<!-- 여행 즐겨찾기 해제 -->
+	<delete id="deleteTraFav" parameterType="Tra_Fav">
+		DELETE FROM Tra_Fav
+		WHERE TRAVEL_ID = #{travel_id}
+		AND member_id = #{member_id, jdbcType=NUMERIC}
+	</delete>
+	
+	
+	<!-- 즐겨찾기 목록 -->
+	<select id="isTra_Fav" parameterType="Tra_Fav" resultType="int">		
+		SELECT count(*)
+		FROM Tra_Fav
+		WHERE TRAVEL_ID = #{travel_id}
+		AND MEMBER_ID = #{member_id}
 	</select>
 
 

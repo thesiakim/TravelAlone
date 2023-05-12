@@ -4,42 +4,34 @@
 
 <mapper namespace="com.travelAlone.s20230404.Tra_ImgMapper">
 	
+	
 	<!-- 이미지 삽입 -->
 	<insert id="traImgInsert" parameterType="Tra_Img">
-		INSERT INTO Tra_Img (	  travel_id
-								, img_id
-								, img_original_file
-								, img_stored_file
-								)
-		VALUES (				#{travel_id},
-								Tra_Img_SEQ.nextval,						 		
-		   						#{img_original_file	, jdbcType=VARCHAR},
-		    					#{img_stored_file}
-		     					)
+		INSERT INTO Tra_Img (travel_id, img_id, img_original_file, img_stored_file)
+		VALUES (#{travel_id}, Tra_Img_SEQ.nextval, #{img_original_file, jdbcType=VARCHAR}, #{img_stored_file})
 	</insert>
-
+	
+	
 	<!-- 이미지 목록가져오기 -->
 	<select id="traImgList" parameterType="Tra_Img" resultType="Tra_Img" >
-			select 	 
-					 TRAVEL_ID
-					,IMG_ID
-					,IMG_STORED_FILE
-					,IMG_ORIGINAL_FILE
-			from  Tra_Img
-			WHERE travel_id = #{travel_id}
-			order by IMG_ID desc
-		</select>
+		SELECT TRAVEL_ID, IMG_ID, IMG_STORED_FILE, IMG_ORIGINAL_FILE
+		FROM Tra_Img
+		WHERE travel_id = #{travel_id}
+		ORDER BY IMG_ID DESC
+	</select>
+	
 	
 	<!-- 이미지 목록삭제하기 -->
 	<delete id="traImgDelete" parameterType="int">
-		delete from Tra_Img where TRAVEL_ID = #{travel_id}
+		DELETE FROM Tra_Img WHERE TRAVEL_ID = #{travel_id}
 	</delete>
-
+	
+	
 	<!-- 이미지 한개 삭제하기 -->
 	<delete id="traOneImgDelete" parameterType="Hou_Img">
-		delete from Tra_Img 
-		where IMG_ID = #{img_id}
-		and   TRAVEL_ID = #{travel_id}
+		DELETE FROM Tra_Img 
+		WHERE IMG_ID = #{img_id}
+		AND TRAVEL_ID = #{travel_id}
 	</delete>
 
 
