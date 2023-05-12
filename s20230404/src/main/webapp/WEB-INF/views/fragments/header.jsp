@@ -8,6 +8,10 @@
     <title>Insert title here</title>
     <meta charset="UTF-8">
     <link href="http://localhost:4040/css/main.css" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+    
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 헤더 -->
 </head>

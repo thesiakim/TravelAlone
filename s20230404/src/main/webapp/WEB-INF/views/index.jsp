@@ -8,9 +8,15 @@
 <html>
 <head>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+
+
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <meta charset="UTF-8">
+
+
 
 <script type="text/javascript">
     /* 검색어 입력 필드에서 Enter키 입력 시 검색 수행 */

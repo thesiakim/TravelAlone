@@ -2,18 +2,15 @@ package com.travelAlone.s20230404.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,14 +38,13 @@ public class MhController {
 	
 	private final MhService mh;
 	
-	
-	
-	// ===================공지사항=========================================================
+		
+// ===================공지사항=========================================================
 
 //공지사항 목록보기
 @RequestMapping(value = "notice")
 public String notice(@LoginUser MemberJpa memberJpa,	Notice notice,String currentPage, Model model) {
-	log.info("NoticeController Start notice");
+	//log.info("NoticeController Start notice");
 	int totalNotice = mh.totalNotice();		
 	
 	//페이징
@@ -57,10 +53,10 @@ public String notice(@LoginUser MemberJpa memberJpa,	Notice notice,String curren
 	notice.setEnd(page.getEnd());
 	
 	List<Notice> listNotice = mh.listNotice(notice);
-	log.info("NoticeController list listNotice.size()=>" + listNotice.size());
+	//log.info("NoticeController list listNotice.size()=>" + listNotice.size());
 	  if (memberJpa != null) {
-			 log.info("NoticeController notice memberJpa.getId()는 "+ memberJpa.getId()); 
-			 log.info("NoticeController notice memberJpa.getId()는 "+ memberJpa.getRole()); 
+			// log.info("NoticeController notice memberJpa.getId()는 "+ memberJpa.getId()); 
+			 //log.info("NoticeController notice memberJpa.getId()는 "+ memberJpa.getRole()); 
 			 model.addAttribute("user_id", memberJpa.getId());
 			 model.addAttribute("user_role", memberJpa.getRole());
 			 
@@ -76,22 +72,22 @@ public String notice(@LoginUser MemberJpa memberJpa,	Notice notice,String curren
 @GetMapping(value = "noticeDetail")
 public String noticeDetail(@LoginUser MemberJpa memberJpa, 
 		int gid , Model model, Not_Img not_Img ) {
-	log.info("NoticeController Start noticeDetail");
-	log.info("NoticeController noticeDetail g_notice_id->"+ gid );
+	//log.info("NoticeController Start noticeDetail");
+	//log.info("NoticeController noticeDetail g_notice_id->"+ gid );
 	
 	Notice notice = mh.detailNotice(gid);
 	//사진 리스트
-	log.info("Not_Img Start");
+	//log.info("Not_Img Start");
 	not_Img.setG_notice_id(gid);
 	List<Not_Img> listImg = mh.listNot_Img(not_Img);
-	log.info("NoticeController  listImg.size()=>"+ listImg.size());
+	//log.info("NoticeController  listImg.size()=>"+ listImg.size());
 	
 	
 	model.addAttribute("imgNotList", listImg);		
 	model.addAttribute("notice", notice);
 	  if (memberJpa != null) {
-	 log.info("NoticeController noticeDetail memberJpa.getId()는 "+ memberJpa.getId()); 
-	 log.info("NoticeController noticeDetail memberJpa.getRole()는 "+ memberJpa.getRole()); 
+	// log.info("NoticeController noticeDetail memberJpa.getId()는 "+ memberJpa.getId()); 
+	// log.info("NoticeController noticeDetail memberJpa.getRole()는 "+ memberJpa.getRole()); 
 	 model.addAttribute("user_id", memberJpa.getId());
 	 model.addAttribute("user_role", memberJpa.getRole());
 	 
@@ -109,8 +105,8 @@ public String noticeWriteForm(@LoginUser MemberJpa memberJpa, Notice notice, Mod
 
 	  
 	if(memberJpa != null) {
-	log.info("NoticeController  noticeWriteForm Start");	
-	 log.info("NoticeController noticeWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+	 //log.info("NoticeController  noticeWriteForm Start");	
+	 //log.info("NoticeController noticeWriteForm memberJpa.getId()는 "+ memberJpa.getId());
     model.addAttribute("user_id", memberJpa.getId());
 	return "mh/noticeWriteForm";
 	
@@ -128,7 +124,7 @@ public String noticeWriteForm(@LoginUser MemberJpa memberJpa, Notice notice, Mod
 public String noticeWrite(@LoginUser MemberJpa memberJpa,
 		Notice notice, Model model, HttpServletRequest request,   List<MultipartFile>  file1
 		,Not_Img not_Img) throws Exception {
-	log.info("NoticeController  noticeWrite Start...");
+	//log.info("NoticeController  noticeWrite Start...");
 	
 	  if (memberJpa == null){
 	         throw new Exception("로그인 해주세요!");
@@ -137,22 +133,22 @@ public String noticeWrite(@LoginUser MemberJpa memberJpa,
 	
 	//공지사항 시퀀스가져오기
 	int noticeSeq = mh.seqNot(notice);
-	log.info("NoticeController noticeWrite noticeSeq->" + noticeSeq );
+	//log.info("NoticeController noticeWrite noticeSeq->" + noticeSeq );
 	
 	notice.setG_notice_id(noticeSeq);
-	log.info("NoticeController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
+	//log.info("NoticeController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
 	
 	
 	notice.setMember_id(memberJpa.getId());
 	int insertResult = mh.insertNotice(notice);
-	log.info("NoticeController noticeWrite insertResult->"+insertResult );
+	//log.info("NoticeController noticeWrite insertResult->"+insertResult );
 	
 	
 	//이미지 삽입
 	String img_context = "images"+File.separator+"noticeUpload" + File.separator;
-	log.info("IMG POST Start");
+	//log.info("IMG POST Start");
 	for(MultipartFile multipartFile : file1) {
-		log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+		//log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
 		String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
 		
 	    // Service --> DB IMG CRUD
@@ -162,7 +158,7 @@ public String noticeWrite(@LoginUser MemberJpa memberJpa,
 	    
 			
 		int insertImgResult = mh.insertNotImg(not_Img);
-		log.info("NoticeController insertNotImg insertImgResult->"+ insertImgResult);
+		//log.info("NoticeController insertNotImg insertImgResult->"+ insertImgResult);
 	}
 	
 	
@@ -182,7 +178,7 @@ public String noticeWrite(@LoginUser MemberJpa memberJpa,
 @GetMapping(value = "noticeUpdateForm")
 //public String noticeUpdateForm(@LoginUser MemberJpa memberJpa,int g_notice_id, Model model, Not_Img not_Img) {
 	public String noticeUpdateForm(int g_notice_id, Model model, Not_Img not_Img) {
-	log.info("NoticeController Start updateForm...");
+	//log.info("NoticeController Start updateForm...");
 	
 //	if(memberJpa != null) {
 	//		log.info("NoticeController noticeUpdateForm memberJpa.getId()는 "+ memberJpa.getId());
@@ -190,13 +186,13 @@ public String noticeWrite(@LoginUser MemberJpa memberJpa,
 	        
 		
 			Notice notice = mh.detailNotice(g_notice_id);
-			log.info("NoticeController updateFormNotice house->" + notice);		
+			//log.info("NoticeController updateFormNotice house->" + notice);		
 			
 			//사진리스트
-			log.info("Not_Img Start");
+			//log.info("Not_Img Start");
 			not_Img.setG_notice_id(g_notice_id);
 			List<Not_Img> listImg  = mh.listNot_Img(not_Img);
-			log.info("NoticeController  listImg.size()=>"+ listImg.size());
+			//log.info("NoticeController  listImg.size()=>"+ listImg.size());
 			model.addAttribute("imgNotList", listImg);
 			
 			model.addAttribute("notice", notice);	
@@ -216,10 +212,10 @@ public String updateNotice(Notice notice , Model model,
 	
 	//이미지삽입
 	String img_context = "images"+File.separator+"noticeUpload" + File.separator;
-	log.info("IMG POST Start");
+	//log.info("IMG POST Start");
 	
 	for (MultipartFile multipartFile : file1){
-		log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+		//log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
 		String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
 		// Service --> DB IMG CRUD
 		not_Img.setImg_original_file(multipartFile.getOriginalFilename());
@@ -227,13 +223,13 @@ public String updateNotice(Notice notice , Model model,
 
 
 		int insertImgResult = mh.insertNotImg(not_Img);
-		log.info("NoticeController insertNotImg insertImgResult->"+ insertImgResult);
+		//log.info("NoticeController insertNotImg insertImgResult->"+ insertImgResult);
 	}
 					
 
-	log.info("NoticeController Start update");
+	//log.info("NoticeController Start update");
 	int updateCount = mh.updateNotice(notice);
-	log.info("NoticeController es.updateNotice updateCount-->"+ updateCount);
+	//log.info("NoticeController es.updateNotice updateCount-->"+ updateCount);
 
 	model.addAttribute("uptCnt",updateCount);   // Test Controller간 Data 전달
 	model.addAttribute("kk3","Message Test");   // Test Controller간 Data 전달
@@ -246,7 +242,7 @@ public String updateNotice(Notice notice , Model model,
 //공지사항 글 삭제
 @RequestMapping(value = "deleteNotice")
 public String deleteNotice(int g_notice_id, Model model) {
-	System.out.println("NoticeController Start delete... n_id :" +g_notice_id);
+	//log.info("NoticeController Start delete... n_id :" +g_notice_id);
 	int result2 = mh.deleteNotImg(g_notice_id);
 	int result = mh.deleteNotice(g_notice_id);
 	
@@ -259,8 +255,8 @@ public String deleteNotice(int g_notice_id, Model model) {
 @ResponseBody
 @RequestMapping(value = "deleteNotImg")
 public String deleteNotImg(int g_notice_id, int img_id, Model model) {
-	log.info("NoticeController Start delete g_notice_id :" + g_notice_id);
-	log.info("NoticeController Start delete img_id :" + img_id);
+	//log.info("NoticeController Start delete g_notice_id :" + g_notice_id);
+	//log.info("NoticeController Start delete img_id :" + img_id);
 	int result = mh.deleteNotOneImg(g_notice_id,img_id);
 	String resultStr = Integer.toString(result);
 	return resultStr;
@@ -272,10 +268,10 @@ public String deleteNotImg(int g_notice_id, int img_id, Model model) {
 //공지사항 검색
 @RequestMapping(value = "noticeSearch")
 public String noticeSearch(Notice notice, String currentPage, Model model) {
-	log.info("mhController noticeSearch Start ..." );
+	//log.info("NoticeController noticeSearch Start ..." );
 	// Notice 전체 Count  
 	int totalNotice = mh.conditionNoticeCount(notice);
-	log.info("mhController noticeSearch totalNotice =>" + totalNotice);
+	//log.info("NoticeController noticeSearch totalNotice =>" + totalNotice);
 	// Paging 작업
 	Paging page = new Paging(totalNotice, currentPage);
 	
@@ -283,8 +279,7 @@ public String noticeSearch(Notice notice, String currentPage, Model model) {
 	notice.setStart(page.getStart());
 	notice.setEnd(page.getEnd());
 	List<Notice> listSearchNotice = mh.listSearchNotice(notice);
-	log.info("mhController noticeSearch listSearchNotice.size()=>" + 
-			listSearchNotice.size());
+	//log.info("NoticeController noticeSearch listSearchNotice.size()=>" + 	listSearchNotice.size());
 	model.addAttribute("totalNotice", totalNotice);
 	model.addAttribute("noticeList", listSearchNotice);
 	model.addAttribute("page", page);
@@ -297,8 +292,8 @@ public String noticeSearch(Notice notice, String currentPage, Model model) {
 // ===================자주믇는 질문=====================================================================================================
 	//자주묻는질문 목록보기
 	@RequestMapping(value = "faq")
-	public String Faq(Notice notice, String currentPage, Model model) {
-		System.out.println("mhController Start faq..." );
+	public String Faq(@LoginUser MemberJpa memberJpa, Notice notice, String currentPage, Model model) {
+		//log.info("FaqController Start faq..." );
 		int totalNotice = mh.totalNotice();		
 		
 		//페이징
@@ -307,10 +302,16 @@ public String noticeSearch(Notice notice, String currentPage, Model model) {
 		notice.setEnd(page.getEnd());
 		
 		List<Notice> listFaq = mh.listFaq(notice);
-		System.out.println("mhController list listFaq.size()=>" + listFaq.size());
+		//log.info("FaqController list listFaq.size()=>" + listFaq.size());
+				
+		if (memberJpa != null) {
+			// log.info("NoticeController notice memberJpa.getId()는 "+ memberJpa.getId()); 
+			 //log.info("NoticeController notice memberJpa.getId()는 "+ memberJpa.getRole()); 
+			 model.addAttribute("user_id", memberJpa.getId());
+			 model.addAttribute("user_role", memberJpa.getRole());
+			 
+			  }
 
-		
-		System.out.println("currentPage는 ?"+ currentPage);
 		//model.addAttribute("totalNotice", totalNotice);
 		model.addAttribute("noticeList", listFaq);
 		model.addAttribute("page", page);
@@ -324,7 +325,7 @@ public String noticeSearch(Notice notice, String currentPage, Model model) {
 @RequestMapping(value = "inquire")
 public String inquire( Inquire inquire, String currentPage, Model model) {
 	
-	log.info("InquireController Start inquire...");
+	//log.info("InquireController Start inquire...");
 	int totalInquire = mh.totalInquire();
 	
 	//페이징
@@ -335,20 +336,18 @@ public String inquire( Inquire inquire, String currentPage, Model model) {
 	
 	//여기에 게시판 코드 불러오는 코드 작성
 	List<CommonCode> commonCode = mh.getCommonCode();
-	log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+	//log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
 	model.addAttribute("boardList",commonCode);
 	
 	
 	//요구사항 리스트
 	List<Inquire> listInquire = mh.listInquire(inquire);
-	log.info("InquireController  listInquire.size()=>" + listInquire.size());
+	//log.info("InquireController  listInquire.size()=>" + listInquire.size());
 	
 	model.addAttribute("totalInquire", totalInquire);
 	model.addAttribute("inquireList", listInquire);
 	model.addAttribute("page", page);
-	
-	//이거 키면 아웃오브 바운즈인가 뜸??ㅇㅇ
-//	log.info("data checking : 1 - {}, 2 - {}, 3 - {}",listInquire.get(0).getG_reply_yn(),listInquire.get(1).getG_reply_yn(),listInquire.get(2).getG_reply_yn());
+
 	
 	return "mh/inquire";
 }
@@ -361,22 +360,22 @@ public String inquire( Inquire inquire, String currentPage, Model model) {
 @GetMapping(value = "inquireDetail")
 public String inquireDetail(@LoginUser MemberJpa memberJpa,  
 		int gid , Model model, Inq_Img inq_Img ) {
-	log.info("InquireController Start inquireDetail..." );
-	log.info("InquireController Start inquireDetail g_notice_id"+ gid  );
+	//log.info("InquireController Start inquireDetail..." );
+	//log.info("InquireController Start inquireDetail g_notice_id"+ gid  );
 	//문의글  보기
 	Inquire inquire = mh.detailInquire(gid);
 	
 	//사진 리스트
-	log.info("Inq_Img Start");
+	//log.info("Inq_Img Start");
 	inq_Img.setG_writing_id(gid);
 	List<Inq_Img> listImg = mh.listInq_Img(inq_Img);
-	log.info("InquireController  listImg.size()=>"+ listImg.size());
+	//log.info("InquireController  listImg.size()=>"+ listImg.size());
 	model.addAttribute("imgInqList", listImg);		
 	model.addAttribute("inquire", inquire);	
 	
 	  if (memberJpa != null) {
-			 log.info("InquireController inquireDetail memberJpa.getId()는 "+ memberJpa.getId()); 
-			 log.info("InquireController inquireDetail memberJpa.getRole()는 "+ memberJpa.getRole()); 
+			// log.info("InquireController inquireDetail memberJpa.getId()는 "+ memberJpa.getId()); 
+			// log.info("InquireController inquireDetail memberJpa.getRole()는 "+ memberJpa.getRole()); 
 			 model.addAttribute("user_id", memberJpa.getId());
 			 model.addAttribute("user_role", memberJpa.getRole());
 			  }
@@ -392,10 +391,10 @@ public String inquireDetail(@LoginUser MemberJpa memberJpa,
 @GetMapping(value = "inquireWriteForm")
 public String inquireWriteForm(@LoginUser MemberJpa memberJpa, 
 		Inquire inquire,Model model) {
-	log.info("InquireController inquireWriteForm Start... ");
+	//log.info("InquireController inquireWriteForm Start... ");
 	
 	 if(memberJpa != null) {
-         log.info("InquireController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
+        // log.info("InquireController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
          model.addAttribute("user_id", memberJpa.getId());
 		 
 		return "mh/inquireWriteForm";
@@ -416,29 +415,29 @@ public String  inquireWrite(
 		HttpServletRequest request,   List<MultipartFile>  file1, Inq_Img inq_Img,
 		Inquire inquire, Model model) throws Exception {
 
-	log.info("InquireController  inquireWrite Start");
+	//log.info("InquireController  inquireWrite Start");
 	  if (memberJpa == null){
 	         throw new Exception("로그인 해주세요!");
 	      }
 	
 	
 	int inquireSeq = mh.seqInq(inquire);
-	log.info("InquireController inqWrite inquireSeq->" + inquireSeq );
+	//log.info("InquireController inqWrite inquireSeq->" + inquireSeq );
 
 	inquire.setG_writing_id(inquireSeq);	
-	log.info("InquireController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
+	//log.info("InquireController writeFormBoard memberJpa.getId()는 "+ memberJpa.getId());
 	
 	inquire.setMember_id(memberJpa.getId());
 	int insertResult = mh.insertInquire(inquire);
-	log.info("InquireController  inquireWrite insertResult> " + insertResult);
+	//log.info("InquireController  inquireWrite insertResult> " + insertResult);
 	
 																			
 	
 	//이미지 삽입
 	String img_context = "images"+File.separator+"InquireUpload" + File.separator;
-	log.info("IMG POST Start");
+	//log.info("IMG POST Start");
 	for(MultipartFile multipartFile : file1) {
-		log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+		//log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
 		String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
 		
 	    // Service --> DB IMG CRUD
@@ -448,7 +447,7 @@ public String  inquireWrite(
 	    
 			
 		int insertImgResult = mh.insertInqImg(inq_Img);
-		log.info("mhController insertImg insertImgResult->"+ insertImgResult);
+		//log.info("mhController insertImg insertImgResult->"+ insertImgResult);
 	}						
 
 	if (insertResult>0) {
@@ -464,17 +463,17 @@ public String  inquireWrite(
 private String uploadFile(String originalName,byte[] fileData, String img_context) throws Exception {
 	 UUID uid = UUID.randomUUID();
 	 // requestPath = requestPath + "/resources/image";
-	 log.info("img_context->" + img_context);
+	// log.info("img_context->" + img_context);
 	 
 	// Directory 생성 
 	 File fileDirectory = new File(img_context);
 	 if (!fileDirectory.exists()) {
 		 fileDirectory.mkdirs();
-		log.info("업로드용 폴더 생성" + img_context ); 
+		//log.info("업로드용 폴더 생성" + img_context ); 
 		
 	 }
 	 String img_stored_file = img_context + uid.toString() + "_" + originalName;
-	 log.info("img_stored_file ->" + img_stored_file);
+	// log.info("img_stored_file ->" + img_stored_file);
 	 File target = new File(img_stored_file);
 	 
 	 FileCopyUtils.copy(fileData,target);
@@ -486,15 +485,15 @@ private String uploadFile(String originalName,byte[] fileData, String img_contex
 //문의게시판 글수정 페이지이동
 @GetMapping(value = "inquireUpdateForm")
 public String inquireUpdateForm(int g_writing_id, Model model, Inq_Img inq_Img) {
-	log.info("InquireController Start updateForm...");
+	//log.info("InquireController Start updateForm...");
 	Inquire inquire = mh.detailInquire(g_writing_id);
-	log.info("InquireController updateFormInquire inquire->"+inquire);			
+	//log.info("InquireController updateFormInquire inquire->"+inquire);			
 	
 	//사진리스트
-	log.info("Inq_Img Start");
+	//log.info("Inq_Img Start");
 	inq_Img.setG_writing_id(g_writing_id);
 	List<Inq_Img> listImg = mh.listInq_Img(inq_Img);
-	log.info("InquireController  listImg.size()=>"+ listImg.size());
+	//log.info("InquireController  listImg.size()=>"+ listImg.size());
 	model.addAttribute("imgInqList", listImg);
 							
 	
@@ -515,10 +514,10 @@ public String updateInquire(Inquire inquire, Model model,
 	
 	//이미지삽입
 	String img_context = "images"+File.separator+"inquireUpload" + File.separator;
-	log.info("IMG POST Start");
+	//log.info("IMG POST Start");
 	
 	for (MultipartFile multipartFile : file1){
-		log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+		//log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
 		String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
 		// Service --> DB IMG CRUD
 		inq_Img.setImg_original_file(multipartFile.getOriginalFilename());
@@ -526,13 +525,13 @@ public String updateInquire(Inquire inquire, Model model,
 
 
 		int insertImgResult = mh.insertInqImg(inq_Img);
-		log.info("InquireController insertImg insertImgResult->"+ insertImgResult);
+		//log.info("InquireController insertImg insertImgResult->"+ insertImgResult);
 	}
 	
 
-	log.info("InquireController Start update...");
+	//log.info("InquireController Start update...");
 	int updateCount = mh.updateInquire(inquire);
-	log.info("InquireController es.updateNotice updateCount-->"+ updateCount);
+	//log.info("InquireController es.updateNotice updateCount-->"+ updateCount);
 	
 	model.addAttribute("uptCnt", updateCount);
 	model.addAttribute("kk3"," Message Test");
@@ -545,7 +544,7 @@ public String updateInquire(Inquire inquire, Model model,
 //문의게시판 글 삭제
 @RequestMapping(value = "deleteInquire")
 public String deleteInquire(int g_writing_id, Model model) {
-	log.info("InquireController Start delete..." + g_writing_id);
+	//log.info("InquireController Start delete..." + g_writing_id);
 	int result2 = mh.deleteInqImg(g_writing_id);
 	int result = mh.deleteInquire(g_writing_id);
 	
@@ -558,8 +557,8 @@ public String deleteInquire(int g_writing_id, Model model) {
 @ResponseBody
 @RequestMapping(value = "deleteInqImg")
 public String deleteInqImg(int g_writing_id, int img_id, Model model) {
-	log.info("InquireController Start delete g_writing_id :" + g_writing_id);
-	log.info("InquireController Start delete img_id :" + img_id);
+	//log.info("InquireController Start delete g_writing_id :" + g_writing_id);
+	//log.info("InquireController Start delete img_id :" + img_id);
 	int result = mh.deleteInqOneImg(g_writing_id,img_id);
 	String resultStr = Integer.toString(result);
 	return resultStr;
@@ -570,10 +569,10 @@ public String deleteInqImg(int g_writing_id, int img_id, Model model) {
 //문의게시판 검색
 @RequestMapping(value = "inquireSearch")
 public String inquireSearch(Inquire inquire, String currentPage, Model model) {
-	log.info("InquireController inquireSearch Start ..." );
+	//log.info("InquireController inquireSearch Start ..." );
 	
 	int totalInquire = mh.conditionInquireCount(inquire);
-	log.info("InquireController inquireSearch totalInquire =>" + totalInquire);
+	//log.info("InquireController inquireSearch totalInquire =>" + totalInquire);
 	// Paging 작업
 	Paging page = new Paging(totalInquire, currentPage);
 	
@@ -581,8 +580,7 @@ public String inquireSearch(Inquire inquire, String currentPage, Model model) {
 	inquire.setEnd(page.getEnd());
 	
 	List<Inquire> listSearchInquire = mh.listSearchInquire(inquire);
-	log.info("mhController InquireSearch listSearchInquire.size()=>" + 
-			listSearchInquire.size());
+	//log.info("mhController InquireSearch listSearchInquire.size()=>" + listSearchInquire.size());
 	
 	model.addAttribute("totalInquire", totalInquire);
 	model.addAttribute("inquireList", listSearchInquire);
@@ -596,17 +594,17 @@ public String inquireSearch(Inquire inquire, String currentPage, Model model) {
 @GetMapping(value="inquireCodeFilter")
 public String inquireFilter(@RequestParam(name = "code") String code,Inquire inquire, String currentPage, Model model) {
 						//@RequestParam 어노테이션은 code라는 이름의 파라미터를 받으며, 이 값은 String 타입의 code 변수에 할당됩니다.
-	log.info("mhController inquireCodeFilter Start ..." );
+	//log.info("mhController inquireCodeFilter Start ..." );
 	
 
 	List<CommonCode> commonCode = mh.getCommonCode();
-	log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+	//log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
 	//				boardList data : 				inq100		, 여행지문의
 	model.addAttribute("boardList",commonCode);
 	//List<CommonCode> 타입의 commonCode 변수에 저장합니다. 이 리스트는 모델 객체에 추가되어 View에서 사용됩니다.
 	
 	int totalInquire = mh.conditionOptionCount(code);
-	log.info("mhController inquireCodeFilter totalInquire =>" + totalInquire);
+	//log.info("mhController inquireCodeFilter totalInquire =>" + totalInquire);
 	//메소드를 호출하여 totalInquire 변수에 총 조회된 데이터의 개수를 할당
 	
 	//페이징
@@ -618,7 +616,7 @@ public String inquireFilter(@RequestParam(name = "code") String code,Inquire inq
 	
 	List<Inquire> listFilterInquire = mh.listFilterOptionInquire(inquire);
 	//메소드를 호출하여 조건에 맞는 데이터를 조회합니다. 이 데이터는 모델 객체에 추가되어 View에서 사용
-	log.info("mhController  listFilterInquire.size()=>" + listFilterInquire.size());
+	//log.info("mhController  listFilterInquire.size()=>" + listFilterInquire.size());
 	model.addAttribute("totalInquire", totalInquire);
 	model.addAttribute("inquireList", listFilterInquire);
 	model.addAttribute("page", page);
@@ -633,9 +631,9 @@ public String inquireFilter(@RequestParam(name = "code") String code,Inquire inq
 //문의게시판 답변 페이지이동
 @GetMapping(value = "inquireReplyForm")
 public String inquireReplyForm(int g_writing_id, Model model) {
-	log.info("mhController inquireReplyForm Start... ");
+	//log.info("mhController inquireReplyForm Start... ");
 	Inquire inquire = mh.detailInquire(g_writing_id);
-	log.info("mhController inquireReplyForm inquire->"+inquire);	
+	//log.info("mhController inquireReplyForm inquire->"+inquire);	
 	model.addAttribute("inquire", inquire);	
 	return "mh/inquireReplyForm";
 	
@@ -644,7 +642,7 @@ public String inquireReplyForm(int g_writing_id, Model model) {
 //문의게시판 글답변(업데이트) 
 @PostMapping(value = "replyInquire")
 public String replyInquire(Inquire inquire, Model model) {
-	log.info("mhController Start reply...");
+	//log.info("mhController Start reply...");
 	System.out.println("mhController reply" + inquire.getG_writing_id());
 	System.out.println("mhController reply" + inquire.getG_content());
 	System.out.println("mhController reply" + inquire.getG_reply_content());
