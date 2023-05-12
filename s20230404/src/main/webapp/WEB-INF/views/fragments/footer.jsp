@@ -30,12 +30,13 @@
  		 <div style="float: right;">  
  		<div style='font-size:20px;  font-weight: border;'>
  		<br>
+ 		<a href="http://localhost:4040/aboutUs.html" style="color: white;" >프로젝트 소개</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  		<a href="http://localhost:4040/service.html" style="color: white;" >서비스 약관</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="http://localhost:4040/personalData.html" style="margin-right: 75px; color: white;" >개인정보 처리방침</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<c:if test="${user.role == 'rol200' }">
       <a href="admin" style="margin-left: 150px; color: white;" >관리자페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </c:if>
-      <a href="notice" style="color: white;">고객센터</a>
+      <a href="/notice" style="color: white;">고객센터</a>
 	  </div>
 	  </div>
 	  </div>

@@ -54,7 +54,7 @@
 
 				var data = {
 					id : id,
-					role : $("#selectRole").val()
+					role : $("#selectRole"+id).val()
 				}
 
 				$.ajax({
@@ -68,11 +68,10 @@
 							alert("회원 ID :"+responseText+" 수정되었습니다.");
 						})
 						.fail(function (error) {
-
 							alert(JSON.stringify(error));
 						});
-
-
+			}else{
+				window.location.reload();
 			}
 		}
 
@@ -126,7 +125,7 @@
 				<td onclick="detailMove(${member.id})">${member.createdDate}</td>
 				<td onclick="detailMove(${member.id})">${member.modifiedDate}</td>
 				<td id="role">
-					<select name="role" id="selectRole" onchange="changeRole(${member.id})">
+					<select name="role" id="selectRole${member.id}" onchange="changeRole(${member.id})">
 						<option value="user" ${member.role == ('rol100') ? 'selected' : ''}>User</option>
 						<option value="admin" ${member.role == ('rol200') ? 'selected' : ''}>Admin</option>
 						<option value="ban" ${member.role == ('rol300') ? 'selected' : ''}>Ban</option>
