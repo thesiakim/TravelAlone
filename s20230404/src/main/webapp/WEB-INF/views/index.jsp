@@ -7,9 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+
+
 <meta charset="UTF-8">
 
 <script type="text/javascript">
@@ -32,6 +36,10 @@
  	});
 </script>
 	<c:import url="fragments/header.jsp"></c:import>
+	
+
+	
+	</head>
  	<!-- 본문 -->
 	<div id="content">
 	  <!-- 이미지배너 -->
@@ -39,19 +47,24 @@
 		<img src="img/main-picture.png" alt="배너">
 	  </div>
 	  <!-- 검색창 -->
+
 	  <form action="search">
-	  	<select id="category" name="category">
+	 
+
+	 
+	   	<select id="category" name="category">
 	  		<option value="category_total">전체</option>
 	  		<option value="category_travel">여행지</option>
 	  		<option value="category_house">숙소</option>
 	  		<option value="category_res">맛집</option>
 	  		<option value="category_comm">커뮤니티</option>  
-	  	</select>
+	  	</select> 
+	  	 
 	  	<div id="serch">
 			<input type="text" placeholder="검색어를 입력해주세요" name="searchName" id="searchId">
 	  	</div>
 	  </form>
-	  
+</div>	  
 
 	  <script>
 	  	/* 자동 완성 */

@@ -199,6 +199,11 @@
 	  border: 3px solid #205E61;
 	}
 	
+	#category option {
+  		border-radius: 25px;
+		}
+	
+	
 	#serch {
 	  display: flex;
 	  align-items: center;
