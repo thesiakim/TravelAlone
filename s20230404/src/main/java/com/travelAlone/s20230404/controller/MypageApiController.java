@@ -38,7 +38,6 @@ public class MypageApiController {
     private final HouseService houseService;
     private final SkService skService;
     private final TravelService travelService;
-    private final SiService SiService;
 
     //마이페이지 Controller (MyBatis 사용)---------------------------------------------------------------
 
@@ -96,7 +95,6 @@ public class MypageApiController {
         if (passwordEncoder.matches(requestDto.getPassword(),memberJpa.getPassword()) &&
                 requestDto.getMemberEmail().equals(memberJpa.getEmail())){
 
-        	//SiService.deleteByMemberWithdrawal(memberJpa.getId());
         	mypageService.memberWithdrawal(memberJpa.getId(), memberJpa.getImgStoredFile());
 
             System.out.println(" 완료 ");

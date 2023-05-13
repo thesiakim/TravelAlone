@@ -203,13 +203,5 @@ public class SiServiceImpl implements SiService {
 		
 	}
 
-	
-	//회원 탈퇴 시 최근 검색어 삭제
-	@Override
-	public void deleteByMemberWithdrawal(Long id) {
-		if(siDao.searchRecentKeyword(id) != 0) {
-		siDao.deleteByMemberWithdrawal(id);
-	  }
-   }
-	
+
 }

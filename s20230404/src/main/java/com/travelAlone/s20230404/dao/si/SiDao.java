@@ -31,9 +31,7 @@ public interface SiDao {
 	void             	   insertRecentSearch(RecentSearch recentSearch);
 	List<RecentSearch>     getRecentSearchList(RecentSearch recentSearch);
 	int 			       findRecentSearch(RecentSearch recentSearch);
-	void                   deleteByMemberWithdrawal(Long id);
-	int                    searchRecentKeyword(Long id);
-	
+
 	
 
 }

@@ -342,27 +342,4 @@ public class SiDaoImpl implements SiDao {
 	}
 
 
-	@Override
-	public void deleteByMemberWithdrawal(Long id) {
-		try {
-			session.delete("deleteByMemberWithdrawal", id);
-		} catch(Exception e) {
-			log.info("siDaoImpl deleteByMemberWithdrawal e.getMessage() : " + e.getMessage());
-		}
-		
-	}
-
-
-	@Override
-	public int searchRecentKeyword(Long id) {
-		int findRecentSearch = 0;
-		try {
-			findRecentSearch = session.selectOne("searchRecentKeyword", id);
-		} catch(Exception e) {
-			log.info("siDaoImpl searchRecentKeyword e.getMessage() : " + e.getMessage());
-		}
-		return findRecentSearch;
-	}
-
-
 }

@@ -24,8 +24,7 @@ public interface SiService {
 	int            		getResCount(Res res);
 	int            		getBoardCount(Board board);
 	List<RecentSearch>  getRecentSearchList(RecentSearch recentSearch);
-	void                deleteByMemberWithdrawal(Long id);
-	
+
 	
 
 }
