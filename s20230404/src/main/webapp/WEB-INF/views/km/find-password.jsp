@@ -13,8 +13,8 @@
 	<link href="<%=contextPath%>/css/login.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
-<h1>아이디 찾기</h1>
-<form action="<%=contextPath%>/api/v1/password" method="post">
+<h1>비밀번호 찾기</h1>
+<form action="<%=contextPath%>/password/info" method="get">
 	<p>
 		<label for="email">아이디</label>
 		<input type="text" name="email" id="email" required>
