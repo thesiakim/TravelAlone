@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
-
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
 
 
 <meta charset="UTF-8">
