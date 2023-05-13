@@ -245,7 +245,9 @@
 	</div>
 		</div>
 	  </div>
-	  <br><br><br><br><br><br><br><br>
+	</div>
+  </div>
+  <br><br><br><br><br>  <br><br><br><br><br>
 </body>
    	<c:import url="fragments/footer.jsp"/>
 </html>
