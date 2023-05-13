@@ -128,6 +128,7 @@
          <br>
          <div>
             <img src="../img/crying.png" alt="#" style="width: 100%; height: auto; max-width: 200px;"></a>
+            <br><br><br><br><br><br><br>
          </div>
    </c:if>
    </article>
@@ -141,7 +142,6 @@
         <!-- 카테고리를 전체로 설정하고 검색한 경우 -->
         <c:if test="${category eq 'category_total'}">
 
-         <!--여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트 여행지 검색 결과 리스트   -->
            <article id="search-content-total">
                 <!-- 여행지 검색 결과 리스트 -->
                 <div class="travel-result">
@@ -353,10 +353,8 @@
              <div class="onlyhouse-result">
                    <ul><c:if test="${not empty resultList.getHouseList()}">
                    <br>
-                    <!-- <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;"> -->
                    <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
                  <c:forEach items="${resultList.houseList}" var="house" varStatus="status">
-                   <%-- <c:if test="${status.index < 7}"> --%>
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
                        <a href="/houDetail?hid=${house.house_id}">
                          <c:url value="/display" var="url">
@@ -369,7 +367,6 @@
                          <a href="/houDetail?hid=${house.house_id}" class="each-name"><c:out value="${house.h_name}" /></a>
                        </div>
                      </div>
-                   <%-- </c:if> --%>
                  </c:forEach>
                     </div>
                     <br>
@@ -402,10 +399,8 @@
              <div class="onlyres-result">
                    <ul><c:if test="${not empty resultList.getRestaurantList()}">
                    <br>
-                  <!--   <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;"> -->
                    <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
                  <c:forEach items="${resultList.restaurantList}" var="res" varStatus="status">
-                   <%-- <c:if test="${status.index < 7}"> --%>
                      <div style="width: calc(33.33% - 10px); margin-bottom: 20px;" id="each-name">
                        <a href="/resDetail?rid=${res.restaurant_id}">
                          <c:url value="/display" var="url">
@@ -418,7 +413,6 @@
                          <a href="/resDetail?rid=${res.restaurant_id}" class="each-name"><c:out value="${res.r_name}" /></a>
                        </div>
                      </div>
-                   <%-- </c:if> --%>
                  </c:forEach>
                     </div>
                     <br>
@@ -457,7 +451,6 @@
                                  </td>
                             </tr>
                             <c:forEach items="${resultList.boardList}" var="board" varStatus="status">
-                                <%--  <c:if test="${status.index < 12}"> --%>
                                     <tr style="padding-bottom: 20px;">
                                           <td style="padding-left: 50px;">
                                            <a href="detailBoard?board_id=${board.board_id}&amp;b_common_board=${board.b_common_board}" class="each-name"><c:out value="${board.b_title}" /></a>
@@ -478,7 +471,6 @@
                                     </tr>
                                  <c:if test="${not status.last }">
                                 </c:if>
-                                 <%-- </c:if> --%>
                             </c:forEach>
                          </table>
                          <br>
@@ -505,7 +497,6 @@
 
      
    
-<!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 --><!-- 인기 검색어 -->   
    <!-- 인기 검색어 --> 
     <c:if test="${not empty resultList.getTravelList() or not empty resultList.getHouseList() or not empty resultList.getRestaurantList() or not empty resultList.getBoardList()}">
       <article id="word" style="display:flex; flex-direction:column; align-items:center;    ">
@@ -581,5 +572,6 @@
 
      
    <hr>
+   <br><br><br><br><br><br><br><br>
    	<c:import url="../fragments/footer.jsp"/>
 </body>

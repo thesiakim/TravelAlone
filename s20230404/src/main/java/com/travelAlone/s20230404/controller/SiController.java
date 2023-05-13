@@ -48,7 +48,7 @@ public class SiController {
 			             @LoginUser MemberJpa memberJpa,
 			             String currentPage, Model model) {
 		
-		log.info("siController search start");
+		//log.info("siController search start");
 		
 		Travel travel = new Travel();
 		House house = new House();
@@ -99,11 +99,6 @@ public class SiController {
 			//검색 키워드에 대한 데이터 가져오기
 			resultList = siService.search(keyword, category, travel, house, res, board);
 			
-			System.out.println("카테고리 전체 travelList size : " + resultList.getTravelList());
-			System.out.println("카테고리 전체 houseList size : " + resultList.getHouseList());
-			System.out.println("카테고리 전체 resList size : " + resultList.getRestaurantList());
-			System.out.println("카테고리 전체 boardList size : " + resultList.getBoardList());
-			
 			//검색 키워드가 하나라도 존재한다면 Search 테이블에 insert or update
 			if(resultList.getTravelList().size() != 0 || resultList.getHouseList().size() != 0 || resultList.getRestaurantList().size() != 0 || resultList.getBoardList().size() != 0) {
 				siService.upsertSearch(keyword);
@@ -111,11 +106,9 @@ public class SiController {
 		
 		//카테고리가 여행지인 경우
 		} else if(category.equals("category_travel")) {
-			log.info("siController category_travel/ siService.search Start");
 			
 			//검색 결과수 조회
 			count = siService.getTravelCount(travel);
-			System.out.println("travel count : " + count);
 			
 			//페이징
 			paging = new Paging(count, currentPage);
@@ -125,14 +118,12 @@ public class SiController {
 			//검색 결과 데이터 조회
 			resultList = siService.search(keyword, category, travel, house, res, board);
 			
-			System.out.println("카테고리 여행지 travelList size : " + resultList.getTravelList());
 			if(resultList.getTravelList().size() != 0) {
 				siService.upsertSearch(keyword);
 			} 
 			
 		//카테고리가 숙소인 경우	
 		} else if(category.equals("category_house")) {
-			log.info("siController category_house/ siService.search Start");
 			
 			//검색 결과수 조회
 			count = siService.getHouseCount(house);
@@ -144,7 +135,7 @@ public class SiController {
 			
 			//검색 결과 데이터 조회
 			resultList = siService.search(keyword, category, travel, house, res, board);
-			log.info("siController category_house/ siService.search 결과 resultList.getHouseList().size() : " + resultList.getHouseList().size());
+
 			if(resultList.getHouseList().size() != 0) {
 				siService.upsertSearch(keyword);
 			}
@@ -168,24 +159,18 @@ public class SiController {
 			
 		//카테고리가 커뮤니티인 경우	
 		} else if(category.equals("category_comm")) {
-			log.info("siController category_comm/ siService.search Start");
 			
 			//검색 결과수 조회
-			System.out.println("boardListCount 시작");
 			count = siService.getBoardCount(board);
-			
-			System.out.println("board 페이징 시작");
-			 
+						 
 			//페이징
 			paging = new Paging(count, currentPage);
 			board.setStart(paging.getStart());
 			board.setEnd(paging.getEnd());
-			
-			System.out.println("boardlist 페이징된걸로 list뽑기 시작");
-			
+						
 			//검색 결과 데이터 조회
 			resultList = siService.search(keyword, category, travel, house, res, board);
-			log.info("siController category_comm/ siService.search End");
+			
 			if(resultList.getBoardList().size() != 0) {
 				siService.upsertSearch(keyword);
 			} 
@@ -222,9 +207,7 @@ public class SiController {
 		model.addAttribute("dailyPopularKeywords", dailyPopularKeywords);
 		model.addAttribute("weeklyPopularKeywords", weeklyPopularKeywords);
 		model.addAttribute("monthlyPopularKeywords", monthlyPopularKeywords);
-		
-		System.out.println("SiController resultList.getBoardList : " + resultList.getBoardList());
-	
+			
 		return "si/searchResult";
 	}
 	
@@ -235,13 +218,10 @@ public class SiController {
 	@GetMapping(value = "autocomplete")
 	public @ResponseBody List<String> autocomplete(@RequestParam("keyword") String keyword, @RequestParam("category") String category) {
         
-		System.out.println("siController autocomplete start");
 		List<String> data = new ArrayList<String>();
 		
 		if(category.equals("category_total")) {
-			
-			System.out.println("siController autocomplete category_total start");
-		
+					
 			data.addAll(siServiceJpa.autoTravelSearch(keyword));
 			data.addAll(siServiceJpa.autoHouseSearch(keyword));
 			data.addAll(siServiceJpa.autoResSearch(keyword));

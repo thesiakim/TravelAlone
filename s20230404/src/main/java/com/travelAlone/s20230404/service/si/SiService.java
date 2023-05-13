@@ -3,10 +3,8 @@ package com.travelAlone.s20230404.service.si;
 import java.util.List;
 
 import com.travelAlone.s20230404.model.Board;
-import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
-import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.RecentSearch;
 import com.travelAlone.s20230404.model.si.ResultList;
@@ -26,6 +24,7 @@ public interface SiService {
 	int            		getResCount(Res res);
 	int            		getBoardCount(Board board);
 	List<RecentSearch>  getRecentSearchList(RecentSearch recentSearch);
+	void                deleteByMemberWithdrawal(Long id);
 	
 	
 

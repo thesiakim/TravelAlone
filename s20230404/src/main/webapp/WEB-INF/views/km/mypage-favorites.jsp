@@ -47,6 +47,9 @@
 	</script>
 </head>
 <body>
+<div id="img_benner">
+	<img src="<%=contextPath%>/img/main-picture.png" alt="배너">
+</div>
 
 		<!-- 여행지리스트 테이블 -->
 		  <h2>즐겨찾기 </h2>

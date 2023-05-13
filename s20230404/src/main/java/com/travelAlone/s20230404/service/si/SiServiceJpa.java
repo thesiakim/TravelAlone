@@ -17,19 +17,16 @@ public class SiServiceJpa {
 private final SiRepository siRepository;
 	
 	public List<String> autoTravelSearch(String keyword) {
-		System.out.println("siServiceJpa autoTravelSearch start");
 		return siRepository.autoTravelSearch(keyword);
 	}
 
 
 	public List<String> autoHouseSearch(String keyword) {
-		System.out.println("siServiceJpa autoHouseSearch start");
 		return siRepository.autoHouseSearch(keyword);
 	}
 
 
 	public List<String> autoResSearch(String keyword) {
-		System.out.println("siServiceJpa autoResSearch start");
 		return siRepository.autoResSearch(keyword);
 	}
 

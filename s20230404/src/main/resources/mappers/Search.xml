@@ -331,5 +331,18 @@
 		ORDER BY create_date ASC
 	</select>
 	
+	<!-- 회원 탈퇴 시 최근 검색어 목록 존재 여부 조회 -->
+	<select id="searchRecentKeyword" parameterType="long" resultType="int">
+		SELECT COUNT(*) FROM RecentSearch
+		WHERE member_id = ${id}
+	</select>
+	
+	<!-- 회원 탈퇴 시 최근 검색어 목록 삭제 -->
+	<delete id="deleteByMemberWithdrawal" parameterType="long">
+		DELETE 
+		FROM RecentSearch
+		WHERE member_id = #{id}
+	</delete>
+	
 	
 </mapper>

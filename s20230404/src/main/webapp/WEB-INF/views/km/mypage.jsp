@@ -111,6 +111,6 @@
 	
 	<br><br><br><br><br><br>
 </body>
-
+	<br><br><br><br><br><br><br><br>
 	<c:import url="../fragments/footer.jsp"/>
 </html>

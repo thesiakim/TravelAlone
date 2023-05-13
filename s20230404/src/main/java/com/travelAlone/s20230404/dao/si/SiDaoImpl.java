@@ -3,15 +3,11 @@ package com.travelAlone.s20230404.dao.si;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.travelAlone.s20230404.model.Board;
-import com.travelAlone.s20230404.model.Hou_Img;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
-import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.TimeDTO;
 import com.travelAlone.s20230404.model.si.RecentSearch;
@@ -25,13 +21,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SiDaoImpl implements SiDao {
 	
-	private final Logger logger = LoggerFactory.getLogger(SiDao.class);
 	private final SqlSession session;
 	
 	//Travel 테이블에 검색 키워드가 있는지 조회
 	@Override
 	public List<Travel> travelSearch(Travel travel) {
-		logger.info("siDaoImpl travelSearch start");
+		//log.info("siDaoImpl travelSearch start");
 		List<Travel> travelList = null;
 		
 		try {
@@ -45,7 +40,7 @@ public class SiDaoImpl implements SiDao {
 			}
 			
 		} catch(Exception e) {
-			logger.info("siDaoImpl travelSearch e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl travelSearch e.getMessage() : " + e.getMessage());
 		}
 		return travelList;
 	}
@@ -54,7 +49,7 @@ public class SiDaoImpl implements SiDao {
 	//House 테이블에 검색 키워드가 있는지 조회
 	@Override
 	public List<House> houseSearch(House house) {
-		logger.info("siDaoImpl houseSearch start");
+		//log.info("siDaoImpl houseSearch start");
 		List<House> houseList = null;
 		
 		try {
@@ -65,7 +60,7 @@ public class SiDaoImpl implements SiDao {
 			}
 			
 		} catch(Exception e) {
-			logger.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
 		}
 		return houseList;
 	}
@@ -75,7 +70,7 @@ public class SiDaoImpl implements SiDao {
 	//Restaurant 테이블에 검색 키워드가 있는지 조회
 	@Override
 	public List<Res> resSearch(Res res) {
-		logger.info("siDaoImpl resSearch start");
+		//log.info("siDaoImpl resSearch start");
 		List<Res> resList = null;
 		
 		try {
@@ -86,7 +81,7 @@ public class SiDaoImpl implements SiDao {
 			}
 			
 		} catch(Exception e) {
-			logger.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl houseSearch e.getMessage() : " + e.getMessage());
 		}
 		return resList;
 	}
@@ -95,14 +90,14 @@ public class SiDaoImpl implements SiDao {
 	//Board 테이블에 검색 키워드가 있는지 조회
 	@Override
 	public List<Board> boardSearch(Board board) {
-		logger.info("siDaoImpl boardSearch start");
+		//log.info("siDaoImpl boardSearch start");
 		List<Board> boardList = null;
 		
 		try {
 			boardList = session.selectList("siBoardSearch", board);			
 			
 		} catch(Exception e) {
-			logger.info("siDaoImpl boardSearch e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl boardSearch e.getMessage() : " + e.getMessage());
 		}
 		
 		return boardList;
@@ -112,13 +107,13 @@ public class SiDaoImpl implements SiDao {
 	//Search 테이블에 검색 키워드가 있다면 update, 없으면 insert
 	@Override
 	public void upsertSearch(String keyword) {
-		logger.info("siDaoImpl upsertSearch start");
+		//log.info("siDaoImpl upsertSearch start");
 		
 		try {
 			session.insert("siUpsert", keyword);
 			
 		} catch(Exception e) {
-			logger.info("siDaoImpl upsertSearch e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl upsertSearch e.getMessage() : " + e.getMessage());
 		}
 		
 	}
@@ -127,7 +122,7 @@ public class SiDaoImpl implements SiDao {
 	//일간 인기 검색어 구하기
 	@Override
 	public List<Search> getDailyPopularSearches(String startOfToday, String endOfToday) {
-		logger.info("siDaoImpl getDailyPopularSearches Start");
+		//log.info("siDaoImpl getDailyPopularSearches Start");
 		
 		List<Search> dailyPopularKeywords = null;
 		TimeDTO timeDto = new TimeDTO();
@@ -137,7 +132,7 @@ public class SiDaoImpl implements SiDao {
 		try {
 			dailyPopularKeywords = session.selectList("siGetPopularSearches", timeDto);
 		} catch(Exception e) {
-			logger.info("siDaoImpl getDailyPopularSearches e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl getDailyPopularSearches e.getMessage() : " + e.getMessage());
 		}
 		
 		return dailyPopularKeywords;
@@ -147,7 +142,7 @@ public class SiDaoImpl implements SiDao {
 	//주간 인기 검색어 구하기
 	@Override
 	public List<Search> getWeeklyPopularSearches(String startOfWeek, String endOfWeek) {
-		logger.info("siDaoImpl getWeeklyPopularSearches Start");
+		//log.info("siDaoImpl getWeeklyPopularSearches Start");
 		
 		List<Search> weeklyPopularKeywords = null;
 		TimeDTO timeDto = new TimeDTO();
@@ -157,7 +152,7 @@ public class SiDaoImpl implements SiDao {
 		try {
 			weeklyPopularKeywords = session.selectList("siGetPopularSearches", timeDto);
 		} catch(Exception e) {
-			logger.info("siDaoImpl getWeeklyPopularSearches e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl getWeeklyPopularSearches e.getMessage() : " + e.getMessage());
 		}
 		return weeklyPopularKeywords;
 	}
@@ -166,7 +161,7 @@ public class SiDaoImpl implements SiDao {
 	//월간 인기 검색어 구하기
 	@Override
 	public List<Search> getMonthlyPopularSearches(String startOfMonth, String endOfMonth) {
-		logger.info("siDaoImpl getMonthlyPopularSearches Start");
+		//log.info("siDaoImpl getMonthlyPopularSearches Start");
 		
 		List<Search> monthlyPopularKeywords = null;
 		TimeDTO timeDto = new TimeDTO();
@@ -176,7 +171,7 @@ public class SiDaoImpl implements SiDao {
 		try {
 			monthlyPopularKeywords = session.selectList("siGetPopularSearches", timeDto);
 		} catch(Exception e) {
-			logger.info("siDaoImpl getMonthlyPopularSearches e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl getMonthlyPopularSearches e.getMessage() : " + e.getMessage());
 		}
 		return monthlyPopularKeywords;
 	}
@@ -185,13 +180,13 @@ public class SiDaoImpl implements SiDao {
 	//인기 명소 구하기
 	@Override
 	public List<Travel> getPopularTravel() {
-		logger.info("siDaoImpl getPopularTravel Start ");
+		//log.info("siDaoImpl getPopularTravel Start ");
 		List<Travel> popularTravel = null;
 		try {
 			System.out.println("siDaoImpl getPopularTravel selectList start");
 			popularTravel = session.selectList("sigetPopularT");
 		} catch(Exception e) {
-			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
 		}
 		return popularTravel;
 	}
@@ -205,7 +200,7 @@ public class SiDaoImpl implements SiDao {
 			System.out.println("siDaoImpl getPopularRes selectList start");
 			popularRes = session.selectList("sigetPopularR");
 		} catch(Exception e) {
-			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
 		}
 		return popularRes;
 	}
@@ -219,7 +214,7 @@ public class SiDaoImpl implements SiDao {
 			System.out.println("siDaoImpl getPopularHouse selectList start");
 			popularHouse = session.selectList("sigetPopularH");
 		} catch(Exception e) {
-			logger.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
+			log.info("siDaoImpl getPopularTravel e.getMessage() : " + e.getMessage());
 		}
 		return popularHouse;
 	}
@@ -344,6 +339,29 @@ public class SiDaoImpl implements SiDao {
 			log.info("siDaoImpl getRecentSearchList e.getMessage() : " + e.getMessage());
 		}
 		return recentSearchList;
+	}
+
+
+	@Override
+	public void deleteByMemberWithdrawal(Long id) {
+		try {
+			session.delete("deleteByMemberWithdrawal", id);
+		} catch(Exception e) {
+			log.info("siDaoImpl deleteByMemberWithdrawal e.getMessage() : " + e.getMessage());
+		}
+		
+	}
+
+
+	@Override
+	public int searchRecentKeyword(Long id) {
+		int findRecentSearch = 0;
+		try {
+			findRecentSearch = session.selectOne("searchRecentKeyword", id);
+		} catch(Exception e) {
+			log.info("siDaoImpl searchRecentKeyword e.getMessage() : " + e.getMessage());
+		}
+		return findRecentSearch;
 	}
 
 
