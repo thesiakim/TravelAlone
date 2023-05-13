@@ -12,6 +12,7 @@ import com.travelAlone.s20230404.model.dto.km.MypageInterestUpdateRequestDto;
 import com.travelAlone.s20230404.model.dto.km.MypageMemberWithdrawalRequestDto;
 import com.travelAlone.s20230404.service.km.MypageService;
 import com.travelAlone.s20230404.service.mh.HouseService;
+import com.travelAlone.s20230404.service.si.SiService;
 import com.travelAlone.s20230404.service.sk.SkService;
 import com.travelAlone.s20230404.service.sm.TravelService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,7 @@ public class MypageApiController {
     private final HouseService houseService;
     private final SkService skService;
     private final TravelService travelService;
+    private final SiService SiService;
 
     //마이페이지 Controller (MyBatis 사용)---------------------------------------------------------------
 
@@ -94,8 +96,8 @@ public class MypageApiController {
         if (passwordEncoder.matches(requestDto.getPassword(),memberJpa.getPassword()) &&
                 requestDto.getMemberEmail().equals(memberJpa.getEmail())){
 
-            mypageService.memberWithdrawal(memberJpa.getId());
-
+        	SiService.deleteByMemberWithdrawal(memberJpa.getId());
+        	mypageService.memberWithdrawal(memberJpa.getId());
             return memberJpa.getEmail();
         }else {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");

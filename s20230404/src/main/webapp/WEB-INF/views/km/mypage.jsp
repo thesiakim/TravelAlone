@@ -107,6 +107,6 @@
 		<button onclick="openWithdrawalWindow()">회원탈퇴</button>
 	</div>
 </body>
-
+	<br><br><br><br><br><br><br><br>
 	<c:import url="../fragments/footer.jsp"/>
 </html>

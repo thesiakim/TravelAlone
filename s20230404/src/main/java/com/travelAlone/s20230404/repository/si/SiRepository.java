@@ -1,16 +1,12 @@
 package com.travelAlone.s20230404.repository.si;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 import javax.persistence.EntityManager;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
-import com.travelAlone.s20230404.domain.si.HouseJPA;
-import com.travelAlone.s20230404.domain.si.ResJPA;
-import com.travelAlone.s20230404.domain.si.TravelJPA;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +19,7 @@ public class SiRepository {
 	private final EntityManager em;
 
 	public List<String> autoTravelSearch(String keyword) {
-		System.out.println("SiRepository autoTravelSearch start");
-		log.info("keyword : {}",keyword);
+		//log.info("keyword : {}", keyword);
 		List<String> travel = em.createNativeQuery(
 			    "SELECT DISTINCT SUBSTR(words.t_name, words.start_pos, words.end_pos - words.start_pos) as t_name_part " +
 			    	    "FROM ( " +
@@ -38,13 +33,11 @@ public class SiRepository {
 			    	.setParameter("keyword", keyword)
 			    	.getResultList();
 		
-		log.info("테스트 {}",travel);
-		
 		return travel;
 	}
 
 	public List<String> autoHouseSearch(String keyword) {
-		System.out.println("SiRepository autoHouseSearch start");
+		
 		List<String> house = em.createNativeQuery(
 			    "SELECT DISTINCT SUBSTR(words.h_name, words.start_pos, words.end_pos - words.start_pos) as h_name_part "
 			    + "FROM ( "
@@ -57,13 +50,11 @@ public class SiRepository {
 			    + "WHERE SUBSTR(h_name, start_pos, end_pos - start_pos) LIKE '%' || :keyword || '%'")
 			.setParameter("keyword", keyword)
 			.getResultList();
-		
-		
+					
 		return house;
 	}
 
 	public List<String> autoResSearch(String keyword) {
-		System.out.println("SiRepository autoResSearch start");
 		List<String> res = em.createNativeQuery(
 			    "SELECT DISTINCT SUBSTR(words.r_name, words.start_pos, words.end_pos - words.start_pos) as r_name_part "
 			    + "FROM ( "
@@ -76,8 +67,7 @@ public class SiRepository {
 			    + "WHERE SUBSTR(r_name, start_pos, end_pos - start_pos) LIKE '%' || :keyword || '%'")
 			.setParameter("keyword", keyword)
 			.getResultList();
-		
-		
+						
 		return res;
 	}
 
