@@ -47,10 +47,10 @@
 		<ul>
 		<li><a href="<%=contextPath%>/tra">여행지</a>
 		  <ul>
-			<li><a href="<%=contextPath%>/traFilter?code=tra100">관 광</a></li>
-			<li><a href="<%=contextPath%>/traFilter?code=tra200">자 연</a></li>
-			<li><a href="<%=contextPath%>/traFilter?code=tra300">레 저</a></li>
-			<li><a href="<%=contextPath%>/traFilter?code=tra400">쇼 핑</a></li>
+			<li><a href="<%=contextPath%>/traCodeFilter?code=tra100">관 광</a></li>
+			<li><a href="<%=contextPath%>/traCodeFilter?code=tra200">자 연</a></li>
+			<li><a href="<%=contextPath%>/traCodeFilter?code=tra300">레 저</a></li>
+			<li><a href="<%=contextPath%>/traCodeFilter?code=tra400">쇼 핑</a></li>
 		  </ul>
 		</li>
 		<li><a href="<%=contextPath%>/hou">숙소</a>
