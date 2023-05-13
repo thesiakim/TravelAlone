@@ -17,7 +17,7 @@ public interface MypageService {
 
     int memberProfileReset(Member member);
 
-    int memberWithdrawal(long id);
+    int memberWithdrawal(long id, String profileImg);
 
     List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto);
 

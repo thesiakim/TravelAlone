@@ -56,9 +56,57 @@
 			]]>
 		</update>
 
+		<select id="memberAllImgSearchForWithdrawal" resultType="ImgDto">
+			<![CDATA[
+			Select BOARD_ID AS ID, IMG_ID, IMG_CONTEXT, IMG_ORIGINAL_FILE, IMG_STORED_FILE
+			from BOD_IMG
+			where BOARD_ID IN (SELECT BOARD_ID FROM BOARD WHERE MEMBER_ID = #{id})
+			UNION ALL
+			Select G_WRITING_ID AS ID, IMG_ID, IMG_CONTEXT, IMG_ORIGINAL_FILE, IMG_STORED_FILE
+			from G_WRT_IMG
+			where G_WRITING_ID IN (SELECT G_WRITING_ID FROM G_WRITING WHERE MEMBER_ID = #{id})
+			UNION ALL
+			Select G_NOTICE_ID AS ID, IMG_ID, IMG_CONTEXT, IMG_ORIGINAL_FILE, IMG_STORED_FILE
+			from G_NOT_IMG
+			where G_NOTICE_ID IN (SELECT G_NOTICE_ID FROM G_NOTICE WHERE MEMBER_ID = #{id})
+			]]>
+		</select>
+
+		<!-- BOD_IMG 테이블의 데이터 삭제 -->
+		<delete id="deleteBodImgByMemberId" parameterType="long">
+			DELETE FROM BOD_IMG
+			WHERE BOARD_ID IN (SELECT BOARD_ID FROM BOARD WHERE MEMBER_ID = #{memberId})
+		</delete>
+
+		<!-- G_WRT_IMG 테이블의 데이터 삭제 -->
+		<delete id="deleteGwrtImgByMemberId" parameterType="long">
+			DELETE FROM G_WRT_IMG
+			WHERE G_WRITING_ID IN (SELECT G_WRITING_ID FROM G_WRITING WHERE MEMBER_ID = #{memberId})
+		</delete>
+
+		<!-- G_NOT_IMG 테이블의 데이터 삭제 -->
+		<delete id="deleteGnotImgByMemberId" parameterType="long">
+			DELETE FROM G_NOT_IMG
+			WHERE G_NOTICE_ID IN (SELECT G_NOTICE_ID FROM G_NOTICE WHERE MEMBER_ID = #{memberId})
+		</delete>
+	
 		<delete id="mypageMemberWithdrawal">
-			DELETE FROM MEMBER
-			WHERE MEMBER_ID = #{id}
+			begin
+			DELETE FROM RECENTSEARCH WHERE MEMBER_ID = #{id};
+			DELETE FROM BOARD WHERE MEMBER_ID = #{id};
+			DELETE FROM TRA_FAV WHERE MEMBER_ID = #{id};
+			DELETE FROM HOU_FAV WHERE MEMBER_ID = #{id};
+			DELETE FROM RES_FAV WHERE MEMBER_ID = #{id};
+			DELETE FROM INTEREST WHERE MEMBER_ID = #{id};
+			DELETE FROM SCORE WHERE MEMBER_ID = #{id};
+			DELETE FROM WARNING WHERE MEMBER_ID = #{id};
+			DELETE FROM G_NOTICE WHERE MEMBER_ID = #{id};
+			DELETE FROM G_WRITING WHERE MEMBER_ID = #{id};
+			DELETE FROM HOU_REV WHERE MEMBER_ID = #{id};
+			DELETE FROM RES_REV WHERE MEMBER_ID = #{id};
+			DELETE FROM TRA_REV WHERE MEMBER_ID = #{id};
+			DELETE FROM MEMBER WHERE MEMBER_ID = #{id};
+			end;
 		</delete>
 
 		<select id="mypageReviewShowhouse" resultType="MypageReviewResponseDto" parameterType="MypageReviewRequestDto" >

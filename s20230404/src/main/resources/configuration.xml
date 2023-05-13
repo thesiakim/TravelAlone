@@ -39,6 +39,7 @@
 		<typeAlias alias="MypageFavoriteResponseDto" type="com.travelAlone.s20230404.model.dto.km.MypageFavoriteResponseDto"/>
 		<typeAlias alias="CommonInterest" type="com.travelAlone.s20230404.model.Common"/>
 		<typeAlias alias="MypageInterestUpdateRequestDto" type="com.travelAlone.s20230404.model.dto.km.MypageInterestUpdateRequestDto"/>
+		<typeAlias alias="ImgDto" type="com.travelAlone.s20230404.model.dto.km.ImgDto"/>
 	</typeAliases>
 </configuration>
 

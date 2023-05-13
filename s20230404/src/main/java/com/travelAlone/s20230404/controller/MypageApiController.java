@@ -91,13 +91,15 @@ public class MypageApiController {
      * */
     @DeleteMapping("/api/v1/mypage/withdrawal")
     @ResponseBody
-    public String mypageMemberWithdrawal(@RequestBody MypageMemberWithdrawalRequestDto requestDto, @LoginUser MemberJpa memberJpa, Model model){
+    public String mypageMemberWithdrawal(@RequestBody MypageMemberWithdrawalRequestDto requestDto, @Login2User SessionUser memberJpa, Model model){
 
         if (passwordEncoder.matches(requestDto.getPassword(),memberJpa.getPassword()) &&
                 requestDto.getMemberEmail().equals(memberJpa.getEmail())){
 
-        	SiService.deleteByMemberWithdrawal(memberJpa.getId());
-        	mypageService.memberWithdrawal(memberJpa.getId());
+        	//SiService.deleteByMemberWithdrawal(memberJpa.getId());
+        	mypageService.memberWithdrawal(memberJpa.getId(), memberJpa.getImgStoredFile());
+
+            System.out.println(" 완료 ");
             return memberJpa.getEmail();
         }else {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");

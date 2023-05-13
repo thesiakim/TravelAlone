@@ -122,8 +122,6 @@ public class UploadHandler {
     public static void delete(String storedFileName) {
         String absolutePath = new File("").getAbsolutePath() + File.separator+File.separator;
         
-        System.out.println("UploadHandler delete absolutePath -> "+ absolutePath);
-        
         try{
             Path file = Paths.get(absolutePath+storedFileName);
             Files.deleteIfExists(file);

@@ -40,6 +40,7 @@ public class MypageServiceImpl implements MypageService{
      * 설명 : 마이페이지에서 보여주는 정보들을 가져온다
      * */
     @Override
+    @Transactional(readOnly = true)
     public MypageResponseDto mypageMain(long memberId) {
 
         MypageResponseDto responseDto = new MypageResponseDto();
@@ -59,6 +60,7 @@ public class MypageServiceImpl implements MypageService{
      * 설명 : 마이페이지 회원정보 변경
      * */
     @Override
+    @Transactional
     public int memberInfoUpdate(Member member) {
         // 회원정보 업데이트
         int updateResult = mypageDao.memberInfoUpdate(member);
@@ -78,6 +80,7 @@ public class MypageServiceImpl implements MypageService{
      *
      * */
     @Override
+    @Transactional
     public int memberProfileUpdate(List<MultipartFile> pictureFile, Member member) throws Exception {
         // 이미지 저장
         BodImg bodImg = UploadHandler.parseFileInfo(pictureFile, member.getMember_id()).get(0);
@@ -107,6 +110,7 @@ public class MypageServiceImpl implements MypageService{
      * 설명 : 프로필 사진을 기본 이미지로 변경한다
      * */
     @Override
+    @Transactional
     public int memberProfileReset(Member member) {
     	String gosunee = "src/main/resources/static/img/gosunee.png";
     	String godoree = "src/main/resources/static/img/godoree.png";
@@ -144,7 +148,26 @@ public class MypageServiceImpl implements MypageService{
      * 설명 : 마이페이지 내 회원탈퇴
      * */
     @Override
-    public int memberWithdrawal(long id) {
+    @Transactional
+    public int memberWithdrawal(long id, String profileImg) {
+
+        // 모든 사진 테이블 id를 이용해 조회 후 삭제
+        List<ImgDto> imgDtos = mypageDao.memberAllImgSearchForWithdrawal(id);
+
+        for (ImgDto imgDto : imgDtos) {
+            UploadHandler.delete(imgDto.getImg_stored_file());
+        }
+
+        // 사진테이블에서 삭제
+        int i = mypageDao.deleteMemberAllImgForWithdrawal(id);
+
+        // 프로필 사진 삭제
+        if (!profileImg.equals("src/main/resources/static/img/gosunee.png")
+                ||!profileImg.equals("src/main/resources/static/img/godoree.png")){
+            //기본 이미지가 아닐 경우 실제 이미지 파일 삭제
+            UploadHandler.delete(profileImg);
+        }
+        // 나머지 테이블 데이터 삭제
         return mypageDao.memberWithdrawal(id);
     }
 
@@ -153,6 +176,7 @@ public class MypageServiceImpl implements MypageService{
      * 설명 : 마이페이지 내가쓴 리뷰 화면 보여주기
      * */
     @Override
+    @Transactional(readOnly = true)
     public List<MypageReviewResponseDto> mypageReviewShow(MypageReviewRequestDto requestDto) {
 
         return mypageDao.mypageReviewShow(requestDto);
@@ -182,6 +206,7 @@ public class MypageServiceImpl implements MypageService{
     
     // 누락 푸쉬
 	@Override
+    @Transactional
 	public UserPageResponseDto userPage(long member_id) {
 		UserPageResponseDto userPageResponseDto = new UserPageResponseDto();
 		
@@ -197,6 +222,7 @@ public class MypageServiceImpl implements MypageService{
 
     //마이페이지 문의내역 리스트 개수 및 페이지확인
     @Override
+    @Transactional(readOnly = true)
     public int myPageInquireListCnt(Long memberId) {
         int myPageInquireListCnt = 0;
         log.info("mhServiceImpl myPageInquireListCnt Start...");
@@ -208,6 +234,7 @@ public class MypageServiceImpl implements MypageService{
 
     //마이페이지 문의내역 리스트
     @Override
+    @Transactional(readOnly = true)
     public List<Inquire> myPageInquireList(Inquire inquire) {
         List<Inquire> myPageInquireList = null;
         log.info("mhServiceImpl myPageInquireList Start...");
@@ -222,6 +249,7 @@ public class MypageServiceImpl implements MypageService{
      * 설명 : 마이페이지 즐겨찾기 불러오기
      * */
     @Override
+    @Transactional(readOnly = true)
     public List<MypageFavoriteResponseDto> mypageFavorites(Long id, String category, int page) {
 
         // 페이징 처리를 위한 가져올 첫번째 게시글 번호 산출
@@ -244,7 +272,12 @@ public class MypageServiceImpl implements MypageService{
         return mypageFavoriteResponseDtos;
     }
 
+    /**
+     * 2023-05-13 조경민
+     * 설명 : 마이페이지 내 즐겨찾기 페이징 처리를 위한 total 갯수 불러오기
+     * */
     @Override
+    @Transactional(readOnly = true)
     public int mypageFavoritesPageCount(Long id, String category) {
         int totalCount;
         if (category.equals("hou")){
@@ -257,12 +290,23 @@ public class MypageServiceImpl implements MypageService{
         return totalCount;
     }
 
+
+    /**
+     * 2023-05-13 조경민
+     * 설명 : 마이페이지 내 관심사 페이지 불러오기
+     * */
     @Override
+    @Transactional
     public MypageTagResponseDto mypageInterest(Long id) {
 
         return mypageDao.mypageInterest(id);
     }
 
+
+    /**
+     * 2023-05-13 조경민
+     * 설명 : 마이페이지 내 관심사 설정
+     * */
     @Override
     public int mypageInterestUpdate(MypageInterestUpdateRequestDto requestDto) {
 

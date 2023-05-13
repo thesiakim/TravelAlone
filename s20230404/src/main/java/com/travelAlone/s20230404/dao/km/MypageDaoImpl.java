@@ -84,13 +84,34 @@ public class MypageDaoImpl implements MypageDao{
     }
 
     /**
+     * 2023-05-13 조경민
+     * 설명 :회원 탈퇴를 위한 모든 사진 불러오기
+     * */
+    @Override
+    public List<ImgDto> memberAllImgSearchForWithdrawal(long id) {
+        return session.selectList("memberAllImgSearchForWithdrawal", id);
+    }
+
+    @Override
+    public int deleteMemberAllImgForWithdrawal(long memberId) {
+        int result = 0;
+
+        result += session.delete("deleteBodImgByMemberId", memberId);
+        result += session.delete("deleteGwrtImgByMemberId", memberId);
+        result += session.delete("deleteGnotImgByMemberId", memberId);
+
+        return result;
+    }
+
+    /**
      * 2023-05-01 조경민
-     * 설명 : 회원탈퇴
+     * 설명 : 회원탈퇴를 위해 사진 테이블을 제외한 모든 테이블 삭제
      * */
 
     @Override
     public int memberWithdrawal(long id){
 
+        System.out.println(" 탈퇴 테이블 삭제 "+id);
         return session.delete("mypageMemberWithdrawal", id);
     }
 
@@ -131,6 +152,11 @@ public class MypageDaoImpl implements MypageDao{
         return myPageInquireListCnt;
     }
 
+    /**
+     * 2023-05-12 조경민
+     * kmMypageFavoritesCountRes~Tra
+     * 설명 : 마이페이지 내 즐겨찾기 페이징을 위한 총 갯수 불러오기
+     * */
     @Override
     public int kmMypageFavoritesCountRes(Long id) {
         return session.selectOne("kmMypageFavoritesCountRes",id);
@@ -146,6 +172,11 @@ public class MypageDaoImpl implements MypageDao{
         return session.selectOne("kmMypageFavoritesCountTra",id);
     }
 
+
+    /**
+     * 2023-05-12 조경민
+     * 설명 : 마이페이지 관심사 불러오기
+     * */
     @Override
     public MypageTagResponseDto mypageInterest(Long id) {
 
@@ -170,6 +201,10 @@ public class MypageDaoImpl implements MypageDao{
         return new MypageTagResponseDto(interestsCommon, interestsById);
     }
 
+    /**
+     * 2023-05-12 조경민
+     * 설명 : 마이페이지 관심사 설정
+     * */
     @Override
     public int mypageInterestUpdate(MypageInterestUpdateRequestDto requestDto) {
         // 삭제할 리스트 선언
@@ -201,6 +236,13 @@ public class MypageDaoImpl implements MypageDao{
         return changeResult;
     }
 
+
+
+    /**
+     * 2023-05-12 조경민
+     * kmMypageFavoritesHou~Res
+     * 설명 : 마이페이지 내 즐겨찾기 불러오기. 페이징 처리를 위해 RowBounds 사용
+     * */
     @Override
     public List<MypageFavoriteResponseDto> kmMypageFavoritesHou(Long id,int startNum) {
 

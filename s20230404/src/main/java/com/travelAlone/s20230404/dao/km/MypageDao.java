@@ -44,4 +44,8 @@ public interface MypageDao {
     MypageTagResponseDto mypageInterest(Long id);
 
     int mypageInterestUpdate(MypageInterestUpdateRequestDto requestDto);
+
+    List<ImgDto> memberAllImgSearchForWithdrawal(long id);
+
+    int deleteMemberAllImgForWithdrawal(long id);
 }
