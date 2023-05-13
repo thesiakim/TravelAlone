@@ -53,7 +53,7 @@ th, td {
 
 <body>
 <div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
+		<img src="img/restaurant-picture.png" alt="마카롱">
 	</div>	
 	
 <h1><a href="res"><img src="img/Res.png" alt="맛집" width=250px height=250px></a></h1>

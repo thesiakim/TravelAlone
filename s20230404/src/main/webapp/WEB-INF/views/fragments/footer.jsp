@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <style>
   #container-left {
-    padding: 0 250px;
+   /*  padding: 0 250px; */
     /* background-color: #F8F8F8; */
     background-color: #5F9EA0;
     font-size: 15px;
@@ -25,45 +25,37 @@
 	
 	
   <form>
-	<div id="container-left" class="clearfix">
- 	  <div class="footerForm">	
- 		 <div style="float: right;">  
- 		<div style='font-size:20px;  font-weight: border;'>
- 		<br>
- 		<a href="http://localhost:4040/aboutUs.html" style="color: white;" >프로젝트 소개</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 		<a href="http://localhost:4040/service.html" style="color: white;" >서비스 약관</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="http://localhost:4040/personalData.html" style="margin-right: 75px; color: white;" >개인정보 처리방침</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<c:if test="${user.role == 'rol200' }">
-      <a href="admin" style="margin-left: 150px; color: white;" >관리자페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </c:if>
-      <a href="/notice" style="color: white;">고객센터</a>
-	  </div>
-	  </div>
-	  </div>
-	  
-	  <div class="footerInfo">
-	  <div style="float: left;">
-	  <div style='font-size:12px; color:white; text-align: left; '>
-	  <br>
-	  
-		서울특별시 마포구 신촌로 176 501호<br>
-		02-123-4567<br>
-		Copyright ⓒ 2023 TravelAlone All Rights Reserved.
-<br>	<p>Special Thanks To LJK</p><br>
-		</div>
-		</div>
-		</div>
-<br>
-<br>
-<br>
-<br>
+		<div id="container-left" class="clearfix">
+			<div class="footerForm">
+				<div style="float: right;">
+					<div style='font-size: 20px; font-weight: border;'>
+						<br> <a href="http://localhost:4040/aboutUs.html"	style="color: white; margin-left: 100px;">프로젝트 소개</a>
+					
+						<a href="http://localhost:4040/service.html" style="color: white; margin-left: 60px;">서비스	약관</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						<a	href="http://localhost:4040/personalData.html"	style="margin-right: 700px; margin-left: 10px; color: white;">개인정보 처리방침</a>
+					
+						<c:if test="${user.role == 'rol200' }">
+							<a href="admin" style=" color: white;">관리자페이지</a>						
+          				</c:if>
+          				
+						<a href="/notice" style="color: white; margin-left: 80px;">고객센터</a>
+					</div>
+				</div>
+			</div>
 
+			<div class="footerInfo">
+				<div style="float: left;">
+					<div style='font-size: 12px; color: white; text-align: left;'>
+						<br> 서울특별시 마포구 신촌로 176 501호<br> 02-123-4567<br>
+						Copyright ⓒ 2023 TravelAlone All Rights Reserved. <br>
+						<p>Special Thanks To LJK</p>
+						<br>
+					</div>
+				</div>
+			</div>
+			<br> <br> <br> <br> <br> <br> <br>
+		</div>
 
-<br>
-<br>
-<br>
-	  </div>
-	
-  </form>
+	</form>
 </body>
 </html>
