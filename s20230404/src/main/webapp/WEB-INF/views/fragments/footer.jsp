@@ -32,7 +32,7 @@
 						<br> <a href="http://localhost:4040/aboutUs.html"	style="color: white; margin-left: 100px;">프로젝트 소개</a>
 					
 						<a href="http://localhost:4040/service.html" style="color: white; margin-left: 60px;">서비스	약관</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-						<a	href="http://localhost:4040/personalData.html"	style="margin-right: 700px; margin-left: 10px; color: white;">개인정보 처리방침</a>
+						<a	href="http://localhost:4040/personalData.html"	style="margin-right: 500px; margin-left: 10px; color: white;">개인정보 처리방침</a>
 					
 						<c:if test="${user.role == 'rol200' }">
 							<a href="admin" style=" color: white;">관리자페이지</a>						
