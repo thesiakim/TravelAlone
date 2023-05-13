@@ -120,7 +120,7 @@ public class MemberService{
     public Long findMemberIdByEmailNamePhone(MemberFindPasswordRequestDto requestDto) {
 
         // 조건에 맞는 momberJpa를 찾아옴
-        MemberJpa memberJpa = memberRepository.findMemberIdByEmailNamePhone(requestDto.getEmail(), requestDto.getEmail(), requestDto.getPhone())
+        MemberJpa memberJpa = memberRepository.findMemberIdByEmailNamePhone(requestDto.getName(), requestDto.getEmail(), requestDto.getPhone())
                 .orElse(null);
 
 

@@ -169,16 +169,16 @@ public class MemberController {
     @GetMapping("/password/info")
     public String findPassword(@ModelAttribute MemberFindPasswordRequestDto requestDto, Model model){
 
+        System.out.println("requestDto = " + requestDto);
         // 해당하는 member id 를 찾아온다
         Long memberId = memberService.findMemberIdByEmailNamePhone(requestDto);
 
         if (memberId == null){
-
+            model.addAttribute("error", "조건에 맞는 아이디가 없습니다.");
             //찾아온 memberId가 null이라면 다시 페이지 반환
             return "km/find-password";
 
         }else {
-
             // 있다면 정보를 담아 비밀번호 변경창으로 이동
             model.addAttribute("info", requestDto);
             model.addAttribute("memberId", memberId);
@@ -192,10 +192,10 @@ public class MemberController {
      * 설명 : 비밀번호 찾기 후 변경 페이지에서 정보들을 받아 확인하고 변경한다(ajax 사용)
      * */
     @PostMapping("api/v1/password/{id}")
-    public String changePassword(@PathVariable Long id, @RequestBody MemberFindAndChangePasswordRequestDto requestDto){
+    public String changePassword(@PathVariable Long id, @ModelAttribute MemberFindAndChangePasswordRequestDto requestDto){
 
         memberService.checkMemberAndChangePassword(id, requestDto, passwordEncoder);
 
-        return "km/login";
+        return "redirect:/login";
     }
 }
