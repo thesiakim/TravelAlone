@@ -15,26 +15,32 @@
 <body>
 <h1>비밀번호 찾기</h1>
 <form action="<%=contextPath%>/password/info" method="get">
-	<p>
-		<label for="email">아이디</label>
-		<input type="text" name="email" id="email" required>
-	</p>
-	<p>
-		<label for="name">이름</label>
-		<input type="text" name="name" id="name" required>
-	</p>
-	<p>
-		<label for="phone">휴대폰 번호</label>
-		<input type="tel" name="phone" id="phone" required>
-	</p>
-	<p>
-		<input type="submit" value="비밀번호 찾기">
-	</p>
-	<p>
-		<c:if test="${not empty error}">
-			<p>${error}</p>
-		</c:if>
-	</p>
+	<table>
+	<tr>
+		<td><label for="email">아이디</label></td>
+		<td><input type="text" name="email" id="email" required></td>
+	</tr>
+	<tr>
+		<td><label for="name">이름</label></td>
+		<td><input type="text" name="name" id="name" required></td>
+	</tr>
+	<tr>
+		<td><label for="phone">휴대폰 번호</label></td>
+		<td><input type="tel" name="phone" id="phone" required></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" style="width: 275px; height: 30px" value="비밀번호 찾기"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td style="text-align: center">
+			<c:if test="${not empty error}">
+			${error}
+			</c:if>
+		</td>
+	</tr>
+	</table>
 </form>
 </body>
 </html>

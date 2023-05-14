@@ -13,7 +13,11 @@
 	<link href="<%=contextPath%>/css/login.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
+<div class="loginLogo">
+	<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/gosunee.png"></a>
+</div>
 <h1>아이디 찾기</h1>
 <h2>회원님의 아이디는 ${email} 입니다.</h2>
+<input type="button" style="width: 275px; height: 30px" value="로그인" onclick="<%=contextPath%>window.location.href='/login'">
 </body>
 </html>

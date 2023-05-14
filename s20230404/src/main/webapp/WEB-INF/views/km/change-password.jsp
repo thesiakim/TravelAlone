@@ -33,29 +33,32 @@
 <body>
 <h1>비밀번호 변경</h1>
 <form action="<%=contextPath%>/api/v1/password/${memberId}" method="post" onsubmit="return passwordChecked()">
-	<p>
-		<label for="email">아이디</label>
-		<input type="text" name="email" id="email" value="${info.email}" readonly>
-	</p>
-	<p>
-		<label for="name">이름</label>
-		<input type="text" name="name" id="name" value="${info.name}" readonly>
-	</p>
-	<p>
-		<label for="phone">휴대폰 번호</label>
-		<input type="tel" name="phone" id="phone" value="${info.phone}" readonly>
-	</p>
-	<p>
-		<label for="password">새 비밀번호</label>
-		<input type="password" name="password" id="password" required>
-	</p>
-	<p>
-		<label for="passwordCheck">새 비밀번호 확인</label>
-		<input type="password" name="passwordCheck" id="passwordCheck" required>
-	</p>
-	<p>
-		<input type="submit" value="비밀번호 찾기">
-	</p>
+	<table>
+	<tr>
+		<td><label for="email">아이디</label></td>
+		<td><input type="text" name="email" id="email" value="${info.email}" readonly></td>
+	</tr>
+	<tr>
+		<td><label for="name">이름</label></td>
+		<td><input type="text" name="name" id="name" value="${info.name}" readonly></td>
+	</tr>
+	<tr>
+		<td><label for="phone">휴대폰 번호</label></td>
+		<td><input type="tel" name="phone" id="phone" value="${info.phone}" readonly></td>
+	</tr>
+	<tr>
+		<td><label for="password">새 비밀번호</label></td>
+		<td><input type="password" name="password" id="password" required></td>
+	</tr>
+	<tr>
+		<td><label for="passwordCheck">새 비밀번호 확인</label></td>
+		<td><input type="password" name="passwordCheck" id="passwordCheck" required></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" style="width: 275px; height: 30px" value="비밀번호 변경"></td>
+	</tr>
+	</table>
 </form>
 </body>
 </html>

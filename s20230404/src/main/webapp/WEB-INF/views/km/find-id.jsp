@@ -11,26 +11,43 @@
 </head>
 	<link href="<%=contextPath%>/css/list.css" rel="stylesheet" type="text/css">
 	<link href="<%=contextPath%>/css/login.css" rel="stylesheet" type="text/css">
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
+<div class="loginLogo">
+	<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/gosunee.png"></a>
+</div>
+<div>
 <h1>아이디 찾기</h1>
-<form action="<%=contextPath%>/api/v1/id" method="post">
-	<p>
-		<label for="name">이름</label>
+</div>
+<div class="form">
+<form action="<%=contextPath%>/api/v1/id" method="post" style="display: flex; flex-direction: column; align-items: center">
+	<table>
+		<tr>
+			<td>
+				<label for="name">이름</label>
+			</td>
+	<td>
 		<input type="text" name="name" id="name" required>
-	</p>
-	<p>
-		<label for="phone">휴대폰 번호</label>
-		<input type="tel" name="phone" id="phone" required>
-	</p>
-	<p>
-		<input type="submit" value="아이디 찾기">
-	</p>
+	</td>
+		</tr>
+	<tr>
+		<td><label for="phone">휴대폰 번호</label></td>
+		<td><input type="tel" name="phone" id="phone" required></td>
+	</tr>
+		<tr>
+			<td></td>
+			<td>
+		<input type="submit" style="width: 275px; height: 30px" value="아이디 찾기">
+			</td>
+		</tr>
 	<p>
 		<c:if test="${not empty error}">
 			<p>${error}</p>
 		</c:if>
 	</p>
+	</table>
 </form>
+</div>
 </body>
 </html>

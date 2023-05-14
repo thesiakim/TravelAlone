@@ -114,7 +114,7 @@
       transition: ease 0.5s;
    }
    
-   // 맨 밑 댓글창
+   /*맨 밑 댓글창*/
    #replyForm > input:focus{ outline: 0px solid #205E61; }
    
    #replyForm > input::placeholder{ color: #5F9EA0; }

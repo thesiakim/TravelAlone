@@ -56,7 +56,7 @@
 	
    /* 회원가입 버튼 */
 	button {
-		width: 80px;         border-radius: 7px;
+		width: 90px;         border-radius: 7px;
 		height: 32px;         box-sizing: border-box;
 		font-size: 15px;        font-weight:bolder;
 		color:white;
