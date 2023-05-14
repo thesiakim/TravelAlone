@@ -141,9 +141,9 @@ public class HouseServiceImpl implements HouseService {
 	
 	//==========리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰====================================
 	@Override
-	public List<Hou_Rev> listHouRev(int hid) {
+	public List<Hou_Rev> listHouRev(Hou_Rev hou_Rev) {
 		//log.debug("HouseServiceImpl Start listHouRev...");
-		List<Hou_Rev> houRevList = mh.selectHouRevList(hid);
+		List<Hou_Rev> houRevList = mh.selectHouRevList(hou_Rev);
 		
 		//log.debug("HouseServiceImpl End listHouRev...");
 		return houRevList;
@@ -242,6 +242,14 @@ public class HouseServiceImpl implements HouseService {
 		//log.info("HouseServiceImpl deleteHouRevAll Start");
 		result = mh.houRevDelAll(house_id);
 		return result;
+	}
+	@Override
+	public int totalHouRev(int hid) {
+		log.info("HouseServiceImpl start totalHouRev ");
+		log.info("house_id->"+ hid);
+		int totHouRevCnt  = mh.totalHouRev(hid);
+		log.info("HouseServiceImpl  totalHouRev totHouRevCnt->" + totHouRevCnt );		
+		return totHouRevCnt;
 	}
 
 

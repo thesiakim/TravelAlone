@@ -90,8 +90,8 @@ private final SiService SiService;
 	
 	//숙소   정보글조회
 	@GetMapping(value = "houDetail")
-	public String houseDetail(@LoginUser MemberJpa memberJpa,
-			int hid , Model model , Hou_Img hou_Img ,Hou_Fav hou_Fav) {
+	public String houseDetail(@LoginUser MemberJpa memberJpa,String currentPage,
+			int hid , Model model , Hou_Img hou_Img ,Hou_Fav hou_Fav,Hou_Rev hou_Rev) {
 		log.info("HouseController Start houseDetail");
 		log.info("HouseController houseDetail house_id->"+ hid );
 		//숙소정보 서비스
@@ -126,11 +126,26 @@ private final SiService SiService;
 		
 		model.addAttribute("isfavHou", favResult);
 		
+		//리뷰갯수
+				int totalHouRev = mh.totalHouRev(hid);	
+		//페이징
+				Paging page = new Paging(totalHouRev, currentPage);
+				hou_Rev.setStart(page.getStart());
+				hou_Rev.setEnd(page.getEnd());
+				log.info("hou_Rev.getStart()"+ hou_Rev.getStart());
+				log.info("hou_Rev.getEnd()"+ hou_Rev.getEnd());
+				hou_Rev.setHouse_id(hid);
+			
+		
 		
 		//리뷰리스트
-		List<Hou_Rev> listHouRev = mh.listHouRev(hid);
+		List<Hou_Rev> listHouRev = mh.listHouRev(hou_Rev);
 		log.info("HouseController list listHouRev.size()=>"+ listHouRev.size());
 		
+		
+		
+	
+		model.addAttribute("page", page);
 		model.addAttribute("house", house);	
 		model.addAttribute("houRevList", listHouRev);
 

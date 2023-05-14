@@ -226,7 +226,15 @@
 		</tr>
 	</table>
 	<br>
+	
+ <div>
+	
+	<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+		<a
+			href="houDetail?hid=${house.house_id}&currentPage=${i}">[${i}]</a>
+	</c:forEach>
 
+</div> 
 	<h6>
 		명예훼손, 개인정보 유출, 분쟁 유발, 허위 사실 유포 등의 글은 이용약관에 의해 제제는 물론<br> 법률에 의해
 		처벌받을 수 있습니다. 건전한 커뮤니티를 위해 자제 당부 드립니다.

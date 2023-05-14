@@ -36,7 +36,7 @@ public interface HouseDao {
 	int 					condOptionLocCnt(String code);
 	
 	//리뷰리스트가져오기
-	List<Hou_Rev> 			selectHouRevList(int hid);
+	List<Hou_Rev> 			selectHouRevList(Hou_Rev hou_Rev);
 	int 					insertHouRev(Hou_Rev hou_Rev);
 	int 					updateHouseRev(Hou_Rev hou_Rev);
 	int 					deleteHouseRev(int review_id);
@@ -47,12 +47,10 @@ public interface HouseDao {
 	int 					insertHouFav(Hou_Fav hou_Fav);
 	int 					deleteHouFav(Hou_Fav hou_Fav);
 	int 					selectHouFav(Hou_Fav hou_Fav);
+	int 					totalHouRev(int hid);
 	
 	
-	
-	
-	
-	
+
 
 	
 	

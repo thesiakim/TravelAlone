@@ -225,11 +225,12 @@ public class HouseDaoImpl implements HouseDao {
 	//==========리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰====================================
 
 	@Override
-	public List<Hou_Rev> selectHouRevList(int hid) {
+	public List<Hou_Rev> selectHouRevList(Hou_Rev hou_Rev) {
 		List<Hou_Rev> houRevList = new ArrayList<Hou_Rev>();
+		log.info("hou_Rev.getHouse_id() ->" + hou_Rev.getHouse_id() );
 		try {
 			//log.info("HouseDaoImpl selectHouRevList houRevList Start...");
-			houRevList = session.selectList("houRevList",hid);
+			houRevList = session.selectList("houRevList",hou_Rev);
 			//log.info("HouseDaoImpl selectHouRevList houRevList End...");
 		} catch (Exception e) {
 			//log.info("HouseDaoImpl houRevList Exception " +e.getMessage());
@@ -416,6 +417,21 @@ public class HouseDaoImpl implements HouseDao {
 			}
 									
 			return result;
+		}
+
+
+		@Override
+		public int totalHouRev(int hid) {
+			int totalHouRev = 0;
+			log.info("HouseDaoImpl Start total");
+			log.info("HouseDaoImpl hid->"+hid);
+			try {
+				totalHouRev = session.selectOne("mhHouRevTotal",hid);
+				log.info("HouseDaoImpl totalHouRev totalHouRev->" + totalHouRev);
+			} catch (Exception e) {
+				log.info("HouseDaoImpl totalHouRev Exception " +e.getMessage());
+			}							
+			return totalHouRev;
 		}
 
 		
