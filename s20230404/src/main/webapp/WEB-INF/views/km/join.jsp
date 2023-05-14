@@ -242,7 +242,7 @@
 				<td></td>
 				<td style="width: 80px;">
 					<button type="submit" class="btn btn-outline-dark">가 입</button>
-					<button type="button" class="btn btn-outline-dark" onclick="history.back();">취 소</button>
+					<button type="button" class="btn btn-outline-dark-cancel" onclick="history.back();">취 소</button>
 				</td>
                 <td></td>
 			</tr>
