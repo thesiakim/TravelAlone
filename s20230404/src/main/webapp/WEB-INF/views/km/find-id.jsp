@@ -11,6 +11,8 @@
 </head>
 	<link href="<%=contextPath%>/css/list.css" rel="stylesheet" type="text/css">
 	<link href="<%=contextPath%>/css/login.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+	
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
