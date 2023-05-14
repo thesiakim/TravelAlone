@@ -38,7 +38,7 @@ public interface HouseService {
 	List<House> 			listFilterOptionLoc(House house);
 	
 	//리뷰 
-	List<Hou_Rev> 			listHouRev(int hid);
+	List<Hou_Rev> 			listHouRev(Hou_Rev hou_Rev);
 	int 					insertHouRev(Hou_Rev hou_Rev);
 	int 					updateHouseRev(Hou_Rev hou_Rev);
 	int 					deleteHouRev(int review_id);
@@ -49,6 +49,8 @@ public interface HouseService {
 	int 					insertHouFav(Hou_Fav hou_Fav);
 	int 					deleteHouFav(Hou_Fav hou_Fav);	
 	int 					isHou_Fav(Hou_Fav hou_Fav);
+	
+	int 					totalHouRev(int hid);
 	
 	
 	

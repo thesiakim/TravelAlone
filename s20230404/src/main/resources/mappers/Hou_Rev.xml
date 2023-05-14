@@ -4,19 +4,38 @@
 
 <mapper namespace="com.travelAlone.s20230404.Hou_RevMapper">
 
+
+<!-- 숙소리뷰글 갯수세기 -->
+<select id="mhHouRevTotal" parameterType="Hou_Rev"    resultType="int">
+	select Count(*)
+	FROM HOU_REV
+	WHERE HOUSE_ID = #{HOUSE_ID} 
+</select>
+
+
+
+
+
 	<!-- 리뷰목록 가져오기 -->
 <select id="houRevList" parameterType="Hou_Rev" resultType="Hou_Rev" >
     		<![CDATA[
-				 
-			 SELECT							  
-				       hr. *
-				       ,m.m_nickname
-			 FROM    HOU_REV hr,  Member m
-			 WHERE    
-			 HOUSE_ID =   #{HOUSE_ID}  
-			 and
-			  hr.member_id = m.member_id
-			
+	
+		 	
+		SELECT *
+         FROM(    
+              SELECT rownum rn , a.*
+                FROM(
+                    SELECT                       
+                             hr. *
+                             ,m.m_nickname
+                    FROM    HOU_REV hr,  Member m
+                    WHERE    
+                    HOUSE_ID =  #{house_id} 
+                    and
+                     hr.member_id = m.member_id) a
+               )
+         WHERE  rn >= #{start} 
+          and    rn <= #{end} 
 						 			 			                      					 		
 		 	 ]]>	
 			
