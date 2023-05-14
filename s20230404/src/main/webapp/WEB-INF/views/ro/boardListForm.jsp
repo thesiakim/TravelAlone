@@ -114,5 +114,7 @@
 		<a href="listBoard?currentPage=${page.startPage + page.pageBlock }&b_common_board=${board.b_common_board }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[다음]</a>
 	</c:if>
 </body>
+
+<br><br><br><br><br><br>
 	<c:import url="../fragments/footer.jsp"></c:import>
 </html>

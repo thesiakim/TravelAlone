@@ -172,7 +172,7 @@
 		</select>
 
 <!-- 조회된 지역 데이터 갯수 세기 -->  
-		<select id="condOptionLocCnt" resultType="int">
+		<select id="condOptionLocResCnt" resultType="int">
 			select Count(*) FROM RESTAURANT where R_COMMON_LOC = #{code}
 		</select>		
 <!-- 조회된 지역데이터 리스트 --> 				

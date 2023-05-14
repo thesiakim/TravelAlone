@@ -199,7 +199,7 @@ public class SkDaoImpl implements SkDao {
 		int count = 0;
 		log.info("SkDaoImpl start total");
 		try {
-			count = session.selectOne("condOptionLocCnt",code);
+			count = session.selectOne("condOptionLocResCnt",code);
 			log.info("SkDaoImpl condOptionLocCnt->"+count);
 		} catch (Exception e) {
 			log.info("SkDaoImpl Exception"+ e.getMessage());

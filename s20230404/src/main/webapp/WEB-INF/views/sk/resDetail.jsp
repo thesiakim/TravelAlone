@@ -173,7 +173,7 @@
                       <c:if test="${user_id == resRev.member_id }">
                <td style=" padding-left:30px;" ><a href="resRevUpdateForm?restaurant_id=${resRev.restaurant_id}&review_id=${resRev.review_id}"><input type="submit" value="수정"></a></td>
                    <td style=" padding-left:30px;">
-                    <a href="resRevDelete?review_id=${resRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')"><input type="submit" value="삭제"></a>
+                    <a href="deleteResRev?review_id=${resRev.review_id}" onclick="return confirm('정말로 삭제하시겠습니까?')"><input type="submit" value="삭제"></a>
                     </td>
                   </c:if>
                                  

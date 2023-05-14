@@ -108,7 +108,11 @@
 	<c:if test="${page.endPage < page.totalPage }">
 		<a href="listAllBoard?currentPage=${page.startPage + page.pageBlock }&orderList=${board.orderList}&listCategory=${board.listCategory}&keyWord=${board.keyWord}">[다음]</a>
 	</c:if>
+	
+	
    
 </body>
+
+<br><br><br><br><br><br>
 	<c:import url="../fragments/footer.jsp"/>
 </html>
