@@ -10,19 +10,14 @@
 <title>Insert title here</title>
 <style>
   #container-left {
-   /*  padding: 0 250px; */
-    /* background-color: #F8F8F8; */
     background-color: #5F9EA0;
     font-size: 15px;
-   /*  font-color : 205E61; */
     font-color : #FFFFFF;
   }
   
 </style>
 </head>
 <body>
-	
-	
 	
   <form>
 		<div id="container-left" class="clearfix">

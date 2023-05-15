@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@ include file="../fragments/header.jsp"%>
-   <%--  <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> --%>
-<%--     <% String role = request.getUserPrincipal().; %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,49 +89,42 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 		<img src="img/main-picture.png" alt="배너">
 	</div>
 
-
-
-
 	<!-- 본문 -->
- 	<form >
- 	<div>
+ 	<form>
+ 		<div>
 		<h1>고객센터</h1>
-			
-				<div >
-				 <a href="notice">공지사항 </a>
-				  <a href="faq" style=" padding-left:50px;">자주 묻는 질문 </a>
-				  <a href="inquire" style=" padding-left:50px;">문의하기</a>
+			<div>
+				<a href="notice">공지사항 </a>
+				<a href="faq" style=" padding-left:50px;">자주 묻는 질문 </a>
+				<a href="inquire" style=" padding-left:50px;">문의하기</a>
 			</div>				
-					<%-- 	<h3>문의글수 : ${totalInquire }</h3>	 --%>
 		</div>
 	</form>	
 	
+	<!-- 검색 -->
+	<form action="inquireSearch">
+		<select id="category" name="search">
+			<option value="s_title">제목</option>
+			<option value="s_content">내용</option>
+			
+		</select> 
+		  <div id="serch">
+		<input type="text" name="keyword" placeholder="검색어를 입력해주세요" value="${search}" id="searchId">
+		<!-- <button type="submit">keyword검색</button> -->
+		</div>
+		<p>
+	</form>
+
+	<c:set var="num" value="${page.total-page.start+1 }"></c:set>
+		
 	
-			<!-- 검색 -->
-			<form action="inquireSearch">
-				<select id="category" name="search">
-					<option value="s_title">제목</option>
-					<option value="s_content">내용</option>
-					
-				</select> 
-				  <div id="serch">
-				<input type="text" name="keyword" placeholder="검색어를 입력해주세요" value="${search}" id="searchId">
-				<!-- <button type="submit">keyword검색</button> -->
-				</div>
-				<p>
-			</form>
-		
-			<c:set var="num" value="${page.total-page.start+1 }"></c:set>
-		
 		<!-- 문의 분류하기   20230419 -->
 			<div id="lis">  
 				<table style="margin:auto;">
 					<tr>
-						<td>
-								
-							<!-- 문의글 종류 -->
+						<!-- 문의글 종류 -->
 						<c:forEach items="${boardList}" var="list">
-							<td style=" padding-left:50px;">
+							<td style=" padding-left:50px; border-bottom: 0;">
 									<!-- 컨트롤러로 보내는거 -->
 								<a href="inquireCodeFilter?code=${list.code}">${list.value} </a>
 									
@@ -141,36 +132,24 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 						</c:forEach>
 					</tr>
 				</table>							
-			
-					   <c:set var="num" value="${page.total-page.start+1 }"></c:set>
+				<c:set var="num" value="${page.total-page.start+1 }"></c:set>
 			</div>				
-		
-		
-		
-		
-		
+			<hr>
 		<!-- 찐본문 -->
 	<div style = "text-align:center;" id="list" >
-			<table style="margin:auto; padding-top:10px; cellpadding:10px">
-				<tr>
-					<td hidden >번호</td>
-					<td  style=" padding-left:120px;">제목</td>
-					<td style=" padding-left:50px;">작성자</td>					
-					<td style=" padding-left:50px;">답변여부</td>					
-					<td style=" padding-left:50px;">작성일</td>
+			<table style="padding-top:10px; cellpadding:10px">
+				<tr>	
+					<td colspan="3" style="border-bottom: 0;"></td>
+					<td style="border-bottom: 0; padding-left:70px;">
+						<a href="inquireWriteForm"><button type="submit">글 쓰기</button></a>
+					</td>
 				</tr>
 				<c:forEach items="${inquireList}" var="inquire">
-				
-				
 				<tr>
 					<td hidden >${inquire.g_writing_id}</td>
 					
 					
 					<td style="text-align: left; , padding-left:100px;"> 
-				<!-- 	<sec:authorize access="hasRole('ROLE_rol200')">
-					<div> 롤 200인거 확인됨 </div>							
-					</sec:authorize> -->
-					<!-- 눌렀을때 비밀번호창나오게하기 -->
 					
 					<a href="#" onclick="detail('${inquire.g_writing_id}', '${inquire.g_passwd}')">${inquire.g_title}</a>
 					</td>
@@ -195,22 +174,23 @@ document.getElementById('category').addEventListener('keyup', function(event) {
 			</table>
 
 	</div>
-					<hr>
-					
-					<a  style=" padding-left:600px;"  href="inquireWriteForm">글작성</a>
-					 
-					<br>
-	<c:if test="${page.startPage > page.pageBlock }">
-		<a href="inquire?currentPage=${page.startPage-page.pageBlock}">[이전]</a>
-	</c:if>
-	<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-		<a
-			href="inquire?currentPage=${i}">[${i}]</a>
-	</c:forEach>
-	<c:if test="${page.endPage < page.totalPage }">
-		<a
-			href="inquire?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
-	</c:if>
+		<hr>
+		
+		<br>
+		
+		<c:if test="${page.startPage > page.pageBlock }">
+			<a href="inquire?currentPage=${page.startPage-page.pageBlock}">[이전]</a>
+		</c:if>
+		
+		<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+			<a href="inquire?currentPage=${i}">[${i}]</a>
+		</c:forEach>
+		
+		<c:if test="${page.endPage < page.totalPage }">
+			<a href="inquire?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
+		</c:if>
+	
+	<br><br><br><br>
 
 </body>
 		<c:import url="../fragments/footer.jsp"/>

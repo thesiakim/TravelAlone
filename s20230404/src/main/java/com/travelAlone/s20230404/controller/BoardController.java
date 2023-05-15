@@ -556,17 +556,6 @@ public class BoardController {
 	   return "ro/reviewPageRes";
 	}
     
-   	// 태그 업데이트
-	@RequestMapping(value = "/mypage/tagUpdate")
-	public String mypageTagUpdate(@LoginUser MemberJpa memberJpa, Interest interest, Model model) {
-//		log.info("BoardController mypageTagUpdate start");
-        model.addAttribute("name", memberJpa.getName());
-        interest.setMember_id(memberJpa.getId());
-        model.addAttribute("nickName", memberJpa.getNickname());
-        List<Interest> mypageTagUpdate = bs.mypageTagUpdate(interest);
-        model.addAttribute("mypageTagUpdate", mypageTagUpdate);
-		return "km/mypage-tagUpdate";
-	}
 	
 	// 유저 페이지 점수 업데이트
 	@RequestMapping(value = "/userScoreUpdate")

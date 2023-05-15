@@ -63,9 +63,7 @@
 	        <option value="s_content">내용</option>
 	    </select> 
 	    <div id="serch">
-	<%--     <input type="text" name="keyword" placeholder="검색어를 입력해주세요 " value="${search}"> --%>
 	    <input type="text" name="keyword" placeholder="검색어를 입력해주세요 " value="${search}" id="searchId">
-	   <%--  <a href="noticeSearch?search=${search}&amp;keyword=${keyword}">keyword검색</a> --%>
 	    </div>
 	    <p>
 	</form>
@@ -75,13 +73,15 @@
 	<hr>		
 <!-- 공지글테이블  공지글테이블 공지글테이블 공지글테이블 공지글테이블 -->
 <div id="list" >
-	<table style="margin:auto;"  >
+	<table>
 		<tr>
-			<td hidden>번호</td>
-			<td style=" padding-left:180px;" >제목</td>
-			<td style=" padding-left:50px;">작성일</td>
+			<c:if test="${user_role == 'rol200' }">
+			<td style="border-bottom: 0;"></td>
+			<td style="border-bottom: 0; padding-left:70px;">
+				<a href="inquireWriteForm"><button type="submit">글 쓰기</button></a>
+			</td>
+		</c:if>
 		</tr>
-		
 		<c:forEach items="${noticeList}" var="notice">
 			<tr>
 				<td hidden>${notice.g_notice_id}</td>
@@ -93,9 +93,7 @@
 	</table>
 </div>	
 	<hr>
-		<c:if test="${user_role == 'rol200' }">
-		<a  style=" padding-left:600px;" href="noticeWriteForm">글작성</a>
-		</c:if>
+		
 
 <!-- 페이징 처리 페이징 처리  페이징 처리  페이징 처리   -->
 
@@ -112,6 +110,7 @@
 			href="notice?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
 	</c:if>
 </div>
+	<br><br>
 </body>
 	<c:import url="../fragments/footer.jsp"/>
 </html>
