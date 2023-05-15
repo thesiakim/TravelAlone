@@ -52,7 +52,7 @@
  
 <body>
    <div id="img_benner">
-      <img src="img/travel-picture.png" alt="배너" style="filter: grayscale(10%); opacity: 0.65;">
+      <img src="img/travel-picture.png" alt="배너">
    </div>
    <h1>
       <a href="tra">
