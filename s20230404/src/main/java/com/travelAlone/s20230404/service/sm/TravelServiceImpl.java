@@ -141,9 +141,18 @@ public class TravelServiceImpl implements TravelService {
 	
 //====================================리뷰====================================
 	@Override
-	public List<Tra_Rev> traRevList(int tid) {
+	public int totalTraRev(int tid) {
+		log.info("TravelServiceImpl start totalTraRev ");
+		log.info("travel_id->"+ tid);
+		int totTraRevCnt  = sm.totalTraRev(tid);
+		log.info("TravelServiceImpl  traRevTotal->" + totTraRevCnt );		
+		return totTraRevCnt;
+	}
+	
+	@Override
+	public List<Tra_Rev> traRevList(Tra_Rev tra_Rev) {
 //		log.debug("TravelServiceImpl traRevList Start...");
-		List<Tra_Rev> traRevList = sm.traRevList(tid);
+		List<Tra_Rev> traRevList = sm.traRevList(tra_Rev);
 		
 //		log.debug("TravelServiceImpl traRevList End...");
 		return traRevList;

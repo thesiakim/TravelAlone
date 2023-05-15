@@ -3,8 +3,6 @@ package com.travelAlone.s20230404.service.sm;
 import java.util.List;
 
 import com.travelAlone.s20230404.model.CommonCode;
-import com.travelAlone.s20230404.model.Hou_Img;
-import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Tra_Fav;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
@@ -35,7 +33,8 @@ public interface TravelService {
 	
 	
 	//리뷰 
-	List<Tra_Rev> 			traRevList(int tid);
+	int 					totalTraRev(int tid);
+	List<Tra_Rev> 			traRevList(Tra_Rev tra_Rev);
 	int 					traRevInsert(Tra_Rev tra_Rev);
 	int 					traRevUpdate(Tra_Rev tra_Rev);
 	int 					traRevDelete(int review_id);
@@ -53,6 +52,9 @@ public interface TravelService {
 	int 					insertTraFav(Tra_Fav tra_Fav);
 	int 					deleteTraFav(Tra_Fav tra_Fav);
 	int 					isTra_Fav(Tra_Fav tra_Fav);
+
+
+	
 	
 	
 }
