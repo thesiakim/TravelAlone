@@ -425,10 +425,10 @@ public class BoardController {
 		if (!boardReportChk) {
 			// 쿠키에 해당 게시물을 처음 조회한 경우, 조회수 증가
 			reportMemberCnt = bs.reportMember(warning);
-			log.info("BoardController reportMember reportMemberCnt -> "+ reportMemberCnt);
 			Cookie cookie = new Cookie(cookieKey, "true");
 			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
 			response.addCookie(cookie);
+			
 			if(reportMemberCnt > 1) {
 				deleteReportImg = bs.deleteReportImg(board.getBoard_id());				
 			}
@@ -584,6 +584,9 @@ public class BoardController {
 				if (cookie.getName().equals(cookieKey)) {
 //					log.info("BoardController userScoreUpdate 중복");
 					
+					cookie.setMaxAge(0 * 0 * 0 * 0);
+					response.addCookie(cookie);
+					
 					String message = "이미 추천한 유저점수입니다.";
 					model.addAttribute("message", message);
 					userScoreUpdateChk = true;
@@ -598,9 +601,9 @@ public class BoardController {
 			
 			log.info("BoardController userScoreUpdate result ->" + userScoreUpdate);
 			model.addAttribute("userScoreUpdate", userScoreUpdate);
-			Cookie cookie = new Cookie(cookieKey, "true");
-			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
-			response.addCookie(cookie);
+//			Cookie cookie = new Cookie(cookieKey, "true");
+//			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
+//			response.addCookie(cookie);
 		} 
 		return result;
 	}

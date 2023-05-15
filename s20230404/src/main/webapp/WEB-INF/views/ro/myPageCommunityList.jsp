@@ -33,7 +33,7 @@
 <body>
 	
 	<div id="img_benner">
-		<img src="img/community-picture.png" alt="배너">
+		<img src="<%=contextPath%>/img/mypage-banner-picture.png" alt="배너">
 	</div>
 	
 	<h1><a href="mypage"><img src="img/myPage-picture.png" alt="마이페이지" width=250px height=250px></a></h1>
@@ -88,6 +88,7 @@
    	<c:if test="${page.endPage < page.totalPage }">
       	<a href="myPageCommunityList?currentPage=${page.startPage + page.pageBlock }">[다음]</a>
    	</c:if>
+   	<br><br>
 </body>
 	<c:import url="../fragments/footer.jsp"/>
 </html>

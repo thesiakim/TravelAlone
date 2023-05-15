@@ -17,7 +17,7 @@
 <body>
 
 <div id="img_benner">
-	<img src="<%=contextPath%>/img/main-picture.png" alt="배너">
+	<img src="<%=contextPath%>/img/mypage-banner-picture.png" alt="배너">
 </div>
 
 <div class="profile-block">

@@ -246,7 +246,6 @@
     <br><br>
     <div style="text-align:center;">
       <input type="submit" value="확인">
-      <a href="tra">목록 보기</a>
       <br><br>
       <hr>
     </div>

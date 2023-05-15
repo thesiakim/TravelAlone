@@ -265,13 +265,10 @@
 						name="r_score" id="score_input" value="0">
 				</div>
 			</div>
-			<br>
-			<br>
+			<br><br>
 			<div style="text-align: center;">
-				<input type="submit" value="확인"> <a href="hou">목록 보기</a><br>
-				<br>
-				<hr>
-				<br>
+				<input type="submit" value="확인">
+				<br><br>
 			</div>
 		</div>
 	</form>

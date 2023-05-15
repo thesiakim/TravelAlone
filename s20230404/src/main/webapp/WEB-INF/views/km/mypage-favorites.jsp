@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/css/list.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+
 	<style>
 		td{
 			padding: 10px;
@@ -48,7 +51,7 @@
 </head>
 <body>
 <div id="img_benner">
-	<img src="<%=contextPath%>/img/main-picture.png" alt="배너">
+	<img src="<%=contextPath%>/img/mypage-banner-picture.png" alt="배너">
 </div>
 
 		<!-- 여행지리스트 테이블 -->
@@ -72,8 +75,8 @@
 				<% } %>
 			</tr>
 		</table>
-
-		<table style="margin:auto;">
+		<br><br>
+		<table>
 		<tr>
 			<td hidden>번호</td>
 			<td>사진</td>
@@ -97,8 +100,8 @@
 					<img alt="#" src="${url}" width="100px" height="70px">
 				</td>
 				<td>${favorite.loc}</td>
-				<td > <a href="<%=contextPath%>/traDetail?tid=${favorite.id}">${favorite.name}</a></td>
-				<td>
+				<td> <a href="<%=contextPath%>/traDetail?tid=${favorite.id}">${favorite.name}</a></td>
+				<td style="color: #ffd700;">
 					<c:choose>
 						<c:when test="${favorite.score eq '1'}">
 							<c:out value="★☆☆☆☆"/>
@@ -191,7 +194,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+		<br><br>
 		<c:import url="../fragments/footer.jsp"/>
-
 </body>
 </html>
