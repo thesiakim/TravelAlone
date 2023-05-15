@@ -1,5 +1,6 @@
 package com.travelAlone.s20230404.dao.km;
 
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
 import com.travelAlone.s20230404.model.Interest;
@@ -18,6 +19,8 @@ public interface MypageDao {
     int memberInfoUpdate(Member member);
 
     int memberProfileUpdate(Member member);
+
+    List<ScoreCount> scoreCountByIdForUserpage(long memberId);
 
     int memberWithdrawal(long id);
 
@@ -48,4 +51,5 @@ public interface MypageDao {
     List<ImgDto> memberAllImgSearchForWithdrawal(long id);
 
     int deleteMemberAllImgForWithdrawal(long id);
+
 }

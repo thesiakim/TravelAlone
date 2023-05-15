@@ -3,6 +3,7 @@ package com.travelAlone.s20230404.service.km;
 import com.travelAlone.s20230404.config.km.SessionUser;
 import com.travelAlone.s20230404.dao.km.MypageDao;
 import com.travelAlone.s20230404.model.BodImg;
+import com.travelAlone.s20230404.model.CommonCode;
 import com.travelAlone.s20230404.model.Member;
 import com.travelAlone.s20230404.model.dto.km.*;
 
@@ -212,8 +213,10 @@ public class MypageServiceImpl implements MypageService{
 		
 		// 관심사 불러오기
 		userPageResponseDto.addInterest(mypageDao.interestList(member_id));
-		// 받은 점수 불러오기
-		userPageResponseDto.addScoreCount(mypageDao.totalScore(member_id));
+
+        // 받은 점수 불러오고 없는 점수는 0으로 처리
+        userPageResponseDto.addScoreCount(mypageDao.scoreCountByIdForUserpage(member_id));
+
 		// 멤버정보 불러오기
 		userPageResponseDto.addMemberInfo(mypageDao.memberInfo(member_id));
 		
