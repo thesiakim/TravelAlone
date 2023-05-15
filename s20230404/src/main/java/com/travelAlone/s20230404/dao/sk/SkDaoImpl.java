@@ -225,11 +225,11 @@ public class SkDaoImpl implements SkDao {
 	@Override
 	public int insertResRev(Res_Rev res_Rev) {
 		int result = 0;
-//		log.info("SkDaoImpl insert Start");
+		log.info("SkDaoImpl insert Start");
 		try {
 			result = session.insert("insertRestaurantRev",res_Rev);
 		} catch (Exception e) {
-//			log.info("SkDaoImpl insert Exception"+e.getMessage());
+			log.info("SkDaoImpl insert Exception"+e.getMessage());
 		}
 		return result;
 	}
