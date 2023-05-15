@@ -271,6 +271,7 @@
 				<input type="submit" value="확인"> <a href="hou">목록 보기</a><br>
 				<br>
 				<hr>
+				<br>
 			</div>
 		</div>
 	</form>
