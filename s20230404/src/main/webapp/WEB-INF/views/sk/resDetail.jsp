@@ -84,7 +84,7 @@
    
    <c:if test="${user_role == 'rol200' }">
       <a href="resUpdateForm?restaurant_id=${restaurant.restaurant_id}"><input type="submit" value="수정"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="resDelete?restaurant_id=${restaurant.restaurant_id}"><input type="submit" value="삭제"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="deleteRestaurant?restaurant_id=${restaurant.restaurant_id}"><input type="submit" value="삭제"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    </c:if>
    
    <c:choose>
