@@ -26,7 +26,7 @@
 			<![CDATA[
 			SELECT	NVL(COUNT(s.s_common_spec), 0) AS count, (c.bcd || c.mcd) as code, c.word
 			FROM	common c
-					LEFT JOIN score s ON s.s_common_spec = c.bcd || c.mcd
+					LEFT JOIN score s ON s.s_common_spec = (c.bcd || c.mcd)
 					AND s.member_id = #{memberId}
 			WHERE c.bcd = 'scr'
 			GROUP BY c.word, (c.bcd || c.mcd)

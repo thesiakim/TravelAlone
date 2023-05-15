@@ -8,9 +8,11 @@ import com.travelAlone.s20230404.model.Member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class UserPageResponseDto {
 	 // 멤버 id, 이미지, 이메일, 이름, 닉네임, 성별, 휴대전화
     private long id;
