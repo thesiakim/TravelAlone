@@ -73,7 +73,7 @@ th, td {
    <br>
    <br>
    <!-- 검색 -->
-      <form action="resSearch">
+      <form action="restaurantSearch">
       <select id="category" name="search">
          <option value="s_title">제목</option>
          <option value="s_content">내용</option>
