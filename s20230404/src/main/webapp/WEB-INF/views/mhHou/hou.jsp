@@ -180,7 +180,7 @@ th, td {
 				<td hidden>${house.house_id}</td>
 			 	<td>${house.h_common_loc}</td>
 			 	<td><a href="houDetail?hid=${house.house_id}">${house.h_name}</a></td>
-                <td>
+                <td style="color: #ffd700;">
 					<c:choose>
 						<c:when test="${house.h_avgscore eq '1'}">
 							<c:out value="★☆☆☆☆"/>

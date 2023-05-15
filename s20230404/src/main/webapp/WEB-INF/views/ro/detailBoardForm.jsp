@@ -111,7 +111,7 @@
 		<div id="reply" class="reply-form">
 		    <table>
                	<tr>
-                  	<td class="level-${content.b_re_level}" style="width: 100px;"><a onclick="openUserPage(${content.member_id})">${content.m_nickname}</a></td>
+                  	<td class="level-${content.b_re_level}" style="width: 130px;"><a onclick="openUserPage(${content.member_id})">${content.m_nickname}</a></td>
                     	<td style="width: 400px;">${content.b_content}</td>
                     	<td style="width: 180px;">${content.getFormattedCreateDate()}</td>
                  
