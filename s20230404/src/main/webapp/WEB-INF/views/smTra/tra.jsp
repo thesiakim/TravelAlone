@@ -189,7 +189,7 @@
             <td hidden>${travel.travel_id}</td>
             <td>${travel.t_common_loc}</td>
             <td><a href="traDetail?tid=${travel.travel_id}">${travel.t_name}</a></td>
-            <td>
+            <td style="color: #ffd700;">
                <c:choose>
                   <c:when test="${travel.t_avgscore eq '1'}">
                      <c:out value="★☆☆☆☆"/>
