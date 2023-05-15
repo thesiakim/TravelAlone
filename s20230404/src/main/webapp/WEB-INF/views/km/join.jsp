@@ -129,7 +129,7 @@
 </head>
 <body>
 	<div class="loginLogo">
-		<a href="/"><img src="/img/gosunee.png"></a>
+		<a href="/"><img src="/img/logo.png"></a>
 	</div>
 	
 	<form action="http://localhost:4040/api/v1/join" role="form" method="post" onsubmit="return checkPassword();">

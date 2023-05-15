@@ -19,12 +19,12 @@
                      Select  b.b_content
                      From    board b,   (
                                          Select member_id, Count(member_id)
-                                         From Warning
+                                         From	Warning w
                                          Group by member_id
                                          Having Count(member_id) >= 10
-                                        ) w
-                     Where   b.member_id = w.member_id
-                     And     b_re_level > 0
+                                         And	w.member_id = #{member_id}
+                                        ) c
+                     Where   b.member_id = c.member_id
                     )
         ]]>
 	</update>

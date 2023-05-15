@@ -25,7 +25,7 @@
 </script>
 <body>
 	<div class="loginLogo">
-		<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/gosunee.png"></a>
+		<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/logo.png"></a>
 	</div>
 	<form role="form" method="post" action="<%=contextPath%>/login">
 		<table>

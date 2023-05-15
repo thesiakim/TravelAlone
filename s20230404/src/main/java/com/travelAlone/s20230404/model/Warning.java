@@ -16,4 +16,5 @@ public class Warning {
 	private LocalDateTime	create_date;	// 생성일	        
 	private LocalDateTime	modified_date;	// 수정일
 	
+	
 }

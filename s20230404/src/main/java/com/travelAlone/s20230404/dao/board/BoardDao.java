@@ -39,8 +39,8 @@ public interface BoardDao {
 	int 				updateCount(Board board);
 	int 				updateMinus(Board board);
 	int 				reportMember(Warning warning);
-	int 				updateBoardImgYn(long boardId);
 	int					reportUpdate(Warning warning);
+	int 				updateBoardImgYn(long boardId);
 	List<Board> 		myPageCommunityList(Board board);
 	int 				myPageCommunityListCnt(long memberId);
 	List<Member> 		userPage(long member_id);

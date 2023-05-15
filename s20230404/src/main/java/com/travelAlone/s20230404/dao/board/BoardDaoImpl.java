@@ -354,14 +354,32 @@ public class BoardDaoImpl implements BoardDao {
 	public int reportMember(Warning warning) {
 //		log.info("BoardDaoImpl reportMember Start");
 		int reportMember = 0;
-		try {
-			reportMember = session.insert("reportMember", warning);
-//			log.info("BoardDaoImpl reportMember -> " + reportMember);
-		} catch (Exception e) {
-//			log.info("BoardDaoImpl reportMember Exception -> " + e.getMessage());
-		}
-		return reportMember;
+	    try {
+	        reportMember = session.insert("reportMember", warning);
+//	        log.info("BoardDaoImpl reportMember -> " + reportMember);
+	    } catch (Exception e) {
+//	        log.info("BoardDaoImpl reportMember Exception -> " + e.getMessage());
+	    }
+	    return reportMember;
 	}
+
+	
+	// 신고 수에 따른 게시글, 댓글 자동 블락
+	@Override
+	public int reportUpdate(Warning warning) {
+	    int updateResult = 0;
+//	    log.info("BoardDaoImpl reportUpdate start");
+	      
+	    try {
+	       updateResult = session.update("updateReportContent", warning);
+//	       log.info("BoardDaoImpl reportUpdate updateResult -> " + updateResult);
+	    } catch (Exception e) {
+//	       log.info("BoardDaoImpl reportUpdate Exception -> " + e.getMessage());
+	    }
+	    
+	    return updateResult;
+	}
+
 	
 	// 게시글 이미지 첨부 여부
 	@Override
@@ -380,20 +398,6 @@ public class BoardDaoImpl implements BoardDao {
 		return result;
 	}
 	
-	// 신고 수에 따른 게시글, 댓글 자동 블락
-	@Override
-	public int reportUpdate(Warning warning) {
-		int updateResult = 0;
-//		log.info("BoardDaoImpl reportUpdate start");
-		
-		try {
-			updateResult = session.update("updateReportContent", warning);
-//			log.info("BoardDaoImpl reportUpdate updateResult -> " + updateResult);
-		} catch (Exception e) {
-//			log.info("BoardDaoImpl reportUpdate Exception -> " + e.getMessage());
-		}
-		return updateResult;
-	}
 	
 	// 마이페이지 커뮤니티 페이징용
 	@Override
@@ -552,5 +556,7 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		return userScoreUpdate;
 	}
+
+	
 	
 }

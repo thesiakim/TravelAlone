@@ -37,6 +37,7 @@ public interface BoardService {
 	int 				updateCount(Board board);
 	int 				updateMinus(Board board);
 	int 				reportMember(Warning warning);
+	int					deleteReportImg(long board_id);
 	List<Board> 		myPageCommunityList(Board board);
 	int 				myPageCommunityListCnt(long memberId);
 	List<Member> 		userPage(long member_id);
