@@ -425,10 +425,13 @@ public class BoardController {
 		if (!boardReportChk) {
 			// 쿠키에 해당 게시물을 처음 조회한 경우, 조회수 증가
 			reportMemberCnt = bs.reportMember(warning);
+			log.info("BoardController reportMember reportMemberCnt -> "+ reportMemberCnt);
 			Cookie cookie = new Cookie(cookieKey, "true");
 			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
 			response.addCookie(cookie);
-			deleteReportImg = bs.deleteReportImg(board.getBoard_id());
+			if(reportMemberCnt > 1) {
+				deleteReportImg = bs.deleteReportImg(board.getBoard_id());				
+			}
 			
 		}
       
