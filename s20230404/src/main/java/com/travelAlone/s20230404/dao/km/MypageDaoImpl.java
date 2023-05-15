@@ -47,8 +47,19 @@ public class MypageDaoImpl implements MypageDao{
      * */
     @Override
     public List<ScoreCount> totalScore(long memberId) {
+
         return session.selectList("scoreCountById",memberId);
     }
+
+    /**
+     * 2023-05-15 조경민
+     * 설명 : 점수 카테고리 전체와 회원 점수 불러오기
+     * */
+    @Override
+    public List<ScoreCount> scoreCountByIdForUserpage(long memberId) {
+        return session.selectList("scoreCountByIdForUserpage",memberId);
+    }
+
 
 
     /**
@@ -91,7 +102,6 @@ public class MypageDaoImpl implements MypageDao{
     public List<ImgDto> memberAllImgSearchForWithdrawal(long id) {
         return session.selectList("memberAllImgSearchForWithdrawal", id);
     }
-
     @Override
     public int deleteMemberAllImgForWithdrawal(long memberId) {
         int result = 0;
@@ -102,6 +112,8 @@ public class MypageDaoImpl implements MypageDao{
 
         return result;
     }
+
+
 
     /**
      * 2023-05-01 조경민

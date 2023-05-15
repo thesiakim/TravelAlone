@@ -22,6 +22,16 @@
 		]]>
 		</select>
 
+		<select id="scoreCountByIdForUserpage" resultType="ScoreCount" >
+			<![CDATA[
+			SELECT NVL(COUNT(s.s_common_spec), 0) AS count, c.word
+			FROM common c
+				LEFT JOIN score s ON s.s_common_spec = c.bcd || c.mcd AND s.member_id = #{memberId}
+			WHERE c.bcd = 'scr'
+			GROUP BY c.word
+		]]>
+		</select>
+
 		<select id="writingCountById" resultType="WritingCount" >
 			<![CDATA[
 			SELECT a.board_count, b.hou_review_count, c.res_review_count, d.tra_review_count,e.favorites_count,f.g_writing_count
