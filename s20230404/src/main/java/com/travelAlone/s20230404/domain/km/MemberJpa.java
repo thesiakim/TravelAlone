@@ -86,12 +86,18 @@ public class MemberJpa extends BaseTimeEntity{
      * 설명 : 비밀번호 찾기 후 변경에서 변경하기 전에 멤버가 맞는지 확인한다
      * */
     public Boolean CheckMember(String email, String name ,String phone){
-        if (this.email == email && this.name == name && this.phone == phone){
+        if (this.email.equals(email) && this.name.equals(name) && this.phone.equals(phone)){
 
             // 정보가 맞으면 true 반환
             return true;
 
         }else {
+            System.out.println("email = " + email);
+            System.out.println("this.email = " + this.email);
+            System.out.println("email = " + name);
+            System.out.println("this.email = " + this.name);
+            System.out.println("email = " + phone);
+            System.out.println("this.email = " + this.phone);
             // 정보가 맞으면 false 반환
             return false;
         }

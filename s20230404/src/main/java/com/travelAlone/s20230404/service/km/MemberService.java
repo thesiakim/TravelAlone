@@ -155,6 +155,8 @@ public class MemberService{
             // 비밀번호 암호화 하여 저장
             member.updatePassword(passwordEncoder.encode(requestDto.getPassword()));
 
+        }else{
+            throw new IllegalStateException("회원정보가 일치하지 않습니다.");
         }
 
         return member.getId();

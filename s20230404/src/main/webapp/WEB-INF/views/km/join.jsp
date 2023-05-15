@@ -116,7 +116,6 @@
 		const passwordCheck = document.querySelector("#password-check");
 
 		if (password === passwordCheck.value && passwordCheck.value !== '') {
-			alert("회원 가입이 완료되었습니다.");
 		      return true;
 		    } else {
 		      	alert("비밀번호가 일치하지 않습니다.");
