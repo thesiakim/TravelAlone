@@ -178,7 +178,7 @@ th, td {
 					<td hidden>${restaurant.restaurant_id}</td>
 				 	<td>${restaurant.r_common_loc}</td>
 					<td> <a href="resDetail?rid=${restaurant.restaurant_id}">${restaurant.r_name}</a></td>
-					<td>
+					<td style="color: #ffd700;">
 						<c:choose>
 							<c:when test="${restaurant.r_avgscore eq '1'}">
 								<c:out value="★☆☆☆☆"/>
