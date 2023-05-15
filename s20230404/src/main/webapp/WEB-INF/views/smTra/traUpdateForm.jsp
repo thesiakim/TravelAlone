@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+ <%@ include file="../fragments/header.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,7 @@
 	<script type="text/javascript">
 		function deleteImage(travel_id, img_id, p_index) {
 			$.ajax({
-				url: "<%=context%>/deleteTraImg",
+				url: "/deleteTraImg",
 				data: {
 					travel_id : travel_id,
 					img_id : img_id

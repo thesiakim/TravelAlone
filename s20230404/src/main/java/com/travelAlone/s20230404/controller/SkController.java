@@ -395,12 +395,12 @@ public class SkController {
 	// 리뷰 작성 페이지
 	@GetMapping(value = "resRevWriteForm")
 	public String resRevWriteForm(@LoginUser MemberJpa memberJpa,Res_Rev res_Rev, Model model) {
-//			log.info("SkController  resRevWriteForm Start" );	
+			log.info("SkController  resRevWriteForm Start" );	
 		
 			 if(memberJpa != null) {
 			
-//			log.info("SkController resRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
-//			log.info("SkController resFav res_Rev.getRestaurant_id()는 "+ res_Rev.getRestaurant_id());
+			log.info("SkController resRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+			log.info("SkController resFav res_Rev.getRestaurant_id()는 "+ res_Rev.getRestaurant_id());
 			model.addAttribute("user_id", memberJpa.getId());
 			model.addAttribute("res_rev", res_Rev);
 			
@@ -414,18 +414,18 @@ public class SkController {
 	@PostMapping(value = "resRevWriteForm")
 	public String resRevWrite(@LoginUser MemberJpa memberJpa,
 			Res_Rev res_Rev, Model model) throws Exception {
-//		log.info("SkController  resRevWrite Start...");
+		log.info("SkController  resRevWrite Start...");
 		
 		  if (memberJpa == null){
 		         throw new Exception("로그인 해주세요!");
 		      }
 		
-//		  log.info("SkController writeFormResRev memberJpa.getId()는 "+ memberJpa.getId());
+		  log.info("SkController writeFormResRev memberJpa.getId()는 "+ memberJpa.getId());
 		  res_Rev.setMember_id( memberJpa.getId());
 		  
 		  
 		int insertResult = sk.insertResRev(res_Rev);
-//		log.info("SkController resRevWrite insertResult->"+insertResult );
+		log.info("SkController resRevWrite insertResult->"+insertResult );
 		
 		
 		if(insertResult >0) {

@@ -34,7 +34,7 @@
 			  (REVIEW_ID , RESTAURANT_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
 		            ,CREATE_DATE ,MODIFIED_DATE )
 		  	values
-		  	  (RES_REV_SEQ.nextval, #{restaurant_id jdbcType=NUMERIC}, #{member_id}, #{r_content}, #{r_score}
+		  	  (RES_REV_SEQ.nextval, #{restaurant_id, jdbcType=NUMERIC}, #{member_id}, #{r_content}, #{r_score}
 		  	  ,sysdate, sysdate	)        
 				
 		</insert>

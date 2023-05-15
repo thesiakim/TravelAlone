@@ -45,7 +45,7 @@
 <!-- 숙소 리뷰글작성하기 -->
 		<insert id="insertHouseRev" parameterType="Hou_Rev">
 			 insert into HOU_REV 
-			  (REVIEW_ID , HOUSE_ID, MEMBER_ID, R_CONTENT, R_SCORE, REATE_DATE, MODIFIED_DATE )
+			  (REVIEW_ID , HOUSE_ID, MEMBER_ID, R_CONTENT, R_SCORE, CREATE_DATE, MODIFIED_DATE )
 		  	values
 		  	  (REVIEW_ID_SEQ.nextval, #{house_id}, #{member_id, jdbcType=NUMERIC}, #{r_content}, #{r_score}
 		  	  ,sysdate, sysdate	)        
