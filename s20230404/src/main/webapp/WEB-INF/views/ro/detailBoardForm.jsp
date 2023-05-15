@@ -152,7 +152,7 @@
 						</tr>
                			<tr class="members" style="display: none;">
 							<td colspan="7">
-                      			<form action="WriteBoardReLevel" onsubmit="return chkId();">
+                      			<form action="WriteBoardReLevel">
 									<input type="hidden">
 									<input type="hidden" name="board_id" value="${board_id}">
 									<input type="hidden" name="member_id" value="${user_id}">

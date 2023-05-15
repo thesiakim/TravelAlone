@@ -160,13 +160,13 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int insertReBoard(Board board) {
 		int insertResult = 0;
-//		log.info("BoardDaoImpl insertReBoard 시작");
+		log.info("BoardDaoImpl insertReBoard 시작");
 		
 		try {
 			insertResult = session.insert("roBoardReInsert", board);
-//			log.info("BoardDaoImpl insertReBoard insertResult는 "+ insertResult);
+			log.info("BoardDaoImpl insertReBoard insertResult는 "+ insertResult);
 		} catch (Exception e) {
-//			log.info("BoardDaoImpl insertReBoard e.getMessage는 "+ e.getMessage());
+			log.info("BoardDaoImpl insertReBoard e.getMessage는 "+ e.getMessage());
 		}
 		return insertResult;
 	}
