@@ -9,19 +9,19 @@
 </head>
 <body>
 <div id="img_benner">
-		<img src="img/main-picture.png" alt="배너">
-	</div>
-<h2>답변하기 글작성</h2>
+	<img src="img/main-picture.png" alt="배너">
+</div>
+
+	<h2>답변하기 글작성</h2>
 
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="replyInquire" method="post" name="frm">
-	<input type="hidden" name = "g_writing_id" value="${inquire.g_writing_id }">
+		<input type="hidden" name = "g_writing_id" value="${inquire.g_writing_id }">
 		<table style="margin:auto;">
 			<tr>
 				<th>글아이디</th>
 				<td>${inquire.g_writing_id }</td>
 			</tr>
-		
 							
 			<tr>
 				<td>답변 내용</td>
