@@ -225,13 +225,14 @@ public class TravelDaoImpl implements TravelDao {
 	}
 
 	
-//====================================리뷰====================================
+//====================================리뷰====================================	
 	@Override
-	public List<Tra_Rev> traRevList(int tid) {
+	public List<Tra_Rev> traRevList(Tra_Rev tra_Rev) {
 		List<Tra_Rev> traRevList = new ArrayList<Tra_Rev>();
+		log.info("tra_Rev.getTravel_id() ->" + tra_Rev.getTravel_id() );
 		try {
 //			log.info("TravelDaoImpl traRevList Start...");
-			traRevList = session.selectList("traRevList", tid);
+			traRevList = session.selectList("traRevList", tra_Rev);
 //			log.info("TravelDaoImpl traRevList End...");
 		} catch (Exception e) {
 //			log.info("TravelDaoImpl traRevList Exception " +e.getMessage());
@@ -298,6 +299,21 @@ public class TravelDaoImpl implements TravelDao {
 //			log.info("TravelDaoImpl delete Exception->"+ e.getMessage());
 		}
 		return result;
+	}
+	
+			
+	@Override
+	public int totalTraRev(int tid) {
+		int totalTraRev = 0;
+		log.info("TravelDaoImpl Start total");
+		log.info("TravelDaoImpl tid->"+tid);
+		try {
+			totalTraRev = session.selectOne("traRevTotal",tid);
+			log.info("TravelDaoImpl totalTraRev->" + totalTraRev);
+		} catch (Exception e) {
+			log.info("TravelDaoImpl totalTraRev Exception " +e.getMessage());
+		}							
+		return totalTraRev;
 	}
 
 	

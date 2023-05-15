@@ -3,8 +3,6 @@ package com.travelAlone.s20230404.dao.sm;
 import java.util.List;
 
 import com.travelAlone.s20230404.model.CommonCode;
-import com.travelAlone.s20230404.model.Hou_Img;
-import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Tra_Fav;
 import com.travelAlone.s20230404.model.Tra_Img;
 import com.travelAlone.s20230404.model.Tra_Rev;
@@ -36,7 +34,8 @@ public interface TravelDao {
 	
 	
 	//리뷰리스트가져오기
-	List<Tra_Rev> 			traRevList(int tid);
+	int 					totalTraRev(int tid);
+	List<Tra_Rev> 			traRevList(Tra_Rev tra_Rev);
 	int 					traRevInsert(Tra_Rev tra_Rev);
 	int 					traRevUpdate(Tra_Rev tra_Rev);
 	int 					traRevDelete(int review_id);
@@ -52,6 +51,8 @@ public interface TravelDao {
 	int 					insertTraFav(Tra_Fav tra_Fav);
 	int 					deleteTraFav(Tra_Fav tra_Fav);
 	int 					selectTraFav(Tra_Fav tra_Fav);
+
+	
 	
 
 	

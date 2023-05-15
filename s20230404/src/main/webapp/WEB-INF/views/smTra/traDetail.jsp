@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <link href="/css/list.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script defer src="/js/detailBoardDelChk.js"></script>
     <script defer src="/js/detailBoardWarning.js"></script>
@@ -207,7 +208,20 @@
 </table>
 <br>
 
-            
+<!-- 페이징 -->
+<div>
+	<c:if test="${page.startPage > page.pageBlock }">
+	      <a href="traDetail?tid=${travel.travel_id}&currentPage=${page.startPage-page.pageBlock}">[이전]</a>
+	   </c:if>
+	<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+		<a href="traDetail?tid=${travel.travel_id}&currentPage=${i}">[${i}]</a>
+	<c:if test="${page.endPage < page.totalPage }">
+	      <a href="traDetail?tid=${travel.travel_id}&currentPage=${page.startPage+page.pageBlock}">[다음]</a>
+	   </c:if>	
+	</c:forEach>
+</div> 
+
+<!-- 리뷰 -->            
 <h6>
   명예훼손, 개인정보 유출, 분쟁 유발, 허위 사실 유포 등의 글은 이용약관에 의해 제제는 물론 
   법률에 의해 처벌받을 수 있습니다. 건전한 커뮤니티를 위해 자제 당부 드립니다.

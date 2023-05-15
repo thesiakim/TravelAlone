@@ -12,10 +12,10 @@ public class Tra_Rev {
 	private  long 				review_id;
 	private  long 				travel_id;
 	private  long 				member_id;
-	private String 				r_content;
-	private int	 				r_score;
-	private LocalDate 	 		create_date;
-    private LocalDate 	 		modified_date;
+	private  String 			r_content;
+	private  int	 			r_score;
+	private  LocalDate 	 		create_date;
+    private  LocalDate 	 		modified_date;
 	
 
     //member조인용
@@ -24,7 +24,7 @@ public class Tra_Rev {
 	// 페이지조회용
 	private String search;   	private String keyword;
 	private String pageNum;  
-	//            1                           10
+	//            1                          10
 	private int start; 		 	private int end;
 	// 리뷰 조인용
 	private String			t_name;

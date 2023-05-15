@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <link href="/css/list.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
     
     <style>
         .swiper-container {

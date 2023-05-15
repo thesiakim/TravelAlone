@@ -94,10 +94,10 @@ public class TravelController {
 //===============================READ===============================		
 	//여행지 정보글조회
 	@GetMapping(value = "traDetail")
-	public String traDetail(@LoginUser MemberJpa memberJpa,
-			int tid , Model model, Tra_Img tra_Img,Tra_Fav tra_Fav) {
-//		log.info("smController Start traDetail");
-//		log.info("smController traDetail travel_id->"+ tid );
+	public String traDetail(@LoginUser MemberJpa memberJpa, String currentPage,
+			int tid , Model model, Tra_Img tra_Img,Tra_Fav tra_Fav, Tra_Rev tra_Rev) {
+//		log.info("TravelController Start traDetail");
+//		log.info("TravelController traDetail travel_id->"+ tid );
 		
 		
 		//여행지 정보 서비스
@@ -135,10 +135,23 @@ public class TravelController {
 		model.addAttribute("isfavTra", favResult);
 		
 			
-		//리뷰리스트
-		List<Tra_Rev> traRevList = sm.traRevList(tid);
-//		log.info("TravelController list traRevList.size()=>"+ traRevList.size());
+		//리뷰갯수
+		int totalTraRev = sm.totalTraRev(tid);	
 		
+		//페이징
+		Paging page = new Paging(totalTraRev, currentPage);
+		tra_Rev.setStart(page.getStart());
+		tra_Rev.setEnd(page.getEnd());
+		log.info("tra_Rev.getStart()"+ tra_Rev.getStart());
+		log.info("tra_Rev.getEnd()"+ tra_Rev.getEnd());
+		tra_Rev.setTravel_id(tid);
+		
+		
+		//리뷰리스트
+		List<Tra_Rev> traRevList = sm.traRevList(tra_Rev);
+		log.info("TravelController list traRevList.size()=>"+ traRevList.size());
+		
+		model.addAttribute("page", page);
 		model.addAttribute("travel", travel);	
 		model.addAttribute("traRevList", traRevList);
 
