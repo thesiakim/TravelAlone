@@ -32,7 +32,7 @@
                                             ,m.m_nickname
 										    from  G_WRITING g, Member m
 										    Where  g.member_id = m.member_id
-										     order by G_WRITING_ID desc) a
+										     order by g.CREATE_DATE desc) a
 											)   
 		 		WHERE  rn >= #{start} 
 		 		and    rn <= #{end} 
