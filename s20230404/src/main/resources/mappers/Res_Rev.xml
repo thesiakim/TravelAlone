@@ -7,15 +7,22 @@
 	<!-- 리뷰목록 가져오기 -->
 <select id="resRevList" parameterType="Res_Rev" resultType="Res_Rev" >
     		<![CDATA[
-			SELECT							  
-				       hr. *
-				       ,m.m_nickname
-			 FROM    RES_REV hr,  Member m
-			 WHERE    
-			 RESTAURANT_ID =   #{RESTAURANT_ID}  
-			 and
-			  hr.member_id = m.member_id   
-			                      					 		
+			SELECT *
+         FROM(    
+              SELECT rownum rn , a.*
+                FROM(
+                    SELECT                       
+                             hr. *
+                             ,m.m_nickname
+                    FROM    RES_REV hr,  Member m
+                    WHERE    
+                    RESTAURANT_ID =  #{restaurant_id} 
+                    and
+                     hr.member_id = m.member_id) a
+               )
+         WHERE  rn >= #{start} 
+          and    rn <= #{end} 
+						 			 			                      					 		
 		 	 ]]>	
 			
 		</select>
@@ -27,7 +34,7 @@
 			  (REVIEW_ID , RESTAURANT_ID ,MEMBER_ID ,R_CONTENT ,R_SCORE
 		            ,CREATE_DATE ,MODIFIED_DATE )
 		  	values
-		  	  (RES_REV_SEQ.nextval, #{restaurant_id}, #{member_id}, #{r_content}, #{r_score}
+		  	  (RES_REV_SEQ.nextval, #{restaurant_id jdbcType=NUMERIC}, #{member_id}, #{r_content}, #{r_score}
 		  	  ,sysdate, sysdate	)        
 				
 		</insert>
@@ -48,11 +55,12 @@
 			delete from RES_REV where REVIEW_ID = #{review_id}
 		</delete>
 
-<!--  맛집 리뷰글 글다삭제하기 -->
-		<delete id="deleteResRevAll"  parameterType="int">
-		 DELETE     from RES_REV   WHERE RESTAURANT_ID = #{restaurant_id}
-		</delete>	
-
+<!-- 맛집 리뷰글 갯수세기 -->
+		<select id="skResRevTotal" parameterType="Res_Rev"    resultType="int">
+			select Count(*)
+			FROM RES_REV
+			WHERE RESTAURANT_ID = #{RESTAURANT_ID} 
+		</select>
 
 
 

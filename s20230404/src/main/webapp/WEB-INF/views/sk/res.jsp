@@ -59,7 +59,7 @@ th, td {
 <h1><a href="res"><img src="img/Res.png" alt="맛집" width=250px height=250px></a></h1>
 
 <!-- 맛집종류 -->
-<div style="display: inline-block; width: 900px; text-align: center;">
+<div style="display: inline-block; width: 700px; text-align: center;">
 <c:forEach items="${boardList}" var="list" varStatus="status">
   <!-- 컨트롤러로 보내는거 -->
   <a href="restaurantCodeFilter?code=${list.code}">

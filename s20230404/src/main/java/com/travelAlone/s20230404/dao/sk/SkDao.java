@@ -32,7 +32,7 @@ public interface SkDao {
 	int						condOptionLocCnt(String code);
 	
 	// 리뷰 리스트 가져오기
-	List<Res_Rev>			selectResRevList(int rid);
+	List<Res_Rev>			selectResRevList(Res_Rev res_Rev);
 	int						insertResRev(Res_Rev res_Rev);
 	int						updateRestaurantRev(Res_Rev res_Rev);
 	int						deleteRestaurantRev(int review_id);
@@ -49,5 +49,6 @@ public interface SkDao {
 	int 					insertResFav(Res_Fav res_Fav);
 	int 					deleteResFav(Res_Fav res_Fav);
 	int 					selectResFav(Res_Fav res_Fav);
+	int 					totalResRev(int rid);
 	
 }
