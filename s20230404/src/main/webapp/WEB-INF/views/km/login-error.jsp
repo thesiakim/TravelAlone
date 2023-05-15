@@ -25,7 +25,7 @@
 	</c:if>
 <body>
 	<div class="loginLogo">
-		<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/gosunee.png"></a>
+		<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/Logo.png"></a>
 	</div>
     <form role="form" method="post" action="${ctx}/login">
 		<table>

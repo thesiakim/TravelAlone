@@ -17,7 +17,7 @@
 	<div class="container">
 	  <div id="container-left clearfix">
 		<div class="logo">
-		  <a href="/"><img src="<%=contextPath%>/img/logo.png"></a>
+		  <a href="/"><img src="<%=contextPath%>/img/Logo.png"></a>
 		</div>
 		<c:choose>
 	    	<c:when test="${empty user}">
