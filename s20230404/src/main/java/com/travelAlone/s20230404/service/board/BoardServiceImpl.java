@@ -125,10 +125,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertReBoard(Board board) {
 		int insertResult = 0;
-//		log.info("BoardServiceImpl insertReBoard 시작");
+		log.info("BoardServiceImpl insertReBoard 시작");
 			
 		insertResult = bd.insertReBoard(board);
-//		log.info("BoardServiceImpl insertReBoard insertResult는 "+ insertResult);
+		log.info("BoardServiceImpl insertReBoard insertResult는 "+ insertResult);
 		
 		return insertResult;
 	}

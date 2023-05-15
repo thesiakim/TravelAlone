@@ -211,9 +211,9 @@ public class BoardController {
 	// 게시물 댓글 작성
 	@PostMapping(value = "writeBoardRe")
 	public String writeReBoard(@LoginUser MemberJpa memberJpa, @ModelAttribute Board board, Model model) {
-//		log.info("BoardController writeReBoard 시작");
-//		log.info("BoardController writeReBoard board_id는 "+ board.getBoard_id());
-//		log.info("BoardController writeReBoard b_common_board()는 "+ board.getB_common_board());
+		log.info("BoardController writeReBoard 시작");
+		log.info("BoardController writeReBoard board_id는 "+ board.getBoard_id());
+		log.info("BoardController writeReBoard b_common_board()는 "+ board.getB_common_board());
 		
 		model.addAttribute("board_id", board.getBoard_id());
 		model.addAttribute("b_common_board", board.getB_common_board());
@@ -222,7 +222,7 @@ public class BoardController {
 		
 		String resultForm = "";
 		
-//		log.info("BoardController writeReBoard insertResult는 "+ insertResult);
+		log.info("BoardController writeReBoard insertResult는 "+ insertResult);
 		
 		if(insertResult > 0) {
 			resultForm = "redirect:detailBoard?board_id="+ board.getBoard_id() +"&b_common_board="+ board.getB_common_board();

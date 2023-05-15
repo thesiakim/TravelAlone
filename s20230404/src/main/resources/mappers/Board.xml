@@ -192,7 +192,7 @@
 	<!-- 게시물 댓글 작성 -->
 	<insert id="roBoardReInsert" parameterType="Board">
 	   Insert   into
-	   Board   (board_id, member_id, b_content, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
+	   Board   (board_id, member_id, b_content, b_like_cnt, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date,IMG_STORED_FILE_YN)
 	   values   (
 	          board_id_seq.nextval,
 	          #{member_id},
@@ -203,7 +203,8 @@
 	          (select  nvl(max(b_re_step),0) + 1 from board where b_ref = #{board_id}),
 	          1,
 	          sysdate,
-	          sysdate
+	          sysdate,
+	          0
 	         )
 	</insert>
 	
@@ -218,7 +219,7 @@
     <!-- 대댓글 sql (1. 가른 댓글 사이에 삽임)  -->
     <insert id="insertReLevel" parameterType="Board">
 		INSERT INTO board
-        (board_id, member_id, b_content, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date)
+        (board_id, member_id, b_content, b_common_board, b_ref, b_re_step, b_re_level, create_date, modified_date,IMG_STORED_FILE_YN)
       	values   (
 			board_id_seq.nextval,
 			#{member_id},
@@ -228,7 +229,8 @@
 			#{b_re_step} + 1,
 			#{b_re_level} + 1,
 			sysdate,
-			sysdate )
+			sysdate,
+			0 )
     </insert>
 	
 	<!-- 게시물 삭제 -->
