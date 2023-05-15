@@ -31,7 +31,6 @@ import com.travelAlone.s20230404.model.Score;
 import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.Warning;
-import com.travelAlone.s20230404.model.dto.km.ScoreCount;
 import com.travelAlone.s20230404.model.dto.km.UserPageResponseDto;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 import com.travelAlone.s20230404.service.Paging;
@@ -413,8 +412,6 @@ public class BoardController {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals(cookieKey)) {
 					// 쿠키에 해당 게시물을 이미 조회한 경우, 조회수 증가하지 않음
-					cookie.setMaxAge(0 * 0 * 0 * 0);
-					response.addCookie(cookie);
 					String message = "이미 신고한 회원입니다.";
 					model.addAttribute("message", message);
 					resultForm = "forward:/detailBoard";
@@ -428,9 +425,9 @@ public class BoardController {
 		if (!boardReportChk) {
 			// 쿠키에 해당 게시물을 처음 조회한 경우, 조회수 증가
 			reportMemberCnt = bs.reportMember(warning);
-//			Cookie cookie = new Cookie(cookieKey, "true");
-//			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
-//			response.addCookie(cookie);
+			Cookie cookie = new Cookie(cookieKey, "true");
+			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
+			response.addCookie(cookie);
 			deleteReportImg = bs.deleteReportImg(board.getBoard_id());
 			
 		}
@@ -593,6 +590,7 @@ public class BoardController {
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals(cookieKey)) {
+//					log.info("BoardController userScoreUpdate 중복");
 					
 					String message = "이미 추천한 유저점수입니다.";
 					model.addAttribute("message", message);
@@ -602,11 +600,11 @@ public class BoardController {
 			}
 		}
 		if (!userScoreUpdateChk) {
-			
+//			log.info("BoardController userScoreUpdate 중복x");
 			score.setMember_id(member_id);
 			userScoreUpdate = bs.userScoreUpdate(score);
 			
-//			log.info("BoardController userScoreUpdate result ->" + userScoreUpdate);
+			log.info("BoardController userScoreUpdate result ->" + userScoreUpdate);
 			model.addAttribute("userScoreUpdate", userScoreUpdate);
 			Cookie cookie = new Cookie(cookieKey, "true");
 			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정

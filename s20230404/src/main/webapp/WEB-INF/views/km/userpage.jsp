@@ -36,7 +36,7 @@
 				<div class="bar-label">${scoreCount.word}</div>
 				<div class="bar-container">
 					<input type="hidden" name="member_id" value="${member_id}">
-					<input type="hidden" name="s_common_spec" value="${scoreCount.s_common_spec}">
+					<input type="hidden" name="s_common_spec" value="${scoreCount.code}">
 					<input type="submit" style="width: 160px;" value="${scoreCount.count}">
 				</div>
 			</div>
