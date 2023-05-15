@@ -254,7 +254,7 @@ public class BoardServiceImpl implements BoardService {
 	// 신고 버튼
 	@Override
 	public int reportMember(Warning warning) {
-//		log.info("BoardServiceImpl reportMember start...");
+//      log.info("BoardServiceImpl reportMember start...");
 		int reportMember = 0;
 		int updateResult = 0;
 		
@@ -264,6 +264,24 @@ public class BoardServiceImpl implements BoardService {
 		return reportMember + updateResult;
 	}
 	
+	// 신고 당한 게시물 사진 삭제
+	@Override
+	public int deleteReportImg(long board_id) {
+		int deleteReportImg = 0;
+//		log.info("BoardServiceImpl deleteReportImg 시작");
+		// 삭제할 실제 이미지 list DB에서 갖고 오기
+		List<String> listDelReportImgs = bd.detailBoardImg(board_id);
+//		log.info("BoardServiceImpl deleteReportImg listDelReportImgs.size()는 "+ listDelReportImgs.size());
+		// 실제 게시물 이미지 파일 삭제
+		for (String listDelFiles : listDelReportImgs) {
+			UploadHandler.delete(listDelFiles);
+		}
+		// DB 게시물에 있는 모든 이미지 파일 삭제
+		deleteReportImg = bd.deleteImgBoard(board_id);
+//		log.info("BoardServiceImpl deleteReportImg delImgResult는 "+ delImgResult);
+		return deleteReportImg;
+	}
+
 	// 마이페이지 커뮤니티 페이징용 
 	@Override
 	public int myPageCommunityListCnt(long memberId) {

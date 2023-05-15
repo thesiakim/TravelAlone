@@ -396,50 +396,57 @@ public class BoardController {
 	   
 	// 게시글 신고 버튼
 	@RequestMapping(value = "reportMember")
-	public String reportMember(Warning warning,Board board,Model model, HttpServletRequest request, HttpServletResponse response) {
-		
+	public String reportMember(Warning warning, Board board, Model model, HttpServletRequest request, HttpServletResponse response) {
+      
 //		log.info("BoardController reportMember start");
 		String resultForm = "";
 		int reportMemberCnt = 0;
-	      
+		int deleteReportImg = 0;
+		
 		// 쿠키 id + 글 id를 하나의 key로 사용 -> 조회수 중복 방지
 		String cookieKey = "report" + board.getMember_id() + board.getBoard_id();
 		
 		Cookie[] cookies = request.getCookies();
 		boolean boardReportChk = false;
-		
+      
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals(cookieKey)) {
 					// 쿠키에 해당 게시물을 이미 조회한 경우, 조회수 증가하지 않음
+					cookie.setMaxAge(0 * 0 * 0 * 0);
+					response.addCookie(cookie);
 					String message = "이미 신고한 회원입니다.";
 					model.addAttribute("message", message);
 					resultForm = "forward:/detailBoard";
 					boardReportChk = true;
-					
+               
 					break;
 				}
 			}
 		}
-		
+      
 		if (!boardReportChk) {
 			// 쿠키에 해당 게시물을 처음 조회한 경우, 조회수 증가
 			reportMemberCnt = bs.reportMember(warning);
-			Cookie cookie = new Cookie(cookieKey, "true");
-			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
-			response.addCookie(cookie);
+//			Cookie cookie = new Cookie(cookieKey, "true");
+//			cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간 30일로 설정
+//			response.addCookie(cookie);
+			deleteReportImg = bs.deleteReportImg(board.getBoard_id());
+			
 		}
-		
+      
 //		log.info("BoardController reportMember reportMemberCnt -> " + reportMemberCnt);
 //		log.info("BoardController reportMember member_id -> " + warning.getMember_id());   // 회원 ID
-//		log.info("BoardController reportMember u_nickname -> " + warning.getU_nickname());   // 신고자 ID
+//	    log.info("BoardController reportMember u_nickname -> " + warning.getU_nickname());   // 신고자 ID
 		model.addAttribute("reportMemberCnt", reportMemberCnt);
+		model.addAttribute("deleteReportImg", deleteReportImg);
 		model.addAttribute("board_id", board.getBoard_id());
-		model.addAttribute("b_common_board", board.getB_common_board());
-		resultForm = "forward:/detailBoard";
-	      
-		return resultForm;
+      	model.addAttribute("b_common_board", board.getB_common_board());
+      	resultForm = "forward:/detailBoard";
+         
+      	return resultForm;
 	}
+
 	   
 	   
 	// 마이페이지 커뮤니티

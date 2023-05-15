@@ -12,7 +12,7 @@
 			]]>
 		</select>
 
-		<select id="scoreCountById" resultType="ScoreCount" >
+		<select id="scoreCountById" parameterType="long" resultType="ScoreCount" >
 			<![CDATA[
 			Select count(*) as count, c.word
 			from score s inner join common c

@@ -5,39 +5,45 @@
 
 <mapper namespace="com.travelAlone.s20230404.Bod_ImgMapper">
 	
+	<!-- 게시물 사진 추가 -->
 	<insert id="roBoardImgInsert" parameterType="BodImg">
 		INSERT INTO BOD_IMG (board_id, img_id, img_context, img_original_file, img_stored_file, common_imagesType, create_date, modified_date)
 		VALUES (#{board_id}, bod_img_seq.nextval, #{img_context}, #{img_original_file}, #{img_stored_file}, #{common_imagesType}, sysdate, sysdate)
-   </insert>
+	</insert>
 	
+	<!-- 게시물에 있는 사진 전체 삭제 -->
 	<delete id="roBoardImgDelete" parameterType="long">
 		Delete	From Bod_Img
 		Where	board_id = #{board_id}
-   </delete>
-   
-   <delete id="roBoardImgDeleteOne" parameterType="BodImg">
+	</delete>
+	
+	<!-- 지정한 게시물 사진 삭제 -->
+	<delete id="roBoardImgDeleteOne" parameterType="BodImg">
 		Delete	From Bod_Img
 		Where	board_id = #{board_id}
 		And		img_id = #{img_id}
-   </delete>
+	</delete>
 	
+	<!-- 게시물에 있는 저장된 사진 파일 리스트 -->
 	<select id="detailBoardImg" parameterType="long" resultType="String">
 		SELECT	img_stored_file
 		FROM	Bod_Img
 		WHERE   board_id = #{board_id}
-   </select>
-   
-   <select id="oneBoardImg" parameterType="BodImg" resultType="String">
+	</select>
+	
+	<!-- 게시물 특정 사진 가져오기 -->
+	<select id="oneBoardImg" parameterType="BodImg" resultType="String">
 		SELECT	img_stored_file
 		FROM	Bod_Img
 		WHERE   board_id = #{board_id}
 		And		img_id = #{img_id}
-   </select>
+	</select>
 	
+	<!-- 게시물에 있는 사진 모든 정보 리스트 -->
 	<select id="listBoardImg" parameterType="long" resultType="BodImg">
 		SELECT	*
 		FROM	Bod_Img
 		WHERE	board_id = #{board_id}
-   </select>
+	</select>
 	
 </mapper>
