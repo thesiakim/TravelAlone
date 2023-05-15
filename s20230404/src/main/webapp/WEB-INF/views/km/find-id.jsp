@@ -17,7 +17,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
 <div class="loginLogo">
-	<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/gosunee.png"></a>
+	<a href="<%=contextPath%>/"><img src="<%=contextPath%>/img/Logo.png"></a>
 </div>
 <div>
 <h1>아이디 찾기</h1>
