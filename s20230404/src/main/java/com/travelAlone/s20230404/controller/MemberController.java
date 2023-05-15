@@ -194,7 +194,12 @@ public class MemberController {
     @PostMapping("api/v1/password/{id}")
     public String changePassword(@PathVariable Long id, @ModelAttribute MemberFindAndChangePasswordRequestDto requestDto){
 
+        try {
         memberService.checkMemberAndChangePassword(id, requestDto, passwordEncoder);
+
+        }catch (Exception e){
+            System.out.println("회원정보 오류");
+        }
 
         return "redirect:/login";
     }

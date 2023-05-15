@@ -56,7 +56,7 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="submit" style="width: 275px; height: 30px" value="비밀번호 변경"></td>
+		<td><input type="submit" style="width: 275px; height: 30px" value="비밀번호 변경" onsubmit="location.href='/'"></td>
 	</tr>
 	</table>
 </form>
