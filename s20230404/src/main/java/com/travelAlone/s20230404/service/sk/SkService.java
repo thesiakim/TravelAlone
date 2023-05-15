@@ -27,7 +27,7 @@ public interface SkService {
 	int					conditionOptionLocCount(String code);
 	List<Res>			listFilterOptionLoc(Res restaurant);
 	
-	List<Res_Rev>		listResRev(int rid);
+	List<Res_Rev>		listResRev(Res_Rev res_Rev);
 	int					insertResRev(Res_Rev res_Rev);
 	int					updateRestaurantRev(Res_Rev res_Rev);
 	int					deleteResRev(int review_id);
@@ -44,5 +44,7 @@ public interface SkService {
 	int 				insertResFav(Res_Fav res_Fav);
 	int 				deleteResFav(Res_Fav res_Fav);	
 	int 				isRes_Fav(Res_Fav res_Fav);
+	
+	int 				totalResRev(int rid);
 	
 }

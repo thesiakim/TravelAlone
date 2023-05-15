@@ -43,8 +43,8 @@ public class SkController {
 
 	// 맛집 메인
 	@RequestMapping("res")
-	public String restaurant(@LoginUser MemberJpa memberJpa ,Res restaurant, String currentPage, Model model) {
-		log.info("SkController Start restaurant");
+	public String restaurant(@LoginUser MemberJpa memberJpa, Res restaurant, String currentPage, Model model) {
+//		log.info("SkController Start restaurant");
 		int totalRestaurant = sk.totalRestaurant();
 
 		// 페이징
@@ -54,25 +54,26 @@ public class SkController {
 
 		// 게시판 코드
 		List<CommonCode> commonCode = sk.getCommonCode();
-		log.info("boardList data : {}, {}", commonCode.get(0).getCode(), commonCode.get(0).getValue());
+//		log.info("boardList data : {}, {}", commonCode.get(0).getCode(), commonCode.get(0).getValue());
 		model.addAttribute("boardList",commonCode);
 
 		// 지역코드
 		List<CommonCode> commonLocCode = sk.getCommonLocCode();
-		log.info("boardLocList data : {}, {}", commonLocCode.get(0).getCode(), commonLocCode.get(0));
+//		log.info("boardLocList data : {}, {}", commonLocCode.get(0).getCode(), commonLocCode.get(0));
 		model.addAttribute("boardLocList", commonLocCode);
 
-		//popularRes
+		// popularRes
 		List<Res> popularRes = SiService.getPopularRes();
 		model.addAttribute("popularRes", popularRes);
 		
+		
 		// 맛집 목록
 		List<Res> listRestaurant = sk.listRestaurant(restaurant);
-		log.info("SkController list listRestaurant.size()=>" + listRestaurant.size());
+//		log.info("SkController list listRestaurant.size()=>" + listRestaurant.size());
 
 		  if (memberJpa != null) {
-				 log.info("SkController restaurant memberJpa.getId()는 "+ memberJpa.getId()); 
-				 log.info("SkController restaurant memberJpa.getId()는 "+ memberJpa.getRole()); 
+//				 log.info("SkController restaurant memberJpa.getId()는 "+ memberJpa.getId()); 
+//				 log.info("SkController restaurant memberJpa.getId()는 "+ memberJpa.getRole()); 
 				 model.addAttribute("user_id", memberJpa.getId());
 				 model.addAttribute("user_role", memberJpa.getRole());
 				 
@@ -87,8 +88,8 @@ public class SkController {
 
 	// 맛집 정보글
 	@GetMapping("resDetail")
-	public String restaurantDetail(@LoginUser MemberJpa memberJpa,
-			int rid, Model model, Res_Img res_Img, Res_Fav res_Fav) {
+	public String restaurantDetail(@LoginUser MemberJpa memberJpa, String currentPage,
+			int rid, Model model, Res_Img res_Img, Res_Fav res_Fav,Res_Rev res_Rev) {
 		log.info("SkController Start restaurantDetail");
 		log.info("SkController restaurantDetail restaurant_id->" + rid);
 		// 맛집 정보 서비스
@@ -116,16 +117,28 @@ public class SkController {
 			res_Fav.setMember_id(memberJpa.getId());							
 			res_Fav.setIsfavRes(isfavRes);								
 			favResult = sk.isRes_Fav(res_Fav);
-			log.info("SkController favResult=>{}", favResult);
+//			log.info("SkController favResult=>{}", favResult);
 			model.addAttribute("user_id", memberJpa.getId());	
 			model.addAttribute("user_role", memberJpa.getRole());
 		}
 		model.addAttribute("isfavRes", favResult);
 		
+		// 리뷰 갯수
+		int totalResRev = sk.totalResRev(rid);
+		
+		//페이징
+		Paging page = new Paging(totalResRev, currentPage);
+		res_Rev.setStart(page.getStart());
+		res_Rev.setEnd(page.getEnd());
+		log.info("res_Rev.getStart()"+ res_Rev.getStart());
+		log.info("res_Rev.getEnd()"+ res_Rev.getEnd());
+		res_Rev.setRestaurant_id(rid);
+		
 		// 리뷰 리스트
-		List<Res_Rev> listResRev = sk.listResRev(rid);
+		List<Res_Rev> listResRev = sk.listResRev(res_Rev);
 		log.info("SkController list listResRev.size()=>" + listResRev.size());
-
+		
+		model.addAttribute("page", page);
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("resRevList", listResRev);
 
@@ -135,7 +148,7 @@ public class SkController {
 	// 정보글 작성 페이지
 	@GetMapping(value = "resWriteForm")
 	public String resWriteForm(@LoginUser MemberJpa memberJpa,Res restaurant, Model model) {
-		log.info("SkController  resWriteForm Start..." );
+//		log.info("SkController  resWriteForm Start..." );
 		  if(memberJpa != null) {
 		         log.info("SkController resWriteForm memberJpa.getId()는 "+ memberJpa.getId());
 		         model.addAttribute("user_id", memberJpa.getId());
@@ -155,7 +168,7 @@ public class SkController {
 		// 1. 시퀀스 가져오기
 		// 맛집 시퀀스 가져오는 쿼리
 		int restaurantSeq = sk.seqRes(restaurant);
-		log.info("SkController resWrite restaurantSeq->" + restaurantSeq);
+//		log.info("SkController resWrite restaurantSeq->" + restaurantSeq);
 
 		// 2. 가져온 시퀀스 세팅하여 res에 insert
 		restaurant.setRestaurant_id(restaurantSeq);
@@ -212,15 +225,15 @@ public class SkController {
 	// 맛집 정보글 수정 페이지
 	@GetMapping(value = "resUpdateForm")
 	public String restaurantUpdateForm(int restaurant_id, Model model, Res_Img res_Img) {
-		log.info("SkController Start updateForm");
+//		log.info("SkController Start updateForm");
 		Res restaurant = sk.detailRestaurant(restaurant_id);
-		log.info("SkController updateFormRes restaurant->" + restaurant);
+//		log.info("SkController updateFormRes restaurant->" + restaurant);
 	
 	//사진 리스트
-		log.info("Res_Img Start");
+//		log.info("Res_Img Start");
 		res_Img.setRestaurant_id(restaurant_id);
 		List<Res_Img> listImg = sk.listRes_Img(res_Img);
-		log.info("SkController  listImg.size()=>"+ listImg.size());
+//		log.info("SkController  listImg.size()=>"+ listImg.size());
 		model.addAttribute("imgResList", listImg);
 		
 		
@@ -237,10 +250,10 @@ public class SkController {
 	
 		//이미지삽입
 		String img_context = "images"+File.separator+"restaurantUpload" + File.separator;
-		log.info("IMG POST Start");
+//		log.info("IMG POST Start");
 		
 		for (MultipartFile multipartFile : file1) {
-		log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
+//		log.info("originalName: {}, img_context : {}",multipartFile.getOriginalFilename(),img_context);
 		String img_stored_file = uploadFile(multipartFile.getOriginalFilename(), multipartFile.getBytes(),  img_context);
 		// Service --> DB IMG CRUD
 		res_Img.setImg_original_file(multipartFile.getOriginalFilename());
@@ -248,11 +261,11 @@ public class SkController {
 
 
 		int insertImgResult = sk.insertImg(res_Img);
-		log.info("SkController insertImg insertImgResult->"+ insertImgResult);
+//		log.info("SkController insertImg insertImgResult->"+ insertImgResult);
 	}
-		log.info("SkController Start update");
+//		log.info("SkController Start update");
 		int updateCount = sk.updateRestaurant(restaurant);
-		log.info("SkController updateRes updateCount ->" + updateCount);
+//		log.info("SkController updateRes updateCount ->" + updateCount);
 
 		model.addAttribute("uptCnt", updateCount); // Test Controller간 Data 전달
 		model.addAttribute("kk3", "Message Test"); // Test Controller간 Data 전달
@@ -263,7 +276,7 @@ public class SkController {
 	// 맛집 정보글 삭제
 	@RequestMapping(value = "deleteRestaurant")
 	public String deleteRestaurant(int restaurant_id, Model model) {
-		log.info("SkController Start delete restaurant_id :" + restaurant_id);
+//		log.info("SkController Start delete restaurant_id :" + restaurant_id);
 		int result2 = sk.deleteResImg(restaurant_id);
 		int result3 = sk.deleteResRevAll(restaurant_id);
 		int result = sk.deleteRestaurant(restaurant_id);
@@ -274,8 +287,8 @@ public class SkController {
 	@ResponseBody
 	@RequestMapping(value = "deleteResImg")
 	public String deleteResImg(int restaurant_id, int img_id, Model model) {
-		log.info("SkController Start delete restaurant_id :" + restaurant_id);
-		log.info("SkController Start delete img_id :" + img_id);
+//		log.info("SkController Start delete restaurant_id :" + restaurant_id);
+//		log.info("SkController Start delete img_id :" + img_id);
 		int result = sk.deleteResOneImg(restaurant_id,img_id);
 		String resultStr = Integer.toString(result);
 		return resultStr;
@@ -284,10 +297,10 @@ public class SkController {
 	// 맛집 검색
 	@RequestMapping(value = "restaurantSearch")
 	public String restaurantSearch(Res restaurant, String currentPage, Model model) {
-		log.info("SkController restaurantSearch start");
+//		log.info("SkController restaurantSearch start");
 
 		int totalRestaurant = sk.conditionRestaurantCount(restaurant);
-		log.info("SkController restaurantSearch totalInquire =>" + totalRestaurant);
+//		log.info("SkController restaurantSearch totalInquire =>" + totalRestaurant);
 		// paging 작업
 		Paging page = new Paging(totalRestaurant, currentPage);
 
@@ -295,8 +308,8 @@ public class SkController {
 		restaurant.setEnd(page.getEnd());
 
 		List<Res> listSearchRestaurant = sk.listSearchRestaurant(restaurant);
-		log.info("SkController restaurantSearch listSearchRestaurant.size()=>" +
-		listSearchRestaurant.size());
+//		log.info("SkController restaurantSearch listSearchRestaurant.size()=>" +
+//		listSearchRestaurant.size());
 
 		model.addAttribute("totalRestaurant", totalRestaurant);
 		model.addAttribute("restaurantList", listSearchRestaurant);
@@ -310,29 +323,30 @@ public class SkController {
 	@GetMapping(value = "restaurantCodeFilter")
 	public String restaurantCodeFilter(@RequestParam(name = "code")
 	String code, Res restaurant, String currentPage, Model model) {
-		log.info("SkController restaurantCodeFilter start");
+//		log.info("SkController restaurantCodeFilter start");
 
 		// 맛집 코드
 		List<CommonCode> commonCode = sk.getCommonCode();
-		log.info("boardList data : {}, {}", commonCode.get(0).getCode(), commonCode.get(0).getValue());
+//		log.info("boardList data : {}, {}", commonCode.get(0).getCode(), commonCode.get(0).getValue());
 		model.addAttribute("boardList", commonCode);
 
 		// 지역 코드
 		List<CommonCode> commonLocCode = sk.getCommonLocCode();
-		log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
+//		log.info("boardLocList data : {}, {}",commonLocCode.get(0).getCode(),commonLocCode.get(0).getValue());
 		model.addAttribute("boardLocList",commonLocCode);
 		
 		int totalRestaurant = sk.conditionOptionCount(code);
-		log.info("SkController restaurantCodeFilter totalRestaurant =>" + totalRestaurant);
+//		log.info("SkController restaurantCodeFilter totalRestaurant =>" + totalRestaurant);
 
 		// 페이징
 		Paging page = new Paging(totalRestaurant, currentPage);
 		restaurant.setStart(page.getStart());
 		restaurant.setEnd(page.getEnd());
 		restaurant.setCode(code);
-
+		
+		restaurant.setCode(code);
 		List<Res> listFilterRestaurant = sk.listFilterOptionRestaurant(restaurant);
-		log.info("SkController  listFilterRes.size()=>" + listFilterRestaurant.size());
+//		log.info("SkController  listFilterRes.size()=>" + listFilterRestaurant.size());
 		model.addAttribute("totalRestaurant", totalRestaurant);
 		model.addAttribute("restaurantList", listFilterRestaurant);
 		model.addAttribute("page", page);
@@ -345,20 +359,20 @@ public class SkController {
 	@GetMapping(value = "resLocCodeFilter")
 	public String locCodeFilter(@RequestParam(name = "code")
 	String code, Res restaurant, String currentPage, Model model) {
-		log.info("SkController locCodeFilter Start");
+//		log.info("SkController locCodeFilter Start");
 
 		// 맛집 코드
 		List<CommonCode> commonCode = sk.getCommonCode();
-		log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
+//		log.info("boardList data : {}, {}",commonCode.get(0).getCode(),commonCode.get(0).getValue());
 		model.addAttribute("boardList",commonCode);
 		
 		// 지역 코드
 		List<CommonCode> commonLocCode = sk.getCommonLocCode();
-		log.info("boardLocList data : {}, {}", commonLocCode.get(0).getCode(), commonLocCode.get(0).getValue());
+//		log.info("boardLocList data : {}, {}", commonLocCode.get(0).getCode(), commonLocCode.get(0).getValue());
 		model.addAttribute("boardLocList", commonLocCode);
 
 		int totalLoc = sk.conditionOptionLocCount(code);
-		log.info("SkController locCodeFilter totalLoc =>" + totalLoc);
+//		log.info("SkController locCodeFilter totalLoc =>" + totalLoc);
 
 		// 페이징
 		Paging page = new Paging(totalLoc, currentPage);
@@ -367,7 +381,7 @@ public class SkController {
 		restaurant.setCode(code);
 
 		List<Res> listFilterLoc = sk.listFilterOptionLoc(restaurant);
-		log.info("SkController  listFilterLoc.size()=>" + listFilterLoc.size());
+//		log.info("SkController  listFilterLoc.size()=>" + listFilterLoc.size());
 		model.addAttribute("totalLoc", totalLoc);
 		model.addAttribute("resList", listFilterLoc);
 		model.addAttribute("page", page);
@@ -381,12 +395,12 @@ public class SkController {
 	// 리뷰 작성 페이지
 	@GetMapping(value = "resRevWriteForm")
 	public String resRevWriteForm(@LoginUser MemberJpa memberJpa,Res_Rev res_Rev, Model model) {
-			log.info("SkController  resRevWriteForm Start" );	
+//			log.info("SkController  resRevWriteForm Start" );	
 		
 			 if(memberJpa != null) {
 			
-			log.info("SkController resRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
-			log.info("SkController resFav res_Rev.getRestaurant_id()는 "+ res_Rev.getRestaurant_id());
+//			log.info("SkController resRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+//			log.info("SkController resFav res_Rev.getRestaurant_id()는 "+ res_Rev.getRestaurant_id());
 			model.addAttribute("user_id", memberJpa.getId());
 			model.addAttribute("res_rev", res_Rev);
 			
@@ -400,18 +414,18 @@ public class SkController {
 	@PostMapping(value = "resRevWriteForm")
 	public String resRevWrite(@LoginUser MemberJpa memberJpa,
 			Res_Rev res_Rev, Model model) throws Exception {
-		log.info("SkController  resRevWrite Start...");
+//		log.info("SkController  resRevWrite Start...");
 		
 		  if (memberJpa == null){
 		         throw new Exception("로그인 해주세요!");
 		      }
 		
-		  log.info("SkController writeFormResRev memberJpa.getId()는 "+ memberJpa.getId());
+//		  log.info("SkController writeFormResRev memberJpa.getId()는 "+ memberJpa.getId());
 		  res_Rev.setMember_id( memberJpa.getId());
 		  
 		  
 		int insertResult = sk.insertResRev(res_Rev);
-		log.info("SkController resRevWrite insertResult->"+insertResult );
+//		log.info("SkController resRevWrite insertResult->"+insertResult );
 		
 		
 		if(insertResult >0) {
@@ -429,7 +443,7 @@ public class SkController {
 	public String resRevUpdateForm(@RequestParam("review_id") Optional<Integer> review_id,
 									@RequestParam(value = "restaurant_id", required = true)
 									long restaurant_id, Model model) {
-		log.info("SkController  resRevUpdateForm Start...");
+//		log.info("SkController  resRevUpdateForm Start...");
 
 		return "sk/resRevUpdateForm";
 	}
@@ -437,10 +451,10 @@ public class SkController {
 	// 리뷰 수정 처리
 	@PostMapping(value = "updateRestaurantRev")
 	public String updateRestaurantRev(@RequestParam("review_id") int review_id, Res_Rev res_Rev, Model model) {
-		log.info("SkController Start update");
+//		log.info("SkController Start update");
 
 		int updateCount = sk.updateRestaurantRev(res_Rev);
-		log.info("Skcontroller updateResRev updateCount ->" + updateCount);
+//		log.info("Skcontroller updateResRev updateCount ->" + updateCount);
 
 		model.addAttribute("uptCnt", updateCount);
 		model.addAttribute("kk3", "Message Test");
@@ -451,7 +465,7 @@ public class SkController {
 	// 리뷰 삭제
 	@RequestMapping(value = "deleteResRev")
 	public String deleteResRev(int review_id, Model model) {
-		log.info("SkController Start delete... n_id : " + review_id);
+//		log.info("SkController Start delete... n_id : " + review_id);
 		int result = sk.deleteResRev(review_id);
 		return "redirect:res";
 	}
@@ -460,33 +474,33 @@ public class SkController {
 	@RequestMapping(value = "insertResFav")
 	public String resFav(@LoginUser MemberJpa memberJpa,
 			Res_Fav res_Fav, Model model) throws Exception {
-		log.info("SkController  resFav Start");
+//		log.info("SkController  resFav Start");
 		if (memberJpa == null){
 	         throw new Exception("로그인 해주세요!");
 	      }
-		 log.info("SkController resFav memberJpa.getId()는 "+ memberJpa.getId());
-		 log.info("SkController resFav res_Fav.getRestaurant_id()는 "+ res_Fav.getRestaurant_id());
+//		 log.info("SkController resFav memberJpa.getId()는 "+ memberJpa.getId());
+//		 log.info("SkController resFav res_Fav.getRestaurant_id()는 "+ res_Fav.getRestaurant_id());
 		res_Fav.setMember_id(memberJpa.getId());
 		res_Fav.setRestaurant_id(res_Fav.getRestaurant_id());
 		
 		int insertResult = sk.insertResFav(res_Fav);
-		log.info("SkController resFav insertResult->"+insertResult );
+//		log.info("SkController resFav insertResult->"+insertResult );
 	
 		
 		return "sk/res";
 	}
 	
 
-	//즐겨찾기 해제   0508 10:53
+	//즐겨찾기 해제
 	@RequestMapping(value = "deleteResFav")
 	public String deleteResFav(@LoginUser MemberJpa memberJpa,Res_Fav res_Fav, Model model) throws Exception {
-		log.info("SkController  deleteResFav Start");
+//		log.info("SkController  deleteResFav Start");
 		if (memberJpa == null){
 	         throw new Exception("로그인 해주세요!");
 	      }
 		res_Fav.setMember_id(memberJpa.getId());
-		log.info("SkController resFav memberJpa.getId()는 "+ memberJpa.getId());
-		log.info("SkController Start delete restaurant_id :" + res_Fav.getRestaurant_id());
+//		log.info("SkController resFav memberJpa.getId()는 "+ memberJpa.getId());
+//		log.info("SkController Start delete restaurant_id :" + res_Fav.getRestaurant_id());
 		
 		res_Fav.setMember_id(memberJpa.getId());
 		res_Fav.setRestaurant_id(res_Fav.getRestaurant_id());

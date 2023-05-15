@@ -183,6 +183,15 @@
                
             </tr>
          </table><br>
+         
+ <div>
+	
+	<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+		<a
+			href="resDetail?rid=${restaurant.restaurant_id}&currentPage=${i}">[${i}]</a>
+	</c:forEach>
+
+</div> 
             
       <h6>명예훼손, 개인정보 유출, 분쟁 유발, 허위 사실 유포 등의 글은 이용약관에 의해 제제는 물론<br> 
       법률에  의해 처벌받을 수 있습니다.건전한 커뮤니티를 위해 자제 당부 드립니다.</h6><br>
@@ -195,19 +204,25 @@
          <br>
           <div class="star-rating">평점
        <div id="rating">
-    <label for="score_0" onclick="changeRating(0)" onmouseover="changeRating(0)"><c:if test="${res_Rev.r_score == null || res_Rev.r_score == 0}"></c:if></label> 
-    <label for="score_1" onclick="changeRating(1)" onmouseover="changeRating(1)"><c:if test="${res_Rev.r_score == 1}">checked</c:if>★</label>
-    <label for="score_2" onclick="changeRating(2)" onmouseover="changeRating(2)"><c:if test="${res_Rev.r_score == 2}">checked</c:if>★</label>
-    <label for="score_3" onclick="changeRating(3)" onmouseover="changeRating(3)"><c:if test="${res_Rev.r_score == 3}">checked</c:if>★</label>
-    <label for="score_4" onclick="changeRating(4)" onmouseover="changeRating(4)"><c:if test="${res_Rev.r_score == 4}">checked</c:if>★</label>
-    <label for="score_5" onclick="changeRating(5)" onmouseover="changeRating(5)"><c:if test="${res_Rev.r_score == 5}">checked</c:if>★</label>
-    <input type="hidden" name="r_score" id="score_input" value="0">
+		<label for="score_0" onclick="changeRating(0)"
+			onmouseover="changeRating(0)"></label> <label for="score_1"
+			onclick="changeRating(1)" onmouseover="changeRating(1)"
+			style="color: #205E61">★</label> <label for="score_2"
+			onclick="changeRating(2)" onmouseover="changeRating(2)"
+			style="color: #205E61">★</label> <label for="score_3"
+			onclick="changeRating(3)" onmouseover="changeRating(3)"
+			style="color: #205E61">★</label> <label for="score_4"
+			onclick="changeRating(4)" onmouseover="changeRating(4)"
+			style="color: #205E61">★</label> <label for="score_5"
+			onclick="changeRating(5)" onmouseover="changeRating(5)"
+			style="color: #205E61">★</label> <input type="hidden"
+			name="r_score" id="score_input" value="0">
   </div>
 </div>
     <br><br>
     <div style="text-align:center;">
       <input type="submit" value="확인">
-      <a href="tra">목록 보기</a><br><br>
+      <a href="res">목록 보기</a><br><br>
       <hr>
     </div>
   </div>
