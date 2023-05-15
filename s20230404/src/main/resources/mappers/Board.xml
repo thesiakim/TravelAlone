@@ -7,31 +7,31 @@
    
 	<!-- 전체 게시판 갯수 -->
 	<select id="roBoardAllCount" resultType="int">
-	   Select	Count(*)
-	   From		Board b, Member m
-	   Where   	b.b_re_level = 0
-	   And		b.member_id = m.member_id
-	   <choose>
-	    	<when test="listCategory == 'lc_total'">
-	    		and (
-	    			 b.b_title like '%' || #{keyWord} || '%' or
-	    			 b.b_content like '%' || #{keyWord} || '%' or
-	               m.m_nickname like '%' || #{keyWord} || '%'
-	              )
-	    	</when>
-	    	<when test="listCategory == 'lc_title'">
-	    		and b.b_title like '%' || #{keyWord} || '%'
-	    	</when>
-	    	<when test="listCategory == 'lc_content'">
-	    		and b.b_content like '%' || #{keyWord} || '%'
-	    	</when>
-	    	<when test="listCategory == 'lc_writer'">
-	    		and m.m_nickname like '%' || #{keyWord} || '%'
-	    	</when>
-	    	<otherwise>
-	    	
-	    	</otherwise>
-	   </choose>       
+	   Select   Count(*)
+		From     Board b,  Member m
+		Where    b.b_re_level = 0
+		and      b.member_id = m.member_id
+		<choose>
+			<when test="listCategory == 'lc_total'">
+				and (
+	                b.b_title like '%' || #{keyWord} || '%' or
+	                b.b_content like '%' || #{keyWord} || '%' or
+	                m.m_nickname like '%' || #{keyWord} || '%'
+	                )
+			</when>
+         	<when test="listCategory == 'lc_title'">
+            	and b.b_title like '%' || #{keyWord} || '%'
+         	</when>
+        	<when test="listCategory == 'lc_content'">
+            	and b.b_content like '%' || #{keyWord} || '%'
+         	</when>
+         	<when test="listCategory == 'lc_writer'">
+            	and m.m_nickname like '%' || #{keyWord} || '%'
+         	</when>
+         	<otherwise>
+	         
+			</otherwise>
+		</choose>
 	</select>
 	
 	<!-- 전체 게시판 리스트 -->
@@ -47,10 +47,10 @@
 	                 <choose>
 	                 	<when test="listCategory == 'lc_total'">
 	                 		and (
-	                 			 b.b_title like '%' || #{keyWord} || '%' or
-	                 			 b.b_content like '%' || #{keyWord} || '%' or
-	                            m.m_nickname like '%' || #{keyWord} || '%'
-	                           )
+				                b.b_title like '%' || #{keyWord} || '%' or
+				                b.b_content like '%' || #{keyWord} || '%' or
+				                m.m_nickname like '%' || #{keyWord} || '%'
+				                )
 	                 	</when>
 	                 	<when test="listCategory == 'lc_title'">
 	                 		and b.b_title like '%' || #{keyWord} || '%'
@@ -86,28 +86,28 @@
 	<!-- 게시판 갯수 -->
 	<select id="roBoardCount" parameterType="Board" resultType="int">
 		Select   Count(*)
-		From      Board b,  Member m
-		Where      b.b_re_level = 0
+		From     Board b,  Member m
+		Where    b.b_re_level = 0
 		and      b.member_id = m.member_id
 		and      b.b_common_board = #{b_common_board}
 		<choose>
 			<when test="listCategory == 'lc_total'">
-			and (
+				and (
 	                b.b_title like '%' || #{keyWord} || '%' or
 	                b.b_content like '%' || #{keyWord} || '%' or
-	                 m.m_nickname like '%' || #{keyWord} || '%'
+	                m.m_nickname like '%' || #{keyWord} || '%'
 	                )
 			</when>
-	         	<when test="listCategory == 'lc_title'">
-	            and b.b_title like '%' || #{keyWord} || '%'
-	         	</when>
-	        	<when test="listCategory == 'lc_content'">
-	            and b.b_content like '%' || #{keyWord} || '%'
-	         	</when>
-	         	<when test="listCategory == 'lc_writer'">
-	            and m.m_nickname like '%' || #{keyWord} || '%'
-	         	</when>
-	         	<otherwise>
+         	<when test="listCategory == 'lc_title'">
+            	and b.b_title like '%' || #{keyWord} || '%'
+         	</when>
+        	<when test="listCategory == 'lc_content'">
+            	and b.b_content like '%' || #{keyWord} || '%'
+         	</when>
+         	<when test="listCategory == 'lc_writer'">
+            	and m.m_nickname like '%' || #{keyWord} || '%'
+         	</when>
+         	<otherwise>
 	         
 			</otherwise>
 		</choose>
@@ -128,7 +128,7 @@
 	                       and (
 	                           b.b_title like '%' || #{keyWord} || '%' or
 	                           b.b_content like '%' || #{keyWord} || '%' or
-	                            m.m_nickname like '%' || #{keyWord} || '%'
+	                           m.m_nickname like '%' || #{keyWord} || '%'
 	                           )
 	                    </when>
 	                    <when test="listCategory == 'lc_title'">

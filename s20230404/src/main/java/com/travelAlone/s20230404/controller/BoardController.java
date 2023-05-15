@@ -56,8 +56,8 @@ public class BoardController {
 //		log.info("BoardController listBoardAll orderList는" + board.getOrderList());
 	  
 		// Board table 전체 count
-		int boardAllCnt = bs.boardAllCnt();
-//		log.info("BoardController listBoardAll boardAllCnt는 "+ boardAllCnt);
+		int boardAllCnt = bs.boardAllCnt(board);
+		log.info("BoardController listBoardAll boardAllCnt는 "+ boardAllCnt);
 		  
 		// Paging 작업
 		Paging page = new Paging(boardAllCnt, currentPage);      
