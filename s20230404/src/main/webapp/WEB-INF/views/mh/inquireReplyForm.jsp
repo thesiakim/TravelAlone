@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="/css/write.css" rel="stylesheet" type="text/css">
+	<link href="/css/list.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -17,22 +19,19 @@
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="replyInquire" method="post" name="frm">
 		<input type="hidden" name = "g_writing_id" value="${inquire.g_writing_id }">
-		<table style="margin:auto;">
+		<table>
 			<tr>
-				<th>글아이디</th>
-				<td>${inquire.g_writing_id }</td>
+				<td hidden="">${inquire.g_writing_id }</td>
 			</tr>
 							
 			<tr>
-				<td>답변 내용</td>
-				<td><textarea name="g_reply_content" rows="10" cols="50"></textarea></td>
-			</tr>
-			<tr >
-				<td colspan="2"> <input type="submit" value="입력"> &nbsp;&nbsp; 
-				<a href="inquire">목록보기</a></td>
+				<td><textarea id="inquireReply" name="g_reply_content" rows="10" cols="50"></textarea></td>
 			</tr>
 		</table>
+		<br>
+			<button type="submit">입 력</button> &nbsp;&nbsp; 
 	</form>
+	<br><br>
 </body>
 	<c:import url="../fragments/footer.jsp"/>
 </html>
