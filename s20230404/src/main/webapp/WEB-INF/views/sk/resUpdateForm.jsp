@@ -40,7 +40,7 @@
 <div id="img_benner">
 		<img src="img/restaurant-picture.png" alt="배너">
 	</div>
-		<h3><img src="../logo/Res.png" alt="여행지" width=250px height=250px></h3>
+		<h3><img src="img/Res.png" alt="여행지" width=250px height=250px></h3>
 	<br><h3>글 수정	</h3><br>
 	<form action="updateRestaurant" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="restaurant_id" value="${restaurant.restaurant_id }">
@@ -50,7 +50,7 @@
 			<tr>
 				<td> 맛집종류</td>
 				<td style="text-align: left;"> 
-				<select name="t_common_travel">
+				<select name="r_common_restaurant">
 					<option value="res100">한식</option>
 					<option value="res200">중식</option>
 					<option value="res300">일식</option>
