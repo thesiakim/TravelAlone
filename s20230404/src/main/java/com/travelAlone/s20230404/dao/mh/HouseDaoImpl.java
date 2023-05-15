@@ -242,11 +242,11 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public int insertHouRev(Hou_Rev hou_Rev) {
 		int result = 0;
-		//log.info("HouseDaoImpl insert Start...");
+		log.info("HouseDaoImpl insert Start...");
 		try {
 			result = session.insert("insertHouseRev",hou_Rev);			
 		} catch (Exception e) {
-			//log.info("HouseDaoImpl insert Exception" + e.getMessage());
+		log.info("HouseDaoImpl insert Exception" + e.getMessage());
 		}
 		
 		return result;

@@ -155,7 +155,7 @@ private final SiService SiService;
 	//정보글작성  페이지 이동
 	@GetMapping(value = "houWriteForm")
 	public String houWriteForm(@LoginUser MemberJpa memberJpa,House house, Model model) {
-		//log.info("HouseController  houWriteForm Start..." );
+		log.info("HouseController  houWriteForm Start..." );
 		  if(memberJpa != null) {
 		         log.info("HouseController houWriteForm memberJpa.getId()는 "+ memberJpa.getId());
 		         model.addAttribute("user_id", memberJpa.getId());
@@ -427,13 +427,12 @@ private final SiService SiService;
 		//정보 리뷰작성  페이지 이동
 		@GetMapping(value = "houRevWriteForm")
 		public String houRevWriteForm (@LoginUser MemberJpa memberJpa,Hou_Rev hou_Rev, Model model) {
-			//log.info("HouseController  houRevWriteForm Start..." );	
-		
+			log.info("HouseController  houRevWriteForm Start..." );	
 			
 			  if(memberJpa != null) {
 			
-			//log.info("HouseController houRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
-			// log.info("HouseController houFav hou_Rev.getHouse_id()는 "+ hou_Rev.getHouse_id());
+			log.info("HouseController houRevWriteForm memberJpa.getId()는 "+ memberJpa.getId());
+			log.info("HouseController houFav hou_Rev.getHouse_id()는 "+ hou_Rev.getHouse_id());
 			model.addAttribute("user_id", memberJpa.getId());
 			model.addAttribute("hou_rev", hou_Rev);
 			
@@ -456,18 +455,18 @@ private final SiService SiService;
 		@PostMapping(value = "houRevWriteForm")
 		public String houRevWrite(@LoginUser MemberJpa memberJpa,
 				Hou_Rev hou_Rev, Model model) throws Exception {
-			//log.info("HouseController  houRevWrite Start...");
+			log.info("HouseController  houRevWrite Start...");
 			
 			  if (memberJpa == null){
 			         throw new Exception("로그인 해주세요!");
 			      }
 			
-			//  log.info("HouseController writeFormHouRev memberJpa.getId()는 "+ memberJpa.getId());
+			  log.info("HouseController writeFormHouRev memberJpa.getId()는 "+ memberJpa.getId());
 			  hou_Rev.setMember_id( memberJpa.getId());
 			  
 			  
 			int insertResult = mh.insertHouRev(hou_Rev);
-			//log.info("HouseController houRevWrite insertResult->"+insertResult );
+			log.info("HouseController houRevWrite insertResult->"+insertResult );
 			
 			
 			if(insertResult >0) {

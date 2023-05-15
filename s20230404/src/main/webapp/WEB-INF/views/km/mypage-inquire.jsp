@@ -15,6 +15,9 @@
 </style>
 
 <body>
+<div id="img_benner">
+	<img src="<%=contextPath%>/img/mypage-banner-picture.png" alt="배너">
+</div>
 	
 	<!-- 본문 -->
  	<form >
@@ -83,7 +86,7 @@
 		<a
 			href="<%=contextPath%>/inquire?currentPage=${page.startPage+page.pageBlock}">[다음]</a>
 	</c:if>
-	
+	<br><br>
 </body>
 	<c:import url="../fragments/footer.jsp"/>
 </html>

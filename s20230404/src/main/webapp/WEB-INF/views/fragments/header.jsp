@@ -6,6 +6,7 @@
 <%String contextPath = request.getContextPath();%>
 <!DOCTYPE html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
     <title>Insert title here</title>
     <meta charset="UTF-8">
     <link href="<%=contextPath%>/css/main.css" rel="stylesheet" type="text/css">

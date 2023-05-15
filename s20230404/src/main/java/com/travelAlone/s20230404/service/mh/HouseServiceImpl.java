@@ -152,7 +152,7 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int insertHouRev(Hou_Rev hou_Rev) {
 		int result = 0;
-		//log.info("HouseServiceImpl insert Start...");
+		log.info("HouseServiceImpl insert Start...");
 		result = mh.insertHouRev(hou_Rev);
 		return result;
 	}
