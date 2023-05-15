@@ -33,9 +33,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 전체 게시판 개수
 	@Override
-	public int boardAllCnt() {
+	public int boardAllCnt(Board board) {
 //		log.info("BoardServiceImpl boardAllCnt 시작");
-		int boardAllCnt = bd.boardAllCnt();
+		int boardAllCnt = bd.boardAllCnt(board);
 //		log.info("BoardServiceImpl boardAllCnt는 "+ boardAllCnt);
 		
 		return boardAllCnt;

@@ -19,7 +19,7 @@ import com.travelAlone.s20230404.model.Warning;
 import com.travelAlone.s20230404.model.dto.ro.BoardWriteRequestDto;
 
 public interface BoardService {
-	int 				boardAllCnt();
+	int 				boardAllCnt(Board board);
 	List<Board> 		listAllBoard(Board board);
 	int 				boardCnt(Board board);
 	List<Board> 		listBoard(Board board);

@@ -17,7 +17,7 @@ import com.travelAlone.s20230404.model.Warning;
 
 public interface BoardDao {
 	
-	int 				boardAllCnt();
+	int 				boardAllCnt(Board board);
 	List<Board> 		listAllBoard(Board board);
 	int 				boardCnt(Board board);
 	List<Board> 		listBoard(Board board);

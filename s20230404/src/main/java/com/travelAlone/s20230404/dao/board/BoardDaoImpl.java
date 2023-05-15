@@ -31,7 +31,7 @@ public class BoardDaoImpl implements BoardDao {
 	
 	// 전체 게시판 개수
 	@Override
-	public int boardAllCnt() {
+	public int boardAllCnt(Board board) {
 		int boardAllCnt = 0;
 //		log.info("BoardDaoImpl boardAllCnt 시작");
 		
