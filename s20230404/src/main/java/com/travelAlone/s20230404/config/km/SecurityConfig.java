@@ -5,12 +5,8 @@ import com.travelAlone.s20230404.domain.km.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -57,23 +53,27 @@ public class SecurityConfig {
      * */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http.cors().disable().csrf().disable();// csrf, cors 기능 사용 안함.
+
         http
-                .csrf().disable()// csrf 기능 사용 안함.
-                .headers().frameOptions().disable()
-                .and()
-                    .authorizeRequests() // URL별 권한 관리 시작
-                    .antMatchers("/mypage/**").authenticated()
-                    .anyRequest().permitAll() // 모든 사이트는 모든 사용자 허가
-                .and() // 일반 로그인 설정
-                    .formLogin()
-                    .loginPage("/login")
-                    .successHandler(authenticationSuccessHandler)
-                    .usernameParameter("email")
-                    .failureUrl("/login/error")
-                .and()
-                    .logout()
+            .headers().frameOptions().disable()
+            .and()
+                .authorizeRequests() // URL별 권한 관리 시작
+                .antMatchers().hasAnyAuthority(Role.rol100.getKey())
+                .antMatchers().hasAnyAuthority(Role.rol200.getKey())
+                .antMatchers("/mypage/**").authenticated()
+                .anyRequest().permitAll() // 모든 사이트는 모든 사용자 허가
+            .and() // 일반 로그인 설정
+                .formLogin()
+                .loginPage("/login")
+                .successHandler(authenticationSuccessHandler)
+                .usernameParameter("email")
+                .failureUrl("/login/error")
+            .and()
+                .logout()
 //                    .logoutSuccessHandler(customLogoutSuccessHandler)
-                    .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/");
 
 
 

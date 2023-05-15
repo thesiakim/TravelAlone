@@ -3,6 +3,7 @@ package com.travelAlone.s20230404.service.km;
 
 import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.domain.km.MemberRepository;
+import com.travelAlone.s20230404.domain.km.WarningRepository;
 import com.travelAlone.s20230404.model.BodImg;
 import com.travelAlone.s20230404.model.dto.km.*;
 
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 public class MemberService{
 
     private final MemberRepository memberRepository;
+    private final WarningRepository warningRepository;
 
     /**
      * 2023-04-17 조경민
@@ -168,9 +170,13 @@ public class MemberService{
     @Transactional(readOnly = true)
     public Page<AdminMemberResponseDto> adminMemberListShow(Pageable pageable) {
 
-        // 멤버 리스트를 조회해와서 AdminMemberResponseDto로 변환 후 반환
-        return memberRepository.findAllDesc(pageable)
-                .map(memberJpa -> new AdminMemberResponseDto(memberJpa));
+        // 멤버 리스트를 조회해와서 AdminMemberResponseDto로 변환, 신고테이블에서 count 찾아서 입력 후 반환
+        Page<AdminMemberResponseDto> responsePageDtos = memberRepository.findAllDesc(pageable)
+                .map(memberJpa -> new AdminMemberResponseDto(memberJpa))
+                .map(responseDto -> responseDto.addWarningCount(warningRepository.countByMemberJpa_id(responseDto.getId())));
+
+
+        return responsePageDtos;
 
     }
 
@@ -182,7 +188,9 @@ public class MemberService{
     public Page<AdminMemberResponseDto> adminMemberSearchAndListShow(String search, Pageable pageable) {
 
         return memberRepository.findSearchAndAllDesc(search, pageable)
-                .map(memberJpa -> new AdminMemberResponseDto(memberJpa));
+                .map(memberJpa -> new AdminMemberResponseDto(memberJpa))
+                .map(responseDto -> responseDto.addWarningCount(warningRepository.countByMemberJpa_id(responseDto.getId())));
+
     }
 
     /**

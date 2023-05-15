@@ -23,6 +23,8 @@ public class AdminMemberResponseDto {
     private String createdDate;
     private String modifiedDate;
 
+    private Long warningCount;
+
     public AdminMemberResponseDto(MemberJpa memberJpa) {
         this.id = memberJpa.getId();
         this.email = memberJpa.getEmail();
@@ -35,8 +37,10 @@ public class AdminMemberResponseDto {
         this.imgOriginalFile = memberJpa.getImgOriginalFile();
         this.imgStoredFile = memberJpa.getImgStoredFile();
         this.imagesType = memberJpa.getImagesType();
-        this.createdDate = memberJpa.getCreatedDate().toString();
-        this.modifiedDate = memberJpa.getModifiedDate().toString();
+
+        // 날짜 보여주는 형식 변경
+        this.createdDate = memberJpa.getCreatedDate().toString().replace("T", " ").substring(0, 16);
+        this.modifiedDate = memberJpa.getModifiedDate().toString().replace("T", " ").substring(0, 16);
 
         // 성별 보여주기
         if (memberJpa.getGender().equals("1")){
@@ -45,6 +49,12 @@ public class AdminMemberResponseDto {
             this.gender = "남자";
         }
 
+    }
+
+    public AdminMemberResponseDto addWarningCount(Long warningCount){
+        this.warningCount = warningCount;
+
+        return this;
     }
 
 }

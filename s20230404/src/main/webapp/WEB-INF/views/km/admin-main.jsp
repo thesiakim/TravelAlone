@@ -117,6 +117,7 @@
 			<th width="200px;" style="color: white; background-color: #5F9EA0;">Phone</th>
 			<th style="color: white; background-color: #5F9EA0;">Created Date</th>
 			<th style="color: white; background-color: #5F9EA0;">Modified Date</th>
+			<th style="color: white; background-color: #5F9EA0;">Warning</th>
 			<th  width="100px;" style="color: white; background-color: #5F9EA0;">Role</th>
 		</tr>
 		</thead>
@@ -131,6 +132,7 @@
 				<td width="200px;" onclick="detailMove(${member.id})">${member.phone}</td>
 				<td onclick="detailMove(${member.id})">${member.createdDate}</td>
 				<td onclick="detailMove(${member.id})">${member.modifiedDate}</td>
+				<td onclick="detailMove(${member.id})">${member.warningCount}</td>
 				<td  width="100px;" id="role">
 					<select name="role" id="selectRole${member.id}" onchange="changeRole(${member.id})">
 						<option value="user" ${member.role == ('rol100') ? 'selected' : ''}>User</option>
