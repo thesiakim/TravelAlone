@@ -29,18 +29,32 @@ var password =  prompt("PASSWD 입력","");
        /*  history.back(); */
     }
     else  {
-        var  combo =  password
-        var  total =  combo.toLowerCase()
+        var data = {
+			gid : gid,
+			gpassword : password
+		}
 
-	    if  (total == passwd)  {                // 비밀번호
-	        alert("인증완료");
-	        location  =  goodURL;
-	    }
-	    else  {
-	        alert("출입금지");
-	        location  = "/inquire"   
-	       /*  history.back(); */
-	    }
+		$.ajax({
+			type: "POST",
+			url: "inquireDetail/PasswordCheck",
+			dataType: "text",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(data)
+		})
+				.done(function (responseText) {
+					if (responseText){
+						alert("인증완료");
+						location  =  goodURL;
+					}else{
+						alert("출입금지");
+						location  = "/inquire"
+					}
+
+				})
+				.fail(function (error) {
+					alert(JSON.stringify(error));
+					location  = "/inquire"
+				});
 	}
 	
 }	

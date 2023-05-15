@@ -369,7 +369,7 @@ public class SkController {
 		List<Res> listFilterLoc = sk.listFilterOptionLoc(restaurant);
 		log.info("SkController  listFilterLoc.size()=>" + listFilterLoc.size());
 		model.addAttribute("totalLoc", totalLoc);
-		model.addAttribute("resList", listFilterLoc);
+		model.addAttribute("restaurantList", listFilterLoc);
 		model.addAttribute("page", page);
 		model.addAttribute("search", restaurant.getKeyword());
 
