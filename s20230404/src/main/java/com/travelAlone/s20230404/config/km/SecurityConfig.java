@@ -60,9 +60,18 @@ public class SecurityConfig {
             .headers().frameOptions().disable()
             .and()
                 .authorizeRequests() // URL별 권한 관리 시작
-                .antMatchers().hasAnyAuthority(Role.rol100.getKey())
-                .antMatchers().hasAnyAuthority(Role.rol200.getKey())
-                .antMatchers("/mypage/**").authenticated()
+                // 문의게시판
+                .antMatchers("inquireDetail","inquireWriteForm","inquireUpdateForm").hasAnyAuthority(Role.rol100.getKey(), Role.rol200.getKey())
+                .antMatchers("noticeWriteForm","noticeUpdateForm","inquireReplyForm").hasAnyAuthority(Role.rol200.getKey())
+                // 여숙맛
+                .antMatchers("houRevWriteForm","houRevUpdateForm","resRevWriteForm","resRevUpdateForm","traRevWriteForm","traRevUpdateForm").hasAnyAuthority(Role.rol100.getKey(), Role.rol200.getKey())
+                .antMatchers("resWriteForm","resUpdateForm","houWriteForm","houUpdateForm","traWriteForm","traUpdateForm").hasAnyAuthority(Role.rol100.getKey(), Role.rol200.getKey())
+                // 커뮤니티
+                .antMatchers("writeBoardForm","updateBoardForm","writeBoardRe","WriteBoardReLevel","UpdateBoardRe","deleteBoard","deleteBoardRe","/boardlike","reportMember").hasAnyAuthority(Role.rol100.getKey(), Role.rol200.getKey())
+                // 마이페이지
+                .antMatchers("myPageCommunityList","/reviewPageTra","/reviewPageRes","/reviewPageHou","/mypage/**","/api/v1/mypage/**").authenticated()
+                // 관리자페이지
+                .antMatchers("/api/v1/admin/**", "/admin/**").hasAnyAuthority(Role.rol200.getKey())
                 .anyRequest().permitAll() // 모든 사이트는 모든 사용자 허가
             .and() // 일반 로그인 설정
                 .formLogin()
