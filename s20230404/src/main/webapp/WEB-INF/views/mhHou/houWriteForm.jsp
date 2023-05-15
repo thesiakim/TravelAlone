@@ -1,27 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-<%-- <%@ include file="header.jsp"%> --%>
 <%@ include file="../fragments/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<link href="/css/list.css" rel="stylesheet" type="text/css">	
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+	<link href="/css/list.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
 	<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 	<script defer src="/js/picture.js"></script>
+</head>
+
+
 <body>
-<div id="img_benner">
+	<div id="img_benner">
 		<img src="img/main-picture.png" alt="배너">
 	</div>
-<h3><img src="img/Hou.png" alt="숙소" width=250px height=250px></h3>
-<h3>글 쓰기</h3>
-	<c:if test="${msg!=null}">${msg}</c:if>
+	<h3>
+		<img src="img/Hou.png" alt="숙소" width=250px height=250px>
+	</h3>
+	
+<h1>글 쓰기</h1>
+	<c:if test="${msg!=null}">
+		${msg}
+	</c:if>
+	
 	<form action="houWriteForm" method="post" name="frm" enctype="multipart/form-data">
-		<table style="margin:auto;">
+		<table>
 			<tr>
-				<td >숙소 종류</td>
+				<td>숙소 종류</td>
 				<td style="text-align: left;"> 
 				<select name="h_common_house">
 					<option value="hou100">호텔</option>
@@ -30,10 +40,9 @@
 					<option value="hou400">캠핑/글램핑</option>
 					<option value="hou500">게스트하우스</option>									
 				</select>
-												
 				</td>																					
-				
 			</tr>
+			
 			<tr>
 				<td>숙소 지역</td>	
 				<td style="text-align: left;">
@@ -56,7 +65,8 @@
 						<option value="loc164">제주</option>										
 					</select>									
 				 </td>															
-		    </tr>		
+		    </tr>
+		    		
 			<tr>
 				<td>숙소명</td>
 				<td> <input type="text" name="h_name" size = "50"> </td>
@@ -96,27 +106,23 @@
 			</tr>
 				
 			<tr>
-			</table><br><br><hr>
-			<br><br>
-			<table style="margin:auto;">
-			<tr><font size=5>사진 첨부</font> </tr><br>
-							<br><font size=4><img alt="사진 추가하기" src="/images/houseUpload/${savedName}"><br>
-				<input type="file" name="file1" multiple="multiple">
-							
-				 </td>	<br><br>
-			<tr>
+				<td>
+					<img alt="사진 추가하기" src="/images/houseUpload/${savedName}"><br>
+				</td>
+				<td>
+					<input type="file" name="file1" multiple="multiple">
+				</td>
 			</tr>
-
-			</table><br><br><br>
-			<hr><br><br>
-				<div style="text-align:center;">
-					<button type="submit">확인</button>
-					<a href="hou">목록 보기</a>
-					</div>
+		</table>
+		
+			<hr>
+			<br><br>
+			
+	<div style="text-align:center;">
+		<button type="submit">확인</button>
+	</div>
 	</form>
-	
-
-
+	<br><br>
 </body>
 	<c:import url="../fragments/footer.jsp"/>
 </html>

@@ -22,7 +22,7 @@
 	<h3>
 		<img src="img/Review.png" alt="리뷰" width=250px height=250px>
 	</h3>
-	<h3>글 수정</h3>
+	<h3>리뷰 수정</h3>
 	<c:if test="${msg!=null}">${msg}</c:if>
 	<form action="traRevUpdate" method="post" name="frm">
 		<input type="hidden" id="review_id" name="review_id">
@@ -30,14 +30,12 @@
 		
 	<table>
 	  <tr>
-	    <td>내용</td>
-	    <td><input type="text" name="r_content" size=50 required="required" value="${tra_Rev.r_content}"></td>
+	    <td id="reply"><input type="text" style="width: 600px;" name="r_content" required="required" value="${tra_Rev.r_content}" placeholder="리뷰를 작성해 주세요"></td>
 	  </tr>
 	  <tr>
-	    <td>평점</td>
 	    <td>
 	      <div class="star-rating">
-	        <div id="rating">
+	        <div id="rating" style="text-align: center;">
 	          <label for="score_0" onclick="changeRating(0)" onmouseover="changeRating(0)"></label>
 	          <label for="score_1" onclick="changeRating(1)" onmouseover="changeRating(1)" style="color: ${tra_Rev.r_score >= 1 ? '#ffd700' : '#205E61'}">★</label>
 	          <label for="score_2" onclick="changeRating(2)" onmouseover="changeRating(2)" style="color: ${tra_Rev.r_score >= 2 ? '#ffd700' : '#205E61'}">★</label>
@@ -55,10 +53,9 @@
 	
 	<div style="text-align:center;">
 	  <input type="submit" value="확인">
-	  <a href="tra">목록 보기</a><br>
 	</div>
 	</form>
-
+	<br><br>
 	<script>
 	  const url = new URL(window.location.href);
 	  const urlParam = url.searchParams;

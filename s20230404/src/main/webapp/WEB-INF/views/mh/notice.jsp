@@ -78,7 +78,7 @@
 			<c:if test="${user_role == 'rol200' }">
 			<td style="border-bottom: 0;"></td>
 			<td style="border-bottom: 0; padding-left:70px;">
-				<a href="inquireWriteForm"><button type="submit">글 쓰기</button></a>
+				<a href="noticeWriteForm"><button type="submit">글 쓰기</button></a>
 			</td>
 		</c:if>
 		</tr>

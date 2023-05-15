@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- <%@ include file="../fragments/header.jsp"%>
+<%@ include file="../fragments/header.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -22,13 +22,13 @@
   <h3>
     <img src="img/Tra.png" alt="여행지" width=250px height=250px>
   </h3>
-  <h3>글 쓰기</h3>
+  <h1>글 쓰기</h1>
 <c:if test="${msg!=null}">
 ${msg}
 </c:if>
 
   <form action="traWriteForm" method="post" name="frm" enctype="multipart/form-data">
-    <table style="margin:auto;">
+    <table>
       <tr>
         <td>여행지 종류</td>
         <td style="text-align: left;"> 
@@ -99,39 +99,24 @@ ${msg}
 	    <td>주차장 여부</td>
 	    <td><input type="text" name="t_parking" size="50"></td>
 	  </tr>	  
-	</table>
-	
-	<br><br>
-	<hr>
-	<br><br>
-	
-	<table style="margin:auto;">
-	  <tr>
-	    <td><font size="5">사진 첨부</font></td>
-	  </tr>
 	  <tr>
 	    <td>
-	      <br>
-	      <font size="4">
 	        <img alt="사진 추가하기" src="/images/traUpload/${savedName}">
-	        <br>
+        </td>
+        <td>
 	        <input type="file" name="file1" multiple="multiple">
-	      </font>
-	      <br><br>
 	    </td>
 	  </tr>
 	</table>
 	
-	<br><br><br>
 	<hr>
 	<br><br>
 	
     <div style="text-align: center;">
       <button type="submit">확인</button>
-      <a href="tra">목록 보기</a>
     </div>
   </form>
-  
+  <br><br>
 </body>
    	<c:import url="../fragments/footer.jsp"/>
 </html>
