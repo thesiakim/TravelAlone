@@ -6,81 +6,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<link rel="stylesheet" href="<%=contextPath%>/css/login.css">
-	<link rel="stylesheet" href="<%=contextPath%>/css/list.css">
 <title>Insert title here</title>
 <script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-	<style type="text/css">
-		.userTag {
-			width: 120px;		height: 40px;
-			border-radius: 7px;	font-weight:bolder;
-			font-size: 15px;	color:white;
-			background-color: #5F9EA0; 
-		}
-	</style>
-	<style>
-		/* 등록한 태그 목록 스타일 */
-		.userTag {
-			cursor: pointer;
-			opacity: 1;
-			transition: opacity 0.5s;
-			animation: slide-up 0.5s ease;
-		}
-
-		/* 슬라이드 업 애니메이션 */
-		@keyframes slide-up {
-			0% {
-				opacity: 0;
-				transform: translateY(50px);
-			}
-			100% {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		/* 등록되지 않은 태그 목록 스타일 */
-		.dont {
-			cursor: pointer;
-			color: blue;
-			text-decoration: underline;
-		}
-
-		.dont:hover {
-			color: red;
-		}
-	</style>
+<link href="/css/tag.css" rel="stylesheet" type="text/css">
+	
 </head>
 <body>
-<h2>${nickName} 님</h2>
-
-<h3>등록한 태그</h3>
-<c:forEach var="commonInterest" items="${interests.commonInterests}">
-	<c:choose>
-		<c:when test="${commonInterest.savedChecked}">
-			<div class="userTag saved" id="saved${commonInterest.mcd}" style="display: block" onclick="toggleDisplay('dont${commonInterest.mcd}', this)">${commonInterest.word}</div>
-		</c:when>
-		<c:otherwise>
-			<div class="userTag saved" id="saved${commonInterest.mcd}" style="display: none" onclick="toggleDisplay('dont${commonInterest.mcd}', this)">${commonInterest.word}</div>
-		</c:otherwise>
-	</c:choose>
-</c:forEach>
-
-<h3>등록하지 않은 태그</h3>
-<c:forEach var="commonInterest" items="${interests.commonInterests}">
-	<c:choose>
-		<c:when test="${commonInterest.savedChecked}">
-			<div class="userTag dont" id="dont${commonInterest.mcd}" style="display: none" onclick="toggleDisplay('saved${commonInterest.mcd}', this)">${commonInterest.word}</div>
-		</c:when>
-		<c:otherwise>
-			<div class="userTag dont" id="dont${commonInterest.mcd}" style="display: block" onclick="toggleDisplay('saved${commonInterest.mcd}', this)">${commonInterest.word}</div>
-		</c:otherwise>
-	</c:choose>
-</c:forEach>
-
-<input type="submit" value="완료" onclick="interestSave()">
-<input type="reset" value="취소" onclick="windowClose()">
-
+<div id="form">
+	
+	<h1>${user.nickname} 님</h1>
+	<h3>등록한 태그</h3>
+	
+	<div class="tagDiv">
+		<c:forEach var="commonInterest" items="${interests.commonInterests}">
+			<c:choose>
+				<c:when test="${commonInterest.savedChecked}">
+					<div class="userTag saved" id="saved${commonInterest.mcd}" style="display: block; text-align: center;" onclick="toggleDisplay('dont${commonInterest.mcd}', this)">${commonInterest.word}</div>
+				</c:when>
+				<c:otherwise>
+					<div class="userTag saved" id="saved${commonInterest.mcd}" style="display: none; text-align: center;" onclick="toggleDisplay('dont${commonInterest.mcd}', this)">${commonInterest.word}</div>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</div>
+	<br>
+	<h3>등록하지 않은 태그</h3>
+	<div class="tagDiv">
+		<c:forEach var="commonInterest" items="${interests.commonInterests}">
+			<c:choose>
+				<c:when test="${commonInterest.savedChecked}">
+					<div class="userTag dont" id="dont${commonInterest.mcd}" style="display: none; text-align: center;" onclick="toggleDisplay('saved${commonInterest.mcd}', this)">${commonInterest.word}</div>
+				</c:when>
+				<c:otherwise>
+					<div class="userTag dont" id="dont${commonInterest.mcd}" style="display: block; text-align: center;" onclick="toggleDisplay('saved${commonInterest.mcd}', this)">${commonInterest.word}</div>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</div>
+	<br>
+	<input type="submit" value="완료" onclick="interestSave()">
+	<input type="reset" value="취소" onclick="windowClose()">
+</div>
 <script>
 	function toggleDisplay(id, clicked) {
 		const element = document.getElementById(id);
