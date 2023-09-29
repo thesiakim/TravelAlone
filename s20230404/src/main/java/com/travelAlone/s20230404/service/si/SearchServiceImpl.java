@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.travelAlone.s20230404.dao.si.SiDao;
+import com.travelAlone.s20230404.dao.si.SearchDao;
 import com.travelAlone.s20230404.model.Board;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
@@ -27,9 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SiServiceImpl implements SiService {
+public class SearchServiceImpl implements SearchService {
 
-	private final SiDao siDao;
+	private final SearchDao searchDao;
 	
 	//검색 시 선택한 카테고리에 따라 DB 데이터에  검색 키워드가 존재하는지 조회
 	@Override
@@ -41,26 +41,26 @@ public class SiServiceImpl implements SiService {
 		  //카테고리가 전체인 경우
 		  if(category.equals("category_total")) {
 		
-			  resultList.setTravelList(siDao.travelSearch(travel));
-			  resultList.setHouseList(siDao.houseSearch(house));
-			  resultList.setRestaurantList(siDao.resSearch(res));
-			  resultList.setBoardList(siDao.boardSearch(board));
+			  resultList.setTravelList(searchDao.travelSearch(travel));
+			  resultList.setHouseList(searchDao.houseSearch(house));
+			  resultList.setRestaurantList(searchDao.resSearch(res));
+			  resultList.setBoardList(searchDao.boardSearch(board));
 		  
 		  //카테고리가 여행지인 경우	  
 		  } else if(category.equals("category_travel")) {
-			  resultList.setTravelList(siDao.travelSearch(travel));
+			  resultList.setTravelList(searchDao.travelSearch(travel));
 		  
 		  //카테고리가 숙소인 경우			  
 		  } else if(category.equals("category_house")) {
-			  resultList.setHouseList(siDao.houseSearch(house));
+			  resultList.setHouseList(searchDao.houseSearch(house));
 		  
 		  //카테고리가 맛집인 경우	  
 		  } else if(category.equals("category_res")) {
-			  resultList.setRestaurantList(siDao.resSearch(res));
+			  resultList.setRestaurantList(searchDao.resSearch(res));
 		  
 		  //카테고리가 커뮤니티인 경우		  
 		  } else if(category.equals("category_comm")) {
-			  resultList.setBoardList(siDao.boardSearch(board));
+			  resultList.setBoardList(searchDao.boardSearch(board));
 	      }
 		  
 		 return resultList;
@@ -72,7 +72,7 @@ public class SiServiceImpl implements SiService {
 	@Override
 	public void upsertSearch(String keyword) {
 		//log.info("siServiceImpl upsertSearch Start");
-		siDao.upsertSearch(keyword);
+		searchDao.upsertSearch(keyword);
 		
 	}
 
@@ -92,7 +92,7 @@ public class SiServiceImpl implements SiService {
 		String endOfToday = utcEnd.format(formatter);       //2023-04-27 23:59:59
 		 
 		
-		List<Search> dailySearches = siDao.getDailyPopularSearches(startOfToday, endOfToday);
+		List<Search> dailySearches = searchDao.getDailyPopularSearches(startOfToday, endOfToday);
 		
 		return dailySearches.stream().map(Search::getS_keyword).collect(Collectors.toList());		
 	}
@@ -113,7 +113,7 @@ public class SiServiceImpl implements SiService {
 		String startOfWeek = utcStart.format(formatter);   //2023-04-24 00:00:00
 		String endOfWeek = utcEnd.format(formatter);       //2023-04-30 23:59:59
 		
-		List<Search> weeklySearches = siDao.getWeeklyPopularSearches(startOfWeek, endOfWeek);
+		List<Search> weeklySearches = searchDao.getWeeklyPopularSearches(startOfWeek, endOfWeek);
 		
 		return weeklySearches.stream().map(Search::getS_keyword).collect(Collectors.toList());
 	}
@@ -134,7 +134,7 @@ public class SiServiceImpl implements SiService {
 		String startOfMonth = utcStart.format(formatter);   //2023-04-01 00:00:00
 		String endOfMonth = utcEnd.format(formatter);       //2023-04-30 23:59:59
 		
-		List<Search> monthlySearches = siDao.getMonthlyPopularSearches(startOfMonth, endOfMonth);
+		List<Search> monthlySearches = searchDao.getMonthlyPopularSearches(startOfMonth, endOfMonth);
 		
 		return monthlySearches.stream().map(Search::getS_keyword).collect(Collectors.toList());
 		
@@ -144,62 +144,62 @@ public class SiServiceImpl implements SiService {
 	//인기 명소 구하기
 	@Override
 	public List<Travel> getPopularTravel() {
-		return siDao.getPopularTravel();
+		return searchDao.getPopularTravel();
 	}
 
 
 	//인기 맛집 구하기
 	@Override
 	public List<Res> getPopularRes() {
-		return siDao.getPopularRes();
+		return searchDao.getPopularRes();
 	}
 
     //인기 숙소 구하기
 	@Override
 	public List<House> getPopularHouse() {
-		return siDao.getPopularHouse();
+		return searchDao.getPopularHouse();
 	}
 
 	//여행지 검색 결과 개수 조회
 	@Override
 	public int getTravelCount(Travel travel) {
-		return siDao.getTravelCount(travel);
+		return searchDao.getTravelCount(travel);
 	}
 
 
 	//숙소 검색 결과 개수 조회
 	@Override
 	public int getHouseCount(House house) {
-		return siDao.getHouseCount(house);
+		return searchDao.getHouseCount(house);
 	}
 
 
 	//맛집 검색 결과 개수 조회
 	@Override
 	public int getResCount(Res res) {
-		return siDao.getResCount(res);
+		return searchDao.getResCount(res);
 	}
 
 
 	//커뮤니티 검색 결과 개수 조회
 	@Override
 	public int getBoardCount(Board board) {
-		return siDao.getBoardCount(board);
+		return searchDao.getBoardCount(board);
 	}
 
 
 	//최근 검색어 목록 조회
 	@Override
 	public List<RecentSearch> getRecentSearchList(RecentSearch recentSearch) {
-		int recentCount = siDao.countRecentSearch(recentSearch);
+		int recentCount = searchDao.countRecentSearch(recentSearch);
 		if(recentCount >= 10) {
-			siDao.deleteRecentSearch(recentSearch);
+			searchDao.deleteRecentSearch(recentSearch);
 		}
 		
-		int findRecentSearch = siDao.findRecentSearch(recentSearch);
-		if(findRecentSearch == 0) siDao.insertRecentSearch(recentSearch);
+		int findRecentSearch = searchDao.findRecentSearch(recentSearch);
+		if(findRecentSearch == 0) searchDao.insertRecentSearch(recentSearch);
 		
-		return siDao.getRecentSearchList(recentSearch);
+		return searchDao.getRecentSearchList(recentSearch);
 		
 	}
 

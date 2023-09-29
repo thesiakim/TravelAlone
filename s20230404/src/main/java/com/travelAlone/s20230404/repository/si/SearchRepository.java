@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Repository
 @Slf4j
-public class SiRepository {
+public class SearchRepository {
 	
 	private final EntityManager em;
 

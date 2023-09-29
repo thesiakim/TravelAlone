@@ -5,29 +5,29 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.travelAlone.s20230404.repository.si.SiRepository;
+import com.travelAlone.s20230404.repository.si.SearchRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class SiServiceJpa {
+public class SearchServiceJpa {
 	
-private final SiRepository siRepository;
+private final SearchRepository searchRepository;
 	
 	public List<String> autoTravelSearch(String keyword) {
-		return siRepository.autoTravelSearch(keyword);
+		return searchRepository.autoTravelSearch(keyword);
 	}
 
 
 	public List<String> autoHouseSearch(String keyword) {
-		return siRepository.autoHouseSearch(keyword);
+		return searchRepository.autoHouseSearch(keyword);
 	}
 
 
 	public List<String> autoResSearch(String keyword) {
-		return siRepository.autoResSearch(keyword);
+		return searchRepository.autoResSearch(keyword);
 	}
 
 	

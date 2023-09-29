@@ -23,10 +23,10 @@ import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.RecentSearch;
 import com.travelAlone.s20230404.model.si.ResultList;
-import com.travelAlone.s20230404.service.si.SiServiceJpa;
+import com.travelAlone.s20230404.service.si.SearchServiceJpa;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.si.MailSendService;
-import com.travelAlone.s20230404.service.si.SiService;
+import com.travelAlone.s20230404.service.si.SearchService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,10 +34,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class SiController {
+public class SearchController {
 	
-	private final SiService siService;
-	private final SiServiceJpa siServiceJpa;
+	private final SearchService searchService;
+	private final SearchServiceJpa searchServiceJpa;
 	private final MailSendService mailService;
 	ResultList resultList;
 	
@@ -78,10 +78,10 @@ public class SiController {
 		if(category.equals("category_total")) {
 			
 			//각 카테고리별 검색 결과 개수 저장
-			travelCount = siService.getTravelCount(travel);
-			houseCount = siService.getHouseCount(house);
-			resCount = siService.getResCount(res);
-			boardCount = siService.getBoardCount(board);
+			travelCount = searchService.getTravelCount(travel);
+			houseCount = searchService.getHouseCount(house);
+			resCount = searchService.getResCount(res);
+			boardCount = searchService.getBoardCount(board);
 			
 			//총 개수 저장
 			count = travelCount + houseCount + resCount + boardCount;
@@ -97,18 +97,18 @@ public class SiController {
 			
 			
 			//검색 키워드에 대한 데이터 가져오기
-			resultList = siService.search(keyword, category, travel, house, res, board);
+			resultList = searchService.search(keyword, category, travel, house, res, board);
 			
 			//검색 키워드가 하나라도 존재한다면 Search 테이블에 insert or update
 			if(resultList.getTravelList().size() != 0 || resultList.getHouseList().size() != 0 || resultList.getRestaurantList().size() != 0 || resultList.getBoardList().size() != 0) {
-				siService.upsertSearch(keyword);
+				searchService.upsertSearch(keyword);
 			} 
 		
 		//카테고리가 여행지인 경우
 		} else if(category.equals("category_travel")) {
 			
 			//검색 결과수 조회
-			count = siService.getTravelCount(travel);
+			count = searchService.getTravelCount(travel);
 			
 			//페이징
 			paging = new Paging(count, currentPage);
@@ -116,17 +116,17 @@ public class SiController {
 			travel.setEnd(paging.getEnd());
 			
 			//검색 결과 데이터 조회
-			resultList = siService.search(keyword, category, travel, house, res, board);
+			resultList = searchService.search(keyword, category, travel, house, res, board);
 			
 			if(resultList.getTravelList().size() != 0) {
-				siService.upsertSearch(keyword);
+				searchService.upsertSearch(keyword);
 			} 
 			
 		//카테고리가 숙소인 경우	
 		} else if(category.equals("category_house")) {
 			
 			//검색 결과수 조회
-			count = siService.getHouseCount(house);
+			count = searchService.getHouseCount(house);
 			
 			//페이징
 			paging = new Paging(count, currentPage);
@@ -134,17 +134,17 @@ public class SiController {
 			house.setEnd(paging.getEnd());
 			
 			//검색 결과 데이터 조회
-			resultList = siService.search(keyword, category, travel, house, res, board);
+			resultList = searchService.search(keyword, category, travel, house, res, board);
 
 			if(resultList.getHouseList().size() != 0) {
-				siService.upsertSearch(keyword);
+				searchService.upsertSearch(keyword);
 			}
 			
 		//카테고리가 맛집인 경우
 		} else if(category.equals("category_res")) {
 			
 			//검색 결과수 조회
-			count = siService.getResCount(res);
+			count = searchService.getResCount(res);
 			
 			//페이징
 			paging = new Paging(count, currentPage);
@@ -152,16 +152,16 @@ public class SiController {
 			res.setEnd(paging.getEnd());
 			
 			//검색 결과 데이터 조회
-			resultList = siService.search(keyword, category, travel, house, res, board);
+			resultList = searchService.search(keyword, category, travel, house, res, board);
 			if(resultList.getRestaurantList().size() != 0) {
-				siService.upsertSearch(keyword);
+				searchService.upsertSearch(keyword);
 			} 
 			
 		//카테고리가 커뮤니티인 경우	
 		} else if(category.equals("category_comm")) {
 			
 			//검색 결과수 조회
-			count = siService.getBoardCount(board);
+			count = searchService.getBoardCount(board);
 						 
 			//페이징
 			paging = new Paging(count, currentPage);
@@ -169,27 +169,27 @@ public class SiController {
 			board.setEnd(paging.getEnd());
 						
 			//검색 결과 데이터 조회
-			resultList = siService.search(keyword, category, travel, house, res, board);
+			resultList = searchService.search(keyword, category, travel, house, res, board);
 			
 			if(resultList.getBoardList().size() != 0) {
-				siService.upsertSearch(keyword);
+				searchService.upsertSearch(keyword);
 			} 
 			
 		}
 		
 		//일간 인기 검색어 구하기
-		List<String> dailyPopularKeywords = siService.getDailyPopularSearches();
+		List<String> dailyPopularKeywords = searchService.getDailyPopularSearches();
 
 		//주간 인기 검색어 구하기
-		List<String> weeklyPopularKeywords = siService.getWeeklyPopularSearches();
+		List<String> weeklyPopularKeywords = searchService.getWeeklyPopularSearches();
 		
 		//월별 인기 검색어 구하기
-		List<String> monthlyPopularKeywords = siService.getMonthlyPopularSearches();
+		List<String> monthlyPopularKeywords = searchService.getMonthlyPopularSearches();
 		
 		//최근 검색어 저장하기
 		if(memberJpa != null) {
 			RecentSearch recentSearch = new RecentSearch(memberJpa.getId(), keyword);
-			List<RecentSearch> recentSearchList = siService.getRecentSearchList(recentSearch);
+			List<RecentSearch> recentSearchList = searchService.getRecentSearchList(recentSearch);
 			model.addAttribute("recentSearchList", recentSearchList);
 		}
 
@@ -222,18 +222,18 @@ public class SiController {
 		
 		if(category.equals("category_total")) {
 					
-			data.addAll(siServiceJpa.autoTravelSearch(keyword));
-			data.addAll(siServiceJpa.autoHouseSearch(keyword));
-			data.addAll(siServiceJpa.autoResSearch(keyword));
+			data.addAll(searchServiceJpa.autoTravelSearch(keyword));
+			data.addAll(searchServiceJpa.autoHouseSearch(keyword));
+			data.addAll(searchServiceJpa.autoResSearch(keyword));
 			
 		} else if(category.equals("category_travel")) {
-			data = siServiceJpa.autoTravelSearch(keyword);
+			data = searchServiceJpa.autoTravelSearch(keyword);
 			
 		} else if(category.equals("category_house")) {
-			data = siServiceJpa.autoHouseSearch(keyword);
+			data = searchServiceJpa.autoHouseSearch(keyword);
 			
 		} else if(category.equals("category_res")) {
-			data = siServiceJpa.autoResSearch(keyword);
+			data = searchServiceJpa.autoResSearch(keyword);
 		}
 		
 		return data;
