@@ -27,7 +27,7 @@ import com.travelAlone.s20230404.model.Hou_Rev;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.service.Paging;
 import com.travelAlone.s20230404.service.mh.HouseService;
-import com.travelAlone.s20230404.service.si.SiService;
+import com.travelAlone.s20230404.service.si.SearchService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HouseController {
 
 private final HouseService mh;
-private final SiService SiService;
+private final SearchService SearchService;
 	
 	// ===================숙소===================
 	//숙소 메인 보기
@@ -65,7 +65,7 @@ private final SiService SiService;
 		model.addAttribute("boardLocList",commonLocCode);
 		
 		//popularHouse
-		List<House> popularHouse = SiService.getPopularHouse();    
+		List<House> popularHouse = SearchService.getPopularHouse();
 		model.addAttribute("popularHouse", popularHouse);
 		
 		//숙소리스트

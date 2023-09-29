@@ -9,7 +9,7 @@ import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.RecentSearch;
 import com.travelAlone.s20230404.model.si.ResultList;
 
-public interface SiService {
+public interface SearchService {
 
 	ResultList     		search(String keyword, String category, Travel travel, House house, Res res, Board board);
 	void           		upsertSearch(String keyword);

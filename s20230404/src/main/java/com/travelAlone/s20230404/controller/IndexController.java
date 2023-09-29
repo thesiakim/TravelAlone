@@ -5,7 +5,7 @@ import com.travelAlone.s20230404.domain.km.MemberJpa;
 import com.travelAlone.s20230404.model.House;
 import com.travelAlone.s20230404.model.Res;
 import com.travelAlone.s20230404.model.Travel;
-import com.travelAlone.s20230404.service.si.SiService;
+import com.travelAlone.s20230404.service.si.SearchService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,21 +33,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class IndexController {
 
-	private final SiService siService;
+	private final SearchService searchService;
 
 	    //메인 페이지에서 인기 명소/숙소/맛집 보여주기
 		@GetMapping(value = {"/", "/index"})
 		public String popular(Model model) {
-			System.out.println("SiController popular start");
-			
 			//인기 명소
-			List<Travel> popularTravel = siService.getPopularTravel();
+			List<Travel> popularTravel = searchService.getPopularTravel();
 
 			//인기 숙소
-			List<House> popularHouse = siService.getPopularHouse();    
+			List<House> popularHouse = searchService.getPopularHouse();
 			
 			//인기 맛집
-			List<Res> popularRes = siService.getPopularRes();
+			List<Res> popularRes = searchService.getPopularRes();
 					     
 			
 		

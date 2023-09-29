@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class SiDaoImpl implements SiDao {
+public class SearchDaoImpl implements SearchDao {
 	
 	private final SqlSession session;
 	

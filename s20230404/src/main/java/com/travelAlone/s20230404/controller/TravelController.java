@@ -27,7 +27,7 @@ import com.travelAlone.s20230404.model.Tra_Rev;
 import com.travelAlone.s20230404.model.Travel;
 
 import com.travelAlone.s20230404.service.Paging;
-import com.travelAlone.s20230404.service.si.SiService;
+import com.travelAlone.s20230404.service.si.SearchService;
 import com.travelAlone.s20230404.service.sm.TravelService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,7 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TravelController {
 
 	private final TravelService sm;
-	private final SiService SiService;
+	private final SearchService SearchService;
 	
 //===============================여행지===============================
 	//여행지메인 보기
@@ -69,7 +69,7 @@ public class TravelController {
 		
 		
 		//인기 여행지
-		List<Travel> popularTravel = SiService.getPopularTravel();
+		List<Travel> popularTravel = SearchService.getPopularTravel();
 		model.addAttribute("popularTravel", popularTravel);
 		
 		

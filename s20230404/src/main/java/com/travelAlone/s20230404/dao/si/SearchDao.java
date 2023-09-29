@@ -9,7 +9,7 @@ import com.travelAlone.s20230404.model.Travel;
 import com.travelAlone.s20230404.model.si.RecentSearch;
 import com.travelAlone.s20230404.model.si.Search;
 
-public interface SiDao {
+public interface SearchDao {
 	
 	void             	   upsertSearch(String keyword);
 	List<House>      	   houseSearch(House house);
