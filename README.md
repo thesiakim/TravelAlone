@@ -7,11 +7,17 @@
 ### 개발 환경 및 기술 
 
 | Language  | Java 11     |
+|-|-|
 | IDE | STS  |
+|-|-|
 | Framework  | Springboot 2.7.12  |
+|-|-|
 | Server  | Apache Tomcat 9.0 |
+|-|-|
 | DBMS |Oracle 11.2.0.2.0|
+|-|-|
 | ORM |MyBatis, JPA|
+|-|-|
 | SCM | Git |
 
 <br/>
